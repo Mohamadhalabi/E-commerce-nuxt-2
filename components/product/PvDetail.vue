@@ -1,0 +1,366 @@
+<template>
+  <div>
+    <div class="d-flex align-items-center">
+      <h1 class="product-title">
+        {{ product.title }}
+      </h1>
+      <div>
+        <pv-product-nav
+          v-if="isProductNav"
+          :prev-product="prevProduct"
+          :next-product="nextProduct"
+        ></pv-product-nav>
+      </div>
+    </div>
+
+    <div v-if="product.summary_name" class="product-desc">
+      <h2 class="summary-name">{{ product.summary_name }}</h2>
+    </div>
+    <pv-rating :product="product" :hide-reviews="false"/>
+    <hr class="short-divider"/>
+
+    <div class="row">
+      <div class="col">
+        <pv-price-box class="reverse-order" v-if="product.hide_price == 0" :product="product"/>
+      <div v-else style="text-align: start; display: flex">
+        <i
+          class="fab fa-sm fa-whatsapp mx-1"
+          style="font-size: 20px; color: #2ba968; cursor: pointer"
+          @click="goToWhatsApp"
+        />
+        <small
+          class="d-inline-block p-1"
+          @click="goToWhatsApp(product)"
+          style="position: relative; color: #2ba968; cursor: pointer"
+        >
+          {{ $t("products.ContactUsToSendYouThePrice") }}
+        </small>
+      </div>
+
+      <div
+        v-if="product.discount &&
+          product.offers &&
+          product.discount.until &&
+          product.stock
+          "
+        class="product-countdown-container-two mt-1"
+      >
+        <h5 class="daily-deal-title">{{ $t("products.discountEndsIn") }}:</h5>
+        <pv-count-down
+          class="product-countdown countdown-compact"
+          :until="product.discount.until"
+          :label-short="true"
+        />
+      </div>
+
+      <ul class="single-info-list">
+        <li class="sku-color mt-1 " v-if="product.sku">
+          {{ $t("products.sku") }}:
+          <strong class="sku-color ">{{ product.sku }}</strong>
+        </li>
+
+        <li>
+          {{ $t("products.category") }}:
+          <strong>
+            <i>
+              <nuxt-link
+                :to="getLink('/'+product.categories[product.categories.length - 1].slug)"
+              >
+                <strong>
+                  <div
+                    :class="{ 'text-right': getIsAr }" class="d-inline-flex">
+                    {{ product.categories[product.categories.length - 1].name }}
+                  </div>
+                </strong>
+              </nuxt-link>
+            </i>
+          </strong>
+        </li>
+
+        <li v-if="models">
+          {{ $t("products.cars") }}:
+          <span v-for="(model, index) in models.split(',')">
+          <nuxt-link
+            :to="getLink('/' + model.trim().toLowerCase().replace(/\s+/g, '-'))"
+            :key="index"
+          >
+            <strong>
+              <i>
+                {{ model.trim() }}
+              </i>
+            </strong>
+          </nuxt-link>
+          <span v-if="index < models.split(',').length - 1">, </span>
+        </span>
+        </li>
+
+        <li v-if="product.specifications.manufacturer">
+          {{ $t("products.MANUFACTURER") }}:
+          <nuxt-link :to="getLink('/' + product.specifications.manufacturer.toLowerCase().replace(/\s+/g, '-'))">
+          <strong>
+            <i>
+              {{ product.specifications.manufacturer }}
+            </i>
+          </strong>
+          </nuxt-link>
+        </li>
+      </ul>
+      </div>
+      <div class="col-lg-12">
+      <!-- Begin:offer table -->
+      <h4 v-if="product.offers.length > 0" class="w-100 mb-1">
+        {{ $t("common.buyMorePayLess") }}
+      </h4>
+      <div
+        v-if="product.offers.length > 0"
+        id="product-offers-content"
+        class="mb-3"
+      >
+        <pv-offers :product="product"/>
+      </div>
+      <!-- End:offer table -->
+      </div>
+    </div>
+    <div
+      class="product-action d-lg-flex  align-items-center"
+      v-if="!product.has_token_input || product.specifications.manufacturer =='TMPRO'"
+    >
+      <div class="product-single-qty">
+        <div
+          v-if="product.hide_price == 0"
+          class="input-group w-100 bootstrap-touchspin bootstrap-touchspin-injected"
+        >
+          <span class=" input-group-btn input-group-prepend">
+            <button
+              class=" btn-outline btn-down-icon bootstrap-touchspin-down"
+              type="button"
+              :disabled="product.hide_price != '0'"
+              @click="minusQty"
+              :style="getIsAr ? 'border-radius: 0px 6px 6px 0px' : 'border-radius:6px 0px 0px 6px ;'"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 96 960 960"
+                width="18"
+              >
+                <path d="M200 606v-60h560v60H200Z"/>
+              </svg>
+            </button>
+          </span>
+
+          <input
+            v-model.number="qty"
+            class="horizontal-quantity form-control bg-transparent"
+            type="text"
+            :max="product.stock"
+            :disabled="product.hide_price != '0'"
+            @change="changeQty($event)"
+          />
+
+
+
+          <span class="input-group-btn input-group-append">
+            <button
+              :style="getIsAr ? 'border-radius:6px 0px 0px 6px' : 'border-radius:0px 6px 6px 0px !important;'"
+              class="btn-outline btn-up-icon bootstrap-touchspin-up"
+              type="button"
+              :disabled="product.hide_price != '0'"
+              @click="plusQty"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 96 960 960"
+                width="18"
+              >
+                <path
+                  d="M450 856V606H200v-60h250V296h60v250h250v60H510v250h-60Z"
+                />
+              </svg>
+            </button>
+          </span>
+        </div>
+      </div>
+      <base-button-icon-1
+        v-if="product.hide_price == 0"
+        @click="
+          product.quantity = qty;
+          addToCart(product);
+        "
+        :outline="true"
+        class="mx-2 py-4"
+      >
+        {{ $t("products.addCart") }}<i class="mx-2 sicon-bag"></i
+      ></base-button-icon-1>
+      <div v-else class="d-flex align-items-center">
+        <button ontouchstart
+                class="whatsapp-button"
+                @click="handleWhatsAppClick(product)">
+          <i
+            style="font-size: 20px"
+            class="py-2 px-5 rounded-3 fab fa-whatsapp"
+          ></i>
+        </button>
+      </div>
+      <div class="d-flex flex-column p-3">
+        <pv-wishlist-button class="p-0" :product="product" :parent="'products-detail'" />
+        <pv-compare-button class="p-0" :product="product" parent="product-detail"></pv-compare-button>
+      </div>
+
+    </div>
+
+
+    <div v-if="product.specifications.manufacturer && product.specifications.manufacturer =='TMPRO'">
+<!--      <label for="formFile" class="form-label">Upload a .ord file</label>-->
+<!--      <input class="d-flex" type="file" id="formFile">-->
+
+    </div>
+
+      <PvInputToken
+    :product="product"
+     v-if="product.has_token_input && !product.hide_price && product.specifications.manufacturer !='TMPRO'"/>
+  </div>
+</template>
+
+<script>
+import {mapActions, mapGetters} from "vuex";
+import PvPriceBox from "~/components/product/partials/PvPriceBox";
+import PvProductNav from "~/components/product/partials/PvProductNav";
+import PvWishlistButton from "~/components/product/partials/PvWishlistButton";
+import PvCountDown from "~/components/product/partials/PvCountDown";
+import PvInputToken from "~/components/product/partials/PvInputToken";
+import Api from "~/api";
+import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
+import PvOffers from "./tabs/PvOffers.vue";
+import PvCompareButton from './partials/PvCompareButton.vue';
+import PvRating from "~/components/product/partials/PvRating.vue";
+
+export default {
+  components: {
+    PvRating,
+    PvPriceBox,
+    PvProductNav,
+    PvWishlistButton,
+    PvInputToken,
+    PvCountDown,
+    BaseButtonIcon1,
+    PvOffers,
+    PvCompareButton,
+  },
+  props: {
+    product: Object,
+    prevProduct: Object,
+    nextProduct: Object,
+    isProductNav: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  data: function () {
+    return {
+      qty: 1,
+      socialMedia: [],
+      models: null,
+    };
+  },
+  computed: {
+    ...mapGetters("rtlStore", ["getIsAr"]),
+    ...mapGetters("language", ["getLang"]),
+  },
+  mounted() {
+    let dataModels = [];
+    for (const item of this.product.brands) {
+      if (!dataModels.includes(item.brand)) {
+        dataModels.push(item.brand)
+      }
+    }
+    if (dataModels != [])
+      this.models = dataModels.join(',')
+    else{
+      this.models =null
+    }
+  },
+  methods: {
+    ...mapActions("shop", ["addToCart"]),
+    ...mapActions("compare", ["fetchList", "addToList"]),
+
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route;
+      } else {
+        return `/${this.getLang}${route}`;
+      }
+    },
+    handleWhatsAppClick(product) {
+      this.goToWhatsApp(product);
+    },
+
+    goToWhatsApp() {
+      window.open(
+        `https://api.whatsapp.com/send?phone=${this.$settings.contact.whatsapp}&text=Can i have take price of this product ${this.product.title}`,
+        "_blank"
+      );
+    },
+    addToCompare(item) {
+      Api.get("/products/compares")
+        .then((response) => {
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      Api.post("/products/compares", {product: item.slug})
+        .then((response) => {
+          this.$notify({
+            group: "custom-notify",
+            type: "success",
+            text: response.data.message,
+          });
+        })
+        .catch(() => {
+        });
+    },
+    plusQty: function () {
+      if (this.qty < this.product.stock) this.qty++;
+    },
+    minusQty: function () {
+      if (this.qty > 1) this.qty--;
+    },
+    changeQty(e) {
+    },
+    addCart: function (product) {
+      this.currentProduct = product;
+      document.querySelector(".cart-message.removed").style.display = "none";
+      document.querySelector(".cart-message.carted").style.display = "block";
+      this.addToCart({product: product});
+      this.removeFromWishlist({product: product.sku});
+    },
+  },
+};
+</script>
+<style>
+.reverse-order{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.whatsapp-button{
+  background-color: #2ba968;
+  border: 1px solid #2ba968;
+  border-radius: 6px;
+  transition: all 0.2s ease-in;
+  font-size: 1em;
+  font-weight: 500;
+  color: white;
+  transition: all 0.2s ease-out;
+  box-shadow: 0px 1px 2px #2ba968;
+}
+.hidden-price-message{
+  color: #f52020 !important;
+  font-size: 14px;
+}
+.summary-name{
+  font-size: 16px;
+  font-weight: normal;
+}
+</style>
