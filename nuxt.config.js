@@ -1,0 +1,292 @@
+import config from './configs';
+import axios from "axios";
+
+
+const {locale, availableLocales, fallbackLocale} = config.locales;
+const currency = 'USD';
+if(typeof window !== 'undefined') {
+  // perform localStorage action
+  // const item = localStorage.getItem('key')
+  currency = localStorage.getItem('currency') || 'USD';
+}
+
+export default {
+  // target: "static",
+  head: {
+    link: [{ rel: 'icon', type: 'image/x-icon',href: "https://dev-srv.tlkeys.com/storage/images/seo/180x180.png"}],
+    meta: [
+      {
+        "http-equiv": "Content-Type", content: 'text/html; charset=utf-8'
+      },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        "http-equiv": "X-UA-Compatible",
+        content: "IE=edge",
+      },
+      {
+        name:'msapplication-tap-highlight', content:'no'
+      },
+      {
+        name:'mobile-web-app-capable' , content: 'yes'
+      },
+      {
+        name:'application-name', content: 'Techno Lock Keys'
+      },
+      {
+        name:'apple-mobile-web-app-capable', content: 'yes',
+      },
+      {
+        name:'apple-mobile-web-app-status-bar-style', content: 'default'
+      },
+      {
+        name:'apple-mobile-web-app-title', content:'Techno Lock Keys'
+      },
+    ],
+    script: [
+      {
+        hid: 'tawk.to',
+        src:
+          'https://embed.tawk.to/65551a48958be55aeaaff3ae/1hfa6tbkt',
+        defer: true,
+        async:true,
+      }
+    ]
+  },
+  redirect: [
+    // Redirect old URL to new URL
+    {
+      from: '/shop',
+      to: '/new-url',
+      statusCode: 301, // 301: Moved Permanently, you can also use 302 for temporary redirects
+    },
+    // Add more redirects if needed
+  ],
+  publicRuntimeConfig: {
+    recaptcha: {
+      version: 2,
+      siteKey: "6LdEvScpAAAAABszbLAI9U_xmaae55wodrrba7YU"
+    }
+  },
+  css: [
+    'swiper/dist/css/swiper.css',
+    '~/static/css/animate.min.css',
+    '~/static/css/porto-icons.min.css',
+    '~/static/css/steper.css',
+    '~/static/vendor/fontawesome-free/css/all.min.css',
+    '~/static/vendor/simple-line-icons/css/simple-line-icons.min.css',
+    '~/static/sass/style.scss'
+  ],
+
+  plugins: [
+    {src: '@plugins', ssr: false},
+    {src: '@plugins/settings.js', ssr: true},
+    {src: '@plugins/localstorage.js', ssr: false},
+    {src: '@plugins/filters.js', ssr: true},
+    {src: '@plugins/vue-progressbar.js', ssr: false},
+    {src: '@plugins/directives/animate.js', ssr: true},
+    {src: '@plugins/directives/parallax.js', ssr: false},
+    {src: '@plugins/directives/sticky.js', ssr: true},
+    {src: 'plugins/direction-control.js', ssr: true}, // rTL
+  ],
+
+  buildModules: [
+    '@nuxtjs/dotenv',
+     'nuxt-ssr-cache',
+    '@nuxtjs/style-resources',
+    'cookie-universal-nuxt',
+    ['nuxt-i18n', {
+      detectBrowserLanguage: false,
+      locales: availableLocales,
+      strategy: 'prefix_except_default',
+      lazy: true,
+      langDir: 'translations/',
+      defaultLocale: 'en',
+      vueI18n: {
+        fallbackLocale: 'en'
+      },
+      skipSettingLocaleOnNavigate: true
+    }]
+  ],
+
+  // ssrCache: {
+  //     useHostPrefix: false,
+  //     pages: ['/'], // Add the routes you want to cache
+  //  },
+
+  modules: ['@nuxtjs/axios', 'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
+    '@nuxtjs/recaptcha', {
+      version: 2
+    }
+  ]],
+  //   delayHydration: {
+  //   mode: 'manual',
+  // },
+  image: {
+    quality: 100,
+    format: ['webp'],
+    domains: ['dev-srv.tlkeys.com'],
+    screens: {
+      'xs': 320,
+      'sm': 640,
+      'md': 768,
+      'lg': 1024,
+      'xl': 1280,
+      'xxl': 1536,
+      '2xl': 1920
+    },
+  },
+  axios: {
+    headers: {
+      'Accept-Language': locale,
+      'Content-Type': 'application/json',
+      'currency': currency,
+      'Accept': 'application/json',
+      'secret-key': process.env.SECRET_KEY,
+      'api-key': process.env.API_KEY
+    },
+    baseURL: process.env.API_BASE_URL
+  },
+
+  // purgecss: {
+  //   enabled: true, // Always enable purgecss
+  // },
+
+  sitemap: {
+    path: '/sitemap.xml',
+    hostname: 'https://tlkeys.com',
+    cacheTime: 86400, // 24 hours in seconds
+    gzip: true,
+    generate: false, // Enable me when using nuxt generate
+    exclude: ['/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**'],
+    routes: async () => {
+      try {
+        const dynamicRoutesResponse = await axios.get('https://dev-srv.tlkeys.com/products-routes');
+        const dynamicRoutes = dynamicRoutesResponse.data; // Extract data from the response
+        // categories :
+        const dynamicRoutesResponse2 = await axios.get('https://dev-srv.tlkeys.com/categories');
+        const dynamicRoutes2 = dynamicRoutesResponse2.data; // Extract data from the response
+
+        const dynamicRoutesResponse3 = await axios.get('https://dev-srv.tlkeys.com/manufacturers');
+        const dynamicRoutes3 = dynamicRoutesResponse3.data; // Extract data from the response
+
+        const dynamicRoutesResponse4 = await axios.get('https://dev-srv.tlkeys.com/brands');
+        const dynamicRoutes4 = dynamicRoutesResponse4.data; // Extract data from the response
+
+        const allRoutes = [
+          '/',
+          ...dynamicRoutes,
+          ...dynamicRoutes2,
+          ...dynamicRoutes3,
+          ...dynamicRoutes4
+        ];
+
+        return allRoutes;
+      } catch (error) {
+        console.error('Error fetching dynamic routes:', error);
+        return [];
+      }
+    },
+  },
+
+  render: {
+    asyncScript:true,
+    http2: {
+      push:true,
+    }
+  },
+
+  auth: {
+    resetOnError: true,
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: '/user/auth/login',
+            method: 'post',
+            propertyName: 'authorisation.token'
+          },
+          logout: {url: '/user/auth/logout', method: 'post'},
+          user: {url: '/me', method: 'post', propertyName: 'data'}
+        },
+        user: {
+        },
+        tokenType: 'Bearer'
+      }
+    },
+    redirect: false
+  },
+
+
+  router: {
+    base: '/',
+    linkActiveClass: '',
+    linkExactActiveClass: 'active',
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition;
+      } else {
+        return { x: 0, y: 0 };
+      }
+    }
+  },
+  serverMiddleware: [
+    '~/middleware/redirects.js',
+    // '~/middleware/removeShopPrefix',
+  ],
+  build: {
+    analyze: false,
+    extractCSS: true,
+    optimizeCSS: true,
+    publicPath: process.env.PUBLIC_PATH,
+    babel: {
+      compact: true
+    },
+  },
+
+  generate: {
+    fallback: 'my-custom-404.html',
+  },
+
+  ssr: true,
+  loading: false,
+  loadingIndicator: false,
+
+  pageTransition: 'page',
+
+  server: {
+    port: 4000,
+    host: 'localhost'
+  },
+  nuxtPrecompress: {
+    enabled: true, // Enable in production
+    report: false, // set true to turn one console messages during module init
+    test: /\.(js|css|html|txt|xml|svg)$/, // files to compress on build
+    middleware: {
+      enabled: true,
+      enabledStatic: true,
+      encodingsPriority: ['br', 'gzip'],
+    },
+
+    // build time compression settings
+    gzip: {
+      // should compress to gzip?
+      enabled: true,
+      // compression config
+      // https://www.npmjs.com/package/compression-webpack-plugin
+      filename: '[path].gz[query]', // middleware will look for this filename
+      threshold: 10240,
+      minRatio: 0.8,
+      compressionOptions: { level: 9 },
+    },
+    brotli: {
+      // should compress to brotli?
+      enabled: true,
+      // compression config
+      // https://www.npmjs.com/package/compression-webpack-plugin
+      filename: '[path].br[query]', // middleware will look for this filename
+      compressionOptions: { level: 11 },
+      threshold: 10240,
+      minRatio: 0.8,
+    },
+  }
+};

@@ -1,0 +1,208 @@
+<template>
+  <div>
+    <div id="smart-button-container">
+      <div style="text-align: center; position: relative;">
+        <div
+          v-if="isActive"
+          class="displayBtn"
+        />
+        <div id="paypal-button-container" />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Api from '~/api';
+
+export default {
+  props: {
+    termsAndConditions:{
+      type: Boolean,
+      required:true,
+    },
+    isActive: {
+      type: Boolean,
+      required: true
+    },
+    PaymentFor: {
+      type: String,
+      default: 'order',
+      required: true
+    },
+    address: {
+      type: String,
+      default: null,
+      required: false
+    },
+    isValid: {
+      type: Boolean,
+      default: false,
+      required: false
+    },
+
+    amount: {
+      type: String,
+      default: 0,
+      required: false
+    },
+    shipping_method: {
+      type: String,
+      default: null,
+      required: false
+    },
+    coupon_code: {
+      type: String,
+      default: null,
+      required: false
+    },
+    brand: {
+      type: Number,
+      default: null,
+      required: false
+    },
+    serialNumber: {
+      type: String,
+      default: null,
+      required: false
+    },
+    contactChannel: {
+      type: String,
+      default: null,
+      required: false
+    },
+    contactValue: {
+      type: String,
+      default: null,
+      required: false
+    }
+  },
+  data() {
+    return {
+      response: null
+    };
+  },
+  created() {
+    this.init();
+  },
+  methods: {
+    init() {
+      function loadScript(url, callback) {
+        const el = document.querySelector(`script[src="${url}"]`);
+        if(!el) {
+          const s = document.createElement('script');
+          s.setAttribute('src', url);
+          s.onload = callback;
+          document.head.insertBefore(s, document.head.firstElementChild);
+        }
+      }
+
+      loadScript('https://www.paypal.com/sdk/js?client-id=test&currency=USD', () => {
+        let _this = this;
+        paypal.Buttons({
+          style: {
+            shape: 'pill',
+            color: 'gold',
+            layout: 'horizontal',
+            label: 'paypal',
+            tagline: false
+          },
+          createOrder(data, actions) {
+            _this.createOrederInDatabese();
+            return actions.order.create({
+              purchase_units: [{
+                amount: {
+                  value: _this.amount,
+                  _token: _this.csrfToken,
+                  brand: 'BRAMD',
+                  serial_number: 'SERILA-NUMBER',
+                  contact_channel: 'CONTACT-CHANNEL',
+                  contact_value: 'CONTACT-VALUE'
+                }
+              }]
+            });
+          },
+
+          // finalize the transaction
+          onApprove(data, actions) {
+            return actions.order.capture().then(details => {
+              _this.approvePayment(true);
+            });
+          },
+          onCancel: function(data) {
+            _this.approvePayment(false);
+          },
+          onError: function(err) {
+            _this.approvePayment(false);
+          }
+
+        }).render('#paypal-button-container');
+      });
+
+    },
+    createOrederInDatabese() {
+      let dataForm = {
+        address: this.address,
+        payment_method: 'paypal',
+        shipping_method: this.shipping_method,
+        coupon_code: this.coupon_code
+      };
+
+      Api.post('/user/orders/create', dataForm)
+        .then((response) => {
+          console.log(response)
+          this.response = response.data;
+          this.order_id = response.data.data.order.order_id;
+          this.payment_id = response.data.data.payment.order_id;
+
+        });
+    },
+    approvePayment($success) {
+      let dataForm = {
+        success: $success,
+        response: this.response,
+        order_id: this.order_id,
+        order_payment_id: this.payment_id
+
+      };
+      Api.post('/user/orders/paypal/response', dataForm).then((res) => {
+        this.$router.push({path: '/account?tab=orders'});
+        this.$notify({
+          group: 'custom-notify',
+          type: 'success',
+          text: 'Payment Successful'
+        });
+      }).catch((error) => {
+        let errorObj = error.response.data.data;
+
+        this.$notify({
+          group: 'errorMessage',
+          type: 'error',
+          text: error.response.data.data[Object.keys(errorObj)[0]][0]
+        });
+        // this.$router.push({path: '/account?tab=orders'});
+      });
+    }
+
+  },
+  watch: {
+    isActive(newValue) {
+      if (newValue) {
+        this.init();
+      }
+    }
+  }
+};
+</script>
+<style>
+
+  .displayBtn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: #ffffff80;
+  }
+</style>
