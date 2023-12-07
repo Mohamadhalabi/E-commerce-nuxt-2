@@ -37,7 +37,7 @@ export const actions = {
       for (let i = 0; i < washList.length; i++) {
         if (washList[i].id == payload.id) {
           this._vm.$notify({
-            group: 'addProduct',
+            group: 'WishListNotify',
             text: payload.sku + ' products already in wishlist',
             type: 'success',
             data: payload
@@ -51,7 +51,7 @@ export const actions = {
       localStorage.setItem('wash', JSON.stringify(concateWash));
       commit('UPDATE_WISHLIST', JSON.parse(localStorage.getItem('wash')));
       this._vm.$notify({
-        group: 'addProduct',
+        group: 'WishListNotify',
         text: 'Has been added to your wishlist',
         type: 'success',
         data: payload
@@ -68,7 +68,7 @@ export const actions = {
     for (let i = 0; i < wishlistItems.data.Wishlist.length; i++) {
       if (wishlistItems.data.Wishlist[i].id == payload.id) {
         this._vm.$notify({
-          group: 'addProduct',
+          group: 'WishListNotify',
           text: payload.sku + ' The products alrady in wishlist',
           type: 'success',
           data: payload
@@ -80,7 +80,7 @@ export const actions = {
     let dataForm = { product_id: payload.id };
     await Api.post('wishlist', dataForm);
     this._vm.$notify({
-      group: 'addProduct',
+      group: 'WishListNotify',
       text: 'Has been added to your wishlist',
       type: 'success',
       data: payload
@@ -102,7 +102,7 @@ export const actions = {
 
       const response = await Api.get('wishlist');
       this._vm.$notify({
-        group: 'addProduct',
+        group: 'WishListNotify',
         type: 'success',
         text: 'Has been removed from your wishlist',
         data: payload.product,
