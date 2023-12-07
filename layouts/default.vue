@@ -17,6 +17,7 @@
       class="minipopup-area" />
     <pv-error-message class="minipopup-area" />
     <pv-compare-popup class="minipopup-area" />
+    <pv-wishlist-popup class="minipopup-area" />
 
     <a id="scroll-top" href="javascript:;" title="Top" role="button" @click="scrollToTop">
       <i class="icon-angle-up" />
@@ -53,6 +54,7 @@ export default {
     PvMobileMenu:() => import("~/components/common/header/PvMobileMenu"),
     PvErrorMessage:() => import("~/components/popups/PvErrorMessage.vue"),
     PvComparePopup:() =>import("~/components/popups/PvComparePopup.vue"),
+    PvWishlistPopup:() => import("~/components/popups/PvWishlistPopup.vue"),
   },
   head() {
         return {
