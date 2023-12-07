@@ -77,30 +77,30 @@
           </div>
         </div>
       </div>
-      <modal name="error">
-        <div
-          class="alert alert-danger alert-dismissible mb-0 text-center"
-          role="alert"
-        >
-          <strong>{{ $t("common.warning") }}</strong>
-          <ul class="my-1">
-            <li v-for="(value, key) in errors" :key="key">
-              {{ key }}:
-              <ul>
-                <li v-for="(err, key2) in value" :key="key2">- {{ err }}</li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </modal>
-      <modal name="success">
-        <div
-          class="alert alert-success alert-dismissible mb-0 text-center"
-          role="alert"
-        >
-          <!-- <strong>{{ message }}</strong> -->
-        </div>
-      </modal>
+<!--      <modal name="error">-->
+<!--        <div-->
+<!--          class="alert alert-danger alert-dismissible mb-0 text-center"-->
+<!--          role="alert"-->
+<!--        >-->
+<!--          <strong>{{ $t("common.warning") }}</strong>-->
+<!--          <ul class="my-1">-->
+<!--            <li v-for="(value, key) in errors" :key="key">-->
+<!--              {{ key }}:-->
+<!--              <ul>-->
+<!--                <li v-for="(err, key2) in value" :key="key2">- {{ err }}</li>-->
+<!--              </ul>-->
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </modal>-->
+<!--      <modal name="success">-->
+<!--        <div-->
+<!--          class="alert alert-success alert-dismissible mb-0 text-center"-->
+<!--          role="alert"-->
+<!--        >-->
+<!--          &lt;!&ndash; <strong>{{ message }}</strong> &ndash;&gt;-->
+<!--        </div>-->
+<!--      </modal>-->
     </div>
   </main>
 </template>
