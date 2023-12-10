@@ -18,7 +18,7 @@
           </base-button-icon-1>
 
         </nuxt-link>
-        <span class="close-btn" @click="$bvModal.hide('bv-modal-example2')">X</span>
+<!--        <span class="close-btn" @click="$bvModal.hide('bv-modal-example2')">X</span>-->
 
       </div>
 

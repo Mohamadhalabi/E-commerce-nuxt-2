@@ -21,7 +21,26 @@
         {{ product.price.currency + product.price.value }}
       </span>
     </template>
-
+        <template v-else-if="product.discount.length != 0">
+          <span
+            v-if="product.discount.type =='fixed'"
+            :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
+            class="product-price price-color font-weight-bold mt-0">
+            {{(product.price.value - product.discount.value).toFixed(2)}}{{product.price.currency}}
+          </span>
+          <span
+            v-else
+            :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
+            class="product-price price-color font-weight-bold mt-0">
+            {{(product.price.value - (product.price.value * (product.discount.value / 100))).toFixed(2)}}{{product.price.currency}}
+          </span>
+          <span
+            class="old-price mt-1"
+            :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
+          >
+            {{product.price.value}}{{product.price.currency}}
+          </span>
+        </template>
     <template v-else>
       <span class="product-price price-color mb-2"
             :class="{ 'highlighted': hasDuplicate(product.price.value), 'homePageSearch': homePageSearch === true }"
@@ -46,6 +65,9 @@ export default {
     return {
       isEmpty
     };
+  },
+  mounted() {
+    console.log(this.product)
   },
   methods:{
     hasDuplicate(status){

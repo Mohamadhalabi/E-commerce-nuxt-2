@@ -4,11 +4,11 @@
       <pv-intro-section/>
       <home-page-search />
       <!--<br>-->
-<!--    <delay-hydration>-->
+    <delay-hydration>
     <pv-slider-Banner class="desktop-only" v-if="!isMobile" />
-<!--    </delay-hydration>-->
+    </delay-hydration>
 
-<!--    <delay-hydration>-->
+    <delay-hydration>
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter"
@@ -21,9 +21,9 @@
           />
         </div>
       </div>
-<!--    </delay-hydration>-->
+    </delay-hydration>
 
-<!--    <delay-hydration>-->
+    <delay-hydration>
 
       <div  v-animate
             :data-animation-delay="animationDelay"
@@ -35,8 +35,8 @@
           />
         </div>
       </div>
-<!--    </delay-hydration>-->
-<!--    <delay-hydration>-->
+    </delay-hydration>
+    <delay-hydration>
       <div
         v-animate
         :data-animation-delay="animationDelay"
@@ -49,8 +49,7 @@
           />
         </div>
       </div>
-<!--    </delay-hydration>-->
-
+    </delay-hydration>
 <!--    <delay-hydration>-->
       <div v-animate
            :data-animation-delay="animationDelay"
@@ -60,8 +59,7 @@
         </div>
       </div>
 <!--    </delay-hydration>-->
-
-<!--    <delay-hydration>-->
+    <delay-hydration>
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter" class="container-fluid"
@@ -87,7 +85,7 @@
           </div>
         </div>
       </div>
-<!--    </delay-hydration>-->
+    </delay-hydration>
     <pv-manufacturers-section v-animate
                               :data-animation-delay="animationDelay"
                               data-animation-name="fadeInUpShorter" />
@@ -140,7 +138,7 @@
 <script>
 import { mapGetters,mapActions } from "vuex";
 import PvNewsletterModal from '~/components/home/PvNewsletterModal.vue';
-// import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
+import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
 export default {
   head() {
     return {

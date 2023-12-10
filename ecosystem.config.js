@@ -8,7 +8,7 @@ module.exports = {
            args: 'start',
            env: {
                NODE_ENV: "production",
-               HOST: 'front-srv.tlkeys.com',
+               HOST: 'tlkeys.com',
                PORT: 4000
            }
         }

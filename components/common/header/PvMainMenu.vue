@@ -2,38 +2,6 @@
   <div class="header-menu main-nav"
        :class="{'text-right':getIsAr}">
     <ul class="menu nav-categories header-main-menu">
-<!--Manufacturers menu -->
-      <li class="left-menu-items" @mouseover="getManufacturers()">
-        <nuxt-link
-          to="#"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
-            {{ $t("header.Manufactures") }} <span class="hoverable">&#x025BE;</span>
-          </span>
-        </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white" v-for="(item, key) in manufacturers" :key="key">
-          <div class="row bg-white m-0">
-            <ul class="submenu custom-submenu d-flex flex-wrap bg-white p-0" >
-              <li
-                v-for="(i,key2) in item"
-                :key="key2"
-                class="bg-white logo-item-car p-0 with-box-shadow sub-menu-items"
-              >
-                <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image && i.image.s">
-                  <nuxt-img
-                    format="webp"
-                    class="sub-menu-images"
-                    :src="i.image.s.url"
-                  />
-                  <div class="brand-name">
-                    <span>{{ i.name[$i18n.locale] }}</span>
-                  </div>
-                </nuxt-link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </li>
 <!--Cars Menu-->
       <li class="left-menu-items" @mouseover="getCars()">
         <nuxt-link
@@ -50,6 +18,38 @@
                 v-for="(i,key2) in item"
                 :key="key2"
                 class="bg-white logo-item-car p-0 with-box-shadow sub-menu-cars"
+              >
+                <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image && i.image.s">
+                  <nuxt-img
+                    format="webp"
+                    class="sub-menu-images"
+                    :src="i.image.s.url"
+                  />
+                  <div class="brand-name">
+                    <span>{{ i.name[$i18n.locale] }}</span>
+                  </div>
+                </nuxt-link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <!--Manufacturers menu -->
+      <li class="left-menu-items" @mouseover="getManufacturers()">
+        <nuxt-link
+          to="#"
+          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
+          <span class="header-main-menu">
+            {{ $t("header.Manufactures") }} <span class="hoverable">&#x025BE;</span>
+          </span>
+        </nuxt-link>
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white" v-for="(item, key) in manufacturers" :key="key">
+          <div class="row bg-white m-0">
+            <ul class="submenu custom-submenu d-flex flex-wrap bg-white p-0" >
+              <li
+                v-for="(i,key2) in item"
+                :key="key2"
+                class="bg-white logo-item-car p-0 with-box-shadow sub-menu-items"
               >
                 <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image && i.image.s">
                   <nuxt-img
