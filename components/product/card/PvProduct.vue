@@ -319,7 +319,7 @@ export default {
 
 @media screen and (max-width: 400px){
   .product-short-title{
-    height: 50px;
+    height: 60px;
   }
 
   .product-card-information{
@@ -329,14 +329,16 @@ export default {
 
 @media screen and (max-width: 350px){
   .product-card-information{
-    height: 150px;
+    height: 160px;
   }
   .product-short-title{
-    height: 15px;
+    height: 25px;
   }
   .category-name{
     height: 10px!important;
   }
 }
-
+.product-short-title-index{
+  display: none;
+}
 </style>

@@ -162,4 +162,9 @@ export default {
 #bv-modal-example2{
   display: flex!important;
 }
+@media screen and (max-width: 993px) {
+  .mobile-sidebar {
+    display: none;
+  }
+}
 </style>

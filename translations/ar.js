@@ -126,7 +126,7 @@ export default {
     OnlineServices: 'خدمات اون لاين',
     Bundles:'باقات',
     FreeShipping: 'شحن مجاني',
-    BestSeller: 'الأكثر مبيعًا',
+    BestSeller: 'عروض',
     keysAndRemote: 'مفتاح/ريموت',
     AccessoriesAndTools: 'إكسسوارات وأدوات',
     DeviceAndMachine : 'أجهزة وآلات',

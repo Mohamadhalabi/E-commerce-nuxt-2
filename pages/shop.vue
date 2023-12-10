@@ -315,3 +315,10 @@ export default {
   },
 };
 </script>
+<style>
+@media screen and (max-width: 993px){
+  .mobile-sidebar{
+    display: none;
+  }
+}
+</style>

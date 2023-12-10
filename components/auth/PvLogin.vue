@@ -98,11 +98,11 @@
 <!--    </div>-->
 
 <!--    <SocialLogin />-->
-    <div v-if="loadedBtn" style="text-align: center !important">
-      <div class="spinner-border text-primary" role="status">
-        <span class="sr-only">{{ $t("common.loading") }}</span>
-      </div>
-    </div>
+<!--    <div v-if="loadedBtn" style="text-align: center !important">-->
+<!--      <div class="spinner-border text-primary" role="status">-->
+<!--        <span class="sr-only">{{ $t("common.loading") }}</span>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -137,10 +137,10 @@ export default {
       token: null,
     };
   },
-  created() {
-    setTimeout(() => {
-      this.loadedBtn = false;
-    }, 2000);
+  mounted() {
+    // setTimeout(() => {
+    //   this.loadedBtn = false;
+    // }, 5000);
 
     this.afterLogOutCompare();
     this.afterLogOutCart();

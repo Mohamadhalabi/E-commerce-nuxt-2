@@ -46,21 +46,12 @@ export default {
       {
         hid: 'tawk.to',
         src:
-          'https://embed.tawk.to/65551a48958be55aeaaff3ae/1hfa6tbkt',
+          'https://embed.tawk.to/62eb896454f06e12d88cddba/1g9k11d13',
         defer: true,
         async:true,
       }
     ]
   },
-  redirect: [
-    // Redirect old URL to new URL
-    {
-      from: '/shop',
-      to: '/new-url',
-      statusCode: 301, // 301: Moved Permanently, you can also use 302 for temporary redirects
-    },
-    // Add more redirects if needed
-  ],
   publicRuntimeConfig: {
     recaptcha: {
       version: 2,
@@ -108,19 +99,19 @@ export default {
     }]
   ],
 
-  // ssrCache: {
-  //     useHostPrefix: false,
-  //     pages: ['/'], // Add the routes you want to cache
-  //  },
+  ssrCache: {
+      useHostPrefix: false,
+      pages: ['/'], // Add the routes you want to cache
+   },
 
-  modules: ['@nuxtjs/axios', 'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
+  modules: ['@nuxtjs/axios', 'nuxt-precompress', 'nuxt-delay-hydration', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
     '@nuxtjs/recaptcha', {
       version: 2
     }
   ]],
-  //   delayHydration: {
-  //   mode: 'manual',
-  // },
+    delayHydration: {
+    mode: 'manual',
+  },
   image: {
     quality: 100,
     format: ['webp'],
@@ -220,31 +211,29 @@ export default {
   router: {
     base: '/',
     linkActiveClass: '',
-    linkExactActiveClass: 'active',
-    scrollBehavior(to, from, savedPosition) {
-      if (savedPosition) {
-        return savedPosition;
-      } else {
-        return { x: 0, y: 0 };
-      }
-    }
+    linkExactActiveClass: 'active'
   },
-  serverMiddleware: [
-    '~/middleware/redirects.js',
-    // '~/middleware/removeShopPrefix',
-  ],
+
   build: {
     analyze: false,
     extractCSS: true,
     optimizeCSS: true,
-    publicPath: process.env.PUBLIC_PATH,
+    publicPath: '/secure',
     babel: {
       compact: true
     },
+    extend(config, { isDev, isClient }) {
+      if (!isDev) {
+        config.output.filename = '[name].[contenthash].js';
+        config.output.chunkFilename = '[name].[contenthash].js';
+      }
+    }
+
   },
 
   generate: {
-    fallback: 'my-custom-404.html',
+    subFolders: false,
+    fallback: '404.html'
   },
 
   ssr: true,
@@ -261,9 +250,13 @@ export default {
     enabled: true, // Enable in production
     report: false, // set true to turn one console messages during module init
     test: /\.(js|css|html|txt|xml|svg)$/, // files to compress on build
+    // Serving options
     middleware: {
+      // You can disable middleware if you serve static files using nginx...
       enabled: true,
+      // Enable if you have .gz or .br files in /static/ folder
       enabledStatic: true,
+      // Priority of content-encodings, first matched with request Accept-Encoding will me served
       encodingsPriority: ['br', 'gzip'],
     },
 

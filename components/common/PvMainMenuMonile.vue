@@ -99,8 +99,8 @@
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <nuxt-link :to="getLink('/shop?best-seller')" class="d-flex">
-          <p class="mobile-menu-links-red">{{ $t("header.BestSeller") }}</p>
+        <nuxt-link :to="getLink('/shop?offers')" class="d-flex">
+          <p class="mobile-menu-links-red">{{ $t("header.Offer") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">

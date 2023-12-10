@@ -247,12 +247,12 @@
           <div class="row text-center w-100">
             <div class="col-lg-9 mt-auto mb-auto text-left">
               <nuxt-link
-                :to="getLink('/shop?best-seller')">
-                <i class="fa fa-star">
+                :to="getLink('/shop?offers')">
+                <i class="fa fa-percent">
                 </i>
                 <span class="ml-1 mr-lg-2"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.BestSeller") }}
+                  {{ $t("header.Offer") }}
                 </span>
               </nuxt-link>
               <nuxt-link :to="getLink('/shop?free-shipping')">
@@ -343,11 +343,11 @@
           <div class="row text-center w-100">
             <div class="row text-center w-100">
               <div class="col-lg-2 m-auto">
-                <nuxt-link :to="getLink('/shop?best-seller')">
-                  <i class="fa fa-star">
+                <nuxt-link :to="getLink('/shop?offers')">
+                  <i class="fa fa-percent">
                   </i>
                   <span class="ml-1">
-                  {{ $t("header.BestSeller") }}
+                  {{ $t("header.Offer") }}
                 </span>
                 </nuxt-link>
               </div>

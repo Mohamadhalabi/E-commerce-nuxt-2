@@ -140,6 +140,7 @@ export default
       Bundles:'Bundles',
       FreeShipping: 'Free Shipping',
       BestSeller: 'Best Seller',
+      Offer: 'Offers',
       keysAndRemote: 'Keys & Remotes',
       AccessoriesAndTools: 'Accessories & Tools',
       DeviceAndMachine : 'Device & Machine',
