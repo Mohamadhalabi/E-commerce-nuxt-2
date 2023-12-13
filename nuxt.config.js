@@ -236,7 +236,7 @@ export default {
     fallback: '404.html'
   },
 
-  ssr: true,
+  ssr: false,
   loading: false,
   loadingIndicator: false,
 

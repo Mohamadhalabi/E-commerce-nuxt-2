@@ -260,7 +260,7 @@
               ><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
               <span>{{ alertMessage }}</span></b-alert
             >
-            <recaptcha />
+<!--            <recaptcha />-->
             <b v-if="this.token == ''" class="text-danger text-left w-100">{{
               $t("common.pleaseCheckRecaptch")
             }}</b>
@@ -323,12 +323,12 @@ export default {
         city: "",
         confirm_password: "",
         country_id: null,
-        state: null,
-        street: null,
+        state: "",
+        street: "",
         address: null,
-        postal_code: null,
-        company_name: null,
-        website_url: null,
+        postal_code: "",
+        company_name: "",
+        website_url: "",
       },
       alertMessage: "",
       alertClass: "",
@@ -365,11 +365,11 @@ export default {
       formData.append("company_name", this.form.company_name);
       formData.append("website_url", this.form.website_url);
       formData.append("avatar", this.avatar);
-      try {
-        this.token = await this.$recaptcha.getResponse();
-      } catch (Ex) {
-        this.token = "";
-      }
+      // try {
+      //   this.token = await this.$recaptcha.getResponse();
+      // } catch (Ex) {
+      //   this.token = "";
+      // }
       Api.post("/user/auth/register", formData)
         .then((response) => {
           this.$notify({

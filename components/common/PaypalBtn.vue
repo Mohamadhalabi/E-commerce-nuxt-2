@@ -3,7 +3,7 @@
     <div id="smart-button-container">
       <div style="text-align: center; position: relative;">
         <div
-          v-if="isActive"
+          v-if="!is_uae && (shipping_method === 'domestic' || shipping_method === 'pick_up')"
           class="displayBtn"
         />
         <div id="paypal-button-container" />
@@ -17,6 +17,10 @@ import Api from '~/api';
 
 export default {
   props: {
+    is_uae:{
+      type: Boolean,
+      required:true,
+    },
     termsAndConditions:{
       type: Boolean,
       required:true,
@@ -97,7 +101,7 @@ export default {
         }
       }
 
-      loadScript('https://www.paypal.com/sdk/js?client-id=test&currency=USD', () => {
+      loadScript('https://www.paypal.com/sdk/js?client-id=Af49r0dUUTEjYOtfvNCqX5AnGmnHHTBotsmIjrP_Ni0q81YVxNzcBVAScbMzAN8U7J5RGFl2waFXGhFa&currency=USD', () => {
         let _this = this;
         paypal.Buttons({
           style: {

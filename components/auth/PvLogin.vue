@@ -36,7 +36,7 @@
         :class="{ 'mb-2': insideModal }"
         required
       />
-      <recaptcha />
+<!--      <recaptcha />-->
       <b v-if="this.token == ''" class="text-danger">{{
         $t("common.pleaseCheckRecaptch")
       }}</b>
@@ -129,7 +129,6 @@ export default {
   },
   data: function () {
     return {
-      loadedBtn: true,
       form: {
         email: "",
         password: "",
@@ -165,14 +164,13 @@ export default {
     ]),
 
     submit: async function () {
-      try {
-        this.token = await this.$recaptcha.getResponse();
-      } catch (Ex) {
-        this.token = "";
-      }
-      if (this.token != "") {
-        this.$auth
-          .loginWith("local", {
+      // try {
+      //   this.token = await this.$recaptcha.getResponse();
+      // } catch (Ex) {
+      //   this.token = "";
+      // }
+      // if (this.token != "") {
+        this.$auth.loginWith("local", {
             data: this.form,
           })
           .then((res) => {
@@ -198,10 +196,10 @@ export default {
               text: err.response.data.message,
             });
           })
-          .finally(() => {
-            this.isLoading = false;
-          });
-      }
+          // .finally(() => {
+          //   this.isLoading = false;
+          // });
+      // }
     },
     fetchDatafronLocalStorage() {
       let cartListLocalStorge = JSON.parse(localStorage.getItem("card"));
