@@ -80,7 +80,7 @@
               />
             </div>
             <transition name="slide">
-              <div class="col-lg-12 mt-2 border-with-top-text-shipping-method" v-if="this.selectedAddress == true">
+              <div class="col-lg-12 mt-2 border-with-top-text-shipping-method">
                 <div class="row" :class="{ 'text-right': getIsAr }">
                   <div
                     v-for="(item, index) in ['dhl', 'aramex', 'fedex', 'ups','domestic','pick_up']" :key="index" class="col-lg-3 col-md-3 col-sm-3 col-6 mt-auto mb-auto text-center">
@@ -125,7 +125,7 @@
             </transition>
 
             <transition name="slide">
-              <div class="col-lg-12 mt-4 border-with-top-text-payment-method" v-if="dataForm.shipping_method !='' ">
+              <div class="col-lg-12 mt-4 border-with-top-text-payment-method">
                 <div class="row" :class="{ 'text-right': getIsAr }">
                   <div class="col-lg-4 mt-lg-4">
                     <div class="card text-center" :class="{ 'payment-method-active': clickedCardIndex === 1 }" @click="handlePaymentMethod(1),CheckCardSelected()">
@@ -409,6 +409,8 @@
                           :address="dataForm.address"
                           :is-valid="checkIsValidPayment && !hasBlockedCountry"
                           :termsAndConditions="termsAndConditions"
+                          :is_uae="this.is_uae"
+                          :isActive="this.isActive"
                         />
                       </div>
                     </div>
@@ -502,6 +504,7 @@ export default {
   },
   data: function () {
     return {
+      is_uae:false,
       termsAndConditions:false,
       isActive:false,
       showAllResults: false,
@@ -584,9 +587,6 @@ export default {
     if (this.$settings.payment_methods.stripe == "stripe") {
       this.paymanetMethodCount++;
     }
-  },
-  props: {
-    ScrollToFooter: Boolean,
   },
   methods: {
     getLink(route) {
@@ -706,20 +706,22 @@ export default {
     GetNewAddress(value){
       this.dataForm.address = value.id
       this.refetchPrice()
+      Api.post("/user/addresses/check-if-uae",{ id: value.id }).then((res) =>{
+        this.is_uae = res.data.message
+      })
     },
     hiddenErrorMessage(event) {
       this.showInvalideMessage = false;
     },
     createOrder() {
-
-      console.log(this.dataForm.address)
       if (this.dataForm.address == "") {
         this.$notify({
           group: "errorMessage",
           type: "error",
           text: "Please select An address",
         });
-      } else if (this.dataForm.shipping_method == "") {
+      }
+      if (this.dataForm.shipping_method == "") {
         this.$notify({
           group: "errorMessage",
           type: "error",
@@ -727,32 +729,41 @@ export default {
         });
       } else {
         if (this.termsAndConditions == true) {
-          this.loadingOrder = true;
-
-          Api.post("/user/orders/create", this.dataForm)
-            .then((response) => {
-              if (this.dataForm.payment_method == 'ccavenue') {
-                location.href = "https://dev-srv.tlkeys.com/online-order?order_id=" + response.data.data.order.order_id + "&amount=" + response.data.data.payment.amount
-              } else {
-                this.$router.push({
-                  path: "/complete-order",
-                  query: {
-                    orderId: response.data.data.order.order_id,
-                    success: response.data.data.order.success,
-                    message: response.data.data.message,
-                  },
-                });
-              }
+          if(!this.is_uae && this.dataForm.shipping_method == "domestic" || !this.is_uae && this.dataForm.shipping_method =="pick_up"){
+            this.$notify({
+              group: "custom-notify",
+              type: "error",
+              text: "Domestic Shipping / Pick up are only Available in the United Arab Emirates"
             })
-            .catch((err) => {
-              this.$notify({
-                group: "errorMessage",
-                type: "error",
-                text: err.response.data.message,
+          }
+          else{
+            this.loadingOrder = true;
+            Api.post("/user/orders/create", this.dataForm)
+              .then((response) => {
+                if (this.dataForm.payment_method == 'ccavenue') {
+                  location.href = "https://dev-srv.tlkeys.com/online-order?order_id=" + response.data.data.order.order_id + "&amount=" + response.data.data.payment.amount
+                } else {
+                  this.$router.push({
+                    path: "/complete-order",
+                    query: {
+                      orderId: response.data.data.order.order_id,
+                      success: response.data.data.order.success,
+                      message: response.data.data.message,
+                    },
+                  });
+                }
+              })
+              .catch((err) => {
+                this.$notify({
+                  group: "errorMessage",
+                  type: "error",
+                  text: err.response.data.message,
+                });
+                this.loadingOrder = false;
               });
-              this.loadingOrder = false;
-            });
-        } else {
+          }
+        }
+        else {
           this.$notify({
             group: "custom-notify",
             type: "error",
@@ -787,15 +798,11 @@ export default {
           this.$Progress.finish();
         })
         .catch((error) => {
-
           console.log(error)
-          /*  let errorObj = 'error.response.data.data';
-          this.errorMessage = error.response.data.data.coupon_code[0];  */
           this.showInvalideMessage = true;
           this.$notify({
             group: "errorMessage",
             type: "error",
-            /*  text: error.response.data.data[Object.keys(errorObj)[0]][0] */
             text: "The selected coupon code is invalid.",
           });
         });
