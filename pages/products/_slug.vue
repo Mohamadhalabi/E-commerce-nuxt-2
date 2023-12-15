@@ -280,11 +280,11 @@ export default {
             "image": [
               this.images
             ],
-            "description": this.product.description,
+            "description": this.product.meta.description,
             "sku": this.product.sku,
             "brand": {
               "@type": "Brand",
-              "name": this.carBrands
+              "name": this.product.specifications.manufacturer ?? "-"
             },
             "review": {
               "@type": "Review",

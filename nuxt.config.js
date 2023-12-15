@@ -82,7 +82,7 @@ export default {
 
   buildModules: [
     '@nuxtjs/dotenv',
-     'nuxt-ssr-cache',
+    'nuxt-ssr-cache',
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
     ['nuxt-i18n', {
@@ -100,18 +100,24 @@ export default {
   ],
 
   ssrCache: {
-      useHostPrefix: false,
-      pages: ['/'], // Add the routes you want to cache
-   },
+    useHostPrefix: false,
+    pages: ['/'], // Add the routes you want to cache
+  },
 
-  modules: ['@nuxtjs/axios', 'nuxt-precompress', 'nuxt-delay-hydration', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
+//   modules: ['@nuxtjs/axios', 'nuxt-precompress', 'nuxt-delay-hydration', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
+//     '@nuxtjs/recaptcha', {
+//       version: 2
+//     }
+//   ]],
+
+  modules: ['@nuxtjs/axios', 'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
     '@nuxtjs/recaptcha', {
       version: 2
     }
   ]],
-    delayHydration: {
-    mode: 'manual',
-  },
+//     delayHydration: {
+//     mode: 'manual',
+//   },
   image: {
     quality: 100,
     format: ['webp'],
@@ -218,15 +224,37 @@ export default {
     analyze: false,
     extractCSS: true,
     optimizeCSS: true,
-    publicPath: '/secure',
+    publicPath: '/secure/v1',
     babel: {
       compact: true
     },
-    extend(config, { isDev, isClient }) {
-      if (!isDev) {
-        config.output.filename = '[name].[contenthash].js';
-        config.output.chunkFilename = '[name].[contenthash].js';
-      }
+    extend(config, { isDev, isModern }) {
+      // Add version to filenames in production
+      const version = '1'; // Set your desired version here
+
+      config.output.filename = isDev
+        ? `[name]${isModern ? '.modern' : ''}.js`
+        : `${version}[contenthash:7]${isModern ? '.modern' : ''}.js`;
+
+      config.output.chunkFilename = isDev
+        ? `[name]${isModern ? '.modern' : ''}.js`
+        : `${version}[contenthash:7]${isModern ? '.modern' : ''}.js`;
+
+      config.output.css = isDev
+        ? '[name].css'
+        : `${version}[contenthash:7].css`;
+
+      config.output.img = isDev
+        ? '[path][name].[ext]'
+        : `img/${version}[name].[contenthash:7].[ext]`;
+
+      config.output.font = isDev
+        ? '[path][name].[ext]'
+        : `fonts/${version}[name].[contenthash:7].[ext]`;
+
+      config.output.video = isDev
+        ? '[path][name].[ext]'
+        : `videos/${version}[name].[contenthash:7].[ext]`;
     }
 
   },
