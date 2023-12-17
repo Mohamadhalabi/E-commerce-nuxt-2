@@ -58,7 +58,7 @@
                     />
                   </div>
                   <div class="" :class="{'col-xl-8 col-lg-8': product.hide_price === 0, 'col-xl-7 col-lg-7': product.hide_price !== 0}">
-                    <p v-html="highlightSearchKey(product['title'], searchKey)" class="w-100"></p>
+                    <p v-html="highlightSearchKey(product['title'] + ' ' + product['summary_name'], searchKey)" class="w-100"></p>
                     <div class="sku-color">
                       <p v-html="highlightSearchKey(product.sku, searchKey)"></p>
                     </div>
