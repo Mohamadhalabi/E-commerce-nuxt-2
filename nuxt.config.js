@@ -1,6 +1,7 @@
 import config from './configs';
 import axios from "axios";
 
+const version = '1.0.1'; // Replace this with your actual version
 
 const {locale, availableLocales, fallbackLocale} = config.locales;
 const currency = 'USD';
@@ -148,41 +149,113 @@ export default {
   //   enabled: true, // Always enable purgecss
   // },
 
+  // sitemap: {
+  //   path: '/sitemap.xml',
+  //   hostname: 'https://tlkeys.com',
+  //   cacheTime: 86400, // 24 hours in seconds
+  //   gzip: true,
+  //   generate: false, // Enable me when using nuxt generate
+  //   exclude: ['/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**'],
+  //   routes: async () => {
+  //     try {
+  //       const dynamicRoutesResponse = await axios.get('https://dev-srv.tlkeys.com/products-routes');
+  //       const dynamicRoutes = dynamicRoutesResponse.data; // Extract data from the response
+  //       // categories :
+  //       const dynamicRoutesResponse2 = await axios.get('https://dev-srv.tlkeys.com/categories');
+  //       const dynamicRoutes2 = dynamicRoutesResponse2.data; // Extract data from the response
+  //
+  //       const dynamicRoutesResponse3 = await axios.get('https://dev-srv.tlkeys.com/manufacturers');
+  //       const dynamicRoutes3 = dynamicRoutesResponse3.data; // Extract data from the response
+  //
+  //       const dynamicRoutesResponse4 = await axios.get('https://dev-srv.tlkeys.com/brands');
+  //       const dynamicRoutes4 = dynamicRoutesResponse4.data; // Extract data from the response
+  //
+  //       const allRoutes = [
+  //         '/',
+  //         ...dynamicRoutes,
+  //         ...dynamicRoutes2,
+  //         ...dynamicRoutes3,
+  //         ...dynamicRoutes4
+  //       ];
+  //
+  //       return allRoutes;
+  //     } catch (error) {
+  //       console.error('Error fetching dynamic routes:', error);
+  //       return [];
+  //     }
+  //   },
+  // },
+
   sitemap: {
     path: '/sitemap.xml',
-    hostname: 'https://tlkeys.com',
-    cacheTime: 86400, // 24 hours in seconds
-    gzip: true,
-    generate: false, // Enable me when using nuxt generate
-    exclude: ['/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**'],
-    routes: async () => {
-      try {
-        const dynamicRoutesResponse = await axios.get('https://dev-srv.tlkeys.com/products-routes');
-        const dynamicRoutes = dynamicRoutesResponse.data; // Extract data from the response
-        // categories :
-        const dynamicRoutesResponse2 = await axios.get('https://dev-srv.tlkeys.com/categories');
-        const dynamicRoutes2 = dynamicRoutesResponse2.data; // Extract data from the response
+    sitemaps: [
+      {
+        path: '/sitemap-products.xml',
+        cacheTime: 86400, // 24 hours in seconds
+        gzip: true,
+        generate: false, // Enable me when using nuxt generate
+        exclude: ['/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**'],
+        routes: async () => {
+          try {
+            const dynamicRoutesResponse = await axios.get('https://dev-srv.tlkeys.com/products-routes');
+            const dynamicRoutes = dynamicRoutesResponse.data; // Extract data from the response
+            // categories :
+            const dynamicRoutesResponse2 = await axios.get('https://dev-srv.tlkeys.com/categories');
+            const dynamicRoutes2 = dynamicRoutesResponse2.data; // Extract data from the response
 
-        const dynamicRoutesResponse3 = await axios.get('https://dev-srv.tlkeys.com/manufacturers');
-        const dynamicRoutes3 = dynamicRoutesResponse3.data; // Extract data from the response
+            const dynamicRoutesResponse3 = await axios.get('https://dev-srv.tlkeys.com/manufacturers');
+            const dynamicRoutes3 = dynamicRoutesResponse3.data; // Extract data from the response
 
-        const dynamicRoutesResponse4 = await axios.get('https://dev-srv.tlkeys.com/brands');
-        const dynamicRoutes4 = dynamicRoutesResponse4.data; // Extract data from the response
+            const dynamicRoutesResponse4 = await axios.get('https://dev-srv.tlkeys.com/brands');
+            const dynamicRoutes4 = dynamicRoutesResponse4.data; // Extract data from the response
 
-        const allRoutes = [
-          '/',
-          ...dynamicRoutes,
-          ...dynamicRoutes2,
-          ...dynamicRoutes3,
-          ...dynamicRoutes4
-        ];
+            const allRoutes = [
+              '/',
+              ...dynamicRoutes,
+              ...dynamicRoutes2,
+              ...dynamicRoutes3,
+              ...dynamicRoutes4
+            ];
 
-        return allRoutes;
-      } catch (error) {
-        console.error('Error fetching dynamic routes:', error);
-        return [];
+            return allRoutes;
+          } catch (error) {
+            console.error('Error fetching dynamic routes:', error);
+            return [];
+          }
+        },
+      }, {
+        path: '/sitemap-images.xml',
+        cacheTime: 86400, // 24 hours in seconds
+        gzip: true,
+        generate: false, // Enable me when using nuxt generate
+        exclude: [
+          '/fr/**',
+          '/ar/**',
+          '/promotion/**',
+          '/routes',
+          '/unlock-remote-services',
+
+          '/products','/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**',
+          '/about','/account','/ar','/cancellation-replacement-policy','/cart','/checkout','/compares','/complete-order','/contact','/deliveryinfo','/downloads',
+          '/fr','/online-services','pin-code','/privacy-policy','/register-completed','/return-policy','/terms','/'
+
+        ],
+        routes: async () => {
+          try {
+            const dynamicRoutesResponse_images = await axios.get('https://dev-srv.tlkeys.com/sitemap-images');
+            const dynamicRoutes_images = dynamicRoutesResponse_images.data; // Extract data from the response
+
+            const allRoutes = [
+              ...dynamicRoutes_images,
+            ];
+            return allRoutes;
+          } catch (error) {
+            console.error('Error fetching dynamic routes:', error);
+            return [];
+          }
+        },
       }
-    },
+    ]
   },
 
   render: {
@@ -224,37 +297,17 @@ export default {
     analyze: false,
     extractCSS: true,
     optimizeCSS: true,
-    publicPath: '/secure/v1',
+    publicPath: '/secure',
     babel: {
       compact: true
     },
-    extend(config, { isDev, isModern }) {
-      // Add version to filenames in production
-      const version = '1'; // Set your desired version here
-
-      config.output.filename = isDev
-        ? `[name]${isModern ? '.modern' : ''}.js`
-        : `${version}[contenthash:7]${isModern ? '.modern' : ''}.js`;
-
-      config.output.chunkFilename = isDev
-        ? `[name]${isModern ? '.modern' : ''}.js`
-        : `${version}[contenthash:7]${isModern ? '.modern' : ''}.js`;
-
-      config.output.css = isDev
-        ? '[name].css'
-        : `${version}[contenthash:7].css`;
-
-      config.output.img = isDev
-        ? '[path][name].[ext]'
-        : `img/${version}[name].[contenthash:7].[ext]`;
-
-      config.output.font = isDev
-        ? '[path][name].[ext]'
-        : `fonts/${version}[name].[contenthash:7].[ext]`;
-
-      config.output.video = isDev
-        ? '[path][name].[ext]'
-        : `videos/${version}[name].[contenthash:7].[ext]`;
+    filenames: {
+      app: ({ isDev, isModern }) => isDev ? `[name]${isModern ? '.modern' : ''}.js` : `[contenthash:7]${isModern ? '.modern' : ''}.${version}.js`,
+      chunk: ({ isDev, isModern }) => isDev ? `[name]${isModern ? '.modern' : ''}.js` : `[contenthash:7]${isModern ? '.modern' : ''}.${version}.js`,
+      css: ({ isDev }) => isDev ? `[name].css` : `css/[contenthash:7].${version}.css`,
+      img: ({ isDev }) => isDev ? `[path][name].[ext]` : `img/[name].[contenthash:7].${version}.[ext]`,
+      font: ({ isDev }) => isDev ? `[path][name].[ext]` : `fonts/[name].[contenthash:7].${version}.[ext]`,
+      video: ({ isDev }) => isDev ? `[path][name].[ext]` : `videos/[name].[contenthash:7].${version}.[ext]`
     }
 
   },
@@ -264,7 +317,7 @@ export default {
     fallback: '404.html'
   },
 
-  ssr: false,
+  ssr: true,
   loading: false,
   loadingIndicator: false,
 
