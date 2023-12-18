@@ -304,6 +304,39 @@ export const actions = {
 
   },
 
+  clearCart: async function ({ commit }, payload) {
+    if (localStorage.getItem("tokenEnded") === '1') {
+      // Clear the cart in local storage
+      if (process.client) {
+        localStorage.removeItem('card');
+      }
+      // Reset the cart in the state
+      commit('RESET_CART', []);
+      // Notify the user
+      this._vm.$notify({
+        group: 'addProduct',
+        type: 'success',
+        text: 'Your cart has been cleared',
+      });
+    } else {
+      // If the user is logged in, clear the cart on the server side
+      try {
+        await Api.post(`cart/empty/${payload.StateUser.id}`);
+        // Reset the cart in the state
+        commit('RESET_CART', []);
+        // Notify the user
+        this._vm.$notify({
+          group: 'addProduct',
+          type: 'success',
+          text: 'Your cart has been cleared',
+        });
+      } catch (error) {
+        // Handle error if needed
+        console.error('Error clearing cart on the server', error);
+      }
+    }
+  },
+
   removeFromCart: async function ({ commit }, payload) {
     if (localStorage.getItem('tokenEnded') == '1') {
       let cartList = JSON.parse(localStorage.getItem('card'));

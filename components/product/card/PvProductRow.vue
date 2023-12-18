@@ -40,6 +40,7 @@
           class="mt-1"
           v-if="product.hide_price == 0"
           :product="product"
+          :additionalProductItems="true"
         />
 
         <div v-else class="d-flex justify-content-center text-lg-center">

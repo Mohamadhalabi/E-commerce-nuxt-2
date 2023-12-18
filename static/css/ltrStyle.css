@@ -549,8 +549,9 @@
 }
 
 .sku-color {
-    color: #556b2f !important;
+  color: #556b2f !important;
   font-weight: bold;
+  font-size: 16px;
 }
 
 .price-color {

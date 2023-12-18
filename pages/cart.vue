@@ -17,6 +17,19 @@
         </div>
       </nav>
     </div>
+    <div v-if="cartList.length > 0">
+      <button
+        @click="clearCart({ StateUser })"
+        style="background-color: #892118;
+        color: white;border-radius: 10px;
+        padding: 15px"
+        type="button"
+        :outline="true"
+        class="py-3 mb-1 font-weight-bold">
+        <i style="color: white;" class="fa fa-trash remove-button"></i>
+        Empty Cart
+      </button>
+    </div>
     <client-only>
       <pv-free-shipping-amount></pv-free-shipping-amount>
     </client-only>
@@ -392,7 +405,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("shop", ["removeFromCart", "getCartList", "changeQuantity"]),
+    ...mapActions("shop", ["removeFromCart", "getCartList", "changeQuantity", "clearCart"]),
     getLink(route) {
       if (this.getLang === 'en') {
         return route; // Return the route as is without the language parameter
