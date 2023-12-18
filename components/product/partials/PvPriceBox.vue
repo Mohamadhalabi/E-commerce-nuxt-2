@@ -1,5 +1,5 @@
 <template>
-  <div class="price-box" style="">
+  <div class="price-box" :class="{ 'text-center': additionalProductItems }">
     <template v-if="product.discount && product.discount.length && product.discount.length !== 0">
       <span
         v-if="product.discount.type =='fixed'"
@@ -60,6 +60,7 @@ export default {
     gridPrice: Boolean,
     highlightCommon: Boolean,
     homePageSearch: Boolean,
+    additionalProductItems: Boolean,
   },
   data: function () {
     return {

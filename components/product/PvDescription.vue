@@ -26,8 +26,7 @@
               <div
                 v-for="item in product.compatible_with"
                 :key="item.sku"
-                class="col-lg-12 col-md-12 col-sm-12"
-              >
+                class="col-lg-12 col-md-12 col-sm-12">
                 <pv-product-row :product="item" />
               </div>
             </td>
@@ -44,8 +43,7 @@
               <div
                 v-for="item in product.bundled"
                 :key="item.sku"
-                class="col-lg-12 col-md-12 col-sm-12"
-              >
+                class="col-lg-12 col-md-12 col-sm-12">
                 <pv-product-bundel :product="item" />
               </div>
             </td>
