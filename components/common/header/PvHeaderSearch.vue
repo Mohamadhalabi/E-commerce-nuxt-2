@@ -45,7 +45,6 @@
                   <div class="col-xl-2 col-lg-2">
                     <nuxt-img
                       format="webp"
-                      loading="lazy"
                       :src="product['gallery'][0]['s']['url']"
                       :alt="product['short_title']"
                       width="60"

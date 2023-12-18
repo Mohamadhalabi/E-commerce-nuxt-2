@@ -28,18 +28,16 @@
             {{ product.short_title }}
           </li>
         </ol>
-        <div class="mt-auto">
-          <client-only>
-            <PvBtnShare :url="urlLink" />
-          </client-only>
-        </div>
+<!--        <div class="mt-auto">-->
+<!--          <client-only>-->
+<!--            <PvBtnShare :url="urlLink" />-->
+<!--          </client-only>-->
+<!--        </div>-->
       </nav>
       <div class="product-single-container container product-single-default">
         <div v-if="product" class="row">
           <div class="col-xl-5 col-lg-6 col-md-6 col-12 product-single-gallery">
-            <client-only>
-              <pv-media :product="product" />
-            </client-only>
+            <pv-media :product="product" />
           </div>
           <div class="col-xl-7 col-lg-6 col-md-5 col-sm-12 col-12 product-single-details">
             <pv-detail
@@ -110,13 +108,15 @@ import PvDescription from "~/components/product/PvDescription";
 import PvCollection from "~/components/product/card/PvCollection";
 import PvSmallCollection from "~/components/product/card/PvSmallCollection";
 import getProducts, { productsQueries } from "~/utils/service";
+import PvMedia from "~/components/product/PvMedia.vue";
 import Api from "~/api";
 import {mapGetters} from "vuex";
 
 export default {
   components: {
-    PvBtnShare: () => import("~/components/common/PvBtnShare.vue"),
-    PvMedia: () => import("~/components/product/PvMedia.vue"),
+    // PvBtnShare: () => import("~/components/common/PvBtnShare.vue"),
+    // PvMedia: () => import("~/components/product/PvMedia.vue"),
+    PvMedia,
     PvDescription,
     PvCollection,
     PvSmallCollection,

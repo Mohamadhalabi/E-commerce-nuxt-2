@@ -168,7 +168,6 @@
                     :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">
                     <nuxt-img
                       format="webp"
-                      loading="lazy"
                       v-if="StateUser.avatar"
                       :src="checkURL(StateUser.avatar)"
                       @error="defalutAvatar"

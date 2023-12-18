@@ -1,8 +1,5 @@
 <template>
-  <nuxt-img
-    format="webp"
-    loading="lazy"
-    sizes="100vw sm:350px md:350px lg:350px xl:350px xxl:350px 2xl:350px"
+  <img
     :src="image[size].url"
     :class="className"
     :alt="image[size].alt + (size != 'l' ? ' - thumbnail' : '')"

@@ -5,8 +5,10 @@
       <!--<client-only>-->
       <pv-top-notice class="top-notice" />
       <!--</client-only>-->
-      <pv-header @isClicked="isClicked" />
-      <nuxt keep-alive />
+      <client-only>
+        <pv-header @isClicked="isClicked" />
+      </client-only>
+      <nuxt />
       <pv-footer/>
       <div class="wishlist-popup">
         <div class="wishlist-popup-msg">Product added!</div>
@@ -28,14 +30,7 @@
 
 <script>
 import api from "~/api";
-// import PvFooter from "~/components/common/PvFooter";
-// import PvAppPopup from "~/components/popups/PvAppPopup";
-// import PvProductPopup from "~/components/popups/PvProductPopup";
-// import PvMobileMenu from "~/components/common/header/PvMobileMenu";
-// import PvErrorMessage from "~/components/popups/PvErrorMessage.vue";
-// import PvComparePopup from "~/components/popups/PvComparePopup.vue";
-// import PvHeader from "~/components/common/header/PvHeader.vue";
-// import PvTopNotice from "~/components/common/header/PvTopNotice";
+import PvHeader from "~/components/common/header/PvHeader.vue";
 import "static/css/ltrStyle.css";
 import {
   resizeHandler,
