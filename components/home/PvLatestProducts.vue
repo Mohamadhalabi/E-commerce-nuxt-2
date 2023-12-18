@@ -7,10 +7,11 @@
 </template>
 <script>
 import getProducts, {productsQueries} from "~/utils/service";
+import PvCollection from "~/components/product/card/PvCollection.vue";
 
 export default {
   components: {
-    PvCollection: () => import("~/components/product/card/PvCollection.vue")
+    PvCollection
   },
   async fetch() {
     this.latestProducts2 = await getProducts(productsQueries.latest_products, 12);

@@ -316,7 +316,6 @@ export default {
     subFolders: false,
     fallback: '404.html'
   },
-
   ssr: true,
   loading: false,
   loadingIndicator: false,

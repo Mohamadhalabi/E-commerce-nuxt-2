@@ -7,9 +7,10 @@
 </template>
 <script>
 import Api from "~/api";
+import PvCollection from "~/components/product/card/PvCollection.vue";
 export default {
   components: {
-    PvCollection: () => import("~/components/product/card/PvCollection.vue")
+    PvCollection,
   },
   async fetch() {
         const topSellingProducts =  await Api.get("products/top-selling-products");

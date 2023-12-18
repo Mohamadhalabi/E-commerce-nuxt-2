@@ -138,6 +138,9 @@
 <script>
 import { mapGetters,mapActions } from "vuex";
 import PvNewsletterModal from '~/components/home/PvNewsletterModal.vue';
+import PvTopSelling from "~/components/home/PvTopSelling.vue";
+import PvBestSelling from "~/components/home/PvBestSelling.vue";
+import PvLatestProducts from "~/components/home/PvLatestProducts.vue";
 // import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
 export default {
   head() {
@@ -271,9 +274,10 @@ export default {
     PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
     PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
     PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
-    PvLatestProducts:() => import("~/components/home/PvLatestProducts.vue"),
-    PvBestSelling:() => import("~/components/home/PvBestSelling.vue"),
-    PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
+    PvLatestProducts,
+    PvBestSelling,
+    // PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
+    PvTopSelling,
     PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
     PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
     PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
