@@ -1,6 +1,6 @@
 <template>
   <div class="price-box text-center" style="">
-    <template v-if="product.discount.length != 0">
+    <template v-if="product.discount && product.discount.length && product.discount.length !== 0">
       <span
         v-if="product.discount.type =='fixed'"
         :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
@@ -65,9 +65,6 @@ export default {
     return {
       isEmpty
     };
-  },
-  mounted() {
-    console.log(this.product)
   },
   methods:{
     hasDuplicate(status){
