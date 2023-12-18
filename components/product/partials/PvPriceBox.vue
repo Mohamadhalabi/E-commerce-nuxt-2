@@ -1,5 +1,5 @@
 <template>
-  <div class="price-box text-center" style="">
+  <div class="price-box" style="">
     <template v-if="product.discount && product.discount.length && product.discount.length !== 0">
       <span
         v-if="product.discount.type =='fixed'"
