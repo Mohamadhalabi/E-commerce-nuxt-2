@@ -49,11 +49,11 @@
         </div>
       </PvCarousel>
 
-      <light-box
-        ref="lightBox"
-        :media="lightBoxMedia"
-        :show-light-box="false"
-      />
+<!--      <light-box-->
+<!--        ref="lightBox"-->
+<!--        :media="lightBoxMedia"-->
+<!--        :show-light-box="false"-->
+<!--      />-->
     </div>
     <div
       style="height: max-content !important"
@@ -114,7 +114,7 @@
         </button>
       </div>
     </div>
-    <light-box ref="lightBox" :media="lightBoxMedia" :show-light-box="false" />
+<!--    <light-box ref="lightBox" :media="lightBoxMedia" :show-light-box="false" />-->
   </div>
 </template>
 
@@ -123,9 +123,9 @@ import PvLabelGroup from "~/components/product/partials/PvLabelGroup";
 import PvGalleryImage from "~/components/product/partials/PvGalleryImage";
 import PvGalleryImage2 from "~/components/product/partials/PvGalleryImage2";
 import PvCarousel from "~/components/features/PvCarousel";
-import LightBox from "vue-image-lightbox";
+// import LightBox from "vue-image-lightbox";
 import { baseSlider1, baseSlider8 } from "~/utils/data/carousel";
-import "vue-image-lightbox/dist/vue-image-lightbox.min.css";
+// import "vue-image-lightbox/dist/vue-image-lightbox.min.css";
 import { mapGetters } from "vuex";
 
 export default {
@@ -134,7 +134,7 @@ export default {
     PvGalleryImage,
     PvGalleryImage2,
     PvCarousel,
-    LightBox,
+    // LightBox,
   },
   props: {
     product: Object,

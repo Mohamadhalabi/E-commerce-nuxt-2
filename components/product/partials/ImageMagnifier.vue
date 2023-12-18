@@ -2,7 +2,6 @@
 
   <div>
     <img
-      loading="lazy"
       :id="'myimage-' + image[size].id"
       :src="image[size].url"
       :width="image[size].width"
