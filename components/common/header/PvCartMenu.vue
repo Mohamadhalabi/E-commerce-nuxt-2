@@ -34,8 +34,15 @@
         </a>
 
         <div class="dropdownmenu-wrapper custom-scrollbar">
-          <div class="dropdown-cart-header text-center">
-            {{ $t("header.shipping_cart") }}
+          <div class="dropdown-cart-header d-flex">
+            <div class="second">
+              <base-button-icon-1 style="font-size: 14px">
+                Empty Cart
+              </base-button-icon-1>
+              <span class="ml-5">
+                {{ $t("header.shipping_cart") }}
+              </span>
+            </div>
           </div>
           <template v-if="cartList && cartList.length > 0">
             <div class="dropdown-cart-products">
@@ -64,8 +71,7 @@
                       width="150"
                       height="150"
                       :src="product.gallery[0]['s']['url']"
-                      alt=""
-                    >
+                      alt="">
                     </nuxt-link>
                   </figure>
                 </div>
