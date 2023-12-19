@@ -1,7 +1,7 @@
 import config from './configs';
 import axios from "axios";
 
-const version = '1.0.1'; // Replace this with your actual version
+const version = process.env.version;
 
 const {locale, availableLocales, fallbackLocale} = config.locales;
 const currency = 'USD';
@@ -190,11 +190,15 @@ export default {
     path: '/sitemap.xml',
     sitemaps: [
       {
-        path: '/sitemap-products.xml',
+        path: '/sitemap-en.xml',
         cacheTime: 86400, // 24 hours in seconds
-        gzip: true,
+        gzip: false,
         generate: false, // Enable me when using nuxt generate
-        exclude: ['/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**'],
+        exclude: [
+          '/ar/**',
+          '/fr/**',
+          '/es/**',
+          '/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**'],
         routes: async () => {
           try {
             const dynamicRoutesResponse = await axios.get('https://dev-srv.tlkeys.com/products-routes');
@@ -226,7 +230,7 @@ export default {
       }, {
         path: '/sitemap-images.xml',
         cacheTime: 86400, // 24 hours in seconds
-        gzip: true,
+        gzip: false,
         generate: false, // Enable me when using nuxt generate
         exclude: [
           '/fr/**',
@@ -342,7 +346,7 @@ export default {
 
     // build time compression settings
     gzip: {
-      // should compress to gzip?
+        // should compress to gzip?
       enabled: true,
       // compression config
       // https://www.npmjs.com/package/compression-webpack-plugin
