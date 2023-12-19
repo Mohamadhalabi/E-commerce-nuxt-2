@@ -39,6 +39,7 @@ import {
   stickyHeaderHandler
 } from "~/utils";
 import { mapActions, mapGetters } from "vuex";
+import Api from "~/api";
 export default {
   components: {
     PvTopNotice:() =>import("~/components/common/header/PvTopNotice"),
@@ -72,10 +73,22 @@ export default {
 
   computed: {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
-    // ...mapState(["toast"]),
   },
-
   mounted: function() {
+    if(process.client) {
+      console.log(localStorage.getItem("version"));
+      document.querySelector("body").classList.add("loaded");
+      if (!localStorage.getItem("tokenEnded")) {
+        localStorage.setItem("tokenEnded", 1);
+      }
+      if(localStorage.getItem("tokenEnded") == "0"){
+        if(localStorage.getItem("version") !== process.env.version) {
+          localStorage.removeItem('card');
+          localStorage.removeItem('tlkeys');
+          delete api.defaults.headers.common['Authorization'];
+        }
+      }
+    }
     this.$store.dispatch('rtlStore/setLanguageFromURL');
     this.updateLanguageCode(this.$i18n.locale)
     api.defaults.headers["Accept-Language"] = this.$i18n.locale;
@@ -83,12 +96,6 @@ export default {
       this.getCartList();
       this.fetchList();
       this.fetchWishlist();
-    }
-    if(process.client) {
-      document.querySelector("body").classList.add("loaded");
-      if (!localStorage.getItem("tokenEnded")) {
-        localStorage.setItem("tokenEnded", 1);
-      }
     }
 
 

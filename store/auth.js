@@ -116,6 +116,7 @@ export const mutations = {
   SET_TOKEN: function (state, token) {
     Api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     localStorage.setItem('tokenEnded', 0);
+    localStorage.setItem('version', process.env.version);
     state.token = token;
   },
 
