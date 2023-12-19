@@ -35,10 +35,16 @@
 
         <div class="dropdownmenu-wrapper custom-scrollbar">
           <div class="dropdown-cart-header d-flex">
-            <div class="second">
-              <base-button-icon-1 style="font-size: 14px">
+            <div class="second" v-if="cartList.length > 0">
+              <button
+                @click="clearCart({ StateUser })"
+                style="background-color: #892118;color: white;border-radius: 10px;font-size: 13px;margin-left: 5px"
+                type="button"
+                :outline="true"
+                class="py-1 mb-1 font-weight-bold">
+                <i style="color: white;font-size: 13px;" class="fa fa-trash remove-button"></i>
                 Empty Cart
-              </base-button-icon-1>
+              </button>
               <span class="ml-5">
                 {{ $t("header.shipping_cart") }}
               </span>
@@ -162,7 +168,7 @@
       BaseButtonIcon1,
     },
     computed: {
-      ...mapGetters("auth", ["isAuthenticated"]),
+      ...mapGetters("auth", ["isAuthenticated","StateUser"]),
       ...mapGetters("shop", [
         "cartCount",
         "cartList",
@@ -182,7 +188,7 @@
       this.getCartList();
     },
     methods: {
-      ...mapActions("shop", ["removeFromCart", "getCartList", "changeQuantity"]),
+      ...mapActions("shop", ["removeFromCart", "getCartList", "changeQuantity","clearCart"]),
       minusQty(product) {
         if(product.quantity > 1){
           product.quantity --;

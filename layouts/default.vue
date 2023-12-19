@@ -53,10 +53,10 @@ export default {
     PvWishlistPopup:() => import("~/components/popups/PvWishlistPopup.vue"),
   },
   head() {
-        return {
+    return {
 
-        }
-   },
+    }
+  },
   watch: {
     $route: function() {
       resizeHandler();
@@ -75,18 +75,24 @@ export default {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
   },
   mounted: function() {
+
+    if(localStorage.getItem("tokenEnded") == "0"){
+      if(localStorage.getItem("version") !== process.env.version) {
+        localStorage.setItem("tokenEnded", 1);
+        localStorage.removeItem('card');
+        localStorage.removeItem('tlkeys');
+        delete api.defaults.headers.common['Authorization'];
+        this.StateUser = null
+      }
+    }
+
     if(process.client) {
-      console.log(localStorage.getItem("version"));
+      for(let i in localStorage) {
+        console.log(i + ' = ' + localStorage[i]);
+      }
       document.querySelector("body").classList.add("loaded");
       if (!localStorage.getItem("tokenEnded")) {
         localStorage.setItem("tokenEnded", 1);
-      }
-      if(localStorage.getItem("tokenEnded") == "0"){
-        if(localStorage.getItem("version") !== process.env.version) {
-          localStorage.removeItem('card');
-          localStorage.removeItem('tlkeys');
-          delete api.defaults.headers.common['Authorization'];
-        }
       }
     }
     this.$store.dispatch('rtlStore/setLanguageFromURL');
