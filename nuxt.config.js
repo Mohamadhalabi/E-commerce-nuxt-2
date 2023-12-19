@@ -213,12 +213,16 @@ export default {
             const dynamicRoutesResponse4 = await axios.get('https://dev-srv.tlkeys.com/brands');
             const dynamicRoutes4 = dynamicRoutesResponse4.data; // Extract data from the response
 
+            const dynamicRoutesResponse5 = await axios.get('https://dev-srv.tlkeys.com/downloads');
+            const dynamicRoutes5 = dynamicRoutesResponse5.data; // Extract data from the response
+
             const allRoutes = [
               '/',
               ...dynamicRoutes,
               ...dynamicRoutes2,
               ...dynamicRoutes3,
-              ...dynamicRoutes4
+              ...dynamicRoutes4,
+              ...dynamicRoutes5
             ];
 
             return allRoutes;
