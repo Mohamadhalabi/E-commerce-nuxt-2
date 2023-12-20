@@ -75,10 +75,10 @@ export default {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
   },
   mounted: function() {
-    if(localStorage.getItem("version") !== process.env.version) {
-      const state = { 'busy': false , 'loggedIn':true, 'strategy':"local", 'token':null , 'user':null};
-      this.LOGOUT(state)
-    }
+    // if(localStorage.getItem("version") !== process.env.version) {
+    //   const state = { 'busy': false , 'loggedIn':true, 'strategy':"local", 'token':null , 'user':null};
+    //   this.LOGOUT(state)
+    // }
     if(process.client) {
       document.querySelector("body").classList.add("loaded");
       if (!localStorage.getItem("tokenEnded")) {
