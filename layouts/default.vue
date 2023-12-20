@@ -75,25 +75,11 @@ export default {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
   },
   mounted: function() {
-
-    if(localStorage.getItem("tokenEnded") == "0"){
-      if(localStorage.getItem("version") !== process.env.version) {
-        localStorage.setItem("tokenEnded", 1);
-        localStorage.removeItem('card');
-        localStorage.removeItem('tlkeys');
-        delete api.defaults.headers.common['Authorization'];
-        this.StateUser = null
-        this.SET_AUTHENTICATED_FALSE(null)
-      }
+    if(localStorage.getItem("version") !== process.env.version) {
+      const state = { 'busy': false , 'loggedIn':true, 'strategy':"local", 'token':null , 'user':null};
+      this.LOGOUT(state)
     }
-    if(localStorage.getItem("version") == null){
-      this.SET_AUTHENTICATED_FALSE(null)
-    }
-
     if(process.client) {
-      for(let i in localStorage) {
-        console.log(i + ' = ' + localStorage[i]);
-      }
       document.querySelector("body").classList.add("loaded");
       if (!localStorage.getItem("tokenEnded")) {
         localStorage.setItem("tokenEnded", 1);
@@ -127,7 +113,7 @@ export default {
     ...mapActions("compare", ["fetchList"]),
     ...mapActions("fav", ["fetchWishlist"]),
     ...mapActions("language",["updateLanguageCode"]),
-    ...mapMutations("auth", ["SET_AUTHENTICATED_FALSE"]),
+    ...mapMutations("auth", ["LOGOUT"]),
 
     isClicked(val){
       this.isSearchInputClicked = val

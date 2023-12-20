@@ -1,11 +1,11 @@
 <template>
   <main class="main">
-      <pv-stories class="desktop-only" v-if="!isMobile" />
+      <pv-stories class="desktop-only" />
       <pv-intro-section/>
       <home-page-search />
       <!--<br>-->
 <!--    <delay-hydration>-->
-    <pv-slider-Banner class="desktop-only" v-if="!isMobile" />
+    <pv-slider-Banner class="desktop-only"  />
 <!--    </delay-hydration>-->
 
 <!--    <delay-hydration>-->
@@ -141,6 +141,7 @@ import PvNewsletterModal from '~/components/home/PvNewsletterModal.vue';
 import PvTopSelling from "~/components/home/PvTopSelling.vue";
 import PvBestSelling from "~/components/home/PvBestSelling.vue";
 import PvLatestProducts from "~/components/home/PvLatestProducts.vue";
+import PvSliderBanner from "~/components/home/PvSliderBanner.vue";
 // import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
 export default {
   head() {
@@ -271,7 +272,7 @@ export default {
     PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
-    PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
+    PvSliderBanner,
     PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
     PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
     PvLatestProducts,

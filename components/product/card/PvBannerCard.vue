@@ -1,14 +1,18 @@
 <template>
   <nuxt-link
     :to="getLink('/products/'+rondomProduct.slug)"
-    class="top-notice-image mb-1 w-100"
-     :class="{'custom-class': width === 250 && height === 250}"
+    class="top-notice-image w-100"
      :style="getBackgroundImageStyle()"
   >
     <div class="postiton-relative d-flex align-items-center flex-column">
       <div class="row home-page-slider">
-        <div class="col-xl-7 col-lg-6 mb-auto mt-auto">
-          <h2 class="w-100 ml-lg-5 h5-home-page text-center mt-1 mt-lg-2 " :class="{'left-banners': left}">
+        <div class="col-xl-6 col-lg-6 mt-auto mb-auto ml-auto mr-auto ">
+          <h2 class="w-100 ml-lg-5 h5-home-page text-center mt-1 mt-lg-2 ">
+            <p
+                class="m-0"
+                :class="{'custom_color': custom_color}">
+              {{ rondomProduct["short_title"] }}
+            </p>
             <span class="product-price price-color" v-if="rondomProduct['sale_price'].value == rondomProduct['price'].value">
               {{rondomProduct['price'].value}}{{rondomProduct['price'].currency}}
             </span>
@@ -20,26 +24,19 @@
               {{rondomProduct['price'].value}}{{rondomProduct['price'].currency}}
               </span>
             </span>
-            <p :class="{'custom_color': custom_color}">
-              {{ rondomProduct["short_title"] }}
-            </p>
           </h2>
         </div>
-        <div class="col-xl-5 col-lg-6 mt-auto mb-auto"
-             :class="{'left-banner-image': width === 350 && height === 350}"
-        >
+        <div class="col-xl-6 col-lg-6">
           <div style="z-index: 1 !important" class="">
             <nuxt-img
               format="webp"
               loading="lazy"
               :alt="rondomProduct['png_image'][0]['s'].alt"
               :src="getImageUrl()"
+              class="mr-0 product_image_png"
               :class="{
-                'mx-auto': true,
                 'image-with-effect': true,
                 }"
-              sizes="100vw sm:50vw md:400px"
-
             />
           </div>
         </div>
@@ -85,36 +82,36 @@ export default {
       }
     },
     getBackgroundImageStyle() {
-      if (process.client) {
-        if (window.innerWidth > 1435) {
-          if(!this.third_item && !this.fourth_item) {
-            return `background-image: url(${this.backgroundImageUrl});` +
-              'background-repeat: no-repeat;' +
-              'background-size: 560px 310px;'
-          } else if (this.third_item) {
-            return `background-image: url(${this.backgroundImageUrl});` +
-              'background-repeat: no-repeat;'
-          } else if (this.fourth_item) {
-            return `background-image: url(${this.backgroundImageUrl});` +
-              'background-repeat: no-repeat;' +
-              'background-size: 500px 240px;'
-          }
-        }
-        else{
-          if(!this.third_item && !this.fourth_item) {
-            return `background-image: url(${this.backgroundImageUrl});` +
-              'background-repeat: no-repeat;' +
-              'background-size: 560px 180px;'
-          } else if (this.third_item) {
+      // if (process.client) {
+      //   if (window.innerWidth > 1435) {
+      //     if(!this.third_item && !this.fourth_item) {
+      //       return `background-image: url(${this.backgroundImageUrl});` +
+      //         'background-repeat: no-repeat;' +
+      //         'background-size: 560px 310px;'
+      //     } else if (this.third_item) {
             return `background-image: url(${this.backgroundImageUrl});` +
               'background-repeat: no-repeat;'
-          } else if (this.fourth_item) {
-            return `background-image: url(${this.backgroundImageUrl});` +
-              'background-repeat: no-repeat;' +
-              'background-size: 500px 180px;'
-          }
-        }
-      }
+      //     } else if (this.fourth_item) {
+      //       return `background-image: url(${this.backgroundImageUrl});` +
+      //         'background-repeat: no-repeat;' +
+      //         'background-size: 500px 240px;'
+      //     }
+      //   }
+      //   else{
+      //     if(!this.third_item && !this.fourth_item) {
+      //       return `background-image: url(${this.backgroundImageUrl});` +
+      //         'background-repeat: no-repeat;' +
+      //         'background-size: 560px 180px;'
+      //     } else if (this.third_item) {
+      //       return `background-image: url(${this.backgroundImageUrl});` +
+      //         'background-repeat: no-repeat;'
+      //     } else if (this.fourth_item) {
+      //       return `background-image: url(${this.backgroundImageUrl});` +
+      //         'background-repeat: no-repeat;' +
+      //         'background-size: 500px 180px;'
+      //     }
+      //   }
+      // }
     },
   },
 };
@@ -208,5 +205,23 @@ img.image-with-effect:hover {
 }
 .custom_color{
   color: white;
+}
+
+@media screen and (min-width: 1436px) {
+  .product_image_png {
+    margin-left: 45px;
+  }
+}
+@media screen and (max-width: 1435px) {
+  .product_image_png{
+    width: 140px!important;
+    margin-left: 40px;
+  }
+}
+@media screen and (max-width: 1200px){
+  .product_image_png{
+    width: 120px!important;
+    margin-left: 30px;
+  }
 }
 </style>
