@@ -193,7 +193,6 @@ export default {
         path: '/sitemap-en.xml',
         cacheTime: 86400, // 24 hours in seconds
         gzip: false,
-        host:"tlkeys.com",
         generate: false, // Enable me when using nuxt generate
         exclude: [
           '/ar/**',
@@ -232,7 +231,8 @@ export default {
             return [];
           }
         },
-      }, {
+      },
+      {
         path: '/sitemap-images.xml',
         cacheTime: 86400, // 24 hours in seconds
         gzip: false,
@@ -243,10 +243,9 @@ export default {
           '/promotion/**',
           '/routes',
           '/unlock-remote-services',
-
           '/products','/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**',
           '/about','/account','/ar','/cancellation-replacement-policy','/cart','/checkout','/compares','/complete-order','/contact','/deliveryinfo','/downloads',
-          '/fr','/online-services','pin-code','/privacy-policy','/register-completed','/return-policy','/terms','/'
+          '/fr','/online-services','pin-code','/privacy-policy','/register-completed','/return-policy','/terms'
 
         ],
         routes: async () => {
