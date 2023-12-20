@@ -38,7 +38,7 @@ import {
   showScrollTopHandler,
   stickyHeaderHandler
 } from "~/utils";
-import { mapActions, mapGetters } from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import Api from "~/api";
 export default {
   components: {
@@ -83,7 +83,11 @@ export default {
         localStorage.removeItem('tlkeys');
         delete api.defaults.headers.common['Authorization'];
         this.StateUser = null
+        this.SET_AUTHENTICATED_FALSE(null)
       }
+    }
+    if(localStorage.getItem("version") == null){
+      this.SET_AUTHENTICATED_FALSE(null)
     }
 
     if(process.client) {
@@ -123,6 +127,7 @@ export default {
     ...mapActions("compare", ["fetchList"]),
     ...mapActions("fav", ["fetchWishlist"]),
     ...mapActions("language",["updateLanguageCode"]),
+    ...mapMutations("auth", ["SET_AUTHENTICATED_FALSE"]),
 
     isClicked(val){
       this.isSearchInputClicked = val
