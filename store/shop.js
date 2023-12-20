@@ -10,9 +10,13 @@ export const state = () => ({
   cartPaymentPrice: 0,
   cartCurrency: null,
   dispaly: false,
+  productStatus: null,
 });
 
 export const getters = {
+  ProductStatus: state => {
+    return state.productStatus
+  },
   cartCount: state => {
     return state.cartCount;
   },
@@ -175,7 +179,6 @@ export const actions = {
   },
 
   addToCart: async function ({ commit }, payload) {
-
     if (localStorage.getItem('tokenEnded') == 1) {
       if (!payload['quantity']) {
         payload['quantity'] = 1;
@@ -257,10 +260,10 @@ export const actions = {
       })
       .catch((error) => {
         let message = error.response.data.message;
+        commit('UPDATE_PRODUCT_STATUS', error.response.data.message); // Add this line to update productStatus
         this._vm.$notify({
           group: 'errorMessage',
           text: message
-
         });
       });
 
@@ -444,6 +447,10 @@ export const actions = {
 export const mutations = {
   toggleDispaly: function (state) {
     state.dispaly = !state.dispaly;
+  },
+
+  UPDATE_PRODUCT_STATUS: function (state, newStatus) {
+    state.productStatus = newStatus;
   },
 
   UPDATE_CART: function (state, payload) {

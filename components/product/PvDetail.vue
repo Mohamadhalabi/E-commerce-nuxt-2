@@ -203,11 +203,25 @@
           ></i>
         </button>
       </div>
+
       <div class="d-flex flex-column p-3">
         <pv-wishlist-button class="p-0" :product="product" :parent="'products-detail'" />
         <pv-compare-button class="p-0" :product="product" parent="product-detail"></pv-compare-button>
       </div>
 
+    </div>
+    <div v-if="ProductStatus !== null">
+      <b-alert
+          variant="danger"
+          class="font-weight-bold"
+          dismissible
+          fade
+          :show="showDismissibleAlert"
+          @dismissed="showDismissibleAlert=false"
+      >    <b-icon icon="exclamation-circle-fill" variant="danger"></b-icon>
+        <i class="fa fa-exclamation-triangle"></i>
+        {{ ProductStatus }}
+      </b-alert>
     </div>
 
 
@@ -262,11 +276,14 @@ export default {
       qty: 1,
       socialMedia: [],
       models: null,
+      showDismissibleAlert: true
+
     };
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
     ...mapGetters("language", ["getLang"]),
+    ...mapGetters("shop", ["ProductStatus"]),
   },
   mounted() {
     let dataModels = [];

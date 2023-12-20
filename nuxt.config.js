@@ -193,6 +193,7 @@ export default {
         path: '/sitemap-en.xml',
         cacheTime: 86400, // 24 hours in seconds
         gzip: false,
+        host:"tlkeys.com",
         generate: false, // Enable me when using nuxt generate
         exclude: [
           '/ar/**',
@@ -300,7 +301,9 @@ export default {
     linkActiveClass: '',
     linkExactActiveClass: 'active'
   },
-
+  serverMiddleware: [
+    '~/middleware/redirects.js',
+  ],
   build: {
     analyze: false,
     extractCSS: true,
