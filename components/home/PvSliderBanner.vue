@@ -10,7 +10,7 @@
                 :width="250"
                 :rondomProduct="rondomProduct[0]"
                 v-animate
-                background-image-url='"../images/home/backgrounds/1-min.png"'
+                background-image-url='"../images/home/backgrounds/background-1.jpg"'
             ></pv-banner-card>
             <pv-banner-card
                 class="d-none d-lg-block"
@@ -18,7 +18,7 @@
                 :width="250"
                 :rondomProduct="rondomProduct[1]"
                 v-animate
-                background-image-url='"../images/home/backgrounds/2-min.jpg"'
+                background-image-url='"../images/home/backgrounds/background-2.jpg"'
                 :fourth_item="true"
             ></pv-banner-card>
             <pv-banner-card
@@ -27,7 +27,7 @@
                 :width="250"
                 :rondomProduct="rondomProduct[2]"
                 v-animate
-                background-image-url='"../images/home/backgrounds/3-min.jpg"'
+                background-image-url='"../images/home/backgrounds/background-3.jpg"'
                 :fourth_item="true"
             >
             </pv-banner-card>
@@ -69,7 +69,7 @@
               :width="250"
               :rondomProduct="rondomProduct[3]"
               v-animate
-              background-image-url='"../images/home/backgrounds/1-min.png"'
+              background-image-url='"../images/home/backgrounds/background-1.jpg"'
             ></pv-banner-card>
             <pv-banner-card
               class="d-none d-lg-block"
@@ -77,7 +77,7 @@
               :width="250"
               :rondomProduct="rondomProduct[4]"
               v-animate
-              background-image-url='"../images/home/backgrounds/2-min.jpg"'
+              background-image-url='"../images/home/backgrounds/background-2.jpg"'
               :fourth_item="true"
             ></pv-banner-card>
             <pv-banner-card
@@ -86,7 +86,7 @@
               :width="250"
               :rondomProduct="rondomProduct[5]"
               v-animate
-              background-image-url='"../images/home/backgrounds/3-min.jpg"'
+              background-image-url='"../images/home/backgrounds/background-3.jpg"'
               :fourth_item="true"
             >
             </pv-banner-card>

@@ -6,8 +6,8 @@
   >
     <div class="postiton-relative d-flex align-items-center flex-column">
       <div class="row home-page-slider">
-        <div class="col-xl-6 col-lg-6 mt-auto mb-auto ml-auto mr-auto ">
-          <h2 class="w-100 ml-lg-5 h5-home-page text-center mt-1 mt-lg-2 ">
+        <div class="col-xl-6 col-lg-6 mt-auto mb-auto">
+          <h2 class="w-100 ml-lg-5 h5-home-page text-center mt-1 mt-lg-2">
             <p
                 class="m-0"
                 :class="{'custom_color': custom_color}">
@@ -82,36 +82,8 @@ export default {
       }
     },
     getBackgroundImageStyle() {
-      // if (process.client) {
-      //   if (window.innerWidth > 1435) {
-      //     if(!this.third_item && !this.fourth_item) {
-      //       return `background-image: url(${this.backgroundImageUrl});` +
-      //         'background-repeat: no-repeat;' +
-      //         'background-size: 560px 310px;'
-      //     } else if (this.third_item) {
-            return `background-image: url(${this.backgroundImageUrl});` +
-              'background-repeat: no-repeat;'
-      //     } else if (this.fourth_item) {
-      //       return `background-image: url(${this.backgroundImageUrl});` +
-      //         'background-repeat: no-repeat;' +
-      //         'background-size: 500px 240px;'
-      //     }
-      //   }
-      //   else{
-      //     if(!this.third_item && !this.fourth_item) {
-      //       return `background-image: url(${this.backgroundImageUrl});` +
-      //         'background-repeat: no-repeat;' +
-      //         'background-size: 560px 180px;'
-      //     } else if (this.third_item) {
-      //       return `background-image: url(${this.backgroundImageUrl});` +
-      //         'background-repeat: no-repeat;'
-      //     } else if (this.fourth_item) {
-      //       return `background-image: url(${this.backgroundImageUrl});` +
-      //         'background-repeat: no-repeat;' +
-      //         'background-size: 500px 180px;'
-      //     }
-      //   }
-      // }
+      return `background-image: url(${this.backgroundImageUrl});` +
+          'background-repeat: no-repeat;'
     },
   },
 };
@@ -179,7 +151,9 @@ img.image-with-effect:hover {
 }
 
 .h5-home-page{
-  font-size: 18px;
+  font-size: 16px;
+  margin: 0!important;
+  padding: 15px;
 }
 @media screen and (max-width: 1200px){
   .h5-home-page{
@@ -209,19 +183,20 @@ img.image-with-effect:hover {
 
 @media screen and (min-width: 1436px) {
   .product_image_png {
-    margin-left: 45px;
+    margin-left: 25px;
+    width: 180px;
   }
 }
 @media screen and (max-width: 1435px) {
   .product_image_png{
     width: 140px!important;
-    margin-left: 40px;
+    margin-left: 20px;
   }
 }
 @media screen and (max-width: 1200px){
   .product_image_png{
     width: 120px!important;
-    margin-left: 30px;
+    margin-left: 20px;
   }
 }
 </style>
