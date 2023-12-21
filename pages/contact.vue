@@ -89,10 +89,10 @@
                     required
                   />
                 </div>
-                <recaptcha />
-                <b v-if="this.token == ''" class="text-danger">{{
-                  $t("common.pleaseCheckRecaptch")
-                }}</b>
+<!--                <recaptcha />-->
+<!--                <b v-if="this.token == ''" class="text-danger">{{-->
+<!--                  $t("common.pleaseCheckRecaptch")-->
+<!--                }}</b>-->
 
                 <div class="form-footer">
                   <!--  <button
@@ -103,17 +103,17 @@
                   </button> -->
                   <base-button-icon-1
                     class="w-50 py-4 px-0"
-                    @click.prevent="sendMessage"
+                    @click="sendMessage"
                     type="submit"
                     :outline="true"
                   >
-                    <span class="mx-1">
+                    <span class="mx-1" style="color: white">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         height="25"
                         viewBox="0 96 960 960"
                         width="25"
-                        fill="#ff6800"
+                        fill="#ffffff"
                       >
                         <path
                           d="M120 896V256l760 320-760 320Zm60-93 544-227-544-230v168l242 62-242 60v167Zm0 0V346v457Z"
@@ -141,7 +141,6 @@
               </div>
               <div class="porto-sicon-description">
                 {{ $settings.contact.whatsapp }}<br />
-                {{ $settings.contact.telegram }}
               </div>
             </div>
             <div class="porto-sicon-box d-flex align-items-center">
@@ -150,7 +149,6 @@
               </div>
               <div class="porto-sicon-description">
                 {{ $settings.contact.email_primary }}<br />
-                {{ $settings.contact.email_secondary }}
               </div>
             </div>
             <div class="porto-sicon-box d-flex align-items-center">
@@ -338,12 +336,12 @@ export default {
     },
 
     sendMessage: async function () {
-      try {
-        this.token = await this.$recaptcha.getResponse();
-      } catch (Ex) {
-        this.token = "";
-      }
-      if (this.token != "") {
+      // try {
+      //   this.token = await this.$recaptcha.getResponse();
+      // } catch (Ex) {
+      //   this.token = "";
+      // }
+      // if (this.token != "") {
         this.$Progress.start();
         Api.post("/contact-us", this.dataForm)
           .then((response) => {
@@ -376,7 +374,7 @@ export default {
 
             this.$Progress.fail();
           });
-      }
+      // }
     },
   },
   computed: {
