@@ -714,6 +714,7 @@ export default {
       this.showInvalideMessage = false;
     },
     createOrder() {
+      console.log(this.dataForm.address)
       if (this.dataForm.address == "") {
         this.$notify({
           group: "errorMessage",
@@ -721,7 +722,7 @@ export default {
           text: "Please select An address",
         });
       }
-      if (this.dataForm.shipping_method == "") {
+      else if (this.dataForm.shipping_method == "") {
         this.$notify({
           group: "errorMessage",
           type: "error",
