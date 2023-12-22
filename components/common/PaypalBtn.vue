@@ -3,10 +3,15 @@
     <div id="smart-button-container">
       <div style="text-align: center; position: relative;">
         <div
-          v-if="!is_uae && (shipping_method === 'domestic' || shipping_method === 'pick_up')"
+          v-if="(shipping_method ==='' || address==='') || (!is_uae && (shipping_method === 'domestic' || shipping_method === 'pick_up')) "
           class="displayBtn"
         />
         <div id="paypal-button-container" />
+      </div>
+      <div>
+        <p class="font-weight-bold" style="color: red" v-if="address ==''">*Please Select an address</p>
+        <p class="font-weight-bold" style="color: red" v-if="shipping_method ==''">*Please Select a shipping method</p>
+        <p class="font-weight-bold" style="color: red" v-if="!is_uae && (shipping_method === 'domestic' || shipping_method === 'pick_up')">*This shipping method is only supported in the UAE</p>
       </div>
     </div>
   </div>

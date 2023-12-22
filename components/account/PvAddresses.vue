@@ -281,12 +281,12 @@ export default {
       this.$emit("address",address)
     },
     scrollToDiv() {
-      const element = this.$refs.myDiv;
-      const offset = element.$el.offsetTop + 0;
-      window.scrollTo({
-        top: offset,
-        behavior: 'smooth'
-      });
+      // const element = this.$refs.myDiv;
+      // const offset = element.$el.offsetTop + 0;
+      // window.scrollTo({
+      //   top: offset,
+      //   behavior: 'smooth'
+      // });
 
       this.close = true
     },
@@ -304,6 +304,10 @@ export default {
       Api.get("/user/addresses?length=1000")
         .then((response) => {
           this.addresses = response.data.addresses;
+          if(response.data.length == 0){
+            this.displayAddressFormInCheckout = true
+          }
+
           scrollTopHandler();
 
           const hasDefaultOne = this.addresses.some(obj => obj.default === 1);
