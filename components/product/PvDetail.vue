@@ -210,14 +210,14 @@
       </div>
 
     </div>
-    <div v-if="ProductStatus !== null">
+    <div v-if="ProductStatus !== null && ProductSKU === product.sku">
       <b-alert
           variant="danger"
           class="font-weight-bold"
           dismissible
           fade
           :show="showDismissibleAlert"
-          @dismissed="showDismissibleAlert=false"
+          @dismissed="showDismissibleAlert=true"
       >    <b-icon icon="exclamation-circle-fill" variant="danger"></b-icon>
         <i class="fa fa-exclamation-triangle"></i>
         {{ ProductStatus }}
@@ -284,6 +284,8 @@ export default {
     ...mapGetters("rtlStore", ["getIsAr"]),
     ...mapGetters("language", ["getLang"]),
     ...mapGetters("shop", ["ProductStatus"]),
+    ...mapGetters("shop", ["ProductSKU"]),
+
   },
   mounted() {
     let dataModels = [];
