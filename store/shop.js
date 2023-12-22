@@ -11,11 +11,15 @@ export const state = () => ({
   cartCurrency: null,
   dispaly: false,
   productStatus: null,
+  productSku:"",
 });
 
 export const getters = {
   ProductStatus: state => {
     return state.productStatus
+  },
+  ProductSKU: state => {
+    return state.productSku
   },
   cartCount: state => {
     return state.cartCount;
@@ -260,7 +264,9 @@ export const actions = {
       })
       .catch((error) => {
         let message = error.response.data.message;
+        console.log(error.response)
         commit('UPDATE_PRODUCT_STATUS', error.response.data.message); // Add this line to update productStatus
+        commit('UPDATE_PRODUCT_SKU', error.response.data.data.product_sku); // Add this line to update productStatus
         this._vm.$notify({
           group: 'errorMessage',
           text: message
@@ -452,7 +458,9 @@ export const mutations = {
   UPDATE_PRODUCT_STATUS: function (state, newStatus) {
     state.productStatus = newStatus;
   },
-
+  UPDATE_PRODUCT_SKU: function (state, newStatus) {
+    state.productSku = newStatus;
+  },
   UPDATE_CART: function (state, payload) {
     let results = {
       products: [],
