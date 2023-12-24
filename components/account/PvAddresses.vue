@@ -27,7 +27,7 @@
           {{ $t("address.noAddress") }}
       </div>
       <div style="display: flex;justify-content: center;">
-      <div>
+      <div v-if="displayAddressFormInCheckout == false">
       <base-button-icon-1
         v-if="checkout !== true"
         :outline="true"
@@ -327,6 +327,7 @@ export default {
     },
 
     openAddressFormModal(address) {
+      this.displayAddressFormInCheckout = true
       this.selectedAddressToUpdate = address;
       if (address) {
         this.typeForm = "edit";

@@ -1,34 +1,34 @@
 <template>
   <div v-animate
-        :data-animation-delay="animationDelay"
-        data-animation-name="fadeInUpShorter" class="from-demo-17">
+       :data-animation-delay="animationDelay"
+       data-animation-name="fadeInUpShorter" class="from-demo-17">
     <footer ref="footer" class="bgWorld footer font2 bg-dark pt-5">
       <div class="container">
         <div class="footer-middle pt-0">
           <div class="row">
-             <nuxt-link
-               :to="getLink('/')"
-             >
-                  <nuxt-img
-                    format="webp"
-                    loading="lazy"
-                    src="/images/logo-footer.png"
-                    alt="footer Logo"
-                    title="Techno lock footer logo"
-                    width="169"
-                    height="56"
-                    class="m-b-3 logo"
-                  />
-                </nuxt-link>
+            <nuxt-link
+              :to="getLink('/')"
+            >
+              <nuxt-img
+                format="webp"
+                loading="lazy"
+                src="/images/logo-footer.png"
+                alt="footer Logo"
+                title="Techno lock footer logo"
+                width="169"
+                height="56"
+                class="m-b-3 logo"
+              />
+            </nuxt-link>
           </div>
           <div class="row">
             <div class="col-lg-5 m-b-4">
               <h6 class="footer-desc text-white font-weight-normal" v-html="$t('footer.description')"/>
               <div class="row ls-0 footer-question">
                 <div class="col-12">
-<!--                  <pv-social-icons-->
-<!--                  :isFooter="true"-->
-<!--                  />-->
+                  <!--                  <pv-social-icons-->
+                  <!--                  :isFooter="true"-->
+                  <!--                  />-->
                 </div>
               </div>
             </div>
@@ -37,21 +37,21 @@
                 <ul class="links">
                   <li>
                     <nuxt-link
-                    :to="getLink('/about')"
+                      :to="getLink('/about')"
                     >
                       {{ $t("footer.AboutUs") }}
                     </nuxt-link>
                   </li>
                   <li>
                     <nuxt-link
-                    :to="getLink('/contact')"
+                      :to="getLink('/contact')"
                     >
                       {{ $t("footer.ContactUs") }}
                     </nuxt-link>
                   </li>
                   <li>
                     <nuxt-link
-                    :to="getLink('/deliveryinfo')"
+                      :to="getLink('/deliveryinfo')"
                     >
                       {{ $t("footer.DeliveryInfo") }}
                     </nuxt-link>
@@ -86,13 +86,13 @@
 
                 <ul class="contact-info d-flex flex-column">
                   <li v-if="$settings.contact.address"
-                  class="d-flex p-0 align-items-start">
-                      <i class="icon-direction mx-2"/>
+                      class="d-flex p-0 align-items-start">
+                    <i class="icon-direction mx-2"/>
                     <a
-                    href="https://www.google.com/maps/place/Techno+Lock+Keys+Trading+(+%D8%AA%D9%83%D9%86%D9%88+%D9%84%D9%88%D9%83+%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D8%A9+%D8%A7%D9%84%D9%85%D9%81%D8%A7%D8%AA%D9%8A%D8%AD+)%E2%80%AD/@25.3199127,55.407002,15z/data=!4m5!3m4!1s0x0:0xc1d5d1a7ec3407f9!8m2!3d25.3199127!4d55.407002?coh=164777&entry=tt&shorturl=1"
-                    target="_blank"
+                      href="https://www.google.com/maps/place/Techno+Lock+Keys+Trading+(+%D8%AA%D9%83%D9%86%D9%88+%D9%84%D9%88%D9%83+%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D8%A9+%D8%A7%D9%84%D9%85%D9%81%D8%A7%D8%AA%D9%8A%D8%AD+)%E2%80%AD/@25.3199127,55.407002,15z/data=!4m5!3m4!1s0x0:0xc1d5d1a7ec3407f9!8m2!3d25.3199127!4d55.407002?coh=164777&entry=tt&shorturl=1"
+                      target="_blank"
                     >
-                     <p class="m-0">{{ $settings.contact.address }}</p>
+                      <p class="m-0">{{ $settings.contact.address }}</p>
                     </a>
                   </li>
                   <li
@@ -101,10 +101,10 @@
                     ]" :key="phone"
                     class="d-flex align-items-center"
                   >
-                   <i class="icon-phone mx-2" />
+                    <i class="icon-phone mx-2" />
 
                     <a :href="'tel:' + phone" class="d-inline-block"
-                      > {{ phone }}</a>
+                    > {{ phone }}</a>
 
                   </li>
 
@@ -115,7 +115,7 @@
                     class="d-flex align-items-center"
                   >
                     <i class="icon-envolope mx-2" />
-                      <a :href="`mailto:${email}`">{{ email }}</a>
+                    <a :href="`mailto:${email}`">{{ email }}</a>
                   </li>
                 </ul>
 
@@ -138,7 +138,7 @@
                   style="color: #fff"
                   target="_blank"
                   href="https://tlkeys.com/"
-                  >{{ $t("footer.company_name") }}</a
+                >{{ $t("footer.company_name") }}</a
                 >
               </p>
             </div>
@@ -157,9 +157,9 @@
                           "
                           class="payment-icon"
                         />
-                      </div>
+            </div>
 
-             <div class="payment-icons">
+            <div class="payment-icons">
                     <span
                       v-for="(item, index) in concat([
                         'paypal',
@@ -172,7 +172,7 @@
                       "
                       class="payment-icon"
                     />
-                  </div>
+            </div>
 
           </div>
         </div>
