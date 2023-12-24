@@ -105,12 +105,12 @@ export default {
         {
           hid: "twitter:site",
           name: "twitter:site",
-          content: `@${this.$settings.social_media.twitter.split("/").pop()}`,
+          content: `@${(this.$settings.social_media.twitter || '').split("/").pop()}`,
         },
         {
           hid: "twitter:creator",
           name: "twitter:creator",
-          content: `@${this.$settings.social_media.twitter.split("/").pop()}`,
+          content: `@${(this.$settings.social_media.twitter || '').split("/").pop()}`,
         },
         {
           hid: "twitter:title",
