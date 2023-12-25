@@ -33,7 +33,7 @@
             }}<strong> {{ $t("contact.message") }}</strong>
           </h2>
 
-          <form action="#">
+          <form action="#" @submit.prevent="sendMessage">
             <div class="row">
               <div class="col-lg-6">
                 <div class="form-group required-field">
@@ -103,7 +103,6 @@
                   </button> -->
                   <base-button-icon-1
                     class="w-50 py-4 px-0"
-                    @click="sendMessage"
                     type="submit"
                     :outline="true"
                   >
