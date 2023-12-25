@@ -38,13 +38,11 @@
           </div>
         </div>
         <div class="sidebar-shop col-lg-2 order-lg-first mobile-sidebar p-0" sticky-container>
-          <client-only>
-            <div v-sticky="isSticky" sticky-offset="{top: 75}">
-              <sidebar-filter v-if="category" :category="category.slug"/>
-              <sidebar-filter v-if="manufacturer" :manufacturer="manufacturer.slug"/>
-              <sidebar-filter v-if="brand" :brand="brand.slug"/>
-            </div>
-          </client-only>
+          <div v-sticky="isSticky" sticky-offset="{top: 75}">
+            <sidebar-filter v-if="category" :category="category.slug"/>
+            <sidebar-filter v-if="manufacturer" :manufacturer="manufacturer.slug"/>
+            <sidebar-filter v-if="brand" :brand="brand.slug"/>
+          </div>
         </div>
       </div>
       <div class="filter-modal">
@@ -70,12 +68,13 @@
 <script>
 import ShopBanner from '~/components/shop/PvShopBanner';
 import PvProductList from "~/components/shop/PvProductList.vue";
+import SidebarFilter from "~/components/shop/SidebarFilter.vue";
 export default {
   name: 'ShopTemplate',
   components: {
     PvProductList,
     ShopBanner,
-    SidebarFilter: () => import("~/components/shop/SidebarFilter.vue")
+    SidebarFilter,
   },
   props: {
     category: {

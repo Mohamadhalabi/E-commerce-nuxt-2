@@ -62,12 +62,9 @@
 </template>
 
 <script>
-import {Tree, VueTreeList} from 'vue-tree-list';
-
 export default {
   name: 'DropDownItem',
   components: {
-    VueTreeList
   },
   props: {
     items: Array,
@@ -84,7 +81,7 @@ export default {
   computed: {
     dataTree: function () {
       this.qry();
-      return new Tree(this.items);
+      // return new Tree(this.items);
     },
   },
   created() {
