@@ -1,18 +1,19 @@
 import axios from 'axios';
 import store from 'vuex';
+import { state } from '/store/currency'
 import config from '~/configs';
 
 // Check if localStorage is available (client-side)
 const isLocalStorageAvailable = process.client && typeof localStorage !== 'undefined';
 
 // If localStorage is available, use it to get the state
-const state = isLocalStorageAvailable ? JSON.parse(localStorage.getItem('tlkeys')) : null;
-const token = state ? state.auth.token : null;
+const localStorageState = isLocalStorageAvailable ? JSON.parse(localStorage.getItem('tlkeys')) : null;
+const token = localStorageState ? localStorageState.auth.token : null;
 
 // Set default currency if not present in localStorage
-if (isLocalStorageAvailable && !localStorage.getItem('currency')) {
-  localStorage.setItem('currency', 'USD');
-}
+// if (isLocalStorageAvailable && !localStorage.getItem('currency')) {
+//   localStorage.setItem('currency', 'USD');
+// }
 
 const api = axios.create({
   withCredentials: true,
@@ -20,7 +21,7 @@ const api = axios.create({
   headers: {
     'Accept-Language': 'en',
     'Content-Type': 'application/json',
-    'currency': isLocalStorageAvailable ? localStorage.getItem('currency') : 'USD',
+    'currency': state().currency,
     'Accept': 'application/json',
     'secret-key': process.env.SECRET_KEY,
     'api-key': process.env.API_KEY,

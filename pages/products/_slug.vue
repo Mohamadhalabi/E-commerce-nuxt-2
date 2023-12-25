@@ -158,14 +158,21 @@ export default {
       carBrands: [],
       childCategory: null,
       ParentCategory: null,
+      isSalePriceEqualToPrice:null,
+      currency:"",
     };
   },
   mounted() {
     this.urlLink = window.location.origin + this.$route.fullPath;
+    if(parseFloat(this.product.price.value) === this.product.sale_price.value){
+      this.isSalePriceEqualToPrice ='-'
+    }
+    else{
+      this.isSalePriceEqualToPrice = this.product.sale_price;
+    }
 
   },
   head() {
-    if(this.childCategory !=null)
     return {
       titleTemplate: this.product.meta.title
         ? this.product.meta.title
@@ -286,6 +293,12 @@ export default {
               "@type": "Brand",
               "name": this.product.specifications.manufacturer ?? "-"
             },
+            "offers": {
+              "@type": "Offer",
+              "price": this.product.price,
+              "salePrice": this.isSalePriceEqualToPrice,
+              // "priceCurrency": this.product.price.code
+            },
             "review": {
               "@type": "Review",
               "reviewRating": {
@@ -303,160 +316,153 @@ export default {
               "ratingValue": 4.4,
               "reviewCount": 89
             },
-            "offers": {
-              "@type": "AggregateOffer",
-              "offerCount": 5,
-              "lowPrice": 119.99,
-              "highPrice": 199.99,
-              "priceCurrency": "USD"
-            }
           }
         }
       ]
     };
-    else
-      return {
-        titleTemplate: this.product.meta.title
-          ? this.product.meta.title
-          : this.product.title,
-        title: this.product.meta.title
-          ? this.product.meta.title
-          : this.product.title,
-        meta: [
-          {
-            "http-equiv": "content-language",
-            content: this.$i18n.locale,
-          },
-          {
-            name: "description",
-            content: this.product.meta.description,
-          },
-          {
-            name:"og:title",
-            content: this.product.meta.title
-          },
-          {
-            name: "og:description",
-            content: this.product.meta.description,
-          },
-          {
-            property: "og:image",
-            content: this.product.open_graph,
-          },
-          {
-            property: "og:type",
-            content: "product",
-          },
-          {
-            property: "og:site_name",
-            content: "Techno Lock Keys"
-          },
-          {
-            property: "og:url",
-            content: this.urlLink,
-          },
-          {
-            property:"twitter:card",
-            content: "summary",
-          },
-          {
-            property: "twitter:site",
-            content: "Techno Lock Keys",
-          },
-          {
-            property: "twitter:description",
-            content: this.product.meta.description
-          },
-          {
-            property: "twitter:title",
-            content: this.product.title
-          },
-          {
-            property: "twitter:url",
-            content: this.urlLink,
-          },
-          {
-            property: "twitter:image",
-            content: this.product.twitter_image,
-          }
-        ],
-        script: [
-          {
-            type: 'application/ld+json',
-            json: {
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": this.$i18n.t("products.home"),
-                  "item": process.env.PUBLIC_PATH,
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": this.$i18n.t("products.shop"),
-                  "item": `${process.env.PUBLIC_PATH}shop`,
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": this.ParentCategory,
-                  "item": `${process.env.PUBLIC_PATH}${this.parentCategoryLink}`,
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 4,
-                  "name": this.product.title,
-                  "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
-                }
-              ]
-            }
-          },
-          {
-            type: 'application/ld+json',
-            json: {
-              "@context": "https://schema.org/",
-              "@type": "Product",
-              "name": this.product.title,
-              "image": [
-                this.images
-              ],
-              "description": this.product.description,
-              "sku": this.product.sku,
-              "brand": {
-                "@type": "Brand",
-                "name": this.carBrands
-              },
-              "review": {
-                "@type": "Review",
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": 4,
-                  "bestRating": 5
-                },
-                "author": {
-                  "@type": "Organization",
-                  "name": "Techno Lock Keys"
-                }
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": 4.4,
-                "reviewCount": 89
-              },
-              "offers": {
-                "@type": "AggregateOffer",
-                "offerCount": 5,
-                "lowPrice": 119.99,
-                "highPrice": 199.99,
-                "priceCurrency": "USD"
-              }
-            }
-          }
-        ]
-      };
+    // else
+    //   return {
+    //     titleTemplate: this.product.meta.title
+    //       ? this.product.meta.title
+    //       : this.product.title,
+    //     title: this.product.meta.title
+    //       ? this.product.meta.title
+    //       : this.product.title,
+    //     meta: [
+    //       {
+    //         "http-equiv": "content-language",
+    //         content: this.$i18n.locale,
+    //       },
+    //       {
+    //         name: "description",
+    //         content: this.product.meta.description,
+    //       },
+    //       {
+    //         name:"og:title",
+    //         content: this.product.meta.title
+    //       },
+    //       {
+    //         name: "og:description",
+    //         content: this.product.meta.description,
+    //       },
+    //       {
+    //         property: "og:image",
+    //         content: this.product.open_graph,
+    //       },
+    //       {
+    //         property: "og:type",
+    //         content: "product",
+    //       },
+    //       {
+    //         property: "og:site_name",
+    //         content: "Techno Lock Keys"
+    //       },
+    //       {
+    //         property: "og:url",
+    //         content: this.urlLink,
+    //       },
+    //       {
+    //         property:"twitter:card",
+    //         content: "summary",
+    //       },
+    //       {
+    //         property: "twitter:site",
+    //         content: "Techno Lock Keys",
+    //       },
+    //       {
+    //         property: "twitter:description",
+    //         content: this.product.meta.description
+    //       },
+    //       {
+    //         property: "twitter:title",
+    //         content: this.product.title
+    //       },
+    //       {
+    //         property: "twitter:url",
+    //         content: this.urlLink,
+    //       },
+    //       {
+    //         property: "twitter:image",
+    //         content: this.product.twitter_image,
+    //       }
+    //     ],
+    //     script: [
+    //       {
+    //         type: 'application/ld+json',
+    //         json: {
+    //           "@context": "https://schema.org",
+    //           "@type": "BreadcrumbList",
+    //           "itemListElement": [
+    //             {
+    //               "@type": "ListItem",
+    //               "position": 1,
+    //               "name": this.$i18n.t("products.home"),
+    //               "item": process.env.PUBLIC_PATH,
+    //             },
+    //             {
+    //               "@type": "ListItem",
+    //               "position": 2,
+    //               "name": this.$i18n.t("products.shop"),
+    //               "item": `${process.env.PUBLIC_PATH}shop`,
+    //             },
+    //             {
+    //               "@type": "ListItem",
+    //               "position": 3,
+    //               "name": this.ParentCategory,
+    //               "item": `${process.env.PUBLIC_PATH}${this.parentCategoryLink}`,
+    //             },
+    //             {
+    //               "@type": "ListItem",
+    //               "position": 4,
+    //               "name": this.product.title,
+    //               "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
+    //             }
+    //           ]
+    //         }
+    //       },
+    //       {
+    //         type: 'application/ld+json',
+    //         json: {
+    //           "@context": "https://schema.org/",
+    //           "@type": "Product",
+    //           "name": this.product.title,
+    //           "image": [
+    //             this.images
+    //           ],
+    //           "description": this.product.description,
+    //           "sku": this.product.sku,
+    //           "brand": {
+    //             "@type": "Brand",
+    //             "name": this.carBrands
+    //           },
+    //           "review": {
+    //             "@type": "Review",
+    //             "reviewRating": {
+    //               "@type": "Rating",
+    //               "ratingValue": 4,
+    //               "bestRating": 5
+    //             },
+    //             "author": {
+    //               "@type": "Organization",
+    //               "name": "Techno Lock Keys"
+    //             }
+    //           },
+    //           "aggregateRating": {
+    //             "@type": "AggregateRating",
+    //             "ratingValue": 4.4,
+    //             "reviewCount": 89
+    //           },
+    //           "offers": {
+    //             "@type": "AggregateOffer",
+    //             "offerCount": 5,
+    //             "lowPrice": 119.99,
+    //             "highPrice": 199.99,
+    //             "priceCurrency": "USD"
+    //           }
+    //         }
+    //       }
+    //     ]
+    //   };
   },
   created: function () {
     this.getProduct();

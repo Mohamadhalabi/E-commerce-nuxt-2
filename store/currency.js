@@ -1,5 +1,5 @@
 export const state = () => ({
-  currency: "USD"
+  currency: ""
 });
 
 export const getters = {

@@ -580,10 +580,9 @@ export default {
     },
 
     setCurrency(currency) {
-      localStorage.setItem("currency", currency);
       api.defaults.headers["currency"] = currency;
       this.setCurrencyValue(currency);
-      window.location.href = window.location.origin + this.$route.fullPath;
+      // window.location.href = window.location.origin + this.$route.fullPath;
     },
 
     defalutAvatar(e) {
@@ -609,9 +608,8 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   mounted() {
-    let currency = localStorage.getItem("currency");
-    api.defaults.headers["currency"] = currency;
-    this.setCurrencyValue(currency);
+    console.log(this.currency)
+    // api.defaults.headers["currency"] = this.currency;
     this.checkMobile();
     window.addEventListener('scroll', this.checkScroll, {passive:true});
     window.addEventListener('resize', this.checkMobile);
