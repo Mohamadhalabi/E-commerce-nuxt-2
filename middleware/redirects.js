@@ -452,7 +452,11 @@ export default function(req, res, next) {
     {
       from:"/shop/eldb",
       to:"/eldb",
-    }
+    },
+    {
+      from:"/pin-code",
+      to:"https://www.tlkeys.com/pin-code"
+    },
 
   ]
   const redirect = redirects.find((r) => r.from === req.url)
