@@ -101,10 +101,15 @@ import PvCarousel from "~/components/features/PvCarousel";
 import { baseSlider6 } from "~/utils/data/carousel";
 import Api from "~/api";
 import PvBannerCard from "../product/card/PvBannerCard.vue";
+import {mapGetters} from "vuex";
+import getProducts, {productsQueries} from "~/utils/service";
 export default {
   components: {
     PvCarousel,
     PvBannerCard,
+  },
+  computed: {
+    ...mapGetters("header",["getCurrency"])
   },
   data: function () {
     return {
@@ -120,24 +125,13 @@ export default {
     const response = await Api.get("products/random-products");
     this.rondomProduct = response.data.products;
   },
-  methods: {
-    // async getSlides() {
-    //   try {
-    //     const response = await Api.get("sliders?type=banner");
-    //     this.slides = response.data.result;
-    //   } catch (error) {
-    //     console.error("Error fetching slides:", error);
-    //   }
-    // },
-    // async getRandomProduct() {
-    //   try {
-    //     const response = await Api.get("products/random-products");
-    //     this.rondomProduct = response.data.products;
-    //   } catch (error) {
-    //     console.error("Error fetching random products:", error);
-    //   }
-    // },
-  },
+  watch: {
+    getCurrency(newValue, oldValue) {
+      Api.get("products/random-products").then((response) => {
+        this.rondomProduct = response.data.products;
+      })
+    },
+  }
 };
 </script>
 <style scoped>

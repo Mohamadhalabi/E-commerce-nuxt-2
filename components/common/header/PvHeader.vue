@@ -454,6 +454,7 @@ export default {
     ...mapActions("fav", ["fetchWishlist"]),
     ...mapActions("auth", ["LogOut"]),
     ...mapActions("language",["updateLanguageCode"]),
+    ...mapMutations("header", ["changeCurrency"]),
 
     sendWhatsAppMessage() {
       // Replace '1234567890' with the desired WhatsApp number
@@ -582,8 +583,11 @@ export default {
     setCurrency(currency) {
       api.defaults.headers["currency"] = currency;
       this.setCurrencyValue(currency);
+      localStorage.setItem("currency",currency)
+      this.changeCurrency(currency);
       // window.location.href = window.location.origin + this.$route.fullPath;
     },
+
 
     defalutAvatar(e) {
       e.target.src = img;
@@ -608,8 +612,14 @@ export default {
     window.removeEventListener('scroll', this.handleScroll);
   },
   mounted() {
-    console.log(this.currency)
-    // api.defaults.headers["currency"] = this.currency;
+    if(process.client) {
+      let currency = localStorage.getItem("currency")
+      if (currency != null) {
+      this.changeCurrency(currency);
+      api.defaults.headers["currency"] = currency;
+      this.setCurrencyValue(currency);
+      }
+    }
     this.checkMobile();
     window.addEventListener('scroll', this.checkScroll, {passive:true});
     window.addEventListener('resize', this.checkMobile);

@@ -8,9 +8,13 @@
 <script>
 import Api from "~/api";
 import PvCollection from "~/components/product/card/PvCollection.vue";
+import {mapGetters} from "vuex";
 export default {
   components: {
     PvCollection,
+  },
+  computed: {
+    ...mapGetters("header",["getCurrency"])
   },
   async fetch() {
         const topSellingProducts =  await Api.get("products/top-selling-products");
@@ -25,5 +29,12 @@ export default {
       topSelling: null,
     };
   },
+  watch: {
+    getCurrency() {
+      Api.get("products/top-selling-products").then((response) => {
+        this.topSelling = response.data.top_selling;
+      })
+    },
+  }
 }
 </script>

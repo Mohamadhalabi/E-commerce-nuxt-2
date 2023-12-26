@@ -7,8 +7,7 @@
 <!--    <delay-hydration>-->
     <pv-slider-Banner class="desktop-only"  />
 <!--    </delay-hydration>-->
-
-<!--    <delay-hydration>-->
+    <!--    <delay-hydration>-->
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter"
@@ -16,7 +15,6 @@
         <div class="container">
           <pv-latest-products
             :isIndexPage ="true"
-            :products="latestProducts2"
             :collectionTitle="$t('home.latestProducts')"
           />
         </div>
@@ -221,7 +219,7 @@ export default {
       ],
       script: [
         { type: 'application/ld+json', json: {
-            "@context": "http://schema.org/",
+            "@context": "https://schema.org/",
             "@type": "Organization",
             "name": "Techno Lock Keys Trading",
             "url": "https://www.tlkeys.com/",

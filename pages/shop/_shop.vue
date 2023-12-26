@@ -109,7 +109,7 @@ export default {
       openModal: false,
     };
   },
-  created() {
+  mounted() {
     if (this.category) {
       this.slug = this.category.slug;
       this.description = this.category.description;
