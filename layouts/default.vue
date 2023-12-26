@@ -5,9 +5,7 @@
       <!--<client-only>-->
       <pv-top-notice class="top-notice" />
       <!--</client-only>-->
-      <client-only>
-        <pv-header @isClicked="isClicked" />
-      </client-only>
+      <pv-header @isClicked="isClicked" />
       <nuxt />
       <pv-footer/>
       <div class="wishlist-popup">
@@ -68,6 +66,7 @@ export default {
     return {
       isSearchInputClicked: false,
       ScrollToFooter: false,
+      currencyValue:"",
     };
   },
 
@@ -118,19 +117,9 @@ export default {
     isClicked(val){
       this.isSearchInputClicked = val
     },
-
     scrollToTop: function() {
       scrollTop(false);
     },
-
-    showToast() {
-      this.$notify({
-        group: "custom-notify",
-        type: "error",
-        text: "Toast with action link",
-      });
-    },
-
     hideMobileSearch: function() {
       if (document.querySelector(".header-search.header-search-inline")) {
         let headerSearch = document.querySelector(".header-search.header-search-inline");

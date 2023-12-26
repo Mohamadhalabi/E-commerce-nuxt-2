@@ -7,10 +7,14 @@
 </template>
 <script>
 import Api from "~/api";
+import {mapGetters} from "vuex";
 
 export default {
   components: {
     PvSmallCollection: () => import("~/components/product/card/PvSmallCollection.vue"),
+  },
+  computed: {
+    ...mapGetters("header",["getCurrency"])
   },
   async fetch() {
       const getNewArrivalProducts = await Api.get("shop?is_new_arrival=1&length=3");
@@ -21,5 +25,12 @@ export default {
       isNewArrivalProducts: null,
     };
   },
+  watch: {
+    getCurrency() {
+      Api.get("shop?is_new_arrival=1&length=3").then((response) => {
+        this.isNewArrivalProducts = response.data.products;
+      })
+    },
+  }
 }
 </script>

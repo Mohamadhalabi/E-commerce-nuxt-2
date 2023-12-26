@@ -74,29 +74,27 @@
       <div
         class="product-widgets-container container mx-auto row pb-2"
       >
-        <pv-small-collection
-          :products="featuredProducts"
-          :collection-title="$t('home.featuredProducts')"
-          :animation-delay="'200'"
-        />
-
-        <pv-small-collection
-          :products="bestSellingProducts"
-          :collection-title="$t('home.topSellingProduct')"
-          :animation-delay="'500'"
-        />
-
-        <pv-small-collection
-          :products="isNewArrivalProducts"
-          :collection-title="$t('home.newarrivalproducts')"
-          :animation-delay="'800'"
-        />
-
-        <pv-small-collection
-          :products="isFreeShippingProducts"
-          :collection-title="$t('home.freeshoppingproducts')"
-          :animation-delay="'1100'"
-        />
+        <div class="container">
+          <div class="product-widgets-container row pb-2">
+            <pv-on-sale-products
+              :collection-title="$t('home.onSaleProduct')"
+              :animation-delay="'200'"
+            />
+            <pv-top-selling-three-products
+              :collection-title="$t('home.topSellingProduct')"
+              :animation-delay="'500'"
+            />
+            <pv-new-arrival
+              :collection-title="$t('home.newarrivalproducts')"
+              :animation-delay="'800'"
+            />
+            <pv-free-shipping
+              :collection-title="$t('home.freeshoppingproducts')"
+              :animation-delay="'1100'"
+            />
+          </div>
+        </div>
+      </div>
       </div>
     </div>
   </main>
@@ -106,20 +104,23 @@
 import PvDetail from "~/components/product/PvDetail";
 import PvDescription from "~/components/product/PvDescription";
 import PvCollection from "~/components/product/card/PvCollection";
-import PvSmallCollection from "~/components/product/card/PvSmallCollection";
-import getProducts, { productsQueries } from "~/utils/service";
 import PvMedia from "~/components/product/PvMedia.vue";
 import Api from "~/api";
 import {mapGetters} from "vuex";
+import PvFreeShipping from "~/components/home/PvFreeShipping.vue";
+import PvNewArrival from "~/components/home/PvNewArrival.vue";
+import PvTopSellingThreeProducts from "~/components/home/PvTopSellingThreeProducts.vue";
+import PvOnSaleProducts from "~/components/home/PvOnSaleProducts.vue";
 
 export default {
   components: {
-    // PvBtnShare: () => import("~/components/common/PvBtnShare.vue"),
-    // PvMedia: () => import("~/components/product/PvMedia.vue"),
+    PvOnSaleProducts,
+    PvTopSellingThreeProducts,
+    PvNewArrival,
+    PvFreeShipping,
     PvMedia,
     PvDescription,
     PvCollection,
-    PvSmallCollection,
     PvDetail
   },
   async asyncData({ params }) {
@@ -161,16 +162,6 @@ export default {
       isSalePriceEqualToPrice:null,
       currency:"",
     };
-  },
-  mounted() {
-    this.urlLink = window.location.origin + this.$route.fullPath;
-    if(parseFloat(this.product.price.value) === this.product.sale_price.value){
-      this.isSalePriceEqualToPrice ='-'
-    }
-    else{
-      this.isSalePriceEqualToPrice = this.product.sale_price;
-    }
-
   },
   head() {
     return {
@@ -464,9 +455,17 @@ export default {
     //     ]
     //   };
   },
-  created: function () {
+  mounted: function () {
+    this.urlLink = window.location.origin + this.$route.fullPath;
+    if(parseFloat(this.product.price.value) === this.product.sale_price.value){
+      this.isSalePriceEqualToPrice ='-'
+    }
+    else{
+      this.isSalePriceEqualToPrice = this.product.sale_price;
+    }
+
     this.getProduct();
-    this.getTopSelling();
+    // this.getTopSelling();
     this.product.gallery.forEach((item) => {
       if (item.m && item.m.url) {
         this.images.push(item.m.url);
@@ -477,11 +476,6 @@ export default {
     })
     const uniqueCarBrandsSet = new Set(this.carBrands);
     this.carBrands = Array.from(uniqueCarBrandsSet);
-
-    this.getFeaturedProducts();
-    this.getBestSellerProducts();
-    this.getNewArrivalProducts();
-    this.getFreeShippingProducts();
     if(this.product.categories[0] && this.product.categories[0].name){
       this.ParentCategory = this.product.categories[0].name;
       this.parentCategoryLink = this.product.categories[0].slug;
@@ -493,6 +487,7 @@ export default {
   },
   computed:{
     ...mapGetters("language", ["getLang"]),
+    ...mapGetters("header",["getCurrency"]),
   },
   methods: {
     getProduct: function () {
@@ -503,13 +498,6 @@ export default {
           let productsArr =
             JSON.parse(localStorage.getItem("lastProductsVisited")) || [];
           productsArr.push(this.product);
-          let last3Product = productsArr.slice(
-            Math.max(productsArr.length - 2, 0)
-          );
-          // localStorage.setItem(
-          //   "lastProductsVisited",
-          //   JSON.stringify(last3Product)
-          // );
           this.related_products = response.data.related_products;
           this.featured_products = response.data.featured_products;
           this.best_selling_products = response.data.best_selling_products;
@@ -521,48 +509,6 @@ export default {
         })
         .catch((error) => ({ error: JSON.stringify(error) }));
     },
-    getTopSelling: async function () {
-      const total = 3;
-      const latestProducts2 = await getProducts(
-        productsQueries.latestProducts,
-        total
-      );
-      const bestSellingProducts2 = await getProducts(
-        productsQueries.bestSellingProducts,
-        total
-      );
-      this.latestProducts2 = await latestProducts2;
-      this.bestSellingProducts2 = await bestSellingProducts2;
-    },
-
-    getFeaturedProducts() {
-      Api.get("shop?is_featured=1&length=3")
-        .then((response) => {
-          this.featuredProducts = response.data.products;
-        })
-        .catch((error) => ({ error: JSON.stringify(error) }));
-    },
-    getNewArrivalProducts() {
-      Api.get("shop?is_new_arrival=1&length=3")
-        .then((response) => {
-          this.isNewArrivalProducts = response.data.products;
-        })
-        .catch((error) => ({ error: JSON.stringify(error) }));
-    },
-    getBestSellerProducts() {
-      Api.get("shop?is_best_seller=1&length=3")
-        .then((response) => {
-          this.bestSellingProducts = response.data.products;
-        })
-        .catch((error) => ({ error: JSON.stringify(error) }));
-    },
-    getFreeShippingProducts() {
-      Api.get("shop?is_free_shipping=1&length=3")
-        .then((response) => {
-          this.isFreeShippingProducts = response.data.products;
-        })
-        .catch((error) => ({ error: JSON.stringify(error) }));
-    },
     getLink(route) {
       if (this.getLang === 'en') {
         return route; // Return the route as is without the language parameter
@@ -571,5 +517,10 @@ export default {
       }
     },
   },
+  watch: {
+    getCurrency() {
+      this.getProduct();
+    },
+  }
 };
 </script>

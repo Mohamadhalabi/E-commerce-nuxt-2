@@ -135,6 +135,7 @@ import Api from "~/api";
 import PvCollection from "~/components/product/card/PvCollection.vue";
 import NotFound from "~/components/shop/NotFound.vue";
 import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
+import {mapGetters} from "vuex";
 
 export default {
   components: {
@@ -146,66 +147,7 @@ export default {
   },
 
   async fetch() {
-    // this.getProduct()
-    let tempQuery = "";
-    let displayType = "normal";
-    if (this.$route.query.hasOwnProperty("categories") || this.category) {
-      displayType = "normal";
-    }
-    if (this.slugtype == "category") {
-      tempQuery += `categories=${this.slug}`;
-    } else if (this.slugtype == "manufacturer") {
-      tempQuery += `manufacturers=${this.slug}`;
-    } else if (this.slugtype == "brand") {
-      tempQuery += `brands=${this.slug}`;
-    }
-    for (const property in this.$route.query) {
-      tempQuery += `&${property}${
-        this.$route.query[property] ? `=${this.$route.query[property]}` : ""
-      }`;
-    }
-    switch (this.ordering) {
-      case "title_a_to_z":
-        this.orderBy = "title";
-        this.direction = "asc";
-        break;
-      case "title_z_to_a":
-        this.orderBy = "title";
-        this.direction = "desc";
-        break;
-      case "price_low_high":
-        this.orderBy = "price";
-        this.direction = "asc";
-        break;
-      case "price_high_low":
-        this.orderBy = "price";
-        this.direction = "desc";
-        break;
-      case "oldest":
-        this.orderBy = "created_at";
-        this.direction = "asc";
-        break;
-      case "newest":
-        this.orderBy = "created_at";
-        this.direction = "desc";
-        break;
-      case "priority":
-        this.orderBy = "created_at";
-        this.direction = "desc";
-        break;
-    }
-    let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
-    const { data } = await Api.get(`search/product${query}`);
-    this.products = data.products;
-
-    if(this.products.length == 0 ){
-      this.show_not_found = true
-    }
-    if (data.products[0]["category"]) {
-      this.viewType = "categories";
-    } else {
-      this.viewType = "product";
-    }
+    await this.fetchProducts();
   },
 
   props: {
@@ -269,6 +211,9 @@ export default {
       this.type = this.$route.query.list_view ? "list" : "grid";
       this.getProduct();
     },
+    async getCurrency() {
+      await this.fetchProducts()
+    },
   },
   created: function () {
     setTimeout(() => {
@@ -281,6 +226,7 @@ export default {
     this.getProduct(this.slug);
   },
   computed: {
+    ...mapGetters("header",["getCurrency"]),
     isSelected() {
       if (this.showStyle === "grid") {
         return true;
@@ -293,6 +239,67 @@ export default {
     this.$Progress.start();
   },
   methods: {
+    async fetchProducts(){
+      let tempQuery = "";
+      let displayType = "normal";
+      if (this.$route.query.hasOwnProperty("categories") || this.category) {
+        displayType = "normal";
+      }
+      if (this.slugtype == "category") {
+        tempQuery += `categories=${this.slug}`;
+      } else if (this.slugtype == "manufacturer") {
+        tempQuery += `manufacturers=${this.slug}`;
+      } else if (this.slugtype == "brand") {
+        tempQuery += `brands=${this.slug}`;
+      }
+      for (const property in this.$route.query) {
+        tempQuery += `&${property}${
+          this.$route.query[property] ? `=${this.$route.query[property]}` : ""
+        }`;
+      }
+      switch (this.ordering) {
+        case "title_a_to_z":
+          this.orderBy = "title";
+          this.direction = "asc";
+          break;
+        case "title_z_to_a":
+          this.orderBy = "title";
+          this.direction = "desc";
+          break;
+        case "price_low_high":
+          this.orderBy = "price";
+          this.direction = "asc";
+          break;
+        case "price_high_low":
+          this.orderBy = "price";
+          this.direction = "desc";
+          break;
+        case "oldest":
+          this.orderBy = "created_at";
+          this.direction = "asc";
+          break;
+        case "newest":
+          this.orderBy = "created_at";
+          this.direction = "desc";
+          break;
+        case "priority":
+          this.orderBy = "created_at";
+          this.direction = "desc";
+          break;
+      }
+      let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
+      const { data } = await Api.get(`search/product${query}`);
+      this.products = data.products;
+
+      if(this.products.length == 0 ){
+        this.show_not_found = true
+      }
+      if (data.products[0]["category"]) {
+        this.viewType = "categories";
+      } else {
+        this.viewType = "product";
+      }
+    },
     clickedFilter(){
       this.$emit('filters',true)
     },

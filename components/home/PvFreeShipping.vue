@@ -7,9 +7,13 @@
 </template>
 <script>
 import Api from "~/api";
+import {mapGetters} from "vuex";
 export default {
   components: {
     PvSmallCollection: () => import("~/components/product/card/PvSmallCollection.vue"),
+  },
+  computed: {
+    ...mapGetters("header",["getCurrency"])
   },
   async fetch() {
       const getFreeShippingProducts = await Api.get("shop?is_free_shipping=1&length=3");
@@ -20,5 +24,12 @@ export default {
       isFreeShippingProducts: null,
     };
   },
+  watch: {
+    getCurrency() {
+      Api.get("shop?is_free_shipping=1&length=3").then((response) => {
+        this.isFreeShippingProducts = response.data.products;
+      })
+    },
+  }
 }
 </script>
