@@ -83,15 +83,63 @@ export default {
             ]
           }
         },
-        { type: 'application/ld+json', json: {
+        {
+          type: 'application/ld+json', json: {
             "@context": "https://schema.org",
             "@type": "Organization",
             "url": "https://www.tlkeys.com",
             "logo": this.$settings.website.system_logo_black.l.url
           }
-        }
+        },
+        {
+          type: 'application/ld+json', json: {
+            "@context": "https://schema.org",
+            "@type": "Organizationn",
+            "url": "https://www.tlkeys.com",
+            "logo": this.$settings.website.system_logo_black.l.url
+          }
+        },
       ]
     };
+    if (this.page.type =="manufacturer") {
+      head_data["script"].push({
+        type: 'application/ld+json', json: {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": this.$i18n.t("products.home"),
+                "item": process.env.PUBLIC_PATH,
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": this.$i18n.t("products.shop"),
+                "item": `${process.env.PUBLIC_PATH}shop`,
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": this.page.title,
+                "item": `${process.env.PUBLIC_PATH}shop/` + this.$route.params.page,
+              },
+            ]
+          },
+          "mainEntity": {
+            "@type": "Manufacturer",
+            "name": "Cath's Cafe",
+            "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 11:00-20:00",
+            "telephone": "+155501003344",
+            "hasMenu": "/menu"
+          }
+        }
+      });
+    }
+
     if (this.page.type == "page") {
       head_data["meta"].push({
         name: "og:image:alt",

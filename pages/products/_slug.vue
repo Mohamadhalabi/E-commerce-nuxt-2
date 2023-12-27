@@ -159,7 +159,7 @@ export default {
       carBrands: [],
       childCategory: null,
       ParentCategory: null,
-      isSalePriceEqualToPrice:null,
+      isSalePriceEqualToPrice:"-",
       currency:"",
     };
   },
@@ -171,6 +171,12 @@ export default {
       title: this.product.meta.title
         ? this.product.meta.title
         : this.product.title,
+      link: [
+        {
+          rel: 'canonical',
+          href: this.product.canonical,
+        },
+      ],
       meta: [
         {
           "http-equiv": "content-language",
@@ -275,37 +281,44 @@ export default {
             "@context": "https://schema.org/",
             "@type": "Product",
             "name": this.product.title,
-            "image": [
-              this.images
-            ],
+            "image": this.product.main_image,
+            "additionalImage": this.product.secondary_image,
+            "video":this.product.videos_link,
+            "compatibleWith":  this.product.compatible_products_slug,
+            "bundledProduct": this.product.bundled_products_slug,
+            "gallery": this.product.schema_gallery,
             "description": this.product.meta.description,
+            "sameAs": this.product.canonical,
             "sku": this.product.sku,
             "brand": {
               "@type": "Brand",
               "name": this.product.specifications.manufacturer ?? "-"
             },
+            "weight": this.product.weight,
             "offers": {
               "@type": "Offer",
-              "price": this.product.price,
-              "salePrice": this.isSalePriceEqualToPrice,
-              // "priceCurrency": this.product.price.code
+              "price": this.product.price.value,
+              "salePrice": this.product.sale_price.value,
+              "priceCurrency": this.product.price.code,
+              "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
             },
             "review": {
               "@type": "Review",
               "reviewRating": {
                 "@type": "Rating",
-                "ratingValue": 4,
-                "bestRating": 5
+                "ratingValue": this.product.avg_rating,
+                "bestRating": this.product.best_rating,
               },
-              "author": {
-                "@type": "Organization",
-                "name": "Techno Lock Keys"
+                "author": {
+                  "@type": "Person",
+                "name": this.product.author_review
               }
             },
             "aggregateRating": {
               "@type": "AggregateRating",
-              "ratingValue": 4.4,
-              "reviewCount": 89
+              "ratingValue": this.product.avg_rating,
+              "reviewCount": this.product.total_reviews
             },
           }
         }
@@ -456,15 +469,15 @@ export default {
     //   };
   },
   mounted: function () {
-    this.urlLink = window.location.origin + this.$route.fullPath;
-    if(parseFloat(this.product.price.value) === this.product.sale_price.value){
-      this.isSalePriceEqualToPrice ='-'
-    }
-    else{
-      this.isSalePriceEqualToPrice = this.product.sale_price;
-    }
-
     this.getProduct();
+    console.log(this.product)
+    this.urlLink = window.location.origin + this.$route.fullPath;
+    // if(parseFloat(this.product.price.value) === this.product.sale_price.value){
+    //   this.isSalePriceEqualToPrice ='-'
+    // }
+    // else{
+    //   this.isSalePriceEqualToPrice = this.product.sale_price;
+    // }
     // this.getTopSelling();
     this.product.gallery.forEach((item) => {
       if (item.m && item.m.url) {
@@ -490,7 +503,7 @@ export default {
     ...mapGetters("header",["getCurrency"]),
   },
   methods: {
-    getProduct: function () {
+    async getProduct() {
       this.loaded = false;
       Api.get(`products/${this.$route.params.slug}`)
         .then((response) => {
