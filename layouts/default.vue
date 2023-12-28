@@ -38,7 +38,6 @@ import {
   stickyHeaderHandler
 } from "~/utils";
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import Api from "~/api";
 export default {
   components: {
     PvTopNotice:() =>import("~/components/common/header/PvTopNotice"),
