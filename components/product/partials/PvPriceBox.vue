@@ -1,6 +1,7 @@
 <template>
   <div class="price-box" :class="{ 'text-center': additionalProductItems }">
-    <template v-if="product.discount && product.discount.length && product.discount.length !== 0">
+    <template v-if="product.discount && product.discount.length !=0">
+      {{product.discount.length}}
       <span
         v-if="product.discount.type =='fixed'"
         :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
@@ -20,6 +21,7 @@
             {{product.price.value}}{{product.price.currency}}
           </span>
     </template>
+
     <template v-else-if="product.is_sale==1 && (product.price.value != product.sale_price.value)">
       <span
         :class="{ 'highlighted': hasDuplicate(product.sale_price.value) }"
@@ -74,6 +76,10 @@ export default {
         return count >=2 ;
       }
     },
+  },
+
+  mounted() {
+    console.log(this.product)
   },
   computed:{
     ...mapGetters("compare", ["getList"]),

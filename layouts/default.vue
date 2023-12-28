@@ -22,13 +22,14 @@
     <a id="scroll-top" href="javascript:;" title="Top" role="button" @click="scrollToTop">
       <i class="icon-angle-up" />
     </a>
-    <pv-mobile-menu />
+    <client-only>
+      <pv-mobile-menu />
+    </client-only>
   </div>
 </template>
 
 <script>
 import api from "~/api";
-import PvHeader from "~/components/common/header/PvHeader.vue";
 import "static/css/ltrStyle.css";
 import {
   resizeHandler,
