@@ -246,6 +246,7 @@
           <div class="row text-center w-100">
             <div class="col-lg-9 mt-auto mb-auto text-left">
               <nuxt-link
+                class="price-color font-weight-bold"
                 :to="getLink('/shop?offers')">
                 <i class="fa fa-percent">
                 </i>
@@ -342,7 +343,9 @@
           <div class="row text-center w-100">
             <div class="row text-center w-100">
               <div class="col-lg-2 m-auto">
-                <nuxt-link :to="getLink('/shop?offers')">
+                <nuxt-link :to="getLink('/shop?offers')"
+                           class="price-color font-weight-bold"
+                >
                   <i class="fa fa-percent">
                   </i>
                   <span class="ml-1">
@@ -791,5 +794,4 @@ export default {
     max-width: 200px;
   }
 }
-
 </style>
