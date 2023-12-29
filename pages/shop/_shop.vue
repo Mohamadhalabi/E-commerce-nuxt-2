@@ -50,21 +50,18 @@
           id="bv-modal-example2"
           v-model="openModal" hide-header hide-footer>
           <div class="sidebar-shop col-lg-2 order-lg-first p-4" sticky-container>
-            <client-only>
-              <div
-                v-sticky="isSticky" sticky-offset="{top: 75}">
-                <sidebar-filter v-if="category" :category="category.slug"/>
-                <sidebar-filter v-if="manufacturer" :manufacturer="manufacturer.slug"/>
-                <sidebar-filter v-if="brand" :brand="brand.slug"/>
-              </div>
-            </client-only>
+            <div
+              v-sticky="isSticky" sticky-offset="{top: 75}">
+              <sidebar-filter v-if="category" :category="category.slug"/>
+              <sidebar-filter v-if="manufacturer" :manufacturer="manufacturer.slug"/>
+              <sidebar-filter v-if="brand" :brand="brand.slug"/>
+            </div>
           </div>
         </b-modal>
       </div>
     </div>
   </main>
 </template>
-
 <script>
 import ShopBanner from '~/components/shop/PvShopBanner';
 import PvProductList from "~/components/shop/PvProductList.vue";
