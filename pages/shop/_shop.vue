@@ -86,9 +86,6 @@ export default {
   },
   data() {
     return {
-      dataShop: {
-        products: []
-      },
       queryFilter: {
         sintax: '?',
         page: 1
