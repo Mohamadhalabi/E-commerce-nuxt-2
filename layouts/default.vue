@@ -5,7 +5,9 @@
       <!--<client-only>-->
       <pv-top-notice class="top-notice" />
       <!--</client-only>-->
-      <pv-header @isClicked="isClicked" />
+      <client-only>
+        <pv-header @isClicked="isClicked" />
+      </client-only>
       <nuxt />
       <pv-footer/>
       <div class="wishlist-popup">
