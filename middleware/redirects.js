@@ -459,11 +459,12 @@ export default function(req, res, next) {
     },
 
   ]
-  const redirect = redirects.find((r) => r.from === req.url)
+  const redirect = redirects.find((r) => r.from.toLowerCase() === req.url.toLowerCase());
+
   if (redirect) {
-    res.writeHead(301, { Location: redirect.to })
-    res.end()
+    res.writeHead(301, { Location: redirect.to });
+    res.end();
   } else {
-    next()
+    next();
   }
 }
