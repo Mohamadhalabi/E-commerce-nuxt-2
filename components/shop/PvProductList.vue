@@ -145,6 +145,49 @@ export default {
     PvProduct,
     PvListProduct,
   },
+  head() {
+    return {
+      script: [
+        {
+          type: 'application/ld+json', json: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "products": this.products.map(product => ({
+              "@type": "Product",
+              "name": product.title,
+              "url":process.env.PUBLIC_PATH+ product.slug,
+              "description": product['seo_description'],
+              "brand" :{
+                "@type" : "Brand",
+                "name" : product.manufacturer,
+              },
+              "image" : product.gallery[0]['l']['url'],
+              // Add other product information here
+            }))
+            // "products": [
+            //   {
+            //     "@type": "Product",
+            //     "name": this.products.slug,
+            //     // "url": "https://your-estore.com/products/xhorse-dolphin-xp005",
+            //     // "description": "A high-precision automatic key cutting machine for various car keys.",
+            //     // "brand": {
+            //     //   "@type": "Brand",
+            //     //   "name": "Xhorse"
+            //     // },
+            //     // "image": "https://your-estore.com/images/xhorse-dolphin-xp005.png",
+            //     // "offers": {
+            //     //   "@type": "Offer",
+            //     //   "price": 1999.99,
+            //     //   "priceCurrency": "USD",
+            //     //   "availability": "InStock"
+            //     // }
+            //   }
+            // ]
+          }
+        },
+      ]
+    }
+  },
 
   async fetch() {
     await this.fetchProducts();
@@ -290,6 +333,9 @@ export default {
       let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
       const { data } = await Api.get(`search/product${query}`);
       this.products = data.products;
+
+      console.log("Test1");
+      console.log(this.products)
 
       if(this.products.length == 0 ){
         this.show_not_found = true

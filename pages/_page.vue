@@ -129,13 +129,47 @@ export default {
               },
             ]
           },
-          "mainEntity": {
-            "@type": "Manufacturer",
-            "name": "Cath's Cafe",
-            "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 11:00-20:00",
-            "telephone": "+155501003344",
-            "hasMenu": "/menu"
-          }
+          // "mainEntity": {
+          //   "@type": "Manufacture",
+          //   "name": "Cath's Cafe",
+          //   "openingHours": "Mo,Tu,We,Th,Fr,Sa,Su 11:00-20:00",
+          //   "telephone": "+155501003344",
+          //   "hasMenu": "/menu"
+          // },
+          // "products": [
+          //
+          //   {
+          //
+          //     "@type": "Product",
+          //
+          //     "name": "Xhorse Dolphin XP005 Key Cutting Machine",
+          //
+          //     "url": "https://your-estore.com/products/xhorse-dolphin-xp005",
+          //
+          //     "description": "A high-precision automatic key cutting machine for various car keys.",
+          //
+          //     "brand": {
+          //
+          //       "@type": "Brand",
+          //
+          //       "name": "Xhorse"
+          //
+          //     },
+          //
+          //     "image": "https://your-estore.com/images/xhorse-dolphin-xp005.png",
+          //
+          //     "offers": {
+          //
+          //       "@type": "Offer",
+          //
+          //       "price": 1999.99,
+          //
+          //       "priceCurrency": "USD",
+          //
+          //       "availability": "InStock"
+          //
+          //     }
+          //   }]
         }
       });
     }
