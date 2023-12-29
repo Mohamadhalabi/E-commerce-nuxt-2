@@ -11,7 +11,10 @@
             {{ $t("header.Cars") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white" v-for="(item, key) in cars" :key="key">
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+             v-if="carMenuOpened"
+             @click="closeCarMenu()"
+             v-for="(item, key) in cars" :key="key">
           <div class="row bg-white m-0">
             <ul class="submenu custom-submenu d-flex flex-wrap bg-white p-0" >
               <li
@@ -43,7 +46,10 @@
             {{ $t("header.Manufactures") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white" v-for="(item, key) in manufacturers" :key="key">
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+             v-if="ManufacturerMenuOpened"
+             @click="closeManufacturerMenu()"
+             v-for="(item, key) in manufacturers" :key="key">
           <div class="row bg-white m-0">
             <ul class="submenu custom-submenu d-flex flex-wrap bg-white p-0" >
               <li
@@ -75,7 +81,10 @@
             {{ $t("header.keysAndRemote") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white" v-for="(item, key) in keysAndRemotes" :key="key">
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+             v-if="keysAndRemoteMenuOpened"
+             @click="closeKeyAndRemotesMenu()"
+             v-for="(item, key) in keysAndRemotes" :key="key">
           <div class="row bg-white m-0">
             <ul class="submenu custom-submenu d-flex flex-wrap bg-white p-0" >
               <li
@@ -107,7 +116,10 @@
             {{ $t("header.AccessoriesAndTools") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white" v-for="(item, key) in accessoriesAndTools" :key="key">
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+             v-if="AccessoriesAndToolsMenuOpened"
+             @click="closeAccessoriesAndTools()"
+             v-for="(item, key) in accessoriesAndTools" :key="key">
           <div class="row bg-white m-0">
             <ul class="submenu custom-submenu d-flex flex-wrap bg-white p-0" >
               <li
@@ -131,9 +143,8 @@
         </div>
       </li>
 <!--      Devices And Machines -->
-
-
-      <li class="left-menu-items" @mouseover="getDevicesAndMachines()">
+      <li class="left-menu-items"
+          @mouseover="getDevicesAndMachines()">
         <nuxt-link
           :to="getLink('/device-machines')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
@@ -141,7 +152,10 @@
             {{ $t("header.DeviceAndMachine") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white" v-for="(item, key) in devicesAndMachines" :key="key">
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+             v-if="DeviceAndMachineMenuOpened"
+             @click="closeDeviceAndMachineMenu()"
+             v-for="(item, key) in devicesAndMachines" :key="key">
           <div class="row bg-white m-0">
             <ul class="submenu custom-submenu d-flex flex-wrap bg-white p-0" >
               <li
@@ -165,6 +179,7 @@
         </div>
       </li>
       <li
+        @mouseover="SoftwareAndTokenMenuOpened = true"
         v-for="(item, name, index) in $settings.main_menu"
         :key="index"
         :class="{
@@ -195,10 +210,14 @@
           </span>
         </nuxt-link>
 
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white">
+        <div
+          class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+          v-if="SoftwareAndTokenMenuOpened"
+        >
           <div class="row bg-white m-0">
             <template v-if="item.items.software">
               <div
+                @click="closeSoftwareAndTokenMenu()"
                 v-for="(category, index) in item.items"
                 :key="index"
                 class="col-lg-6"
@@ -278,19 +297,45 @@ export default {
       accessoriesAndTools: [],
       devicesAndMachines: [],
       softwareAndTokens: [],
+      carMenuOpened: false,
+      ManufacturerMenuOpened: false,
+      keysAndRemoteMenuOpened: false,
+      AccessoriesAndToolsMenuOpened: false,
+      DeviceAndMachineMenuOpened: false,
+      SoftwareAndTokenMenuOpened: false,
     };
   },
   methods: {
-      getCars: function() {
-        Api.get(`/menu`)
-          .then(response => {
-            this.cars = response.data.data.menu.main_menu.cars;
-          })
-          .catch(error => ({error: JSON.stringify(error)}));
-      },
+    closeCarMenu(){
+      this.carMenuOpened = false;
+    },
+    closeManufacturerMenu(){
+      this.ManufacturerMenuOpened = false;
+    },
+    closeKeyAndRemotesMenu(){
+      this.keysAndRemoteMenuOpened = false;
+    },
+    closeAccessoriesAndTools(){
+      this.AccessoriesAndToolsMenuOpened = false;
+    },
+    closeDeviceAndMachineMenu(){
+      this.DeviceAndMachineMenuOpened = false;
+    },
+    closeSoftwareAndTokenMenu(){
+      this.SoftwareAndTokenMenuOpened = false;
+    },
+    getCars: function() {
+      Api.get(`/menu`)
+        .then(response => {
+          this.carMenuOpened = true
+          this.cars = response.data.data.menu.main_menu.cars;
+        })
+        .catch(error => ({error: JSON.stringify(error)}));
+    },
     getManufacturers: function() {
       Api.get('/manufacturers_menu')
         .then(response => {
+          this.ManufacturerMenuOpened = true
           this.manufacturers = response.data.data.menu.main_menu.manufacturers
         })
         .catch(error => ({error: JSON.stringify(error)}));
@@ -298,6 +343,7 @@ export default {
     getKeysAndRemotes: function(){
       Api.get('/keys-and-remotes-menu')
         .then(response => {
+          this.keysAndRemoteMenuOpened = true
           this.keysAndRemotes = response.data.data.menu.main_menu['Key-Remote'];
         })
         .catch(error => ({error: JSON.stringify(error)}));
@@ -305,6 +351,7 @@ export default {
     getAccessoriesAndTools: function(){
       Api.get('/accessories-tools-menu')
         .then(response => {
+          this.AccessoriesAndToolsMenuOpened = true;
           this.accessoriesAndTools = response.data.data.menu.main_menu['accessories-tools'];
         })
         .catch(error => ({error: JSON.stringify(error)}));
@@ -312,6 +359,7 @@ export default {
     getDevicesAndMachines: function(){
       Api.get('/device-machine-menu')
         .then(response => {
+          this.DeviceAndMachineMenuOpened = true;
           this.devicesAndMachines = response.data.data.menu.main_menu['device_machines'];
         })
         .catch(error => ({error: JSON.stringify(error)}));
