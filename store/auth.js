@@ -121,8 +121,6 @@ export const mutations = {
   },
 
   LOGOUT: function (state) {
-    console.log("this is the state")
-    console.log(state)
     state.user = null;
     state.token = null;
     localStorage.removeItem('card');

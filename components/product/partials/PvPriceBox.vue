@@ -77,10 +77,6 @@ export default {
       }
     },
   },
-
-  mounted() {
-    console.log(this.product)
-  },
   computed:{
     ...mapGetters("compare", ["getList"]),
   }

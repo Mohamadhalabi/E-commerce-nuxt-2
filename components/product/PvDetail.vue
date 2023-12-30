@@ -326,7 +326,6 @@ export default {
         .then((response) => {
         })
         .catch((error) => {
-          console.log(error);
         });
       Api.post("/products/compares", {product: item.slug})
         .then((response) => {

@@ -91,7 +91,6 @@ export default {
   mounted() {
     if(process.client){
       this.clickedStoryIndices = JSON.parse(sessionStorage.getItem('clickedStoryIndex')) || [];
-      console.log(this.clickedStoryIndices);
     }
   }
 };
