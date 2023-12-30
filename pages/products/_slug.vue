@@ -164,80 +164,121 @@ export default {
     };
   },
   head() {
-    if(this.product.categories[1])
-    return {
-      titleTemplate: this.product.meta.title
-        ? this.product.meta.title
-        : this.product.title,
-      title: this.product.meta.title
-        ? this.product.meta.title
-        : this.product.title,
-      link: [
-        {
-          rel: 'canonical',
-          href: this.product.canonical,
-        },
-      ],
-      meta: [
-        {
-          "http-equiv": "content-language",
-          content: this.$i18n.locale,
-        },
-        {
-          name: "description",
-          content: this.product.meta.description,
-        },
-        {
-          name:"og:title",
-          content: this.product.meta.title
-        },
-        {
-          name: "og:description",
-          content: this.product.meta.description,
-        },
-        {
-          property: "og:image",
-          content: this.product.open_graph,
-        },
-        {
-          property: "og:type",
-          content: "product",
-        },
-        {
-          property: "og:site_name",
-          content: "Techno Lock Keys"
-        },
-        {
-          property: "og:url",
-          content: this.urlLink,
-        },
-        {
-          property:"twitter:card",
-          content: "summary",
-        },
-        {
-          property: "twitter:site",
-          content: "Techno Lock Keys",
-        },
-        {
-          property: "twitter:description",
-          content: this.product.meta.description
-        },
-        {
-          property: "twitter:title",
-          content: this.product.title
-        },
-        {
-          property: "twitter:url",
-          content: this.urlLink,
-        },
-        {
-          property: "twitter:image",
-          content: this.product.twitter_image,
-        }
-      ],
-      script: [
-        {
+    let head_data = {
+        titleTemplate: this.product.meta.title
+          ? this.product.meta.title
+          : this.product.title,
+        title: this.product.meta.title
+          ? this.product.meta.title
+          : this.product.title,
+        link: [
+          {
+            rel: 'canonical',
+            href: this.product.canonical,
+          },
+        ],
+        meta: [
+          {
+            "http-equiv": "content-language",
+            content: this.$i18n.locale,
+          },
+          {
+            name: "description",
+            content: this.product.meta.description,
+          },
+          {
+            name: "og:title",
+            content: this.product.meta.title
+          },
+          {
+            name: "og:description",
+            content: this.product.meta.description,
+          },
+          {
+            property: "og:image",
+            content: this.product.open_graph,
+          },
+          {
+            property: "og:type",
+            content: "product",
+          },
+          {
+            property: "og:site_name",
+            content: "Techno Lock Keys"
+          },
+          {
+            property: "og:url",
+            content: this.urlLink,
+          },
+          {
+            property: "twitter:card",
+            content: "summary",
+          },
+          {
+            property: "twitter:site",
+            content: "Techno Lock Keys",
+          },
+          {
+            property: "twitter:description",
+            content: this.product.meta.description
+          },
+          {
+            property: "twitter:title",
+            content: this.product.title
+          },
+          {
+            property: "twitter:url",
+            content: this.urlLink,
+          },
+          {
+            property: "twitter:image",
+            content: this.product.twitter_image,
+          }
+        ],
+        script: []
+      }
+      if(this.product.categories[1])
+      head_data["script"].push({
+      type: 'application/ld+json',
+      json: {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": this.$i18n.t("products.home"),
+            "item": process.env.PUBLIC_PATH,
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": this.$i18n.t("products.shop"),
+            "item": `${process.env.PUBLIC_PATH}shop`,
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": this.product.categories[0]['name'],
+            "item": `${process.env.PUBLIC_PATH}${this.product.categories[0]['slug']}`,
+          },
+          {
+            "@type": "ListItem",
+            "position": 4,
+            "name": this.product.categories[1] && this.product.categories[1]['name'] ? this.product.categories[1]['name'] : '-',
+            "item": `${process.env.PUBLIC_PATH}${this.product.categories[1] && this.product.categories[1]['slug'] ? this.product.categories[1]['slug'] : ''}`,
+          },
+          {
+            "@type": "ListItem",
+            "position": 5,
+            "name": this.product.title,
+            "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
+          }
+          ]
+      }
+      });
+      else{
+        head_data["script"].push({
           type: 'application/ld+json',
           json: {
             "@context": "https://schema.org",
@@ -264,19 +305,63 @@ export default {
               {
                 "@type": "ListItem",
                 "position": 4,
-                "name": this.product.categories[1] && this.product.categories[1]['name'] ? this.product.categories[1]['name'] : '-',
-                "item": `${process.env.PUBLIC_PATH}${this.product.categories[1] && this.product.categories[1]['slug'] ? this.product.categories[1]['slug'] : ''}`,
-              },
-              {
-                "@type": "ListItem",
-                "position": 5,
                 "name": this.product.title,
                 "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
               }
             ]
           }
-        },
-        {
+        })
+      };
+      if(this.product.avg_rating !=0)
+      head_data["script"].push({
+        type: 'application/ld+json',
+        json: {
+          "@context": "https://schema.org/",
+          "@type": "Product",
+          "name": this.product.title,
+          "image": this.product.main_image,
+          "additionalImage": this.product.secondary_image,
+          "video":this.product.videos_link,
+          "compatibleWith":  this.product.compatible_products_slug,
+          "bundledProduct": this.product.bundled_products_slug,
+          "gallery": this.product.schema_gallery,
+          "description": this.product.meta.description,
+          "sameAs": this.product.canonical,
+          "sku": this.product.sku,
+          "brand": {
+            "@type": "Brand",
+            "name": this.product.specifications.manufacturer ?? "-"
+          },
+          "weight": this.product.weight,
+          "offers": {
+            "@type": "Offer",
+            "price": this.product.price.value,
+            "salePrice": this.product.sale_price.value,
+            "priceCurrency": this.product.price.code,
+            "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+            "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
+          },
+          "review": {
+            "@type": "Review",
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": this.product.avg_rating,
+              "bestRating": this.product.best_rating,
+            },
+            "author": {
+              "@type": "Person",
+              "name": this.product.author_review
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": this.product.avg_rating,
+            "reviewCount": this.product.total_reviews
+          },
+        }
+      });
+      else{
+        head_data["script"].push({
           type: 'application/ld+json',
           json: {
             "@context": "https://schema.org/",
@@ -304,182 +389,10 @@ export default {
               "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
               "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
             },
-            "review": {
-              "@type": "Review",
-              "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": this.product.avg_rating,
-                "bestRating": this.product.best_rating,
-              },
-                "author": {
-                  "@type": "Person",
-                "name": this.product.author_review
-              }
-            },
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": this.product.avg_rating,
-              "reviewCount": this.product.total_reviews
-            },
           }
-        }
-      ]
-    };
-    else
-      return{
-        titleTemplate: this.product.meta.title
-          ? this.product.meta.title
-          : this.product.title,
-        title: this.product.meta.title
-          ? this.product.meta.title
-          : this.product.title,
-        link: [
-          {
-            rel: 'canonical',
-            href: this.product.canonical,
-          },
-        ],
-        meta: [
-          {
-            "http-equiv": "content-language",
-            content: this.$i18n.locale,
-          },
-          {
-            name: "description",
-            content: this.product.meta.description,
-          },
-          {
-            name:"og:title",
-            content: this.product.meta.title
-          },
-          {
-            name: "og:description",
-            content: this.product.meta.description,
-          },
-          {
-            property: "og:image",
-            content: this.product.open_graph,
-          },
-          {
-            property: "og:type",
-            content: "product",
-          },
-          {
-            property: "og:site_name",
-            content: "Techno Lock Keys"
-          },
-          {
-            property: "og:url",
-            content: this.urlLink,
-          },
-          {
-            property:"twitter:card",
-            content: "summary",
-          },
-          {
-            property: "twitter:site",
-            content: "Techno Lock Keys",
-          },
-          {
-            property: "twitter:description",
-            content: this.product.meta.description
-          },
-          {
-            property: "twitter:title",
-            content: this.product.title
-          },
-          {
-            property: "twitter:url",
-            content: this.urlLink,
-          },
-          {
-            property: "twitter:image",
-            content: this.product.twitter_image,
-          }
-        ],
-        script: [
-          {
-            type: 'application/ld+json',
-            json: {
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              "itemListElement": [
-                {
-                  "@type": "ListItem",
-                  "position": 1,
-                  "name": this.$i18n.t("products.home"),
-                  "item": process.env.PUBLIC_PATH,
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 2,
-                  "name": this.$i18n.t("products.shop"),
-                  "item": `${process.env.PUBLIC_PATH}shop`,
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 3,
-                  "name": this.product.categories[0]['name'],
-                  "item": `${process.env.PUBLIC_PATH}${this.product.categories[0]['slug']}`,
-                },
-                {
-                  "@type": "ListItem",
-                  "position": 4,
-                  "name": this.product.title,
-                  "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
-                }
-              ]
-            }
-          },
-          {
-            type: 'application/ld+json',
-            json: {
-              "@context": "https://schema.org/",
-              "@type": "Product",
-              "name": this.product.title,
-              "image": this.product.main_image,
-              "additionalImage": this.product.secondary_image,
-              "video":this.product.videos_link,
-              "compatibleWith":  this.product.compatible_products_slug,
-              "bundledProduct": this.product.bundled_products_slug,
-              "gallery": this.product.schema_gallery,
-              "description": this.product.meta.description,
-              "sameAs": this.product.canonical,
-              "sku": this.product.sku,
-              "brand": {
-                "@type": "Brand",
-                "name": this.product.specifications.manufacturer ?? "-"
-              },
-              "weight": this.product.weight,
-              "offers": {
-                "@type": "Offer",
-                "price": this.product.price.value,
-                "salePrice": this.product.sale_price.value,
-                "priceCurrency": this.product.price.code,
-                "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-                "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-              },
-              "review": {
-                "@type": "Review",
-                "reviewRating": {
-                  "@type": "Rating",
-                  "ratingValue": this.product.avg_rating,
-                  "bestRating": this.product.best_rating,
-                },
-                "author": {
-                  "@type": "Person",
-                  "name": this.product.author_review
-                }
-              },
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": this.product.avg_rating,
-                "reviewCount": this.product.total_reviews
-              },
-            }
-          }
-        ]
+        });
       }
+    return head_data
   },
   mounted: function () {
     this.getProduct();
@@ -505,7 +418,6 @@ export default {
       Api.get(`products/${this.$route.params.slug}`)
         .then((response) => {
           this.product = response.data.product;
-          console.log(this.product)
           let productsArr =
             JSON.parse(localStorage.getItem("lastProductsVisited")) || [];
           productsArr.push(this.product);
