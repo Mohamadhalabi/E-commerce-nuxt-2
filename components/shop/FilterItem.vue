@@ -158,10 +158,7 @@ export default {
       }
     },
     filterQuery(data) {
-      // console.log(data)
-      // if(data.type !== 'categories') {
         this.$emit("filter-query", data);
-      // }
     },
     filterQuery2(data) {
         this.$emit("filter-query", data);

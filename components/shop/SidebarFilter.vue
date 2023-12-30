@@ -156,9 +156,6 @@ export default {
         language: this.getLang,
         main_manufacturer: this.manufacturer
       };
-
-      // console.log(this.$route.path.substring(1));
-      // console.log(this.category)
       for (const property in query) {
         dataForm[property] = query[property]
           ? query[property].split(",").toString()
@@ -187,17 +184,6 @@ export default {
       let questionMarkIndex = pathpart.indexOf("?");
       let urlWithoutBeforeQuestionMark = pathpart.substring(questionMarkIndex + 1);
       let finalUrl = "/shop?" + urlWithoutBeforeQuestionMark.replace("?", "/");
-
-      // let partss = urlWithoutBeforeQuestionMark.split('=');
-      // let finalUrl = partss[1];
-      // console.log(urlWithoutBeforeQuestionMark)
-      // let finalUrl2 = ""
-      // if (finalUrl !== undefined) {
-      //   finalUrl2 = finalUrl.split('&page=1')
-      // }
-      // else{
-      //   finalUrl2 = finalUrl
-      // }
       const path = this.$route.path;
 
       // Split the path by '/' to get an array of parts

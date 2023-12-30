@@ -159,7 +159,6 @@ export default {
 
       Api.post('/user/orders/create', dataForm)
         .then((response) => {
-          console.log(response)
           this.response = response.data;
           this.order_id = response.data.data.order.order_id;
           this.payment_id = response.data.data.payment.order_id;

@@ -333,10 +333,6 @@ export default {
       let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
       const { data } = await Api.get(`search/product${query}`);
       this.products = data.products;
-
-      console.log("Test1");
-      console.log(this.products)
-
       if(this.products.length == 0 ){
         this.show_not_found = true
       }
