@@ -12,16 +12,16 @@
         ></pv-product-nav>
       </div>
     </div>
+    <hr class="mb-1 mt-0">
 
     <div v-if="product.summary_name" class="product-desc">
       <h2 class="summary-name">{{ product.summary_name }}</h2>
     </div>
     <pv-rating :product="product" :hide-reviews="false"/>
-    <hr class="short-divider"/>
-
+<!--    <hr class="short-divider"/>-->
     <div class="row">
       <div class="col">
-        <pv-price-box class="reverse-order" v-if="product.hide_price == 0" :product="product"/>
+        <pv-price-box class="mb-2 mt-1" v-if="product.hide_price == 0" :product="product"/>
       <div v-else style="text-align: start; display: flex">
         <i
           class="fab fa-sm fa-whatsapp mx-1"
@@ -357,11 +357,6 @@ export default {
 };
 </script>
 <style>
-.reverse-order{
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
-}
 .whatsapp-button{
   background-color: #2ba968;
   border: 1px solid #2ba968;
@@ -373,12 +368,9 @@ export default {
   transition: all 0.2s ease-out;
   box-shadow: 0px 1px 2px #2ba968;
 }
-.hidden-price-message{
-  color: #f52020 !important;
-  font-size: 14px;
-}
 .summary-name{
   font-size: 16px;
-  font-weight: normal;
+  font-weight: bold;
+  color: #556b2f;
 }
 </style>
