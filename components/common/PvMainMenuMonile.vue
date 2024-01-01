@@ -38,42 +38,48 @@
       </nuxt-link>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <nuxt-link :to="getLink('/key-remote')" class="d-flex">
-          <p class="mobile-menu-links">{{ $t("header.keysAndRemote") }}</p>
-        </nuxt-link>
+          <p
+            @click="KeyRemoteMenu(),getKeysAndRemotes()"
+            class="pt-3 mb-1 mobile-menu-links">{{ $t("header.keysAndRemote") }}</p>
         <span @click="KeyRemoteMenu(),getKeysAndRemotes()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <nuxt-link :to="getLink('/accessories-tools')" class="d-flex">
-          <p class="mobile-menu-links">{{ $t("header.AccessoriesAndTools") }}</p>
-        </nuxt-link>
+          <p
+            @click="accessoriesMenu(),getAccessoriesAndTools()"
+            class="pt-3 mb-1 mobile-menu-links">{{ $t("header.AccessoriesAndTools") }}</p>
         <span @click="accessoriesMenu(),getAccessoriesAndTools()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <nuxt-link :to="getLink('/Device-Machines')" class="d-flex">
-          <p class="mobile-menu-links">{{ $t("header.DeviceAndMachine")}}</p>
-        </nuxt-link>
+          <p
+            @click="DeviceMachineMenu(),getDevicesAndMachines()"
+            class="pt-3 mb-1 mobile-menu-links">{{ $t("header.DeviceAndMachine")}}</p>
         <span @click="DeviceMachineMenu(),getDevicesAndMachines()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <p class="pt-3 mb-1 mobile-menu-links">
+        <p
+          @click="manufacturersMenu(),getManufacturers()"
+          class="pt-3 mb-1 mobile-menu-links">
           {{ $t("header.Manufactures") }}
         </p>
         <span @click="manufacturersMenu(),getManufacturers()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <p class="pt-3 mb-1 mobile-menu-links">
+        <p
+          @click="tokenSoftwareMenu()"
+          class="pt-3 mb-1 mobile-menu-links">
           {{ $t("header.TokensAndSoftware") }}
         </p>
         <span @click="tokenSoftwareMenu()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <p class="pt-3 mb-1 mobile-menu-links">
+        <p
+          @click="carsMenu(),getCars()"
+          class="pt-3 mb-1 mobile-menu-links">
           {{ $t("header.Cars") }}
         </p>
         <span @click="carsMenu(),getCars()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
