@@ -63,7 +63,7 @@ export default {
 .pdf-button {
   text-align: left;
   background-color: #3e3e3e!important;
-  padding: 25px!important;
+  padding: 20px!important;
 }
 
 .accordion-arrow {

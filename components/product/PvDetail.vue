@@ -1,9 +1,16 @@
 <template>
   <div>
     <div class="d-flex align-items-center">
-      <h1 class="product-title">
-        {{ product.title }}
-      </h1>
+      <div class="title-and-summary-name">
+        <div class="product-h1">
+          <h1 class="product-title">
+            {{ product.title }}
+          </h1>
+        </div>
+        <div>
+          {{product.summary_name}}
+        </div>
+      </div>
       <div>
         <pv-product-nav
           v-if="isProductNav"

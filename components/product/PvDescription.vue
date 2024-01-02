@@ -92,7 +92,7 @@
         >
       </li>
 
-      <li class="nav-item" v-if="product.faq && !isEmpty(product.faq)">
+      <li class="nav-item" v-if="product.frequently_asked_questions && !isEmpty(product.frequently_asked_questions)">
         <a
           id="product-tab-faq"
           class="nav-link"
@@ -208,13 +208,36 @@
       </div>
 
       <div
-        v-if="product.faq && !isEmpty(product.faq)"
+        v-if="product.frequently_asked_questions && !isEmpty(product.frequently_asked_questions)"
         id="product-faq-content"
         class="tab-pane fade"
         role="tabpanel"
         aria-labelledby="product-tab-faq"
-        v-html="product.faq"
-      />
+      >
+        <div v-for="(faq, index) in product.frequently_asked_questions" :key="index">
+          <b-card no-body class="mb-1">
+            <b-button
+              class="pdf-button"
+              block
+              v-b-toggle="'accordion-' + index"
+              @click="flipArrow(index)"
+            >
+              <div class="pdf-icon"></div>
+              <h2 class="m-0 pdf-faq-title">{{faq[0]}}
+                <span :class="['accordion-arrow', {'flipped': isArrowFlipped(index)}]" style="float: right">&#9660;</span>
+              </h2>
+            </b-button>
+            <b-collapse :id="'accordion-' + index" accordion="my-accordion" role="tabpanel">
+              <b-card-body>
+                <b-card-text>
+                  <p class="m-0">{{ faq[1] }}</p>
+                </b-card-text>
+              </b-card-body>
+            </b-collapse>
+          </b-card>
+
+        </div>
+      </div>
       <div
         id="product-support-content"
         class="tab-pane fade"
@@ -322,6 +345,7 @@ export default {
       loadedData: false,
       ImageFromDescription:'',
       isModalOpen: false,
+      flippedArrows: [],
       selectedImage: null,
       videoOptions: {
         autoplay: false,
@@ -341,9 +365,21 @@ export default {
     },
   },
   mounted() {
+    console.log(this.product)
     // this.addEventListenersToImages();
   },
   methods: {
+    flipArrow(index) {
+      const currentIndex = this.flippedArrows.indexOf(index);
+      if (currentIndex === -1) {
+        this.flippedArrows.push(index);
+      } else {
+        this.flippedArrows.splice(currentIndex, 1);
+      }
+    },
+    isArrowFlipped(index) {
+      return this.flippedArrows.includes(index);
+    },
     addEventListenersToImages() {
       const contentContainer = this.$refs.contentContainer;
       const images = contentContainer.getElementsByTagName('img');
@@ -433,7 +469,9 @@ div.vjs-poster{
   border-radius: 50%;
   cursor: pointer;
 }
-
-
+.pdf-faq-title{
+  font-size: 16px;
+  color: #ffffff;
+}
 
 </style>
