@@ -392,6 +392,33 @@ export default {
           }
         });
       }
+      if(this.product.frequently_asked_questions && this.product.frequently_asked_questions.length > 0) {
+        const faqItems = [];
+        // Loop through the frequently_asked_questions array
+        this.product.frequently_asked_questions.forEach(item => {
+          // Ensure that the item has at least two elements (question and answer)
+          if (item.length >= 2) {
+            // Construct the FAQ item and add it to the faqItems array
+            const faqItem = {
+              "@type": "Question",
+              "name": item[0], // Question is at index 0
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item[1], // Answer is at index 1
+              },
+            };
+            faqItems.push(faqItem);
+          }
+        });
+        head_data["script"].push({
+          type: 'application/ld+json',
+          json: {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqItems,
+          },
+        });
+      }
     return head_data
   },
   mounted: function () {
