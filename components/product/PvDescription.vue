@@ -310,7 +310,6 @@ import PvReviews from "~/components/product/tabs/PvReviews";
 import PvPdf from "~/components/product/tabs/PvPdf";
 import PvProduct from "~/components/product/card/PvProduct";
 import PvContactus from "~/components/product/tabs/PvContactus";
-// import PvVideoPlayer from "../features/PvVideoPlayer.vue";
 import { isEmpty } from "lodash";
 import PvProductRow from "~/components/product/card/PvProductRow.vue";
 import PvProductBundel from "~/components/product/card/PvProductBundel.vue";
@@ -333,7 +332,6 @@ export default {
     PvProduct,
     PvPdf,
     PvContactus,
-    // PvVideoPlayer,
   },
 
   props: {
@@ -364,10 +362,6 @@ export default {
       }
     },
   },
-  mounted() {
-    console.log(this.product)
-    // this.addEventListenersToImages();
-  },
   methods: {
     flipArrow(index) {
       const currentIndex = this.flippedArrows.indexOf(index);
@@ -380,36 +374,12 @@ export default {
     isArrowFlipped(index) {
       return this.flippedArrows.includes(index);
     },
-    addEventListenersToImages() {
-      const contentContainer = this.$refs.contentContainer;
-      const images = contentContainer.getElementsByTagName('img');
-
-      // Add click event listener to each image
-      Array.from(images).forEach((img) => {
-        img.addEventListener('click', () => {
-          this.openModal({
-            src: img.getAttribute('src'),
-            alt: img.getAttribute('alt')
-          });
-        });
-      });
-    },
     openModal(image) {
       this.selectedImage = image;
       this.isModalOpen = true;
     },
     closeModal() {
       this.isModalOpen = false;
-    },
-    openVedioModal: function (story) {
-      this.$modal.show(
-        () => import("~/components/home/PvStoryModal"),
-        { story },
-        {
-          adaptive: true,
-          class: "video-modal-container",
-        }
-      );
     },
   }
 };
