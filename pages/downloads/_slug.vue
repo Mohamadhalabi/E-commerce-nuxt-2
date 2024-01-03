@@ -354,7 +354,6 @@
 
 <script>
 import Api from "~/api";
-// import PvVideoPlayer from "~/components/features/PvVideoPlayer";
 import PvMedia from "~/components/downloads/PvMedia.vue";
 import { baseSlider3 } from "~/utils/data/carousel";
 
@@ -363,6 +362,15 @@ export default {
     // PvVideoPlayer,
     PvMedia,
     PvBtnShare: () => import("~/components/common/PvBtnShare.vue"),
+  },
+  async asyncData({ params }) {
+    const { data } = await Api.get(`downloads/${params.slug}`)
+    return {
+      download: data.download,
+      sources: data.download.videos,
+      productTitle: data.download.title,
+      videos: data.download.video
+    };
   },
   data: function () {
     return {
@@ -381,38 +389,6 @@ export default {
         autoplay: false,
         controls: true,
       },
-      structuredData: {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://www.tlkeys.com"
-        },{
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Downloads",
-          "item": "https://www.tlkeys.com/downloads"
-        },
-          {
-            "@type" : "ListItem",
-            "position": 3,
-            "name": this.$route.params.slug.replace(/-/g, ' '),
-          }
-        ]
-      },
-      structuredData2: {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Techno Lock Keys",
-        "url": "https://www.tlkeys.com",
-        "sameAs" : [ "https://www.facebook.com/technolockkeys_world/",
-          "https://twitter.com/techno_lock",
-          "https://www.instagram.com/technolock/",
-          "https://www.youtube.com/channel/UC40E3nDQ52h8d-jGbCJeepg",
-          "https://api.whatsapp.com/send?phone=971504429045"]
-      },
     };
   },
   head() {
@@ -420,7 +396,7 @@ export default {
       link: [
         {
           rel: 'canonical',
-          href: this.urlLink,
+          href: process.env.PUBLIC_PATH + "downloads/" + this.download.slug,
         },
         {
           rel: 'alternate',
@@ -461,50 +437,75 @@ export default {
         {
           hid: "og:image",
           name: "og:image",
-          content: this.meta_image.url,
+          content: this.download.meta_image['s']['url'],
         },
       ],
       script: [
-        { type: 'application/ld+json', json: this.structuredData },
-        { type: 'application/ld+json', json: this.structuredData2 },
+        { type: 'application/ld+json', json: {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [{
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.tlkeys.com"
+            },{
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Downloads",
+              "item": "https://www.tlkeys.com/downloads"
+            },
+              {
+                "@type" : "ListItem",
+                "position": 3,
+                "name": process.env.PUBLIC_PATH + "downloads/" + this.download.slug,
+              }
+            ]
+          }
+        },
+        { type: 'application/ld+json', json: {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "image": this.$settings.website.default_images.s['url'],
+            "name": "Techno Lock Keys",
+            "url": "https://www.tlkeys.com",
+            "sameAs" : [ "https://www.facebook.com/technolockkeys_world/",
+              "https://www.instagram.com/technolock/",
+              "https://www.youtube.com/@technolock",
+              "https://api.whatsapp.com/send?phone=971504429045"],
+            "description": "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators",
+            "email": "info@tlkeys.com",
+            "telephone": "+971504429045",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Industrial No. 5, behind Maliah Road., shop No. 8, Property of Ali Nasir Mohamed Suleiman",
+              "addressLocality": "Sharjah",
+              "addressCountry": "AE",
+              "addressRegion": "United Arab Emirates",
+              "postalCode": "00000"
+            },
+          }},
         { type: 'application/ld+json', json:
             {
               "@context": "https://schema.org",
-              "@type": "WebPage",
+              "@type": "SoftwareApplication",
               "name": this.download ? this.download.meta_title : null,
-              "description": this.download ? this.download.meta_description : null,
-              "mainEntity": {
-                "@type": "SoftwareApplication",
-                "name": this.softwareName,
-                "operatingSystem": ["Windows", "MacOS", "Linux"],
-                "applicationCategory": "DriverApplication",
-                "downloadUrl": this.softwareLink,
+              "operatingSystem": ["Windows", "MacOS", "Linux"],
+              "applicationCategory": "DriverApplication",
+              "downloadUrl": this.download.attributes.software[0].link ? this.download.attributes.software[0].link : this.download.attributes.driver[0].link,
+              "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
               }
             }
         },
       ]
     };
   },
-  mounted() {
+  mounted: async function () {
     this.urlLink = window.location.origin + this.$route.fullPath
-  },
-  created: async function () {
     await this.getDownload();
-    if(this.download.meta_image['s'] !== undefined){
-      this.meta_image = this.download.meta_image['s'];
-    }
-    if(this.download.attributes.software !== undefined) {
-      this.softwareLink = this.download.attributes.software[0].link;
-      this.softwareName = this.download.attributes.software[0].name;
-    }
-    else if(this.download.attributes.driver !== undefined){
-      this.softwareLink = this.download.attributes.driver[0].link;
-      this.softwareName = this.download.attributes.driver[0].name;
-    }
-    else{
-      this.softwareLink = "";
-      this.softwareName = "";
-    }
   },
 
   methods: {
@@ -518,17 +519,11 @@ export default {
         }
       );
     },
-    toggleVisiplity() {
-      this.isVisible = !this.isVisible;
-    },
     getDownload: async function () {
       this.loaded = false;
       await Api.get(`downloads/${this.$route.params.slug}`)
         .then((response) => {
           this.download = response.data.download;
-          this.sources = this.download.videos;
-          this.productTitle = response.data.download.title;
-          this.videos = this.download.video;
           for (
             let index = 0;
             index < this.download.screen_shot.length;
@@ -541,7 +536,6 @@ export default {
           }
           this.loaded = true;
         })
-
         .catch((error) => ({ error: JSON.stringify(error) }));
     },
   },
