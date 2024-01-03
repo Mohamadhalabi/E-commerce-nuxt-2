@@ -81,10 +81,20 @@ export default {
     //   this.LOGOUT(state)
     // }
     if(process.client) {
-      document.querySelector("body").classList.add("loaded");
+      const localStorageObject = localStorage;
+      const authToken = localStorageObject.getItem('auth._token.local');
+      if(authToken != null)
+      {
+        api.defaults.headers.common['Authorization'] = authToken;
+      }
+      else {
+        localStorage.setItem("tokenEnded", 1);
+        api.defaults.headers.common['Authorization'] = authToken;
+      }
       if (!localStorage.getItem("tokenEnded")) {
         localStorage.setItem("tokenEnded", 1);
       }
+      document.querySelector("body").classList.add("loaded");
     }
     this.$store.dispatch('rtlStore/setLanguageFromURL');
     this.updateLanguageCode(this.$i18n.locale)
