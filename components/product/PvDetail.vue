@@ -1,16 +1,10 @@
 <template>
   <div>
     <div class="d-flex align-items-center">
-      <div class="title-and-summary-name">
-        <div class="product-h1">
-          <h1 class="product-title">
-            {{ product.title }}
-          </h1>
-        </div>
-        <div>
-          {{product.summary_name}}
-        </div>
-      </div>
+      <h1 class="product-title">
+        {{ product.title }}
+      </h1>
+
       <div>
         <pv-product-nav
           v-if="isProductNav"
@@ -19,11 +13,11 @@
         ></pv-product-nav>
       </div>
     </div>
-    <hr class="mb-1 mt-0">
 
-    <div v-if="product.summary_name" class="product-desc">
+    <div v-if="product.summary_name && product.summary_name != product.title" class="product-desc">
       <h2 class="summary-name">{{ product.summary_name }}</h2>
     </div>
+    <hr class="mb-1 mt-0">
     <pv-rating :product="product" :hide-reviews="false"/>
 <!--    <hr class="short-divider"/>-->
     <div class="row">
@@ -376,8 +370,10 @@ export default {
   box-shadow: 0px 1px 2px #2ba968;
 }
 .summary-name{
-  font-size: 16px;
+  font-size: 22px;
   font-weight: bold;
   color: #556b2f;
+  letter-spacing: -.01em;
+  width: calc( 100% - 70px );
 }
 </style>
