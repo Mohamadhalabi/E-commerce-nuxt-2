@@ -133,6 +133,12 @@ export default {
   },
   mounted() {
     this.$Progress.start();
+    if(process.client){
+      let fullDomain = window.location.href;
+      if(fullDomain !=="https://www.tlkeys.com/pin-code"){
+        window.location = "https://www.tlkeys.com/pin-code"
+      }
+    }
   },
   created() {
     this.getProduct();
