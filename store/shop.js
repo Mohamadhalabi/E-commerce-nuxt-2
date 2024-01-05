@@ -143,12 +143,12 @@ export const actions = {
       return;
     }
 
-    if (!payload.gallery[0]['s']) {
-      for (let index = 0; index < payload.gallery.length; index++) {
-        payload.gallery[index]['s'] = payload.gallery[index]['m'];
-
-      }
-    }
+    // if (!payload.gallery[0]['s']) {
+    //   for (let index = 0; index < payload.gallery.length; index++) {
+    //     payload.gallery[index]['s'] = payload.gallery[index]['m'];
+    //
+    //   }
+    // }
 
     if (localStorage.getItem('tokenEnded') == '1') return;
 
@@ -234,12 +234,12 @@ export const actions = {
       return;
     }
 
-    if (!payload.gallery[0]['s']) {
-      for (let index = 0; index < payload.gallery.length; index++) {
-        payload.gallery[index]['s'] = payload.gallery[index]['m'];
-
-      }
-    }
+    // if (!payload.gallery[0]['s']) {
+    //   for (let index = 0; index < payload.gallery.length; index++) {
+    //     payload.gallery[index]['s'] = payload.gallery[index]['m'];
+    //
+    //   }
+    // }
 
     if (localStorage.getItem('tokenEnded') == '1') return;
 
@@ -276,8 +276,6 @@ export const actions = {
   },
 
   changeQuantity: async function ({ commit, state }, payload) {
-
-
     if (localStorage.getItem('tokenEnded') == '1') {
 
       let product = payload.product;

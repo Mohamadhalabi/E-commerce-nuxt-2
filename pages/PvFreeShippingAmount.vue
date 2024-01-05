@@ -54,6 +54,9 @@ export default {
   created() {
     this.getCartList();
     let selected_currency = localStorage.getItem('currency');
+    if(selected_currency == null){
+      selected_currency ="USD"
+    }
     Api.post("exchange-rate", selected_currency)
       .then((response) => {
         this.exchange_rate = response.data;

@@ -111,10 +111,19 @@
                     <span>{{product.price.currency + product.sale_price.value}}</span>
                   </div>
                   <div v-else>
-                    <span class="old-price mt-auto mb-auto" v-if="product.priceitem != product.price.value">
-<!--                      {{product.price.currency + product.price.value}}-->
-                    </span>
-                    <span>{{product.price.currency + product.sale_price.value}}</span>
+                    <div v-if="product.sale_price.value !='-'">
+                      {{product.sale_price.value}}{{product.sale_price.currency}}
+
+                    </div>
+                    <div v-else>
+                      {{product.price.value}}{{product.price.currency}}
+                    </div>
+<!--                    -->
+<!--                    {{product.price.currency}}{{product.price.value}}-->
+<!--                    <span v-if="product.sale_price.value !='-'">-->
+<!--                      {{product.sale_price.value}}-->
+<!--                    </span>-->
+<!--                    <span>{{product.price.currency + product.sale_price.value}}</span>-->
 
                   </div>
                 </td>
@@ -378,7 +387,7 @@ export default {
     };
   },
 
-  created() {
+  mounted() {
     this.getCartList();
   },
   computed: {
