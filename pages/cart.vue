@@ -106,30 +106,27 @@
                 <td class="price-color text-center font-weight-bold vertical-align-middle" style="">
                   <div v-if="isAuthenticated">
                     <span class="old-price mt-auto mb-auto" v-if="product.price_without_sale != product.sale_price.value">
-<!--                      {{product.price.currency + product.price_without_sale}}-->
                     </span>
                     <span>{{product.price.currency + product.sale_price.value}}</span>
                   </div>
                   <div v-else>
                     <div v-if="product.sale_price.value !='-'">
                       {{product.sale_price.value}}{{product.sale_price.currency}}
-
                     </div>
                     <div v-else>
                       {{product.price.value}}{{product.price.currency}}
                     </div>
-<!--                    -->
-<!--                    {{product.price.currency}}{{product.price.value}}-->
-<!--                    <span v-if="product.sale_price.value !='-'">-->
-<!--                      {{product.sale_price.value}}-->
-<!--                    </span>-->
-<!--                    <span>{{product.price.currency + product.sale_price.value}}</span>-->
-
                   </div>
                 </td>
 
                 <td class="text-center" style="vertical-align: middle">
-                  <pv-quantity-input
+<!--                  <pv-quantity-input-->
+<!--                    :qty="product.quantity"-->
+<!--                    :has_token="product.has_token_input"-->
+<!--                    :product="product"-->
+<!--                    @changeQty="changeQuantity"-->
+<!--                  />-->
+                  <pv-quantity-select
                     :qty="product.quantity"
                     :has_token="product.has_token_input"
                     :product="product"
@@ -283,6 +280,7 @@ import { mapGetters, mapActions } from "vuex";
 import PvQuantityInput from "~/components/features/PvQuantityInput";
 import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
 import Api from "~/api";
+import PvQuantitySelect from "~/components/features/PvQuantitySelect.vue";
 export default {
   head() {
     return {
@@ -362,6 +360,7 @@ export default {
     }
   },
   components: {
+    PvQuantitySelect,
     PvFreeShippingAmount:() => import("~/pages/PvFreeShippingAmount.vue"),
     PvQuantityInput,
     BaseButtonIcon1,

@@ -268,7 +268,7 @@
         class="right-menu-items"
       >
         <nuxt-link
-          v-if="!isURL(item.link, { require_protocol: true })"
+          v-if="item.link"
           :to="getLink('/'+item.link)"
           :class="{ active: item.link === currentItem }"
           class="d-flex align-items-center flex-column download-pin-code"
@@ -282,14 +282,12 @@
   </div>
 </template>
 <script>
-import { isURL } from "validator";
 import { capitalize } from "lodash";
 import {mapGetters} from "vuex";
 import Api from "~/api";
 export default {
   data: function () {
     return {
-      isURL,
       capitalize,
       manufacturers : [],
       cars: [],
