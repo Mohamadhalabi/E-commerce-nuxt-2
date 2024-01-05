@@ -183,7 +183,6 @@
 
 <script>
 import PvSocialIcons from "~/components/common/PvSocialIcons";
-import { isMobilePhone, isEmail, isURL } from "validator";
 import { concat } from "lodash";
 import {mapGetters} from "vuex";
 
@@ -194,9 +193,7 @@ export default {
   data: function () {
     return {
       concat,
-      isMobilePhone,
-      isEmail,
-      isURL,
+
       animationDelay : `100ms`
     };
   },

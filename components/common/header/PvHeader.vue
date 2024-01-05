@@ -27,19 +27,19 @@
                     </ul>
                   </div>
                 </div>
-<!--                <div class="header-dropdown m-0" style="margin-top: 3px!important;">-->
-<!--                  <a class="header-icons" href="javascript:;">{{currentLocale.shortName}}</a>-->
-<!--                  <div class="header-menu">-->
-<!--                    <ul>-->
-<!--                      <li-->
-<!--                        v-for="locale in availableLocales"-->
-<!--                        :key="locale"-->
-<!--                        @click="setLocale(locale[0])">-->
-<!--                        <a href="javascript:;" class="text-uppercase">{{ locale[0]}}</a>-->
-<!--                      </li>-->
-<!--                    </ul>-->
-<!--                  </div>-->
-<!--                </div>-->
+                <!--                <div class="header-dropdown m-0" style="margin-top: 3px!important;">-->
+                <!--                  <a class="header-icons" href="javascript:;">{{currentLocale.shortName}}</a>-->
+                <!--                  <div class="header-menu">-->
+                <!--                    <ul>-->
+                <!--                      <li-->
+                <!--                        v-for="locale in availableLocales"-->
+                <!--                        :key="locale"-->
+                <!--                        @click="setLocale(locale[0])">-->
+                <!--                        <a href="javascript:;" class="text-uppercase">{{ locale[0]}}</a>-->
+                <!--                      </li>-->
+                <!--                    </ul>-->
+                <!--                  </div>-->
+                <!--                </div>-->
                 <div class="header-about-contact">
                   <nuxt-link :to="getLink('/about')">
                     {{ $t("header.about") }}
@@ -178,24 +178,24 @@
                   </i>
                   <template>
                     <div class="header-dropdown">
-                    <p style="text-decoration: none !important;" href="javascript:;">
-                      {{ StateUser.name }}
-                    </p>
-                    <div class="header-menu border-0">
-                      <ul>
-                        <li>
+                      <p style="text-decoration: none !important;" href="javascript:;">
+                        {{ StateUser.name }}
+                      </p>
+                      <div class="header-menu border-0">
+                        <ul>
+                          <li>
                             <span class="account-list" @click.prevent="myOrders">
                                 {{ $t("account.orders") }}
                             </span>
-                        </li>
-                        <li>
+                          </li>
+                          <li>
                             <span class="account-list" @click="LogOut">
                                 {{ $t("account.log_out") }}
                             </span>
-                        </li>
-                      </ul>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                  </div>
                   </template>
                   <div class="header-userinfo d-none d-lg-block">
                     <span class="d-inline-block font2 line-height-1"> </span>
@@ -208,24 +208,24 @@
 
 
               <div class="desktop-only">
-              <a
-                class="header-icon position-relative mx-2 cursor-pointer"
-                title="wishlist"
-              >
-                <i class="sicon-heart" @click="goToWishlist" />
-                <span class="cart-count badge-circle">{{getWishlistCounts}}</span>
-              </a>
+                <a
+                  class="header-icon position-relative mx-2 cursor-pointer"
+                  title="wishlist"
+                >
+                  <i class="sicon-heart" @click="goToWishlist" />
+                  <span class="cart-count badge-circle">{{getWishlistCounts}}</span>
+                </a>
 
-              <a
-                class="header-icon position-relative ComparesBtn mx-2 cursor-pointer"
-                title="Compares">
-                <i class="sicon-shuffle" @click="goToCompares" />
-                <span class="cart-count badge-circle">{{ getCounts }}</span>
-              </a>
+                <a
+                  class="header-icon position-relative ComparesBtn mx-2 cursor-pointer"
+                  title="Compares">
+                  <i class="sicon-shuffle" @click="goToCompares" />
+                  <span class="cart-count badge-circle">{{ getCounts }}</span>
+                </a>
 
-              <a class="mx-2 cursor-pointer">
-                <pv-cart-menu />
-              </a>
+                <a class="mx-2 cursor-pointer">
+                  <pv-cart-menu />
+                </a>
               </div>
             </div>
             <!-- End : Right Side -->
@@ -300,22 +300,22 @@
                   </ul>
                 </div>
               </div>
-<!--              <div class="header-dropdown m-auto">-->
-<!--                <a class="header-icons" href="javascript:;">{{-->
-<!--                    currentLocale.shortName-->
-<!--                  }}</a>-->
-<!--                <div class="header-menu">-->
-<!--                  <ul>-->
-<!--                    <li-->
-<!--                      v-for="locale in availableLocales"-->
-<!--                      :key="locale"-->
-<!--                      class="cursor-pointer"-->
-<!--                      @click="setLocale(locale[0])">-->
-<!--                      <a href="javascript:;" class="text-uppercase">{{ locale[0]}}</a>-->
-<!--                    </li>-->
-<!--                  </ul>-->
-<!--                </div>-->
-<!--              </div>-->
+              <!--              <div class="header-dropdown m-auto">-->
+              <!--                <a class="header-icons" href="javascript:;">{{-->
+              <!--                    currentLocale.shortName-->
+              <!--                  }}</a>-->
+              <!--                <div class="header-menu">-->
+              <!--                  <ul>-->
+              <!--                    <li-->
+              <!--                      v-for="locale in availableLocales"-->
+              <!--                      :key="locale"-->
+              <!--                      class="cursor-pointer"-->
+              <!--                      @click="setLocale(locale[0])">-->
+              <!--                      <a href="javascript:;" class="text-uppercase">{{ locale[0]}}</a>-->
+              <!--                    </li>-->
+              <!--                  </ul>-->
+              <!--                </div>-->
+              <!--              </div>-->
               <a
                 class="header-icon position-relative m-auto mt-1 ml-lg-3 cursor-pointer"
                 title="wishlist"
@@ -522,16 +522,16 @@ export default {
       if (this.searchKey =='') {
         this.productsBySearch = [];
       } else {
-          let query = `?search=${this.searchKey}`;
-          if (this.selectedCategory != null) {
-            query = `?search=${this.searchKey}&categories=${this.selectedCategory}`;
-          }
-          Api.get(`shop${query}`)
-            .then((response) => {
-              this.productsBySearch = response.data.products;
-              this.totalProduct = response.data.total;
-            })
-            .catch((error) => ({ error: JSON.stringify(error) }));
+        let query = `?search=${this.searchKey}`;
+        if (this.selectedCategory != null) {
+          query = `?search=${this.searchKey}&categories=${this.selectedCategory}`;
+        }
+        Api.get(`shop${query}`)
+          .then((response) => {
+            this.productsBySearch = response.data.products;
+            this.totalProduct = response.data.total;
+          })
+          .catch((error) => ({ error: JSON.stringify(error) }));
       }
     },
     goToShop() {
@@ -618,9 +618,9 @@ export default {
     if(process.client) {
       let currency = localStorage.getItem("currency")
       if (currency != null) {
-      this.changeCurrency(currency);
-      api.defaults.headers["currency"] = currency;
-      this.setCurrencyValue(currency);
+        this.changeCurrency(currency);
+        api.defaults.headers["currency"] = currency;
+        this.setCurrencyValue(currency);
       }
     }
     this.checkMobile();
@@ -776,8 +776,8 @@ export default {
   font-size: 13px;
 }
 .account-list{
-    font-size:16px;
-    padding:5px;
+  font-size:16px;
+  padding:5px;
 }
 @media screen and (min-width: 993px){
   .logo-image{

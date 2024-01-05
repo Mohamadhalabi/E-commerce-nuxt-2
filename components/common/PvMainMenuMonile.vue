@@ -254,8 +254,6 @@
 import {mapActions, mapGetters} from "vuex";
 import img from "~/static/images/blank.png";
 import Api from "~/api";
-import {isURL} from "validator";
-import {capitalize} from "lodash";
 export default {
   data: function () {
     return {
