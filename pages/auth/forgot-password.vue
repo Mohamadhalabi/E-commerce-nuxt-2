@@ -1,6 +1,13 @@
 <template>
   <main class="main">
     <div class="container reset-password-container">
+      <div class="text-center" style="color: red;">
+        <p style="font-size: 18px;">If you encounter any issues with resetting your password, please don't hesitate to reach out to us on WhatsApp for assistance.</p>
+        <p style="font-size: 18px;">إذا واجهت أي مشكلة في إعادة تعيين كلمة المرور، فلا تتردد في الاتصال بنا على واتساب للحصول على المساعدة.</p>
+        <button @click="contactUs" style="border: 0;background-color: transparent">
+          <img src="../../static/images/whatsapp-icon.webp" class="mb-1" width="60" height="60" style="display: inline" />
+        </button>
+      </div>
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
           <div style="border-top: 3px solid #ff832d;   border-left: 1px solid #aaa; border-right: 1px solid #aaa; border-bottom: 1px solid #aaa;" class="feature-box   rounded-2 shadow">
@@ -65,6 +72,12 @@ export default {
     this.email = this.getEmail
   },
   methods: {
+    contactUs(){
+      window.open(
+        `https://api.whatsapp.com/send?phone=971504429045&text=I Have a problem with resetting my password`,
+        "_blank"
+      );
+    },
     forgotPassword() {
       this.$store
         .dispatch("auth/forgotPassword", this.email)
