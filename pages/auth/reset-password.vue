@@ -79,6 +79,7 @@
 
 <script>
 import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
+import {mapActions} from "vuex";
 export default {
   components: {
     BaseButtonIcon1,
@@ -97,6 +98,8 @@ export default {
     };
   },
   methods: {
+    ...mapActions('auth', ['LogIn']),
+
     resetPassword() {
       const data = {
         password: this.password,
@@ -105,27 +108,31 @@ export default {
       };
 
       this.$store
-        .dispatch("auth/resetPassword", data)
+        .dispatch('auth/resetPassword', data)
         .then((res) => {
           this.message = res.data.message;
-          // this.$modal.show('success');
-          this.$router.push("/auth/login");
-           this.$notify({
-            group: "custom-notify",
-            type: "success",
-            text: this.$t("common.passwordUpdatedSuccessfully"),
+          // Log in the user after successfully resetting the password
+          const user = { email: this.$route.query.email, password: this.password };
+          return this.LogIn(user);
+        })
+        .then(() => {
+          // Redirect or perform any additional actions after logging in
+          this.$router.push('/');
+          this.$notify({
+            group: 'custom-notify',
+            type: 'success',
+            text: this.$t('common.passwordUpdatedSuccessfully'),
           });
         })
         .catch((error) => {
           this.errors = error.response.data.data;
           this.$notify({
-            group: "errorMessage",
-            type: "error",
+            group: 'errorMessage',
+            type: 'error',
             text: this.$t('common.failedToChangeThePassword'),
           });
-
         });
-    },
-  },
+    }
+  }
 };
 </script>
