@@ -3,16 +3,21 @@ import { pick, includes } from 'lodash';
 
 export const state = () => ({
   user: null,
-  token: null
+  token: null,
+  email: "ggg",
 });
 
 export const getters = {
   isAuthenticated: (state) => !!state.user,
   StateUser: (state) => state.user,
-  getToken: (state) => state.token
+  getToken: (state) => state.token,
+  getEmail: (state) => state.email,
 };
 
 export const actions = {
+  ResetPasswordEmail: async function ({ commit }, payload) {
+    await commit('SET_EMAIL', payload);
+  },
   Register: async function ({ dispatch }, form) {
     form = pick(form, ['name', 'email', 'password', 'confirm_password']);
     await Api.post('user/auth/register', form);
@@ -111,6 +116,10 @@ export const actions = {
 export const mutations = {
   SET_USER: function (state, user) {
     state.user = user;
+  },
+  SET_EMAIL: function(state, email){
+    state.email = email
+    console.log(state.email)
   },
 
   SET_TOKEN: function (state, token) {

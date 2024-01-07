@@ -52,9 +52,10 @@
             {{ $t("login.rememberMe") }}
           </label>
         </div>
-
         <nuxt-link to="/auth/forgot-password" class="forget-password text-dark">
+          <a @click="ResetPasswordEmail(form.email)">
           {{ $t("login.forgotPassword") }}
+          </a>
         </nuxt-link>
       </div>
 
@@ -153,7 +154,10 @@ export default {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
   methods: {
-    ...mapActions("auth", ["LogIn"]),
+    test(){
+      alert("TEST")
+    },
+    ...mapActions("auth", ["LogIn","ResetPasswordEmail"]),
     ...mapMutations("auth", ["SET_USER", "SET_TOKEN"]),
     ...mapActions("shop", ["afterLogOutCart", "getCartList", "addToCart","addToCartWithoutNotifications"]),
     ...mapActions("compare", ["afterLogOutCompare", "fetchList", "addToList"]),
