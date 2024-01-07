@@ -119,7 +119,6 @@ export const mutations = {
   },
   SET_EMAIL: function(state, email){
     state.email = email
-    console.log(state.email)
   },
 
   SET_TOKEN: function (state, token) {
