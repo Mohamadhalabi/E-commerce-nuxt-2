@@ -120,18 +120,18 @@
                 </td>
 
                 <td class="text-center" style="vertical-align: middle">
-<!--                  <pv-quantity-input-->
-<!--                    :qty="product.quantity"-->
-<!--                    :has_token="product.has_token_input"-->
-<!--                    :product="product"-->
-<!--                    @changeQty="changeQuantity"-->
-<!--                  />-->
-                  <pv-quantity-select
+                  <pv-quantity-input
                     :qty="product.quantity"
                     :has_token="product.has_token_input"
                     :product="product"
                     @changeQty="changeQuantity"
                   />
+<!--                  <pv-quantity-select-->
+<!--                    :qty="product.quantity"-->
+<!--                    :has_token="product.has_token_input"-->
+<!--                    :product="product"-->
+<!--                    @changeQty="changeQuantity"-->
+<!--                  />-->
                 </td>
 
                 <td class="price-color text-center font-weight-bold" style="vertical-align: middle">
