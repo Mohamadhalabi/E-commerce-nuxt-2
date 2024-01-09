@@ -101,7 +101,7 @@
 @include mq(lg, max) {
 	.vm--container:not(.newsletter-modal):not(.quickview-modal):not(.video-modal-container) .vm--modal {
 		position: absolute;
-		left: calc(50% - 262px) !important;
+		//left: calc(50% - 262px) !important;
 		right: calc(50% - 262px) !important;
 		width: 525px !important;
 		max-width: 932px !important;

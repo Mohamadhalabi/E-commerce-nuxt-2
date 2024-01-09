@@ -15,7 +15,7 @@
         <video-player :src="story.link" />
       </div>
 
-      <div v-if="story.type === 'image'" class="lightBoxVideoWrapper" style="position: fixed">
+      <div v-if="story.type === 'image'" class="lightboxImageWrapper" >
         <img class="w-100"  :src="story.value" />
       </div>
       <div v-if="story.type === 'video'" class="lightBoxVideoWrapper">

@@ -778,7 +778,28 @@ a:hover {
     width: 100% !important;
     height: 400px !important;
 }
-
+.lightboxImageWrapper{
+  position: fixed;
+  bottom: 10vh;
+  max-width: 700px;
+}
+@media screen and (max-width: 1550px){
+  .lightboxImageWrapper{
+    bottom: 2vh;
+  }
+}
+@media screen and (max-width: 1350px){
+  .lightboxImageWrapper{
+    max-width: 600px;
+  }
+}
+@media screen and (max-width: 1200px){
+  .lightboxImageWrapper{
+    bottom: 4vh;
+    right: 50vh;
+    max-width: 500px;
+  }
+}
  .video-modal-container .vm--modal  {
     left: 50% !important;
     transform: translate(-50%, -10%) !important;
