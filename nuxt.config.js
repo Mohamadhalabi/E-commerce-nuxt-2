@@ -46,12 +46,28 @@ export default {
     script: [
       {
         hid: 'tawk.to',
-        src:
-          'https://embed.tawk.to/62eb896454f06e12d88cddba/1g9k11d13',
+        src: 'https://embed.tawk.to/62eb896454f06e12d88cddba/1g9k11d13',
         defer: true,
-        async:true,
+        async: true,
+      },
+      {
+        hid: 'google-tag-manager',
+        innerHTML: String.raw`
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PWSSMVC7');
+    `,
+        defer: true,
+        async: true,
       }
-    ]
+    ],
+    __dangerouslyDisableSanitizers: ['script']
   },
   publicRuntimeConfig: {
     recaptcha: {
@@ -111,7 +127,7 @@ export default {
 //     }
 //   ]],
 
-  modules: ['@nuxtjs/axios', 'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
+  modules: ['@nuxtjs/axios', '@nuxtjs/google-gtag', 'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
     '@nuxtjs/recaptcha', {
       version: 2
     }
@@ -119,6 +135,10 @@ export default {
 //     delayHydration: {
 //     mode: 'manual',
 //   },
+  'google-gtag':{
+    id: 'G-5G2DSZVBJ9', // required
+    debug: true, // enable to track in dev mode
+  },
   image: {
     quality: 100,
     format: ['webp'],
@@ -352,7 +372,7 @@ export default {
 
     // build time compression settings
     gzip: {
-        // should compress to gzip?
+      // should compress to gzip?
       enabled: true,
       // compression config
       // https://www.npmjs.com/package/compression-webpack-plugin

@@ -1,5 +1,6 @@
 <template>
   <div :dir="$dir()" :class="$i18n.locale === 'ar' ? 'ltrClass' : ''" @click="hideMobileSearch">
+    <noscript v-html="iFrameCode" />
     <vue-progress-bar />
     <div class="page-wrapper position-relative">
       <!--<client-only>-->
@@ -52,11 +53,6 @@ export default {
     PvComparePopup:() =>import("~/components/popups/PvComparePopup.vue"),
     PvWishlistPopup:() => import("~/components/popups/PvWishlistPopup.vue"),
   },
-  head() {
-    return {
-
-    }
-  },
   watch: {
     $route: function() {
       resizeHandler();
@@ -69,6 +65,7 @@ export default {
       isSearchInputClicked: false,
       ScrollToFooter: false,
       currencyValue:"",
+      iFrameCode: '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWSSMVC7" height="0" width="0" style="display:none;visibility:hidden"></iframe>',
     };
   },
 
