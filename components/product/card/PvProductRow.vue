@@ -29,7 +29,7 @@
       </div>
       <div class="col-lg-8 col-md-4 col-sm-4 col-xs-4 mt-auto mb-auto text-lg-left title-short">
         <div class="mt-1">
-          <nuxt-link class="short-title" :to="`/product/${product.slug}`">
+          <nuxt-link class="short-title" :to="`/products/${product.slug}`">
             {{ product.short_title }}
           </nuxt-link>
         </div>
