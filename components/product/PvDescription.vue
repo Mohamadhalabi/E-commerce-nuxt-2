@@ -101,7 +101,7 @@
           role="tab"
           aria-controls="product-faq-content"
           aria-selected="true"
-          >{{ $t("products.FAQ") }}</a
+          >{{ $t("products.FAQ") }} ({{product.frequently_asked_questions.length}})</a
         >
       </li>
 
@@ -230,7 +230,7 @@
             <b-collapse :id="'accordion-' + index" accordion="my-accordion" role="tabpanel">
               <b-card-body>
                 <b-card-text>
-                  <p class="m-0">{{ faq[1] }}</p>
+                  <p class="m-0" v-html="faq[1]"></p>
                 </b-card-text>
               </b-card-body>
             </b-collapse>
