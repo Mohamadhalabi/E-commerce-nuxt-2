@@ -53,7 +53,7 @@
               </h3>
               <iframe height="90%" width="100%" src="https://vin.prokeytools.com/login" style="border: none;" __idm_frm__="452">
               </iframe>
-              <h4 class="text-center">
+              <h4 class="to-get-pin-code text-center">
                 {{ $t("pincode.togetpincode") }}
               </h4>
             </div>
