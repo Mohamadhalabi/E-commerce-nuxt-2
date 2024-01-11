@@ -3,6 +3,7 @@
     :isIndexPage ="true"
     :products="bestSellingProducts2"
     :collectionTitle="$t('home.bestSellingProducts')"
+    :link="link"
   />
 </template>
 <script>
@@ -23,6 +24,7 @@ export default {
   props: {
     isIndexPage: Boolean,
     collectionTitle: String,
+    link:String,
   },
   data: function () {
     return {
