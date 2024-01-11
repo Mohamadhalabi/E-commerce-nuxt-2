@@ -3,7 +3,11 @@
     <div class="row">
       <div class="col-lg-12 additional-product-items d-flex">
         <h3 class="m-0 home-page-title">
-          <span>{{title}}</span>
+          <span>
+            <nuxt-link :to="UrlLink">
+              {{ title }}
+            </nuxt-link>
+          </span>
         </h3>
       </div>
     </div>
@@ -14,9 +18,14 @@
 import { mapGetters } from 'vuex';
 export default {
   name: "PvSectionTitle",
-  props: ["title"],
+  props: ["title","link"],
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
-  }
+  },
+  data() {
+    return {
+      UrlLink: 'shop?' + this.link,
+    };
+  },
 };
 </script>

@@ -3,6 +3,7 @@
       :products="isFreeShippingProducts"
       :collection-title="$t('home.freeshoppingproducts')"
       :animation-delay="'200'"
+      :link="link"
   />
 </template>
 <script>
@@ -14,6 +15,9 @@ export default {
   },
   computed: {
     ...mapGetters("header",["getCurrency"])
+  },
+  props: {
+    link: String,
   },
   async fetch() {
       const getFreeShippingProducts = await Api.get("shop?is_free_shipping=1&length=3");

@@ -3,6 +3,7 @@
     :products="topSellingThreeProducts"
     :collection-title="$t('home.topSellingProduct')"
     :animation-delay="'200'"
+    :link="link"
   />
 </template>
 <script>
@@ -15,6 +16,9 @@ export default {
   },
   computed: {
     ...mapGetters("header",["getCurrency"])
+  },
+  props : {
+    link: String,
   },
   async fetch() {
       const topSellingProducts =  await Api.get("products/top-selling-products");

@@ -3,6 +3,7 @@
     :products="onSaleProducts"
     :collection-title="$t('home.onSaleProduct')"
     :animation-delay="'200'"
+    :link="link"
   />
 </template>
 <script>
@@ -15,6 +16,9 @@ export default {
   },
   computed: {
     ...mapGetters("header",["getCurrency"])
+  },
+  props:{
+    link:String,
   },
   async fetch() {
     const getOnSaleProducts = await Api.get("shop?on_sale=1&length=3");

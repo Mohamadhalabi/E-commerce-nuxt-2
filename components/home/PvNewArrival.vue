@@ -3,6 +3,7 @@
       :products="isNewArrivalProducts"
       :collection-title="$t('home.newarrivalproducts')"
       :animation-delay="'200'"
+      :link="link"
   />
 </template>
 <script>
@@ -19,6 +20,9 @@ export default {
   async fetch() {
       const getNewArrivalProducts = await Api.get("shop?is_new_arrival=1&length=3");
       this.isNewArrivalProducts = getNewArrivalProducts.data.products;
+  },
+  props: {
+    link: String,
   },
   data: function () {
     return {

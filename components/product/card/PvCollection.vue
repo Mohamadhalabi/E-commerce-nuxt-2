@@ -1,7 +1,10 @@
 <template>
   <div class="products-section position-relative">
     <div v-if="products" class="mb-2">
-      <pv-section-title :title="collectionTitle"></pv-section-title>
+      <pv-section-title
+        :title="collectionTitle"
+        :link="link"
+      ></pv-section-title>
     </div>
     <pv-carousel
       :ShowNavigation="true"
@@ -36,6 +39,7 @@ export default {
     isIndexPage: Boolean,
     index:Object,
     products: Array,
+    link:String,
     collectionTitle: String,
     viewType: {
       type: String,

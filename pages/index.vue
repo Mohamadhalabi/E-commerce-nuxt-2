@@ -3,11 +3,7 @@
       <pv-stories class="desktop-only" />
       <pv-intro-section/>
       <home-page-search />
-      <!--<br>-->
-<!--    <delay-hydration>-->
     <pv-slider-Banner class="desktop-only"  />
-<!--    </delay-hydration>-->
-    <!--    <delay-hydration>-->
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter"
@@ -16,13 +12,10 @@
           <pv-latest-products
             :isIndexPage ="true"
             :collectionTitle="$t('home.latestProducts')"
+            :link="'new-arrival'"
           />
         </div>
       </div>
-<!--    </delay-hydration>-->
-
-<!--    <delay-hydration>-->
-
       <div  v-animate
             :data-animation-delay="animationDelay"
             data-animation-name="fadeInUpShorter" class="container-fluid">
@@ -30,11 +23,10 @@
           <pv-best-selling
             :isIndexPage ="true"
             :collectionTitle="$t('home.bestSellingProducts')"
+            :link="'best-seller'"
           />
         </div>
       </div>
-<!--    </delay-hydration>-->
-<!--    <delay-hydration>-->
       <div
         v-animate
         :data-animation-delay="animationDelay"
@@ -44,11 +36,10 @@
           <pv-top-selling
             :isIndexPage ="true"
             :collectionTitle="$t('home.topSellingProduct')"
+            :link="'top-selling'"
           />
         </div>
       </div>
-<!--    </delay-hydration>-->
-<!--    <delay-hydration>-->
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter"  class="container-fluid pt-4">
@@ -56,8 +47,6 @@
           <pv-line-banner class="mb-4" v-if="!isMobile" />
         </div>
       </div>
-<!--    </delay-hydration>-->
-<!--    <delay-hydration>-->
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter" class="container-fluid"
@@ -67,23 +56,26 @@
             <pv-on-sale-products
               :collection-title="$t('home.onSaleProduct')"
               :animation-delay="'200'"
+              :link="'discount'"
             />
             <pv-top-selling-three-products
               :collection-title="$t('home.topSellingProduct')"
               :animation-delay="'500'"
+              :link="'top-selling'"
             />
             <pv-new-arrival
               :collection-title="$t('home.newarrivalproducts')"
               :animation-delay="'800'"
+              :link="'new-arrival'"
             />
             <pv-free-shipping
               :collection-title="$t('home.freeshoppingproducts')"
               :animation-delay="'1100'"
+              :link="'free-shipping'"
             />
           </div>
         </div>
       </div>
-<!--    </delay-hydration>-->
     <pv-manufacturers-section v-animate
                               :data-animation-delay="animationDelay"
                               data-animation-name="fadeInUpShorter" />

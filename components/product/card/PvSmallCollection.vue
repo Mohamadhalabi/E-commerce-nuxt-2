@@ -6,7 +6,9 @@
     class="col-xl-3 col-lg-6 col-sm-6  pb-lg-0 col-equal d-flex align-items-center justify-content-between flex-column"
   >
     <h3 class="section-sub-title px-2 w-100">
-      {{collectionTitle}}
+      <nuxt-link :to="UrlLink">
+        {{collectionTitle}}
+      </nuxt-link>
     </h3>
 
     <div v-if="!products || products.length === 0">
@@ -38,10 +40,12 @@ export default {
     products: Array,
     collectionTitle: String,
     animationDelay: String,
+    link: String,
   },
   data: function() {
     return {
-      kebabCase
+      kebabCase,
+      UrlLink: 'shop?' + this.link,
     };
   }
 };
