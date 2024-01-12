@@ -31,10 +31,10 @@ body {
 	-webkit-font-smoothing: antialiased;
 	overflow-x: hidden;
 
-	&:not(.loaded) > *:not(.loading-overlay) {
-		visibility: hidden !important;
-		transition: none !important;
-	}
+	//&:not(.loaded) > *:not(.loading-overlay) {
+	//	visibility: hidden !important;
+	//	transition: none !important;
+	//}
 }
 
 ::-moz-selection {
@@ -171,10 +171,10 @@ body.modal-open {
 	visibility: visible;
 	z-index: 999999;
 
-	.loaded > & {
-		opacity: 0;
-		visibility: hidden;
-	}
+	//.loaded > & {
+	//	opacity: 0;
+	//	visibility: hidden;
+	//}
 }
 
 .bounce-loader {
