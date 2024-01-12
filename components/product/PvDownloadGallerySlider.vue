@@ -86,7 +86,7 @@
       </div>
     </div>
 
-    <light-box ref="lightBox" :media="lightBoxMedia" :show-light-box="false" />
+<!--    <light-box ref="lightBox" :media="lightBoxMedia" :show-light-box="false" />-->
   </div>
 </template>
 
@@ -94,9 +94,9 @@
 import PvLabelGroup from "~/components/product/partials/PvLabelGroup";
 import PvGalleryImage from "~/components/product/partials/PvGalleryImage";
 import PvCarousel from "~/components/features/PvCarousel";
-import LightBox from "vue-image-lightbox";
+// import LightBox from "vue-image-lightbox";
 import { bigSlider, smallSlider2 } from "~/utils/data/carousel";
-import "vue-image-lightbox/dist/vue-image-lightbox.min.css";
+// import "vue-image-lightbox/dist/vue-image-lightbox.min.css";
 import PvSmallCollection from "~/components/product/card/PvSmallCollection.vue";
 import PvSmallProduct from "~/components/product/card/PvSmallProduct.vue";
 import { mapGetters } from "vuex";
@@ -108,7 +108,7 @@ export default {
     PvLabelGroup,
     PvGalleryImage,
     PvCarousel,
-    LightBox,
+    // LightBox,
   },
   props: {
     product: Object,
