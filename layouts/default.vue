@@ -3,12 +3,8 @@
     <noscript v-html="iFrameCode" />
     <vue-progress-bar />
     <div class="page-wrapper position-relative">
-      <!--<client-only>-->
       <pv-top-notice class="top-notice" />
-      <!--</client-only>-->
-      <client-only>
-        <pv-header @isClicked="isClicked" />
-      </client-only>
+      <pv-header @isClicked="isClicked" />
       <nuxt />
       <pv-footer/>
       <div class="wishlist-popup">
@@ -25,9 +21,7 @@
     <a id="scroll-top" href="javascript:;" title="Top" role="button" @click="scrollToTop">
       <i class="icon-angle-up" />
     </a>
-    <client-only>
-      <pv-mobile-menu />
-    </client-only>
+    <pv-mobile-menu />
   </div>
 </template>
 
