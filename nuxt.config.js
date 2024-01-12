@@ -78,10 +78,11 @@ export default {
   css: [
     'swiper/dist/css/swiper.css',
     '~/static/css/animate.min.css',
-    '~/static/css/porto-icons.min.css',
+    '~/static/css/bootstrap.min.css',
+    // '~/static/css/porto-icons.min.css',
     '~/static/css/steper.css',
-    '~/static/vendor/fontawesome-free/css/all.min.css',
-    '~/static/vendor/simple-line-icons/css/simple-line-icons.min.css',
+    // '~/static/vendor/fontawesome-free/css/all.min.css',
+    // '~/static/vendor/simple-line-icons/css/simple-line-icons.min.css',
     '~/static/sass/style.scss'
   ],
 
@@ -99,7 +100,6 @@ export default {
 
   buildModules: [
     '@nuxtjs/dotenv',
-    'nuxt-ssr-cache',
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
     ['nuxt-i18n', {
@@ -127,7 +127,7 @@ export default {
 //     }
 //   ]],
 
-  modules: ['@nuxtjs/axios', '@nuxtjs/google-gtag', 'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
+  modules: ['@nuxtjs/axios', '@nuxtjs/google-gtag', 'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap',[
     '@nuxtjs/recaptcha', {
       version: 2
     }
@@ -324,12 +324,17 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    analyze: false,
+    analyze: true,
     extractCSS: true,
     optimizeCSS: true,
     publicPath: '/secure',
     babel: {
       compact: true
+    },
+    splitChunks: {
+      layouts: true,
+      pages: true,
+      commons: true
     },
     filenames: {
       app: ({ isDev, isModern }) => isDev ? `[name]${isModern ? '.modern' : ''}.js` : `[contenthash:7]${isModern ? '.modern' : ''}.${version}.js`,
@@ -338,8 +343,7 @@ export default {
       img: ({ isDev }) => isDev ? `[path][name].[ext]` : `img/[name].[contenthash:7].${version}.[ext]`,
       font: ({ isDev }) => isDev ? `[path][name].[ext]` : `fonts/[name].[contenthash:7].${version}.[ext]`,
       video: ({ isDev }) => isDev ? `[path][name].[ext]` : `videos/[name].[contenthash:7].${version}.[ext]`
-    }
-
+    },
   },
 
   generate: {

@@ -74,15 +74,15 @@
 
 <script>
 import PvCarousel from "~/components/features/PvCarousel";
-import LightBox from "vue-image-lightbox";
+// import LightBox from "vue-image-lightbox";
 import { baseUrl } from "~/api";
 import { baseSlider1, baseSlider8 } from "~/utils/data/carousel";
-import "vue-image-lightbox/dist/vue-image-lightbox.min.css";
+// import "vue-image-lightbox/dist/vue-image-lightbox.min.css";
 
 export default {
   components: {
     PvCarousel,
-    LightBox,
+    // LightBox,
   },
   props: {
     product: Object,

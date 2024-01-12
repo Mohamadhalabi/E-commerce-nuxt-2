@@ -4,7 +4,7 @@ import { pick, includes } from 'lodash';
 export const state = () => ({
   user: null,
   token: null,
-  email: "ggg",
+  email: "",
 });
 
 export const getters = {
