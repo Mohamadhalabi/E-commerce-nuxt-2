@@ -9,16 +9,16 @@ export default async function ({ app, isClient }, inject) {
     inject('settings', settings);
 
     // Perform DOM-related operations only on the client side
-    if (isClient) {
-      (function () {
-        let s1 = document.createElement("script"),
-          s0 = document.getElementsByTagName("script")[0];
-        s1.async = true;
-        s1.charset = "UTF-8";
-        s1.setAttribute("crossorigin", "*");
-        s0.parentNode.insertBefore(s1, s0);
-      })();
-    }
+    // if (isClient) {
+    //   (function () {
+    //     let s1 = document.createElement("script"),
+    //       s0 = document.getElementsByTagName("script")[0];
+    //     s1.async = true;
+    //     s1.charset = "UTF-8";
+    //     s1.setAttribute("crossorigin", "*");
+    //     s0.parentNode.insertBefore(s1, s0);
+    //   })();
+    // }
   } catch (error) {
     throw error;
   }

@@ -1,12 +1,9 @@
 <template>
   <main class="main">
-    <pv-stories class="desktop-only" />
-    <pv-intro-section/>
-    <home-page-search />
-    <delay-hydration>
-      <pv-slider-Banner class="desktop-only"  />
-    </delay-hydration>
-    <delay-hydration>
+      <pv-stories class="desktop-only" />
+      <pv-intro-section/>
+      <home-page-search />
+    <pv-slider-Banner class="desktop-only"  />
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter"
@@ -19,8 +16,6 @@
           />
         </div>
       </div>
-    </delay-hydration>
-    <delay-hydration>
       <div  v-animate
             :data-animation-delay="animationDelay"
             data-animation-name="fadeInUpShorter" class="container-fluid">
@@ -32,8 +27,6 @@
           />
         </div>
       </div>
-    </delay-hydration>
-    <delay-hydration>
       <div
         v-animate
         :data-animation-delay="animationDelay"
@@ -47,8 +40,6 @@
           />
         </div>
       </div>
-    </delay-hydration>
-    <delay-hydration>
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter"  class="container-fluid pt-4">
@@ -56,8 +47,6 @@
           <pv-line-banner class="mb-4" v-if="!isMobile" />
         </div>
       </div>
-    </delay-hydration>
-    <delay-hydration>
       <div v-animate
            :data-animation-delay="animationDelay"
            data-animation-name="fadeInUpShorter" class="container-fluid"
@@ -87,12 +76,10 @@
           </div>
         </div>
       </div>
-    </delay-hydration>
-    <delay-hydration>
-      <pv-manufacturers-section v-animate
-                                :data-animation-delay="animationDelay"
-                                data-animation-name="fadeInUpShorter" />
-    </delay-hydration>
+    <pv-manufacturers-section v-animate
+                              :data-animation-delay="animationDelay"
+                              data-animation-name="fadeInUpShorter" />
+
     <div style="background-color: #f07905">
       <div class="container">
         <div class="footer-top pt-5">
@@ -105,7 +92,7 @@
       </div>
     </div>
 
-    <!--<PvNewsletterModal />-->
+      <PvNewsletterModal />
 
 
 
@@ -140,8 +127,12 @@
 </template>
 <script>
 import { mapGetters,mapActions } from "vuex";
-// import PvNewsletterModal from '~/components/home/PvNewsletterModal.vue';
-import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
+import PvNewsletterModal from '~/components/home/PvNewsletterModal.vue';
+import PvTopSelling from "~/components/home/PvTopSelling.vue";
+import PvBestSelling from "~/components/home/PvBestSelling.vue";
+import PvLatestProducts from "~/components/home/PvLatestProducts.vue";
+import PvSliderBanner from "~/components/home/PvSliderBanner.vue";
+// import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
 export default {
   head() {
     return {
@@ -267,20 +258,24 @@ export default {
     }
   },
   components: {
-    // PvNewsletterModal,
+    PvNewsletterModal,
     PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
-    PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
+    PvSliderBanner,
     PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
     PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
-    PvLatestProducts: () => import("~/components/home/PvLatestProducts.vue"),
-    PvBestSelling: () => import("~/components/home/PvBestSelling.vue"),
-    PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
+    PvLatestProducts,
+    PvBestSelling,
+    // PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
+    PvTopSelling,
     PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
     PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
     PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
     PvFreeShipping:() => import("~/components/home/PvFreeShipping.vue"),
+
+
+
   },
 
   data: function () {
@@ -302,7 +297,7 @@ export default {
     ...mapActions('homePageModul',['showModul']),
     handleResize() {
       if(process.client)
-        this.isMobile = window.innerWidth < 768;
+      this.isMobile = window.innerWidth < 768;
     },
   },
   mounted() {
@@ -316,7 +311,7 @@ export default {
   beforeDestroy() {
     // Remove the resize event listener when the component is destroyed
     if(process.client)
-      window.removeEventListener('resize', this.handleResize);
+    window.removeEventListener('resize', this.handleResize);
   },
 }
 </script>

@@ -132,9 +132,9 @@ export default {
       version: 2
     }
   ]],
-    delayHydration: {
-    mode: 'init',
-  },
+  //   delayHydration: {
+  //   mode: 'mount',
+  // },
   'google-gtag':{
     id: 'G-5G2DSZVBJ9', // required
     debug: true, // enable to track in dev mode
