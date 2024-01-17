@@ -131,6 +131,8 @@ export const baseSlider88 = {
 export const baseSlider6 = {
   slidesPerView: 1,
   spaceBetween: 20,
+  autoplay: true,
+  loop:true,
   pagination: {
     el: '.swiper-dots',
     clickable: true

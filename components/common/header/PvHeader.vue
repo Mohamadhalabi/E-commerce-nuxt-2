@@ -91,13 +91,13 @@
                 <nuxt-img
                   v-if="!isMobile"
                   format="webp"
-                  sizes="lg:800px"
+                  sizes="xs:100px sm:200px md:400px lg:500px xl:800px"
                   class="logo-image" title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
                 <nuxt-img
                   v-else
                   format="webp"
                   class="mobile-logo"
-                  sizes="md:300px"
+                  sizes="xs:300px sm:300px md:300px lg:500px xl:800px"
                   title="Techno lock logo" src="/images/logos/techno-lock-logo-mobile.webp" alt="tlk Logo" />
               </nuxt-link>
               <pv-header-search
@@ -637,34 +637,6 @@ export default {
     justify-content: center;
   }
 }
-@media screen and (max-width: 992px){
-  .large-screen-only{
-    display: none!important;
-  }
-  .header-class{
-    width: 100%;
-  }
-  .social-icons{
-    display: none!important;
-  }
-}
-
-@media screen and (max-width: 992px)
-{
-  .small-screen-only{
-    display: flex!important;
-    padding: 3px;
-    justify-content: center;
-  }
-
-  .desktop-only{
-    display: none!important;
-  }
-}
-.large-screen-onlyy{
-  display: flex;
-}
-
 @media screen and (min-width: 992px)
 {
   .contact-icons{
@@ -672,34 +644,6 @@ export default {
   }
 }
 
-@media screen and (max-width: 767px){
-  .mobile-header{
-    display: grid;
-  }
-  .sub-menu-items{
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 25px;
-  }
-}
-
-@media screen and (min-width: 767px){
-  div.col-lg-12.second-sub-menu{
-    display: none!important;
-  }
-}
-.menu-button{
-  margin-right: 25px;
-  font-size: 30px;
-  text-align: center;margin-top: auto;
-  margin-bottom: auto
-}
-@media screen and (max-width: 320px) {
-  .menu-button {
-    margin-right: 10px;
-    font-size: 16px;
-  }
-}
 .header-top{
   background-color: #f6f6f6;
 }
@@ -712,39 +656,11 @@ export default {
   font-weight: 900;
 }
 
-.off-animation{
-  animation: infinite-title-animation 1s infinite;
-}
-@keyframes infinite-title-animation {
-  0% {
-    transform: translateX(0);
-  }
-  50% {
-    transform: translateX(3px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}
-
 @media screen and (min-width: 992px) {
   .small-devices-only{
     display: none!important;
   }
 }
-
-@media screen and (max-width: 1435px){
-  .header-class{
-    width: 50%;
-  }
-}
-
-@media screen and (max-width: 1200px){
-  .header-class{
-    width: 75%;
-  }
-}
-
 @media screen and (max-width: 993px){
   .contact-icons{
     justify-content: end;

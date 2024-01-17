@@ -13,9 +13,23 @@
                 :class="{'custom_color': custom_color}">
               {{ rondomProduct["short_title"] }}
             </p>
-            <span class="product-price price-color" v-if="rondomProduct['sale_price'].value == rondomProduct['price'].value">
+
+
+            <span class="" v-if="rondomProduct.offers.length !=0">
+              <span class="product-price price-color">
+                {{(rondomProduct.price.value  - rondomProduct.offers.value).toFixed(2)}}{{rondomProduct.price.currency}}
+              </span>
+              <span class="old-price">
+              {{rondomProduct['price'].value}}{{rondomProduct['price'].currency}}
+              </span>
+            </span>
+
+
+            <span class="product-price price-color" v-else-if="rondomProduct['sale_price'].value == rondomProduct['price'].value">
               {{rondomProduct['price'].value}}{{rondomProduct['price'].currency}}
             </span>
+
+
             <span class="" v-else>
               <span class="product-price price-color">
                 {{rondomProduct['sale_price'].value}}{{rondomProduct['sale_price'].currency}}
