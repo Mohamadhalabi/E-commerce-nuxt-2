@@ -19,6 +19,9 @@
         <button type="button" class="border-0 bg-white" @click="generatePdf()">
           <img src="../static/images/pdf-logo.png" class="pdf-logo" alt="PDF Button">
         </button>
+        <button type="button" class="border-0 bg-white" @click="generateExcel()">
+          <img src="../static/images/excel.webp" class="excel-logo" alt="Excel Button">
+        </button>
       </div>
     </div>
   </div>
@@ -100,6 +103,15 @@ export default {
 
   methods: {
     ...mapActions("shop", ["removeFromCart", "getCartList", "changeQuantity"]),
+    generateExcel() {
+      Api.get(`/generate-excel`, { params: { user: this.StateUser.id, currency: this.cartCurrency } })
+        .then((response) => {
+          console.log(response)
+        })
+        .catch((error) => {
+          console.error('Error generating Excel:', error);
+        });
+    },
     generatePdf() {
       let idsWithQuantities = [];
       this.cartList.forEach(item => {
@@ -209,5 +221,8 @@ export default {
 img.pdf-logo{
   width: 50px;
   height: auto;
+}
+img.excel-logo{
+  width: 100px;
 }
 </style>

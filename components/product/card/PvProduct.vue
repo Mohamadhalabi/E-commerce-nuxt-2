@@ -164,6 +164,7 @@ export default {
     product: Object,
   },
   methods: {
+    ...mapActions("shop", ["addToCart"]),
     getLink(route) {
       if (this.getLang === 'en') {
         return route; // Return the route as is without the language parameter
@@ -177,7 +178,6 @@ export default {
       }
       return title;
     },
-  ...mapActions("shop", ["addToCart"]),
     handleWhatsAppClick(product) {
       this.goToWhatsApp(product);
     },
