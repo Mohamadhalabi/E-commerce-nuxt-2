@@ -22,6 +22,9 @@
         <button type="button" class="border-0 bg-white" @click="generateExcel()">
           <img src="../static/images/excel.webp" class="excel-logo" alt="Excel Button">
         </button>
+        <button type="button" class="border-0 bg-white" @click="generateWord()">
+          <img src="../static/images/word-logo.webp" class="word-logo" alt="word Button">
+        </button>
       </div>
     </div>
   </div>
@@ -53,7 +56,6 @@ export default {
       totalWishList: 0
     };
   },
-
   created() {
     this.getCartList();
     let selected_currency = localStorage.getItem('currency');
@@ -103,10 +105,27 @@ export default {
 
   methods: {
     ...mapActions("shop", ["removeFromCart", "getCartList", "changeQuantity"]),
+    generateWord(){
+      Api.get(`/generate-word`, { params: { user: this.StateUser.id, currency: this.cartCurrency } })
+        .then((response) => {
+          let url ="https://dev-srv.tlkeys.com"+response.data.file_url;
+          window.open(
+            url,
+            '_blank' // <- This is what makes it open in a new window.
+          );
+        })
+        .catch((error) => {
+          console.error('Error generating Excel:', error);
+        });
+    },
     generateExcel() {
       Api.get(`/generate-excel`, { params: { user: this.StateUser.id, currency: this.cartCurrency } })
         .then((response) => {
-          console.log(response)
+          let url ="https://dev-srv.tlkeys.com"+response.data.file_url;
+          window.open(
+            url,
+            '_blank' // <- This is what makes it open in a new window.
+          );
         })
         .catch((error) => {
           console.error('Error generating Excel:', error);
@@ -224,5 +243,8 @@ img.pdf-logo{
 }
 img.excel-logo{
   width: 100px;
+}
+img.word-logo{
+  width: 75px;
 }
 </style>
