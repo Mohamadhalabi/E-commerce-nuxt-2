@@ -78,7 +78,7 @@ export default {
   css: [
     'swiper/dist/css/swiper.css',
     '~/static/css/animate.min.css',
-    '~/static/css/bootstrap.min.css',
+    // '~/static/css/bootstrap.min.css',
     '~/static/css/porto-icons.min.css',
     '~/static/css/steper.css',
     '~/static/vendor/fontawesome-free/css/all.min.css',
@@ -121,13 +121,7 @@ export default {
     pages: ['/'], // Add the routes you want to cache
   },
 
-//   modules: ['@nuxtjs/axios', 'nuxt-precompress', 'nuxt-delay-hydration', '@nuxt/image','@nuxtjs/sitemap', 'bootstrap-vue/nuxt', '@nuxtjs/auth',[
-//     '@nuxtjs/recaptcha', {
-//       version: 2
-//     }
-//   ]],
-
-  modules: ['@nuxtjs/axios', '@nuxtjs/google-gtag', 'nuxt-delay-hydration' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap',[
+  modules: ['@nuxtjs/axios', 'nuxt-purgecss', '@nuxtjs/google-gtag', 'nuxt-delay-hydration' ,'bootstrap-vue/nuxt', '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap',[
     '@nuxtjs/recaptcha', {
       version: 2
     }
@@ -165,9 +159,9 @@ export default {
     baseURL: process.env.API_BASE_URL
   },
 
-  // purgecss: {
-  //   enabled: true, // Always enable purgecss
-  // },
+  purgecss: {
+    enabled: true, // Always enable purgecss
+  },
 
   sitemap: {
     path: '/sitemap.xml',

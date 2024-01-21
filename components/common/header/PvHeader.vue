@@ -161,47 +161,47 @@
 
 
 
-              <nuxt-link v-else :to="getLink('/account')" class="header-icon desktop-only">
-                <div class="header-user">
-                  <i
-                    class=""
-                    :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">
-                    <nuxt-img
-                      format="webp"
-                      v-if="StateUser.avatar"
-                      :src="checkURL(StateUser.avatar)"
-                      @error="defalutAvatar"
-                      width="50"
-                      height="50"
-                      alt="Avatar"
-                    />
-                  </i>
-                  <template>
-                    <div class="header-dropdown">
-                      <p style="text-decoration: none !important;" href="javascript:;">
-                        {{ StateUser.name }}
-                      </p>
-                      <div class="header-menu border-0">
-                        <ul>
-                          <li>
-                            <span class="account-list" @click.prevent="myOrders">
-                                {{ $t("account.orders") }}
-                            </span>
-                          </li>
-                          <li>
-                            <span class="account-list" @click="LogOut">
-                                {{ $t("account.log_out") }}
-                            </span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </template>
-                  <div class="header-userinfo d-none d-lg-block">
-                    <span class="d-inline-block font2 line-height-1"> </span>
-                  </div>
-                </div>
-              </nuxt-link>
+<!--              <nuxt-link v-else :to="getLink('/account')" class="header-icon desktop-only">-->
+<!--                <div class="header-user">-->
+<!--                  <i-->
+<!--                    class=""-->
+<!--                    :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">-->
+<!--                    <nuxt-img-->
+<!--                      format="webp"-->
+<!--                      v-if="StateUser.avatar"-->
+<!--                      :src="checkURL(StateUser.avatar)"-->
+<!--                      @error="defalutAvatar"-->
+<!--                      width="50"-->
+<!--                      height="50"-->
+<!--                      alt="Avatar"-->
+<!--                    />-->
+<!--                  </i>-->
+<!--                  <template>-->
+<!--                    <div class="header-dropdown">-->
+<!--                      <p style="text-decoration: none !important;" href="javascript:;">-->
+<!--                        {{ StateUser.name }}-->
+<!--                      </p>-->
+<!--                      <div class="header-menu border-0">-->
+<!--                        <ul>-->
+<!--                          <li>-->
+<!--                            <span class="account-list" @click.prevent="myOrders">-->
+<!--                                {{ $t("account.orders") }}-->
+<!--                            </span>-->
+<!--                          </li>-->
+<!--                          <li>-->
+<!--                            <span class="account-list" @click="LogOut">-->
+<!--                                {{ $t("account.log_out") }}-->
+<!--                            </span>-->
+<!--                          </li>-->
+<!--                        </ul>-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </template>-->
+<!--                  <div class="header-userinfo d-none d-lg-block">-->
+<!--                    <span class="d-inline-block font2 line-height-1"> </span>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </nuxt-link>-->
 
 
 

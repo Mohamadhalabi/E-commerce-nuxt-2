@@ -21,7 +21,7 @@
     <a id="scroll-top" href="javascript:;" title="Top" role="button" @click="scrollToTop">
       <i class="icon-angle-up" />
     </a>
-    <pv-mobile-menu />
+<!--    <pv-mobile-menu />-->
   </div>
 </template>
 
@@ -42,7 +42,7 @@ export default {
     PvFooter:() => import("~/components/common/PvFooter"),
     PvAppPopup:() => import("~/components/popups/PvAppPopup"),
     PvProductPopup:() => import("~/components/popups/PvProductPopup"),
-    PvMobileMenu:() => import("~/components/common/header/PvMobileMenu"),
+    // PvMobileMenu:() => import("~/components/common/header/PvMobileMenu"),
     PvErrorMessage:() => import("~/components/popups/PvErrorMessage.vue"),
     PvComparePopup:() =>import("~/components/popups/PvComparePopup.vue"),
     PvWishlistPopup:() => import("~/components/popups/PvWishlistPopup.vue"),
