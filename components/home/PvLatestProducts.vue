@@ -8,12 +8,11 @@
 </template>
 <script>
 import getProducts, {productsQueries} from "~/utils/service";
-import PvCollection from "~/components/product/card/PvCollection.vue";
 import {mapGetters} from "vuex";
 
 export default {
   components: {
-    PvCollection
+    PvCollection: () => import("~/components/product/card/PvCollection.vue"),
   },
   computed: {
     ...mapGetters("header",["getCurrency"])
@@ -32,7 +31,7 @@ export default {
     };
   },
   watch: {
-    getCurrency(newValue, oldValue) {
+    getCurrency() {
       getProducts(productsQueries.latest_products, 12).then((response) => {
         this.latestProducts2 = response;
       })

@@ -10,7 +10,7 @@
                 :width="250"
                 :rondomProduct="rondomProduct[0]"
                 v-animate
-                background-image-url='"../images/home/backgrounds/background-1.jpg"'
+                background-image-url='"../images/home/backgrounds/background-1.webp"'
             ></pv-banner-card>
             <pv-banner-card
                 class="d-none d-lg-block"
@@ -18,7 +18,7 @@
                 :width="250"
                 :rondomProduct="rondomProduct[1]"
                 v-animate
-                background-image-url='"../images/home/backgrounds/background-2.jpg"'
+                background-image-url='"../images/home/backgrounds/background-2.webp"'
                 :fourth_item="true"
             ></pv-banner-card>
             <pv-banner-card
@@ -27,7 +27,7 @@
                 :width="250"
                 :rondomProduct="rondomProduct[2]"
                 v-animate
-                background-image-url='"../images/home/backgrounds/background-3.jpg"'
+                background-image-url='"../images/home/backgrounds/background-3.webp"'
                 :fourth_item="true"
             >
             </pv-banner-card>
@@ -69,7 +69,7 @@
               :width="250"
               :rondomProduct="rondomProduct[3]"
               v-animate
-              background-image-url='"../images/home/backgrounds/background-1.jpg"'
+              background-image-url='"../images/home/backgrounds/background-1.webp"'
             ></pv-banner-card>
             <pv-banner-card
               class="d-none d-lg-block"
@@ -77,7 +77,7 @@
               :width="250"
               :rondomProduct="rondomProduct[4]"
               v-animate
-              background-image-url='"../images/home/backgrounds/background-2.jpg"'
+              background-image-url='"../images/home/backgrounds/background-2.webp"'
               :fourth_item="true"
             ></pv-banner-card>
             <pv-banner-card
@@ -86,7 +86,7 @@
               :width="250"
               :rondomProduct="rondomProduct[5]"
               v-animate
-              background-image-url='"../images/home/backgrounds/background-3.jpg"'
+              background-image-url='"../images/home/backgrounds/background-3.webp"'
               :fourth_item="true"
             >
             </pv-banner-card>
@@ -97,16 +97,13 @@
   </div>
 </template>
 <script>
-import PvCarousel from "~/components/features/PvCarousel";
 import { baseSlider6 } from "~/utils/data/carousel";
 import Api from "~/api";
-import PvBannerCard from "../product/card/PvBannerCard.vue";
 import {mapGetters} from "vuex";
-import getProducts, {productsQueries} from "~/utils/service";
 export default {
   components: {
-    PvCarousel,
-    PvBannerCard,
+    PvCarousel: () => import("~/components/features/PvCarousel.vue"),
+    PvBannerCard: () => import("../product/card/PvBannerCard.vue"),
   },
   computed: {
     ...mapGetters("header",["getCurrency"])
