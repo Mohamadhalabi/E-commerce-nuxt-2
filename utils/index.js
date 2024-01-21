@@ -28,11 +28,11 @@ export function scrollTop(isCustom = true, speed = 50) {
 
 // function to remove classes on resizing
 export function resizeHandler() {
-  let bodyClasses = document.querySelector('body').classList;
-  let initClasses = ['home', 'loaded', 'modal-open'];
-  bodyClasses = bodyClasses.value.split(' ').filter(item => initClasses.indexOf(item) === -1);
-  for(let i = 0; i < bodyClasses.length; i++)
-    document.querySelector('body').classList.remove(bodyClasses[i]);
+  // let bodyClasses = document.querySelector('body').classList;
+  // let initClasses = ['home', 'loaded', 'modal-open'];
+  // bodyClasses = bodyClasses.value.split(' ').filter(item => initClasses.indexOf(item) === -1);
+  // for(let i = 0; i < bodyClasses.length; i++)
+  //   document.querySelector('body').classList.remove(bodyClasses[i]);
 }
 
 export function stickyHeaderHandler() {

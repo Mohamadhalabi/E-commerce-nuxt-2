@@ -1,4 +1,5 @@
 <template>
+  <no-ssr>
     <main class="main">
       <div class="container account-container custom-account-container">
         <div
@@ -433,6 +434,7 @@
         </div>
       </div>
     </main>
+  </no-ssr>
 </template>
 
 <script>
