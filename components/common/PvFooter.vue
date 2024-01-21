@@ -144,35 +144,32 @@
             </div>
 
             <div class="payment-icons ">
-                        <span
-                          v-for="(item, index) in concat([
-                            'dhl',
-                            'aramex',
-                            'fedex',
-                            'ups',
-                          ])"
-                          :key="index"
-                          v-lazy:background-image="
-                            `./images/payments_and_shipping/${item}.png`
-                          "
-                          class="payment-icon"
-                        />
+              <span
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/dhl.png')"
+                class="payment-icon" />
+              <span
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/aramex.png')"
+                class="payment-icon" />
+              <span
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/fedex.png')"
+                class="payment-icon" />
+              <span
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/ups.png')"
+                class="payment-icon" />
             </div>
 
-            <div class="payment-icons">
-                    <span
-                      v-for="(item, index) in concat([
-                        'paypal',
-                        'stripe',
-                        'card',
-                      ])"
-                      :key="index"
-                      v-lazy:background-image="
-                        `./images/payments_and_shipping/${item}.png`
-                      "
-                      class="payment-icon"
-                    />
+            <div class="payment-icons ">
+              <span
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/paypal.png')"
+                class="payment-icon" />
+              <span
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/stripe.png')"
+                class="payment-icon" />
+              <span
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/card.png')"
+                class="payment-icon" />
             </div>
+
 
           </div>
         </div>
