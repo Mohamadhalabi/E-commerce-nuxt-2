@@ -150,15 +150,15 @@
   </div>
 </template>
 <script>
-import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
-import AutoComplate from "~/components/common/AutoComplate.vue";
-import PvPriceBox from "~/components/product/partials/PvPriceBox.vue";
 import Api from "~/api";
 import {mapGetters} from "vuex";
-
 export default {
   name: "HomePageSearch",
-  components: {PvPriceBox, AutoComplate, BaseButtonIcon1},
+  components: {
+    PvPriceBox:() => import("~/components/product/partials/PvPriceBox.vue"),
+    AutoComplate:() => import("~/components/common/AutoComplate.vue"),
+    BaseButtonIcon1:() => import("~/components/common/BaseButtonIcon1.vue")
+  },
   data: function () {
     return {
       availableItems: [],

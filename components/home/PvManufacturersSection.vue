@@ -35,25 +35,22 @@
               :scal="manufacturer.image.s.scal"
               :description="manufacturer.image.s.description"
               class="manufacture-images"
-              
+
             />
          </nuxt-link>
         </div>
       </pv-carousel-manufactures>
       </div>
     </div>
-
   </section>
 </template>
 
 <script>
-import PvCarouselManufactures from '~/components/features/PvCarouselManufactures.vue';
 import {mapGetters} from "vuex";
 import Api from "~/api";
-
 export default {
   components: {
-    PvCarouselManufactures
+    PvCarouselManufactures:() => import("~/components/features/PvCarouselManufactures.vue")
   },
   async fetch() {
     try {

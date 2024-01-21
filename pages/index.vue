@@ -91,11 +91,7 @@
         </div>
       </div>
     </div>
-
-      <PvNewsletterModal />
-
-
-
+<!--      <PvNewsletterModal />-->
 
     <div v-animate
          :data-animation-delay="animationDelay"
@@ -127,11 +123,6 @@
 </template>
 <script>
 import { mapGetters,mapActions } from "vuex";
-import PvNewsletterModal from '~/components/home/PvNewsletterModal.vue';
-import PvTopSelling from "~/components/home/PvTopSelling.vue";
-import PvBestSelling from "~/components/home/PvBestSelling.vue";
-import PvLatestProducts from "~/components/home/PvLatestProducts.vue";
-import PvSliderBanner from "~/components/home/PvSliderBanner.vue";
 // import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
 export default {
   head() {
@@ -258,24 +249,20 @@ export default {
     }
   },
   components: {
-    PvNewsletterModal,
+    // PvNewsletterModal,
     PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
-    PvSliderBanner,
+    PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
     PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
     PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
-    PvLatestProducts,
-    PvBestSelling,
-    // PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
-    PvTopSelling,
+    PvLatestProducts: () => import("~/components/home/PvLatestProducts.vue"),
+    PvBestSelling: () => import("~/components/home/PvBestSelling.vue"),
+    PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
     PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
     PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
     PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
     PvFreeShipping:() => import("~/components/home/PvFreeShipping.vue"),
-
-
-
   },
 
   data: function () {
@@ -301,10 +288,8 @@ export default {
     },
   },
   mounted() {
-    // Check if the screen width is below a certain threshold (e.g., 768 pixels)
     if(process.client) {
       this.isMobile = window.innerWidth < 768;
-      // Listen for window resize events to update the isMobile flag
       window.addEventListener('resize', this.handleResize);
     }
   },

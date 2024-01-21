@@ -35,7 +35,6 @@
   </div>
 </template>
 <script>
-// import PvCarousel from "~/components/features/PvCarousel";
 import { mapGetters } from "vuex";
 import Api from "~/api";
 export default {

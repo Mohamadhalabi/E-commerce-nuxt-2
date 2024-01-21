@@ -37,12 +37,10 @@
 </template>
 
 <script>
-import PvCarousel from '~/components/features/PvCarousel';
 import Api from '~/api';
-
 export default {
   components: {
-    PvCarousel
+    PvCarousel: () => import("~/components/features/PvCarousel.vue")
   },
   data: function() {
     return {

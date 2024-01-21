@@ -29,12 +29,11 @@
 </template>
 
 <script>
-import PvSmallProduct from '~/components/product/card/PvSmallProduct';
 import {kebabCase} from 'lodash';
 
 export default {
   components: {
-    PvSmallProduct
+    PvSmallProduct: () => import("~/components/product/card/PvSmallProduct")
   },
   props: {
     products: Array,
