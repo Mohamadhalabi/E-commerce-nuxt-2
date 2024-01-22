@@ -492,7 +492,9 @@ export default {
               "name": this.download ? this.download.meta_title : null,
               "operatingSystem": ["Windows", "MacOS", "Linux"],
               "applicationCategory": "DriverApplication",
-              "downloadUrl": this.download.attributes.software[0].link ? this.download.attributes.software[0].link : this.download.attributes.driver[0].link,
+              "downloadUrl": this.download && this.download.attributes && this.download.attributes.software && this.download.attributes.software[0] && this.download.attributes.software[0].link
+                ? this.download.attributes.software[0].link
+                : this.download && this.download.attributes && this.download.attributes.driver && this.download.attributes.driver[1] && this.download.attributes.driver[1].link,
               "offers": {
                 "@type": "Offer",
                 "price": "0",
