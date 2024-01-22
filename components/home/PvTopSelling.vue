@@ -9,9 +9,10 @@
 <script>
 import Api from "~/api";
 import {mapGetters} from "vuex";
+import PvCollection from "~/components/product/card/PvCollection.vue";
 export default {
   components: {
-    PvCollection: () => import("~/components/product/card/PvCollection.vue"),
+    PvCollection,
   },
   computed: {
     ...mapGetters("header",["getCurrency"])
