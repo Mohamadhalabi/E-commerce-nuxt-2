@@ -148,25 +148,25 @@
                 style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/dhl.png')"
                 class="payment-icon" />
               <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/aramex.png')"
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/aramex.webp')"
                 class="payment-icon" />
               <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/fedex.png')"
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/fedex.webp')"
                 class="payment-icon" />
               <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/ups.png')"
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/ups.webp')"
                 class="payment-icon" />
             </div>
 
             <div class="payment-icons ">
               <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/paypal.png')"
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/paypal.webp')"
                 class="payment-icon" />
               <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/stripe.png')"
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/stripe.webp')"
                 class="payment-icon" />
               <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/card.png')"
+                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/card.webp')"
                 class="payment-icon" />
             </div>
 
