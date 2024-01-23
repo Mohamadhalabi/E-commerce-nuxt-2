@@ -78,7 +78,7 @@ export default {
   css: [
     'swiper/dist/css/swiper.css',
     '~/static/css/animate.min.css',
-    // '~/static/css/bootstrap.min.css',
+    '~/static/css/bootstrap.min.css',
     '~/static/css/porto-icons.min.css',
     '~/static/css/steper.css',
     '~/static/vendor/fontawesome-free/css/all.min.css',
@@ -121,14 +121,23 @@ export default {
     pages: ['/'], // Add the routes you want to cache
   },
 
-  modules: ['@nuxtjs/axios', 'nuxt-purgecss', '@nuxtjs/google-gtag', 'nuxt-delay-hydration' ,'bootstrap-vue/nuxt', '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap',[
+  modules: ['@nuxtjs/axios', 'bootstrap-vue/nuxt', 'nuxt-delay-hydration' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap',[
     '@nuxtjs/recaptcha', {
       version: 2
     }
   ]],
-  //   delayHydration: {
-  //   mode: 'mount',
-  // },
+  bootstrapVue: {
+    componentPlugins: [
+      'CardPlugin',
+      'FormInputPlugin',
+      'ModalPlugin',
+      'TablePlugin',
+      'CollapsePlugin',
+    ],
+  },
+    delayHydration: {
+    mode: 'mount',
+  },
   'google-gtag':{
     id: 'G-5G2DSZVBJ9', // required
     debug: true, // enable to track in dev mode
@@ -158,11 +167,6 @@ export default {
     },
     baseURL: process.env.API_BASE_URL
   },
-
-  purgecss: {
-    enabled: true, // Always enable purgecss
-  },
-
   sitemap: {
     path: '/sitemap.xml',
     sitemaps: [
@@ -343,7 +347,13 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    analyze: true,
+    analyze: false,
+    minifyCSS: true,
+    minifyJS: true,
+    html: {
+      minifyCSS: false,
+      minifyJS: false,
+    },
     extractCSS: true,
     optimizeCSS: true,
     publicPath: '/secure',
