@@ -31,6 +31,14 @@
               : (selectedCategory = null)
           "
         />
+<!--        <b-form-select-->
+<!--              v-model="selectedCategory"-->
+<!--              :options="categories || []"-->
+<!--          :text-field="`name_${$i18n.locale}`"-->
+<!--          :value-field="`value_${$i18n.locale}`"-->
+<!--          :placeholder="$t('home.selectCategory')"-->
+<!--          ></b-form-select>-->
+
       </div>
       <button class="btn icon-magnifier" title="search" @click="goToShop" />
       <div class="live-search-list">
@@ -289,7 +297,8 @@ span.multiselect__placeholder{
 .list-group-item.pruductSearch {
   display: flex;
   align-items: center;
-  text-align: start
+  text-align: start;
+  border-bottom: 2px solid #dee2eb;
 }
 .notHover:hover {
   background: none !important;

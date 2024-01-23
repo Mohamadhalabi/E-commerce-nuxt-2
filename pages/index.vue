@@ -2,7 +2,7 @@
   <main class="main">
       <pv-stories class="desktop-only" />
       <pv-intro-section/>
-      <home-page-search />
+<!--      <home-page-search />-->
     <pv-slider-Banner class="desktop-only"  />
       <div v-animate
            :data-animation-delay="animationDelay"

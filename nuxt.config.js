@@ -133,6 +133,8 @@ export default {
       'ModalPlugin',
       'TablePlugin',
       'CollapsePlugin',
+      'PaginationPlugin',
+      'ListGroupPlugin'
     ],
   },
     delayHydration: {
@@ -347,7 +349,7 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    analyze: false,
+    analyze: true,
     minifyCSS: true,
     minifyJS: true,
     html: {
