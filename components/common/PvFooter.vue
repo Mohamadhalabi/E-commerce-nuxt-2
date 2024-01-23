@@ -1,8 +1,6 @@
 <template>
-  <div v-animate
-       :data-animation-delay="animationDelay"
-       data-animation-name="fadeInUpShorter" class="from-demo-17">
-    <footer ref="footer" class="bgWorld footer font2 bg-dark pt-5">
+  <div class="from-demo-17">
+    <footer ref="footer" class="bgWorld footer bg-dark">
       <div class="container">
         <div class="footer-middle pt-0">
           <div class="row">
@@ -26,9 +24,6 @@
               <h6 class="footer-desc text-white font-weight-normal" v-html="$t('footer.description')"/>
               <div class="row ls-0 footer-question">
                 <div class="col-12">
-                  <!--                  <pv-social-icons-->
-                  <!--                  :isFooter="true"-->
-                  <!--                  />-->
                 </div>
               </div>
             </div>
@@ -83,7 +78,6 @@
 
             <div class="col-lg-3 col-sm-4 m-b-4">
               <div class="widget footer-widget-contact-info">
-
                 <ul class="contact-info d-flex flex-column">
                   <li v-if="$settings.contact.address"
                       class="d-flex p-0 align-items-start">
@@ -169,8 +163,6 @@
                 style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/card.webp')"
                 class="payment-icon" />
             </div>
-
-
           </div>
         </div>
       </div>
@@ -179,34 +171,12 @@
 </template>
 
 <script>
-import PvSocialIcons from "~/components/common/PvSocialIcons";
-import { concat } from "lodash";
 import {mapGetters} from "vuex";
 
 export default {
-  components: {
-    PvSocialIcons,
-  },
-  data: function () {
-    return {
-      concat,
-
-      animationDelay : `100ms`
-    };
-  },
   computed:{
     ...mapGetters("language", ["getLang"]),
   },
-  mounted() {
-    // Attach the scroll event listener to the window
-    window.addEventListener('scroll', this.handleScroll, {passive:true});
-  },
-
-  beforeDestroy() {
-    // Remove the scroll event listener when the component is destroyed
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-
   methods: {
     getLink(route) {
       if (this.getLang === 'en') {
@@ -215,25 +185,9 @@ export default {
         return `/${this.getLang}${route}`; // Include the language parameter
       }
     },
-    handleScroll() {
-      // Get the bounding rectangle of the footer element
-      const footerRect = this.$refs.footer.getBoundingClientRect();
-
-      // Calculate the bottom of the viewport
-      const viewportBottom = window.innerHeight || document.documentElement.clientHeight;
-
-      // Check if the top of the footer is within the viewport
-      if (footerRect.top <= viewportBottom) {
-        this.$emit('reachedFooter',true)
-      }
-      else{
-        this.$emit('reachedFooter',false)
-      }
-    }
   }
 };
 </script>
-
 <style scoped>
 .bgWorld{
   background: #3c3c3c
@@ -243,8 +197,5 @@ export default {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-.links{
-
 }
 </style>
