@@ -152,12 +152,15 @@
 <script>
 import Api from "~/api";
 import {mapGetters} from "vuex";
+import PvPriceBox from "~/components/product/partials/PvPriceBox.vue";
+import AutoComplate from "~/components/common/AutoComplate.vue";
+import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
 export default {
   name: "HomePageSearch",
   components: {
-    PvPriceBox:() => import("~/components/product/partials/PvPriceBox.vue"),
-    AutoComplate:() => import("~/components/common/AutoComplate.vue"),
-    BaseButtonIcon1:() => import("~/components/common/BaseButtonIcon1.vue")
+    PvPriceBox,
+    AutoComplate,
+    BaseButtonIcon1
   },
   data: function () {
     return {
