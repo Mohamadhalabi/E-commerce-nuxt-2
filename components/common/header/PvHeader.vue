@@ -159,7 +159,11 @@
                 </div>
               </nuxt-link>
 
-
+              <div v-else>
+                <no-ssr>
+                  <PvAuth />
+                </no-ssr>
+              </div>
 
 <!--              <nuxt-link v-else :to="getLink('/account')" class="header-icon desktop-only">-->
 <!--                <div class="header-user">-->
@@ -401,8 +405,10 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 import api from "~/api";
 import img from "~/static/images/blank.png";
 import Api from "~/api";
+import PvAuth from "~/components/common/header/PvAuth.vue";
 export default {
   components: {
+    PvAuth,
     PvMainMenu,
     PvCartMenu,
     PvHeaderSearch,
