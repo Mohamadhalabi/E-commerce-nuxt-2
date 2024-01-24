@@ -121,17 +121,9 @@
             </div>
           </div>
         </form>
-
-        <PvMainMenuMonile />
-
-<!--        <div-->
-<!--          class="header-bottom sticky-header d-none d-lg-flex mb-2 desktop-sticky box-shadow-none"-->
-<!--        >-->
-<!--          <div class="container">-->
-<!--            <PvMainMenuMonile />-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <pv-social-icons />-->
+        <no-ssr>
+          <PvMainMenuMonile />
+        </no-ssr>
       </div>
     </div>
   </div>
@@ -140,7 +132,6 @@
 <script>
 import PvSocialIcons from "~/components/common/PvSocialIcons";
 import PvMainMenuMonile from "~/components/common/PvMainMenuMonile";
-import PvHeaderSearch from "./PvHeaderSearch.vue";
 import BaseButtonIcon1 from "../BaseButtonIcon1.vue";
 import PvPriceBox from "~/components/product/partials/PvPriceBox.vue";
 import Api from "~/api";
@@ -149,7 +140,6 @@ export default {
   components: {
     PvSocialIcons,
     PvMainMenuMonile,
-    PvHeaderSearch,
     PvPriceBox,
     BaseButtonIcon1,
   },
