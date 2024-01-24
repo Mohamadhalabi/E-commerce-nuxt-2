@@ -138,7 +138,11 @@ export default {
     ],
   },
     delayHydration: {
-    mode: 'mount',
+    mode: 'init',
+      postIdleTimeout:{
+        mobile: 5000,
+        desktop: 2500,
+      }
   },
   'google-gtag':{
     id: 'G-5G2DSZVBJ9', // required
