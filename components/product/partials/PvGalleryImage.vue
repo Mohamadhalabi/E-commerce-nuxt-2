@@ -10,6 +10,7 @@
     :open_graph="image[size].open_graph"
     :scal="image[size].scal"
     :description="image[size].description"
+
   />
 </template>
 
