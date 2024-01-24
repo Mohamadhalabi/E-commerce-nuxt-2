@@ -18,7 +18,6 @@
               <figure>
                 <img
                   loading="lazy"
-                  :v-lazy="item.avatar"
                   :src="item.avatar"
                   alt="author"
                   width="50"
