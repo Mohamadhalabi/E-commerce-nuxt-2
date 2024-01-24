@@ -42,8 +42,10 @@
         >
           <figure class="post-media">
             <nuxt-link :to="`/downloads/${download.slug}`">
-              <img
-                v-lazy="download.internal_image.l.url"
+              <nuxt-img
+                loading="lazy"
+                format="webp"
+                :src="download.internal_image.l.url"
                 :alt="download.internal_image.l.alt"
                 :width="download.internal_image.l.width"
                 :height="download.internal_image.l.height"
