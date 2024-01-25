@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-
   <div
     v-animate
     :data-animation-delay="this.animationDelay"
@@ -17,8 +16,8 @@
       :product="product"
     />
 
-    <div class="position-absolute mb-0 card-price-box"></div>
-   <div class=" col-sm-3   col-7 ">
+    <div class="position-absolute mb-0"></div>
+   <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-7 ">
      <figure class="mt-sm-0 mt-4 img-effect  ">
         <nuxt-link :to="`/products/${product.slug}`">
 
@@ -29,30 +28,15 @@
               class="rounded-5 border shadow"
             />
           </template>
-
-         <!--  <img
-          class="rounded-5 border shadow"
-            :src="products.gallery[0].m.url"
-            :alt="products.gallery[0].m.alt"
-            :title="products.gallery[0].m.title"
-            width="250"
-            height="250"
-          /> -->
         </nuxt-link>
 
         <pv-label-group :product="product" />
-
-        <div class="btn-icon-group">
-          <pv-cart-button :product="product" :parent="'products-card'" />
-        </div>
-
         <div
           v-if="product.offers &&
             product.discount &&
             product.discount.until &&
             product.stock
             "
-          style="background-color: #0d6efd"
           class="product-countdown-container w-100"
         >
           <span class="product-countdown-title">Discount ends in:</span>
@@ -65,11 +49,10 @@
       </figure>
    </div>
 
-    <div class="col-sm-8  col-12">
+    <div class="col-xl-9 col-lg-8 col-md-9 col-sm-8 col-12">
       <div class="position-relative py-1 d-flex flex-column">
         <div
-          :class="{ 'category-list': wrapper, 'text-right': getIsAr }"
-          :style="!wrapper ? 'display: inline-block;' : ''"
+          :class="{'text-right': getIsAr }"
         >
           <nuxt-link
             id="categoryLink"
@@ -79,13 +62,13 @@
           </nuxt-link>
         </div>
 
-        <div>
+        <div class="mt-1">
           <nuxt-link style="font-weight: 600" :to="`/products/${product.slug}`">
             {{ product.short_title }}
           </nuxt-link>
         </div>
 
-        <p class="mt-2 mb-0">{{ product.seo_description }}</p>
+        <p class="mt-1 mb-0">{{ product.seo_description }}</p>
 
         <pv-price-box
           class="m-0 mt-2 mb-1 align-items-start"
@@ -114,11 +97,11 @@
           </small>
         </div>
 
-        <div class="sku-color">SKU:{{ product.sku }}</div>
       </div>
+      <div class="sku-color">SKU:{{ product.sku }}</div>
 
       <!-- Begin:Buttons -->
-      <div class="d-flex justify-content-sm-start  justify-content-between mt-3 py-2">
+      <div class="d-flex justify-content-sm-start  justify-content-between py-2">
         <whatsapp-button
           v-if="!(product.hide_price == 0)"
           class="mx-2"

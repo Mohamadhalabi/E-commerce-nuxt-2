@@ -496,4 +496,9 @@ export default {
     max-width: 100%;
   }
 }
+@media screen and (max-width: 767px){
+  .icon-mode-list{
+    display: none;
+  }
+}
 </style>
