@@ -50,13 +50,11 @@
               class="pruductSearch align-items-center justify-content-between">
               <nuxt-link class="p-0 notHover" @click.native="RemoveSearchKey" :to="getLink('/products/'+product.slug)">
                 <div class="row">
-                  <div class="col-xl-2 col-lg-2">
+                  <div class="col-xl-2 col-lg-2 m-auto">
                     <nuxt-img
                       format="webp"
                       :src="product['gallery'][0]['s']['url']"
                       :alt="product['short_title']"
-                      width="60"
-                      height="60"
                       class="mr-auto ml-auto"
                       style="
                       border: 1px solid #d2d2d2;
@@ -295,8 +293,6 @@ export default {
 span.multiselect__placeholder{
 }
 .list-group-item.pruductSearch {
-  display: flex;
-  align-items: center;
   text-align: start;
   border-bottom: 2px solid #dee2eb;
 }
