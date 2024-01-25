@@ -15,7 +15,7 @@
         {{(product.price.value - (product.price.value * (product.discount.value / 100))).toFixed(2)}}{{product.price.currency}}
       </span>
       <span
-        class="old-price mt-auto mb-auto"
+        class="old-price mt-1 mb-0"
         :class="{ 'highlighted': hasDuplicate(product.discount.value), 'mt-1': gridPrice }"
       >
             {{product.price.value}}{{product.price.currency}}
