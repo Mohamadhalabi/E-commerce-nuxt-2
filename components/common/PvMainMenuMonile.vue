@@ -17,7 +17,7 @@
         </span>
       </div>
     </div>
-    <div v-else class="text-center">
+    <div v-else class="text-center" @click="closeAllNav()">
       <nuxt-link :to="getLink('/auth/login')">
         <button class="w-25 login-button" >
           {{ $t("login.title") }}
@@ -31,11 +31,13 @@
     </div>
     <hr class="mt-1 mb-0 dashed">
     <ul class="menu main-menu nav-categories">
-      <nuxt-link :to="getLink('/')">
-        <li class="menu-list-items mb-0">
-          {{ $t("header.home") }}
-        </li>
-      </nuxt-link>
+      <div @click="closeAllNav()">
+        <nuxt-link :to="getLink('/')">
+          <li class="menu-list-items mb-0">
+            {{ $t("header.home") }}
+          </li>
+        </nuxt-link>
+      </div>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
           <p
@@ -85,44 +87,57 @@
         <span @click="carsMenu(),getCars()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
       </li>
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      @click="closeAllNav()"
+      >
         <nuxt-link :to="getLink('/downloads')" class="d-flex">
           <p class="mobile-menu-links">{{ $t("header.downloads") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">
-
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      @click="closeAllNav()"
+      >
         <nuxt-link :to="getLink('/pin-code')" class="d-flex">
           <p class="mobile-menu-links">{{ $t("header.PinCode") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      @click="closeAllNav()"
+      >
         <nuxt-link :to="getLink('/shop?free-shipping')" class="d-flex">
           <p class="mobile-menu-links-red">{{ $t("header.FreeShipping") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      @click="closeAllNav()"
+      >
         <nuxt-link :to="getLink('/shop?offers')" class="d-flex">
           <p class="mobile-menu-links-red">{{ $t("header.Offer") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      @click="closeAllNav()"
+      >
         <nuxt-link :to="getLink('/shop?bundled')" class="d-flex">
           <p class="mobile-menu-links-red">{{ $t("header.Bundles") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      @click="closeAllNav()"
+      >
         <nuxt-link :to="getLink('/unlock-remote-services')" class="d-flex">
           <p class="mobile-menu-links-red">{{ $t("header.unlockService") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      @click="closeAllNav()"
+      >
         <nuxt-link :to="getLink('/online-services')" class="d-flex">
           <p class="mobile-menu-links-red">{{ $t("header.OnlineServices") }}</p>
         </nuxt-link>
@@ -130,7 +145,7 @@
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4" v-if="isAuthenticated">
         <div class="text-center">
-          <button class="login-button w-50" @click="LogOut">
+          <button class="login-button w-50" @click="LogOut(),closeAllNav()">
             {{ $t("account.log_out") }}
           </button>
         </div>
@@ -143,10 +158,12 @@
       <div v-for="(item,index) in keysAndRemotes" :key="index" class="row ml-auto mr-auto text-center mb-1">
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''">
-            <nuxt-link :to="item2.slug">
-              <nuxt-img format="webp" alt="key and remote" :src="item2.image"  width="100" height="100" class="mt-1 mb-1" loading="lazy" />
-              <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-            </nuxt-link>
+            <div @click="closeAllNav()">
+              <nuxt-link :to="item2.slug">
+                <nuxt-img format="webp" alt="key and remote" :src="item2.image"  width="100" height="100" class="mt-1 mb-1" loading="lazy" />
+                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
+              </nuxt-link>
+            </div>
           </div>
         </div>
       </div>
@@ -157,10 +174,12 @@
       <div v-for="(item,index) in accessoriesAndTools" :key="index" class="row ml-auto mr-auto text-center mb-1">
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''" >
-            <nuxt-link :to="item2.slug">
-              <nuxt-img alt="Accessories and tools" format="webp" :src="item2.image" width="100" height="100" class="mt-1 mb-1" loading="lazy" />
-              <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-            </nuxt-link>
+            <div @click="closeAllNav()">
+              <nuxt-link :to="item2.slug">
+                <nuxt-img alt="Accessories and tools" format="webp" :src="item2.image" width="100" height="100" class="mt-1 mb-1" loading="lazy" />
+                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
+              </nuxt-link>
+            </div>
           </div>
         </div>
       </div>
@@ -172,8 +191,10 @@
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''" >
             <nuxt-link :to="item2.slug">
-              <nuxt-img alt="Device and machines" format="webp" :src="item2.image" width="100" height="100" class="mt-1 mb-1" loading="lazy" />
-              <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
+              <div @click="closeAllNav()">
+                <nuxt-img alt="Device and machines" format="webp" :src="item2.image" width="100" height="100" class="mt-1 mb-1" loading="lazy" />
+                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
+              </div>
             </nuxt-link>
           </div>
         </div>
@@ -185,10 +206,12 @@
       <div v-for="(item,index) in manufacturers" :key="index" class="row ml-auto mr-auto text-center mb-1">
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''">
-            <nuxt-link :to="item2.slug">
-              <nuxt-img alt="Manufactures" format="webp" :src="item2.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
-              <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-            </nuxt-link>
+            <div @click="closeAllNav()">
+              <nuxt-link :to="item2.slug">
+                <nuxt-img alt="Manufactures" format="webp" :src="item2.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
+                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
+              </nuxt-link>
+            </div>
           </div>
         </div>
       </div>
@@ -199,10 +222,12 @@
       <div v-for="(item,index) in cars" :key="index" class="row ml-auto mr-auto text-center mb-1">
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''">
-            <nuxt-link :to="item2.slug">
-              <nuxt-img alt="Cars" format="webp" :src="item2.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
-              <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-            </nuxt-link>
+            <div @click="closeAllNav()">
+              <nuxt-link :to="item2.slug">
+                <nuxt-img alt="Cars" format="webp" :src="item2.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
+                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
+              </nuxt-link>
+            </div>
           </div>
         </div>
       </div>
@@ -218,11 +243,13 @@
           <div v-if="itemm.slug =='tokens-software'" class="row ml-auto mr-auto text-center d-flex flex-row ">
             <div v-for="(item3,index3) in item2" :key="index3" class="col-6">
               <div v-if="item3.slug.includes('software')" >
-                <nuxt-link
-                  :to="item3.slug">
-                  <nuxt-img alt="Software" format="webp" :src="item3.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
-                  <span class="font-weight-bold">{{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}</span>
-                </nuxt-link>
+                <div @click="closeAllNav()">
+                  <nuxt-link
+                    :to="item3.slug">
+                    <nuxt-img alt="Software" format="webp" :src="item3.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
+                    <span class="font-weight-bold">{{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}</span>
+                  </nuxt-link>
+                </div>
               </div>
             </div>
           </div>
@@ -237,11 +264,13 @@
           <div v-if="itemm.slug =='tokens-software'" class="row ml-auto mr-auto text-center d-flex flex-row mb-1">
             <div v-for="(item3,index3) in item2" :key="index3" class="col-6">
               <div v-if="item3.slug.includes('token')" >
-                <nuxt-link
-                  :to="item3.slug">
-                  <nuxt-img alt="Token" format="webp" :src="item3.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
-                  <span class="font-weight-bold">{{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}</span>
-                </nuxt-link>
+                <div @click="closeAllNav()">
+                  <nuxt-link
+                    :to="item3.slug">
+                    <nuxt-img alt="Token" format="webp" :src="item3.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
+                    <span class="font-weight-bold">{{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}</span>
+                  </nuxt-link>
+                </div>
               </div>
             </div>
           </div>
@@ -279,6 +308,9 @@ export default {
     ...mapActions("compare", ["fetchList"]),
     ...mapActions("fav", ["fetchWishlist"]),
 
+    test(){
+      alert("test")
+    },
 
     getKeysAndRemotes: function(){
       Api.get('/keys-and-remotes-menu')
@@ -357,6 +389,15 @@ export default {
       document.getElementById("mySidenav4").style.width = "0";
       document.getElementById("mySidenav5").style.width = "0";
       document.getElementById("mySidenav6").style.width = "0";
+    },
+    closeAllNav(){
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("mySidenav2").style.width = "0";
+      document.getElementById("mySidenav3").style.width = "0";
+      document.getElementById("mySidenav4").style.width = "0";
+      document.getElementById("mySidenav5").style.width = "0";
+      document.getElementById("mySidenav6").style.width = "0";
+      document.querySelector("body").classList.remove("mmenu-active");
     },
     LogOut() {
       this.$Progress.start();
