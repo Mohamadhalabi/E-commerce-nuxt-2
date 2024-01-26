@@ -347,7 +347,16 @@ export default {
   router: {
     base: '/',
     linkActiveClass: '',
-    linkExactActiveClass: 'active'
+    linkExactActiveClass: 'active',
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        // If the user is navigating back, restore the saved scroll position
+        return savedPosition;
+      } else {
+        // If navigating to a new page, scroll to the top
+        return { x: 0, y: 0 };
+      }
+    }
   },
   serverMiddleware: [
     '~/middleware/redirects.js',
