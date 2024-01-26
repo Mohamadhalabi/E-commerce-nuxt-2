@@ -111,6 +111,7 @@ import PvFreeShipping from "~/components/home/PvFreeShipping.vue";
 import PvNewArrival from "~/components/home/PvNewArrival.vue";
 import PvTopSellingThreeProducts from "~/components/home/PvTopSellingThreeProducts.vue";
 import PvOnSaleProducts from "~/components/home/PvOnSaleProducts.vue";
+import {scrollTopHandler} from "~/utils";
 
 export default {
   components: {
@@ -422,6 +423,11 @@ export default {
     return head_data
   },
   mounted: function () {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'auto'
+    });
     this.getProduct();
     this.urlLink = window.location.origin + this.$route.fullPath;
     this.product.gallery.forEach((item) => {

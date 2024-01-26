@@ -349,13 +349,18 @@ export default {
     linkActiveClass: '',
     linkExactActiveClass: 'active',
     scrollBehavior(to, from, savedPosition) {
-      if (savedPosition) {
-        // If the user is navigating back, restore the saved scroll position
-        return savedPosition;
-      } else {
-        // If navigating to a new page, scroll to the top
-        return { x: 0, y: 0 };
-      }
+      return new Promise((resolve) => {
+        // Set a timeout of 500 milliseconds (adjust as needed)
+        setTimeout(() => {
+          if (savedPosition) {
+            // If the user is navigating back, restore the saved scroll position
+            resolve(savedPosition);
+          } else {
+            // If navigating to a new page, scroll to the top
+            return({ x: 0, y: 0 });
+          }
+        }, 1500); // Adjust the timeout value as needed
+      });
     }
   },
   serverMiddleware: [
