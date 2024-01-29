@@ -19,12 +19,14 @@
         <button type="button" class="border-0 bg-white" @click="generatePdf()">
           <img src="../static/images/pdf-logo.png" class="pdf-logo" alt="PDF Button">
         </button>
-        <button type="button" class="border-0 bg-white" @click="generateExcel()">
-          <img src="../static/images/excel.webp" class="excel-logo" alt="Excel Button">
-        </button>
-        <button type="button" class="border-0 bg-white" @click="generateWord()">
-          <img src="../static/images/word-logo.webp" class="word-logo" alt="word Button">
-        </button>
+        <div v-if="StateUser">
+          <button v-if="StateUser['is_admin'] === 1" type="button" class="border-0 bg-white" @click="generateExcel()">
+            <img src="../static/images/excel.webp" class="excel-logo" alt="Excel Button">
+          </button>
+          <button v-if="StateUser['is_admin'] === 1" type="button" class="border-0 bg-white" @click="generateWord()">
+            <img src="../static/images/word-logo.webp" class="word-logo" alt="word Button">
+          </button>
+        </div>
       </div>
     </div>
   </div>
