@@ -134,7 +134,9 @@ export default {
       'TablePlugin',
       'CollapsePlugin',
       'PaginationPlugin',
-      'ListGroupPlugin'
+      'ListGroupPlugin',
+      'FormTagsPlugin',
+      'AlertPlugin',
     ],
   },
     delayHydration: {
