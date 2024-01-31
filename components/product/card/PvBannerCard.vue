@@ -13,7 +13,7 @@
                 :class="{'custom_color': custom_color}">
               {{ rondomProduct["short_title"] }}
             </p>
-            <span class="" v-if="rondomProduct.offer.length !=0">
+            <span class="" v-if="rondomProduct.offer && rondomProduct.offer.length !=0">
               <span class="product-price price-color">
                 {{(rondomProduct.price.value  - rondomProduct.offer.value).toFixed(2)}}{{rondomProduct.price.currency}}
               </span>
