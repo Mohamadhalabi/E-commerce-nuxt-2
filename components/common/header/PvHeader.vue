@@ -697,10 +697,6 @@ export default {
 .login-register{
   font-size: 13px;
 }
-.account-list{
-  font-size:16px;
-  padding:5px;
-}
 @media screen and (min-width: 993px){
   .logo-image{
     width: 450px
