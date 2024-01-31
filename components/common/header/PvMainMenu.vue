@@ -549,8 +549,8 @@ export default {
 }
 @media screen and (max-width: 1300px){
   .sub-menu-cars{
-    width: 76px!important;
-    height: 76px!important;
+    width: 60px!important;
+    height: 60px!important;
   }
   li.sub-menu-items{
     width: 95px!important;
