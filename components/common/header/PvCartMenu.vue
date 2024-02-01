@@ -123,21 +123,27 @@
               </div>
             </div>
               <div class="dropdown-cart-action">
-              <nuxt-link :to="getLink('/cart')">
+              <nuxt-link
+                @click.native="hideCartMenu"
+                :to="getLink('/cart')">
                 <base-button-icon-1
                   class="py-3 my-1 w-100 view-cart-button"
                   :outline="true"
                   >{{ $t("header.view_cart") }}</base-button-icon-1
                 >
               </nuxt-link>
-              <nuxt-link v-if="isAuthenticated" :to="getLink('/checkout')">
+              <nuxt-link
+                @click.native="hideCartMenu"
+                v-if="isAuthenticated" :to="getLink('/checkout')">
                 <base-button-icon-1
                   class="w-100 py-3 mt-1 checkout-button"
                   :outline="true">
                   {{ $t("header.checkout") }}</base-button-icon-1>
               </nuxt-link>
 
-              <nuxt-link v-else :to="getLink('/auth/login')">
+              <nuxt-link
+                @click.native="hideCartMenu"
+                v-else :to="getLink('/auth/login')">
                  <base-button-icon1
                   :outline="true"
                   class="w-100 py-3 mt-1 checkout-button"
