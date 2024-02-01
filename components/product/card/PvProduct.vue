@@ -57,7 +57,7 @@
         <div class="col-lg-12 text-center mt-1 product-short-title mb-1 mb-lg-1 mb-md-0 mb-1 mb-xl-0">
           <div>
             <nuxt-link :to="getLink('/products/'+product.slug)">
-             <h2 class="product-h2">{{ truncateTitle(product.short_title, 50) }}</h2>
+             <h2 class="product-h2">{{ truncateTitle(product.title, 75) }}</h2>
             </nuxt-link>
           </div>
         </div>
@@ -173,11 +173,12 @@ export default {
         return `/${this.getLang}${route}`; // Include the language parameter
       }
     },
-    truncateTitle(title, limit) {
-      if (title.length > limit) {
-        return title.slice(0, limit);
+    truncateTitle(title, maxLength) {
+      if (title.length > maxLength) {
+        return title.slice(0, maxLength) + '...';
+      } else {
+        return title;
       }
-      return title;
     },
     handleWhatsAppClick(product) {
       this.goToWhatsApp(product);
