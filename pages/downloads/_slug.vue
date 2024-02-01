@@ -358,12 +358,13 @@
 import Api from "~/api";
 import PvMedia from "~/components/downloads/PvMedia.vue";
 import { baseSlider3 } from "~/utils/data/carousel";
+import PvBtnShare from "~/components/common/PvBtnShare.vue";
 
 export default {
   components: {
+    PvBtnShare,
     // PvVideoPlayer,
     PvMedia,
-    PvBtnShare: () => import("~/components/common/PvBtnShare.vue"),
   },
   async asyncData({ params }) {
     const { data } = await Api.get(`downloads/${params.slug}`)

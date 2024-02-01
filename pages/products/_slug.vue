@@ -28,11 +28,9 @@
             {{ product.short_title }}
           </li>
         </ol>
-<!--        <div class="mt-auto">-->
-<!--          <client-only>-->
-<!--            <PvBtnShare :url="urlLink" />-->
-<!--          </client-only>-->
-<!--        </div>-->
+        <div class="mt-auto">
+          <PvBtnShare  />
+        </div>
       </nav>
       <div class="product-single-container container product-single-default">
         <div v-if="product" class="row">
@@ -112,9 +110,11 @@ import PvNewArrival from "~/components/home/PvNewArrival.vue";
 import PvTopSellingThreeProducts from "~/components/home/PvTopSellingThreeProducts.vue";
 import PvOnSaleProducts from "~/components/home/PvOnSaleProducts.vue";
 import {scrollTopHandler} from "~/utils";
+import PvBtnShare from "~/components/common/PvBtnShare.vue";
 
 export default {
   components: {
+    PvBtnShare,
     PvOnSaleProducts,
     PvTopSellingThreeProducts,
     PvNewArrival,
