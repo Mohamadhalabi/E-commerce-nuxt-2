@@ -587,6 +587,10 @@ export default function(req, res, next) {
       from:"/download-files.php?device=HTProg",
       to:"/downloads/HTProg",
     },
+    {
+      from:"/download-files.php?device=vvdi-mb",
+      to:"/downloads/xhorse-vvdi-mb"
+    }
 
 
 
