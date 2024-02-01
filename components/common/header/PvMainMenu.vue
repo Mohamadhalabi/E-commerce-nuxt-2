@@ -467,11 +467,11 @@ export default {
     top: 85%;
   }
 }
-@media screen and (max-width: 1200px)
+@media screen and (max-width: 1300px)
 {
   .brand-name{
     padding: 0;
-    top: 85%;
+    top: 90%;
     font-size: 8px;
   }
 }
@@ -497,10 +497,6 @@ export default {
 
 .logo-item:hover img {
   transform: scale(0.8)!important;
-}
-
-.logo-item .brand-name span {
-  opacity: 1;
 }
 
 .logo-item .brand-name span {
