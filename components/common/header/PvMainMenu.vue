@@ -75,7 +75,7 @@
 <!--      Keys And remotes menu -->
       <li class="left-menu-items" @mouseover="getKeysAndRemotes()">
         <nuxt-link
-          :to="getLink('/key-remote')"
+          :to="getLink('')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
           <span class="header-main-menu">
             {{ $t("header.keysAndRemote") }} <span class="hoverable">&#x025BE;</span>
@@ -110,7 +110,7 @@
 <!--      Accessoires and tools -->
       <li class="left-menu-items" @mouseover="getAccessoriesAndTools()">
         <nuxt-link
-          :to="getLink('/accessories-tools')"
+          :to="getLink('')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
           <span class="header-main-menu">
             {{ $t("header.AccessoriesAndTools") }} <span class="hoverable">&#x025BE;</span>
@@ -146,7 +146,7 @@
       <li class="left-menu-items"
           @mouseover="getDevicesAndMachines()">
         <nuxt-link
-          :to="getLink('/device-machines')"
+          :to="getLink('')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
           <span class="header-main-menu">
             {{ $t("header.DeviceAndMachine") }} <span class="hoverable">&#x025BE;</span>
