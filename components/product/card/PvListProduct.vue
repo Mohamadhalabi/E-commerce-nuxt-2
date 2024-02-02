@@ -226,9 +226,6 @@ export default {
   bottom: 0px;
 }
 
-.card-main-wrapper {
-  overflow: hidden;
-}
 
 
 /* .products-default {

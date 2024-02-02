@@ -19,6 +19,7 @@
         :product="product"
         class="swiper-slide"
         data-swiper-autoplay="5000"
+        :isIndexPage="isIndexPage"
       />
     </pv-carousel>
   </div>
