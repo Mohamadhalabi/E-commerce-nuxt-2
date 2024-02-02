@@ -162,9 +162,6 @@ export default {
   z-index: 1;
   margin: 0px !important;
 }
-.card-main-wrapper {
-  overflow: hidden;
-}
 
 .rounded-10 {
   border-radius: 10px;

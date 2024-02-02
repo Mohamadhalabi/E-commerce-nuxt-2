@@ -1,7 +1,6 @@
 <template>
   <div class="price-box" :class="{ 'text-center': additionalProductItems }">
     <template v-if="product.discount && product.discount.length !=0">
-      {{product.discount.length}}
       <span
         v-if="product.discount.type =='fixed'"
         :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
@@ -44,7 +43,7 @@
       </span>
     </template>
     <template v-else>
-      <span class="product-price price-color mb-2"
+      <span class="product-price price-color mb-1"
             :class="{ 'highlighted': hasDuplicate(product.price.value), 'homePageSearch': homePageSearch === true }"
       >
         {{ product.price.currency + product.price.value }}

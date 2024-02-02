@@ -36,7 +36,9 @@
       </div>
     </figure>
 
-    <div class="position-relative px-3 py-1 d-flex flex-column product-card-information">
+    <div class="position-relative px-3 py-1 d-flex flex-column"
+         :class="{'product-card-information' : !isIndexPage, 'product-card-information-index' : isIndexPage}"
+    >
       <div class="row">
         <div class="col-lg-12 text-center">
           <div class="sku-color">SKU:{{ product.sku }}</div>
@@ -54,14 +56,17 @@
             </nuxt-link>
           </div>
         </div>
-        <div class="col-lg-12 text-center mt-1 product-short-title mb-1 mb-lg-1 mb-md-0 mb-1 mb-xl-0">
+        <div class="col-lg-12 text-center mt-1 product-short-title"
+             :class="{'product-short-title-index': isIndexPage, 'product-short-title': !isIndexPage }"
+        >
           <div>
             <nuxt-link :to="getLink('/products/'+product.slug)">
-             <h2 class="product-h2">{{ truncateTitle(product.title, 75) }}</h2>
+             <h2 class="product-h2 mb-0">{{ truncateTitle(product.title, 75) }}</h2>
             </nuxt-link>
           </div>
         </div>
-        <div class="col-lg-12 text-center mt-lg-1 mt-4 mt-md-1 mt-sm-2 mt-xl-2">
+<!--        col-lg-12 text-center mt-lg-1 mt-4 mt-md-1 mt-sm-2 mt-xl-2-->
+        <div class="col-lg-12">
           <pv-price-box
             class="m-0"
             v-if="product.hide_price == 0"
@@ -163,6 +168,7 @@ export default {
   },
   props: {
     product: Object,
+    isIndexPage: Boolean,
   },
   methods: {
     ...mapActions("shop", ["addToCart"]),
@@ -225,15 +231,8 @@ export default {
   bottom: 0px;
 }
 
-.card-main-wrapper {
-  overflow: hidden;
-}
-
 .rounded-10 {
   border-radius: 10px;
-}
-
-.product-default {
 }
 
 .position-relative .category-list a {
@@ -256,12 +255,12 @@ export default {
   text-decoration: underline;
 
 }
-.product-card-information{
+.product-card-information, .product-card-information-index{
   height: 180px;
 }
 .product-short-title{
   font-weight: 900;
-  height: 50px;
+  height: 70px;
 }
 .product-short-title:hover{
   text-decoration: underline;
@@ -279,68 +278,90 @@ export default {
   box-shadow: 0px 1px 2px #2ba968;
 }
 .product-h2{
-  font-size: 14px;
+  font-size: 13px;
+
+}
+
+@media screen and (max-width: 1435px) and (min-width: 1200px){
+  .product-card-information{
+    height: 200px;
+  }
+  .category-name{
+    height: 40px;
+  }
+  .product-short-title{
+    height: 85px;
+  }
 }
 
 @media screen and (max-width: 767px)
 {
-  .category-name {
-    height: 20px!important;
-  }
   .product-short-title{
-    height: 55px;
+    height: 90px;
   }
   .product-card-information{
     height: 180px;
+  }
+  .category-name{
+    height: 20px;
   }
 }
 
 @media screen and (max-width: 575px){
   .category-name {
-    height: 10px!important;
-  }
-  .product-short-title{
-    height: 20px;
-  }
-  .product-card-information{
-    height: 140px;
-  }
-}
-
-@media screen and (max-width: 450px){
-  .category-name{
     height: 20px!important;
   }
-  .product-card-information{
-    height: 180px;
-  }
   .product-short-title{
-    height: 40px;
+    height: 80px;
+  }
+  .product-card-information{
+    height: 160px;
   }
 }
 
 @media screen and (max-width: 400px){
-  .product-short-title{
-    height: 60px;
-  }
-
   .product-card-information{
+    height: 180px;
+  }
+  .product-short-title{
+    height: 100px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .product-short-title-index {
+    height: 100px!important;
+  }
+  .product-card-information-index{
     height: 200px;
   }
 }
 
+@media screen and (max-width: 400px) {
+  .product-short-title-index {
+    height: 135px!important;
+  }
+  .product-card-information-index{
+    height: 225px;
+  }
+}
+
 @media screen and (max-width: 350px){
-  .product-card-information{
-    height: 160px;
-  }
-  .product-short-title{
-    height: 25px;
-  }
-  .category-name{
+  .category-name {
     height: 10px!important;
   }
+  .product-card-information{
+    height: 140px;
+  }
+  .product-short-title{
+    height: 70px!important;
+  }
+  .product-card-information-index{
+    height: 160px;
+  }
+  .product-short-title-index{
+    height: 80px!important;
+  }
 }
-.product-short-title-index{
-  display: none;
-}
+
 </style>
