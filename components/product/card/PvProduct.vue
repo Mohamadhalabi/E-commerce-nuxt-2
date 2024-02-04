@@ -262,6 +262,9 @@ export default {
   font-weight: 900;
   height: 70px;
 }
+.product-short-title-index{
+  height: 80px;
+}
 .product-short-title:hover{
   text-decoration: underline;
 }
@@ -286,11 +289,32 @@ export default {
   .product-card-information{
     height: 200px;
   }
+  .product-card-information-index{
+    height: 200px;
+  }
   .category-name{
     height: 40px;
   }
   .product-short-title{
     height: 85px;
+  }
+}
+
+@media screen and (max-width: 1200px){
+  .product-card-information-index{
+    height: 180px;
+  }
+  .product-short-title-index{
+    height: 80px;
+  }
+}
+
+@media screen and (max-width: 993px){
+  .product-card-information-index{
+    height: 180px;
+  }
+  .product-short-title-index{
+    height: 80px;
   }
 }
 
@@ -330,7 +354,7 @@ export default {
 
 @media screen and (max-width: 500px) {
   .product-short-title-index {
-    height: 100px!important;
+    height: 110px!important;
   }
   .product-card-information-index{
     height: 200px;
