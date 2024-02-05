@@ -19,6 +19,9 @@
               >
                 {{ attributeValue + (j === product.attributes[attributeName].length - 1 ? '' : ', ') }}
               </span>
+            <span v-if="attributeName == 'weight'">
+              {{product.weight}} KG
+            </span>
           </td>
         </tr>
         </tbody>
@@ -50,6 +53,20 @@ export default {
       const result = [];
       for (let i = 0; i < this.attributeNames.length; i += this.groupSize) {
         result.push(this.attributeNames.slice(i, i + this.groupSize));
+      }
+      // console.log(this.groupSize)
+      if(result[1] && result[1].length) {
+        let FirstTable = result[0].length;
+        let SecondTable = result[1].length;
+        if (FirstTable - SecondTable === 1) {
+          console.log(true)
+          result[1].push("weight")
+        } else {
+          result[0].push("weight")
+        }
+      }
+      else{
+        result[0].push("weight")
       }
       return result;
     },

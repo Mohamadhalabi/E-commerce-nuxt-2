@@ -1,59 +1,74 @@
 <template>
   <div :class="{ 'text-right': getIsAr }">
-      <div v-if="product.accessories && !isEmpty(product.accessories)">
-        <h3 class="additional-product-items mb-lg-3">{{ $t("products.Accessories") }}</h3>
-        <table class="table table-bordered table-spacing">
-          <tr>
-            <td>
-              <div
-                v-for="item in product.accessories"
-                :key="item.sku"
-                class="col-lg-12 col-md-12 col-sm-12"
-              >
-                <pv-product-row :product="item" />
-              </div>
-            </td>
-          </tr>
-          <br>
-        </table>
-      </div>
+    <div v-if="product.accessories && !isEmpty(product.accessories)">
+      <h3 class="additional-product-items mb-lg-3">{{ $t("products.Accessories") }}</h3>
+      <table class="table table-bordered table-spacing">
+        <tr>
+          <td>
+            <div
+              v-for="item in product.accessories"
+              :key="item.sku"
+              class="col-lg-12 col-md-12 col-sm-12"
+            >
+              <pv-product-row :product="item" />
+            </div>
+          </td>
+        </tr>
+        <br>
+      </table>
+    </div>
 
-      <div v-if="product.compatible_with && !isEmpty(product.compatible_with)">
-        <h3 class="additional-product-items mb-lg-3">{{ $t("products.CompatibleWith") }}</h3>
-        <table class="table table-bordered table-spacing">
-          <tr>
-            <td>
-              <div
-                v-for="item in product.compatible_with"
-                :key="item.sku"
-                class="col-lg-12 col-md-12 col-sm-12">
-                <pv-product-row :product="item" />
-              </div>
-            </td>
-          </tr>
-          <br>
-        </table>
-      </div>
+    <div v-if="product.work_with_blade && !isEmpty(product.work_with_blade)">
+      <h3 class="additional-product-items mb-lg-3">{{ $t("products.Accessories") }}</h3>
+      <table class="table table-bordered table-spacing">
+        <tr>
+          <td>
+            <div
+              v-for="item in product.work_with_blade"
+              :key="item.sku"
+              class="col-lg-12 col-md-12 col-sm-12"
+            >
+              <pv-product-row :product="item" />
+            </div>
+          </td>
+        </tr>
+        <br>
+      </table>
+    </div>
 
-      <div v-if="product.bundled.length > 0">
-        <h3 class="additional-product-items mb-lg-3">{{ $t("products.BundleProducts") }}</h3>
-        <table class="table table-bordered table-spacing">
-          <tr>
-            <td>
-              <div
-                v-for="item in product.bundled"
-                :key="item.sku"
-                class="col-lg-12 col-md-12 col-sm-12">
-                <pv-product-bundel :product="item" />
-              </div>
-            </td>
-          </tr>
-          <br>
-        </table>
-      </div>
-
-
-      <div v-if="product.attributes && !isEmpty(product.attributes)">
+    <div v-if="product.compatible_with && !isEmpty(product.compatible_with)">
+      <h3 class="additional-product-items mb-lg-3">{{ $t("products.CompatibleWith") }}</h3>
+      <table class="table table-bordered table-spacing">
+        <tr>
+          <td>
+            <div
+              v-for="item in product.compatible_with"
+              :key="item.sku"
+              class="col-lg-12 col-md-12 col-sm-12">
+              <pv-product-row :product="item" />
+            </div>
+          </td>
+        </tr>
+        <br>
+      </table>
+    </div>
+    <div v-if="product.bundled.length > 0">
+      <h3 class="additional-product-items mb-lg-3">{{ $t("products.BundleProducts") }}</h3>
+      <table class="table table-bordered table-spacing">
+        <tr>
+          <td>
+            <div
+              v-for="item in product.bundled"
+              :key="item.sku"
+              class="col-lg-12 col-md-12 col-sm-12">
+              <pv-product-bundel :product="item" />
+            </div>
+          </td>
+        </tr>
+        <br>
+      </table>
+    </div>
+    <div v-if="product.attributes && !isEmpty(product.attributes)">
       <h3 class="additional-product-items">{{ $t("products.Attributes") }}</h3>
       <div class="col-12 p-0">
         <no-ssr>
