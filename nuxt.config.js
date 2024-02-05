@@ -369,7 +369,7 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    analyze: true,
+    analyze: false,
     minifyCSS: true,
     minifyJS: true,
     html: {
