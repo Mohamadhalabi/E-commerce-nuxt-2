@@ -3,10 +3,13 @@
     <div class="row">
       <div class="col-lg-12 additional-product-items d-flex">
         <h3 class="m-0 home-page-title">
-          <span>
+          <span v-if="!UrlLink.includes('undefined')">
             <nuxt-link :to="UrlLink">
               {{ title }}
             </nuxt-link>
+          </span>
+          <span v-else>
+            {{ title }}
           </span>
         </h3>
       </div>
