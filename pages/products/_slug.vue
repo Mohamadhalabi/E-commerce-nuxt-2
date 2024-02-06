@@ -61,6 +61,12 @@
           class="container"
         />
       </div>
+      <pv-collection
+        v-if="product.work_with_blade.length > 0"
+        :products="product.work_with_blade"
+        :collection-title="'Works with this blade'"
+        class="container"
+      />
 
       <pv-collection
         :products="related_products"
