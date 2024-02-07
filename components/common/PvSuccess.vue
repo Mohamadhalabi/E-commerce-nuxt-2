@@ -10,8 +10,22 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
-  
+  computed:{
+    ...mapGetters("auth", ["isAuthenticated","StateUser"]),
+  },
+  methods:{
+    ...mapActions("shop", ["removeFromCart", "getCartList", "changeQuantity", "clearCart"]),
+  },
+  mounted() {
+    setTimeout(() => {
+      let StateUser = this.StateUser;
+      this.clearCart({StateUser});
+    }, 2000);
+  }
+
 };
 </script>
 
