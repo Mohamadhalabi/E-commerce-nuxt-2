@@ -17,7 +17,7 @@ export default {
     ...mapGetters("auth", ["isAuthenticated","StateUser"]),
   },
   methods:{
-    ...mapActions("shop", ["removeFromCart", "getCartList", "changeQuantity", "clearCart"]),
+    ...mapActions("shop", [ "getCartList", "clearCart"]),
   },
   mounted() {
     setTimeout(() => {
