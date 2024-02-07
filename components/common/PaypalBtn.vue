@@ -19,8 +19,13 @@
 
 <script>
 import Api from '~/api';
+import {mapActions, mapGetters} from "vuex";
 
 export default {
+  computed:{
+    ...mapGetters("auth", ["isAuthenticated","StateUser"]),
+  },
+
   props: {
     is_uae:{
       type: Boolean,
@@ -95,6 +100,7 @@ export default {
     this.init();
   },
   methods: {
+    ...mapActions("shop", [ "getCartList", "clearCart"]),
     init() {
       function loadScript(url, callback) {
         const el = document.querySelector(`script[src="${url}"]`);
@@ -174,6 +180,10 @@ export default {
 
       };
       Api.post('/user/orders/paypal/response', dataForm).then((res) => {
+        setTimeout(() => {
+          let StateUser = this.StateUser;
+          this.clearCart({StateUser});
+        }, 2000);
         this.$router.push({path: '/account?tab=orders'});
         this.$notify({
           group: 'custom-notify',
