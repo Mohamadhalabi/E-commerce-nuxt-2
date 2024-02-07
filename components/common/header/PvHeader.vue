@@ -143,27 +143,13 @@
                   </a>
                 </span>
               </div>
-              <nuxt-link :to="getLink('/auth/login')" class="header-icon mx-2 desktop-only" v-if="!isAuthenticated">
-                <div class="header-user">
-                  <i class="fa fa-user" />
-                  <div
-                    class="header-userinfo d-none d-lg-block"
-                    :class="getIsAr ? 'text-right' : ''">
-                    <span class="d-inline-block font2 line-height-1">
-                      {{ $t("header.welcome") }}
-                    </span>
-                    <p class="mb-0 font-weight-bold login-register">
-                      {{ $t("header.login") }}
-                    </p>
-                  </div>
-                </div>
-              </nuxt-link>
+              <no-ssr>
+                <PvLoggedIn />
+              </no-ssr>
+              <no-ssr>
+                <PvAuth />
+              </no-ssr>
 
-              <div v-else>
-                <no-ssr>
-                  <PvAuth />
-                </no-ssr>
-              </div>
 
 <!--              <nuxt-link v-else :to="getLink('/account')" class="header-icon desktop-only">-->
 <!--                <div class="header-user">-->
@@ -406,8 +392,10 @@ import api from "~/api";
 import img from "~/static/images/blank.png";
 import Api from "~/api";
 import PvAuth from "~/components/common/header/PvAuth.vue";
+import PvLoggedIn from "~/components/common/header/PvLoggedIn.vue";
 export default {
   components: {
+    PvLoggedIn,
     PvAuth,
     PvMainMenu,
     PvCartMenu,

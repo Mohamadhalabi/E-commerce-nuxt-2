@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link  :to="getLink('/account')" class="header-icon desktop-only">
+  <nuxt-link  :to="getLink('/account')" class="header-icon desktop-only" v-if="isAuthenticated">
     <div class="header-user">
       <i
         class=""
