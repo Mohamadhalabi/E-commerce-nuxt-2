@@ -133,6 +133,7 @@ export const mutations = {
     state.token = null;
     localStorage.removeItem('card');
     localStorage.removeItem('tlkeys');
+    localStorage.clear();
     delete Api.defaults.headers.common['Authorization'];
   },
 };
