@@ -39,6 +39,37 @@
         </nuxt-link>
       </div>
       <hr class="mt-0 mb-0 dashed">
+      <div @click="closeAllNav()">
+        <nuxt-link :to="getLink('/cart')">
+          <li class="menu-list-items mb-0">
+            Cart
+            <i class="sicon-bag" style="float: inline-end" />
+          </li>
+        </nuxt-link>
+      </div>
+
+      <hr class="mt-0 mb-0 dashed">
+      <div @click="closeAllNav()">
+        <nuxt-link :to="getLink('/compares')">
+          <li class="menu-list-items mb-0">
+            Compares
+            <i class="sicon-shuffle" style="float: inline-end" @click="goToCompares" />
+          </li>
+        </nuxt-link>
+      </div>
+
+      <hr class="mt-0 mb-0 dashed">
+      <div @click="closeAllNav()">
+        <nuxt-link :to="getLink('/wishlist')">
+          <li class="menu-list-items mb-0">
+            Wishlist
+            <i class="sicon-heart" style="float: inline-end;" />
+
+          </li>
+        </nuxt-link>
+      </div>
+
+      <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
           <p
             @click="KeyRemoteMenu(),getKeysAndRemotes()"
