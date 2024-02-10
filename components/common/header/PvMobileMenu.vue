@@ -130,7 +130,6 @@
 </template>
 
 <script>
-import PvSocialIcons from "~/components/common/PvSocialIcons";
 import PvMainMenuMonile from "~/components/common/PvMainMenuMonile";
 import BaseButtonIcon1 from "../BaseButtonIcon1.vue";
 import PvPriceBox from "~/components/product/partials/PvPriceBox.vue";
@@ -138,7 +137,6 @@ import Api from "~/api";
 
 export default {
   components: {
-    PvSocialIcons,
     PvMainMenuMonile,
     PvPriceBox,
     BaseButtonIcon1,
