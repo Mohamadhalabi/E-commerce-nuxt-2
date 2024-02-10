@@ -27,19 +27,6 @@
                     </ul>
                   </div>
                 </div>
-                <!--                <div class="header-dropdown m-0" style="margin-top: 3px!important;">-->
-                <!--                  <a class="header-icons" href="javascript:;">{{currentLocale.shortName}}</a>-->
-                <!--                  <div class="header-menu">-->
-                <!--                    <ul>-->
-                <!--                      <li-->
-                <!--                        v-for="locale in availableLocales"-->
-                <!--                        :key="locale"-->
-                <!--                        @click="setLocale(locale[0])">-->
-                <!--                        <a href="javascript:;" class="text-uppercase">{{ locale[0]}}</a>-->
-                <!--                      </li>-->
-                <!--                    </ul>-->
-                <!--                  </div>-->
-                <!--                </div>-->
                 <div class="header-about-contact">
                   <nuxt-link :to="getLink('/about')">
                     {{ $t("header.about") }}
