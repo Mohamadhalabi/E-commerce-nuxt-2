@@ -12,7 +12,7 @@
                 sizes="lg:400px"
                 alt="techno lock offer" src="/images/offers/best-deals-of-the-week.webp" loading="lazy" />
             </div>
-            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-lg-end justify-content-md-center justify-content-sm-center currency-language ">
+            <div class="col-12 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-lg-end justify-content-md-center justify-content-sm-center currency-language ">
               <div class="d-flex align-items-center">
                 <div class="header-dropdown m-0" style="margin-top: 3px!important;">
                   <a class="header-icons" href="javascript:;">{{ currency }}</a>
@@ -197,7 +197,7 @@
 
 
 
-              <div class="desktop-only">
+              <div class="d-flex">
                 <a
                   class="header-icon position-relative mx-2 cursor-pointer"
                   title="wishlist"
