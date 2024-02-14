@@ -590,8 +590,11 @@ export default function(req, res, next) {
     {
       from:"/download-files.php?device=vvdi-mb",
       to:"/downloads/xhorse-vvdi-mb"
+    },
+    {
+      from:"/products/Chevrolet-2017-Proximity-Flip-Key-5B-433mhz-Aftermarket-Bran-33079",
+      to:"/products/Chevrolet-2017-Proximity-Flip-Key-13531362-5B-433mhz-33079"
     }
-
 
 
 
