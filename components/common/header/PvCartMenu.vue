@@ -6,7 +6,7 @@
         class="dropdown-toggle cart-toggle"
         role="button"
         @click="showCartMenu">
-        <i class="sicon-bag" />
+        <i class="fa fa-shopping-cart"  />
         <span class="cart-count badge-circle">{{ cartCount }}</span>
       </a>
       <div class="cart-overlay" @click="hideCartMenu" />
