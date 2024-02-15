@@ -189,7 +189,7 @@
                   class="header-icon position-relative mx-2 cursor-pointer"
                   title="wishlist"
                 >
-                  <i class="sicon-heart" @click="goToWishlist" />
+                  <i class="fa fa-heart" @click="goToWishlist" />
                   <span class="cart-count badge-circle">{{getWishlistCounts}}</span>
                 </a>
 
@@ -297,7 +297,7 @@
                 class="header-icon position-relative m-auto mt-1 ml-lg-3 cursor-pointer"
                 title="wishlist"
               >
-                <i class="sicon-heart" @click="goToWishlist" />
+                <i class="fa fa-heart" @click="goToWishlist" />
                 <span class="cart-count badge-circle">{{
                     getWishlistCounts
                   }}</span>
