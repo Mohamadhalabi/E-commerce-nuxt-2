@@ -384,7 +384,7 @@
 
                       <base-button-icon-1
                         v-if="
-                    dataForm.payment_method == 'ccavenue' ||
+                    dataForm.payment_method == 'stripe_link_online' ||
                     dataForm.payment_method == 'transfer'
                   "
                         class="py-4 w-100"
@@ -528,7 +528,7 @@ export default {
       typeForm: "add",
       dataForm: {
         address: "",
-        payment_method: "ccavenue",
+        payment_method: "stripe_link_online",
         card_name: "",
         card_id: "",
         card_exp_month: "",
@@ -652,7 +652,7 @@ export default {
       this.clickedCardIndex = index;
 
       if(this.clickedCardIndex === 1){
-        this.dataForm.payment_method = "ccavenue"
+        this.dataForm.payment_method = "stripe_link_online"
       }
       else if(this.clickedCardIndex === 2){
         this.dataForm.payment_method ="paypal"
@@ -741,8 +741,9 @@ export default {
             this.loadingOrder = true;
             Api.post("/user/orders/create", this.dataForm)
               .then((response) => {
-                if (this.dataForm.payment_method == 'ccavenue') {
-                  location.href = "https://dev-srv.tlkeys.com/online-order?order_id=" + response.data.data.order.order_id + "&amount=" + response.data.data.payment.amount
+                console.log(response.data.data.payment.stripe_url)
+                if (this.dataForm.payment_method == 'stripe_link_online') {
+                  location.href = response.data.data.payment.stripe_url
                 } else {
                   this.$router.push({
                     path: "/complete-order",
