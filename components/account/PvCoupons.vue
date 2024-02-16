@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="account-sub-title  d-md-block mt-0 pt-1 ml-1">
-      <i class="orange-1 sicon-tag align-middle mx-2 pr-1" />{{
+      {{
         $t("account.coupons")
       }}
     </h3>
@@ -29,9 +29,9 @@
       </div>
     </div>
 
-   
 
-   
+
+
   </div> -->
 
     <section v-if="coupons.length != 0" id="labels">
@@ -56,7 +56,7 @@
             class="dl py-5 bg-light rounded-5 shadow position-relative"
           >
             <div class="brand mt-2 text-center">
-             
+
               <h2>{{ coupon.coupon_type }}</h2>
             </div>
 
@@ -107,7 +107,7 @@
             <div
               class="border mt-1 rounded-5 mx-3 bg-white py-3 px-4 d-flex align-items-center justify-content-between"
             >
-            
+
               <!-- <h5 class="mb-0">
                 {{ coupon.coupon_code }}
               </h5> -->
@@ -191,8 +191,8 @@ export default {
       loadingOrders: false,
       coupons: [],
       isEmpty,
-      
-      
+
+
     };
   },
 

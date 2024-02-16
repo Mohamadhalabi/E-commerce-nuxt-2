@@ -186,7 +186,7 @@
 
               <div class="d-flex">
                 <a
-                  class="header-icon position-relative mx-2 cursor-pointer"
+                  class="header-icon position-relative mx-2 cursor-pointer mt-auto mb-auto"
                   title="wishlist"
                 >
                   <i class="fa fa-heart" @click="goToWishlist" />
@@ -194,13 +194,13 @@
                 </a>
 
                 <a
-                  class="header-icon position-relative ComparesBtn mx-2 cursor-pointer"
+                  class="header-icon position-relative ComparesBtn mx-2 cursor-pointer mt-auto mb-auto"
                   title="Compares">
-                  <i class="sicon-shuffle" @click="goToCompares" />
+                  <i class="fa fa-shuffle" @click="goToCompares" />
                   <span class="cart-count badge-circle">{{ getCounts }}</span>
                 </a>
 
-                <a class="mx-2 cursor-pointer">
+                <a class="mx-2 cursor-pointer mt-auto mb-auto">
                   <pv-cart-menu />
                 </a>
               </div>
@@ -305,7 +305,7 @@
               <a
                 class="header-icon position-relative ComparesBtn m-auto mt-1 ml-lg-3 cursor-pointer"
                 title="Compares">
-                <i class="sicon-shuffle" @click="goToCompares" />
+                <i class="fa fa-shuffle" @click="goToCompares" />
                 <span class="cart-count badge-circle">{{ getCounts }}</span>
               </a>
               <a class="m-auto mt-1 ml-lg-3 cursor-pointer">

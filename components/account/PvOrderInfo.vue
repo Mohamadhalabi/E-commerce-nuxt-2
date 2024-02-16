@@ -219,102 +219,61 @@
                 <div
                   v-for="(product, index) in order_products"
                   :key="product.id"
-                  :class="
-                    index == order_products.length - 1 && (index + 1) & (2 != 0)
-                      ? 'col-12 '
-                      : 'col-6'
-                  "
+                  class="col-12"
                 >
                   <div
                     style="border: 1px solid #dbe3e5; border-radius: 5px"
                     class="p-2 mb-2"
                   >
                     <div v-if="!product.brand" class="row px-2 py-2">
-                      <div
-                        :class="`${
-                          index == order_products.length - 1 &&
-                          (index + 1) & (2 != 0)
-                            ? 'col-md-2'
-                            : 'col-md-4'
-                        } border-0`"
-                      >
-                        <span
-                          style="cursor: pointer"
-                          @click="$router.push(`/products/${product.slug}`)"
-                        >
+                      <div class="col-2 m-auto">
+                        <nuxt-link :to="getLink(`/products/${product.slug}`)">
                           <img
                             loading="lazy"
                             :src="product.gallery[0]['l']['url']"
                             class="d-inline-block border-0 img-thumbnail"
                             width="100%"
                           />
-                        </span>
+                        </nuxt-link>
                       </div>
                       <div
-                        :class="
-                          index == product.length - 1 && (index + 1) & (2 != 0)
-                            ? 'col-md-10'
-                            : 'col-md-8'
-                        "
+                        class="col-10 m-auto"
                       >
-                        <h5
-                          v-if="product.short_title"
-                          style="cursor: pointer"
-                          class="m-0"
+                        <h4
+                          v-if="product.title"
+                          style="cursor: pointer;font-size: 18px"
                           @click="$router.push(`/products/${product.slug}`)"
                         >
-                          {{ product.short_title }}
-                        </h5>
-
-                        <b-badge
-                          v-if="product.quantity"
-                          pill
-                          variant="secondary"
-                        >
-                          {{ $t("orders.quantity") }} :
-                          {{ product.quantity }}
-                        </b-badge>
-                        <b-badge v-if="product.sku" pill variant="secondary">
+                          {{ product.title }}
+                        </h4>
+                        <p class="sku-color mb-0" style="font-size: 14px;">
                           {{ $t("products.sku") }} : {{ product.sku }}
-                        </b-badge>
-                        <div
-                          :class="{
+                        </p>
+                        <h6 v-if="product.price" class="mt-1 mb-0 price-color" style="font-size: 16px">
+                          {{ $t("products.PRICE") }} : {{ product.price.value }}
+                          {{ product.price.currency }}
+                        </h6>
+                        <p>
+                          <div
+                            :class="{
                             'category-list': wrapper,
                             'text-right': getIsAr,
                           }"
-                          :style="!wrapper ? 'display: inline-block;' : ''"
-                        >
-                          <nuxt-link
-                            id="categoryLink"
-                            :to="getLink('/'+product.categories[product.categories.length - 1].slug)"
+                            :style="!wrapper ? 'display: inline-block;' : ''"
                           >
-                            {{
-                              product.categories[product.categories.length - 1]
-                                .name
-                            }}
-                          </nuxt-link>
-                        </div>
-
-                        <ul
-                          v-for="(attr, indexAttr) in product.attributes"
-                          :key="indexAttr"
-                          v-if="product.attributes"
-                          class="m-0"
-                        >
-                          <li class="p-0">
-                            {{ indexAttr }} :
-                            <span
-                              v-for="(attribute, index) in attr"
-                              :key="index"
-                              v-if="attr"
-                            >{{ attribute }}</span
+                            <nuxt-link
+                              id="categoryLink"
+                              :to="getLink('/'+product.categories[product.categories.length - 1].slug)"
                             >
-                          </li>
-                        </ul>
-
-                        <h6 v-if="product.price" class="mb-0 text-warning mb-1">
-                          {{ $t("products.PRICE") }} : {{ product.price.value }}
-                          {{ product.price.currency }}
+                              <p class="m-0 font-weight-bold">
+                                {{ product.categories[product.categories.length - 1].name }}
+                              </p>
+                            </nuxt-link>
+                          </div>
+                        </p>
+                        <h6 v-if="product.quantity" class="m-0 mt-1">
+                          {{ $t("orders.quantity") }} :
+                          {{ product.quantity }}
                         </h6>
                         <h6
                           v-if="
@@ -333,46 +292,16 @@
                             :key="index"
                           />
                         </h6>
-
-                        <h6
-                          v-if="order.type == 'order' && product.brands[0]"
-                          class="mb-1"
-                        >
-                          {{
-                            `${product.brands[0]["brand"] || ""} ${
-                              product.brands[0]["model"] || ""
-                            }`
-                          }}
-                        </h6>
                         <h6 v-else-if="order.type == 'pin_code'" class="mb-1">
                           {{
                             `${product["brand"]} ${product["serial_number"]}`
                           }}
                         </h6>
-                        <div v-if="order.type == 'order'">
-                          <p v-if="product.brands[0]" class="text-warning">
-                            <span
-                              v-for="(year, ind) in product.brands[0]['years']"
-                              :key="ind"
-                            >{{ year }}
-                              <span
-                                v-if="
-                                  ind < product.brands[0]['years'].length - 1
-                                "
-                              >-
-                              </span>
-                            </span>
-                          </p>
-                        </div>
                       </div>
                     </div>
                     <div v-else class="px-2">
                       <div class="row">
                         <div class="col-6">
-                          <p class="mb-1">
-                            <b>{{ $t("orders.brand") }} : </b>
-                            <span>{{ product.brand }}</span>
-                          </p>
                           <p class="mb-1">
                             <b>{{ $t("orders.serialNumber") }} : </b>
                             <span>{{ product.serial_number }}</span>

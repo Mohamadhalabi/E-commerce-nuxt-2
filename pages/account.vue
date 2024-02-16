@@ -16,15 +16,15 @@
               <div class="from-demo-26 mb-3">
                 <div v-if="isAuthenticated" class="header-user">
                   <i :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">
-<!--                    <nuxt-img-->
-<!--                      format="webp"-->
-<!--                      v-if="StateUser.avatar"-->
-<!--                      :src="checkURL(StateUser.avatar)"-->
-<!--                      @error="defalutAvatar"-->
-<!--                      width="50"-->
-<!--                      height="50"-->
-<!--                      alt="Avatar"-->
-<!--                    />-->
+                    <nuxt-img
+                      format="webp"
+                      v-if="StateUser.avatar"
+                      :src="checkURL(StateUser.avatar)"
+                      @error="defalutAvatar"
+                      width="50"
+                      height="50"
+                      alt="Avatar"
+                    />
                   </i>
 
                   <div
@@ -406,9 +406,9 @@
             <div v-else-if="$route.query.tab == 'addresses'">
               <PvAddresses />
             </div>
-            <div v-else-if="$route.query.tab == 'cards'">
-              <PvCards />
-            </div>
+<!--            <div v-else-if="$route.query.tab == 'cards'">-->
+<!--              <PvCards />-->
+<!--            </div>-->
             <div v-else-if="$route.query.tab == 'change-password'">
               <PvChangePassword />
             </div>
@@ -460,7 +460,7 @@ export default {
     PvWallet: () => import("~/components/account/PvWallet"),
     PvCoupons: () => import("~/components/account/PvCoupons"),
     PvAddresses: () => import("~/components/account/PvAddresses"),
-    PvCards: () => import("~/components/account/PvCards"),
+    // PvCards: () => import("~/components/account/PvCards"),
     PvOrderInfo: () => import("~/components/account/PvOrderInfo"),
     PvCart: () => import("~/components/account/PvCart"),
     PvWashlist: () => import("~/components/account/PvWashlist"),
