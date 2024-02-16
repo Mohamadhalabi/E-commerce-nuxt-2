@@ -2,7 +2,6 @@
   <div>
     <div class="clearfix d-flex align-items-center justify-content-between">
       <h3 class="account-sub-title  d-md-block mt-0 pt-1 ml-1" v-if="checkout !=true">
-        <i class="orange-1 sicon-direction align-middle mx-2 pr-1" />
         {{ $t("account.address") }}
       </h3>
       <div v-if="addresses && !isEmpty(addresses)" class="address">

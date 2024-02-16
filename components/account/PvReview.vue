@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="d-flex align-items-center">
-      <i class="orange-1 sicon-bubble mx-3" style="color: #e7e7e6; font-size: 3rem" />
       <h3 class="account-sub-title d-md-block">
         {{ $t("review.your_review") }}
       </h3>

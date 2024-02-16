@@ -82,7 +82,7 @@ export default {
     '~/static/css/porto-icons.min.css',
     '~/static/css/steper.css',
     '~/static/vendor/fontawesome-free/css/all.min.css',
-    '~/static/vendor/simple-line-icons/css/simple-line-icons.min.css',
+    // '~/static/vendor/simple-line-icons/css/simple-line-icons.min.css',
     '~/static/sass/style.scss'
   ],
 

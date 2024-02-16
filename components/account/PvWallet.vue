@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="account-sub-title d-md-block mt-0 pt-1 ml-1">
-      <i class="orange-1 sicon-wallet align-middle mx-2" />{{ $t("account.wallet") }}
+      {{ $t("account.wallet") }}
     </h3>
     <div class="row">
       <div class="col-md-3 col-12">

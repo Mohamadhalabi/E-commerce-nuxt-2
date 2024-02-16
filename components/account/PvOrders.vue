@@ -1,7 +1,7 @@
 <template>
   <div class="order-content">
     <h3 class="account-sub-title d-md-block mt-0 pt-1 ml-1">
-      <i class="orange-1 sicon-basket align-middle mx-2 pr-1" />{{
+      {{
         $t("account.orders")
       }}
     </h3>

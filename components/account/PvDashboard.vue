@@ -20,7 +20,7 @@
             data-toggle="orders"
             @click.prevent="changeTab('orders')"
           >
-            <i class="sicon-basket" />
+            <i class="fa fa-cart-arrow-down" />
             <div class="feature-box-content">
               <h3>{{ $t("dashboard.orders") }}</h3>
             </div>
@@ -35,7 +35,7 @@
             data-toggle="wallet"
             @click.prevent="changeTab('wallet')"
           >
-            <i class="sicon-wallet" />
+            <i class="fa fa-money-bill" />
             <div class="feature-box-content">
               <h3>{{ $t("dashboard.wallet") }}</h3>
             </div>
@@ -50,7 +50,7 @@
             data-toggle="coupons"
             @click.prevent="changeTab('coupons')"
           >
-            <i class="sicon-tag" />
+            <i class="fa fa-percentage" />
             <div class="feature-box-content">
               <h3>{{ $t("coupon.coupons") }}</h3>
             </div>
@@ -65,7 +65,7 @@
             data-toggle="addresses"
             @click.prevent="changeTab('addresses')"
           >
-            <i class="sicon-direction" />
+            <i class="fa fa-address-card" />
             <div class="feature-box-content">
               <h3>{{ $t("dashboard.addresses") }}</h3>
             </div>
@@ -80,7 +80,7 @@
             data-toggle="account-details"
             @click.prevent="changeTab('account-details')"
           >
-            <i class="sicon-user" />
+            <i class="fa fa-info" />
             <div class="feature-box-content">
               <h3>{{ $t("account.account_details") }}</h3>
             </div>
@@ -95,7 +95,7 @@
             data-toggle="cart"
             @click.prevent="changeTab('cart')"
           >
-            <i class="sicon-bag" />
+            <i class="fa fa-shopping-cart" />
             <div class="feature-box-content">
               <h3>
                 Cart
@@ -113,7 +113,7 @@
             data-toggle="wishlist"
             @click.prevent="changeTab('wishlist')"
           >
-            <i class="sicon-heart" />
+            <i class="fa fa-heart" />
             <div class="feature-box-content">
               <h3>
                 {{ $t("account.wishlist") }}
@@ -127,7 +127,7 @@
       <div  v-if="isAuthenticated" class="col-6 col-md-4 col-xl-3">
         <a href="javascript:;" @click="LogOut">
           <div class="feature-box text-center pb-4">
-            <i class=" sicon-logout" />
+            <i class="fa fa-sign-out-alt" />
             <div class="feature-box-content">
               <h3>{{ $t("account.log_out") }}</h3>
             </div>
@@ -188,7 +188,7 @@ export default {
 
 <style scoped>
 #wrapper i{
-color: #ff6800 !important;
+  color: #535250!important;
 }
 .link-to-tab{
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);

@@ -19,7 +19,8 @@
       <h1 class="account-sub-title d-md-block mt-0 pt-1 ml-1 font-weight-bold mt-3">
         <i
           class="orange-1 fa fa-heart wishlist-empty align-middle mx-2 pr-1"
-        />{{ $t("wishlist.wishlist") }}
+        />
+        {{ $t("wishlist.wishlist") }}
       </h1>
       <div class="cart-message carted" style="display: none">
         <strong v-if="currentProduct" class="single-cart-notice">
