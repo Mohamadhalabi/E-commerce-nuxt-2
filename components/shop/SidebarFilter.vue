@@ -32,7 +32,8 @@
             {{ item.name }}
             <i
               @click="filterQuery({ slug: item.slug, type: item.group })"
-              class="mx-1 sicon-close pt-2 filter-close"
+              class="mx-1 fa fa-times-circle pt-2 filter-close"
+              style="margin-top: -5px"
             ></i>
           </li>
         </ul>
