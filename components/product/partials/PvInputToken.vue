@@ -11,10 +11,6 @@
             <i class="fa fa-exclamation-triangle"></i>
             {{ $t("products.after_receiving_payment") }}
           </li>
-          <li class="">
-            <i class="fa fa-exclamation-triangle"></i>
-            {{ $t("products.if_want_multi") }}
-          </li>
         </ul>
       </div>
       <div class="col-12 m-0">
