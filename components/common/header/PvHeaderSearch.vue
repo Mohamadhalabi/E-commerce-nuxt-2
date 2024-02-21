@@ -77,7 +77,7 @@
                     />
                     <div v-else class="w-100 float-right d-flex" style="justify-content: end">
                       <i
-                        class="fab fa-sm fa-whatsapp mx-1"
+                        class="fab fa-sm fa-whatsapp mx-1 m-auto"
                         style="font-size: 20px; color: rgb(43, 169, 104); cursor: pointer;"
                         @click="goToWhatsApp(product)"
                       />
