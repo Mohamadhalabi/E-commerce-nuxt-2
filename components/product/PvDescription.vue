@@ -49,7 +49,7 @@
         <br>
       </table>
     </div>
-    <div v-if="product.attributes && !isEmpty(product.attributes)">
+    <div v-if="product.attributes && !isEmpty(product.attributes) || (product.weight !== 0)">
       <h3 class="additional-product-items">{{ $t("products.Attributes") }}</h3>
       <div class="col-12 p-0">
         <no-ssr>

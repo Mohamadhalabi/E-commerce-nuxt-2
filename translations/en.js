@@ -573,7 +573,7 @@ export default
       reviewFor: 'Review For',
       reviewsFor: 'reviews For',
       serial_number_is_required: 'Serial Number Is Required .',
-      after_receiving_payment: 'After receiving payment notification and Serial Number we will send you the file with instructions.',
+      after_receiving_payment: 'After receiving the payment notification and Serial Number, we will promptly send you the file or an update notification.',
       if_want_multi: 'If You Want Multiple Files Send Serial Number For Each One Seperated With + .',
       bundled: 'Bundle',
       serial_number: 'Serial Number',

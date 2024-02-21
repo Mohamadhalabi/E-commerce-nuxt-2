@@ -51,22 +51,26 @@ export default {
     },
     groupedAttributeNames() {
       const result = [];
-      for (let i = 0; i < this.attributeNames.length; i += this.groupSize) {
-        result.push(this.attributeNames.slice(i, i + this.groupSize));
-      }
-      // console.log(this.groupSize)
-      if(result[1] && result[1].length) {
-        let FirstTable = result[0].length;
-        let SecondTable = result[1].length;
-        if (FirstTable - SecondTable === 1) {
-          console.log(true)
-          result[1].push("weight")
-        } else {
-          result[0].push("weight")
+      if (this.attributeNames.length > 0) {
+        for (let i = 0; i < this.attributeNames.length; i += this.groupSize) {
+          result.push(this.attributeNames.slice(i, i + this.groupSize));
         }
-      }
-      else{
-        result[0].push("weight")
+        // Check if there are groups in the result
+        if (result.length > 0) {
+          if (result[1] && result[1].length) {
+            let FirstTable = result[0].length;
+            let SecondTable = result[1].length;
+            if (FirstTable - SecondTable === 1) {
+              result[1].push("weight");
+            } else {
+              result[0].push("weight");
+            }
+          } else {
+            result[0].push("weight");
+          }
+        }
+      } else {
+        result[0] = ["weight"];
       }
       return result;
     },
@@ -80,8 +84,10 @@ export default {
   methods: {
     updateGroupedAttributeNames() {
       const result = [];
-      for (let i = 0; i < this.attributeNames.length; i += this.groupSize) {
-        result.push(this.attributeNames.slice(i, i + this.groupSize));
+      if(this.attributeNames.length > 0) {
+        for (let i = 0; i < this.attributeNames.length; i += this.groupSize) {
+          result.push(this.attributeNames.slice(i, i + this.groupSize));
+        }
       }
       return result;
     },
