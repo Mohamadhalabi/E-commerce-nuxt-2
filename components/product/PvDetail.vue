@@ -224,17 +224,9 @@
         {{ ProductStatus }}
       </b-alert>
     </div>
-
-
-    <div v-if="product.specifications.manufacturer && product.specifications.manufacturer =='TMPRO'">
-<!--      <label for="formFile" class="form-label">Upload a .ord file</label>-->
-<!--      <input class="d-flex" type="file" id="formFile">-->
-
-    </div>
-
-      <PvInputToken
-    :product="product"
-     v-if="product.has_token_input && !product.hide_price && product.specifications.manufacturer !='TMPRO'"/>
+    <PvInputToken
+      :product="product"
+      v-if="product.has_token_input && !product.hide_price"/>
   </div>
 </template>
 
