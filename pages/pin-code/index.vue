@@ -201,7 +201,6 @@ export default {
         let query = `?categories=pin-code&disply_type=categories&direction=desc&order-by=created_at&length=12`;
 
       Api.get(`search/product${query}`).then((response) => {
-        console.log(response)
         if (response.data.products.length > 0) {
 
           if (response.data.products[0]["category"]) {
