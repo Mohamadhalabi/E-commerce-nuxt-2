@@ -70,12 +70,9 @@ export default {
       let query = this.$route.query;
       let me = this;
 
-      console.log(query)
       Api.post("/user/auth/verfiy-mail", query)
         .then(function (response) {
 
-          console.log(response)
-          console.log("test")
           me.success= true;
           me.message= response.data.message;
           localStorage.setItem("tokenEnded", 0);

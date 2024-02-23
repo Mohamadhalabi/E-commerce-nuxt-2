@@ -714,7 +714,6 @@ export default {
       this.showInvalideMessage = false;
     },
     createOrder() {
-      console.log(this.dataForm.address)
       if (this.dataForm.address == "") {
         this.$notify({
           group: "errorMessage",
@@ -741,7 +740,6 @@ export default {
             this.loadingOrder = true;
             Api.post("/user/orders/create", this.dataForm)
               .then((response) => {
-                console.log(response.data.data.payment.stripe_url)
                 if (this.dataForm.payment_method == 'stripe_link_online') {
                   location.href = response.data.data.payment.stripe_url
                 } else {
@@ -800,13 +798,13 @@ export default {
           this.$Progress.finish();
         })
         .catch((error) => {
-          console.log(error)
-          this.showInvalideMessage = true;
-          this.$notify({
-            group: "errorMessage",
-            type: "error",
-            text: "The selected coupon code is invalid.",
-          });
+          location.reload();
+          // this.showInvalideMessage = true;
+          // this.$notify({
+          //   group: "errorMessage",
+          //   type: "error",
+          //   text: "The selected coupon code is invalid.",
+          // });
         });
     },
 

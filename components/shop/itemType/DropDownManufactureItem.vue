@@ -129,8 +129,6 @@ export default {
       const query = Object.assign({}, this.$route.query);
 
       delete query['manufacturers'];
-
-      console.log(slugtype)
       if(slugtype === 'manufacturer'){
         this.$router.push({path: '/shop', query: {...query}});
       }

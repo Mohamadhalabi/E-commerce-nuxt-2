@@ -178,7 +178,6 @@ export default {
     this.$Progress.start();
     Api.get("/unlock-remote")
       .then((response) => {
-        console.log(response.data)
         const data = response.data; // Assuming response.data is the array you provided
         this.uniqueMakes = [...new Set(data.map(item => item.make))];
         this.uniqueModels = [...new Set(data.map(item => item.model))];
