@@ -126,7 +126,7 @@ export default {
         },
         {
           name: "og:image",
-          content: "https://dev-srv.tlkeys.com/storage/images/seo/technolock_logo.jpg",
+          content: "https://dev-srv.tlkeys.com/storage/images/seo/og-image.jpg",
         },
         {
           name: "og:image:alt",
