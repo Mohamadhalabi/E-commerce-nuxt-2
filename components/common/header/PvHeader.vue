@@ -1,18 +1,14 @@
 <template>
   <div class="from-demo-26">
     <header class="header">
-      <div class="header-top">
+      <div class="" style="background-color: #f6f6f6">
         <div class="container d-block">
           <div class="row align-items-center">
             <div
-              class="large-screen-only col-xl-4 col-lg-4 col-md-5 col-sm-12 col-xs-12 d-flex flex-wrap justify-content-md-start justify-content-center align-items-center">
-              <nuxt-img
-                format="webp"
-                height="90"
-                sizes="lg:400px"
-                alt="techno lock offer" src="/images/offers/best-deals-of-the-week.webp" loading="lazy" />
+              class="large-screen-only col-xl-6 col-lg-7 col-md-5 col-sm-12 col-xs-12 d-flex flex-wrap justify-content-md-start justify-content-center align-items-center">
+              <pv-top-notice class="top-notice" />
             </div>
-            <div class="col-12 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-lg-end justify-content-md-center justify-content-sm-center currency-language ">
+            <div class="col-12 col-xl-6 col-lg-5 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-lg-end justify-content-md-center justify-content-sm-center currency-language ">
               <div class="d-flex align-items-center">
                 <div class="header-dropdown m-0" style="margin-top: 3px!important;">
                   <a class="header-icons" href="javascript:;">{{ currency }}</a>
@@ -380,8 +376,10 @@ import img from "~/static/images/blank.png";
 import Api from "~/api";
 import PvAuth from "~/components/common/header/PvAuth.vue";
 import PvLoggedIn from "~/components/common/header/PvLoggedIn.vue";
+import PvTopNotice from "~/components/common/header/PvTopNotice.vue";
 export default {
   components: {
+    PvTopNotice,
     PvLoggedIn,
     PvAuth,
     PvMainMenu,
@@ -674,7 +672,7 @@ export default {
 }
 @media screen and (min-width: 993px){
   .logo-image{
-    width: 450px
+    width: 350px
   }
 }
 @media screen and (max-width: 992px){

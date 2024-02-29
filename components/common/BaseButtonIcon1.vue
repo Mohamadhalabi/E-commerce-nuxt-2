@@ -37,7 +37,7 @@ export default {
 
 <style scoped>
 button {
-  background-color: #892118;
+  background-color: #a51017;
   border: 1px solid white;
   border-radius: 6px;
   font-size: 1em;
@@ -51,15 +51,18 @@ button:active {
   box-shadow: 0px 0px 2px white;
 
 }
-.outline {
+button:hover{
   background-color: #892118;
-  border: 1px solid #892118;
+}
+.outline {
+  background-color: #a51017;
+  border: 1px solid #a51017;
   color: white;
   font-weight: bold;
-  box-shadow: 0px 1px 2px #892118;
+  box-shadow: 0px 1px 2px #a51017;
 }
 .outline:active {
-  box-shadow: 0px 0px 2px #892118;
+  box-shadow: 0px 0px 2px #a51017;
   transform: translate(0px,2px);
 
 }
