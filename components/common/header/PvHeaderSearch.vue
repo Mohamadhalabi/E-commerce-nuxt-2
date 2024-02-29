@@ -55,11 +55,7 @@
                       format="webp"
                       :src="product['gallery'][0]['s']['url']"
                       :alt="product['short_title']"
-                      class="mr-auto ml-auto"
-                      style="
-                      border: 1px solid #d2d2d2;
-                      border-radius: 50%;
-                      object-fit: fill; "
+                      class="mr-auto ml-auto search-image"
                     />
                   </div>
                   <div class="" :class="{'col-xl-8 col-lg-8': product.hide_price === 0, 'col-xl-7 col-lg-7': product.hide_price !== 0}">
@@ -103,7 +99,7 @@
                 </base-button-icon-1>
               </nuxt-link>
               <nuxt-link v-else class="notHover" :to="getLink('/shop?search='+searchKey)">
-                <base-button-icon-1 class="w-50 py-3" :outline="true">
+                <base-button-icon-1 class="w-100 py-3" :outline="true">
                   see ({{ getProductsBySearchArrayLength - 5 }}) product more..
                 </base-button-icon-1>
               </nuxt-link>
@@ -294,9 +290,17 @@ span.multiselect__placeholder{
 }
 .list-group-item.pruductSearch {
   text-align: start;
-  border-bottom: 2px solid #dee2eb;
+  border-bottom: 3px solid #dee2eb;
 }
 .notHover:hover {
   background: none !important;
+}
+.search-image{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  width: 75px;
+}
+.search-image:hover{
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 </style>
