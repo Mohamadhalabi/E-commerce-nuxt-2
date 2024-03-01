@@ -98,12 +98,24 @@
         <li v-if="product.specifications.manufacturer">
           {{ $t("products.MANUFACTURER") }}:
           <nuxt-link :to="getLink('/' + product.specifications.manufacturer.toLowerCase().replace(/\s+/g, '-'))">
-          <strong>
+            <strong>
             <i>
               {{ product.specifications.manufacturer }}
             </i>
           </strong>
           </nuxt-link>
+          <span v-for="(other_man,index) in product.specifications.other_manufacturers.toString().split(',')">
+            <nuxt-link
+              :to="getLink('/' + other_man.trim().toLowerCase().replace(/\s+/g, '-'))"
+              :key="index"
+            >
+              <strong>
+                <i>
+                  {{ other_man.trim() }}
+                </i>
+              </strong>
+            </nuxt-link>
+          </span>
         </li>
       </ul>
       </div>
