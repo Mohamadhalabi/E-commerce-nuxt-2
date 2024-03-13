@@ -385,7 +385,7 @@
                       <base-button-icon-1
                         v-if="
                     dataForm.payment_method == 'stripe_link_online' ||
-                    dataForm.payment_method == 'transfer'
+                    dataForm.payment_method == 'transfer_online'
                   "
                         class="py-4 w-100"
                         type="button"
@@ -658,7 +658,7 @@ export default {
         this.dataForm.payment_method ="paypal"
       }
       else if(this.clickedCardIndex === 3){
-        this.dataForm.payment_method ="transfer"
+        this.dataForm.payment_method ="transfer_online"
       }
     },
     CheckIfDefaultExists(val) {
