@@ -798,13 +798,7 @@ export default {
           this.$Progress.finish();
         })
         .catch((error) => {
-          location.reload();
-          // this.showInvalideMessage = true;
-          // this.$notify({
-          //   group: "errorMessage",
-          //   type: "error",
-          //   text: "The selected coupon code is invalid.",
-          // });
+          console.log(error)
         });
     },
 
