@@ -111,11 +111,8 @@ export default {
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
-  beforeCreate() {
+  mounted() {
     this.$Progress.start();
-  },
-  created() {
-    this.$Progress.finish();
     this.getProduct();
   },
   methods:{
@@ -129,6 +126,7 @@ export default {
        this.short_title = this.product.short_title
        this.price = this.product.price
        this.description = this.product.description
+       this.$Progress.finish();
      });
      },
     goToWhatsApp(product) {
