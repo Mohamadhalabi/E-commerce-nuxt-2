@@ -65,6 +65,17 @@ export default {
     `,
         defer: true,
         async: true,
+      },
+      {
+        hid:'yandex',
+        src: "https://mc.yandex.ru/metrika/tag.js",
+        async: true,
+        defer: true,
+      }
+    ],
+    noscript: [
+      {
+        innerHTML: '<div><img src="https://mc.yandex.ru/watch/96738038" style="position:absolute; left:-9999px;" alt="" /></div>'
       }
     ],
     __dangerouslyDisableSanitizers: ['script']
