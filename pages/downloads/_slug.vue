@@ -326,15 +326,9 @@
         <div
           v-for="(video, index) in videos"
           :key="index"
-          class="downloadVedioWrapper col-md-4  position-relative mb-2 "
+          class="downloadVedioWrapper col-md-4  position-relative mb-2 ">
+          <video-player :src="video.link" />
 
-        >
-<!--          <pv-video-player-->
-<!--            :src="video.link"-->
-<!--            :type="'video/youtube'"-->
-<!--            :options="videoOptions"-->
-<!--            class=""-->
-<!--          />-->
           <div
             style="
               opacity: 0;
@@ -359,11 +353,14 @@ import Api from "~/api";
 import PvMedia from "~/components/downloads/PvMedia.vue";
 import { baseSlider3 } from "~/utils/data/carousel";
 import PvBtnShare from "~/components/common/PvBtnShare.vue";
+import VideoPlayer from 'nuxt-video-player'
+
+require('nuxt-video-player/src/assets/css/main.css')
 
 export default {
   components: {
+    VideoPlayer,
     PvBtnShare,
-    // PvVideoPlayer,
     PvMedia,
   },
   async asyncData({ params }) {

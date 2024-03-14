@@ -124,7 +124,7 @@ export default {
     },
     goToWhatsApp(product) {
       window.open(
-        `https://api.whatsapp.com/send?phone=971504429045&text=Can i have the price of this product ${product}`,
+        `https://api.whatsapp.com/send?phone=971544179287&text=Can i have the price of this product ${product}`,
         "_blank"
       );
     },
