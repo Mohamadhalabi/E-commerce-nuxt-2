@@ -49,7 +49,7 @@
         <br>
       </table>
     </div>
-    <div v-if="product.attributes && !isEmpty(product.attributes) || (product.weight !== 0)">
+    <div v-if="product.attributes && !isEmpty(product.attributes) || (product.weight !== 0 && product.weight != null)">
       <h3 class="additional-product-items">{{ $t("products.Attributes") }}</h3>
       <div class="col-12 p-0">
         <no-ssr>
@@ -115,20 +115,18 @@
         >
       </li>
 
-      <li class="nav-item" v-if="product.videos.length > 0">
-        <a
-          id="product-tab-videos"
-          class="nav-link"
-          data-toggle="tab"
-          href="#product-videos-content"
-          role="tab"
-          aria-controls="product-videos-content"
-          aria-selected="false"
-          >{{ $t("products.Videos") }} ({{ product.videos.length }})</a
-        >
-
-
-      </li>
+<!--      <li class="nav-item" v-if="product.videos.length > 0">-->
+<!--        <a-->
+<!--          id="product-tab-videos"-->
+<!--          class="nav-link"-->
+<!--          data-toggle="tab"-->
+<!--          href="#product-videos-content"-->
+<!--          role="tab"-->
+<!--          aria-controls="product-videos-content"-->
+<!--          aria-selected="false"-->
+<!--          >{{ $t("products.Videos") }} ({{ product.videos.length }})</a-->
+<!--        >-->
+<!--      </li>-->
 
       <li class="nav-item d-none d-md-block" v-if="product.pdf.length > 0">
         <a
@@ -158,23 +156,39 @@
     </ul>
 
     <div class="tab-content">
-      <div
-        v-if="product.description && !isEmpty(product.description)"
-        id="product-desc-content"
-        class="tab-pane fade show active"
-        role="tabpanel"
-        aria-labelledby="product-tab-desc"
-        v-html="product.description"
-        ref="contentContainer"
-      />
-      <div class="modal" v-if="isModalOpen">
-        <div class="modal-content">
-          <span class="close-btn" @click="closeModal">X</span>
-          <div class="modal-image-container">
-            <img loading="lazy" :src="selectedImage.src" :alt="selectedImage.alt" class="modal-image">
+      <div v-if="product.description && !isEmpty(product.description)"
+           id="product-desc-content"
+           class="tab-pane fade show active"
+           role="tabpanel"
+           aria-labelledby="product-tab-desc"
+           ref="contentContainer">
+        <div v-html="product.description"></div>
+
+
+        <div class="row"
+        v-if="product.videos && !isEmpty(product.videos)"
+        >
+          <div
+               v-for="(video, index) in product.videos"
+               :key="index"
+               class="downloadVedioWrapper col-md-4 col-sm-6 col-12 mb-2">
+            <video-player class="d-flex" :src="video.link" />
           </div>
         </div>
+
+
       </div>
+
+<!--      <div>-->
+<!--        <img-->
+<!--          v-b-modal.modal-center-1-->
+<!--          src="https://dev-srv.tlkeys.com/storage/images/key-cutting-machine/xhorse/Dolphinii-XP005L/Xhorse-Dolphin-II-XP-005L.jpg" />-->
+
+<!--        <b-modal id="modal-center-1" centered hide-footer hide-header>-->
+<!--          <img src="https://dev-srv.tlkeys.com/storage/images/key-cutting-machine/xhorse/Dolphinii-XP005L/Xhorse-Dolphin-II-XP-005L.jpg" />-->
+<!--        </b-modal>-->
+<!--      </div>-->
+
 
 
       <div
@@ -252,27 +266,6 @@
         aria-labelledby="product-tab-reviews"
       >
         <pv-reviews :product="product" />
-      </div>
-      <div
-        id="product-videos-content"
-        class="tab-pane fade"
-        role="tabpanel"
-        aria-labelledby="product-tab-videos">
-        <div class="row">
-          <div
-            v-for="(video, index) in product.videos"
-            :key="index"
-            class="downloadVedioWrapper col-md-4  position-relative mb-2 ">
-            <video-player :src="video.link" />
-
-<!--            <pv-video-player-->
-<!--              :src="video.link"-->
-<!--              :type="'video/youtube'"-->
-<!--              :options="videoOptions"-->
-<!--              class=""/>-->
-
-          </div>
-        </div>
       </div>
       <div
         id="product-pdf-content"
@@ -439,5 +432,7 @@ div.vjs-poster{
   font-size: 16px;
   color: #ffffff;
 }
-
+.modal-body{
+  padding: 0;
+}
 </style>
