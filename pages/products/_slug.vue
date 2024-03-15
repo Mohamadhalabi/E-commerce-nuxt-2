@@ -103,7 +103,6 @@
         </div>
       </div>
       </div>
-    </div>
   </main>
 </template>
 
@@ -165,8 +164,6 @@ export default {
       SubCategory: null,
       SubCategoryLink: null,
       short_tile: null,
-      images: [],
-      carBrands: [],
       childCategory: null,
       ParentCategory: null,
       isSalePriceEqualToPrice:"-",
@@ -429,6 +426,31 @@ export default {
           },
         });
       }
+    if (this.product.video_details && this.product.video_details.length > 0) {
+      this.product.video_details.forEach(video => {
+        let thumbnailUrls = [];
+        // Iterate over each thumbnail type (default, high, maxres, medium, standard)
+        for (let thumbnailType in video.thumbnailUrl) {
+          // Push the URL of each thumbnail into the array
+          thumbnailUrls.push(video.thumbnailUrl[thumbnailType].url);
+        }
+
+        head_data["script"].push({
+          type: 'application/ld+json',
+          json: {
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            "name": video.name,
+            "description": video.description,
+            "thumbnailUrl": thumbnailUrls,
+            "uploadDate": video.uploadDate,
+            "duration": video.duration,
+            "contentUrl": video.contentUrl,
+            "embedUrl": video.embedUrl,
+          }
+        });
+      });
+    }
     return head_data
   },
   mounted: function () {
@@ -439,16 +461,9 @@ export default {
     });
     this.getProduct();
     this.urlLink = window.location.origin + this.$route.fullPath;
-    this.product.gallery.forEach((item) => {
-      if (item.m && item.m.url) {
-        this.images.push(item.m.url);
-      }
-    });
-    this.product.brands.forEach((item) => {
-      this.carBrands.push(item.brand)
-    })
-    const uniqueCarBrandsSet = new Set(this.carBrands);
-    this.carBrands = Array.from(uniqueCarBrandsSet);
+
+    console.log(this.product.video_details)
+
   },
   computed:{
     ...mapGetters("language", ["getLang"]),
