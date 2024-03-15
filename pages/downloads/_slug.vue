@@ -507,7 +507,6 @@ export default {
   },
   mounted: async function () {
     this.urlLink = window.location.origin + this.$route.fullPath
-    await this.getDownload();
   },
 
   methods: {
