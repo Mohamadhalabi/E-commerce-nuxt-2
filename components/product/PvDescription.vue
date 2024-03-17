@@ -162,7 +162,8 @@
            role="tabpanel"
            aria-labelledby="product-tab-desc"
            ref="contentContainer">
-        <div v-html="product.description"></div>
+        <div v-html="product.description"  @click="openModal"></div>
+        <ImageModal :imageUrl="selectedImageUrl" ref="imageModal" />
 
 
         <div class="row"
@@ -305,11 +306,13 @@ import PvProductBundel from "~/components/product/card/PvProductBundel.vue";
 import {mapGetters} from "vuex";
 
 import VideoPlayer from 'nuxt-video-player'
+import ImageModal from "~/components/product/ImageModal.vue";
 
 require('nuxt-video-player/src/assets/css/main.css')
 
 export default {
   components: {
+    ImageModal,
     VideoPlayer,
     PvProductBundel,
     PvProductRow,
@@ -334,6 +337,7 @@ export default {
       isModalOpen: false,
       flippedArrows: [],
       selectedImage: null,
+      selectedImageUrl: '',
       videoOptions: {
         autoplay: false,
         controls: true,
@@ -360,12 +364,14 @@ export default {
         this.flippedArrows.splice(currentIndex, 1);
       }
     },
+    openModal(event) {
+      if (event.target.tagName === 'IMG') {
+        this.selectedImageUrl = event.target.src;
+        this.$refs.imageModal.showModal = true;
+      }
+    },
     isArrowFlipped(index) {
       return this.flippedArrows.includes(index);
-    },
-    openModal(image) {
-      this.selectedImage = image;
-      this.isModalOpen = true;
     },
     closeModal() {
       this.isModalOpen = false;
