@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal v-model="showModal" hide-footer hide-header>
+    <b-modal v-model="showModal" hide-footer centered hide-header>
       <img :src="imageUrl" alt="Modal Image">
       <div>
       </div>
