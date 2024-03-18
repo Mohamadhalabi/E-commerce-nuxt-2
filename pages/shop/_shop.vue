@@ -45,7 +45,18 @@
               </ul>
 
               <div class="tab-content">
-                <div v-if="description && !isEmpty(description)" id="product-desc-content" class="tab-pane fade show active" role="tabpanel" aria-labelledby="product-tab-desc" v-html="description" ref="contentContainer"></div>
+                <div v-if="description && !isEmpty(description)"
+                     id="product-desc-content"
+                     class="tab-pane fade show active"
+                     role="tabpanel"
+                     aria-labelledby="product-tab-desc"
+                     v-html="description"
+                     ref="contentContainer"
+                     @click="openModal2"
+                >
+                </div>
+                <ImageModal :imageUrl="selectedImageUrl" ref="imageModal" />
+
                 <div v-if="frequently_asked_questions && !isEmpty(frequently_asked_questions)" id="faq-content" class="tab-pane fade" role="tabpanel" aria-labelledby="product-tab-faq" ref="contentContainer">
                   <div v-for="(faq, index) in frequently_asked_questions" :key="index">
                     <b-card no-body class="mb-1">
@@ -104,9 +115,11 @@ import PvPdf from "~/components/product/tabs/PvPdf.vue";
 import PvReviews from "~/components/product/tabs/PvReviews.vue";
 import PvTabs from "~/components/features/PvTabs.vue";
 import {isEmpty} from "lodash";
+import ImageModal from "~/components/product/ImageModal.vue";
 export default {
   name: 'ShopTemplate',
   components: {
+    ImageModal,
     PvTabs, PvReviews, PvPdf, PvProduct, PvContactus,
     PvProductList,
     ShopBanner,
@@ -140,6 +153,7 @@ export default {
       slug: null,
       title: null,
       openModal: false,
+      selectedImageUrl: '',
       frequently_asked_questions: [],
       flippedArrows: [],
     };
@@ -164,7 +178,6 @@ export default {
       this.slugtype = "brand";
       this.title = this.brand.title;
     }
-
   },
   methods: {
     isEmpty,
@@ -191,7 +204,13 @@ export default {
     },
     isArrowFlipped(index) {
       return this.flippedArrows.includes(index);
-    }
+    },
+    openModal2(event) {
+      if (event.target.tagName === 'IMG') {
+        this.selectedImageUrl = event.target.src;
+        this.$refs.imageModal.showModal = true;
+      }
+    },
   }
 }
 ;
@@ -212,5 +231,8 @@ export default {
   .mobile-sidebar {
     display: none;
   }
+}
+img{
+  cursor: pointer;
 }
 </style>

@@ -3,17 +3,17 @@
     <b-modal v-model="showModal" hide-footer hide-header>
       <img :src="imageUrl" alt="Modal Image">
       <div>
-        <button
-          title="Close (Esc)"
-          type="button"
-          class="close-image-modal"
-          @click="closeModal"
-          style=""
-        >
-          ×
-        </button>
       </div>
     </b-modal>
+    <button
+        v-if="this.showModal"
+        title="Close (Esc)"
+        type="button"
+        class="close-image-modal"
+        @click="closeModal"
+    >
+      X
+    </button>
   </div>
 </template>
 <script>
@@ -35,15 +35,15 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .close-image-modal{
-
   position: fixed!important;
   top: 0!important;
   background: transparent;
   color: white;
-  font-size: 40px;
+  font-size: 25px;
   right: 0;
   border: 0;
+  z-index: 10000
 }
 </style>
