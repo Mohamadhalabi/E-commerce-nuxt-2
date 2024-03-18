@@ -373,9 +373,6 @@ export default {
     isArrowFlipped(index) {
       return this.flippedArrows.includes(index);
     },
-    closeModal() {
-      this.isModalOpen = false;
-    },
   }
 };
 </script>
