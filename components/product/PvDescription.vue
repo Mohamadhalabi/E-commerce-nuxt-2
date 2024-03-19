@@ -52,9 +52,7 @@
     <div v-if="product.attributes && !isEmpty(product.attributes) || (product.weight !== 0 && product.weight != null)">
       <h3 class="additional-product-items">{{ $t("products.Attributes") }}</h3>
       <div class="col-12 p-0">
-        <no-ssr>
           <pv-attributes :product="product" />
-        </no-ssr>
       </div>
     </div>
 
