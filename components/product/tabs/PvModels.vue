@@ -2,10 +2,10 @@
   <table class="table table-striped table-bordered">
     <thead>
     <tr>
-      <th>{{$t('products.BRAND')}}</th>
-      <th>{{$t('products.MODEL')}}</th>
-      <th>{{$t('products.from')}}</th>
-      <th>{{$t('products.to')}}</th>
+      <th class="bg-white">{{$t('products.BRAND')}}</th>
+      <th class="bg-white">{{$t('products.MODEL')}}</th>
+      <th class="bg-white">{{$t('products.from')}}</th>
+      <th class="bg-white">{{$t('products.to')}}</th>
     </tr>
     </thead>
     <tbody>
