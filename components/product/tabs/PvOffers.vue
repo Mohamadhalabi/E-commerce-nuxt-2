@@ -2,17 +2,24 @@
 
    <table id="offerTable"  class="w-50 w-md-100 shadow rounded-10" >
       <thead>
-        <tr >
-          <th>{{ $t("products.FROM") }}</th>
-          <th>{{ $t("products.TO") }}</th>
-          <th >{{ $t("products.PRICE") }}</th>
+        <tr>
+          <th class="text-center">{{ $t("products.FROM") }}</th>
+          <th class="text-center">{{ $t("products.TO") }}</th>
+          <th class="text-center">{{ $t("products.PRICE") }}</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="text-center">
         <tr v-for="(offer, index) in product.offers" :key="index">
           <td>{{ offer.from }}</td>
-          <td>{{ offer.to }}</td>
-          <td>{{ offer.price.currency + offer.price.value }}</td>
+          <td>
+            <span v-if="offer.to === 10000">
+              More than {{offer.from}}
+            </span>
+            <span v-else>
+              {{ offer.to }}
+            </span>
+          </td>
+          <td class="price-color-offer">{{ offer.price.currency + offer.price.value }}</td>
         </tr>
       </tbody>
     </table>
