@@ -123,9 +123,7 @@ import PvLabelGroup from "~/components/product/partials/PvLabelGroup";
 import PvGalleryImage from "~/components/product/partials/PvGalleryImage";
 import PvGalleryImage2 from "~/components/product/partials/PvGalleryImage2";
 import PvCarousel from "~/components/features/PvCarousel";
-// import LightBox from "vue-image-lightbox";
 import { baseSlider1, baseSlider8 } from "~/utils/data/carousel";
-// import "vue-image-lightbox/dist/vue-image-lightbox.min.css";
 import { mapGetters } from "vuex";
 
 export default {
@@ -134,7 +132,6 @@ export default {
     PvGalleryImage,
     PvGalleryImage2,
     PvCarousel,
-    // LightBox,
   },
   props: {
     product: Object,
