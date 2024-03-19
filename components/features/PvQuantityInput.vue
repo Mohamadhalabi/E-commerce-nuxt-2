@@ -69,6 +69,7 @@ export default {
   data: function () {
     return {
       currentQty: this.qty,
+      minPurchaseQty:0,
     };
   },
 
@@ -100,9 +101,12 @@ export default {
     },
 
     minusQty: function () {
-      if (this.currentQty > 1) {
+      if(this.currentQty <= this.product.min_purchase_qty) {
+        this.currentQty = this.product.min_purchase_qty
+      } else{
         this.currentQty--;
       }
+
       let dataForm = {
         quantity: this.currentQty,
         product: this.product,
