@@ -167,6 +167,7 @@
             class="horizontal-quantity form-control bg-transparent"
             type="text"
             :max="product.stock"
+            :min="qty"
             :disabled="product.hide_price != '0'"
             @change="changeQty($event)"
           />
@@ -204,8 +205,7 @@
         :outline="true"
         class="mx-2 py-4"
       >
-        {{ $t("products.addCart") }}<i class="mx-2 sicon-bag"></i
-      ></base-button-icon-1>
+        {{ $t("products.addCart") }}</base-button-icon-1>
       <div v-else class="d-flex align-items-center">
         <button ontouchstart
                 class="whatsapp-button"
@@ -281,7 +281,8 @@ export default {
       qty: 1,
       socialMedia: [],
       models: null,
-      showDismissibleAlert: true
+      showDismissibleAlert: true,
+      minPurchaseQty:0,
 
     };
   },
@@ -293,6 +294,8 @@ export default {
 
   },
   mounted() {
+    this.qty = this.product.min_purchase_qty
+    this.minPurchaseQty = this.product.min_purchase_qty;
     let dataModels = [];
     for (const item of this.product.brands) {
       if (!dataModels.includes(item.brand)) {
@@ -347,9 +350,12 @@ export default {
       if (this.qty < this.product.stock) this.qty++;
     },
     minusQty: function () {
-      if (this.qty > 1) this.qty--;
+      if (this.qty > this.minPurchaseQty) this.qty--;
     },
     changeQty(e) {
+      if(this.qty < this.minPurchaseQty){
+        this.qty = this.minPurchaseQty
+      }
     },
     addCart: function (product) {
       this.currentProduct = product;

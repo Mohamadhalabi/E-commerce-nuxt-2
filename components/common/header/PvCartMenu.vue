@@ -98,7 +98,7 @@
                           :qty="product.quantity"
                           :has_token="product.has_token_input"
                           :product="product"
-                          @changeQty="changeQuantity"
+                          @change="changeQuantity"
                         />
                         <span class="cart-price ml-4 m-auto">
                           {{product.price.currency + parseFloat(product.priceitem * product.quantity).toFixed(2) }}
