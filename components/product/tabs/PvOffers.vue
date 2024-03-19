@@ -1,6 +1,6 @@
 <template >
 
-   <table id="offerTable"  class="w-50 w-md-100 shadow rounded-10" >
+   <table id="offerTable"  class=" w-md-50 w-sm-100 shadow rounded-10" >
       <thead>
         <tr>
           <th class="text-center">{{ $t("products.FROM") }}</th>
@@ -57,5 +57,13 @@ export default {
   text-align: left;
   background-color: #3e3e3e;
   color: white;
+}
+#offerTable{
+  width: 100%;
+}
+@media screen and (min-width: 1200px){
+  #offerTable{
+    width: 40%;
+  }
 }
 </style>
