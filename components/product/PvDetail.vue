@@ -94,9 +94,7 @@
           <span v-if="index < models.split(',').length - 1">, </span>
         </span>
         </li>
-
         <li v-if="product.specifications.manufacturer">
-          {{ $t("products.MANUFACTURER") }}:
           <nuxt-link :to="getLink('/' + product.specifications.manufacturer.toLowerCase().replace(/\s+/g, '-'))">
             <strong>
             <i>
@@ -111,7 +109,7 @@
             >
               <strong>
                 <i>
-                  {{ other_man.trim() }}
+                {{ other_man.replace(/-/g, '') }}
                 </i>
               </strong>
             </nuxt-link>
