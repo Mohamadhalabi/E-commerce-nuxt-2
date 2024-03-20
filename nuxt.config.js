@@ -87,7 +87,7 @@ export default {
     }
   },
   css: [
-    'swiper/dist/css/swiper.css',
+    '~/static/css/swiper.min.css',
     '~/static/css/animate.min.css',
     '~/static/css/bootstrap.min.css',
     '~/static/css/porto-icons.min.css',
@@ -387,7 +387,7 @@ export default {
       minifyCSS: false,
       minifyJS: false,
     },
-    extractCSS: true,
+    extractCSS: false,
     optimizeCSS: true,
     publicPath: '/secure',
     babel: {
