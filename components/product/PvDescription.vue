@@ -62,6 +62,19 @@
         <pv-models :product="product" />
       </div>
     </div>
+
+    <div v-if="product.videos && !isEmpty(product.videos)">
+      <h3 class="additional-product-items">Videos</h3>
+      <div class="row">
+        <div
+          v-for="(video, index) in product.videos"
+          :key="index"
+          class="downloadVedioWrapper col-md-4 col-sm-6 col-12 mb-2">
+          <video-player class="d-flex" :src="video.link" />
+        </div>
+      </div>
+    </div>
+
     <div>
 
   <pv-tabs class="product-single-tabs">
@@ -113,19 +126,6 @@
         >
       </li>
 
-<!--      <li class="nav-item" v-if="product.videos.length > 0">-->
-<!--        <a-->
-<!--          id="product-tab-videos"-->
-<!--          class="nav-link"-->
-<!--          data-toggle="tab"-->
-<!--          href="#product-videos-content"-->
-<!--          role="tab"-->
-<!--          aria-controls="product-videos-content"-->
-<!--          aria-selected="false"-->
-<!--          >{{ $t("products.Videos") }} ({{ product.videos.length }})</a-->
-<!--        >-->
-<!--      </li>-->
-
       <li class="nav-item d-none d-md-block" v-if="product.pdf.length > 0">
         <a
           id="product-tab-pdf"
@@ -162,34 +162,7 @@
            ref="contentContainer">
         <div v-html="product.description"  @click="openModal"></div>
         <ImageModal :imageUrl="selectedImageUrl" ref="imageModal" />
-
-
-        <div class="row"
-        v-if="product.videos && !isEmpty(product.videos)"
-        >
-          <div
-               v-for="(video, index) in product.videos"
-               :key="index"
-               class="downloadVedioWrapper col-md-4 col-sm-6 col-12 mb-2">
-            <video-player class="d-flex" :src="video.link" />
-          </div>
-        </div>
-
-
       </div>
-
-<!--      <div>-->
-<!--        <img-->
-<!--          v-b-modal.modal-center-1-->
-<!--          src="https://dev-srv.tlkeys.com/storage/images/key-cutting-machine/xhorse/Dolphinii-XP005L/Xhorse-Dolphin-II-XP-005L.jpg" />-->
-
-<!--        <b-modal id="modal-center-1" centered hide-footer hide-header>-->
-<!--          <img src="https://dev-srv.tlkeys.com/storage/images/key-cutting-machine/xhorse/Dolphinii-XP005L/Xhorse-Dolphin-II-XP-005L.jpg" />-->
-<!--        </b-modal>-->
-<!--      </div>-->
-
-
-
       <div
         id="product-bundled-content"
         class="tab-pane fade"
