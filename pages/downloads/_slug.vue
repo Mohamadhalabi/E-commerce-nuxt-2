@@ -520,25 +520,6 @@ export default {
         }
       );
     },
-    getDownload: async function () {
-      this.loaded = false;
-      await Api.get(`downloads/${this.$route.params.slug}`)
-        .then((response) => {
-          this.download = response.data.download;
-          for (
-            let index = 0;
-            index < this.download.screen_shot.length;
-            index++
-          ) {
-            this.screenShorts.push(this.download["screen_shot"][index].l.url);
-          }
-          for (let index = 0; index < this.download.gallery.length; index++) {
-            this.gallery.push(this.download["gallery"][index].l.url);
-          }
-          this.loaded = true;
-        })
-        .catch((error) => ({ error: JSON.stringify(error) }));
-    },
   },
 };
 </script>

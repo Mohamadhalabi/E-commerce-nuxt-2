@@ -1,15 +1,12 @@
 import Vue from 'vue';
 import VModal from 'vue-js-modal';
 import Notifications from 'vue-notification';
-import VueAwesomeSwiper from 'vue-awesome-swiper/dist/ssr';
+import VueAwesomeSwiper from 'vue-awesome-swiper/dist/ssr'
 // import VueLazyLoad from 'vue-lazyload';
 
 Vue.use(VModal);
 Vue.use(Notifications);
-Vue.use(VueAwesomeSwiper, {
-
-
-});
+Vue.use(VueAwesomeSwiper)
 
 // Vue.use(VueLazyLoad, {
 //   preLoad: 0,
@@ -46,13 +43,3 @@ Vue.use(VueAwesomeSwiper, {
 //     }
 //   }
 // });
-
-function handler(el) {
-  el.addEventListener('load', function() {
-    el.removeAttribute('style');
-    el.classList.add('fade-in', 'fadeIn');
-    if(!el.classList.contains('last-image') && !el.classList.contains('vue-lb-modal-image'))
-      el.setAttribute('style', 'animation-duration: .3s; animation-delay: 0s');
-    // window.clearInterval(interval);
-  }, {once: true});
-}

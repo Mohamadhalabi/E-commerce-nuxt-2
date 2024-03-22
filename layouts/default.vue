@@ -3,7 +3,6 @@
     <noscript v-html="iFrameCode" />
     <vue-progress-bar />
     <div class="page-wrapper position-relative">
-<!--      <pv-top-notice class="top-notice" />-->
       <pv-header @isClicked="isClicked" />
       <nuxt />
       <pv-footer/>
@@ -38,7 +37,6 @@ import {
 import {mapActions, mapGetters, mapMutations} from "vuex";
 export default {
   components: {
-    // PvTopNotice:() =>import("~/components/common/header/PvTopNotice"),
     PvHeader:() =>import("~/components/common/header/PvHeader.vue"),
     PvFooter,
     PvAppPopup:() => import("~/components/popups/PvAppPopup"),

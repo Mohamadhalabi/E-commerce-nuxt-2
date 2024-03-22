@@ -87,26 +87,29 @@ export default {
     }
   },
   css: [
-    '~/static/css/swiper.min.css',
-    '~/static/css/animate.min.css',
-    '~/static/css/bootstrap.min.css',
-    '~/static/css/porto-icons.min.css',
-    '~/static/css/steper.css',
-    '~/static/vendor/fontawesome-free/css/all.min.css',
-    // '~/static/vendor/simple-line-icons/css/simple-line-icons.min.css',
-    '~/static/sass/style.scss'
+    // 'swiper/dist/css/swiper.css',
+    '@assets/css/bootstrap.min.css',
+    '@assets/css/porto-icons.min.css',
+    '@assets/css/steper.css',
+    '@assets/vendor/fontawesome-free/css/all.min.css',
+    '@assets/sass/style.scss',
+    'vue-multiselect/dist/vue-multiselect.min.css',
+    '@assets/css/agile.css'
   ],
 
   plugins: [
-    {src: '@plugins', ssr: false},
+    {src: '@plugins/index.js', ssr: false},
     {src: '@plugins/settings.js', ssr: true},
     {src: '@plugins/localstorage.js', ssr: false},
     {src: '@plugins/filters.js', ssr: true},
-    {src: '@plugins/vue-progressbar.js', ssr: false},
-    {src: '@plugins/directives/animate.js', ssr: true},
-    {src: '@plugins/directives/parallax.js', ssr: false},
+    {src: '@plugins/vue-progressbar.js', ssr: true},
+    // {src: '@plugins/directives/animate.js', ssr: true},
+    // {src: '@plugins/directives/parallax.js', ssr: false},
     {src: '@plugins/directives/sticky.js', ssr: true},
-    {src: 'plugins/direction-control.js', ssr: true}, // rTL
+    {src: '@plugins/direction-control.js', ssr: true}, // rTL
+    {src: '@plugins/vue-awesome-swiper.js', ssr: true},
+
+
   ],
 
   buildModules: [
@@ -132,10 +135,10 @@ export default {
     pages: ['/'], // Add the routes you want to cache
   },
 
-  modules: ['@nuxtjs/axios', 'bootstrap-vue/nuxt', 'nuxt-delay-hydration' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap',[
+  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap',[
     '@nuxtjs/recaptcha', {
       version: 2
-    }
+    },
   ]],
   bootstrapVue: {
     componentPlugins: [
@@ -148,14 +151,8 @@ export default {
       'ListGroupPlugin',
       'FormTagsPlugin',
       'AlertPlugin',
+      'CarouselPlugin'
     ],
-  },
-    delayHydration: {
-    mode: 'init',
-      postIdleTimeout:{
-        mobile: 5000,
-        desktop: 2500,
-      }
   },
   'google-gtag':{
     id: 'G-5G2DSZVBJ9', // required
@@ -358,6 +355,7 @@ export default {
 
 
   router: {
+    prefetchLinks: true,
     base: '/',
     linkActiveClass: '',
     linkExactActiveClass: 'active',
@@ -380,14 +378,17 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
+    transpile: ['vue-agile'],
     analyze: false,
     minifyCSS: true,
     minifyJS: true,
     html: {
-      minifyCSS: false,
-      minifyJS: false,
+      minifyCSS: true,
+      minifyJS: true,
     },
-    extractCSS: false,
+    extractCSS: {
+      ignoreOrder: false
+    },
     optimizeCSS: true,
     publicPath: '/secure',
     babel: {

@@ -91,16 +91,22 @@
       <div class="filter-modal">
         <b-modal
           id="bv-modal-example2"
-          v-model="openModal" hide-header hide-footer>
-          <div class="sidebar-shop col-lg-2 order-lg-first p-4" sticky-container>
-            <div
-              v-sticky="isSticky" sticky-offset="{top: 75}">
+          v-model="openModal" centered hide-header hide-footer>
+          <div class="sidebar-shop p-4">
               <sidebar-filter v-if="category" :category="category.slug"/>
               <sidebar-filter v-if="manufacturer" :manufacturer="manufacturer.slug"/>
               <sidebar-filter v-if="brand" :brand="brand.slug"/>
-            </div>
           </div>
         </b-modal>
+        <button
+          v-if="openModal"
+          title="Close (Esc)"
+          type="button"
+          class="close-image-modal"
+          @click="closeModal"
+        >
+          X
+        </button>
       </div>
     </div>
   </main>
@@ -109,10 +115,6 @@
 import ShopBanner from '~/components/shop/PvShopBanner';
 import PvProductList from "~/components/shop/PvProductList.vue";
 import SidebarFilter from "~/components/shop/SidebarFilter.vue";
-import PvContactus from "~/components/product/tabs/PvContactus.vue";
-import PvProduct from "~/components/product/card/PvProduct.vue";
-import PvPdf from "~/components/product/tabs/PvPdf.vue";
-import PvReviews from "~/components/product/tabs/PvReviews.vue";
 import PvTabs from "~/components/features/PvTabs.vue";
 import {isEmpty} from "lodash";
 import ImageModal from "~/components/product/ImageModal.vue";
@@ -120,7 +122,7 @@ export default {
   name: 'ShopTemplate',
   components: {
     ImageModal,
-    PvTabs, PvReviews, PvPdf, PvProduct, PvContactus,
+    PvTabs,
     PvProductList,
     ShopBanner,
     SidebarFilter,
@@ -138,14 +140,8 @@ export default {
   },
   data() {
     return {
-      queryFilter: {
-        sintax: '?',
-        page: 1
-      },
       isSticky: false,
       page: 1,
-      pageCount: 1,
-      selectedPage: 1,
       orderBy: 'created_at',
       directionBy: 'asc',
       slugtype: null,
@@ -185,6 +181,9 @@ export default {
       if(val){
         this.openModal = true
       }
+    },
+    closeModal(){
+      this.openModal = false
     },
     sortBy(sortBy) {
       this.orderBy = sortBy;
@@ -234,5 +233,8 @@ export default {
 }
 img{
   cursor: pointer;
+}
+.modal-body{
+  padding: 10px!important;
 }
 </style>
