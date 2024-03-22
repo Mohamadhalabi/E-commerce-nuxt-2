@@ -1,0 +1,26 @@
+.agile__nav-button--prev{
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  background: transparent;
+  border: 0;
+}
+
+.agile__nav-button--next{
+  position: absolute;
+  right: 0;
+  top: 10p;
+  top: 0;
+  bottom: 0px;
+  background: transparent;
+  border: 0;
+}
+
+.fa-chevron-left, .fa-chevron-right{
+  font-size: 45px!important;
+  color: #2e59d7;
+}
+
+.agile__dots{
+
+}

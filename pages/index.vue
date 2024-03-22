@@ -4,81 +4,81 @@
       <pv-intro-section/>
       <home-page-search />
     <pv-slider-Banner class="desktop-only"  />
-      <div v-animate
-           :data-animation-delay="animationDelay"
-           data-animation-name="fadeInUpShorter"
-           class="container-fluid">
-        <div class="container">
-          <pv-latest-products
-            :isIndexPage ="true"
-            :collectionTitle="$t('home.latestProducts')"
-            :link="'new-arrival'"
-          />
-        </div>
-      </div>
-      <div  v-animate
-            :data-animation-delay="animationDelay"
-            data-animation-name="fadeInUpShorter" class="container-fluid">
-        <div class="container">
-          <pv-best-selling
-            :isIndexPage ="true"
-            :collectionTitle="$t('home.bestSellingProducts')"
-            :link="'best-seller'"
-          />
-        </div>
-      </div>
-      <div
-        v-animate
-        :data-animation-delay="animationDelay"
-        data-animation-name="fadeInUpShorter"
-        class="container-fluid">
-        <div class="container">
-          <pv-top-selling
-            :isIndexPage ="true"
-            :collectionTitle="$t('home.topSellingProduct')"
-            :link="'top-selling'"
-          />
-        </div>
-      </div>
-      <div v-animate
-           :data-animation-delay="animationDelay"
-           data-animation-name="fadeInUpShorter"  class="container-fluid pt-4">
-        <div class="container large-screen-only">
-          <pv-line-banner class="mb-4" v-if="!isMobile" />
-        </div>
-      </div>
-      <div v-animate
-           :data-animation-delay="animationDelay"
-           data-animation-name="fadeInUpShorter" class="container-fluid"
-      >
-        <div class="container">
-          <div class="product-widgets-container row pb-2">
-            <pv-on-sale-products
-              :collection-title="$t('home.onSaleProduct')"
-              :animation-delay="'200'"
-              :link="'discount'"
-            />
-            <pv-top-selling-three-products
-              :collection-title="$t('home.topSellingProduct')"
-              :animation-delay="'500'"
-              :link="'top-selling'"
-            />
-            <pv-new-arrival
-              :collection-title="$t('home.newarrivalproducts')"
-              :animation-delay="'800'"
-              :link="'new-arrival'"
-            />
-            <pv-free-shipping
-              :collection-title="$t('home.freeshoppingproducts')"
-              :animation-delay="'1100'"
-              :link="'free-shipping'"
-            />
-          </div>
-        </div>
-      </div>
-    <pv-manufacturers-section v-animate
-                              :data-animation-delay="animationDelay"
-                              data-animation-name="fadeInUpShorter" />
+<!--      <div v-animate-->
+<!--           :data-animation-delay="animationDelay"-->
+<!--           data-animation-name="fadeInUpShorter"-->
+<!--           class="container-fluid">-->
+<!--        <div class="container">-->
+<!--          <pv-latest-products-->
+<!--            :isIndexPage ="true"-->
+<!--            :collectionTitle="$t('home.latestProducts')"-->
+<!--            :link="'new-arrival'"-->
+<!--          />-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div  v-animate-->
+<!--            :data-animation-delay="animationDelay"-->
+<!--            data-animation-name="fadeInUpShorter" class="container-fluid">-->
+<!--        <div class="container">-->
+<!--          <pv-best-selling-->
+<!--            :isIndexPage ="true"-->
+<!--            :collectionTitle="$t('home.bestSellingProducts')"-->
+<!--            :link="'best-seller'"-->
+<!--          />-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div-->
+<!--        v-animate-->
+<!--        :data-animation-delay="animationDelay"-->
+<!--        data-animation-name="fadeInUpShorter"-->
+<!--        class="container-fluid">-->
+<!--        <div class="container">-->
+<!--          <pv-top-selling-->
+<!--            :isIndexPage ="true"-->
+<!--            :collectionTitle="$t('home.topSellingProduct')"-->
+<!--            :link="'top-selling'"-->
+<!--          />-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div v-animate-->
+<!--           :data-animation-delay="animationDelay"-->
+<!--           data-animation-name="fadeInUpShorter"  class="container-fluid pt-4">-->
+<!--        <div class="container large-screen-only">-->
+<!--          <pv-line-banner class="mb-4" v-if="!isMobile" />-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div v-animate-->
+<!--           :data-animation-delay="animationDelay"-->
+<!--           data-animation-name="fadeInUpShorter" class="container-fluid"-->
+<!--      >-->
+<!--        <div class="container">-->
+<!--          <div class="product-widgets-container row pb-2">-->
+<!--            <pv-on-sale-products-->
+<!--              :collection-title="$t('home.onSaleProduct')"-->
+<!--              :animation-delay="'200'"-->
+<!--              :link="'discount'"-->
+<!--            />-->
+<!--            <pv-top-selling-three-products-->
+<!--              :collection-title="$t('home.topSellingProduct')"-->
+<!--              :animation-delay="'500'"-->
+<!--              :link="'top-selling'"-->
+<!--            />-->
+<!--            <pv-new-arrival-->
+<!--              :collection-title="$t('home.newarrivalproducts')"-->
+<!--              :animation-delay="'800'"-->
+<!--              :link="'new-arrival'"-->
+<!--            />-->
+<!--            <pv-free-shipping-->
+<!--              :collection-title="$t('home.freeshoppingproducts')"-->
+<!--              :animation-delay="'1100'"-->
+<!--              :link="'free-shipping'"-->
+<!--            />-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    <pv-manufacturers-section v-animate-->
+<!--                              :data-animation-delay="animationDelay"-->
+<!--                              data-animation-name="fadeInUpShorter" />-->
 
     <div style="background-color: #f07905">
       <div class="container">
@@ -93,32 +93,32 @@
     </div>
 <!--      <PvNewsletterModal />-->
 
-    <div v-animate
-         :data-animation-delay="animationDelay"
-         data-animation-name="fadeInUpShorter">
-      <div class="container optionWebsite">
-        <div class="row">
-          <div class="col-md-3 d-flex align-items-end">
-            <p>
-              <i class="fas fa-truck-pickup" /> <span>{{ $t("home.option1") }}</span>
-            </p>
-          </div>
-          <div class="col-md-3 d-flex align-items-end">
-            <p>
-              <i class="fas fa-dollar-sign" /> <span>{{ $t("home.option2") }}</span>
-            </p>
-          </div>
-          <div class="col-md-3 d-flex align-items-end">
-            <p><i class="fas fa-headset" /><span>{{ $t("home.option3") }}</span></p>
-          </div>
-          <div class="col-md-3 d-flex align-items-end">
-            <p>
-              <i class="fab fa-cc-mastercard" /><span>{{ $t("home.option4") }}</span>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
+<!--    <div v-animate-->
+<!--         :data-animation-delay="animationDelay"-->
+<!--         data-animation-name="fadeInUpShorter">-->
+<!--      <div class="container optionWebsite">-->
+<!--        <div class="row">-->
+<!--          <div class="col-md-3 d-flex align-items-end">-->
+<!--            <p>-->
+<!--              <i class="fas fa-truck-pickup" /> <span>{{ $t("home.option1") }}</span>-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          <div class="col-md-3 d-flex align-items-end">-->
+<!--            <p>-->
+<!--              <i class="fas fa-dollar-sign" /> <span>{{ $t("home.option2") }}</span>-->
+<!--            </p>-->
+<!--          </div>-->
+<!--          <div class="col-md-3 d-flex align-items-end">-->
+<!--            <p><i class="fas fa-headset" /><span>{{ $t("home.option3") }}</span></p>-->
+<!--          </div>-->
+<!--          <div class="col-md-3 d-flex align-items-end">-->
+<!--            <p>-->
+<!--              <i class="fab fa-cc-mastercard" /><span>{{ $t("home.option4") }}</span>-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
   </main>
 </template>
 <script>
@@ -254,15 +254,15 @@ export default {
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
     PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
-    PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
-    PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
-    PvLatestProducts: () => import("~/components/home/PvLatestProducts.vue"),
-    PvBestSelling: () => import("~/components/home/PvBestSelling.vue"),
-    PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
-    PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
-    PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
-    PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
-    PvFreeShipping:() => import("~/components/home/PvFreeShipping.vue"),
+    // PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
+    // PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
+    // PvLatestProducts: () => import("~/components/home/PvLatestProducts.vue"),
+    // PvBestSelling: () => import("~/components/home/PvBestSelling.vue"),
+    // PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
+    // PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
+    // PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
+    // PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
+    // PvFreeShipping:() => import("~/components/home/PvFreeShipping.vue"),
   },
 
   data: function () {

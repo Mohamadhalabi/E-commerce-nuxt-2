@@ -23,9 +23,6 @@
           </div>
         </PvCarousel>
 
-        <span v-if="isMagnify" class="prod-full-screen" @click="openLightBox">
-          <i class="icon-magnifier-add" />
-        </span>
       </div>
 
       <PvCarousel
@@ -148,17 +145,6 @@ export default {
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
-    lightBoxMedia: function () {
-      return this.product.gallery.reduce((acc, cur) => {
-        return [
-          ...acc,
-          {
-            src: cur.l.url,
-            thumb: cur.s.url,
-          },
-        ];
-      }, []);
-    },
   },
   mounted: function () {
     if (this.product !== null) {
@@ -185,15 +171,10 @@ export default {
       e.currentTarget.parentNode
         .querySelector(".swiper-dot.active")
         .classList.remove("active");
-
       // active current selected item
       e.currentTarget.classList.add("active");
-
       // translate thumb carousel
       this.$refs.mediaRef.swiper.slideTo(index);
-    },
-    openLightBox: function () {
-      this.$refs.lightBox.showImage(this.$refs.mediaRef.swiper.activeIndex);
     },
   },
 };

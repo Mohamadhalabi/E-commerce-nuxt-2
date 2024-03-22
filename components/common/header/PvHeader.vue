@@ -5,8 +5,12 @@
         <div class="container d-block">
           <div class="row align-items-center">
             <div
-              class="large-screen-only col-xl-6 col-lg-7 col-md-5 col-sm-12 col-xs-12 d-flex flex-wrap justify-content-md-start justify-content-center align-items-center">
-              <pv-top-notice class="top-notice" />
+              class="large-screen-only col-xl-6 col-lg-7 col-md-5 col-sm-12 col-xs-12 p-3 d-flex flex-wrap justify-content-md-start justify-content-center align-items-center">
+                <div class="text-center pl-6 pr-6 container top-notice-container top-n" :class="{'text-right': getIsAr}">
+                  <p class="mb-auto mt-auto welcome-text">{{$t('common.WelcomeTo')}}
+                    <span class="second-top-notice">{{$t('common.tlkeys')}}</span>
+                  </p>
+                </div>
             </div>
             <div class="col-12 col-xl-6 col-lg-5 col-md-12 col-sm-12 col-xs-12 d-flex justify-content-lg-end justify-content-md-center justify-content-sm-center currency-language ">
               <div class="d-flex align-items-center">
@@ -376,10 +380,10 @@ import img from "~/static/images/blank.png";
 import Api from "~/api";
 import PvAuth from "~/components/common/header/PvAuth.vue";
 import PvLoggedIn from "~/components/common/header/PvLoggedIn.vue";
-import PvTopNotice from "~/components/common/header/PvTopNotice.vue";
+// import PvTopNotice from "~/components/common/header/PvTopNotice.vue";
 export default {
   components: {
-    PvTopNotice,
+    // PvTopNotice,
     PvLoggedIn,
     PvAuth,
     PvMainMenu,

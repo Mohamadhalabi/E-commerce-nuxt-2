@@ -33,9 +33,9 @@
             </pv-banner-card>
           </div>
           <div class="col-xl-4 col-lg-4 align-content-center mt-auto mb-auto large-screen-only">
-            <pv-carousel
+            <agile
               class="rounded-5"
-              :options="baseSlider6"
+              :options="homeSlidersSettings"
               v-animate
             >
               <div
@@ -59,7 +59,7 @@
                     />
                 </a>
               </div>
-            </pv-carousel>
+            </agile>
           </div>
 
           <div class="d-flex flex-column align-items-center justify-content-between col-xl-4 col-lg-4 col-md-8 ml-auto mr-auto">
@@ -106,7 +106,21 @@ export default {
     PvBannerCard: () => import("../product/card/PvBannerCard.vue"),
   },
   computed: {
-    ...mapGetters("header",["getCurrency"])
+    ...mapGetters("header",["getCurrency"]),
+    homeSlidersSettings() {
+      return{
+        autoplay: true,
+        autoplaySpeed: 5000,
+        fade:true,
+        changeDelay:1000,
+        mobileFirst: true,
+        navButtons:false,
+        timing: 'ease',
+        dots: true,
+        slidesToShow: 1,
+        speed: 3000,
+      }
+    }
   },
   data: function () {
     return {

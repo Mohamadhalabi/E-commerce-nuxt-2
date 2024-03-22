@@ -4,11 +4,8 @@
       <div class="row">
         <!-- Begin: Left Side -->
         <div key="intro-1" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <pv-carousel
-            :options="HomeSliderConfig"
-            :ShowNavigation="true"
-            :mainSlider="true"
-            ref="carousel">
+          <agile
+            :options="HomeSliderConfig">
             <div
               v-for="(slide, index) in slides"
               :key="index"
@@ -28,7 +25,12 @@
                   :description="slide['description']" />
               </a>
             </div>
-          </pv-carousel>
+            <template slot="prevButton"><i class="prevButton fa fa-chevron-left"></i></template>
+            <template slot="nextButton"><i class="nextButton fa fa-chevron-right"></i></template>
+          </agile>
+
+
+
         </div>
       </div>
     </section>
@@ -57,17 +59,17 @@ export default {
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
     HomeSliderConfig() {
-      return {
-        speed: 1000,
-        spaceBetween: 0,
+      return{
         autoplay: true,
-        slidesPerView: 1,
-        slidesPerGroup: 1,
-        nav: false,
-        navigation: {
-          nextEl: this.getIsAr ? '.swiper-nav-mainSlider .swiper-prev' : '.swiper-nav-mainSlider .swiper-next',
-          prevEl: this.getIsAr ? '.swiper-nav-mainSlider .swiper-next' : '.swiper-nav-mainSlider .swiper-prev',
-        },
+        autoplaySpeed: 5000,
+        fade:true,
+        changeDelay:1000,
+        mobileFirst: true,
+        navButtons:true,
+        timing: 'ease',
+        dots: false,
+        slidesToShow: 1,
+        speed: 1000,
       }
     }
   },

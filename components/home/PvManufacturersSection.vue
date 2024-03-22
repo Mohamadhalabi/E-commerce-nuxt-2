@@ -2,7 +2,7 @@
   <section
     v-animate
     data-animation-delay="200"
-    class="section-3 brand-section appear-animate manufacturerClassConatiner"
+    class="section-3 brand-sectionmanufacturerClassConatiner"
   >
     <div class="container mb-0 manufactureresContainer">
       <h4

@@ -2,7 +2,7 @@
   <div class="from-demo-37">
     <div class="stories header-bottom">
       <div class="container">
-        <pv-carousel
+        <agile
           class="products-slider dots-top dots-small mb-0 border-0"
           :options="storiesSlider">
           <div
@@ -30,7 +30,7 @@
               />
             </a>
           </div>
-        </pv-carousel>
+        </agile>
       </div>
     </div>
   </div>
@@ -38,29 +38,37 @@
 
 <script>
 import Api from '~/api';
+// import PvCarousel from "~/components/features/PvCarousel.vue";
 export default {
   components: {
-    PvCarousel: () => import("~/components/features/PvCarousel.vue")
+    // PvCarousel
+    // PvCarousel: () => import("~/components/features/PvCarousel.vue")
   },
   data: function() {
     return {
       stories: [],
       storiesSlider: {
-        spaceBetween: 20,
         autoplay: false,
-        slidesPerView: 16,
-        breakpoints: {
-          320: {slidesPerView: 3},
-          400: {slidesPerView: 4},
-          480: {slidesPerView: 5},
-          576: {slidesPerView: 6},
-          650: {slidesPerView: 7},
-          768: {slidesPerView: 8},
-          850: {slidesPerView: 9},
-          992: {slidesPerView: 10},
-          1200: {slidesPerView: 11},
-          1435: {slidesPerView: 13}
-        }
+        navButtons:false,
+        changeDelay: 0,
+        swipeDistance:1000,
+        throttleDelay: 0,
+        timing: 'ease',
+        dots: false,
+        slidesToShow: 16,
+        speed:0,
+        // breakpoints: {
+        //   320: {slidesPerView: 3},
+        //   400: {slidesPerView: 4},
+        //   480: {slidesPerView: 5},
+        //   576: {slidesPerView: 6},
+        //   650: {slidesPerView: 7},
+        //   768: {slidesPerView: 8},
+        //   850: {slidesPerView: 9},
+        //   992: {slidesPerView: 10},
+        //   1200: {slidesPerView: 11},
+        //   1435: {slidesPerView: 13}
+        // }
       },
       clickedStoryIndices: []
     };
