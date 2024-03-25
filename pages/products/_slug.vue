@@ -35,7 +35,9 @@
       <div class="product-single-container container product-single-default">
         <div v-if="product" class="row">
           <div class="col-xl-5 col-lg-6 col-md-6 col-12 product-single-gallery">
-            <pv-media :product="product" />
+
+<!--            <pv-media :product="product" />-->
+            <pv-media-new :product="product" />
             <div class="text-center">
               <span class="sku-color d-lg-none d-md-none">SKU: {{ product.sku }}</span>
             </div>
@@ -111,6 +113,7 @@ import PvDetail from "~/components/product/PvDetail";
 import PvDescription from "~/components/product/PvDescription";
 import PvCollection from "~/components/product/card/PvCollection";
 import PvMedia from "~/components/product/PvMedia.vue";
+import PvMediaNew from "~/components/product/PvMediaNew.vue"
 import Api from "~/api";
 import {mapGetters} from "vuex";
 import PvFreeShipping from "~/components/home/PvFreeShipping.vue";
@@ -122,6 +125,7 @@ import PvBtnShare from "~/components/common/PvBtnShare.vue";
 
 export default {
   components: {
+    PvMediaNew,
     PvBtnShare,
     PvOnSaleProducts,
     PvTopSellingThreeProducts,

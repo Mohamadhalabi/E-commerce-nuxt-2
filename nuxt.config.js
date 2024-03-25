@@ -88,13 +88,15 @@ export default {
   },
   css: [
     // 'swiper/dist/css/swiper.css',
+    '@assets/sass/agile.scss',
+
     '@assets/css/bootstrap.min.css',
     '@assets/css/porto-icons.min.css',
     '@assets/css/steper.css',
     '@assets/vendor/fontawesome-free/css/all.min.css',
     '@assets/sass/style.scss',
     'vue-multiselect/dist/vue-multiselect.min.css',
-    '@assets/css/agile.css'
+    '@assets/css/agile.css',
   ],
 
   plugins: [
@@ -379,7 +381,7 @@ export default {
   ],
   build: {
     transpile: ['vue-agile'],
-    analyze: false,
+    analyze: true,
     minifyCSS: true,
     minifyJS: true,
     html: {
