@@ -320,11 +320,11 @@ export const actions = {
       // Reset the cart in the state
       commit('RESET_CART', []);
       // Notify the user
-      this._vm.$notify({
-        group: 'addProduct',
-        type: 'success',
-        text: 'Your cart has been cleared',
-      });
+      // this._vm.$notify({
+      //   group: 'addProduct',
+      //   type: 'success',
+      //   text: 'Your cart has been cleared',
+      // });
     } else {
       // If the user is logged in, clear the cart on the server side
       try {
