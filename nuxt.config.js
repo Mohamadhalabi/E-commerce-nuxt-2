@@ -115,6 +115,7 @@ export default {
   ],
 
   buildModules: [
+    'vue-ssr-carousel/nuxt',
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     'cookie-universal-nuxt',
@@ -380,7 +381,6 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    transpile: ['vue-agile'],
     analyze: true,
     minifyCSS: true,
     minifyJS: true,

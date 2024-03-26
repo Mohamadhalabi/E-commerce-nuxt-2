@@ -1,12 +1,10 @@
 import Vue from 'vue';
 import VModal from 'vue-js-modal';
 import Notifications from 'vue-notification';
-import VueAwesomeSwiper from 'vue-awesome-swiper/dist/ssr'
 // import VueLazyLoad from 'vue-lazyload';
 
 Vue.use(VModal);
 Vue.use(Notifications);
-Vue.use(VueAwesomeSwiper)
 
 // Vue.use(VueLazyLoad, {
 //   preLoad: 0,

@@ -1,21 +1,34 @@
 <template>
-  <section
-    v-animate
-    data-animation-delay="200"
-    class="section-3 brand-sectionmanufacturerClassConatiner"
-  >
-    <div class="container mb-0 manufactureresContainer">
+  <section v-if="manufacturers.length > 0">
+    <div class="container mb-0">
       <h4
         class="section-title mt-0"
         style="border-bottom: 1px solid #32323224"
       >
         {{ $t("home.shopByBrand") }}
       </h4>
-      <div class="carousel-container">
-      <pv-carousel-manufactures
-        ref="carouselManufactures"
-        class="mb-2 px-2"
-        :options="brandSliderConfig"
+      <Carousel
+        :slides-per-page='8'
+        :autoplay-delay="3"
+        :paginate-by-slide="true"
+        :responsive='[
+        {
+          maxWidth: 1200,
+          slidesPerPage: 6,
+        },
+        {
+          maxWidth: 876,
+          slidesPerPage: 5
+        },
+        {
+          maxWidth: 580,
+          slidesPerPage: 3
+        },
+        {
+          maxWidth: 375,
+          slidesPerPage: 2
+        }
+      ]'
       >
         <div
           v-for="manufacturer in manufacturers"
@@ -39,8 +52,7 @@
             />
          </nuxt-link>
         </div>
-      </pv-carousel-manufactures>
-      </div>
+      </Carousel>
     </div>
   </section>
 </template>
@@ -48,9 +60,11 @@
 <script>
 import {mapGetters} from "vuex";
 import Api from "~/api";
+import Carousel from "vue-ssr-carousel";
 export default {
   components: {
-    PvCarouselManufactures:() => import("~/components/features/PvCarouselManufactures.vue")
+    Carousel
+    // PvCarouselManufactures:() => import("~/components/features/PvCarouselManufactures.vue")
   },
   async fetch() {
     try {

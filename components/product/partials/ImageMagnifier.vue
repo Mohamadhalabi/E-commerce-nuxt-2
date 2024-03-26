@@ -23,7 +23,8 @@ export default {
       type: String,
       default: 'l'
     },
-    isMouseInside:Boolean
+    isMouseInside:Boolean,
+    highlightImage:Boolean,
   },
   methods: {
     resetMagnifier() {
@@ -128,6 +129,12 @@ export default {
       }
       if(val === false){
         this.initializeMagnifier()
+      }
+    },
+    highlightImage(val) {
+      console.log(val)
+      if (val) {
+        alert(val)
       }
     }
   }
