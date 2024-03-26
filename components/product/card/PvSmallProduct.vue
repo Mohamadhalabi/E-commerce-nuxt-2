@@ -93,14 +93,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.Test {
-  background-color: #ffbb77c2;
-  border-radius: 20px 20px 10px 10px;
-  width: 100%;
-  height: 130px;
-  position: relative;
-  bottom: -2px;
-}
-</style>

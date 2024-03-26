@@ -5,6 +5,7 @@
       :image="image"
       :size="size"
       :isMouseInside="isMouseInside"
+      highlightImage:highlightImage
     />
   </div>
 </template>
@@ -22,7 +23,8 @@ export default {
     size: {
       type: String,
       default: 'l'
-    }
+    },
+    highlightImage: Boolean,
   },
   data() {
     return {

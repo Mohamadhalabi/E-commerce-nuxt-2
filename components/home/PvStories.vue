@@ -1,8 +1,67 @@
 <template>
-  <div class="from-demo-37">
+  <div class="from-demo-37" v-if="stories.length > 0">
     <div class="stories header-bottom">
       <div class="container">
-        <agile
+        <Carousel
+          :slides-per-page='16'
+          :gutter='5'
+          :responsive='[
+          {
+            maxWidth: 319,
+            slidesPerPage: 3,
+          },
+          {
+            minWidth: 320,
+            maxWidth: 399,
+            slidesPerPage: 4,
+          },
+          {
+            minWidth: 400,
+            maxWidth: 479,
+            slidesPerPage: 5,
+          },
+          {
+            minWidth: 480,
+            maxWidth: 575,
+            slidesPerPage: 6,
+          },
+          {
+            minWidth: 576,
+            maxWidth: 649,
+            slidesPerPage: 7,
+          },
+          {
+            minWidth: 650,
+            maxWidth: 767,
+            slidesPerPage: 8,
+          },
+          {
+            minWidth: 768,
+            maxWidth: 849,
+            slidesPerPage: 9,
+          },
+          {
+            minWidth: 850,
+            maxWidth: 991,
+            slidesPerPage: 10,
+          },
+          {
+            minWidth: 992,
+            maxWidth: 1199,
+            slidesPerPage: 11,
+          },
+          {
+            minWidth: 1200,
+            maxWidth: 1434,
+            slidesPerPage: 13,
+          },
+          {
+            minWidth: 1435,
+            slidesPerPage: 16,
+          }
+        ]'
+
+
           class="products-slider dots-top dots-small mb-0 border-0"
           :options="storiesSlider">
           <div
@@ -30,7 +89,7 @@
               />
             </a>
           </div>
-        </agile>
+        </Carousel>
       </div>
     </div>
   </div>
@@ -38,37 +97,21 @@
 
 <script>
 import Api from '~/api';
-// import PvCarousel from "~/components/features/PvCarousel.vue";
 export default {
   components: {
-    // PvCarousel
-    // PvCarousel: () => import("~/components/features/PvCarousel.vue")
+    Carousel: () => import("vue-ssr-carousel"),
   },
   data: function() {
     return {
       stories: [],
+      test:true,
       storiesSlider: {
         autoplay: false,
         navButtons:false,
-        changeDelay: 0,
-        swipeDistance:1000,
-        throttleDelay: 0,
         timing: 'ease',
         dots: false,
         slidesToShow: 16,
         speed:0,
-        // breakpoints: {
-        //   320: {slidesPerView: 3},
-        //   400: {slidesPerView: 4},
-        //   480: {slidesPerView: 5},
-        //   576: {slidesPerView: 6},
-        //   650: {slidesPerView: 7},
-        //   768: {slidesPerView: 8},
-        //   850: {slidesPerView: 9},
-        //   992: {slidesPerView: 10},
-        //   1200: {slidesPerView: 11},
-        //   1435: {slidesPerView: 13}
-        // }
       },
       clickedStoryIndices: []
     };
