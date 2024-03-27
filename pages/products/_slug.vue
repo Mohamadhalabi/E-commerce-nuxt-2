@@ -219,32 +219,8 @@ export default {
           },
           {
             property: "og:url",
-            content: this.urlLink,
+            content:  `${process.env.PUBLIC_PATH_WITHOUT_SLASH}`+this.$route.fullPath,
           },
-          {
-            property: "twitter:card",
-            content: "summary",
-          },
-          {
-            property: "twitter:site",
-            content: "Techno Lock Keys",
-          },
-          {
-            property: "twitter:description",
-            content: this.product.meta.description
-          },
-          {
-            property: "twitter:title",
-            content: this.product.title
-          },
-          {
-            property: "twitter:url",
-            content: this.urlLink,
-          },
-          {
-            property: "twitter:image",
-            content: this.product.twitter_image,
-          }
         ],
         script: []
       }
@@ -464,10 +440,7 @@ export default {
       behavior: 'auto'
     });
     this.getProduct();
-    this.urlLink = window.location.origin + this.$route.fullPath;
-
-    console.log(this.product.video_details)
-
+    this.urlLink = this.$route.fullPath;
   },
   computed:{
     ...mapGetters("language", ["getLang"]),

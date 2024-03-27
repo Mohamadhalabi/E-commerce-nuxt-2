@@ -87,8 +87,24 @@ export default {
           type: 'application/ld+json', json: {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "url": "https://www.tlkeys.com",
-            "logo": this.$settings.website.system_logo_black.l.url
+            "url": `${process.env.PUBLIC_PATH}`+this.page.slug,
+            "logo": this.page.meta_image,
+            "image": this.page.meta_image,
+            "name" : this.page.title,
+            "description" : this.page.meta_description,
+            "email": "info@tlkeys.com",
+            // "telephone": "+47-99-999-9999",
+            // "address": {
+            //   "@type": "PostalAddress",
+            //   "streetAddress": "Rue Improbable 99",
+            //   "addressLocality": "Paris",
+            //   "addressCountry": "FR",
+            //   "addressRegion": "Ile-de-France",
+            //   "postalCode": "75001"
+            // },
+            // "vatID": "FR12345678901",
+            // "iso6523Code": "0199:724500PMK2A2M1SQQ228"
+
           }
         },
       ]
@@ -191,22 +207,22 @@ export default {
         property: "og:image",
         content: this.page.meta_image,
       });
-      head_data["meta"].push({
-        property: "twitter:card",
-        content: "summary",
-      });
-      head_data["meta"].push({
-        property: "twitter:site",
-        content: `${this.$settings.social_media.twitter}`,
-      });
-      head_data["meta"].push({
-        property: "twitter:title",
-        content: this.page.meta_title,
-      });
-      head_data["meta"].push({
-        property: "twitter:description",
-        content: this.page.meta_description,
-      });
+      // head_data["meta"].push({
+      //   property: "twitter:card",
+      //   content: "summary",
+      // });
+      // head_data["meta"].push({
+      //   property: "twitter:site",
+      //   content: `${this.$settings.social_media.twitter}`,
+      // });
+      // head_data["meta"].push({
+      //   property: "twitter:title",
+      //   content: this.page.meta_title,
+      // });
+      // head_data["meta"].push({
+      //   property: "twitter:description",
+      //   content: this.page.meta_description,
+      // });
     }
 
     return head_data;

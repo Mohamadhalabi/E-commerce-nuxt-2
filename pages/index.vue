@@ -179,22 +179,22 @@ export default {
           name: "og:image:width",
           content: "1200",
         },
-        {
-          name: "twitter:card",
-          content: "summary",
-        },
-        {
-          name: "twitter:site",
-          content: `${this.$settings.social_media.twitter}`,
-        },
-        {
-          name: "twitter:title",
-          content: 'Techno Lock Keys Trading | Automotive Locksmith Services',
-        },
-        {
-          name: "twitter:description",
-          content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
-        },
+        // {
+        //   name: "twitter:card",
+        //   content: "summary",
+        // },
+        // {
+        //   name: "twitter:site",
+        //   content: `${this.$settings.social_media.twitter}`,
+        // },
+        // {
+        //   name: "twitter:title",
+        //   content: 'Techno Lock Keys Trading | Automotive Locksmith Services',
+        // },
+        // {
+        //   name: "twitter:description",
+        //   content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
+        // },
         {
           rel: "shortcut icon",
           href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
@@ -225,7 +225,7 @@ export default {
                   "Saturday",
                   "Sunday"
                 ],
-                "opens": "10:00",
+                "opens": "8:00",
                 "closes": "18:00"
               }
             ],
