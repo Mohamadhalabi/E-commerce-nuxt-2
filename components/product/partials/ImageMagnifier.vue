@@ -132,9 +132,7 @@ export default {
       }
     },
     highlightImage(val) {
-      console.log(val)
       if (val) {
-        alert(val)
       }
     }
   }
