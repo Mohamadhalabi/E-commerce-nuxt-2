@@ -5,7 +5,8 @@
       :image="image"
       :size="size"
       :isMouseInside="isMouseInside"
-      highlightImage:highlightImage
+      :highlightImage="highlightImage"
+
     />
   </div>
 </template>
@@ -38,6 +39,6 @@ export default {
     mouseLeft() {
       this.isMouseInside = false;
     }
-  }
+  },
 };
 </script>
