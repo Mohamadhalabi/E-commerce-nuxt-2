@@ -97,31 +97,31 @@ export default {
           name: "og:image:width",
           content: "1200",
         },
-        {
-          hid: "twitter:card",
-          name: "twitter:card",
-          content: "summary_large_image",
-        },
-        {
-          hid: "twitter:site",
-          name: "twitter:site",
-          content: `@${(this.$settings.social_media.twitter || '').split("/").pop()}`,
-        },
-        {
-          hid: "twitter:creator",
-          name: "twitter:creator",
-          content: `@${(this.$settings.social_media.twitter || '').split("/").pop()}`,
-        },
-        {
-          hid: "twitter:title",
-          name: "twitter:title",
-          content: JSON.parse(this.$settings.seo.meta_title)[this.$i18n.locale],
-        },
-        {
-          hid: "twitter:description",
-          name: "twitter:description",
-          content: JSON.parse(this.$settings.seo.meta_description)[this.$i18n.locale],
-        },
+        // {
+        //   hid: "twitter:card",
+        //   name: "twitter:card",
+        //   content: "summary_large_image",
+        // },
+        // {
+        //   hid: "twitter:site",
+        //   name: "twitter:site",
+        //   content: `@${(this.$settings.social_media.twitter || '').split("/").pop()}`,
+        // },
+        // {
+        //   hid: "twitter:creator",
+        //   name: "twitter:creator",
+        //   content: `@${(this.$settings.social_media.twitter || '').split("/").pop()}`,
+        // },
+        // {
+        //   hid: "twitter:title",
+        //   name: "twitter:title",
+        //   content: JSON.parse(this.$settings.seo.meta_title)[this.$i18n.locale],
+        // },
+        // {
+        //   hid: "twitter:description",
+        //   name: "twitter:description",
+        //   content: JSON.parse(this.$settings.seo.meta_description)[this.$i18n.locale],
+        // },
         {
           rel: "icon",
           type: "image/png",

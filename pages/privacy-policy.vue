@@ -186,7 +186,7 @@ export default {
                   "Saturday",
                   "Sunday"
                 ],
-                "opens": "10:00",
+                "opens": "8:00",
                 "closes": "18:00"
               }
             ],
