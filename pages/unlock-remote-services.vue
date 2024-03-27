@@ -2,7 +2,7 @@
   <div
     :class="{ 'text-right': getIsAr }"
     v-images-loaded.on="updateIsotope">
-    <pv-carousel-unlock-remote
+    <Carousel
       class="rounded-5"
       :options="baseSlider6"
       v-animate
@@ -22,7 +22,7 @@
 
           />
       </div>
-    </pv-carousel-unlock-remote>
+    </Carousel>
     <div class="container mt-3">
       <div class="d-flex">
         <h1 class="text-center unlock-service-title">{{ $t("services.unlockServices") }}</h1>
@@ -154,7 +154,7 @@
 </template>
 
 <script>
-import PvCarouselUnlockRemote from "~/components/features/PvCarouselUnlockRemote.vue";
+import Carousel from 'vue-ssr-carousel';
 import {baseSlider6} from "~/utils/data/carousel";
 import Api from "~/api";
 import {mapGetters} from "vuex";
@@ -162,7 +162,7 @@ import {mapGetters} from "vuex";
 export default {
   name: "unlock-remote-services",
   components: {
-    PvCarouselUnlockRemote,
+    Carousel,
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
