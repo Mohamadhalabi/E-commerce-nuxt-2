@@ -4,7 +4,7 @@
       <h1 class="home-page-h1 font-weight-bold m-0">{{ $t("home.keyandremote") }}</h1>
     </div>
     <div class="box-shadow-none third-menu">
-      <div class="row d-flex home-page-search">
+      <div class="row d-flex home-page-search mb-3 mb-lg-0">
         <div class="col-xl-5 col-lg-12 col-12 mt-lg-0 mt-2 col-md-12 d-lg-flex justify-content-xl-end justify-content-center align-center text-center" style="align-items: center;">
           <span class="search-by-fcc mr-2">
             {{ $t("home.SearchFCCID") }} {{ $t("home.orSearchPartNumber")}}
@@ -97,7 +97,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-7 col-lg-12 m-auto pl-5 pr-5 mb-lg-2">
+        <div class="col-xl-7 col-lg-12 m-auto pl-5 pr-5 mb-2">
           <div class="" action="#" method="get">
             <div class="row d-lg-flex justify-content-center d-block home-page-search">
               <div class="mt-auto mb-auto text-center">

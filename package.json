@@ -52,7 +52,6 @@
     "nuxt-video-player": "^1.0.17",
     "postcss": "^8.4.37",
     "sass": "1.32.8",
-    "vue-agile": "^2.0.0",
     "vue-carousel": "^0.18.0",
     "vue-js-modal": "2.0.1",
     "vue-multiselect": "^2.1.8",

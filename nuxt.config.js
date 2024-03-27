@@ -87,9 +87,6 @@ export default {
     }
   },
   css: [
-    // 'swiper/dist/css/swiper.css',
-    '@assets/sass/agile.scss',
-
     '@assets/css/bootstrap.min.css',
     '@assets/css/porto-icons.min.css',
     '@assets/css/steper.css',

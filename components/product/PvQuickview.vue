@@ -28,7 +28,7 @@
         />
       </div>
 
-  
+
       <button
               title="Close (Esc)"
               type="button"
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import PvMedia from '~/components/product/PvMedia';
+import PvMedia from '~/components/product/PvMediaNew.vue';
 import PvDetail from '~/components/product/PvDetail';
 import Api from '~/api';
 
