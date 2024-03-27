@@ -52,3 +52,7 @@ i.prevButton.fa.fa-chevron-left , i.nextButton.fa.fa-chevron-right{
 :not([aria-disabled]) > .ssr-carousel-left-icon, :not([aria-disabled]) > .ssr-carousel-right-icon{
   opacity: 1!important;
 }
+
+.ssr-carousel-dots{
+  margin-bottom: 20px;
+}
