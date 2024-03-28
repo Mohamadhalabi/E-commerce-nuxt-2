@@ -163,7 +163,6 @@ export default {
       topRatedProducts: null,
       latestProducts2: null,
       bestSellingProducts2: null,
-      urlLink: null,
       parentCategoryLink: null,
       SubCategory: null,
       SubCategoryLink: null,
@@ -320,14 +319,31 @@ export default {
             "name": this.product.specifications.manufacturer ?? "-"
           },
           "weight": this.product.weight,
-          "offers": {
+          "offers": this.product.offers.length > 0 ? this.product.offers.map(offer => ({
+            "@type": "Offer",
+            "price": offer.price.value,
+            "salePrice": this.product.sale_price.value,
+            "priceCurrency": this.product.price.code,
+            "priceValidUntil": formatDate(this.product.price.until),
+            "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+            "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
+            "eligibleQuantity": {
+              "@type": "QuantitativeValue",
+              "value": offer.from
+            }
+          })) : [{
             "@type": "Offer",
             "price": this.product.price.value,
             "salePrice": this.product.sale_price.value,
             "priceCurrency": this.product.price.code,
+            "priceValidUntil": formatDate(this.product.price.until),
             "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
             "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-          },
+            "eligibleQuantity": {
+              "@type": "QuantitativeValue",
+              "value": 1
+            }
+          }],
           "review": {
             "@type": "Review",
             "reviewRating": {
@@ -368,14 +384,31 @@ export default {
               "name": this.product.specifications.manufacturer ?? "-"
             },
             "weight": this.product.weight,
-            "offers": {
+            "offers": this.product.offers.length > 0 ? this.product.offers.map(offer => ({
+              "@type": "Offer",
+              "price": offer.price.value,
+              "salePrice": this.product.sale_price.value,
+              "priceCurrency": this.product.price.code,
+              "priceValidUntil": formatDate(this.product.price.until),
+              "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
+              "eligibleQuantity": {
+                "@type": "QuantitativeValue",
+                "value": offer.from
+              }
+            })) : [{
               "@type": "Offer",
               "price": this.product.price.value,
               "salePrice": this.product.sale_price.value,
               "priceCurrency": this.product.price.code,
+              "priceValidUntil": formatDate(this.product.price.until),
               "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
               "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-            },
+              "eligibleQuantity": {
+                "@type": "QuantitativeValue",
+                "value": 1
+              }
+            }]
           }
         });
       }
@@ -431,6 +464,22 @@ export default {
         });
       });
     }
+    function formatDate(dateString) {
+      if(dateString !== undefined){
+        var date = new Date(dateString);
+        var year = date.getFullYear();
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var day = ("0" + date.getDate()).slice(-2);
+        return year + "-" + month + "-" + day;
+      }
+      else{
+        var lastDayOfYear = new Date(new Date().getFullYear(), 11, 31);
+        var year = lastDayOfYear.getFullYear();
+        var month = ("0" + (lastDayOfYear.getMonth() + 1)).slice(-2);
+        var day = ("0" + lastDayOfYear.getDate()).slice(-2);
+        return year + "-" + month + "-" + day;
+      }
+    }
     return head_data
   },
   mounted: function () {
@@ -440,7 +489,6 @@ export default {
       behavior: 'auto'
     });
     this.getProduct();
-    this.urlLink = this.$route.fullPath;
   },
   computed:{
     ...mapGetters("language", ["getLang"]),
