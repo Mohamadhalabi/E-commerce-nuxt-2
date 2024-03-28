@@ -120,7 +120,6 @@ import PvFreeShipping from "~/components/home/PvFreeShipping.vue";
 import PvNewArrival from "~/components/home/PvNewArrival.vue";
 import PvTopSellingThreeProducts from "~/components/home/PvTopSellingThreeProducts.vue";
 import PvOnSaleProducts from "~/components/home/PvOnSaleProducts.vue";
-import {scrollTopHandler} from "~/utils";
 import PvBtnShare from "~/components/common/PvBtnShare.vue";
 
 export default {
