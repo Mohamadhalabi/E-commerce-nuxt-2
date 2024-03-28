@@ -5,7 +5,7 @@
         v-if="product.discount.type =='fixed'"
         :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
         class="product-price price-color font-weight-bold mt-0">
-        {{(product.price.value - product.discount.value).toFixed(2)}}{{product.price.currency}}
+        {{(product.price.value - (product.discount.value * product.price.exchange_rate)).toFixed(2)}}{{product.price.currency}}
       </span>
       <span
         v-else
