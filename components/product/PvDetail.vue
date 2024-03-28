@@ -64,8 +64,8 @@
           {{ $t("products.category") }}:
           <strong>
             <i>
-              <nuxt-link
-                :to="getLink('/'+product.categories[product.categories.length - 1].slug)"
+              <a
+                :href="getLink('https://www.tlkeys.com/'+product.categories[product.categories.length - 1].slug)"
               >
                 <strong>
                   <div
@@ -73,7 +73,7 @@
                     {{ product.categories[product.categories.length - 1].name }}
                   </div>
                 </strong>
-              </nuxt-link>
+              </a>
             </i>
           </strong>
         </li>
@@ -81,8 +81,8 @@
         <li v-if="models">
           {{ $t("products.cars") }}:
           <span v-for="(model, index) in models.split(',')">
-          <nuxt-link
-            :to="getLink('/' + model.trim().toLowerCase().replace(/\s+/g, '-'))"
+          <a
+            :href="getLink('https://www.tlkeys.com/' + model.trim().toLowerCase().replace(/\s+/g, '-'))"
             :key="index"
           >
             <strong>
@@ -90,19 +90,19 @@
                 {{ model.trim() }}
               </i>
             </strong>
-          </nuxt-link>
+          </a>
           <span v-if="index < models.split(',').length - 1">, </span>
         </span>
         </li>
         <li v-if="product.specifications.manufacturer">
           {{ $t("products.MANUFACTURER") }}:
-          <nuxt-link :to="getLink('/' + product.specifications.manufacturer.toLowerCase().replace(/\s+/g, '-'))">
+          <a :href="getLink('https://www.tlkeys.com/' + product.specifications.manufacturer.toLowerCase().replace(/\s+/g, '-'))">
             <strong>
             <i>
               {{ product.specifications.manufacturer }}
             </i>
           </strong>
-          </nuxt-link>
+          </a>
           <span v-for="(other_man,index) in product.specifications.other_manufacturers.toString().split(',')">
             <nuxt-link
               :to="getLink('/' + other_man.trim().toLowerCase().replace(/\s+/g, '-'))"
