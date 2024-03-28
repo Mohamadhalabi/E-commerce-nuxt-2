@@ -1,17 +1,9 @@
 <template>
   <div>
-    <Carousel main ref="main" :loop="false" :peek-left="10" :peek-right="10" :paginate-by-slide="true">
-      <div v-for="(image, index) in product.gallery" :key="index" class="slide rounded-5"
-           @mouseenter="mouseEntered" @mouseleave="mouseLeft"
-      >
-        <ImageMagnifier
-          :image="image"
-          size="l"
-          :isMouseInside="isMouseInside"
-          :highlightImage="highlightImage"
-          />
-      </div>
-    </Carousel>
+    <div v-for="(image, index) in product.gallery" :key="index" class="slide rounded-5" ref="main" @mouseenter="mouseEntered" @mouseleave="mouseLeft">
+      <ImageMagnifier v-if="index === currentIndex" :image="image" size="l" :isMouseInside="isMouseInside" />
+    </div>
+
     <Carousel
       thumbnails
       ref="thumbnails"
@@ -44,27 +36,26 @@
 </template>
 
 <script>
-import PvGalleryImage2 from "~/components/product/partials/PvGalleryImage2.vue";
 import ImageMagnifier from "~/components/product/partials/ImageMagnifier.vue";
 import Carousel from "vue-ssr-carousel";
 
 export default {
   name: "Example4",
-  components: { ImageMagnifier, PvGalleryImage2, Carousel },
+  components: { ImageMagnifier, Carousel },
   props: {
     product: Object,
   },
   data() {
     return {
       highlightImage: false,
-      isMouseInside:false
+      isMouseInside: false,
+      currentIndex: 0
     };
   },
   methods: {
     gotoMainCarousel(index) {
-      this.$refs.main.goto(index);
+      this.currentIndex = index;
       this.highlightImage = true;
-
     },
     mouseEntered() {
       this.isMouseInside = true;

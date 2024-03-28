@@ -1,11 +1,13 @@
 <template>
 
-  <div>
+  <div style="padding: 10px">
     <img
       :id="'myimage-' + image[size].id"
       :src="image[size].url"
       :width="image[size].width"
       :height="image[size].height"
+      class="rounded-5"
+      style="border: 1px solid #e7e7e6!important;"
     >
   </div>
 </template>
@@ -55,7 +57,10 @@ export default {
       // Set background properties for the magnifier glass
       glass.style.backgroundImage = `url('${img.src}')`;
       glass.style.backgroundRepeat = "no-repeat";
-      glass.style.backgroundSize = `${img.width * zoom}px ${img.height * zoom}px`;
+      glass.style.backgroundSize = `1800px 1800px`;
+      glass.style.zIndex= `999`;
+      glass.style.overflow =`hidden`;
+
 
       const bw = 3;
       const w = glass.offsetWidth / 4;
@@ -131,10 +136,6 @@ export default {
         this.initializeMagnifier()
       }
     },
-    highlightImage(val) {
-      if (val) {
-      }
-    }
   }
 };
 </script>
