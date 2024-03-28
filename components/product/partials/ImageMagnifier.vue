@@ -57,14 +57,14 @@ export default {
       // Set background properties for the magnifier glass
       glass.style.backgroundImage = `url('${img.src}')`;
       glass.style.backgroundRepeat = "no-repeat";
-      glass.style.backgroundSize = `1800px 1800px`;
+      glass.style.backgroundSize = `${img.width * zoom}px ${img.height * zoom}px`;
       glass.style.zIndex= `999`;
       glass.style.overflow =`hidden`;
 
 
-      const bw = 3;
-      const w = glass.offsetWidth / 4;
-      const h = glass.offsetHeight / 4;
+      const bw = 2;
+      const w = glass.offsetWidth / 1.5;
+      const h = glass.offsetHeight / 1.5;
 
       // Execute a function when someone moves the magnifier glass over the image
       glass.addEventListener("mousemove", moveMagnifier);

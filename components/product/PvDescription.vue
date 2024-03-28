@@ -69,8 +69,8 @@
         <div
           v-for="(video, index) in product.videos"
           :key="index"
-          class="downloadVedioWrapper col-md-4 col-sm-6 col-12 mb-2">
-          <video-player class="d-flex" :src="video.link" />
+          class="downloadVedioWrapper col-md-14 col-sm-6 col-12 mb-2">
+          <iframe class="d-flex" style="width: 100%;min-height: 300px"  :src="getEmbedUrl(video.link)" />
         </div>
       </div>
     </div>
@@ -327,6 +327,15 @@ export default {
     },
   },
   methods: {
+    getEmbedUrl(link) {
+      const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const match = link.match(regex);
+      if (match && match[1]) {
+        return `https://www.youtube.com/embed/${match[1]}`;
+      } else {
+        return ""; // or handle invalid URLs accordingly
+      }
+    },
     flipArrow(index) {
       const currentIndex = this.flippedArrows.indexOf(index);
       if (currentIndex === -1) {
