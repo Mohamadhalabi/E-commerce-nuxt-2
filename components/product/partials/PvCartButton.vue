@@ -53,7 +53,7 @@ export default {
     ...mapActions('compare', ['fetchList', 'addToList']),
     ...mapActions('fav', ['addToWishlist']),
     goToWhatsApp(product) {
-      window.open(`https://api.whatsapp.com/send?phone=00905525700100&text=Can i have the price of this product ${product.title}`, '_blank');
+      window.open(`https://api.whatsapp.com/send?phone=00905525700100&text=Could I please have the price of the ${product.title}`, '_blank');
     }
   }
 };
