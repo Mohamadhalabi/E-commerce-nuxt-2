@@ -87,13 +87,13 @@ export default {
     }
   },
   css: [
-    '@assets/css/bootstrap.min.css',
-    '@assets/css/porto-icons.min.css',
-    '@assets/css/steper.css',
-    '@assets/vendor/fontawesome-free/css/all.min.css',
-    '@assets/sass/style.scss',
+    '@static/css/bootstrap.min.css',
+    '@static/css/porto-icons.min.css',
+    '@static/css/steper.css',
+    '@static/vendor/fontawesome-free/css/all.min.css',
+    '@static/sass/style.scss',
     'vue-multiselect/dist/vue-multiselect.min.css',
-    '@assets/css/agile.css',
+    '@static/css/agile.css',
   ],
 
   plugins: [
@@ -378,7 +378,7 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    analyze: true,
+    analyze: false,
     minifyCSS: true,
     minifyJS: true,
     html: {
