@@ -26,7 +26,7 @@
 
 <script>
 import api from "~/api";
-import "assets/css/ltrStyle.css";
+import "static/css/ltrStyle.css";
 import PvFooter from "~/components/common/PvFooter.vue";
 import {
   resizeHandler,
