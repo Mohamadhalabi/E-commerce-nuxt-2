@@ -73,25 +73,19 @@
             :product="product"
             :gridPrice="true"
           />
-          <div v-else style="justify-content: center; display: flex">
+          <div v-else style="justify-content: center; display: flex;position: relative;bottom: 5px">
             <i
-              class="fab fa-sm fa-whatsapp mx-1"
+              class="fab fa-sm fa-whatsapp mb-auto mt-auto p-1"
               style="font-size: 20px; color: #2ba968; cursor: pointer"
               @click="goToWhatsApp(product)"
             />
-
-            <small
-              class="d-inline-block px-2"
+            <span
+              class="d-inline-block p-1 font-weight-bold"
               @click="goToWhatsApp(product)"
-              style="
-              position: relative;
-            color: #2ba968;
-            cursor: pointer;
-            font-size: 12px;height: 38px;
-          "
+              style="position: relative; color: #f52020; cursor: pointer;font-size: 14px"
             >
-              {{ $t("products.ContactUsToSendYouThePrice") }}
-            </small>
+          Contact Us
+        </span>
           </div>
         </div>
         <div class="col-lg-12 text-center">
