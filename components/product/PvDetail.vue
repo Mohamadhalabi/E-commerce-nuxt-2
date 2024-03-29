@@ -25,17 +25,17 @@
         <pv-price-box class="mb-2 mt-1" v-if="product.hide_price == 0" :product="product"/>
       <div v-else style="text-align: start; display: flex">
         <i
-          class="fab fa-sm fa-whatsapp mx-1"
+          class="fab fa-sm fa-whatsapp mb-auto mt-auto p-1"
           style="font-size: 20px; color: #2ba968; cursor: pointer"
-          @click="goToWhatsApp"
-        />
-        <small
-          class="d-inline-block p-1"
           @click="goToWhatsApp(product)"
-          style="position: relative; color: #2ba968; cursor: pointer"
+        />
+        <span
+          class="d-inline-block p-1 font-weight-bold"
+          @click="goToWhatsApp(product)"
+          style="position: relative; color: #f52020; cursor: pointer;font-size: 14px"
         >
-          {{ $t("products.ContactUsToSendYouThePrice") }}
-        </small>
+          To order this product, please click on the WhatsApp icon and contact us.
+        </span>
       </div>
 
       <div
@@ -324,7 +324,7 @@ export default {
 
     goToWhatsApp() {
       window.open(
-        `https://api.whatsapp.com/send?phone=${this.$settings.contact.whatsapp}&text=Can i have take price of this product ${this.product.title}`,
+        `https://api.whatsapp.com/send?phone=${this.$settings.contact.whatsapp}&text=Could I please have the price of the ${this.product.title}`,
         "_blank"
       );
     },

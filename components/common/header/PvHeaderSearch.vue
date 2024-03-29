@@ -71,9 +71,9 @@
                       v-if="product.hide_price == 0"
                       :product="product"
                     />
-                    <div v-else class="w-100 float-right d-flex" style="justify-content: end">
+                    <div v-else class="float-right d-flex">
                       <i
-                        class="fab fa-sm fa-whatsapp mx-1 m-auto"
+                        class="fab fa-sm fa-whatsapp m-auto"
                         style="font-size: 20px; color: rgb(43, 169, 104); cursor: pointer;"
                         @click="goToWhatsApp(product)"
                       />
@@ -178,7 +178,7 @@ export default {
 
     goToWhatsApp(product) {
       window.open(
-        `https://api.whatsapp.com/send?phone=971504429045&text=Can i have the price of this product ${product.title}`,
+        `https://api.whatsapp.com/send?phone=971504429045&text=Could I please have the price of the ${product.title}`,
         "_blank"
       );
     },
