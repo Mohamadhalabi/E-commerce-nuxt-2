@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link  :to="getLink('/account')" class="header-icon desktop-only" v-if="isAuthenticated">
+  <nuxt-link  :to="getLink('/account')" class="header-icon" v-if="isAuthenticated">
     <div class="header-user">
       <i
         class=""
@@ -16,7 +16,7 @@
       </i>
       <template>
         <div class="header-dropdown">
-          <p style="text-decoration: none !important;" href="javascript:;">
+          <p class="desktop-only" style="text-decoration: none !important;" href="javascript:;">
             {{ StateUser.name }}
           </p>
           <div class="header-menu border-0">

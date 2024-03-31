@@ -9,6 +9,7 @@
       :show-labels="false"
       :searchable="true"
       @input="updateValueAction"
+      style="height: 10px!important;"
     />
   </div>
 </template>
@@ -87,7 +88,7 @@ export default {
 }
 
 .multiselect__tags {
-
+  height: 10px!important;
 }
 
 .multiselect__select {
