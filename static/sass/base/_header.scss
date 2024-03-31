@@ -277,6 +277,22 @@ header {
 	font-size: 20px;
 	line-height: 0;
 	cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 5px;
+}
+
+@media screen and (max-width: 566px){
+  .mobile-menu-toggler{
+    bottom: 50px;
+  }
+}
+
+@media screen and (max-width: 300px){
+  .mobile-menu-toggler{
+    position: relative;
+  }
 }
 
 // 2.4) Circle Badge

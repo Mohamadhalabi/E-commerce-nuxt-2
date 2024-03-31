@@ -1,9 +1,9 @@
 <template>
-  <nuxt-link :to="getLink('/auth/login')" class="header-icon mx-2 desktop-only" v-if="!isAuthenticated">
+  <nuxt-link :to="getLink('/auth/login')" class="header-icon mx-2" v-if="!isAuthenticated">
     <div class="header-user">
       <i class="fa fa-user" />
       <div
-        class="header-userinfo d-none d-lg-block"
+        class="header-userinfo d-lg-block desktop-only"
         :class="getIsAr ? 'text-right' : ''">
                     <span class="d-inline-block font2 line-height-1">
                       {{ $t("header.welcome") }}

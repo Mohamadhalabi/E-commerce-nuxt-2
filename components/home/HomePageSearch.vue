@@ -17,7 +17,7 @@
                 <input
                   v-model="searchKey"
                   type="search"
-                  class="w-100"
+                  class="w-100 fcc-part-search-input search-by-car"
                   :placeholder="$t('common.search')"
                   @input="searchProduct"
                   :style=" getIsAr
@@ -105,7 +105,7 @@
                   {{ $t('home.searchByCar') }}
                 </span>
               </div>
-              <div class="ml-lg-2 mb-1 mb-lg-0 mt-1 mt-lg-0">
+              <div class="ml-lg-2 mb-1 mb-lg-0 mt-1 mt-lg-0 search-by-car">
                 <AutoComplate
                   v-model="brand"
                   :placeholder="$t('home.selectBrand')"
@@ -114,7 +114,7 @@
                   :item-text="'brand'"
                   @setValue="$event ? (brand = $event.slug) : (brand = null),getModelsByBrand()"/>
               </div>
-              <div class="ml-lg-2 mb-1 mb-lg-0">
+              <div class="ml-lg-2 mb-1 mb-lg-0 search-by-car">
                 <AutoComplate
                   v-model="model"
                   :placeholder="$t('home.selectModel')"
@@ -123,7 +123,7 @@
                   :item-text="'name'"
                   @setValue="$event ? (model = $event.slug) : (model = null),getYears()"/>
               </div>
-              <div class="ml-lg-2 mb-1 mb-lg-0">
+              <div class="ml-lg-2 mb-1 mb-lg-0 search-by-car">
                 <AutoComplate
                   v-model="year"
                   :placeholder="$t('home.selectYear')"
@@ -133,7 +133,7 @@
                   @setValue="$event ? (year = $event.slug) : (year = null), goToShop()"
                 />
               </div>
-              <div class="ml-lg-2 mb-1 mb-lg-0">
+              <div class="ml-lg-2 mb-1 mb-lg-0 search-by-car">
                 <base-button-icon-1
                   @click="goToShop"
                   :icon="true"
@@ -292,3 +292,13 @@ export default {
   },
 }
 </script>
+<style>
+@media screen and (max-width: 767px){
+  .fcc-part-search-input{
+    height: 35px;
+  }
+  .search-by-car{
+    padding:3px;
+  }
+}
+</style>

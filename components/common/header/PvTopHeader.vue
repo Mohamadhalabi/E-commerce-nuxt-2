@@ -1,14 +1,14 @@
 <template>
-  <div class="row">
-    <div class="col-6">
-      <div class="text-center pl-6 pr-6 container top-notice-container top-n" :class="{'text-right': getIsAr}">
+  <div class="row top-header">
+    <div class="d-none d-lg-flex col-lg-6 ">
+      <div class="top-notice-container top-n" :class="{'text-right': getIsAr}">
         <p class="mb-auto mt-auto welcome-text">{{$t('common.WelcomeTo')}}
           <span class="second-top-notice">{{$t('common.tlkeys')}}</span>
         </p>
       </div>
     </div>
-    <div class="col-3">
-      <div class="d-flex align-items-center">
+    <div class="col-6 col-md-6 col-sm-6 col-lg-3">
+      <div class="d-flex align-items-center justify-content-lg-center">
         <div class="header-dropdown m-0" style="margin-top: 3px!important;">
           <a class="header-icons" href="javascript:;">{{ currency }}</a>
           <div class="header-menu text-center">
@@ -34,21 +34,19 @@
         </div>
       </div>
     </div>
-    <div class="col-3">
-      <div class="contact-icons d-flex ml-2 mr-2">
-        <div class="header-dropdown ml-2 mr-2 whatsapp-icon" @click="sendWhatsAppMessage">
-          <i class="fab fa-whatsapp"></i>
-        </div>
-
-        <div class="header-dropdown ml-2 mr-2 map-icon" @click="openGoogleMap">
-          <i class="fa fa-map-marker"></i>
-        </div>
-
-        <div class="header-dropdown ml-2 mr-2 phone-icon" @click="makePhoneCall">
-          <i class="fa fa-phone"></i>
-        </div>
+    <div class="col-6 col-md-6 col-sm-6 col-lg-1 d-flex mt-auto mb-auto ml-auto mr-lg-1 justify-content-end">
+      <div class="whatsapp-icon ml-2 mr-2" @click="sendWhatsAppMessage">
+        <i class="fab fa-whatsapp"></i>
       </div>
-      <pv-social-icons class="d-lg-flex social-icons ml-lg-5"/>
+
+      <div class="map-icon ml-2 mr-2" @click="openGoogleMap">
+        <i class="fa fa-map-marker"></i>
+      </div>
+
+      <div class="phone-icon ml-2 mr-2" @click="makePhoneCall">
+        <i class="fa fa-phone"></i>
+      </div>
+      <pv-social-icons class="social-icons ml-2"/>
     </div>
   </div>
 
@@ -122,5 +120,13 @@ export default {
 }
 </script>
 <style scoped>
-
+.whatsapp-icon ,.map-icon, .phone-icon{
+  font-size: 16px;
+}
+@media screen and (max-width: 350px){
+  .top-header{
+    display: inline-block;
+    text-align: center;
+  }
+}
 </style>

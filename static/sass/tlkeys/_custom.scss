@@ -286,7 +286,7 @@ button.mfp-close {
     border: 1px solid $navy-light-color;
     border-radius: 1px;
     transition: border-color .3s ease-in-out;
-    width: 14px;
+    width: 18px;
     height: 1px;
     margin-bottom: 2px;
     &:nth-child(1) {
@@ -413,7 +413,7 @@ button.mfp-close {
 .from-demo-26 .header-user .user-avatar {
   overflow: hidden;
   img {
-
+    border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 11px;
@@ -422,6 +422,7 @@ button.mfp-close {
     font-style: normal;
     background-color: $orange-light2-color;
     color: $navy-light-color;
+    margin: 10px;
   }
 }
 
@@ -1291,7 +1292,7 @@ input:checked ~ .accordion-content {
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 .welcome-text {
   font-weight: bold;

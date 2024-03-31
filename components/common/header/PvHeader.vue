@@ -1,7 +1,11 @@
 <template>
   <div class="from-demo-26">
+    <div class="bg-light-gray">
+      <div class="container p-lg-3 text-center">
+        <PvTopHeader />
+      </div>
+    </div>
     <header class="header">
-      <PvTopHeader />
       <div class="header-middle sticky-header mobile-sticky">
         <div class="container justify-content-center">
           <div class="row justify-content-center w-100 py-2 main-menu">
@@ -45,7 +49,7 @@
                     <i class="fa fa-search mt-auto"></i>
                   </a>
                 </div>
-                <b-modal v-model="modalOpen" class="modal-title" title="Find Your Product" hide-footer>
+                <b-modal v-model="modalOpen" class="modal-title" title="Find Your Product" centered hide-footer>
                   <div class="d-flex flex-column">
                     <div class="mb-2">
                       <label for="search-input" class="mr-2">Search:</label>
@@ -176,22 +180,7 @@
                   </ul>
                 </div>
               </div>
-              <!--              <div class="header-dropdown m-auto">-->
-              <!--                <a class="header-icons" href="javascript:;">{{-->
-              <!--                    currentLocale.shortName-->
-              <!--                  }}</a>-->
-              <!--                <div class="header-menu">-->
-              <!--                  <ul>-->
-              <!--                    <li-->
-              <!--                      v-for="locale in availableLocales"-->
-              <!--                      :key="locale"-->
-              <!--                      class="cursor-pointer"-->
-              <!--                      @click="setLocale(locale[0])">-->
-              <!--                      <a href="javascript:;" class="text-uppercase">{{ locale[0]}}</a>-->
-              <!--                    </li>-->
-              <!--                  </ul>-->
-              <!--                </div>-->
-              <!--              </div>-->
+
               <a
                 class="header-icon position-relative m-auto mt-1 ml-lg-3 cursor-pointer"
                 title="wishlist"
