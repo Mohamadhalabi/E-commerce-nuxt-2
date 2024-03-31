@@ -280,18 +280,17 @@ header {
   position: absolute;
   left: 0;
   top: 0;
-  bottom: 5px;
+  bottom: 50%;
 }
 
-@media screen and (max-width: 566px){
+@media screen and (min-width: 567px){
   .mobile-menu-toggler{
-    bottom: 50px;
+    bottom: 0px;
   }
 }
-
-@media screen and (max-width: 300px){
+@media screen and (max-width: 567px){
   .mobile-menu-toggler{
-    position: relative;
+    bottom: 40%;
   }
 }
 
