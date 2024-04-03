@@ -11,7 +11,7 @@
           </span>
           <div>
             <div class="searchProductStyle p-3">
-              <form class="nosubmit"
+              <form class="nosubmit2"
                     @submit.prevent="onEnter(searchKey)"
               >
                 <input
