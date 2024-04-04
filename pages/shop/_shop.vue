@@ -42,6 +42,18 @@
                 <li class="nav-item" v-if="frequently_asked_questions && !isEmpty(frequently_asked_questions)">
                   <a id="product-tab-faq" class="nav-link" data-toggle="tab" href="#faq-content" role="tab" aria-controls="faq-content" aria-selected="true">{{ $t("products.FAQ") }} ({{frequently_asked_questions.length}})</a>
                 </li>
+                <li class="nav-item">
+                  <a
+                    id="product-tab-contactus"
+                    class="nav-link"
+                    data-toggle="tab"
+                    href="#product-contactus-content"
+                    role="tab"
+                    aria-controls="product-contactus-content"
+                    aria-selected="false"
+                  >{{ $t("products.contactus") }}</a
+                  >
+                </li>
               </ul>
 
               <div class="tab-content">
@@ -75,6 +87,16 @@
                       </b-collapse>
                     </b-card>
                   </div>
+                </div>
+
+                <div
+                  id="product-contactus-content"
+                  class="tab-pane fade"
+                  role="tabpanel"
+                  aria-labelledby="product-tab-contactus"
+                >
+                  <pv-contactus
+                  />
                 </div>
               </div>
             </pv-tabs>
@@ -118,9 +140,11 @@ import SidebarFilter from "~/components/shop/SidebarFilter.vue";
 import PvTabs from "~/components/features/PvTabs.vue";
 import {isEmpty} from "lodash";
 import ImageModal from "~/components/product/ImageModal.vue";
+import PvContactus from "~/components/product/tabs/PvContactus.vue";
 export default {
   name: 'ShopTemplate',
   components: {
+    PvContactus,
     ImageModal,
     PvTabs,
     PvProductList,

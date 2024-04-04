@@ -40,7 +40,6 @@
     "@nuxtjs/dotenv": "1.4.1",
     "@nuxtjs/google-gtag": "^1.0.4",
     "@nuxtjs/i18n": "^7.3.0",
-    "@nuxtjs/recaptcha": "^1.1.2",
     "@nuxtjs/sitemap": "^2.4.0",
     "@nuxtjs/style-resources": "1.2.1",
     "bootstrap-vue": "^2.23.1",

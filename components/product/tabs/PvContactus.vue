@@ -74,8 +74,8 @@
                 />
                 <pv-error :error-msg="errorMsg.message"/>
               </div>
-              <recaptcha/>
-              <b v-if="this.token==''" class="text-danger">{{ $t('common.pleaseCheckRecaptch') }}</b>
+<!--              <recaptcha/>-->
+<!--              <b v-if="this.token==''" class="text-danger">{{ $t('common.pleaseCheckRecaptch') }}</b>-->
 
               <div class="form-footer">
                 <button
@@ -168,12 +168,12 @@ export default {
   },
   methods: {
     async sendMessage() {
-      try {
-        this.token = await this.$recaptcha.getResponse()
-      } catch (Ex) {
-        this.token = ''
-      }
-      if (this.token != '') {
+      // try {
+      //   this.token = await this.$recaptcha.getResponse()
+      // } catch (Ex) {
+      //   this.token = ''
+      // }
+      // if (this.token != '') {
         this.$Progress.start();
         Api.post('/contact-us', this.dataForm)
           .then(response => {
@@ -200,7 +200,7 @@ export default {
             this.$Progress.fail();
             this.errorMsg = err.response.data.data;
           });
-      }
+      // }
     }
   }
 };

@@ -80,12 +80,6 @@ export default {
     ],
     __dangerouslyDisableSanitizers: ['script']
   },
-  publicRuntimeConfig: {
-    recaptcha: {
-      version: 2,
-      siteKey: "6LdEvScpAAAAABszbLAI9U_xmaae55wodrrba7YU"
-    }
-  },
   css: [
     // '@static/css/bootstrap.min.css',
     '@static/css/porto-icons.min.css',
@@ -136,11 +130,7 @@ export default {
     pages: ['/'], // Add the routes you want to cache
   },
 
-  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap',[
-    '@nuxtjs/recaptcha', {
-      version: 2
-    },
-  ]],
+  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap'],
   bootstrapVue: {
     componentPlugins: [
       'CardPlugin',
@@ -459,10 +449,4 @@ export default {
       minRatio: 0.8,
     },
   },
-  hooks: {
-    'vue-renderer:ssr:context'(context) {
-      const routePath = JSON.stringify(context.nuxt.routePath);
-      context.nuxt = {serverRendered: true, routePath};
-    }
-  }
 };
