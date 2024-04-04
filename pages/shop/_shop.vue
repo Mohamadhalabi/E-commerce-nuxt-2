@@ -42,6 +42,20 @@
                 <li class="nav-item" v-if="frequently_asked_questions && !isEmpty(frequently_asked_questions)">
                   <a id="product-tab-faq" class="nav-link" data-toggle="tab" href="#faq-content" role="tab" aria-controls="faq-content" aria-selected="true">{{ $t("products.FAQ") }} ({{frequently_asked_questions.length}})</a>
                 </li>
+
+                <li class="nav-item" v-if="videos && !isEmpty(videos)">
+                  <a
+                    id="video-tab"
+                    class="nav-link"
+                    data-toggle="tab"
+                    href="#video-tab-content"
+                    role="tab"
+                    aria-controls="video-tab-content"
+                    aria-selected="false"
+                  >Videos</a
+                  >
+                </li>
+
                 <li class="nav-item">
                   <a
                     id="product-tab-contactus"
@@ -54,6 +68,7 @@
                   >{{ $t("products.contactus") }}</a
                   >
                 </li>
+
               </ul>
 
               <div class="tab-content">
@@ -90,14 +105,31 @@
                 </div>
 
                 <div
+                  id="video-tab-content"
+                  class="tab-pane fade"
+                  role="tabpanel"
+                  aria-labelledby="video-tab"
+                >
+                  <div class="row">
+                    <div
+                      v-for="(video, index) in videos"
+                      :key="index"
+                      class="downloadVedioWrapper col-md-4 col-sm-12 col-12 mb-2">
+                      <video-player :src="video" />
+                    </div>
+                  </div>
+                </div>
+
+                <div
                   id="product-contactus-content"
                   class="tab-pane fade"
                   role="tabpanel"
-                  aria-labelledby="product-tab-contactus"
+                  aria-labelledby="contactus-tab"
                 >
                   <pv-contactus
                   />
                 </div>
+
               </div>
             </pv-tabs>
           </div>
@@ -175,6 +207,7 @@ export default {
       openModal: false,
       selectedImageUrl: '',
       frequently_asked_questions: [],
+      videos: [],
       flippedArrows: [],
     };
   },
@@ -191,6 +224,7 @@ export default {
       this.slugtype = "manufacturer";
       this.title = this.manufacturer.title;
       this.frequently_asked_questions = this.manufacturer.frequently_asked_questions
+      this.videos = this.manufacturer.videos
 
     } else if (this.brand) {
       this.slug = this.brand.slug;

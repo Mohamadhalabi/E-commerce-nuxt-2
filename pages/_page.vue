@@ -167,6 +167,31 @@ export default {
           },
         });
       }
+      if (this.page.video_details && this.page.video_details.length > 0) {
+        this.page.video_details.forEach(video => {
+          let thumbnailUrls = [];
+          // Iterate over each thumbnail type (default, high, maxres, medium, standard)
+          for (let thumbnailType in video.thumbnailUrl) {
+            // Push the URL of each thumbnail into the array
+            thumbnailUrls.push(video.thumbnailUrl[thumbnailType].url);
+          }
+
+          head_data["script"].push({
+            type: 'application/ld+json',
+            json: {
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": video.name,
+              "description": video.description,
+              "thumbnailUrl": thumbnailUrls,
+              "uploadDate": video.uploadDate,
+              "duration": video.duration,
+              "contentUrl": video.contentUrl,
+              "embedUrl": video.embedUrl,
+            }
+          });
+        });
+      }
     }
 
     if (this.page.type == "page") {
