@@ -458,5 +458,11 @@ export default {
       threshold: 10240,
       minRatio: 0.8,
     },
+  },
+  hooks: {
+    'vue-renderer:ssr:context'(context) {
+      const routePath = JSON.stringify(context.nuxt.routePath);
+      context.nuxt = {serverRendered: true, routePath};
+    }
   }
 };
