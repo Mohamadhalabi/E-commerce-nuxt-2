@@ -278,19 +278,21 @@ header {
 	line-height: 0;
 	cursor: pointer;
   position: absolute;
-  left: 0;
+  left: 8px;
   top: 0;
-  bottom: 50%;
+  bottom: 0;
 }
 
-@media screen and (min-width: 567px){
-  .mobile-menu-toggler{
-    bottom: 0px;
-  }
-}
+
+//@media screen and (min-width: 567px){
+//  .mobile-menu-toggler{
+//    bottom: 0px;
+//  }
+//}
 @media screen and (max-width: 567px){
   .mobile-menu-toggler{
-    bottom: 30%;
+    //bottom: 30%;
+    bottom:70px
   }
 }
 

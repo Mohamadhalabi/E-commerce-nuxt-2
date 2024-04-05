@@ -283,11 +283,11 @@ button.mfp-close {
 .mobile-menu-toggler .fas.fa-bars {
   div {
     box-sizing: content-box;
-    border: 1px solid $navy-light-color;
+    border: 1px solid black;
     border-radius: 1px;
     transition: border-color .3s ease-in-out;
-    width: 18px;
-    height: 1px;
+    width: 22px;
+    height: 2px;
     margin-bottom: 2px;
     &:nth-child(1) {
     }

@@ -10,19 +10,20 @@
         <div class="container justify-content-center">
           <div class="row justify-content-center w-100 py-2 main-menu">
             <!--Begin: Left Side -->
+
+            <div>
+              <button
+                class="mobile-menu-toggler"
+                type="button"
+                @click="showMobileMenu"
+              >
+                <i class="fas fa-bars">
+                  <div v-for="number in numbers" :key="number"></div>
+                </i>
+              </button>
+            </div>
             <div
               class="d-flex align-items-center flex-md-row flex-lg-grow-1 ">
-              <div>
-                <button
-                  class="mobile-menu-toggler"
-                  type="button"
-                  @click="showMobileMenu"
-                >
-                  <i class="fas fa-bars">
-                    <div v-for="number in numbers" :key="number"></div>
-                  </i>
-                </button>
-              </div>
               <nuxt-link :to="getLink('/')">
                 <nuxt-img
                   v-if="!isMobile"
