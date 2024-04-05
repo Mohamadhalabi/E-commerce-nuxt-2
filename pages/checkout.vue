@@ -96,7 +96,7 @@
                             @click="GetShippingMethod(item)"
                           />
                           <img
-                            v-if="item !=='pick_up' || item !=='domestic'"
+                            v-if="item !=='pick_up' && item !=='domestic'"
                             class="shipping-methods"
                             :src="`./images/payments_and_shipping/${item}-png.png`"
                             :alt="item"
