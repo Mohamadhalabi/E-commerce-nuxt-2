@@ -23,12 +23,12 @@
           </div>
         </div>
         <div class="header-about-contact">
-          <nuxt-link :to="getLink('/about')">
+          <nuxt-link :to="('/about')">
             {{ $t("header.about") }}
           </nuxt-link>
         </div>
         <div class="header-about-contact">
-          <nuxt-link :to="getLink('/contact')">
+          <nuxt-link :to="('/contact')">
             {{ $t("header.contact") }}
           </nuxt-link>
         </div>
