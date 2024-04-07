@@ -173,6 +173,7 @@ import PvTabs from "~/components/features/PvTabs.vue";
 import {isEmpty} from "lodash";
 import ImageModal from "~/components/product/ImageModal.vue";
 import PvContactus from "~/components/product/tabs/PvContactus.vue";
+import {scrollTopHandler} from "~/utils";
 export default {
   name: 'ShopTemplate',
   components: {
@@ -231,6 +232,9 @@ export default {
       this.description = this.brand.description;
       this.slugtype = "brand";
       this.title = this.brand.title;
+    }
+    if(process.client){
+      scrollTopHandler();
     }
   },
   methods: {
