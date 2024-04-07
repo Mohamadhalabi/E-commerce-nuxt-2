@@ -222,6 +222,18 @@
       </div>
 
     </div>
+    <div v-if="product.has_cover">
+      <AutoComplate
+        v-model="selectedBrand"
+        placeholder="Please Select a brand for the cover"
+        :options="selectBrands"
+        @setValue="
+            $event
+              ? (selectedBrand = $event.name)
+              : (selectedBrand = null)
+          "
+      />
+    </div>
     <div v-if="ProductStatus !== null && ProductSKU === product.sku">
       <b-alert
           variant="danger"
@@ -253,9 +265,11 @@ import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import PvOffers from "./tabs/PvOffers.vue";
 import PvCompareButton from './partials/PvCompareButton.vue';
 import PvRating from "~/components/product/partials/PvRating.vue";
+import AutoComplate from "~/components/common/AutoComplate.vue";
 
 export default {
   components: {
+    AutoComplate,
     PvRating,
     PvPriceBox,
     PvProductNav,
@@ -282,7 +296,8 @@ export default {
       models: null,
       showDismissibleAlert: true,
       minPurchaseQty:0,
-
+      selectBrands: [],
+      selectedBrand: null,
     };
   },
   computed: {
@@ -297,15 +312,16 @@ export default {
     this.minPurchaseQty = this.product.min_purchase_qty;
     let dataModels = [];
     for (const item of this.product.brands) {
-      if (!dataModels.includes(item.brand)) {
-        dataModels.push(item.brand)
+      if (!dataModels.some(model => model.value === item.brand)) {
+        dataModels.push({ name: item.brand, value: item.brand });
       }
     }
-    if (dataModels != [])
-      this.models = dataModels.join(',')
-    else{
-      this.models =null
+    if (dataModels.length > 0) {
+      this.models = dataModels.map(model => model.value).join(',');
+    } else {
+      this.models = null;
     }
+    this.selectBrands = dataModels;
   },
   methods: {
     ...mapActions("shop", ["addToCart"]),

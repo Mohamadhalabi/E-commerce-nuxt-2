@@ -386,7 +386,7 @@ export default {
     };
   },
 
-  mounted() {
+  created() {
     this.getCartList();
   },
   computed: {
