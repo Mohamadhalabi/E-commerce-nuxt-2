@@ -1,7 +1,17 @@
 <template>
   <div>
     <div v-for="(image, index) in product.gallery" :key="index" class="slide rounded-5" ref="main" @mouseenter="mouseEntered" @mouseleave="mouseLeft">
-      <ImageMagnifier v-if="index === currentIndex" :image="image" size="l" :isMouseInside="isMouseInside" />
+      <div class="showOnDesktop">
+        <ImageMagnifier v-if="index === currentIndex" :image="image" size="l" :isMouseInside="isMouseInside" />
+      </div>
+      <div class="showOnMobile">
+        <img
+          :src="image['l']['url']"
+          v-if="index === currentIndex"
+          class="rounded-5"
+          style="border: 1px solid #e7e7e6!important;"
+        />
+      </div>
     </div>
 
     <Carousel
@@ -66,3 +76,15 @@ export default {
   },
 };
 </script>
+<style>
+@media screen and (max-width: 993px){
+  .showOnDesktop{
+    display: none;
+  }
+}
+@media screen and (min-width: 993px){
+  .showOnMobile{
+    display: none;
+  }
+}
+</style>

@@ -159,7 +159,7 @@
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''">
             <div @click="closeAllNav()">
-              <nuxt-link :to="item2.slug">
+              <nuxt-link :to="'/'+item2.slug">
                 <nuxt-img format="webp" alt="key and remote" :src="item2.image"  width="100" height="100" class="mt-1 mb-1" loading="lazy" />
                 <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
               </nuxt-link>
@@ -175,7 +175,7 @@
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''" >
             <div @click="closeAllNav()">
-              <nuxt-link :to="item2.slug">
+              <nuxt-link :to="'/'+item2.slug">
                 <nuxt-img alt="Accessories and tools" format="webp" :src="item2.image" width="100" height="100" class="mt-1 mb-1" loading="lazy" />
                 <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
               </nuxt-link>
@@ -190,7 +190,7 @@
       <div v-for="(item,index) in devicesAndMachines" :key="index" class="row ml-auto mr-auto text-center mb-1">
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''" >
-            <nuxt-link :to="item2.slug">
+            <nuxt-link :to="'/'+item2.slug">
               <div @click="closeAllNav()">
                 <nuxt-img alt="Device and machines" format="webp" :src="item2.image" width="100" height="100" class="mt-1 mb-1" loading="lazy" />
                 <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
@@ -207,7 +207,7 @@
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''">
             <div @click="closeAllNav()">
-              <nuxt-link :to="item2.slug">
+              <nuxt-link :to="'/'+item2.slug">
                 <nuxt-img alt="Manufactures" format="webp" :src="item2.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
                 <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
               </nuxt-link>
@@ -223,7 +223,7 @@
         <div v-for="(item2, index2) in item" :key="index2" class="col-6">
           <div v-if="item2.slug && item2.slug !=''">
             <div @click="closeAllNav()">
-              <nuxt-link :to="item2.slug">
+              <nuxt-link :to="'/'+item2.slug">
                 <nuxt-img alt="Cars" format="webp" :src="item2.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
                 <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
               </nuxt-link>
@@ -245,7 +245,7 @@
               <div v-if="item3.slug.includes('software')" >
                 <div @click="closeAllNav()">
                   <nuxt-link
-                    :to="item3.slug">
+                    :to="'/'+item3.slug">
                     <nuxt-img alt="Software" format="webp" :src="item3.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
                     <span class="font-weight-bold">{{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}</span>
                   </nuxt-link>
@@ -266,7 +266,7 @@
               <div v-if="item3.slug.includes('token')" >
                 <div @click="closeAllNav()">
                   <nuxt-link
-                    :to="item3.slug">
+                    :to="'/'+item3.slug">
                     <nuxt-img alt="Token" format="webp" :src="item3.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
                     <span class="font-weight-bold">{{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}</span>
                   </nuxt-link>
