@@ -57,6 +57,7 @@ export default {
         },
       ],
       meta: [
+        { name: 'robots', content: 'noindex, nofollow' },
         {
           "http-equiv": "content-language",
           content: this.$i18n.locale,

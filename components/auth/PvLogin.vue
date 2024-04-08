@@ -209,7 +209,7 @@ export default {
       let cartListLocalStorge = JSON.parse(localStorage.getItem("card"));
       if (cartListLocalStorge && cartListLocalStorge.length > 0) {
         for (let index = 0; index < cartListLocalStorge.length; index++) {
-          this.addToCartWithoutNotifications(cartListLocalStorge[index]);
+          this.addToCart(cartListLocalStorge[index]);
         }
         localStorage.removeItem("card");
       }

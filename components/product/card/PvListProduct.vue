@@ -109,7 +109,7 @@
         ></whatsapp-button>
 
         <base-button-icon-1
-          v-else-if="!product.has_token"
+          v-else-if="!product.has_token && !product.has_cover"
           style="width: 100px"
           class="px-2 py-2 mx-2"
           @click="addToCart(product)"
