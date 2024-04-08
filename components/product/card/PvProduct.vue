@@ -107,7 +107,7 @@
       </button>
 
       <base-button-icon-1
-        v-else-if="!product.has_token"
+        v-else-if="!product.has_token && !product.has_cover"
         class="px-2 py-2 mx-1 w-100"
         @click="addToCart(product)"
         :outline="true"

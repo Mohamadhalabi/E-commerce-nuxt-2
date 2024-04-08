@@ -199,7 +199,7 @@
         v-if="product.hide_price == 0"
         @click="
           product.quantity = qty;
-          addToCart(product);
+          AddProductToCart(product);
         "
         :outline="true"
         class="mx-2 py-4"
@@ -326,6 +326,20 @@ export default {
   methods: {
     ...mapActions("shop", ["addToCart"]),
     ...mapActions("compare", ["fetchList", "addToList"]),
+
+    AddProductToCart(product){
+      if(this.selectedBrand == null && this.product.has_cover){
+        this.$notify({
+          group: 'errorMessage',
+          type: 'error',
+          text: "Please choose a cover"
+        });
+      }
+      else{
+        product["cover_model"] = this.selectedBrand;
+        this.addToCart(product)
+      }
+    },
 
     getLink(route) {
       if (this.getLang === 'en') {
