@@ -598,8 +598,11 @@ export default function(req, res, next) {
     {
       from:"/products/Original-Nissan-2013-2018-Flip-Key-3-Buttons-433MHz-H0561-4CA0B-40231",
       to:"/products/Original-Nissan-Sunny-2018-2024-Flip-Key-3-Buttons-433MHz-40231"
+    },
+    {
+      from:"/products/Original-Ford-F-150-2017-Smart-Key-Remote-3-Buttons-868MHz-ID49-Chip-GB5T-15K601-DB-36157",
+      to:"/products/SUNSHINE-LC-AD15-Infrared-Thermal-Imaging-Analyzing-Camera-400W-3D-36157"
     }
-
 
 
   ]
