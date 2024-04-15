@@ -110,7 +110,6 @@ export default {
     'vue-ssr-carousel/nuxt',
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
-    'cookie-universal-nuxt',
     ['nuxt-i18n', {
       detectBrowserLanguage: false,
       locales: availableLocales,
@@ -125,12 +124,7 @@ export default {
     }]
   ],
 
-  ssrCache: {
-    useHostPrefix: false,
-    pages: ['/'], // Add the routes you want to cache
-  },
-
-  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image','@nuxtjs/sitemap'],
+  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image'],
   bootstrapVue: {
     componentPlugins: [
       'CardPlugin',
@@ -174,148 +168,6 @@ export default {
     },
     baseURL: process.env.API_BASE_URL
   },
-  sitemap: {
-    path: '/sitemap.xml',
-    sitemaps: [
-      {
-        path: '/sitemap-en.xml',
-        cacheTime: 86400, // 24 hours in seconds
-        gzip: false,
-        generate: false, // Enable me when using nuxt generate
-        exclude: [
-          '/ar/**',
-          '/fr/**',
-          '/es/**',
-          '/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**'],
-        routes: async () => {
-          try {
-            const dynamicRoutesResponse = await axios.get('https://dev-srv.tlkeys.com/products-routes');
-            const dynamicRoutes = dynamicRoutesResponse.data; // Extract data from the response
-            // categories :
-            const dynamicRoutesResponse2 = await axios.get('https://dev-srv.tlkeys.com/categories');
-            const dynamicRoutes2 = dynamicRoutesResponse2.data; // Extract data from the response
-
-            const dynamicRoutesResponse3 = await axios.get('https://dev-srv.tlkeys.com/manufacturers');
-            const dynamicRoutes3 = dynamicRoutesResponse3.data; // Extract data from the response
-
-            const dynamicRoutesResponse4 = await axios.get('https://dev-srv.tlkeys.com/brands');
-            const dynamicRoutes4 = dynamicRoutesResponse4.data; // Extract data from the response
-
-            const dynamicRoutesResponse5 = await axios.get('https://dev-srv.tlkeys.com/downloads');
-            const dynamicRoutes5 = dynamicRoutesResponse5.data; // Extract data from the response
-
-            const allRoutes = [
-              '/',
-              ...dynamicRoutes,
-              ...dynamicRoutes2,
-              ...dynamicRoutes3,
-              ...dynamicRoutes4,
-              ...dynamicRoutes5
-            ];
-
-            return allRoutes;
-          } catch (error) {
-            console.error('Error fetching dynamic routes:', error);
-            return [];
-          }
-        },
-      },
-      {
-        path: '/sitemap-images.xml',
-        cacheTime: 86400, // 24 hours in seconds
-        gzip: false,
-        generate: false, // Enable me when using nuxt generate
-        exclude: [
-          '/fr/**',
-          '/ar/**',
-          '/promotion/**',
-          '/routes',
-          '/unlock-remote-services',
-          '/products','/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**',
-          '/about','/account','/ar','/cancellation-replacement-policy','/cart','/checkout','/compares','/complete-order','/contact','/deliveryinfo','/downloads',
-          '/fr','/online-services','pin-code','/privacy-policy','/register-completed','/return-policy','/terms'
-
-        ],
-        routes: async () => {
-          try {
-            const dynamicRoutesResponse_images = await axios.get('https://dev-srv.tlkeys.com/sitemap-images');
-            const dynamicRoutes_images = dynamicRoutesResponse_images.data; // Extract data from the response
-
-            const allRoutes = [
-              ...dynamicRoutes_images,
-            ];
-            return allRoutes;
-          } catch (error) {
-            console.error('Error fetching dynamic routes:', error);
-            return [];
-          }
-        },
-      },
-      {
-        path: '/sitemap-videos.xml',
-        cacheTime: 86400, // 24 hours in seconds
-        gzip: false,
-        generate: false, // Enable me when using nuxt generate
-        exclude: [
-          '/fr/**',
-          '/ar/**',
-          '/promotion/**',
-          '/routes',
-          '/unlock-remote-services',
-          '/products','/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**',
-          '/about','/account','/ar','/cancellation-replacement-policy','/cart','/checkout','/compares','/complete-order','/contact','/deliveryinfo','/downloads',
-          '/fr','/online-services','pin-code','/privacy-policy','/register-completed','/return-policy','/terms'
-
-        ],
-        routes: async () => {
-          try {
-            const dynamicRoutesResponse_images = await axios.get('https://dev-srv.tlkeys.com/sitemap-videos');
-            const dynamicRoutes_images = dynamicRoutesResponse_images.data; // Extract data from the response
-
-            const allRoutes = [
-              ...dynamicRoutes_images,
-            ];
-            return allRoutes;
-          } catch (error) {
-            console.error('Error fetching dynamic routes:', error);
-            return [];
-          }
-        },
-      },
-      {
-        path: '/sitemap-pdfs.xml',
-        cacheTime: 86400, // 24 hours in seconds
-        gzip: false,
-        generate: false, // Enable me when using nuxt generate
-        exclude: [
-          '/fr/**',
-          '/ar/**',
-          '/promotion/**',
-          '/routes',
-          '/unlock-remote-services',
-          '/products','/secret', '/ar/auth/**' ,'/verify-mail' ,'/ar/verify-mail', '/orders', '/ar/register-completed' ,'/fr/verify-mail','/fr/PvFreeShippingAmount', '/fr/register-completed','/fr/compares' ,'/fr/checkout' ,'/fr/cart' ,'/ar/wishlist' ,'/ar/orders' ,'/wishlist' ,'verify-mail' ,'/ar/PvFreeShippingAmount', '/ar/completed-order' ,'/ar/compares', '/ar/checkout' , '/ar/cart' ,'/ar/account','/apps/validation','/PvFreeShippingAmount','/fr/auth/**','/fr/apps/validation', '/ar/apps/validation' , '/fr/wishlist', '/fr/verify', '/fr/orders', '/fr/complete-order','/fr/account','/auth/**',
-          '/about','/account','/ar','/cancellation-replacement-policy','/cart','/checkout','/compares','/complete-order','/contact','/deliveryinfo','/downloads',
-          '/fr','/online-services','pin-code','/privacy-policy','/register-completed','/return-policy','/terms'
-
-        ],
-        routes: async () => {
-          try {
-            const dynamicRoutesResponse_images = await axios.get('https://dev-srv.tlkeys.com/sitemap-pdf');
-            const dynamicRoutes_images = dynamicRoutesResponse_images.data; // Extract data from the response
-
-            const allRoutes = [
-              ...dynamicRoutes_images,
-            ];
-            return allRoutes;
-          } catch (error) {
-            console.error('Error fetching dynamic routes:', error);
-            return [];
-          }
-        },
-      }
-    ]
-  },
-
   render: {
     asyncScript:true,
     http2: {
