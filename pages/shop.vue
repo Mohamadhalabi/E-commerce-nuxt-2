@@ -67,7 +67,7 @@ import PvProductList from "~/components/shop/PvProductList.vue";
 
 export default {
   directives: {
-    Sticky: () => import("vue-sticky-directive"),
+    // Sticky: () => import("vue-sticky-directive"),
   },
   components: {
     SidebarFilter: () => import("~/components/shop/SidebarFilter.vue"),
