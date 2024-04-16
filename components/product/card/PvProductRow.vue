@@ -124,14 +124,20 @@ export default {
       "cartPaymentPrice",
     ])
   },
-  created() {
-    this.getCartList();
+  mounted() {
+    this.getCartList().then(() => {
+      this.cartList.forEach(item => {
+        if (item.sku === this.product.sku) {
+          this.checked = true;
+        }
+      });
+    });
   },
   props: {
     product: Object
   },
   methods: {
-    ...mapActions("shop", ["addToCart", "removeFromCart" , "getCartList"]),
+    ...mapActions("shop", ["addToCart", "removeFromCart","getCartList"]),
     goToWhatsApp() {
       window.open(
         `https://api.whatsapp.com/send?phone=00905525700100&text=Could I please have the price of the ${this.product.short_title}`,
@@ -140,17 +146,12 @@ export default {
     },
     // add or remove from cart
     handleChange(product) {
-      if(this.checked == true){
+      if(this.checked){
         this.addToCart(product)
       }
       else{
-        const productId = product.id;
-        // Find the index of the products in the cartList array
-        const index = this.cartList.findIndex(item => item.id === productId);
-
-        if (index !== -1) {
-          this.removeFromCart({ product, index })
-        }
+        const filteredCartItems = this.cartList.filter(item => item.sku === product.sku);
+        this.removeFromCart({product:filteredCartItems[0],index:1})
       }
     }
   }

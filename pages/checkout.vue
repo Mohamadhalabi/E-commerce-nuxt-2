@@ -576,10 +576,7 @@ export default {
     },
   },
   mounted() {
-    // this.getMyAddress();
-    this.getMyCard();
     this.refetchPrice();
-
     this.reFetchShippingMethod();
     if (this.$settings.payment_methods.paypal == "paypal") {
       this.paymanetMethodCount++;
