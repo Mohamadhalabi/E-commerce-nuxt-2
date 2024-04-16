@@ -89,98 +89,6 @@ export const actions = {
     }
   },
 
-  // addToCartWithoutNotifications: async function ({ commit }, payload) {
-  //
-  //   if (localStorage.getItem('tokenEnded') == 1) {
-  //     if (!payload['quantity']) {
-  //       payload['quantity'] = 1;
-  //     }
-  //
-  //     let cartListCheck = JSON.parse(localStorage.getItem('card')) || [];
-  //
-  //     cartListCheck.forEach((item, index) => {
-  //
-  //       if (item.slug == payload.slug) {
-  //
-  //         cartListCheck.splice(index, 1);
-  //         if(process.client)
-  //         localStorage.setItem('card', JSON.stringify(cartListCheck));
-  //       }
-  //     })
-  //
-  //     let cartList = JSON.parse(localStorage.getItem('card')) || [];
-  //     let concateCard = cartList.concat([payload]);
-  //     if(process.client)
-  //     localStorage.setItem('card', JSON.stringify(concateCard));
-  //
-  //     let totalPrice = {
-  //       currency: concateCard[0]['price']['currency'],
-  //       value: 0
-  //     };
-  //
-  //     for (let index = 0; index < concateCard.length; index++) {
-  //       totalPrice.value += parseFloat(concateCard[index]['price']['value']) * parseFloat(concateCard[index]['quantity']);
-  //     }
-  //     totalPrice.value = totalPrice.value.toString();
-  //
-  //     let response = {
-  //       discount_value: totalPrice,
-  //       dolar_price: totalPrice,
-  //       products: concateCard,
-  //       total: totalPrice,
-  //       total_before_coupon: totalPrice
-  //     };
-  //
-  //     commit('UPDATE_CART', response);
-  //
-  //     this._vm.$notify({
-  //       group: 'addProduct',
-  //       text: 'Has been added to your cart',
-  //       type: 'success',
-  //       data: payload,
-  //     });
-  //     return;
-  //   }
-  //
-  //   // if (!payload.gallery[0]['s']) {
-  //   //   for (let index = 0; index < payload.gallery.length; index++) {
-  //   //     payload.gallery[index]['s'] = payload.gallery[index]['m'];
-  //   //
-  //   //   }
-  //   // }
-  //
-  //   if (localStorage.getItem('tokenEnded') == '1') return;
-  //
-  //   payload.product = payload.sku;
-  //   payload.quantity = payload.quantity || 1;
-  //   let product = pick(payload, ['product', 'quantity', 'short_title', 'price', 'serial_number', 'gallery']);
-  //
-  //   Api.post('cart', product)
-  //     .then(() => {
-  //       let response = Api.get('cart');
-  //       // this._vm.$notify({
-  //       //   group: 'addProduct',
-  //       //   text: 'Has been added to your cart',
-  //       //   data: payload,
-  //       //   type: 'success',
-  //       //   position: 'top right',
-  //       // });
-  //       response.then((res) => {
-  //         commit('UPDATE_CART', res.data);
-  //       });
-  //
-  //     })
-  //     .catch((error) => {
-  //       let message = error.response.data.message;
-  //       this._vm.$notify({
-  //         group: 'errorMessage',
-  //         text: message
-  //
-  //       });
-  //     });
-  //
-  // },
-
   addToCart: async function ({ commit }, payload) {
     if (localStorage.getItem('tokenEnded') == 1) {
       if (!payload['quantity']) {
@@ -337,6 +245,10 @@ export const actions = {
   },
 
   removeFromCart: async function ({ commit }, payload) {
+
+
+    console.log(payload)
+
     if (localStorage.getItem('tokenEnded') == '1') {
       let cartList = JSON.parse(localStorage.getItem('card'));
       cartList.splice(parseInt(payload.index), 1);

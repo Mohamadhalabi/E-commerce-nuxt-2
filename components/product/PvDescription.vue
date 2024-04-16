@@ -10,7 +10,7 @@
               :key="item.sku"
               class="col-lg-12 col-md-12 col-sm-12"
             >
-              <pv-product-row :product="item" />
+              <pv-product-row :product="item"  />
             </div>
           </td>
         </tr>
