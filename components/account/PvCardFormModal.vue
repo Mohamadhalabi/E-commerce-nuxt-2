@@ -275,7 +275,7 @@ export default {
   },
   methods: {
     submit: function () {
-      this.$Progress.start();
+      // this.$Progress.start();
       this.loadingAddCard = true;
       let dataForm = {
         card_name: this.valueFields.cardName,
@@ -329,7 +329,7 @@ export default {
           this.loadingAddCard = false;
         });
 
-      this.$Progress.finish();
+      // this.$Progress.finish();
     },
     changeName(e) {
       this.valueFields.cardName = e.target.value;

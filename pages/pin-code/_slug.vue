@@ -175,7 +175,7 @@ export default {
     },
   },
   mounted() {
-    this.$Progress.start();
+    // this.$Progress.start();
   },
   methods:{
     goToWhatsApp(product) {
@@ -195,7 +195,7 @@ export default {
           this.brand = this.matchingBrand.brand;
           this.brands = this.brands.filter(item => item.brand !== this.matchingBrand.brand);
           this.image = this.matchingBrand.pin_code_image
-          this.$Progress.finish();
+          // this.$Progress.finish();
         })
         .catch(error => ({ error: JSON.stringify(error) }));
     },

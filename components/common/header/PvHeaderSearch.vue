@@ -194,7 +194,7 @@ export default {
           this.timer = null;
         }
         this.timer = setTimeout(() => {
-          this.$Progress.start();
+          // this.$Progress.start();
           let query = `?search=${search_key}`;
           if (this.selectedCategory != null && this.selectedCategory !== "shop") {
             query = `?search=${search_key}&categories=${this.selectedCategory}`;
@@ -204,10 +204,10 @@ export default {
               this.productsBySearch = response.data.products;
               this.getProductsBySearchArrayLength = response.data.total;
               this.availableItems = this.productsBySearch.slice(0, 5);
-              this.$Progress.finish();
+              // this.$Progress.finish();
             })
             .catch((error) => {
-              this.$Progress.fail();
+              // this.$Progress.fail();
               return {error: JSON.stringify(error)};
             });
         }, 500);

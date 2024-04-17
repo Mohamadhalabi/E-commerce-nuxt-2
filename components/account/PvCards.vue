@@ -135,14 +135,14 @@ export default {
     },
     getCards() {
       this.cards = null;
-      this.$Progress.start();
+      // this.$Progress.start();
       Api.get("/card?length=1000000")
         .then((response) => {
           this.cards = response.data.cards;
           // scrollTopHandler();
         })
         .catch((error) => ({ error: JSON.stringify(error) }));
-      this.$Progress.finish();
+      // this.$Progress.finish();
     },
     closedEvent() {
       this.$bvModal.hide("bv-modal-card");

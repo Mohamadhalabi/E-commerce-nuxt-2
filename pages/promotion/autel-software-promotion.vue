@@ -50,7 +50,7 @@ export default {
     ...mapGetters('rtlStore',['getIsAr'])
   },
   mounted() {
-    this.$Progress.start();
+    // this.$Progress.start();
   },
 };
 </script>

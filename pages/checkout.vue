@@ -613,11 +613,11 @@ export default {
       }
     },
     generatePdf(){
-      this.$Progress.start();
+      // this.$Progress.start();
       Api.get(`/generate-pdf-checkout`, {params: {user: this.StateUser.email, currency: this.cartCurrency, address:this.dataForm.address,shipping_method:this.dataForm.shipping_method
           ,shipping_cost:this.checkoutData.shipping_cost.value}})
         .then((response) => {
-          this.$Progress.finish();
+          // this.$Progress.finish();
           // Assuming the response contains the base64-encoded PDF data as 'pdf'
           if (response.data.pdf) {
             // Convert base64 to binary data
@@ -790,7 +790,7 @@ export default {
     },
 
     refetchPrice() {
-      this.$Progress.start();
+      // this.$Progress.start();
       let query = "?";
       if (this.dataForm.address) {
         query += `address=${this.dataForm.address}&`;
@@ -811,7 +811,7 @@ export default {
             this.checkoutData.shipping_cost.value = 0.00
           }
           this.checkHasBlockedCountry(this.checkoutData.products);
-          this.$Progress.finish();
+          // this.$Progress.finish();
         })
         .catch((error) => {
           console.log(error)

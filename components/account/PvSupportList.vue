@@ -487,10 +487,10 @@ export default {
     };
   },
   created() {
-    this.$Progress.start();
+    // this.$Progress.start();
     this.getSupport();
     this.getOrders();
-    this.$Progress.finish();
+    // this.$Progress.finish();
   },
   methods: {
     getSupport() {

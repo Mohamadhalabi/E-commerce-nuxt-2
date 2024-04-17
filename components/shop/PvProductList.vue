@@ -290,7 +290,7 @@ export default {
     },
   },
   mounted() {
-    this.$Progress.start();
+    // this.$Progress.start();
   },
   methods: {
     async fetchProducts(){
@@ -455,7 +455,7 @@ export default {
           } else {
             this.viewType = "product";
           }
-          this.$Progress.finish();
+          // this.$Progress.finish();
         }
         this.products = response.data.products;
 
@@ -468,7 +468,7 @@ export default {
           this.md = response.data.md5;
         }
         this.pageCount = response.data.total_pages;
-        this.$Progress.finish();
+        // this.$Progress.finish();
       });
     },
   },

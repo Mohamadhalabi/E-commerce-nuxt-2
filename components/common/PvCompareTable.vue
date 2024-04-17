@@ -432,7 +432,7 @@ export default {
   },
 
   mounted: async function () {
-    this.$Progress.start();
+    // this.$Progress.start();
     await this.fetchList();
     const mergedAttributes = {};
     const listLength = this.getList.length;
@@ -447,7 +447,7 @@ export default {
         }
       }
     });
-    this.$Progress.finish();
+    // this.$Progress.finish();
     this.mergedAttributes = mergedAttributes;
   },
 

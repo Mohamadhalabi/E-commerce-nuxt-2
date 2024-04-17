@@ -96,7 +96,7 @@ export default {
     {src: '@plugins/settings.js', ssr: true},
     {src: '@plugins/localstorage.js', ssr: false},
     {src: '@plugins/filters.js', ssr: true},
-    {src: '@plugins/vue-progressbar.js', ssr: true},
+    // {src: '@plugins/vue-progressbar.js', ssr: true},
     // {src: '@plugins/directives/animate.js', ssr: true},
     // {src: '@plugins/directives/parallax.js', ssr: false},
     {src: '@plugins/directives/sticky.js', ssr: true},
@@ -256,14 +256,19 @@ export default {
     fallback: '404.html'
   },
   ssr: true,
-  loading: false,
-  loadingIndicator: false,
+  loading: {
+    color: '#f07905',
+    height: '6px',
+    throttle: 0,
+    failedColor: 'red',
+  },
+
 
   pageTransition: 'page',
 
   server: {
     port: 4000,
-    host: 'localhost'
+    host: process.env.host
   },
   nuxtPrecompress: {
     enabled: true, // Enable in production

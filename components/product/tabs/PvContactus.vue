@@ -174,7 +174,7 @@ export default {
       //   this.token = ''
       // }
       // if (this.token != '') {
-        this.$Progress.start();
+      //   this.$Progress.start();
         Api.post('/contact-us', this.dataForm)
           .then(response => {
             this.dataForm.name = '',
@@ -194,7 +194,7 @@ export default {
               type: 'success',
               text: response.data.message
             });
-            this.$Progress.finish();
+            // this.$Progress.finish();
           })
           .catch((err) => {
             this.$Progress.fail();

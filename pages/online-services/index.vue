@@ -66,7 +66,7 @@ export default {
     };
   },
   mounted() {
-    this.$Progress.start();
+    // this.$Progress.start();
   },
   created() {
     this.getProduct();
@@ -91,7 +91,7 @@ export default {
           this.md = response.data.md5;
         }
         this.pageCount = response.data.total_pages;
-        this.$Progress.finish();
+        // this.$Progress.finish();
       });
     },
   }
