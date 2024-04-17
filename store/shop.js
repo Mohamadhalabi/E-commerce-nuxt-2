@@ -164,7 +164,6 @@ export const actions = {
       })
       .catch((error) => {
         let message = error.response.data.message;
-        console.log(error.response)
         commit('UPDATE_PRODUCT_STATUS', error.response.data.message); // Add this line to update productStatus
         commit('UPDATE_PRODUCT_SKU', error.response.data.data.product_sku); // Add this line to update productStatus
         this._vm.$notify({

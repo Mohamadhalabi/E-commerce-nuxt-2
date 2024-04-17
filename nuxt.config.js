@@ -221,7 +221,7 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    analyze: false,
+    analyze: true,
     minifyCSS: true,
     minifyJS: true,
     html: {

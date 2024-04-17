@@ -41,7 +41,17 @@
       key="noEmpty"
       class="row account-container">
       <div class="col-lg-8">
-          <table class="table table-bordered table-striped mt-0 table-responsive-md"
+
+        <b-alert v-if="outOfStockItems.length > 0" show variant="danger">
+          <i class="fa fa-exclamation-triangle"></i>
+          The quantity of the  Product(s) <span class="font-weight-bold" v-for="(outofstock,index) in outOfStockItems" :key="index">
+          {{outofstock}}
+        </span> is currently not available
+        </b-alert>
+
+
+
+        <table class="table table-bordered table-striped mt-0 table-responsive-md"
                  :class="{'text-right':getIsAr}">
             <thead>
               <tr class="text-center bg-white vertical-align-middle">
@@ -126,12 +136,6 @@
                     :product="product"
                     @changeQty="changeQuantity"
                   />
-<!--                  <pv-quantity-select-->
-<!--                    :qty="product.quantity"-->
-<!--                    :has_token="product.has_token_input"-->
-<!--                    :product="product"-->
-<!--                    @changeQty="changeQuantity"-->
-<!--                  />-->
                 </td>
 
                 <td class="price-color text-center font-weight-bold" style="vertical-align: middle">
@@ -383,11 +387,18 @@ export default {
       max: 1000,
       current: 900,
       animationDelay: `100ms`,
+      outOfStockItems: [],
     };
   },
 
   mounted() {
-    this.getCartList();
+    this.getCartList().then(() => {
+      this.cartList.forEach(item => {
+        if(item.quantity > item.stock){
+          this.outOfStockItems.push(item.sku);
+        }
+      });
+    });
   },
   computed: {
     ...mapGetters("language", ["getLang"]),
