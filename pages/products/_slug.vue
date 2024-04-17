@@ -135,11 +135,20 @@ export default {
     PvCollection,
     PvDetail
   },
-  async asyncData({ params }) {
+  async asyncData({ params, redirect }) {
     const { data } = await Api.get(`products/${params.slug}`);
+    if (data.product.slug !== params.slug)
+      redirect(`/products/${data.product.slug}`);
     return {
       product: data.product,
       tokens: data.tokens,
+      related_products: data.related_products,
+      featured_products : data.featured_products,
+      best_selling_products : data.best_selling_products,
+      latest_products: data.latest_products,
+      top_rated_products: data.top_rated_products,
+      prev_product: data.next_previous_products[0],
+      next_product: data.next_previous_products[1],
     };
   },
   data: function () {
@@ -487,7 +496,6 @@ export default {
       left: 0,
       behavior: 'auto'
     });
-    this.getProduct();
   },
   computed:{
     ...mapGetters("language", ["getLang"]),
