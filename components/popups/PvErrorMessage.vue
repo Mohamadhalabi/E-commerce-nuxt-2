@@ -24,7 +24,10 @@
             <span class="font-weight-bold p-2">{{props.item.text}}</span>
           </div>
         </div>
-        <div class="p-1 position-absolute alterTimerRed"></div>
+
+        <div
+          v-if="props.item.type !=='OutOfStockError'"
+          class="p-1 position-absolute alterTimerRed"></div>
       </div>
     </template>
   </notifications>

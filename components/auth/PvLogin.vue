@@ -159,7 +159,7 @@ export default {
     },
     ...mapActions("auth", ["LogIn","ResetPasswordEmail"]),
     ...mapMutations("auth", ["SET_USER", "SET_TOKEN"]),
-    ...mapActions("shop", ["afterLogOutCart", "getCartList", "addToCart","addToCartWithoutNotifications"]),
+    ...mapActions("shop", ["afterLogOutCart", "getCartList", "addToCart"]),
     ...mapActions("compare", ["afterLogOutCompare", "fetchList", "addToList"]),
     ...mapActions("fav", [
       "afterLogOutWishlist",

@@ -488,7 +488,7 @@
   </main>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import {mapActions, mapGetters} from "vuex";
 import Api from "~/api";
 import PaypalBtn from "~/components/common/PaypalBtn";
 import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
@@ -584,8 +584,27 @@ export default {
     if (this.$settings.payment_methods.stripe == "stripe") {
       this.paymanetMethodCount++;
     }
+
+    this.getCartList().then(() => {
+      this.cartList.forEach(item => {
+        if(item.quantity > item.stock){
+          this.$notify({
+            group: "errorMessage",
+            type: "OutOfStockError",
+            text: "The quantity " + item.quantity +" for "+item.sku+ " is currently not available, you will be redirected to the cart page",
+            duration: 5000, // Display the notification for 5 seconds
+          });
+          // Redirect to /cart after 5 seconds
+          setTimeout(() => {
+            this.$router.push('/cart');
+          }, 5000);
+        }
+      });
+    });
+
   },
   methods: {
+    ...mapActions("shop", ["getCartList"]),
     getLink(route) {
       if (this.getLang === 'en') {
         return route; // Return the route as is without the language parameter
