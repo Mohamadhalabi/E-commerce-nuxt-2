@@ -400,7 +400,7 @@ export default {
       document.querySelector("body").classList.remove("mmenu-active");
     },
     LogOut() {
-      this.$Progress.start();
+      // this.$Progress.start();
       this.$auth.logout().then((res) => {
         localStorage.setItem("tokenEnded", 1);
         this.fetchList();
@@ -409,7 +409,7 @@ export default {
         this.closeNav()
         this.$router.push("/");
       });
-      this.$Progress.finish();
+      // this.$Progress.finish();
     },
   },
 };

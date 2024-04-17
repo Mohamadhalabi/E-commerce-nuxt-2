@@ -222,7 +222,7 @@ export default {
           this.$router
               .push(`/shop?search_attributes=` + this.searchKey)
             .then(() => {
-              this.$Progress.finish();
+              // this.$Progress.finish();
             });
       }
     },
@@ -265,7 +265,7 @@ export default {
         if (this.timer) {
           clearTimeout(this.timer); // delay time befor searching
           this.timer = null; // delay time befor searching
-          this.$Progress.finish();
+          // this.$Progress.finish();
         }
 
         if (this.searchKey.length >= 3) {
@@ -274,18 +274,18 @@ export default {
               this.productsBySearch = [];
               return;
             }
-            this.$Progress.start();
+            // this.$Progress.start();
             Api.get(`/shop?search_attributes=${this.searchKey}`)
               .then((response) => {
                 this.productsBySearch = response.data.products;
                 this.getProductsBySearchArrayLength = response.data.total;
                 this.availableItems = this.productsBySearch.slice(0, 5);
-                this.$Progress.finish();
+                // this.$Progress.finish();
               })
               .catch((error) => ({error: JSON.stringify(error)}));
           }, 500);
 
-          this.$Progress.finish();
+          // this.$Progress.finish();
         }
       }
     },

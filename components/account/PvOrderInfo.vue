@@ -641,7 +641,7 @@ export default {
       }
     },
     getOrderInfo() {
-      this.$Progress.start();
+      // this.$Progress.start();
       Api.get(`/user/orders/${this.$route.query.id}`)
         .then((response) => {
           this.order = response.data.order;
@@ -652,7 +652,7 @@ export default {
             this.order_products.push(response.data.order_products);
           }
           this.payment_history = response.data.payment_history;
-          this.$Progress.finish();
+          // this.$Progress.finish();
         })
         .catch((error) => ({error: JSON.stringify(error)}));
     },

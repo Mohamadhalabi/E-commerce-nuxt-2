@@ -245,9 +245,9 @@ export default {
     ...mapGetters("language", ["getLang"]),
   },
   mounted: function () {
-    this.$Progress.start();
+    // this.$Progress.start();
     this.fetchWishlist();
-    this.$Progress.finish();
+    // this.$Progress.finish();
   },
   methods: {
     ...mapActions("fav", ["fetchWishlist", "removeFromWishlist"]),

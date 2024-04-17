@@ -175,7 +175,7 @@ export default {
   },
 
   mounted() {
-    this.$Progress.start();
+    // this.$Progress.start();
     Api.get("/unlock-remote")
       .then((response) => {
         const data = response.data; // Assuming response.data is the array you provided
@@ -196,7 +196,7 @@ export default {
           description: item.description,
           year: item.year,
         }));
-        this.$Progress.finish();
+        // this.$Progress.finish();
       })
       .catch((error) => {
         console.error("An error occurred:", error);

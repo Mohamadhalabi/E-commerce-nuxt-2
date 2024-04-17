@@ -85,12 +85,12 @@ export default {
     }
   },
   async fetch() {
-    this.$Progress.start();
+    // this.$Progress.start();
 
     if(this.error.statusCode == 404) {
       const currentUrl = window.location.href;
       api.post('redirect', {url: currentUrl}).then((res) => {
-        this.$Progress.finish();
+        // this.$Progress.finish();
         window.location.replace(res.data.new_route);
 
       }).catch(()=>{

@@ -321,9 +321,9 @@ export default {
     };
   },
   mounted() {
-    this.$Progress.start();
+    // this.$Progress.start();
     setTimeout(() => {
-      this.$Progress.finish();
+      // this.$Progress.finish();
     }, 1000);
   },
   methods: {
@@ -341,7 +341,7 @@ export default {
       //   this.token = "";
       // }
       // if (this.token != "") {
-        this.$Progress.start();
+      //   this.$Progress.start();
         Api.post("/contact-us", this.dataForm)
           .then((response) => {
             (this.dataForm.name = ""),
@@ -360,7 +360,7 @@ export default {
               type: "success",
               text: response.data.message,
             });
-            this.$Progress.finish();
+            // this.$Progress.finish();
           })
           .catch((err) => {
             this.errorMsg = err.response.data.data;

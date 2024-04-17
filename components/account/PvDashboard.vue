@@ -170,7 +170,7 @@ export default {
       scrollTopHandler();
     },
     LogOut() {
-      this.$Progress.start();
+      // this.$Progress.start();
       this.$auth.logout().then((res) => {
         localStorage.setItem("tokenEnded", 1);
 
@@ -180,7 +180,7 @@ export default {
 
         this.$router.push("/");
       });
-      this.$Progress.finish();
+      // this.$Progress.finish();
     },
   },
 };

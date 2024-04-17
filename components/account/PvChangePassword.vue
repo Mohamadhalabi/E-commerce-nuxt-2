@@ -100,7 +100,7 @@ export default {
 
 
     changePassword: function () {
-      this.$Progress.start();
+      // this.$Progress.start();
       Api.post("/user/auth/change-password", this.form)
         .then((response) => {
           scrollTopHandler();
@@ -125,7 +125,7 @@ export default {
         });
 
 
-      this.$Progress.finish();
+      // this.$Progress.finish();
 
     },
 
