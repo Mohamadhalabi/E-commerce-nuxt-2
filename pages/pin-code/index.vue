@@ -172,6 +172,14 @@ export default {
   computed: {
     ...mapGetters('rtlStore',['getIsAr'])
   },
+  mounted() {
+    if(process.client) {
+      let fullDomain = window.location.href;
+      if (fullDomain !== "https://www.tlkeys.com/pin-code") {
+        window.location = "https://www.tlkeys.com/pin-code"
+      }
+    }
+  },
 };
 </script>
 <style>
