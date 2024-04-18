@@ -23,6 +23,12 @@
             <i class="position-absolute fa fa-exclamation-circle"/>
             <span class="font-weight-bold p-2">{{props.item.text}}</span>
           </div>
+          <div v-if="props.item.type ==='OutOfStockError'">
+            <nuxt-link to="/cart">
+              <success-button class="p-2 px-sm-3 px-4 mx-1 mb-1" style="background-color: #a51017">cart
+              </success-button>
+            </nuxt-link>
+          </div>
         </div>
 
         <div
@@ -43,6 +49,7 @@ export default {
   name: "ErrorMessage",
 
   components: {
+    SuccessButton
   },
   data() {
     return {

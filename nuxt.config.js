@@ -136,7 +136,8 @@ export default {
       'ListGroupPlugin',
       'FormTagsPlugin',
       'AlertPlugin',
-      'CarouselPlugin'
+      'CarouselPlugin',
+      'ButtonPlugin'
     ],
   },
   'google-gtag':{

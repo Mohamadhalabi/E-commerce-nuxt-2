@@ -82,47 +82,44 @@
 
     <div style="background-color: #f07905">
       <div class="container">
-        <div class="footer-top pt-5">
-          <div
-            style="text-align: left"
-            class="sender-form-field"
-            data-sender-form-id="l9cu97bjbmxnrajomtt"
-          />
+        <div
+          class="p-3 justify-content-center">
+          <b-form>
+            <div class="row">
+              <div class="col-lg-3 m-auto">
+                <h6 class="mt-auto mb-auto mr-3 news-letter-h6">Subscribe to our newsletter</h6>
+              </div>
+              <div class="col-lg-6 m-auto">
+                <b-form-group
+                  id="input-group-1"
+                  label="Enter your email address"
+                  label-for="input-1"
+                  description="We'll never share your email with anyone else."
+                >
+                  <b-form-input
+                    id="input-1"
+                    type="email"
+                    class="m-0"
+                    v-model="email"
+                    placeholder="Enter email"
+                    required
+                  ></b-form-input>
+                </b-form-group>
+              </div>
+              <div class="col-lg-3 m-auto">
+                <button type="submit" @click="Subscribe()" class="subscribe">Subscribe</button>
+              </div>
+            </div>
+          </b-form>
         </div>
       </div>
     </div>
-<!--      <PvNewsletterModal />-->
-
-<!--    <div v-animate-->
-<!--         :data-animation-delay="animationDelay"-->
-<!--         data-animation-name="fadeInUpShorter">-->
-<!--      <div class="container optionWebsite">-->
-<!--        <div class="row">-->
-<!--          <div class="col-md-3 d-flex align-items-end">-->
-<!--            <p>-->
-<!--              <i class="fas fa-truck-pickup" /> <span>{{ $t("home.option1") }}</span>-->
-<!--            </p>-->
-<!--          </div>-->
-<!--          <div class="col-md-3 d-flex align-items-end">-->
-<!--            <p>-->
-<!--              <i class="fas fa-dollar-sign" /> <span>{{ $t("home.option2") }}</span>-->
-<!--            </p>-->
-<!--          </div>-->
-<!--          <div class="col-md-3 d-flex align-items-end">-->
-<!--            <p><i class="fas fa-headset" /><span>{{ $t("home.option3") }}</span></p>-->
-<!--          </div>-->
-<!--          <div class="col-md-3 d-flex align-items-end">-->
-<!--            <p>-->
-<!--              <i class="fab fa-cc-mastercard" /><span>{{ $t("home.option4") }}</span>-->
-<!--            </p>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
   </main>
 </template>
 <script>
 import { mapGetters,mapActions } from "vuex";
+import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
+import api from "~/api";
 // import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
 export default {
   head() {
@@ -249,6 +246,7 @@ export default {
     }
   },
   components: {
+    BaseButtonIcon1,
     // PvNewsletterModal,
     PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
@@ -275,6 +273,7 @@ export default {
       topSelling: [],
       topSellingThreeProducts: [],
       isMobile:false,
+      email:"",
     };
   },
   computed: {
@@ -286,6 +285,30 @@ export default {
       if(process.client)
       this.isMobile = window.innerWidth < 768;
     },
+    Subscribe(){
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
+        // Assuming `api` is an instance of Axios or similar HTTP client
+        api.post("/subscribe", { email: this.email }).then((response) => {
+          console.log(response);
+        }).catch((error) => {
+          if (error.response.status === 400) {
+            this.$notify({
+              group: "errorMessage",
+              type: "error",
+              text: "Email already exists",
+            });
+          } else {
+            console.error(error);
+          }
+        });
+      } else {
+        this.$notify({
+          group: "errorMessage",
+          type: "error",
+          text: "Enter a valid email",
+        });
+      }
+    }
   },
   mounted() {
     if(process.client) {
@@ -305,5 +328,16 @@ export default {
   .desktop-only{
     display: none;
   }
+}
+.news-letter-h6{
+  font-size: 24px;
+  color: #FFFFFF;
+}
+.subscribe{
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #a51017;
+  color: #FFFFFF;
+  border-color: black;
 }
 </style>

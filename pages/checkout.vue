@@ -389,7 +389,7 @@
                   "
                         class="py-4 w-100"
                         type="button"
-                        :disabled="hasBlockedCountry"
+                        :disabled="hasBlockedCountry || displayOutOfStock"
                         @click="createOrder"
                         :outline="true"
                       ><span v-if="!loadingOrder">
@@ -397,7 +397,6 @@
                   </span>
                         <b-spinner v-else class=""
                         /></base-button-icon-1>
-
                       <div class="mt-2">
                         <PaypalBtn
                           v-if="checkoutData && dataForm.payment_method == 'paypal'"
@@ -548,6 +547,7 @@ export default {
       "cartProductsPrice",
       "cartCurrency",
       "cartPaymentPrice",
+      "displayOutOfStock",
     ]),
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
@@ -575,34 +575,38 @@ export default {
       deep: true,
     },
   },
-  mounted() {
-    this.refetchPrice();
-    this.reFetchShippingMethod();
-    if (this.$settings.payment_methods.paypal == "paypal") {
-      this.paymanetMethodCount++;
-    }
-    if (this.$settings.payment_methods.stripe == "stripe") {
-      this.paymanetMethodCount++;
-    }
+  beforeRouteEnter(to, from, next) {
+    next(vm => {
+      // Execute logic here
+      vm.refetchPrice();
+      vm.reFetchShippingMethod();
 
-    this.getCartList().then(() => {
-      this.cartList.forEach(item => {
-        if(item.quantity > item.stock){
-          this.$notify({
-            group: "errorMessage",
-            type: "OutOfStockError",
-            text: "The quantity " + item.quantity +" for "+item.sku+ " is currently not available, you will be redirected to the cart page",
-            duration: 5000, // Display the notification for 5 seconds
-          });
-          // Redirect to /cart after 5 seconds
-          setTimeout(() => {
-            this.$router.push('/cart');
-          }, 5000);
-        }
+      vm.clickedCardIndex = 1;
+      vm.handlePaymentMethod(vm.clickedCardIndex)
+
+      vm.getCartList().then(() => {
+        vm.cartList.forEach(item => {
+          if(item.quantity > item.stock){
+            vm.$notify({
+              group: "errorMessage",
+              type: "OutOfStockError",
+              text: "The quantity " + item.quantity +" for "+item.sku+ " is currently not available, please modify your cart",
+              duration: -1,
+            });
+          }
+        });
       });
     });
-
   },
+  beforeRouteLeave(to, from, next) {
+    this.handlePaymentMethod(this.clickedCardIndex)
+    this.$notify({
+      group: "errorMessage",
+      clean: true
+    });
+    next();
+  },
+
   methods: {
     ...mapActions("shop", ["getCartList"]),
     getLink(route) {
@@ -703,20 +707,6 @@ export default {
         shipping_methods.push(obj);
       }
       this.shipping_methods = shipping_methods;
-    },
-    getMyCard() {
-      Api.get("/card").then((response) => {
-        this.myCards = response.data.cards;
-        let defaultCard = this.myCards.filter((obj) => {
-          return obj.is_default === 1;
-        });
-        if (defaultCard.length > 0) {
-          this.dataForm.card_id = defaultCard[0]["id"];
-        } else {
-          this.dataForm.card_id = this.card_id[0]["id"];
-        }
-        this.refetchPrice();
-      });
     },
 
     GetNewAddress(value){

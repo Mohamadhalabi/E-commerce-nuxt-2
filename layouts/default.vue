@@ -71,6 +71,8 @@ export default {
         localStorage.setItem("tokenEnded", 1);
       }
     }
+
+
     this.$store.dispatch('rtlStore/setLanguageFromURL');
     this.updateLanguageCode(this.$i18n.locale)
     api.defaults.headers["Accept-Language"] = this.$i18n.locale;
