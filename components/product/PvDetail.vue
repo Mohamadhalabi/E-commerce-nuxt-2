@@ -22,6 +22,9 @@
 <!--    <hr class="short-divider"/>-->
     <div class="row">
       <div class="col">
+        <div v-if="product.categories[0].slug ==  'pin-code-offline'">
+          <pv-price-box class="mb-2 mt-1" :product="product" />
+        </div>
         <pv-price-box class="mb-2 mt-1" v-if="product.hide_price == 0" :product="product"/>
       <div v-else style="text-align: start; display: flex">
         <i
@@ -354,7 +357,7 @@ export default {
 
     goToWhatsApp() {
       window.open(
-        `https://api.whatsapp.com/send?phone=${this.$settings.contact.whatsapp}&text=Could I please have the price of the ${this.product.title}`,
+        `https://api.whatsapp.com/send?phone=${this.$settings.contact.whatsapp}&text=Could I have more details about the product ${this.product.title}`,
         "_blank"
       );
     },
