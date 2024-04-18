@@ -183,6 +183,16 @@ export default {
   cursor: pointer;
   min-height: 200px;
 }
+@media screen and (max-width: 993px){
+  .brandClass{
+    min-height: 250px;
+  }
+}
+@media screen and (max-width: 550px){
+  .brandClass{
+    min-height: 200px!important;
+  }
+}
 .brandClass:hover{
   transform: scale(1.05);
 }
