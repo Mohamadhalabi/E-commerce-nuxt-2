@@ -78,9 +78,9 @@ a.btn.disabled {
 	@include button-variant(white, $primary-color, $primary-color);
 }
 
-.btn-secondary {
-	@include button-variant(white, $secondary-color, $secondary-color);
-}
+//.btn-secondary {
+//	@include button-variant(white, $secondary-color, $secondary-color);
+//}
 
 .btn-outline {
 	@include button-outline-variant($navy-light3-color, $primary-color, transparent, $navy-light3-color, $primary-color);

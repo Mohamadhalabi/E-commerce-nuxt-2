@@ -67,12 +67,13 @@ button:hover{
 
 }
 .disaple {
-  color: white !important ;
-  border: 1px solid #892118;
+  color: #ababab !important ;
+  background-color: #e5e5e5;
 }
 .disaple:hover {
   transform: none !important;
   box-shadow: none !important ;
-  cursor: initial !important;
+  cursor: not-allowed !important;
+  background-color: #e5e5e5;
 }
 </style>

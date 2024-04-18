@@ -3,7 +3,7 @@
     <div id="smart-button-container">
       <div style="text-align: center; position: relative;">
         <div
-          v-if="(shipping_method ==='' || address==='') || (!is_uae && (shipping_method === 'domestic' || shipping_method === 'pick_up')) "
+          v-if="(shipping_method ==='' || address==='') || (!is_uae && (shipping_method === 'domestic' || shipping_method === 'pick_up'))  || displayOutOfStock "
           class="displayBtn"
         />
         <div id="paypal-button-container" />
@@ -24,6 +24,7 @@ import {mapActions, mapGetters} from "vuex";
 export default {
   computed:{
     ...mapGetters("auth", ["isAuthenticated","StateUser"]),
+    ...mapGetters("shop",["displayOutOfStock"]),
   },
 
   props: {
@@ -96,13 +97,13 @@ export default {
       response: null
     };
   },
-  created() {
+  mounted() {
     this.init();
   },
   methods: {
     ...mapActions("shop", [ "getCartList", "clearCart"]),
     init() {
-      function loadScript(url, callback) {
+        function loadScript(url, callback) {
         const el = document.querySelector(`script[src="${url}"]`);
         if(!el) {
           const s = document.createElement('script');

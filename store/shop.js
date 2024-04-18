@@ -12,6 +12,8 @@ export const state = () => ({
   dispaly: false,
   productStatus: null,
   productSku:"",
+  displayOutOfStock: false,
+  outOfStockList: [],
 });
 
 export const getters = {
@@ -28,6 +30,12 @@ export const getters = {
     return state.cartList;
   },
 
+  displayOutOfStock: state => {
+    return state.displayOutOfStock
+  },
+  outOfStockList: state => {
+    return state.outOfStockList
+  },
   cartProductsPrice: state => {
     return state.cartProductsPrice;
   },
@@ -244,10 +252,6 @@ export const actions = {
   },
 
   removeFromCart: async function ({ commit }, payload) {
-
-
-    console.log(payload)
-
     if (localStorage.getItem('tokenEnded') == '1') {
       let cartList = JSON.parse(localStorage.getItem('card'));
       cartList.splice(parseInt(payload.index), 1);
@@ -366,6 +370,11 @@ export const mutations = {
     state.productSku = newStatus;
   },
   UPDATE_CART: function (state, payload) {
+
+    let countOutOfStock = 0;
+
+    let OutOfStockSku = [];
+
     let results = {
       products: [],
       total: 0,
@@ -396,11 +405,20 @@ export const mutations = {
           }
         }
       }
+      if(item.quantity > item.stock){
+        countOutOfStock++
+        OutOfStockSku.push(item.sku)
+      }
+
       // item.sale_price['value']=price;
       item.priceitem = price;
       results.products.push(item);
       results.total += (price * item.quantity);
     }
+
+    // items in the cart out of stock
+    state.displayOutOfStock = countOutOfStock > 0;
+    state.outOfStockList = OutOfStockSku;
 
     if(process.client)
     localStorage.setItem('card', JSON.stringify(results.products));

@@ -41,19 +41,9 @@
       key="noEmpty"
       class="row account-container">
       <div class="col-lg-8">
-
-        <b-alert v-if="outOfStockItems.length > 0" show variant="danger">
-          <i class="fa fa-exclamation-triangle"></i>
-          The quantity of the  Product(s) <span class="font-weight-bold" v-for="(outofstock,index) in outOfStockItems" :key="index">
-          {{outofstock}}
-        </span> is currently not available
-        </b-alert>
-
-
-
         <table class="table table-bordered table-striped mt-0 table-responsive-md"
                  :class="{'text-right':getIsAr}">
-            <thead>
+            <thead class="thead-dark">
               <tr class="text-center bg-white vertical-align-middle">
                 <th style="width: 10%">
                   {{ $t("cart.delete") }}
@@ -75,7 +65,7 @@
             <tbody>
               <tr
                 v-for="(product, index) in cartList"
-                :key="product.sku">
+                :key="product.sku" :class="{ out_of_stock_class: outOfStockList.includes(product.sku) }">
                 <td class="text-center vertical-align-middle">
                   <i class="fa fa-trash remove-button" @click="removeFromCart({ product, index })"></i>
                 </td>
@@ -186,6 +176,12 @@
               </tr>
             </tfoot>
           </table>
+          <b-alert v-if="displayOutOfStock" show variant="danger">
+            <i class="fa fa-exclamation-triangle"></i>
+            The selected quantity of the  Product(s) <span class="font-weight-bold" v-for="(outofstock,index) in outOfStockList" :key="index">
+          {{outofstock}}
+        </span> is currently not available
+          </b-alert>
           <base-button-icon1
             class="w-100 py-4"
             @click="
@@ -200,6 +196,7 @@
             type="button"
             v-if="isAuthenticated"
             :outline="true"
+            :disabled="displayOutOfStock"
           >
             {{ $t("checkout.checkoutBtn") }}</base-button-icon1
           >
@@ -390,16 +387,6 @@ export default {
       outOfStockItems: [],
     };
   },
-
-  mounted() {
-    this.getCartList().then(() => {
-      this.cartList.forEach(item => {
-        if(item.quantity > item.stock){
-          this.outOfStockItems.push(item.sku);
-        }
-      });
-    });
-  },
   computed: {
     ...mapGetters("language", ["getLang"]),
     ...mapGetters("shop", [
@@ -409,6 +396,8 @@ export default {
       "cartCurrency",
       "cartTotalDiscount",
       "cartPaymentPrice",
+      "displayOutOfStock",
+      "outOfStockList",
     ]),
     ...mapGetters("auth", ["isAuthenticated","StateUser"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
@@ -528,5 +517,9 @@ export default {
 }
 .mix-blend-multiply{
   mix-blend-mode: multiply;
+}
+.out_of_stock_class{
+  background-color: red;
+  border: 2px solid red
 }
 </style>
