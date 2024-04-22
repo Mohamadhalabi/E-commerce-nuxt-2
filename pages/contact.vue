@@ -89,22 +89,12 @@
                     required
                   />
                 </div>
-<!--                <recaptcha />-->
-<!--                <b v-if="this.token == ''" class="text-danger">{{-->
-<!--                  $t("common.pleaseCheckRecaptch")-->
-<!--                }}</b>-->
-
                 <div class="form-footer">
-                  <!--  <button
-                    type="submit"
-                    class="btn btn-primary m-auto"
-                    @click.prevent="sendMessage"
-                  >
-                  </button> -->
                   <base-button-icon-1
                     class="w-50 py-4 px-0"
                     type="submit"
                     :outline="true"
+                    style="margin-top: 25px"
                   >
                     <span class="mx-1" style="color: white">
                       <svg
@@ -160,6 +150,89 @@
             </div>
           </div>
         </div>
+
+        <div class="col-12">
+          <h3>Our Branches</h3>
+          <center>
+            <div class="tabledataa" >
+              <div class="myheader">
+                <center><h2>United Arab Emirates</h2></center>
+              </div>
+              <div class="leftimg">
+                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/Flag_of_the_United_Arab_Emirates.gif" /></center>
+              </div>
+              <div class="mytable">
+                <table style="width:100%;" >
+                  <tr class="tablerow"><td>Address:</td><td>
+                    <a href="https://goo.gl/maps/edxL7RXM6zK5hCYE9" class="google-map-location" target="_blank">
+                      Industrial area 5, Sharjah
+                    </a>
+                  </td></tr>
+                  <tr class="tablerow"><td>Mobile</td><td><a href="tel:00971504429045">+971 50 442 9045</a></td></tr>
+                </table>
+              </div>
+              <div class="rightimg">
+                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/Flag_of_the_United_Arab_Emirates.gif" /></center>
+              </div>
+            </div>
+
+            <div class="tabledataa" >
+              <div class="myheader">
+                <center><h2>Saudi Arabia</h2></center>
+              </div>
+              <div class="leftimg">
+                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/Flag_of_Saudi_Arabia.gif" /></center>
+              </div>
+              <div class="mytable">
+                <table style="width:100%;" >
+                  <tr class="tablerow"><td>Address:</td><td>Al Hasa area - Saudi Arabia</td></tr>
+                  <tr class="tablerow"><td>Mobile</td><td><a href="tel:00966505953232">+966 50 595 3232</a></td></tr>
+                </table>
+              </div>
+              <div class="rightimg">
+                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/Flag_of_Saudi_Arabia.gif" /></center>
+              </div>
+            </div>
+
+            <div class="tabledataa" >
+              <div class="myheader">
+                <center><h2>United States of America</h2></center>
+              </div>
+              <div class="leftimg">
+                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/AcclaimedNiftyGuineafowl-size_restricted.gif" /></center>
+              </div>
+              <div class="mytable">
+                <table style="width:100%;" >
+                  <tr class="tablerow"><td>Address:</td><td>4637 Given ave. Memphis</td></tr>
+                  <tr class="tablerow"><td>Mobile</td><td><a href="tel:0019734624473">+1973 46 244 73</a></td></tr>
+                </table>
+              </div>
+              <div class="rightimg">
+                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/AcclaimedNiftyGuineafowl-size_restricted.gif" /></center>
+              </div>
+            </div>
+
+            <div class="tabledataa" >
+              <div class="myheader">
+                <center><h2>Turkey</h2></center>
+              </div>
+              <div class="leftimg">
+                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/UntriedPaleAbalone-small.gif" /></center>
+              </div>
+              <div class="mytable">
+                <table style="width:100%;" >
+                  <tr class="tablerow"><td>Address:</td><td>Turkey - Istanbul - Baris Mah.Karadeniz</td></tr>
+                  <tr class="tablerow"><td>Mobile</td><td><a href="tel:00905355847446">+90 553 146 84 75</a></td></tr>
+                </table>
+              </div>
+              <div class="rightimg">
+                <center><img style="width:70%; padding-top:13%;" src="wp-content/uploads/2019/03/UntriedPaleAbalone-small.gif" /></center>
+              </div>
+            </div>
+          </center>
+
+        </div>
+
       </div>
     </div>
   </main>
