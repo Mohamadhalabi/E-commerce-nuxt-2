@@ -151,87 +151,107 @@
           </div>
         </div>
 
-        <div class="col-12">
+        <div class="col-12 text-center">
           <h3>Our Branches</h3>
-          <center>
-            <div class="tabledataa" >
-              <div class="myheader">
-                <center><h2>United Arab Emirates</h2></center>
-              </div>
-              <div class="leftimg">
-                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/Flag_of_the_United_Arab_Emirates.gif" /></center>
-              </div>
-              <div class="mytable">
-                <table style="width:100%;" >
-                  <tr class="tablerow"><td>Address:</td><td>
-                    <a href="https://goo.gl/maps/edxL7RXM6zK5hCYE9" class="google-map-location" target="_blank">
-                      Industrial area 5, Sharjah
-                    </a>
-                  </td></tr>
-                  <tr class="tablerow"><td>Mobile</td><td><a href="tel:00971504429045">+971 50 442 9045</a></td></tr>
-                </table>
-              </div>
-              <div class="rightimg">
-                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/Flag_of_the_United_Arab_Emirates.gif" /></center>
-              </div>
-            </div>
-
-            <div class="tabledataa" >
-              <div class="myheader">
-                <center><h2>Saudi Arabia</h2></center>
-              </div>
-              <div class="leftimg">
-                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/Flag_of_Saudi_Arabia.gif" /></center>
-              </div>
-              <div class="mytable">
-                <table style="width:100%;" >
-                  <tr class="tablerow"><td>Address:</td><td>Al Hasa area - Saudi Arabia</td></tr>
-                  <tr class="tablerow"><td>Mobile</td><td><a href="tel:00966505953232">+966 50 595 3232</a></td></tr>
-                </table>
-              </div>
-              <div class="rightimg">
-                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/Flag_of_Saudi_Arabia.gif" /></center>
-              </div>
-            </div>
-
-            <div class="tabledataa" >
-              <div class="myheader">
-                <center><h2>United States of America</h2></center>
-              </div>
-              <div class="leftimg">
-                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/AcclaimedNiftyGuineafowl-size_restricted.gif" /></center>
-              </div>
-              <div class="mytable">
-                <table style="width:100%;" >
-                  <tr class="tablerow"><td>Address:</td><td>4637 Given ave. Memphis</td></tr>
-                  <tr class="tablerow"><td>Mobile</td><td><a href="tel:0019734624473">+1973 46 244 73</a></td></tr>
-                </table>
-              </div>
-              <div class="rightimg">
-                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/AcclaimedNiftyGuineafowl-size_restricted.gif" /></center>
-              </div>
-            </div>
-
-            <div class="tabledataa" >
-              <div class="myheader">
-                <center><h2>Turkey</h2></center>
-              </div>
-              <div class="leftimg">
-                <center><img style="width:70%; padding-top:13%;" src="<? echo $baseurl; ?>wp-content/uploads/2019/03/UntriedPaleAbalone-small.gif" /></center>
-              </div>
-              <div class="mytable">
-                <table style="width:100%;" >
-                  <tr class="tablerow"><td>Address:</td><td>Turkey - Istanbul - Baris Mah.Karadeniz</td></tr>
-                  <tr class="tablerow"><td>Mobile</td><td><a href="tel:00905355847446">+90 553 146 84 75</a></td></tr>
-                </table>
-              </div>
-              <div class="rightimg">
-                <center><img style="width:70%; padding-top:13%;" src="wp-content/uploads/2019/03/UntriedPaleAbalone-small.gif" /></center>
-              </div>
-            </div>
-          </center>
-
         </div>
+        <div class="col-lg-6 col-md-6 col-12 m-auto">
+          <div>
+            <b-card-group deck>
+              <b-card
+                header="United Arab Emirates"
+                header-tag="header"
+              >
+                <b-card-text>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-6 m-auto">
+                      <img src="../static/images/flags/uae-flag.webp" width="200px" />
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-12 m-auto">
+                      <p>Address:Sharjah - Industrial No. 5, behind Maliah Road., shop No. 8, Property of Ali Nasir Mohamed Suleiman</p>
+                      <p>Mobile: <a href="tel:+97150429045">+971 50 442 9045</a></p>
+                    </div>
+                  </div>
+                </b-card-text>
+              </b-card>
+
+            </b-card-group>
+          </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-12 m-auto">
+          <div>
+            <b-card-group deck>
+              <b-card
+                header="Saudi Arabia"
+                header-tag="header"
+              >
+                <b-card-text>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-6 m-auto">
+                      <img src="../static/images/flags/Flag_of_Saudi_Arabia.gif" width="200px" />
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-12 m-auto">
+                      <p>Address:Al Hasa area - Saudi Arabia</p>
+                      <p>Mobile: <a href="tel:00966505953232">+966 50 595 3232</a></p>
+                    </div>
+                  </div>
+                </b-card-text>
+              </b-card>
+
+            </b-card-group>
+          </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-6 col-12 mt-2">
+          <div>
+            <b-card-group deck>
+              <b-card
+                header="United States of America"
+                header-tag="header"
+              >
+                <b-card-text>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-6 m-auto ">
+                      <img src="../static/images/flags/usa-flag.webp" width="200px" />
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-12 m-auto">
+                      <p>Address:4637 Given ave. Memphis</p>
+                      <p>Mobile: <a href="tel:0019734624473">+1973 46 244 73</a></p>
+                    </div>
+                  </div>
+                </b-card-text>
+              </b-card>
+
+            </b-card-group>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-12 mt-2">
+          <div>
+            <b-card-group deck>
+              <b-card
+                header="Saudi Arabia"
+                header-tag="header"
+              >
+                <b-card-text>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-3 col-6 m-auto">
+                      <img src="../static/images/flags/turkey-flag.webp" width="200px" />
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-12 m-auto">
+                      <p>Address:Turkey - Istanbul - Baris Mah.Karadeniz</p>
+                      <p>Mobile: <a href="tel:00905355847446">+90 553 146 84 75</a></p>
+                    </div>
+                  </div>
+                </b-card-text>
+              </b-card>
+
+            </b-card-group>
+          </div>
+        </div>
+
 
       </div>
     </div>
@@ -454,3 +474,18 @@ export default {
   },
 };
 </script>
+<style>
+@media screen and (min-width: 768px){
+  .card{
+    min-height: 200px;
+    max-height: 200px;
+  }
+}
+.card{
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+.card:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+</style>
