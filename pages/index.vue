@@ -84,33 +84,33 @@
       <div class="container">
         <div
           class="p-3 justify-content-center">
-          <b-form>
-            <div class="row">
-              <div class="col-lg-3 m-auto">
-                <h6 class="mt-auto mb-auto mr-3 news-letter-h6">Subscribe to our newsletter</h6>
-              </div>
-              <div class="col-lg-6 m-auto">
-                <b-form-group
-                  id="input-group-1"
-                  label="Enter your email address"
-                  label-for="input-1"
-                  description="We'll never share your email with anyone else."
-                >
-                  <b-form-input
-                    id="input-1"
-                    type="email"
-                    class="m-0"
-                    v-model="email"
-                    placeholder="Enter email"
-                    required
-                  ></b-form-input>
-                </b-form-group>
-              </div>
-              <div class="col-lg-3 m-auto">
-                <button type="submit" @click="Subscribe()" class="subscribe">Subscribe</button>
-              </div>
-            </div>
-          </b-form>
+<!--          <b-form>-->
+<!--            <div class="row">-->
+<!--              <div class="col-lg-3 m-auto">-->
+<!--                <h6 class="mt-auto mb-auto mr-3 news-letter-h6">Subscribe to our newsletter</h6>-->
+<!--              </div>-->
+<!--              <div class="col-lg-6 m-auto">-->
+<!--                <b-form-group-->
+<!--                  id="input-group-1"-->
+<!--                  label="Enter your email address"-->
+<!--                  label-for="input-1"-->
+<!--                  description="We'll never share your email with anyone else."-->
+<!--                >-->
+<!--                  <b-form-input-->
+<!--                    id="input-1"-->
+<!--                    type="email"-->
+<!--                    class="m-0"-->
+<!--                    v-model="email"-->
+<!--                    placeholder="Enter email"-->
+<!--                    required-->
+<!--                  ></b-form-input>-->
+<!--                </b-form-group>-->
+<!--              </div>-->
+<!--              <div class="col-lg-3 m-auto">-->
+<!--                <button type="submit" @click="Subscribe()" class="subscribe">Subscribe</button>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </b-form>-->
         </div>
       </div>
     </div>
