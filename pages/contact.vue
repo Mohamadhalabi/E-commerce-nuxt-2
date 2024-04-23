@@ -163,12 +163,12 @@
               >
                 <b-card-text>
                   <div class="row">
-                    <div class="col-lg-3 col-md-3 col-6 m-auto">
-                      <img src="../static/images/flags/uae-flag.webp" width="200px" />
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-6 m-auto">
+                      <img src="../static/images/flags/uae-flag.webp" class="m-auto m-lg-3" width="200px" />
                     </div>
-                    <div class="col-lg-9 col-md-9 col-12 m-auto">
-                      <p>Address:Sharjah - Industrial No. 5, behind Maliah Road., shop No. 8, Property of Ali Nasir Mohamed Suleiman</p>
-                      <p>Mobile: <a href="tel:+97150429045">+971 50 442 9045</a></p>
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-12 mt-2">
+                      <p class="text-center">Address:Sharjah - Industrial No. 5, behind Maliah Road., shop No. 8, Property of Ali Nasir Mohamed Suleiman</p>
+                      <p class="text-center">Mobile: <a href="tel:+97150429045">+971 50 442 9045</a></p>
                     </div>
                   </div>
                 </b-card-text>
@@ -188,12 +188,12 @@
               >
                 <b-card-text>
                   <div class="row">
-                    <div class="col-lg-3 col-md-3 col-6 m-auto">
-                      <img src="../static/images/flags/Flag_of_Saudi_Arabia.gif" width="200px" />
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-6 m-auto">
+                      <img src="../static/images/flags/Flag_of_Saudi_Arabia.gif" class="m-auto m-lg-3" width="200px" />
                     </div>
-                    <div class="col-lg-9 col-md-9 col-12 m-auto">
-                      <p>Address:Al Hasa area - Saudi Arabia</p>
-                      <p>Mobile: <a href="tel:00966505953232">+966 50 595 3232</a></p>
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-12 mt-2">
+                      <p class="text-center">Address:Al Hasa area - Saudi Arabia</p>
+                      <p class="text-center">Mobile: <a href="tel:00966505953232">+966 50 595 3232</a></p>
                     </div>
                   </div>
                 </b-card-text>
@@ -213,12 +213,12 @@
               >
                 <b-card-text>
                   <div class="row">
-                    <div class="col-lg-3 col-md-3 col-6 m-auto ">
-                      <img src="../static/images/flags/usa-flag.webp" width="200px" />
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-6 m-auto ">
+                      <img src="../static/images/flags/usa-flag.webp" class="m-auto m-lg-3" width="200px" />
                     </div>
-                    <div class="col-lg-9 col-md-9 col-12 m-auto">
-                      <p>Address:4637 Given ave. Memphis</p>
-                      <p>Mobile: <a href="tel:0019734624473">+1973 46 244 73</a></p>
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-12 mt-2">
+                      <p class="text-center">Address:4637 Given ave. Memphis</p>
+                      <p class="text-center">Mobile: <a href="tel:0019734624473">+1973 46 244 73</a></p>
                     </div>
                   </div>
                 </b-card-text>
@@ -232,17 +232,17 @@
           <div>
             <b-card-group deck>
               <b-card
-                header="Saudi Arabia"
+                header="Turkey"
                 header-tag="header"
               >
                 <b-card-text>
                   <div class="row">
-                    <div class="col-lg-3 col-md-3 col-6 m-auto">
-                      <img src="../static/images/flags/turkey-flag.webp" width="200px" />
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-6 m-auto">
+                      <img src="../static/images/flags/turkey-flag.webp" class="m-auto m-lg-3" width="200px" />
                     </div>
-                    <div class="col-lg-9 col-md-9 col-12 m-auto">
-                      <p>Address:Turkey - Istanbul - Baris Mah.Karadeniz</p>
-                      <p>Mobile: <a href="tel:00905355847446">+90 553 146 84 75</a></p>
+                    <div class="col-xl-9 col-lg-8 col-md-12 col-12 mt-2">
+                      <p class="text-center">Address:Turkey - Istanbul - Baris Mah.Karadeniz</p>
+                      <p class="text-center">Mobile: <a href="tel:00905355847446">+90 553 146 84 75</a></p>
                     </div>
                   </div>
                 </b-card-text>
@@ -475,7 +475,7 @@ export default {
 };
 </script>
 <style>
-@media screen and (min-width: 768px){
+@media screen and (min-width: 993px){
   .card{
     min-height: 200px;
     max-height: 200px;
