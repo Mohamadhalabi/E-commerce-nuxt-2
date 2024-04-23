@@ -35,8 +35,6 @@
       <div class="product-single-container container product-single-default">
         <div v-if="product" class="row">
           <div class="col-xl-5 col-lg-6 col-md-6 col-12 product-single-gallery">
-
-<!--            <pv-media :product="product" />-->
             <pv-media-new :product="product" />
             <div class="text-center">
               <span class="sku-color d-lg-none d-md-none">SKU: {{ product.sku }}</span>

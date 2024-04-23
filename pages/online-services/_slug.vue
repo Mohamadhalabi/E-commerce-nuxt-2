@@ -22,10 +22,13 @@
       </nav>
       <div class="product-single-container container product-single-default">
         <div class="row">
-          <div class="col-xl-5 col-lg-6 col-md-6 col-12 mt-auto mb-auto ml-auto mr-auto">
-            <img src="../../static/images/online-services/online-services.jpg" class="w-75 ml-auto mr-auto">
+          <div class="col-xl-5 col-lg-6 col-md-6 col-12">
+            <nuxt-img :src="image['l']['url']" class="rounded-5" style="border: 1px solid #e7e7e6!important;"
+            />
+
+<!--              <ImageMagnifier :image="image" size="l" />-->
           </div>
-          <div class="col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12 m-auto">
+          <div class="col-xl-7 col-lg-6 col-md-6 col-sm-12 col-12">
             <h1 class="product-title">{{title[$i18n.locale]}}</h1>
             <div class="summary-name">
               <span> {{summary_name[$i18n.locale]}}</span>
@@ -91,44 +94,43 @@
 import Api from "~/api";
 import PvRating from "~/components/product/partials/PvRating.vue";
 import {mapGetters} from "vuex";
-
+import ImageMagnifier from "~/components/product/partials/ImageMagnifier.vue";
 export default {
   name: "_slug",
-  components: {PvRating,},
+  components: {PvRating,ImageMagnifier},
+
+  async asyncData({ params }) {
+    const response  = await Api.post(`search/online-service-product/${params.slug}`);
+
+    return {
+      product : response.data,
+      title : response.data.title,
+      summary_name : response.data.summary_name,
+      short_title : response.data.short_title,
+      price : response.data.price,
+      description : response.data.description,
+      image: response.data.image,
+    }
+  },
+
+
   data() {
     return {
-      products:[],
       product: [],
-      matchingProduct: [],
       description: "",
-      faq: "",
       short_title: "",
       price: "",
       title:"",
       summary_name:"",
+      image: "",
+        prev_product: null,
+      next_product: null,
     }
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
-  mounted() {
-    // this.$Progress.start();
-    this.getProduct();
-  },
   methods:{
-   getProduct(){
-     let slug = this.$route.params.slug
-     Api.get(`search/online-services-products`).then((response) => {
-       this.products = response.data
-       this.product = response.data.find(item => item.slug === this.$route.params.slug);
-       this.title = this.product.title;
-       this.summary_name = this.product.summary_name;
-       this.short_title = this.product.short_title
-       this.price = this.product.price
-       this.description = this.product.description
-       // this.$Progress.finish();
-     });
-     },
     goToWhatsApp(product) {
       window.open(
         `https://api.whatsapp.com/send?phone=971544179287&text=I want to order the ${product} `,

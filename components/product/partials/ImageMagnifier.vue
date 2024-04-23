@@ -1,5 +1,4 @@
 <template>
-
   <div style="padding: 10px">
     <img
       :id="'myimage-' + image[size].id"
