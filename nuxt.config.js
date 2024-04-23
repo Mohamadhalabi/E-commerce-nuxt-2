@@ -136,7 +136,6 @@ export default {
       'ListGroupPlugin',
       'FormTagsPlugin',
       'AlertPlugin',
-      'CarouselPlugin',
       'ButtonPlugin'
     ],
   },
