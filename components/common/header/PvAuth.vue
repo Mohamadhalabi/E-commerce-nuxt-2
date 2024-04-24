@@ -20,12 +20,12 @@
             {{ StateUser.name }}
           </p>
           <div class="header-menu border-0">
-            <ul>
-              <li><span class="account-list" @click.prevent="myOrders">
+            <ul class="account-menu-ul">
+              <li class="account-menu-li"><span class="account-list" @click.prevent="myOrders">
                 {{ $t("account.orders") }}
               </span>
               </li>
-              <li>
+              <li class="account-menu-li">
                 <span class="account-list" @click="LogOut">{{ $t("account.log_out") }}</span>
               </li>
             </ul>
@@ -75,3 +75,9 @@ export default {
   },
 };
 </script>
+<style>
+.account-menu-ul{
+  padding: 10px!important;
+  margin-bottom: 10px;
+}
+</style>
