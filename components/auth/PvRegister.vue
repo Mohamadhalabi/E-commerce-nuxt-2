@@ -291,14 +291,10 @@ import { mapActions, mapGetters } from "vuex";
 import AutoComplate from "~/components/common/AutoComplate.vue";
 import PvError from "~/components/common/ErrorMessage.vue";
 import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
-// import VuePhoneNumberInput, { async } from "vue-phone-number-input";
-// import "vue-phone-number-input/dist/vue-phone-number-input.css";
-
 import Api from "~/api";
 
 export default {
   components: {
-    // VuePhoneNumberInput,
     AutoComplate,
     PvError,
     BaseButtonIcon1,
@@ -311,7 +307,7 @@ export default {
   },
   data: function () {
     return {
-       phoneFormated: null,
+      phoneFormated: null,
       avatar: null,
       avatarLink: "",
       companyInfoSecrion: true,
@@ -377,9 +373,8 @@ export default {
             type: "success",
             text: response.data.data.message,
           });
-          this.$router.push({
-            path: "/register-completed",
-          });
+          const user = { email: this.form.email, password: this.form.password };
+          return this.LogIn(user);
         })
         .catch((error) => {
           let errorObj = error.response.data.data;

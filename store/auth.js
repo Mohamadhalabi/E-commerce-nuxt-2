@@ -44,7 +44,7 @@ export const actions = {
 
       let currentPath = this.$router.currentRoute.fullPath;
       if (includes(currentPath, '/auth')) {
-        this.$router.push('/account');
+        this.$router.push('/');
       } else {
         this.$router.push({ path: currentPath, query: { logged_in: true } });
       }
