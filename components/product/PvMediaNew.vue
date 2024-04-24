@@ -1,5 +1,6 @@
 <template>
   <div>
+    <pv-label-group :product="product" class="p-4" />
     <div v-for="(image, index) in product.gallery" :key="index" class="slide rounded-5" ref="main" @mouseenter="mouseEntered" @mouseleave="mouseLeft">
       <div class="showOnDesktop">
         <ImageMagnifier v-if="index === currentIndex" :image="image" size="l" :isMouseInside="isMouseInside" />
@@ -48,10 +49,11 @@
 <script>
 import ImageMagnifier from "~/components/product/partials/ImageMagnifier.vue";
 import Carousel from "vue-ssr-carousel";
+import PvLabelGroup from "~/components/product/partials/PvLabelGroup.vue";
 
 export default {
   name: "Example4",
-  components: { ImageMagnifier, Carousel },
+  components: {PvLabelGroup, ImageMagnifier, Carousel },
   props: {
     product: Object,
   },
