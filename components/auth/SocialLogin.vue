@@ -102,7 +102,7 @@ export default {
         profile_picture: responsePayload.picture
       };
       this.$store.dispatch('auth/loginWithGoogle', user).then((res)=> {
-        this.$modal.hideAll();
+        // this.$modal.hideAll();
         this.$store.dispatch('auth/setUser', res.data.data);
       });
     },

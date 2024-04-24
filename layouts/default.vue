@@ -49,7 +49,7 @@ export default {
   watch: {
     $route: function() {
       resizeHandler();
-      this.$modal.hideAll();
+      // this.$modal.hideAll();
       document.getElementById("search_term").value = "";
     },
   },

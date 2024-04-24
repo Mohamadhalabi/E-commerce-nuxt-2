@@ -191,7 +191,7 @@ export default {
             // if (this.$route.fullPath == "/auth/login") {
               this.$router.push("/");
             // }
-            this.$modal.hideAll();
+            // this.$modal.hideAll();
           })
           .catch((err) => {
             this.$notify({
