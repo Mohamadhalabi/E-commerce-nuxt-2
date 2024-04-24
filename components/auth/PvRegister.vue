@@ -17,17 +17,7 @@
           >
             <div class="profile-avatar profileAvatarRegister position-relative">
               <a href="javascript:;" class="rounded-5">
-                <i
-                  v-if="avatarLink == ''"
-                  :class="
-                    avatarLink && avatarLink !== null
-                      ? 'user-avatar'
-                      : 'sicon-user'
-                  "
-                >
-                </i>
                 <img
-                  v-else
                   loading="lazy"
                   style="object-fit: cover"
                   :src="avatarLink"
@@ -309,7 +299,7 @@ export default {
     return {
       phoneFormated: null,
       avatar: null,
-      avatarLink: "",
+      avatarLink: "https://tlkeys.com/static/images/user.png",
       companyInfoSecrion: true,
       form: {
         name: "",
@@ -339,6 +329,8 @@ export default {
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
+  mounted() {
+  },
   methods: {
     ...mapActions("auth", ["LogIn"]),
     submit: async function () {
@@ -361,11 +353,7 @@ export default {
       formData.append("company_name", this.form.company_name);
       formData.append("website_url", this.form.website_url);
       formData.append("avatar", this.avatar);
-      // try {
-      //   this.token = await this.$recaptcha.getResponse();
-      // } catch (Ex) {
-      //   this.token = "";
-      // }
+
       Api.post("/user/auth/register", formData)
         .then((response) => {
           this.$notify({
@@ -403,7 +391,10 @@ export default {
       const file = e.target.files[0];
       if (file == undefined) {
         this.avatarLink;
-      } else this.avatarLink = URL.createObjectURL(file);
+      } else {
+        this.avatarLink = URL.createObjectURL(file);
+
+      }
     },
   },
 };
