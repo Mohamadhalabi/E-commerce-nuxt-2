@@ -654,7 +654,8 @@ export default
       oldest: 'Oldest',
       newest: 'Newest',
       priority: 'Priority',
-      show: 'Show'
+      show: 'Show',
+      type: "Type"
     },
 
     support: {
