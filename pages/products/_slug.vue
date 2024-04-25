@@ -71,7 +71,9 @@
         class="container"
       />
 
+
       <pv-collection
+        v-if="related_products.length > 1"
         :products="related_products"
         :collection-title="$t('products.relatedProducts')"
         class="container"
