@@ -306,6 +306,10 @@ export default {
         }`;
       }
       switch (this.ordering) {
+        case "type":
+          this.orderBy = "type";
+          this.direction = "desc";
+          break;
         case "title_a_to_z":
           this.orderBy = "title";
           this.direction = "asc";
