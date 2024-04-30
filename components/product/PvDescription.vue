@@ -275,16 +275,10 @@ import { isEmpty } from "lodash";
 import PvProductRow from "~/components/product/card/PvProductRow.vue";
 import PvProductBundel from "~/components/product/card/PvProductBundel.vue";
 import {mapGetters} from "vuex";
-
-import VideoPlayer from 'nuxt-video-player'
 import ImageModal from "~/components/product/ImageModal.vue";
-
-require('nuxt-video-player/src/assets/css/main.css')
-
 export default {
   components: {
     ImageModal,
-    VideoPlayer,
     PvProductBundel,
     PvProductRow,
     PvTabs,
