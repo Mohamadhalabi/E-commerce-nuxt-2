@@ -21,28 +21,28 @@
           <div class="row align-items-center">
             <div class="col-12">
               <div class="about_content">
-                <h1 class="delivery-info-h1">Our Privacy Policy</h1>
+                <h1 class="delivery-info-h1">{{ $t('privacypolicy.title')}}</h1>
                 <p>
-                  All credit/debit card details and personally identifiable information will NOT be stored, sold, shared, rented, or leased to any third parties.
+                  {{ $t('privacypolicy.creditDebit') }}
                 </p>
                 <p>
-                  The Website Policies and <a href="/terms">Terms and Conditions</a> may be changed or updated occasionally to meet the requirements and standards.<br>
-                  Therefore the Customers are encouraged to frequently visit these sections in order to be updated about the changes on the website.<br>
-                  Modifications will be effective on the day they are posted.
+                  {{ $t('privacypolicy.websitePolicies')}} <a href="/terms">{{ $t('privacypolicy.TermsAndConditions') }}</a> {{ $t('privacypolicy.mayBeChanged') }}<br>
+                  {{ $t('privacypolicy.therfore')}}.<br>
+                  {{ $t('privacypolicy.modifications') }}
                 </p>
                 <p>
-                  Some of the advertisements you see on the Site are selected and delivered by third parties, such as ad networks, advertising agencies, advertisers, and audience segment providers.<br>
-                  These third parties may collect information about you and your online activities, either on the Site or on other websites, through cookies, web beacons, and other technologies in an effort to understand your interests and deliver to you advertisements that are tailored to your interests.<br>
-                  Please remember that we do not have access to, or control over, the information these third parties may collect.<br>
-                  The information practices of these third parties are not covered by this privacy policy.<br>
-                </p>
-
-                <p>
-                  We respect your privacy and are committed to protecting your personal information. If you make a payment for our products or services on our website, certain details will be required from you. Please note that we use this information solely for the purpose of completing the payment process and delivering the requested service or product.
+                  {{ $t('privacypolicy.someOfTheAd') }}.<br>
+                  {{ $t('privacypolicy.thirdParties') }}.<br>
+                  {{ $('privacypolicy.pleaseRemember')}}<br>
+                  {{ $('privacypolicy.theInformation')}}<br>
                 </p>
 
                 <p>
-                  The information collected from you during the payment process, such as your name, email address, and credit card details, is used to process the payment and ensure the correct delivery of the purchased products or services. We guarantee the confidentiality and security of this information through the use of a secure and trusted connection to our payment provider.
+                  {{ $t('privacypolicy.weRespect') }}
+                </p>
+
+                <p>
+                  {{ $t('privacypolicy.theinfocollected') }}
                 </p>
                 <p>
                   We do not share your personal information with any third party outside of completing the payment process and delivering the service or product. Additionally, we are committed to complying with all relevant laws and regulations related to the protection of personal data.

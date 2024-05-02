@@ -794,5 +794,21 @@ export default
       seoDescription: "Connect with us effortlessly! Our contact us page is your gateway to seamless communication. Reach out for support, inquiries, or collaboration opportunities. We're here to assist you – let's start the conversation today!",
       ogTitle:"Techno Lock Keys Trading | Automotive Locksmith Services",
       ogDescription:"Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators",
+    },
+    privacypolicy:{
+      title: "Our Privacy Policy",
+      creditDebit:"All credit/debit card details and personally identifiable information will NOT be stored, sold, shared, rented, or leased to any third parties.",
+      websitePolicies: "The Website Policies and",
+      TermsAndConditions:"Terms and Conditions",
+      mayBeChanged: "may be changed or updated occasionally to meet the requirements and standards.",
+      therfore:"Therefore the Customers are encouraged to frequently visit these sections in order to be updated about the changes on the website.",
+      modifications:"Modifications will be effective on the day they are posted.",
+      someOfTheAd:"Some of the advertisements you see on the Site are selected and delivered by third parties, such as ad networks, advertising agencies, advertisers, and audience segment providers",
+      thirdParties:"These third parties may collect information about you and your online activities, either on the Site or on other websites, through cookies, web beacons, and other technologies in an effort to understand your interests and deliver to you advertisements that are tailored to your interests",
+      pleaseRemember:"Please remember that we do not have access to, or control over, the information these third parties may collect",
+      theInformation:"The information practices of these third parties are not covered by this privacy policy.",
+      weRespect:"We respect your privacy and are committed to protecting your personal information. If you make a payment for our products or services on our website, certain details will be required from you. Please note that we use this information solely for the purpose of completing the payment process and delivering the requested service or product",
+      theinfocollected:"The information collected from you during the payment process, such as your name, email address, and credit card details, is used to process the payment and ensure the correct delivery of the purchased products or services. We guarantee the confidentiality and security of this information through the use of a secure and trusted connection to our payment provider.",
+
     }
   };
