@@ -145,14 +145,14 @@
                 <i class="fa fa-location-arrow" />
               </div>
               <div class="porto-sicon-description p-3">
-                Address :{{ $settings.contact.address }}
+                {{ $settings.contact.address }}
               </div>
             </div>
           </div>
         </div>
 
         <div class="col-12 text-center">
-          <h3>Our Branches</h3>
+          <h3>{{ $t("contact.ourBranches") }}</h3>
         </div>
         <div class="col-lg-6 col-md-6 col-12 m-auto">
           <div>
@@ -167,8 +167,8 @@
                       <img src="../static/images/flags/uae-flag.webp" class="m-auto m-lg-3" width="200px" />
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-12 col-12 mt-2">
-                      <p class="text-center">Address:Sharjah - Industrial No. 5, behind Maliah Road., shop No. 8, Property of Ali Nasir Mohamed Suleiman</p>
-                      <p class="text-center">Mobile: <a href="tel:+97150429045">+971 50 442 9045</a></p>
+                      <p class="text-center">{{ $t("contact.address") }}:{{ $t("contact.uaeAddress") }}</p>
+                      <p class="text-center">{{ $t("contact.Mobile") }}: <a href="tel:+97150429045">+971 50 442 9045</a></p>
                     </div>
                   </div>
                 </b-card-text>
@@ -192,8 +192,8 @@
                       <img src="../static/images/flags/Flag_of_Saudi_Arabia.gif" class="m-auto m-lg-3" width="200px" />
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-12 col-12 mt-2">
-                      <p class="text-center">Address:Al Hasa area - Saudi Arabia</p>
-                      <p class="text-center">Mobile: <a href="tel:00966505953232">+966 50 595 3232</a></p>
+                      <p class="text-center">{{ $t("contact.address") }}:{{ $t("contact.ksaAddress") }}</p>
+                      <p class="text-center">{{ $t("contact.Mobile") }}: <a href="tel:00966505953232">+966 50 595 3232</a></p>
                     </div>
                   </div>
                 </b-card-text>
@@ -217,8 +217,8 @@
                       <img src="../static/images/flags/usa-flag.webp" class="m-auto m-lg-3" width="200px" />
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-12 col-12 mt-2">
-                      <p class="text-center">Address:4637 Given ave. Memphis</p>
-                      <p class="text-center">Mobile: <a href="tel:0019734624473">+1973 46 244 73</a></p>
+                      <p class="text-center">{{ $t("contact.address") }}:{{ $t("contact.usaAddress") }}</p>
+                      <p class="text-center">{{ $t("contact.Mobile") }}: <a href="tel:0019734624473">+1973 46 244 73</a></p>
                     </div>
                   </div>
                 </b-card-text>
@@ -241,37 +241,33 @@
                       <img src="../static/images/flags/turkey-flag.webp" class="m-auto m-lg-3" width="200px" />
                     </div>
                     <div class="col-xl-9 col-lg-8 col-md-12 col-12 mt-2">
-                      <p class="text-center">Address:Turkey - Istanbul - Baris Mah.Karadeniz</p>
-                      <p class="text-center">Mobile: <a href="tel:00905355847446">+90 553 146 84 75</a></p>
+                      <p class="text-center">{{ $t("contact.address") }}:{{ $t("contact.turkeyAddress") }}</p>
+                      <p class="text-center">{{ $t("contact.Mobile") }}: <a href="tel:00905355847446">+90 553 146 84 75</a></p>
                     </div>
                   </div>
                 </b-card-text>
               </b-card>
-
             </b-card-group>
           </div>
         </div>
-
-
       </div>
     </div>
   </main>
 </template>
 
 <script>
-import { VueSlideToggle } from "vue-slide-toggle";
 import { mapGetters } from "vuex";
 import Api from "~/api";
 import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
+import _contactTwo from 'static/sass/pages/_contact-two.scss'
 export default {
   components: {
-    VueSlideToggle,
     BaseButtonIcon1,
   },
 
   head() {
     return {
-      title: "Techno Lock Keys Trading | Get in Touch with Us",
+      title: this.$t('contact.seoTitle'),
       link: [
         {
           rel: 'canonical',
@@ -285,7 +281,7 @@ export default {
         },
         {
           name: 'description',
-          content: "Connect with us effortlessly! Our contact us page is your gateway to seamless communication. Reach out for support, inquiries, or collaboration opportunities. We're here to assist you – let's start the conversation today!"
+          content: this.$t('contact.seoDescription'),
         },
         {
           name: "og:type",
@@ -297,11 +293,11 @@ export default {
         },
         {
           name: "og:title",
-          content: "Techno Lock Keys Trading | Automotive Locksmith Services",
+          content: this.$t('contact.ogTitle'),
         },
         {
           name: "og:description",
-          content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
+          content: this.$t('contact.ogDescription')
         },
         {
           name: "og:url",
@@ -323,22 +319,22 @@ export default {
           name: "og:image:width",
           content: "1200",
         },
-        {
-          name: "twitter:card",
-          content: "summary",
-        },
-        {
-          name: "twitter:site",
-          content: `${this.$settings.social_media.twitter}`,
-        },
-        {
-          name: "twitter:title",
-          content: 'Techno Lock Keys Trading | Automotive Locksmith Services',
-        },
-        {
-          name: "twitter:description",
-          content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
-        },
+        // {
+        //   name: "twitter:card",
+        //   content: "summary",
+        // },
+        // {
+        //   name: "twitter:site",
+        //   content: `${this.$settings.social_media.twitter}`,
+        // },
+        // {
+        //   name: "twitter:title",
+        //   content: 'Techno Lock Keys Trading | Automotive Locksmith Services',
+        // },
+        // {
+        //   name: "twitter:description",
+        //   content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
+        // },
         {
           rel: "shortcut icon",
           href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
@@ -351,10 +347,10 @@ export default {
             "name": "Techno Lock Keys Trading",
             "url": "https://www.tlkeys.com/",
             "image": "https://www.tlkeys.com/tlk-logo.png",
-            "description": "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators.",
+            "description": this.$t('contact.ogDescription'),
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Industrial No. 5, behind Maliah Road., shop No. 8",
+              "streetAddress": this.$t('contact.uaeAddress'),
               "addressCountry": "AE"
             },
             "telephone": "+971 6 542 1313",
@@ -401,7 +397,6 @@ export default {
   },
   data: function () {
     return {
-      toggleState: [true, false, false, false, false],
       dataForm: {
         name: "",
         email: "",
@@ -413,28 +408,8 @@ export default {
       token: null,
     };
   },
-  mounted() {
-    // this.$Progress.start();
-    setTimeout(() => {
-      // this.$Progress.finish();
-    }, 1000);
-  },
   methods: {
-    changeToggle: function (index) {
-      let tmp = this.toggleState[index];
-      this.toggleState.fill(false);
-      this.toggleState[index] = !tmp;
-      this.toggleState = [...this.toggleState];
-    },
-
     sendMessage: async function () {
-      // try {
-      //   this.token = await this.$recaptcha.getResponse();
-      // } catch (Ex) {
-      //   this.token = "";
-      // }
-      // if (this.token != "") {
-      //   this.$Progress.start();
         Api.post("/contact-us", this.dataForm)
           .then((response) => {
             (this.dataForm.name = ""),
@@ -453,7 +428,6 @@ export default {
               type: "success",
               text: response.data.message,
             });
-            // this.$Progress.finish();
           })
           .catch((err) => {
             this.errorMsg = err.response.data.data;
@@ -463,10 +437,7 @@ export default {
               type: "error",
               text: err.response.data.data.message[0],
             });
-
-            this.$Progress.fail();
           });
-      // }
     },
   },
   computed: {
@@ -474,18 +445,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-@media screen and (min-width: 993px){
-  .card{
-    min-height: 200px;
-    max-height: 200px;
-  }
-}
-.card{
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-}
-.card:hover {
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-}
-</style>
