@@ -152,8 +152,8 @@ export default
     },
     footer: {
       description: 'Established in 1997, Techno Lock Keys Trading has been your trusted locksmith partner for over two decades. We are dedicated to ensuring your security needs are met with professionalism and expertise. From key cutting to advanced security system installations, we\'ve got you covered. Your peace of mind is our priority.',
-      copyrights: '© 2023',
-      company_name: 'Techno lock keys trading',
+      copyrights: '© 2024',
+      company_name: 'Techno Lock Keys Trading',
       subsicribe: 'Get all the lasted infornation on event , Sales and Offers',
       subsicribeTitle: 'Subscribe newsletter',
       enterEmail: 'Enter Your Email address',
@@ -706,6 +706,35 @@ export default
     deliveryinfo:{
       DeliveryInfo:"Delivery Info",
       addToCart: "Add to cart",
+    },
+    about: {
+      aboutTechnoLock: "About Techno Lock",
+      creativeTeam: "We are a creative key trading company working since 1997",
+      securedBusiness: "Because we are one of the top safe and secured businesses, our practice is highly recommended by our clients. A significant part of our business comes from referrals by customers who are pleased with the quality of service we offer",
+      WasEstablished: "The company was established in 1997 with a mission to transform the automobiles keys trading, programmable devices and key making in the UAE market and other part of the world.",
+      hasBeenStriving: "The brand 'Techno lock Keys has been striving to deliver top performance products to fulfil every customer's requirement.The motto of the company is to offer defect-free products with zero complaints from customers.",
+      contactUs: "Contact Us",
+      futureGoal: "Our Future Goal",
+      weWantToLead: "We want to lead in innovation & Technology",
+      increaseMarket: "Increase market share by expanding product line to smart key systems.",
+      improveCustomer: "Improve customer satisfaction by offering 24/7 technical support.",
+      streamline: "Streamline production process to reduce costs and improve efficiency. Develop strong partnerships with car manufacturers to increase brand recognition.",
+      imlpementEco:"Implement eco-friendly production methods to promote sustainability, Expand international reach by opening new sales and distribution centers. Invest in research and development to introduce innovative products.",
+      FosterApostive: "Foster a positive company culture to attract and retain top talent.",
+      whatweoffer: "What we Offer",
+      ourComprehensive: "Our Comprehensive Locksmith Services and Solutions",
+      veryConvinent: "Very Convenient & High Quality Services.",
+      ourCompanyOffer: "Our company offers its customers only high-precision products. We invest in production processes and strive for continuous improvement.",
+      keyprogramming: "Key Programming And Reprogramming Services.",
+      weAreSpecialist: "We are specialist auto locksmiths and we offer services such as repairing key fobs, reprogramming keys and providing spare transponder keys.",
+      carKey:"Car Key Repair Services.",
+      weHaveTheExperience:"We have the experience and expertise to repair almost any broken or damaged key and fob. We are providing fast and reliable car key repair services.",
+      lostKey:"Lost Key Replacement Services.",
+      ifYouHave:"If you have lost your vehicle key you no longer need to wonder about how you are going to get a new one, simply contact us and get your key.",
+      softwareUpdate: "Software Update",
+      weOfferSoftware:"We offer software designed specifically for locksmiths to streamline their operations and enhance their services. Our software features a range of tools and features.",
+      support:"24/7 Support",
+      weOfferSupport:"We offer 24/7 support to our customers, ensuring that they have access to assistance whenever they need it. Our dedicated support team is available to answer any questions.",
+
     }
-  }
-  ;
+  };
