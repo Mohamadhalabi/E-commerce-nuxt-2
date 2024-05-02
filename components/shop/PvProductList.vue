@@ -22,6 +22,7 @@
                 class="form-control"
                 @change="changeOrder"
               >
+                <option value="type">{{ $t("shop.type")}}</option>
                 <option value="title_a_to_z">
                   {{ $t("shop.title_a_to_z") }}
                 </option>
@@ -243,10 +244,7 @@ export default {
       selectedNumber: 24,
       show_not_found: false,
       products: [],
-      repeatCount: new Array(100),
       direction: "asc",
-      itemsPerPage: 9,
-      totalCount: 0,
       length: 12,
       pageCount: 1,
       md: "",
@@ -256,28 +254,27 @@ export default {
         default: "grid",
       },
       orderBy: "created_at",
-      ordering: "price_high_low",
-      directionBy: "asc",
+      ordering: "type",
     };
   },
   watch: {
     $route: function () {
       this.type = this.$route.query.list_view ? "list" : "grid";
-      this.getProduct();
+      this.fetchProducts();
     },
     async getCurrency() {
       await this.fetchProducts()
     },
   },
   created: function () {
-    setTimeout(() => {
-      this.show_not_found = true;
-    }, 3000);
-    if (this.$route.query.hasOwnProperty("page")) {
-      this.selectedPage = this.$route.query.page;
-    }
-    this.type = this.$route.query.list_view ? "list" : "grid";
-    this.getProduct(this.slug);
+    // setTimeout(() => {
+    //   this.show_not_found = true;
+    // }, 3000);
+    // if (this.$route.query.hasOwnProperty("page")) {
+    //   this.selectedPage = this.$route.query.page;
+    // }
+    // this.type = this.$route.query.list_view ? "list" : "grid";
+    // this.getProduct(this.slug);
   },
   computed: {
     ...mapGetters("header",["getCurrency"]),
@@ -288,9 +285,6 @@ export default {
         return false;
       }
     },
-  },
-  mounted() {
-    // this.$Progress.start();
   },
   methods: {
     async fetchProducts(){
@@ -312,6 +306,10 @@ export default {
         }`;
       }
       switch (this.ordering) {
+        case "type":
+          this.orderBy = "type";
+          this.direction = "desc";
+          break;
         case "title_a_to_z":
           this.orderBy = "title";
           this.direction = "asc";
@@ -344,7 +342,7 @@ export default {
       let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
       const { data } = await Api.get(`search/product${query}`);
       this.products = data.products;
-      if(this.products.length == 0 ){
+      if(this.products.length === 0 ){
         this.show_not_found = true
       }
       if (data.products[0]["category"]) {
@@ -352,6 +350,9 @@ export default {
       } else {
         this.viewType = "product";
       }
+
+      this.pageCount = data.total_pages;
+
     },
     clickedFilter(){
       this.$emit('filters',true)
@@ -360,17 +361,17 @@ export default {
       this.showStyle = style;
     },
     handleChange() {
-      this.getProduct();
+      this.fetchProducts();
       this.$router.push({ path: this.$route.path, query: {
             ...this.$route.query,
             page: 1,
           }, });
     },
     changeOrder() {
-      this.getProduct();
+      this.fetchProducts();
     },
     changeDirection() {
-      this.getProduct();
+      this.fetchProducts();
     },
     changePage(page) {
       this.selectedPage = page;
@@ -392,85 +393,6 @@ export default {
       this.$router.push({ path: "shop", query: { ...query } });
     },
 
-    async getProduct() {
-      this.viewType = null;
-      let tempQuery = "";
-      // let displayType = "categories";
-      let displayType = "normal";
-
-      if (this.$route.query.hasOwnProperty("categories") || this.category) {
-        displayType = "normal";
-      }
-      if (this.slugtype == "category") {
-        tempQuery += `categories=${this.slug}`;
-      } else if (this.slugtype == "manufacturer") {
-        tempQuery += `manufacturers=${this.slug}`;
-      } else if (this.slugtype == "brand") {
-        tempQuery += `brands=${this.slug}`;
-      }
-      for (const property in this.$route.query) {
-        // if(checkQueryArray.includes(property)) {
-        tempQuery += `&${property}${
-          this.$route.query[property] ? `=${this.$route.query[property]}` : ""
-        }`;
-        // }
-      }
-      switch (this.ordering) {
-        case "title_a_to_z":
-          this.orderBy = "title";
-          this.direction = "asc";
-          break;
-        case "title_z_to_a":
-          this.orderBy = "title";
-          this.direction = "desc";
-          break;
-        case "price_low_high":
-          this.orderBy = "price";
-          this.direction = "asc";
-          break;
-        case "price_high_low":
-          this.orderBy = "price";
-          this.direction = "desc";
-          break;
-        case "oldest":
-          this.orderBy = "created_at";
-          this.direction = "asc";
-          break;
-        case "newest":
-          this.orderBy = "created_at";
-          this.direction = "desc";
-          break;
-        case "priority":
-          this.orderBy = "created_at";
-          this.direction = "desc";
-          break;
-      }
-
-      let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
-      await Api.get(`search/product${query}`).then((response) => {
-        if (response.data.products.length > 0) {
-
-          if (response.data.products[0]["category"]) {
-            this.viewType = "categories";
-          } else {
-            this.viewType = "product";
-          }
-          // this.$Progress.finish();
-        }
-        this.products = response.data.products;
-
-        if (this.md != response.data.md5 && this.md != "") {
-          this.selectedPage = 1;
-
-          this.md = response.data.md5;
-        }
-        if (this.md == "") {
-          this.md = response.data.md5;
-        }
-        this.pageCount = response.data.total_pages;
-        // this.$Progress.finish();
-      });
-    },
   },
 };
 </script>
