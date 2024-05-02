@@ -128,7 +128,7 @@
               <div class="porto-icon">
                 <i class="fas fa-mobile-alt mobile-phone" />
               </div>
-              <div class="porto-sicon-description">
+              <div class="porto-sicon-description p-3">
                 {{ $settings.contact.whatsapp }}<br />
               </div>
             </div>
@@ -136,7 +136,7 @@
               <div class="porto-icon">
                 <i class="fa fa-envelope" />
               </div>
-              <div class="porto-sicon-description">
+              <div class="porto-sicon-description p-3">
                 {{ $settings.contact.email_primary }}<br />
               </div>
             </div>
@@ -144,7 +144,7 @@
               <div class="porto-icon">
                 <i class="fa fa-location-arrow" />
               </div>
-              <div class="porto-sicon-description">
+              <div class="porto-sicon-description p-3">
                 Address :{{ $settings.contact.address }}
               </div>
             </div>
@@ -474,7 +474,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 @media screen and (min-width: 993px){
   .card{
     min-height: 200px;
