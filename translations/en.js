@@ -736,5 +736,9 @@ export default
       support:"24/7 Support",
       weOfferSupport:"We offer 24/7 support to our customers, ensuring that they have access to assistance whenever they need it. Our dedicated support team is available to answer any questions.",
 
+      seoTitle:"Learn About Techno lock keys Mission, Values, and Journey",
+      seoDescription:"Uncover Techno lock story: Our mission, values, and journey towards excellence. Join us in celebrating our commitment to making a difference.",
+      ogTitle:"Techno Lock Keys Trading | Automotive Locksmith Services",
+      ogDescription:"Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators",
     }
   };
