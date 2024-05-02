@@ -29,7 +29,7 @@
       </span>
       <span
         v-if="!gridPrice"
-        class="old-price mt-auto mb-auto"
+        class="old-price mt-1 mb-0"
         :class="{ 'highlighted': hasDuplicate(product.price.value) }"
       >
         {{ product.price.currency + product.price.value }}

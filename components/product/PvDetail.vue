@@ -200,8 +200,7 @@
       </div>
       <base-button-icon-1
         v-if="product.hide_price == 0"
-        @click="
-          product.quantity = qty;
+        @click="product.quantity = qty;
           AddProductToCart(product);
         "
         :outline="true"

@@ -62,8 +62,7 @@
         ]'
 
 
-          class="products-slider dots-top dots-small mb-0 border-0"
-          :options="storiesSlider">
+          class="products-slider dots-top dots-small mb-0 border-0">
           <div
             v-for="story in stories"
             :key="story.id"
@@ -90,6 +89,35 @@
             </a>
           </div>
         </Carousel>
+
+        <div>
+          <b-modal v-model="showModalImage" hide-footer centered hide-header>
+
+          </b-modal>
+
+          <iframe v-if="showModalImage && selectedStory.type === 'video'"
+                  class="d-flex modal-image"
+                  width="700px"
+                  height="440px"
+                  style="border: 0!important;"
+                  :src="getEmbedUrl(selectedStory.value)" />
+
+          <img v-if="showModalImage && selectedStory.type === 'image'" :src="selectedStory.value"
+               alt="Modal Image" style="max-width: 900px;max-height: 900px" class="modal-image rounded-6">
+
+
+          <button
+            v-if="this.showModalImage"
+            title="Close (Esc)"
+            type="button"
+            class="close-image-modal"
+            @click="closeModal"
+          >
+            X
+          </button>
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -104,30 +132,31 @@ export default {
   data: function() {
     return {
       stories: [],
-      test:true,
-      storiesSlider: {
-        autoplay: false,
-        navButtons:false,
-        timing: 'ease',
-        dots: false,
-        slidesToShow: 16,
-        speed:0,
-      },
-      clickedStoryIndices: []
+      clickedStoryIndices: [],
+      showModalImage: false,
+      selectedStory: null,
     };
   },
   async fetch() {
-      const response = await Api.get('status');
-      this.stories = response.data.result;
+    const response = await Api.get('status');
+    this.stories = response.data.result;
   },
   methods: {
+    getEmbedUrl(link) {
+      const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const match = link.match(regex);
+      if (match && match[1]) {
+        return `https://www.youtube.com/embed/${match[1]}`;
+      } else {
+        return ""; // or handle invalid URLs accordingly
+      }
+    },
     openStory: function(story) {
-      this.$modal.show(
-        () => import('~/components/home/PvStoryModal'), {story}, {
-          adaptive: true,
-          class: story.type == 'image' ? 'image-modal-container' : 'video-modal-container'
-        }
-      );
+      this.selectedStory = story
+      this.showModalImage = true
+    },
+    closeModal() {
+      this.showModalImage = false;
     },
     storeIdInSession: function(index) {
       this.clickedStoryIndices = JSON.parse(sessionStorage.getItem('clickedStoryIndex')) || [];
@@ -154,5 +183,10 @@ export default {
   .from-demo-37{
     display: none;
   }
+}
+.modal{
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0!important;
+  border: 0!important;
 }
 </style>
