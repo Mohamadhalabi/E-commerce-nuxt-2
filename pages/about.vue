@@ -160,7 +160,7 @@ import _about from 'static/sass/pages/_about.scss'
 export default {
   head() {
     return {
-      title: "Discover Our Story: Learn About Techno lock Mission, Values, and Journey",
+      title: this.$t('about.seoTitle'),
       link: [
         {
           rel: 'canonical',
@@ -174,7 +174,7 @@ export default {
         },
         {
           name: 'description',
-          content: "Uncover Techno lock story: Our mission, values, and journey towards excellence. Join us in celebrating our commitment to making a difference."
+          content: this.$t('about.seoDescription')
         },
         {
           name: "og:type",
@@ -186,11 +186,11 @@ export default {
         },
         {
           name: "og:title",
-          content: "Techno Lock Keys Trading | Automotive Locksmith Services",
+          content: this.$t('about.ogTitle'),
         },
         {
           name: "og:description",
-          content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
+          content: this.$t('about.ogDescription'),
         },
         {
           name: "og:url",
@@ -212,22 +212,22 @@ export default {
           name: "og:image:width",
           content: "1200",
         },
-        {
-          name: "twitter:card",
-          content: "summary",
-        },
-        {
-          name: "twitter:site",
-          content: `${this.$settings.social_media.twitter}`,
-        },
-        {
-          name: "twitter:title",
-          content: 'Techno Lock Keys Trading | Automotive Locksmith Services',
-        },
-        {
-          name: "twitter:description",
-          content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
-        },
+        // {
+        //   name: "twitter:card",
+        //   content: "summary",
+        // },
+        // {
+        //   name: "twitter:site",
+        //   content: `${this.$settings.social_media.twitter}`,
+        // },
+        // {
+        //   name: "twitter:title",
+        //   content: 'Techno Lock Keys Trading | Automotive Locksmith Services',
+        // },
+        // {
+        //   name: "twitter:description",
+        //   content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
+        // },
         {
           rel: "shortcut icon",
           href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
@@ -240,7 +240,7 @@ export default {
             "name": "Techno Lock Keys Trading",
             "url": "https://www.tlkeys.com/",
             "image": "https://www.tlkeys.com/tlk-logo.png",
-            "description": "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators.",
+            "description": this.$t('about.ogDescription'),
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Industrial No. 5, behind Maliah Road., shop No. 8",
@@ -284,17 +284,6 @@ export default {
 	components: {
     BaseButtonIcon1
 	},
-	data: function() {
-		return {
-			toggleState: [true, false, false, false]
-		};
-	},
-	props: {
-		isMagnify: {
-			type: Boolean,
-			default: true
-		}
-	},
 	computed: {
 		lightBoxMedia: function() {
 			let pictures = [];
@@ -318,16 +307,5 @@ export default {
 			return pictures;
 		}
 	},
-	methods: {
-		openLightBox: function(index) {
-			this.$refs.lightBox.showImage(index);
-		},
-		changeToggle: function(index) {
-			let tmp = this.toggleState[index];
-			this.toggleState.fill(false);
-			this.toggleState[index] = !tmp;
-			this.toggleState = [...this.toggleState];
-		}
-	}
 };
 </script>
