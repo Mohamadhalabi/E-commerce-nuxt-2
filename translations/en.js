@@ -1,5 +1,3 @@
-import product from "~/api/mockEndpoints/product";
-
 export default
   {
     common: {
@@ -67,8 +65,6 @@ export default
       failedToChangeThePassword: 'Failed to change the password try agin',
       WelcomeTo:'Welcome To',
       tlkeys:'Techno Lock Keys',
-
-
     },
     auth: {
       phoneNumber: 'Phone number',
@@ -232,7 +228,6 @@ export default
       transfer: 'Transfer',
       free_shipping: 'Free Shipping',
       cancelled: 'Cancelled',
-
       created_at: 'Created at',
       approve: 'Approve',
       pending: 'Pending',
@@ -353,7 +348,6 @@ export default
       not_address: 'You have not set any address yet.',
       not_card: 'You have not set any cards yet.',
       loading_cards: 'Loading Cards',
-
       address_information: 'The following addresses will be used on the checkout page by default.',
       code: 'Code',
       country: 'Country',
@@ -399,7 +393,6 @@ export default
       wishlist: 'Wishlist',
       orderDetils: 'Order Info',
       reviews: 'Reviews',
-
       logged: 'Logged in as',
       compares: 'Compare',
       support: 'Support',
@@ -721,7 +714,7 @@ export default
       freeDelivery:"2. Free Delivery:",
       theStoreMight:"The store might offer free delivery services to customers if their order exceeds a certain value or as part of special offers or marketing campaigns. Typically, customers need to meet a specified total order amount to qualify for free delivery.",
       toFindOut:"To find out whether the store imposes delivery fees or offers free delivery, customers are advised to check the Shipping and Delivery Policy page on the store's website or contact customer service for precise information regarding the terms and conditions related to delivery services.",
-      deliveryTime:"Delivery Time for Local/International Orders:", 
+      deliveryTime:"Delivery Time for Local/International Orders:",
       localDelivery:"1. Local Delivery Time:",
       localDeliveryTime:"Local delivery time is generally faster than international delivery and can take anywhere from two days to several days, depending on the location and the logistics service used.",
       internationalDelivery:"2. International Delivery Time:",

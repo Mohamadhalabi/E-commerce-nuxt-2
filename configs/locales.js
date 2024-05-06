@@ -27,9 +27,16 @@ export default {
     flag: 'fr',
     shortName: 'Fr',
     dir: 'ltr',
-    name: 'France',
+    name: 'French',
     file: 'fr.js'
-  }
+  },{
+      code: 'es',
+      flag: 'es',
+      shortName: 'Es',
+      dir: 'ltr',
+      name: 'Spanish',
+      file: 'es.js'
+    }
   ],
 
   languages: [{
@@ -45,14 +52,13 @@ export default {
   {
     code: 'fr',
     flag: 'fr',
-    name: 'France'
-  }],
-
-
-
-
-
-
-
+    name: 'French',
+  },
+    {
+      code: 'es',
+      flag: 'es',
+      name: 'Spanish'
+    }
+  ],
 
 }

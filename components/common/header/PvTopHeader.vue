@@ -22,6 +22,25 @@
             </ul>
           </div>
         </div>
+        <div class="header-dropdown m-0">
+          <a href="javascript:;">{{
+              currentLocale.shortName
+            }}</a>
+          <div class="header-menu">
+            <ul>
+              <li
+                v-for="locale in availableLocales"
+                :key="locale"
+                style="cursor: pointer"
+                @click="setLocale(locale[0])"
+              >
+                <a href="javascript:;"
+                   style="text-transform: uppercase;">{{ locale[0]}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
         <div class="header-about-contact">
           <nuxt-link :to="('/about')">
             {{ $t("header.about") }}
@@ -67,10 +86,17 @@ export default {
     availableCurrencies() {
       return this.$settings.currencies.filter((i) => i !== this.currency);
     },
+    currentLocale() {
+      return this.$i18n.locales.find((i) => i.code === this.$i18n.locale);
+    },
+    availableLocales() {
+      return Object.entries(this.$settings.languages);
+    },
   },
   methods: {
     ...mapMutations("currency", ["setCurrencyValue"]),
     ...mapMutations("header", ["changeCurrency"]),
+    ...mapMutations("rtlStore", ["setLan"]),
 
     setCurrency(currency) {
       api.defaults.headers["currency"] = currency;
@@ -78,13 +104,10 @@ export default {
       localStorage.setItem("currency",currency)
       this.changeCurrency(currency);
     },
-
-    getLink(route) {
-      if (this.getLang === 'en') {
-        return route; // Return the route as is without the language parameter
-      } else {
-        return `/${this.getLang}${route}`; // Include the language parameter
-      }
+    setLocale(locale) {
+      api.defaults.headers["Accept-Language"] = locale;
+      this.$i18n.setLocale(locale);
+      this.setLan(locale);
     },
     sendWhatsAppMessage() {
       // Replace '1234567890' with the desired WhatsApp number
