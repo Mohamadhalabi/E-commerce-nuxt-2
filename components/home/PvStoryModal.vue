@@ -31,7 +31,7 @@
 
 </style>
 <script>
-import VideoPlayer from 'nuxt-video-player'
+// import VideoPlayer from 'nuxt-video-player'
 
 export default {
   components: {
