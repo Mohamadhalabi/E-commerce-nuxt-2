@@ -387,6 +387,12 @@ export default {
       return "";
     },
   },
+  mounted() {
+    if(process.client){
+      alert(window.innerWidth)
+      alert(window.innerHeight)
+    }
+  }
 };
 </script>
 
@@ -526,6 +532,14 @@ export default {
   height: 117.8px!important;
 }
 
+
+@media screen and (max-width: 1600px){
+  .sub-menu-cars{
+    width: 78.5px!important;
+    height: 78.5px!important;
+  }
+}
+
 @media screen and (max-width: 1435px){
   li.sub-menu-items{
     width: 102px!important;
@@ -571,6 +585,19 @@ export default {
   .sub-menu-items-software-token{
     width: 79.7px!important;
     height: 79.7px!important;
+  }
+}
+@media screen and (max-width: 1400px) and (max-height: 650px){
+  .sub-menu-cars{
+    width: 71.2px!important;
+    height: 71.2px!important;
+  }
+}
+
+@media screen and (max-width: 1100px) and (max-height: 600px){
+  .sub-menu-cars{
+    width: 60px!important;
+    height: 60px!important;
   }
 }
 .download-pin-code{
