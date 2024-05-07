@@ -1,17 +1,14 @@
 <template>
-  <div class="">
-    <multiselect
-      v-model="selecteVal"
-      class="multiselectClass"
-      :options="options"
-      :placeholder="placeholder"
-      :label="itemText"
-      :show-labels="false"
-      :searchable="true"
-      @input="updateValueAction"
-      style="height: 10px!important;"
+  <multiselect
+  v-model="selecteVal"
+  class="multiselectClass"
+  :options="options"
+  :placeholder="placeholder"
+  :label="itemText"
+  :show-labels="false"
+  :searchable="true"
+  @input="updateValueAction"
     />
-  </div>
 </template>
 
 <script>
@@ -85,14 +82,6 @@ export default {
 
 .multiselect__content-wrapper .multiselect__element {
   padding: 0 !important
-}
-
-.multiselect__tags {
-  height: 10px!important;
-}
-
-.multiselect__select {
-  height: 44px;
 }
 
 .multiselect__content-wrapper {

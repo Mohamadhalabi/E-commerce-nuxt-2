@@ -21,6 +21,7 @@
       />
       <div class="autoComplateClass">
         <AutoComplate
+        style="width: 220px;text-align:end"
           v-model="selectedCategory"
           :placeholder="$t('home.selectCategory')"
           :options="categories || []"
@@ -272,7 +273,7 @@ export default {
 .autoComplateClass .multiselect__tags {
   border: 0px;
   margin-top: 3%;
-  width: 150px;
+  width: 100%
 }
 
 .autoComplateClass .multiselect__element,

@@ -1,15 +1,8 @@
 import config from './configs';
-import axios from "axios";
-
 const version = process.env.version;
 
 const {locale, availableLocales, fallbackLocale} = config.locales;
 const currency = 'USD';
-if(typeof window !== 'undefined') {
-  // perform localStorage action
-  // const item = localStorage.getItem('key')
-  currency = localStorage.getItem('currency') || 'USD';
-}
 
 export default {
   // target: "static",
@@ -125,21 +118,21 @@ export default {
   ],
 
   modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image'],
-  bootstrapVue: {
-    componentPlugins: [
-      'CardPlugin',
-      'FormInputPlugin',
-      'ModalPlugin',
-      'TablePlugin',
-      'CollapsePlugin',
-      'PaginationPlugin',
-      'ListGroupPlugin',
-      'FormTagsPlugin',
-      'AlertPlugin',
-      'ButtonPlugin',
-      'FormFilePlugin'
-    ],
-  },
+  // bootstrapVue: {
+  //   componentPlugins: [
+  //     'CardPlugin',
+  //     'FormInputPlugin',
+  //     'ModalPlugin',
+  //     'TablePlugin',
+  //     'CollapsePlugin',
+  //     'PaginationPlugin',
+  //     'ListGroupPlugin',
+  //     'FormTagsPlugin',
+  //     'AlertPlugin',
+  //     'ButtonPlugin',
+  //     'FormFilePlugin'
+  //   ],
+  // },
   'google-gtag':{
     id: 'G-5G2DSZVBJ9', // required
     debug: true, // enable to track in dev mode
