@@ -11,7 +11,7 @@
             {{ $t("header.Cars") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+        <div class="megamenu custom-megamenu megamenu-car p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
              v-if="carMenuOpened"
              @click="closeCarMenu()"
              v-for="(item, key) in cars" :key="key">
@@ -518,8 +518,8 @@ export default {
   height: 128.7px!important;
 }
 .sub-menu-cars{
-  width: 94.3px!important;
-  height: 94.3px!important;
+  width: 100.6px!important;
+  height: 100.6px!important;
 }
 .sub-menu-items-software-token{
   width: 117.8px!important;
@@ -528,10 +528,6 @@ export default {
 
 
 @media screen and (max-width: 1600px){
-  .sub-menu-cars{
-    width: 78.5px!important;
-    height: 78.5px!important;
-  }
 }
 
 @media screen and (max-width: 1435px){
@@ -542,20 +538,16 @@ export default {
   .header-main-menu{
     font-size: smaller!important;
   }
-  .sub-menu-cars{
-    width: 81.3px!important;
-    height: 81.3px!important;
-  }
   .sub-menu-items-software-token{
     width: 94.7px!important;
     height: 94.7px!important;
   }
+  .sub-menu-cars{
+    width: 94.3px!important;
+    height: 94.3px!important;
+  }
 }
 @media screen and (max-width: 1300px){
-  .sub-menu-cars{
-    width: 60px!important;
-    height: 60px!important;
-  }
   li.sub-menu-items{
     width: 95px!important;
     height: 95px!important;
@@ -572,29 +564,20 @@ export default {
   .header-main-menu{
     font-size: smaller!important;
   }
-  .sub-menu-cars{
-    width: 60px!important;
-    height: 60px!important;
-  }
   .sub-menu-items-software-token{
     width: 79.7px!important;
     height: 79.7px!important;
   }
-}
-@media screen and (max-width: 1400px) and (max-height: 650px){
   .sub-menu-cars{
-    width: 71.2px!important;
-    height: 71.2px!important;
-  }
-}
-
-@media screen and (max-width: 1100px) and (max-height: 600px){
-  .sub-menu-cars{
-    width: 60px!important;
-    height: 60px!important;
+    width: 86.6px!important;
+    height: 86.6px!important;
   }
 }
 .download-pin-code{
   height: 50px;
+}
+.megamenu-car{
+  overflow-y: scroll;
+  max-height: 75vh;
 }
 </style>
