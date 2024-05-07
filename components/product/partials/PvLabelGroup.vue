@@ -1,5 +1,5 @@
 <template>
-  <div style="top:0px; z-index: 10;" class="p-1 w-100 position-absolute d-flex flex-column align items-center justify-content-between">
+  <div style="top:0px" class="p-1 w-100 position-absolute d-flex flex-column align items-center justify-content-between">
     <!-- Begin:Top Row -->
     <div class="d-flex align-items-center justify-content-between  ">
       <!-- Begin: Discount -->
