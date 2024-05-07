@@ -128,7 +128,7 @@
               <div class="col-lg-12 mt-4 border-with-top-text-payment-method">
                 <div class="row" :class="{ 'text-right': getIsAr }">
                   <div class="col-lg-4 mt-lg-4">
-                    <div class="card text-center" :class="{ 'payment-method-active': clickedCardIndex === 1 }" @click="handlePaymentMethod(1),CheckCardSelected()">
+                    <div class="card text-center" style="max-height: 100px!important;min-height: 100px" :class="{ 'payment-method-active': clickedCardIndex === 1 }" @click="handlePaymentMethod(1),CheckCardSelected()">
                       <div class="card-body payment-method-card">
                         <div class="row">
                           <div class="col-lg-8 mt-auto mb-auto payment-method-text">
@@ -142,7 +142,7 @@
                     </div>
                   </div>
                   <div class="col-lg-4 mt-lg-4">
-                    <div class="card text-center" :class="{ 'payment-method-active': clickedCardIndex === 2 }" @click="handlePaymentMethod(2),CheckCardSelected()">
+                    <div class="card text-center" style="max-height: 100px!important;min-height: 100px" :class="{ 'payment-method-active': clickedCardIndex === 2 }" @click="handlePaymentMethod(2),CheckCardSelected()">
                       <div class="card-body payment-method-card">
                         <div class="row">
                           <div class="col-lg-8 mt-auto mb-auto payment-method-text">
@@ -156,7 +156,7 @@
                     </div>
                   </div>
                   <div class="col-lg-4 mt-lg-4">
-                    <div class="card text-center" :class="{ 'payment-method-active': clickedCardIndex === 3 }" @click="handlePaymentMethod(3),CheckCardSelected()">
+                    <div class="card text-center" style="max-height: 100px!important;min-height: 100px" :class="{ 'payment-method-active': clickedCardIndex === 3 }" @click="handlePaymentMethod(3),CheckCardSelected()">
                       <div class="card-body payment-method-card">
                         <div class="row">
                           <div class="col-lg-8 mt-auto mb-auto payment-method-text">

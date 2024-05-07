@@ -22,7 +22,7 @@
             </ul>
           </div>
         </div>
-        <!-- <div class="header-dropdown m-0">
+     <div class="header-dropdown m-0">
           <a href="javascript:;">{{
               currentLocale.shortName
             }}</a>
@@ -39,7 +39,7 @@
               </li>
             </ul>
           </div>
-        </div> -->
+        </div>
 
         <div class="header-about-contact">
           <nuxt-link :to="('/about')">

@@ -33,8 +33,8 @@
                 <p>
                   {{ $t('privacypolicy.someOfTheAd') }}.<br>
                   {{ $t('privacypolicy.thirdParties') }}.<br>
-                  {{ $('privacypolicy.pleaseRemember')}}<br>
-                  {{ $('privacypolicy.theInformation')}}<br>
+                  {{ $t('privacypolicy.pleaseRemember')}}<br>
+                  {{ $t('privacypolicy.theInformation')}}<br>
                 </p>
 
                 <p>
