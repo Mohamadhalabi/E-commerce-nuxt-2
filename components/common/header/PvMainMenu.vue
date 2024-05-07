@@ -387,12 +387,6 @@ export default {
       return "";
     },
   },
-  mounted() {
-    if(process.client){
-      alert(window.innerWidth)
-      alert(window.innerHeight)
-    }
-  }
 };
 </script>
 

@@ -35,6 +35,7 @@ import {
   stickyHeaderHandler
 } from "~/utils";
 import {mapActions, mapGetters, mapMutations} from "vuex";
+import localstorage from "~/plugins/localstorage";
 export default {
   components: {
     PvHeader:() =>import("~/components/common/header/PvHeader.vue"),
@@ -66,13 +67,6 @@ export default {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
   },
   mounted: function() {
-    if(process.client) {
-      if (!localStorage.getItem("tokenEnded")) {
-        localStorage.setItem("tokenEnded", 1);
-      }
-    }
-
-
     this.$store.dispatch('rtlStore/setLanguageFromURL');
     this.updateLanguageCode(this.$i18n.locale)
     api.defaults.headers["Accept-Language"] = this.$i18n.locale;
