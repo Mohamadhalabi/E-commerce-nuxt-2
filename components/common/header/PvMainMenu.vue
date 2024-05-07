@@ -394,11 +394,14 @@ export default {
 .header-main-menu{
   color: white;
   font-weight: bold;
-  font-size: 15px;
   margin-top: auto;
   margin-bottom: auto;
   background-color: #3e3e3e;
   max-height: 49px;
+  padding-left:5px;
+  padding-right: 5px;
+  display: flex;
+  justify-content: center;
 }
 .left-menu-items, .right-menu-items{
   border-right: 1px solid #585a5e!important;
@@ -407,10 +410,10 @@ export default {
   height: 50px!important;
 }
 .hoverable {
-  display: inline-block;
   transition: transform 0.3s ease;
   transform-style: preserve-3d;
   font-size: 14px;
+  margin: auto;
 }
 
 .left-menu-items:hover .hoverable {
