@@ -7,33 +7,33 @@
   />
 </template>
 <script>
-import Api from "~/api";
-import {mapGetters} from "vuex";
+import axios from "axios";
 export default {
   components: {
     PvSmallCollection: () => import("~/components/product/card/PvSmallCollection.vue"),
-  },
-  computed: {
-    ...mapGetters("header",["getCurrency"])
   },
   props: {
     link: String,
   },
   async fetch() {
-      const getFreeShippingProducts = await Api.get("shop?is_free_shipping=1&length=3");
-      this.isFreeShippingProducts = getFreeShippingProducts.data.products;
+    const getFreeShippingProducts = await axios.get("shop?is_free_shipping=1&length=3",{
+      baseURL: process.env.API_BASE_URL,
+      headers:{
+        'Accept-Language': this.$i18n.locale,
+        'Content-Type': 'application/json',
+        'currency': this.$cookies.get('currency') || 'USD',
+        'Accept': 'application/json',
+        'secret-key': process.env.SECRET_KEY,
+        'api-key': process.env.API_KEY,
+      }
+    });
+
+    this.isFreeShippingProducts = getFreeShippingProducts.data.products;
   },
   data: function () {
     return {
       isFreeShippingProducts: null,
     };
   },
-  watch: {
-    getCurrency() {
-      Api.get("shop?is_free_shipping=1&length=3").then((response) => {
-        this.isFreeShippingProducts = response.data.products;
-      })
-    },
-  }
 }
 </script>

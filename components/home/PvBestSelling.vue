@@ -7,18 +7,25 @@
   />
 </template>
 <script>
-import getProducts, {productsQueries} from "~/utils/service";
-import {mapGetters} from "vuex";
 import PvCollection from "~/components/product/card/PvCollection.vue";
+import axios from "axios";
 export default {
   components: {
     PvCollection,
   },
-  computed: {
-    ...mapGetters("header",["getCurrency"])
-  },
   async fetch() {
-    this.bestSellingProducts2 = await getProducts(productsQueries.best_selling_products, 12);
+    const best_seller = await axios.get("products/best-seller",{
+      baseURL: process.env.API_BASE_URL,
+      headers:{
+        'Accept-Language': this.$i18n.locale,
+        'Content-Type': 'application/json',
+        'currency': this.$cookies.get('currency') || 'USD',
+        'Accept': 'application/json',
+        'secret-key': process.env.SECRET_KEY,
+        'api-key': process.env.API_KEY,
+      },
+    })
+    this.bestSellingProducts2 = best_seller.data.best_seller
   },
   props: {
     isIndexPage: Boolean,
@@ -30,12 +37,5 @@ export default {
       bestSellingProducts2: null,
     };
   },
-  watch: {
-    getCurrency() {
-      getProducts(productsQueries.latest_products, 12).then((response) => {
-        this.bestSellingProducts2 = response;
-      })
-    },
-  }
 }
 </script>

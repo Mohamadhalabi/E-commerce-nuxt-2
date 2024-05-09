@@ -7,19 +7,24 @@
   />
 </template>
 <script>
-import Api from "~/api";
-import {mapGetters} from "vuex";
-
+import axios from "axios";
 export default {
   components: {
     PvSmallCollection: () => import("~/components/product/card/PvSmallCollection.vue"),
   },
-  computed: {
-    ...mapGetters("header",["getCurrency"])
-  },
   async fetch() {
-      const getNewArrivalProducts = await Api.get("shop?is_new_arrival=1&length=3");
-      this.isNewArrivalProducts = getNewArrivalProducts.data.products;
+    const new_arrival = await axios.get("products/new-arrival",{
+      baseURL: process.env.API_BASE_URL,
+      headers:{
+        'Accept-Language': this.$i18n.locale,
+        'Content-Type': 'application/json',
+        'currency': this.$cookies.get('currency') || 'USD',
+        'Accept': 'application/json',
+        'secret-key': process.env.SECRET_KEY,
+        'api-key': process.env.API_KEY,
+      },
+    })
+    this.isNewArrivalProducts = new_arrival.data.new_arrival.slice(0,3);
   },
   props: {
     link: String,
@@ -29,12 +34,5 @@ export default {
       isNewArrivalProducts: null,
     };
   },
-  watch: {
-    getCurrency() {
-      Api.get("shop?is_new_arrival=1&length=3").then((response) => {
-        this.isNewArrivalProducts = response.data.products;
-      })
-    },
-  }
 }
 </script>

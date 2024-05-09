@@ -95,8 +95,6 @@ export default {
     {src: '@plugins/directives/sticky.js', ssr: true},
     {src: '@plugins/direction-control.js', ssr: true}, // rTL
     {src: '@plugins/vue-awesome-swiper.js', ssr: true},
-
-
   ],
 
   buildModules: [
@@ -117,7 +115,7 @@ export default {
     }]
   ],
 
-  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image'],
+  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image', 'cookie-universal-nuxt'],
   // bootstrapVue: {
   //   componentPlugins: [
   //     'CardPlugin',
@@ -150,17 +148,6 @@ export default {
       'xxl': 1536,
       '2xl': 1920
     },
-  },
-  axios: {
-    headers: {
-      'Accept-Language': locale,
-      'Content-Type': 'application/json',
-      'currency': currency,
-      'Accept': 'application/json',
-      'secret-key': process.env.SECRET_KEY,
-      'api-key': process.env.API_KEY
-    },
-    baseURL: process.env.API_BASE_URL
   },
   render: {
     asyncScript:true,

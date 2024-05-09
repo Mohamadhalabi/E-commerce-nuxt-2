@@ -303,9 +303,6 @@ export default {
     ...mapGetters("currency", ["currency"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
     ...mapGetters("language", ["getLang"]),
-    setLogo() {
-      return this.$settings.website.system_logo_black.l.url;
-    },
 
     currentLocale() {
       return this.$i18n.locales.find((i) => i.code === this.$i18n.locale);
@@ -314,11 +311,6 @@ export default {
     availableLocales() {
       return Object.entries(this.$settings.languages);
     },
-
-    currentCurrency() {
-      return this.$settings.currencies.find((i) => i === this.currency);
-    },
-
 
     availableCurrencies() {
       return this.$settings.currencies.filter((i) => i !== this.currency);
@@ -429,9 +421,14 @@ export default {
     setCurrency(currency) {
       api.defaults.headers["currency"] = currency;
       this.setCurrencyValue(currency);
-      localStorage.setItem("currency",currency)
       this.changeCurrency(currency);
-      // window.location.href = window.location.origin + this.$route.fullPath;
+
+      this.$cookies.set('currency',currency,{
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7
+      });
+      this.$nuxt.refresh();
+      window.location.reload()
     },
 
 
