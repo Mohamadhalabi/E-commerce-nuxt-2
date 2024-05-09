@@ -97,11 +97,9 @@
   </div>
 </template>
 <script>
-// import { baseSlider6 } from "~/utils/data/carousel";
-import Api from "~/api";
 import {mapGetters} from "vuex";
 import Carousel from 'vue-ssr-carousel';
-
+import axios from "axios";
 export default {
   components: {
     PvBannerCard: () => import("../product/card/PvBannerCard.vue"),
@@ -113,24 +111,45 @@ export default {
   data: function () {
     return {
       slides: [],
-      // baseSlider6,
       rondomProduct: [],
     };
   },
   async fetch() {
-    const responseBanner = await Api.get("sliders?type=banner");
-    this.slides = responseBanner.data.result;
+    try {
+      const responseBanner = await axios.get("sliders?type=banner",{
+        baseURL: process.env.API_BASE_URL,
+        headers:{
+          'Accept-Language': this.$i18n.locale,
+          'Content-Type': 'application/json',
+          'currency': this.$cookies.get('currency') || 'USD',
+          'Accept': 'application/json',
+          'secret-key': process.env.SECRET_KEY,
+          'api-key': process.env.API_KEY,
+        }
+      });
+      this.slides = responseBanner.data.result;
+    } catch (error){
+      // eslint-disable-next-line no-console
+      console.log(error)
+    }
 
-    const response = await Api.get("products/random-products");
-    this.rondomProduct = response.data.products;
+    try {
+      const response = await axios.get("products/random-products",{
+        baseURL: process.env.API_BASE_URL,
+        headers:{
+          'Accept-Language': this.$i18n.locale,
+          'Content-Type': 'application/json',
+          'currency': this.$cookies.get('currency') || 'USD',
+          'Accept': 'application/json',
+          'secret-key': process.env.SECRET_KEY,
+          'api-key': process.env.API_KEY,
+        }
+      });
+      this.rondomProduct = response.data.products;
+    } catch (error){
+      console.log(error)
+    }
   },
-  watch: {
-    getCurrency(newValue, oldValue) {
-      Api.get("products/random-products").then((response) => {
-        this.rondomProduct = response.data.products;
-      })
-    },
-  }
 };
 </script>
 <style scoped>
