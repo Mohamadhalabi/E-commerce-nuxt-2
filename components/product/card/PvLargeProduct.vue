@@ -2,7 +2,7 @@
   <div class="product-default left-details product-list">
     <figure>
       <nuxt-link
-        :to="`/products/${product.slug}`"
+        :to="getLink(`/products/${product.slug}`)"
        >
         <template v-for="image in product.gallery.slice(0,2)">
           <pv-gallery-image
@@ -31,7 +31,7 @@
       <pv-category-list :product="product" />
 
       <h3 class="product-title">
-        <nuxt-link :to="`/products/${product.slug}`">
+        <nuxt-link :to="getLink(`/products/${product.slug}`)">
           {{product.title}}
         </nuxt-link>
       </h3>
@@ -79,6 +79,7 @@ import PvPriceBox from '~/components/product/partials/PvPriceBox';
 import PvCartButton from '~/components/product/partials/PvCartButton';
 import PvWishlistButton from '~/components/product/partials/PvWishlistButton';
 import PvQuickviewButton from '~/components/product/partials/PvQuickviewButton';
+import {mapGetters} from "vuex";
 
 export default {
   components: {
@@ -94,6 +95,18 @@ export default {
   },
   props: {
     product: Object
+  },
+  computed:{
+    ...mapGetters("language", ["getLang"])
+  },
+  methods:{
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
+    },
   }
 };
 </script>

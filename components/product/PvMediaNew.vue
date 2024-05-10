@@ -1,6 +1,6 @@
 <template>
   <div>
-    <pv-label-group :product="product" class="p-4" />
+    <pv-label-group :product="product" style="padding-right: 25px!important;padding-top: 10px!important;" />
     <div v-for="(image, index) in product.gallery" :key="index" class="slide rounded-5" ref="main" @mouseenter="mouseEntered" @mouseleave="mouseLeft">
       <div class="showOnDesktop">
         <ImageMagnifier v-if="index === currentIndex" :image="image" size="l" :isMouseInside="isMouseInside" />

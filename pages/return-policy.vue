@@ -7,7 +7,7 @@
       >
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <nuxt-link to="/">
+            <nuxt-link :to="getLink('/')">
             {{ $t('shop.home') }}
             </nuxt-link>
           </li>
@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "return-policy",
   head() {
@@ -194,6 +196,18 @@ export default {
       ]
     }
   },
+  computed:{
+    ...mapGetters("language", ["getLang"])
+  },
+  methods:{
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
+    },
+  }
 }
 </script>
 

@@ -112,7 +112,6 @@
 import PvDetail from "~/components/product/PvDetail";
 import PvDescription from "~/components/product/PvDescription";
 import PvCollection from "~/components/product/card/PvCollection";
-import PvMedia from "~/components/product/PvMedia.vue";
 import PvMediaNew from "~/components/product/PvMediaNew.vue"
 import Api from "~/api";
 import {mapGetters} from "vuex";
@@ -121,6 +120,7 @@ import PvNewArrival from "~/components/home/PvNewArrival.vue";
 import PvTopSellingThreeProducts from "~/components/home/PvTopSellingThreeProducts.vue";
 import PvOnSaleProducts from "~/components/home/PvOnSaleProducts.vue";
 import PvBtnShare from "~/components/common/PvBtnShare.vue";
+import axios from "axios";
 
 export default {
   components: {
@@ -130,13 +130,22 @@ export default {
     PvTopSellingThreeProducts,
     PvNewArrival,
     PvFreeShipping,
-    PvMedia,
     PvDescription,
     PvCollection,
     PvDetail
   },
-  async asyncData({ params, redirect }) {
-    const { data } = await Api.get(`products/${params.slug}`);
+  async asyncData({ params, redirect, app }) {
+    const { data } = await axios.get(`products/${params.slug}`,{
+      baseURL: process.env.API_BASE_URL,
+      headers:{
+        'Accept-Language': app.i18n.locale,
+        'Content-Type': 'application/json',
+        'currency': app.$cookies.get('currency') || 'USD',
+        'Accept': 'application/json',
+        'secret-key': process.env.SECRET_KEY,
+        'api-key': process.env.API_KEY,
+      }
+    });
     if (data.product.slug !== params.slug)
       redirect(`/products/${data.product.slug}`);
     return {
@@ -529,10 +538,5 @@ export default {
       }
     },
   },
-  watch: {
-    getCurrency() {
-      this.getProduct();
-    },
-  }
 };
 </script>

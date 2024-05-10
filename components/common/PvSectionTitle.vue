@@ -4,7 +4,7 @@
       <div class="col-lg-12 additional-product-items d-flex">
         <h3 class="m-0 home-page-title">
           <span v-if="!UrlLink.includes('undefined')">
-            <nuxt-link :to="UrlLink">
+            <nuxt-link :to="getLink('/shop?' + this.link)">
               {{ title }}
             </nuxt-link>
           </span>
@@ -24,11 +24,21 @@ export default {
   props: ["title","link"],
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
+    ...mapGetters("language", ["getLang"]),
   },
   data() {
     return {
       UrlLink: 'shop?' + this.link,
     };
   },
+  methods:{
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
+    },
+  }
 };
 </script>

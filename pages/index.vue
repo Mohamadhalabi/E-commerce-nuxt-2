@@ -118,9 +118,7 @@
 </template>
 <script>
 import { mapGetters,mapActions } from "vuex";
-import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
 import api from "~/api";
-// import { DelayHydration } from 'nuxt-delay-hydration/dist/runtime/components/DelayHydration.vue'
 export default {
   head() {
     return {
@@ -246,7 +244,6 @@ export default {
     }
   },
   components: {
-    BaseButtonIcon1,
     // PvNewsletterModal,
     PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
@@ -280,7 +277,6 @@ export default {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
   methods: {
-    ...mapActions('homePageModul',['showModul']),
     handleResize() {
       if(process.client)
       this.isMobile = window.innerWidth < 768;
