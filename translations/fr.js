@@ -786,6 +786,26 @@ export default
     theInformation:"Les pratiques d'information de ces tiers ne sont pas couvertes par cette politique de confidentialité.",
     weRespect:"Nous respectons votre vie privée et nous nous engageons à protéger vos informations personnelles. Si vous effectuez un paiement pour nos produits ou services sur notre site Web, certaines informations vous seront demandées. Veuillez noter que nous utilisons ces informations uniquement dans le but de finaliser le processus de paiement et de livrer le service ou le produit demandé",
     theinfocollected:"Les informations collectées auprès de vous lors du processus de paiement, telles que votre nom, votre adresse e-mail et les détails de votre carte de crédit, sont utilisées pour traiter le paiement et garantir la livraison correcte des produits ou services achetés. Nous garantissons la confidentialité et la sécurité de ces informations grâce à l'utilisation d'une connexion sécurisée et fiable avec notre fournisseur de paiement.",
+    weDontShare:"Nous ne partageons pas vos informations personnelles avec des tiers en dehors de la finalisation du processus de paiement et de la livraison du service ou du produit. De plus, nous nous engageons à respecter toutes les lois et réglementations pertinentes relatives à la protection des données personnelles.\n",
+    wePrioritize:"Nous donnons la priorité à la sécurité et à la confidentialité de vos informations personnelles. Lorsque vous effectuez des transactions avec nous, soyez assuré que nous ne divulguerons aucun détail de carte de débit/crédit à des tiers en aucune circonstance. Votre confiance est d'une importance capitale pour nous, et nous nous engageons à protéger votre vie privée et à garantir une expérience sécurisée tout au long de vos interactions avec nos services.\n",
+    at:"À",
+    WeAre: "nous sommes dédiés à la protection de votre vie privée et de votre sécurité des données. Nous utilisons une gamme de méthodes matérielles et logicielles pour assurer la confidentialité et l'intégrité de vos informations personnelles. Cependant, il est important de noter que bien que nous prenions toutes les précautions nécessaires, nous ne pouvons garantir la sécurité absolue de toutes les informations divulguées en ligne",
+    weEncourage:"Nous vous encourageons à prendre des mesures appropriées de votre côté, telles que l'utilisation de mots de passe forts et la sécurisation de vos appareils et de votre connexion Internet. En utilisant nos services, vous reconnaissez que la sécurité des informations transmises en ligne ne peut jamais être complètement garantie.\n",
+    PleasebeAware:"Veuillez être conscient que",
+    mayContain:"peut contenir des liens vers des sites Web externes. Bien que nous nous efforcions de fournir des liens vers des sources réputées et dignes de confiance, nous tenons à souligner que le marchand n'est pas responsable des politiques de confidentialité ou des pratiques de ces sites Web externes.",
+    WhenYouAccess:"Lorsque vous accédez à ces sites Web tiers, des règles différentes concernant la collecte et l'utilisation de vos informations personnelles peuvent s'appliquer. Nous vous recommandons de consulter les politiques de confidentialité de ces sites Web pour comprendre comment vos données seront traitées par eux.\n",
+    ifyouchoose:"si vous choisissez de fournir des informations à ces tiers, il est important de noter que le marchand décline toute responsabilité quant à leurs pratiques de confidentialité. Nous vous encourageons à contacter directement ces entités si vous avez des questions sur la manière dont elles collectent, utilisent ou protègent vos informations personnelles.\n",
+    yourPrivacy:"Votre vie privée et votre sécurité sont primordiales pour nous. Si vous avez des préoccupations ou des questions concernant notre politique de confidentialité ou les pratiques des sites Web externes liés à partir de",
+    doNotHesitate:"n'hésitez pas à",
+    contactUs:"nous contacter",
+    ThankYouFor:"Merci de nous faire confiance avec vos informations",
+    ifYouHaveAny:"Si vous avez des questions sur la collecte ou l'utilisation de vos informations personnelles, n'hésitez pas à",
+    viaThe:"via le",
+    email:"E-mail",
+    or:"ou",
+    phoneNumber:"(+971) 50 442 9045",
+    trust:"Nous vous remercions de votre confiance en nous, et nous sommes impatients de vous servir avec professionnalisme et sécurité",
+
   }
 }
 ;
