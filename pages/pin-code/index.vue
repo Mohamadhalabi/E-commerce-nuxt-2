@@ -78,17 +78,27 @@
 import Api from '~/api';
 import { mapGetters } from 'vuex';
 import PvProduct from "~/components/product/card/PvProduct.vue";
+import axios from "axios";
 export default {
   components: {
     PvProduct,
   },
-  async asyncData() {
-    const response = await Api.get(`pin-code/offline-pincode`);
+  async asyncData({ app }) {
+    const response = await axios.get(`pin-code/offline-pincode`,{
+      baseURL: process.env.API_BASE_URL,
+      headers:{
+        'Accept-Language': app.$cookies.get('locale') || app.i18n.locale,
+        'Content-Type': 'application/json',
+        'currency': app.$cookies.get('currency') || 'USD',
+        'Accept': 'application/json',
+        'secret-key': process.env.SECRET_KEY,
+        'api-key': process.env.API_KEY,
+      }
+    });
     return {
       offline_pin_code : response.data.data
     };
   },
-
   async fetch(){
     this.viewType = null;
     let tempQuery = "";
@@ -175,8 +185,9 @@ export default {
   mounted() {
     if(process.client) {
       let fullDomain = window.location.href;
-      if (fullDomain !== "https://www.tlkeys.com/pin-code") {
-        window.location = "https://www.tlkeys.com/pin-code"
+      let expectedUrl = `https://www.tlkeys.com/${this.$i18n.locale}/pin-code`;
+      if (fullDomain !== expectedUrl) {
+        window.location.href = expectedUrl;
       }
     }
   },

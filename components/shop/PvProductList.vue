@@ -343,7 +343,7 @@ export default {
       const { data } = await axios.get(`search/product${query}`,{
         baseURL: process.env.API_BASE_URL,
         headers:{
-          'Accept-Language': this.$i18n.locale,
+          'Accept-Language': this.$cookies.get('locale') || this.$i18n.locale,
           'Content-Type': 'application/json',
           'currency': this.$cookies.get('currency') || 'USD',
           'Accept': 'application/json',

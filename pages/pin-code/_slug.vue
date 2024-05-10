@@ -138,12 +138,9 @@
 <script>
 import Api from "~/api";
 import {mapGetters} from "vuex";
-import {baseSlider7, baseSlider9} from "~/utils/data/carousel";
-import PvCarousel from "~/components/features/PvCarousel.vue";
-import PvRating from "~/components/product/partials/PvRating.vue";
 export default {
   name: "_slug",
-  components: {PvRating, PvCarousel},
+  components: {},
   data() {
     return {
       brands: [],
