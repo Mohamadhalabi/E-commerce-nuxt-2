@@ -72,7 +72,7 @@
 
 </template>
 <script>
-import {mapGetters, mapMutations} from "vuex";
+import {mapActions, mapGetters, mapMutations} from "vuex";
 import PvSocialIcons from "~/components/common/PvSocialIcons.vue";
 import api from "~/api";
 
@@ -91,12 +91,16 @@ export default {
       return this.$i18n.locales.find((i) => i.code === this.$i18n.locale);
     },
     availableLocales() {
-      return Object.entries(this.$settings.languages);
-    },
+      const currentLocale = this.$i18n.locale;
+      const locales = Object.entries(this.$settings.languages);
+      return locales.filter(([locale,]) => locale !== currentLocale);
+    }
+
   },
   methods: {
     ...mapMutations("rtlStore", ["setLan"]),
     ...mapMutations('currency', ['setCurrencyValue']),
+    ...mapActions("language",["updateLanguageCode"]),
 
     setCurrency(currency) {
       api.defaults.headers["currency"] = currency;
@@ -117,7 +121,12 @@ export default {
     setLocale(locale) {
       api.defaults.headers["Accept-Language"] = locale;
       this.$i18n.setLocale(locale);
-      this.setLan(locale);
+      this.$i18n.locale = locale;
+      this.$cookies.set('locale',locale,{
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7
+      });
+      this.updateLanguageCode(locale)
     },
     sendWhatsAppMessage() {
       // Replace '1234567890' with the desired WhatsApp number
