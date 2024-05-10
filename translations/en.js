@@ -803,5 +803,25 @@ export default
       weRespect:"We respect your privacy and are committed to protecting your personal information. If you make a payment for our products or services on our website, certain details will be required from you. Please note that we use this information solely for the purpose of completing the payment process and delivering the requested service or product",
       theinfocollected:"The information collected from you during the payment process, such as your name, email address, and credit card details, is used to process the payment and ensure the correct delivery of the purchased products or services. We guarantee the confidentiality and security of this information through the use of a secure and trusted connection to our payment provider.",
 
+
+      weDontShare:"We do not share your personal information with any third party outside of completing the payment process and delivering the service or product. Additionally, we are committed to complying with all relevant laws and regulations related to the protection of personal data.\n",
+      wePrioritize:"We prioritize the security and confidentiality of your personal information. When you engage in transactions with us, rest assured that we will not disclose any debit/credit card details to third parties under any circumstances. Your trust is of utmost importance to us, and we are dedicated to safeguarding your privacy and ensuring a secure experience throughout your interactions with our services.\n",
+      at:"At",
+      WeAre: "we are dedicated to protecting your data privacy and security. We employ a range of hardware and software methods to ensure the confidentiality and integrity of your personal information. However, it's important to note that while we take all necessary precautions, we cannot guarantee the absolute security of any information disclosed online",
+      weEncourage:"We encourage you to take appropriate measures on your end, such as using strong passwords and ensuring the security of your devices and internet connection. By using our services, you acknowledge that the security of information transmitted online can never be completely guaranteed.\n",
+      PleasebeAware:"Please be aware that",
+      mayContain:"may contain links to external websites. While we strive to provide links to reputable and trustworthy sources, we want to emphasize that the merchant is not responsible for the privacy policies or practices of these external websites.",
+      WhenYouAccess:"When you access these third-party websites, different rules regarding the collection and use of your personal information may apply. We recommend that you review the privacy policies of these websites to understand how your data will be handled by them.\n",
+      ifyouchoose:"if you choose to provide any information to these third parties, it is important to note that the merchant disclaims any responsibility for their privacy practices. We encourage you to contact these entities directly if you have any questions about how they collect, use, or safeguard your personal information.\n",
+      yourPrivacy:"Your privacy and security are paramount to us. If you have any concerns or questions about our privacy policy or the practices of external websites linked from",
+      doNotHesitate:"please do not hesitate to",
+      contactUs:"contact us",
+      ThankYouFor:"Thank you for trusting us with your information",
+      ifYouHaveAny:"If you have any inquiries regarding how your personal information is collected or used, please do not hesitate to",
+      viaThe:"via the",
+      email:"Email",
+      or:"or",
+      phoneNumber:"(+971) 50 442 9045",
+      trust:"Thank you for your trust in us, and we look forward to serving you with professionalism and security",
     }
   };

@@ -7,7 +7,7 @@
       >
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <nuxt-link to="/">
+            <nuxt-link :to="getLink('/')">
               {{ $t('shop.home') }}
             </nuxt-link>
           </li>
@@ -45,34 +45,34 @@
                   {{ $t('privacypolicy.theinfocollected') }}
                 </p>
                 <p>
-                  We do not share your personal information with any third party outside of completing the payment process and delivering the service or product. Additionally, we are committed to complying with all relevant laws and regulations related to the protection of personal data.
+                  {{ $t('privacypolicy.weDontShare')}}
                 </p>
                 <p>
-                  We prioritize the security and confidentiality of your personal information. When you engage in transactions with us, rest assured that we will not disclose any debit/credit card details to third parties under any circumstances. Your trust is of utmost importance to us, and we are dedicated to safeguarding your privacy and ensuring a secure experience throughout your interactions with our services.
+                  {{ $t('privacypolicy.wePrioritize')}}
                 </p>
                 <p>
-                  At <a href="/">tlkeys.com</a>, we are dedicated to protecting your data privacy and security. We employ a range of hardware and software methods to ensure the confidentiality and integrity of your personal information. However, it's important to note that while we take all necessary precautions, we cannot guarantee the absolute security of any information disclosed online.
+                  {{ $t('privacypolicy.at') }} <a href="/">tlkeys.com</a>, {{ $t('privacypolicy.WeAre')}}.
                 </p>
                 <p>
-                  We encourage you to take appropriate measures on your end, such as using strong passwords and ensuring the security of your devices and internet connection. By using our services, you acknowledge that the security of information transmitted online can never be completely guaranteed.
+                  {{ $t('privacypolicy.weEncourage')}}
                 </p>
                 <p>
-                  Please be aware that <a href="/">tlkeys.com</a> may contain links to external websites. While we strive to provide links to reputable and trustworthy sources, we want to emphasize that the merchant is not responsible for the privacy policies or practices of these external websites.
+                  {{ $t('privacypolicy.PleasebeAware') }} <a href="/">tlkeys.com</a> {{ $t('privacypolicy.mayContain')}}
                 </p>
                 <p>
-                  When you access these third-party websites, different rules regarding the collection and use of your personal information may apply. We recommend that you review the privacy policies of these websites to understand how your data will be handled by them.
+                  {{ $t('privacypolicy.WhenYouAccess')}}
                 </p>
                 <p>
-                  if you choose to provide any information to these third parties, it is important to note that the merchant disclaims any responsibility for their privacy practices. We encourage you to contact these entities directly if you have any questions about how they collect, use, or safeguard your personal information.
+                  {{ $t('privacypolicy.ifyouchoose')}}
                 </p>
                 <p>
-                  Your privacy and security are paramount to us. If you have any concerns or questions about our privacy policy or the practices of external websites linked from <a href="/">tlkeys.com</a>, please do not hesitate to <a href="/contact">contact us</a>. Thank you for trusting us with your information.
+                  {{ $t('privacypolicy.yourPrivacy')}} <a href="/">tlkeys.com</a>, {{ $t('privacypolicy.doNotHesitate') }} <a href="/contact">{{ $t('privacypolicy.contactUs') }}</a>. {{$t('privacypolicy.ThankYouFor')}}.
                 </p>
                 <p>
-                  If you have any inquiries regarding how your personal information is collected or used, please do not hesitate to <a href="/contact">contact us</a> via the <a href="mailto:info@tlkeys.com">Email</a> or <a href="tel:+971504429045"> (+971) 50 442 9045</a> .
+                  {{ $t('privacypolicy.ifYouHaveAny')}} <a href="/contact">{{ $t('privacypolicy.contactUs') }}</a> {{ $t('privacypolicy.viaThe') }} <a href="mailto:info@tlkeys.com">{{ $t('privacypolicy.email') }}</a> {{$t('privacypolicy.or')}} <a href="tel:+971504429045"> {{$t('privacypolicy.phoneNumber')}}</a> .
                 </p>
                 <p>
-                  Thank you for your trust in us, and we look forward to serving you with professionalism and security.
+                  {{ $t('privacypolicy.trust')}}
                 </p>
               </div>
             </div>
@@ -84,6 +84,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "privacy-policy",
   head() {
@@ -209,6 +211,18 @@ export default {
       ]
     }
   },
+  computed:{
+    ...mapGetters("language", ["getLang"]),
+  },
+  methods:{
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
+    },
+  }
 }
 </script>
 
