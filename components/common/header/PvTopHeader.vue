@@ -152,7 +152,9 @@ export default {
   },
   mounted() {
     const currency = this.$cookies.get('currency');
-    this.setCurrencyValue(currency);
+    if(currency !== undefined){
+      this.setCurrencyValue(currency);
+    }
   }
 }
 </script>
