@@ -5,7 +5,7 @@
 <!--Cars Menu-->
       <li class="left-menu-items" @mouseover="getCars()">
         <nuxt-link
-          to="#"
+          :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
           <span class="header-main-menu">
             {{ $t("header.Cars") }} <span class="hoverable">&#x025BE;</span>
@@ -40,7 +40,7 @@
       <!--Manufacturers menu -->
       <li class="left-menu-items" @mouseover="getManufacturers()">
         <nuxt-link
-          to="#"
+          :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
           <span class="header-main-menu">
             {{ $t("header.Manufactures") }} <span class="hoverable">&#x025BE;</span>

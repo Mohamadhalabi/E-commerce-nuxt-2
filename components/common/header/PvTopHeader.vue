@@ -42,12 +42,12 @@
         </div>
 
         <div class="header-about-contact">
-          <nuxt-link :to="('/about')">
+          <nuxt-link :to="getLink('/about')">
             {{ $t("header.about") }}
           </nuxt-link>
         </div>
         <div class="header-about-contact">
-          <nuxt-link :to="('/contact')">
+          <nuxt-link :to="getLink('/contact')">
             {{ $t("header.contact") }}
           </nuxt-link>
         </div>
@@ -83,6 +83,7 @@ export default {
   },
   computed:{
     ...mapGetters("currency", ["currency"]),
+    ...mapGetters("language", ["getLang"]),
     availableCurrencies() {
       return this.$settings.currencies.filter((i) => i !== this.currency);
     },
@@ -94,22 +95,24 @@ export default {
     },
   },
   methods: {
-    ...mapMutations("currency", ["setCurrencyValue"]),
-    ...mapMutations("header", ["changeCurrency"]),
     ...mapMutations("rtlStore", ["setLan"]),
+    ...mapMutations('currency', ['setCurrencyValue']),
 
     setCurrency(currency) {
       api.defaults.headers["currency"] = currency;
-      this.setCurrencyValue(currency);
-      // localStorage.setItem("currency",currency)
-      this.changeCurrency(currency);
-
       this.$cookies.set('currency',currency,{
         path: '/',
         maxAge: 60 * 60 * 24 * 7
       });
       this.$nuxt.refresh();
       window.location.reload()
+    },
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
     },
     setLocale(locale) {
       api.defaults.headers["Accept-Language"] = locale;
@@ -146,6 +149,10 @@ export default {
       // Open the phone call link
       window.location.href = phoneLink;
     },
+  },
+  mounted() {
+    const currency = this.$cookies.get('currency');
+    this.setCurrencyValue(currency);
   }
 }
 </script>

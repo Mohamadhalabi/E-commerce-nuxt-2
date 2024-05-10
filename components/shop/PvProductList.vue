@@ -132,11 +132,11 @@
 import PvProduct from "~/components/product/card/PvProduct.vue";
 import PvListProduct from "~/components/product/card/PvListProduct.vue";
 import { scrollTopHandler } from "~/utils";
-import Api from "~/api";
 import PvCollection from "~/components/product/card/PvCollection.vue";
 import NotFound from "~/components/shop/NotFound.vue";
 import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import {mapGetters} from "vuex";
+import axios from "axios";
 
 export default {
   components: {
@@ -340,7 +340,17 @@ export default {
           break;
       }
       let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
-      const { data } = await Api.get(`search/product${query}`);
+      const { data } = await axios.get(`search/product${query}`,{
+        baseURL: process.env.API_BASE_URL,
+        headers:{
+          'Accept-Language': this.$i18n.locale,
+          'Content-Type': 'application/json',
+          'currency': this.$cookies.get('currency') || 'USD',
+          'Accept': 'application/json',
+          'secret-key': process.env.SECRET_KEY,
+          'api-key': process.env.API_KEY,
+        }
+      });
       this.products = data.products;
       if(this.products.length === 0 ){
         this.show_not_found = true

@@ -4,12 +4,12 @@
       <div class="">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <nuxt-link to="/">
+            <nuxt-link :to="getLink('/')">
               {{ $t("common.home") }}
             </nuxt-link>
           </li>
           <li class="breadcrumb-item">
-            <nuxt-link to="/downloads">
+            <nuxt-link :to="getLink('/downloads')">
               {{ $t("common.dashboard") }}
             </nuxt-link>
           </li>
@@ -41,7 +41,7 @@
           class="col-lg-3 col-9 col-sm-6 col-md-4 ml-auto mr-auto "
         >
           <figure class="post-media">
-            <nuxt-link :to="`/downloads/${download.slug}`">
+            <nuxt-link :to="getLink(`/downloads/${download.slug}`)">
               <nuxt-img
                 loading="lazy"
                 format="webp"
@@ -354,6 +354,7 @@ import PvMedia from "~/components/downloads/PvMedia.vue";
 import { baseSlider3 } from "~/utils/data/carousel";
 import PvBtnShare from "~/components/common/PvBtnShare.vue";
 import VideoPlayer from 'nuxt-video-player'
+import {mapGetters} from "vuex";
 
 require('nuxt-video-player/src/assets/css/main.css')
 
@@ -508,7 +509,9 @@ export default {
   mounted: async function () {
     this.urlLink = window.location.origin + this.$route.fullPath
   },
-
+  computed:{
+    ...mapGetters("language", ["getLang"]),
+  },
   methods: {
     openVedioModal: function (story) {
       this.$modal.show(
@@ -519,6 +522,13 @@ export default {
           class: "video-modal-container",
         }
       );
+    },
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
     },
   },
 };

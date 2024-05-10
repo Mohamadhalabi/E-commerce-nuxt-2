@@ -68,6 +68,7 @@ import FilterItem from "~/components/shop/FilterItem.vue";
 import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import {mapGetters} from "vuex";
 import {scrollTopHandler} from "~/utils";
+import axios from "axios";
 
 export default {
   name: "SidebarFilter",
@@ -163,16 +164,33 @@ export default {
           ? query[property].split(",").toString()
           : true;
       }
-      api.post("/search/filter", dataForm).then((response) => {
-        this.filter = response.data;
-        this.total = this.filter.total;
-        this.checked_items = this.filter.checked_items.items;
-        this.checked_items = this.checked_items.reverse();
 
-        this.attributeFilters = this.filter.attributes;
-        this.selected_category = response.data.categories.selected;
-        this.selected_manufacture = response.data.manufacturers.selected;
-      });
+      const locale = this.$i18n.locale;
+      const currency = this.$cookies.get('currency') || 'USD';
+
+      const axiosConfig = {
+        baseURL: process.env.API_BASE_URL,
+        headers:{
+          'Accept-Language': locale,
+          'Content-Type': 'application/json',
+          'currency': currency,
+          'Accept': 'application/json',
+          'secret-key': process.env.SECRET_KEY,
+          'api-key': process.env.API_KEY,
+        }
+      };
+
+      axios.post("/search/filter", dataForm, axiosConfig)
+        .then((response) => {
+          this.filter = response.data;
+          this.total = this.filter.total;
+          this.checked_items = this.filter.checked_items.items;
+          this.checked_items = this.checked_items.reverse();
+          this.attributeFilters = this.filter.attributes;
+          this.selected_category = response.data.categories.selected;
+          this.selected_manufacture = response.data.manufacturers.selected;
+        });
+
     },
 
     filterQuery(data) {

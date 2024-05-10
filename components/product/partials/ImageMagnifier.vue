@@ -1,5 +1,5 @@
 <template>
-  <div style="padding: 10px">
+  <div>
     <img
       :id="'myimage-' + image[size].id"
       :src="image[size].url"

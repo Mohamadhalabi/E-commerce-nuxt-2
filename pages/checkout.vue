@@ -4,12 +4,12 @@
       <nav aria-label="breadcrumb" class="breadcrumb-nav">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <nuxt-link to="/">
+            <nuxt-link :to="getLink('/')">
               {{ $t('shop.home') }}
             </nuxt-link>
           </li>
           <li class="breadcrumb-item">
-            <nuxt-link to="/cart"> {{ $t("dashboard.cart") }} </nuxt-link>
+            <nuxt-link :to="getLink('/cart')"> {{ $t("dashboard.cart") }} </nuxt-link>
           </li>
           <li class="breadcrumb-item active">
             <a href="javascript:;">{{ $t("dashboard.checkout") }}</a>
@@ -469,7 +469,7 @@
           </tr>
           <tr class="border-0 py-0">
             <td colspan="6" class="px-3 text-center">
-              <nuxt-link to="/shop" class="btn btn-go-shop">
+              <nuxt-link :to="getLink('/shop')" class="btn btn-go-shop">
                 {{ $t("checkout.returnToShop") }}
               </nuxt-link>
             </td>
