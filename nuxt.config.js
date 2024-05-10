@@ -131,6 +131,20 @@ export default {
   //     'FormFilePlugin'
   //   ],
   // },
+
+  axios: {
+    headers: {
+      'Accept-Language': locale,
+      'Content-Type': 'application/json',
+      'currency': currency,
+      'Accept': 'application/json',
+      'secret-key': process.env.SECRET_KEY,
+      'api-key': process.env.API_KEY
+    },
+    baseURL: process.env.API_BASE_URL
+  },
+
+
   'google-gtag':{
     id: 'G-5G2DSZVBJ9', // required
     debug: true, // enable to track in dev mode
