@@ -4,7 +4,7 @@
       <div class="">
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
-            <nuxt-link :to="getLink('/')">
+            <nuxt-link :to="getLink('')">
               {{ $t("common.home") }}
             </nuxt-link>
           </li>

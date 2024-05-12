@@ -270,7 +270,6 @@ import Api from "~/api";
 import PvAuth from "~/components/common/header/PvAuth.vue";
 import PvLoggedIn from "~/components/common/header/PvLoggedIn.vue";
 import PvTopHeader from "~/components/common/header/PvTopHeader.vue";
-// import PvTopNotice from "~/components/common/header/PvTopNotice.vue";
 export default {
   components: {
     PvTopHeader,

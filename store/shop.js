@@ -143,7 +143,7 @@ export const actions = {
 
       this._vm.$notify({
         group: 'addProduct',
-        text: 'Has been added to your cart',
+        text: this.$i18n.t('alerts.addedToCart'),
         type: 'success',
         data: payload,
       });
@@ -160,7 +160,7 @@ export const actions = {
         let response = Api.get('cart');
         this._vm.$notify({
           group: 'addProduct',
-          text: 'Has been added to your cart',
+          text: this.$i18n.t('alerts.addedToCart'),
           data: payload,
           type: 'success',
           position: 'top right',
@@ -242,7 +242,7 @@ export const actions = {
         this._vm.$notify({
           group: 'addProduct',
           type: 'success',
-          text: 'Your cart has been cleared',
+          text: this.$i18n.t('alerts.CartCleared'),
         });
       } catch (error) {
         // Handle error if needed
@@ -292,7 +292,7 @@ export const actions = {
       this._vm.$notify({
         group: 'addProduct',
         type: 'success',
-        text: 'Has been removed from your cart',
+        text: this.$i18n.t('alerts.RemovedFromCart'),
         data: payload.product
       });
 
@@ -302,7 +302,7 @@ export const actions = {
       this._vm.$notify({
         group: 'addProduct',
         type: 'success',
-        text: 'Has been removed from your cart',
+        text: this.$i18n.t('alerts.RemovedFromCart'),
         data: payload.product,
       });
       let response = await Api.get('cart');

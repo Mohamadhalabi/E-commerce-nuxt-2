@@ -38,7 +38,7 @@ export const actions = {
         if (washList[i].id == payload.id) {
           this._vm.$notify({
             group: 'WishListNotify',
-            text: payload.sku + ' products already in wishlist',
+            text: payload.sku + this.$i18n.t('alerts.alreadyInWishlist2'),
             type: 'success',
             data: payload
           });
@@ -52,7 +52,7 @@ export const actions = {
       commit('UPDATE_WISHLIST', JSON.parse(localStorage.getItem('wash')));
       this._vm.$notify({
         group: 'WishListNotify',
-        text: 'Has been added to your wishlist',
+        text: this.$i18n.t('alerts.AddedToWishlist'),
         type: 'success',
         data: payload
       });
@@ -69,7 +69,7 @@ export const actions = {
       if (wishlistItems.data.Wishlist[i].id == payload.id) {
         this._vm.$notify({
           group: 'WishListNotify',
-          text: payload.sku + ' The products alrady in wishlist',
+          text: payload.sku + this.$i18n.t('alerts.alreadyInWishlist2'),
           type: 'success',
           data: payload
         });
@@ -81,7 +81,7 @@ export const actions = {
     await Api.post('wishlist', dataForm);
     this._vm.$notify({
       group: 'WishListNotify',
-      text: 'Has been added to your wishlist',
+      text: this.$i18n.t('alerts.AddedToWishlist'),
       type: 'success',
       data: payload
     });
@@ -104,7 +104,7 @@ export const actions = {
       this._vm.$notify({
         group: 'WishListNotify',
         type: 'success',
-        text: 'Has been removed from your wishlist',
+        text: this.$i18n.t('alerts.RemovedWishlist'),
         data: payload.product,
       });
       await commit('UPDATE_WISHLIST', response.data.Wishlist);

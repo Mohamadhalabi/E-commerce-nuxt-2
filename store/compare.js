@@ -33,7 +33,7 @@ export const actions = {
         if (compareList[i].id == payload.id) {
           this._vm.$notify({
             group: 'CompareNotify',
-            text: payload.sku + ' products alredy in wishlist',
+            text: payload.sku + this.$i18n.t('alerts.alreadyInWishList'),
             type: 'success'
           });
           return;
@@ -46,7 +46,7 @@ export const actions = {
       this._vm.$notify({
         group: 'CompareNotify',
         type: 'success',
-        text: 'Has been added to your compare',
+        text: this.$i18n.t('alerts.hasBeenAddedToYourCompare'),
         data: payload
       });
       return;
@@ -58,7 +58,7 @@ export const actions = {
       if (compareItems.data.products[i].id == payload.id) {
         this._vm.$notify({
           group: 'CompareNotify',
-          text: payload.sku + ' is already in your compare',
+          text: payload.sku + this.$i18n.t('alerts.alreadyInWishList'),
           data: payload,
           type: 'success'
         });
@@ -71,7 +71,7 @@ export const actions = {
     this._vm.$notify({
       group: 'CompareNotify',
       type: 'success',
-      text: 'Has been added to your compare',
+      text: this.$i18n.t('alerts.hasBeenAddedToYourCompare'),
       data: payload,
     });
 
@@ -92,7 +92,7 @@ export const actions = {
       this._vm.$notify({
         group: 'CompareNotify',
         type: 'success',
-        text: 'Has been removed from your compare',
+        text: this.$i18n.t('alerts.RemovedFromCompare'),
         data: payload.product
       });
       const response = await Api.get('products/compares');

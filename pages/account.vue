@@ -444,6 +444,118 @@ import { scrollTopHandler } from "~/utils";
 import img from "~/static/images/blank.png";
 
 export default {
+  head() {
+    return {
+      title: `${this.$t("dashboard.accountDetails")} | Techno Lock Keys Trading`,
+      link: [
+        {
+          rel: 'canonical',
+          href: 'https://www.tlkeys.com/account',
+        },
+      ],
+      meta: [
+        { hid: 'description', name: 'description', content: "Discover all the necessary download files at Techno lock Keys, a premier wholesale distributor. Techno lock Keys is recognized as one of the top distributors." },
+        { charset: "utf-8" },
+        {
+          hid: "og:site_name",
+          name: "og:site_name",
+          content: "Techno Lock Keys",
+        },
+        {
+          hid: "og:description",
+          name: "og:description",
+          content: "Discover all the necessary download files at Techno lock Keys, a premier wholesale distributor. Techno lock Keys is recognized as one of the top distributors.",
+        },
+        {
+          hid: "og:title",
+          name: "og:title",
+          content: "Downloads | Techno Lock Keys Trading",
+        },
+        {
+          hid: "og:type",
+          name: "og:type",
+          content: "website",
+        },
+        {
+          hid: "og:url",
+          name: "og:url",
+          content: "www.tlkeys.com/downloads",
+        },
+        {
+          hid: "og:image",
+          name: "og:image",
+          content: this.$settings.seo.meta_image.l.url,
+        },
+        {
+          hid: "og:image:alt",
+          name: "og:image:alt",
+          content: this.$settings.seo.meta_image.l.alt,
+        },
+        {
+          hid: "og:image:height",
+          name: "og:image:height",
+          content: "627",
+        },
+        {
+          hid: "og:image:width",
+          name: "og:image:width",
+          content: "1200",
+        },
+        // {
+        //   hid: "twitter:card",
+        //   name: "twitter:card",
+        //   content: "summary_large_image",
+        // },
+        // {
+        //   hid: "twitter:site",
+        //   name: "twitter:site",
+        //   content: `@${(this.$settings.social_media.twitter || '').split("/").pop()}`,
+        // },
+        // {
+        //   hid: "twitter:creator",
+        //   name: "twitter:creator",
+        //   content: `@${(this.$settings.social_media.twitter || '').split("/").pop()}`,
+        // },
+        // {
+        //   hid: "twitter:title",
+        //   name: "twitter:title",
+        //   content: JSON.parse(this.$settings.seo.meta_title)[this.$i18n.locale],
+        // },
+        // {
+        //   hid: "twitter:description",
+        //   name: "twitter:description",
+        //   content: JSON.parse(this.$settings.seo.meta_description)[this.$i18n.locale],
+        // },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "16x16",
+          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        },
+        {
+          rel: "shortcut icon",
+          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        },
+        {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        },
+        {
+          "http-equiv": "content-language",
+          content: this.$i18n.locale,
+        },
+        {
+          "http-equiv": "X-UA-Compatible",
+          content: "IE=edge",
+        },
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+      ],
+    }
+  },
   computed: {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
     ...mapGetters("shop", ["cartCount"]),
@@ -485,7 +597,7 @@ export default {
     ...mapActions("auth", ["LogOut"]),
 
     changeTab(query) {
-      this.$router.push({ path: "/account", query: { tab: query } });
+      this.$router.push({ path: "account", query: { tab: query } });
       scrollTopHandler();
     },
 

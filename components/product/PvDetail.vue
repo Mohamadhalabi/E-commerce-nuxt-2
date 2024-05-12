@@ -334,7 +334,7 @@ export default {
         this.$notify({
           group: 'errorMessage',
           type: 'error',
-          text: "Please choose a cover"
+          text:  this.$t("alerts.chooseCover"),
         });
       }
       else{

@@ -186,12 +186,12 @@
             class="w-100 py-4"
             @click="
               $router.push(
-                `/checkout${
+                getLink(`/checkout${
                   dataForm.coupon_code
                     ? `?coupon_code=${dataForm.coupon_code}`
                     : ''
                 }`
-              )
+              ))
             "
             type="button"
             v-if="isAuthenticated"
@@ -448,15 +448,11 @@ export default {
           this.checkHasBlockedCountry(this.checkoutData.products);
         })
         .catch((error) => {
-
           console.log(error)
-          /*  let errorObj = 'error.response.data.data';
-          this.errorMessage = error.response.data.data.coupon_code[0];  */
           this.showInvalideMessage = true;
           this.$notify({
             group: "errorMessage",
             type: "error",
-            /*  text: error.response.data.data[Object.keys(errorObj)[0]][0] */
             text: "The selected coupon code is invalid.",
           });
         });

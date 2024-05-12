@@ -21,63 +21,64 @@
           <div class="row align-items-center">
             <div class="col-12">
               <div class="about_content">
-                <h1 class="h1-terms-and-conditions">Terms and conditions</h1>
+                <h1 class="h1-terms-and-conditions">{{ $t('terms.title')}}</h1>
                 <h3>Definition</h3>
                 <p class="terms-and-conditions">
-                  These Terms and Conditions ("Terms") govern your use of the Car Locksmith E-commerce Website (the "Website") operated by [Insert Company Name] ("we," "us," or "our"). By accessing or using the Website, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use the Website.
+                  {{ $t('terms.theseTerms')}}
                 </p>
-                <h3>1.Acceptance of Terms</h3>
+                <h3>{{ $t('terms.acceptanceTerms') }}</h3>
                 <p class="terms-and-conditions">
-                  By using the Website, you acknowledge that you have read, understood, and agree to be bound by these Terms and any additional terms and conditions referenced herein.
+                  {{ $t('terms.byUsing')}}
                 </p>
-                <h3>2.Services</h3>
+                <h3>{{ $t('terms.services') }}</h3>
                 <p class="terms-and-conditions">
-                  Our Website provides access to information about locksmith services for cars, as well as the opportunity to purchase products and services related to car locksmithing.
+                  {{ $t('terms.ourWebsite')}}
                 </p>
-                <h3>3.User Accounts</h3>
-                <ul class="terms-and-conditions">
-                  <li>You may need to create an account to access certain features of the Website. You agree to provide accurate, current, and complete information during the registration process.
-                  </li>
-                  <li>
-                    You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.
-                  </li>
-                  <li>
-                    You must promptly notify us of any unauthorized access or use of your account.
-                  </li>
-                </ul>
-                <h3>4.Purchases</h3>
+                <h3>{{ $t('terms.userAccount') }}</h3>
                 <ul class="terms-and-conditions">
                   <li>
-                    When making a purchase through the Website, you agree to provide accurate billing and payment information.
+                    {{$t('terms.youMayNeed')}}
                   </li>
                   <li>
-                    All sales are final, and refunds are subject to our Refund Policy
+                    {{ $t('terms.youAre')}}
                   </li>
                   <li>
-                    Prices are subject to change without notice, and we are not responsible for pricing errors.
+                    {{ $t('terms.youMust')}}
                   </li>
                 </ul>
-                <h3>5.Intellectual Property</h3>
+                <h3>{{ $t('terms.purchase') }}</h3>
                 <ul class="terms-and-conditions">
                   <li>
-                    All content on the Website, including but not limited to text, images, logos, and trademarks, is our property or the property of our licensors and is protected by intellectual property laws.
+                    {{ $t('terms.whenMaking')}}
                   </li>
                   <li>
-                    You may not use, copy, reproduce, modify, or distribute any content from the Website without our prior written consent.
+                    {{ $t('terms.allSales')}}
+                  </li>
+                  <li>
+                    {{ $t('terms.prices')}}
                   </li>
                 </ul>
-                <h3>6.Privacy</h3>
+                <h3>{{ $t('terms.intellectual')}}</h3>
                 <ul class="terms-and-conditions">
                   <li>
-                    We collect and use personal information as described in our Privacy Policy.
+                    {{ $t('terms.allContent')}}
                   </li>
                   <li>
-                    By using the Website, you consent to the collection and use of your personal information as described in the Privacy Policy.
+                    {{ $t('terms.YouMayNot')}}
                   </li>
                 </ul>
-                <h3>7- Contact Information</h3>
+                <h3>{{ $t('terms.privacy') }}</h3>
+                <ul class="terms-and-conditions">
+                  <li>
+                    {{ $t('terms.weCollect')}}
+                  </li>
+                  <li>
+                    {{ $t('terms.ByUsing')}}
+                  </li>
+                </ul>
+                <h3>{{ $t('terms.Contact') }}</h3>
                 <p class="terms-and-conditions">
-                  If you have any questions about these Terms, please contact us at <a href="mailto:info@tlkeys.com">info@tlkeys.com</a>
+                  {{ $t('terms.IfYouHave')}} <a href="mailto:info@tlkeys.com">{{$t('terms.email')}}</a>
                 </p>
               </div>
             </div>
@@ -187,6 +188,7 @@ export default {
                   "Monday",
                   "Tuesday",
                   "Wednesday",
+                  "Friday",
                   "Thursday",
                   "Saturday",
                   "Sunday"

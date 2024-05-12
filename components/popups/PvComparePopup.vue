@@ -22,7 +22,7 @@
           <div class="product pt-5 position-relative">
             <i class="position-absolute fa fa-check-circle"/>
             <figure v-if="props.item.data" class="product-media">
-              <nuxt-link :to="`/products/${props.item.data.slug}`">
+              <nuxt-link :to="getLink(`/products/${props.item.data.slug}`)">
                 <pv-gallery-image
                   :image="props.item.data.gallery[0]"
                   :size="'m'"
@@ -31,7 +31,7 @@
             </figure>
             <div v-if="props.item.data" class="product-detail w-75">
               <nuxt-link
-                :to="`/products/${props.item.data.slug}`"
+                :to="getLink(`/products/${props.item.data.slug}`)"
                 class="product-name"
                 style="font-size: medium;"
               >
@@ -45,20 +45,12 @@
           </div>
 
           <div v-if="props.item.data" class="product-action px-sm-0 px-2 d-flex align-items-center justify-content-between">
-            <nuxt-link to="/compares">
-              <success-button class="p-2 px-sm-3 px-4 mx-1 mb-1" :outline="true">View Compare
+            <nuxt-link :to="getLink('/compares')">
+              <success-button class="p-2 px-sm-3 px-4 mx-1 mb-1" :outline="true">
+                {{ $t("alert.viewCompare") }}
               </success-button>
             </nuxt-link>
 
-<!--            <nuxt-link-->
-<!--              v-if="isAuthenticated"-->
-<!--              to="/checkout"-->
-
-<!--            >-->
-<!--              <success-button class="p-2 px-sm-3 px-4 mx-1 mb-1  " :outline="true">{{ $t('header.checkout') }}-->
-<!--              </success-button>-->
-
-<!--            </nuxt-link>-->
           </div>
         </div>
         <div class=" p-1 position-absolute alterTimer"></div>
@@ -81,17 +73,24 @@ export default {
   components: {
     SuccessButton,
     PvGalleryImage,
-    BaseButtonIcon1,
   },
   data() {
     return {
     }
   },
   methods: {
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
+    },
   },
 
   computed: {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("language", ["getLang"])
   },
 };
 </script>

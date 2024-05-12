@@ -189,7 +189,7 @@ export default {
         this.$notify({
           group: 'custom-notify',
           type: 'success',
-          text: 'Payment Successful'
+          text:  this.$t("alerts.paymentSuccesfull"),
         });
       }).catch((error) => {
         let errorObj = error.response.data.data;

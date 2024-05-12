@@ -63,7 +63,7 @@ export default {
       }
     },
     myOrders() {
-      this.$router.push({ path: "/account", query: { tab: "orders" } });
+      this.$router.push({ path: this.getLink("/account"), query: { tab: "orders" } });
     },
     checkURL(url) {
       if (url) {

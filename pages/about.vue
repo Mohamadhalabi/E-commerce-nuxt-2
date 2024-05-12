@@ -40,7 +40,7 @@
           <base-button-icon-1
             class="py-3 mt-lg-5 contactUsButton"
             :outline="true">
-            <nuxt-link to="/contact" class="contactUsButton">
+            <nuxt-link :to="getLink('/contact')" class="contactUsButton">
               {{ $t('about.contactUs')}}
             </nuxt-link>
           </base-button-icon-1>
@@ -157,6 +157,7 @@
 <script>
 import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
 import _about from 'static/sass/pages/_about.scss'
+import {mapGetters} from "vuex";
 export default {
   head() {
     return {
@@ -285,27 +286,16 @@ export default {
     BaseButtonIcon1
 	},
 	computed: {
-		lightBoxMedia: function() {
-			let pictures = [];
-			pictures.push({
-				src: './images/home/team/member-1.jpg',
-				thumb: './images/home/team/member-1.jpg'
-			});
-			pictures.push({
-				src: './images/home/team/member-2.jpg',
-				thumb: './images/home/team/member-2.jpg'
-			});
-			pictures.push({
-				src: './images/home/team/member-3.jpg',
-				thumb: './images/home/team/member-3.jpg'
-			});
-			pictures.push({
-				src: './images/home/team/member-4.jpg',
-				thumb: './images/home/team/member-4.jpg'
-			});
-
-			return pictures;
-		}
+    ...mapGetters("language", ["getLang"]),
 	},
+  methods:{
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
+    },
+  }
 };
 </script>

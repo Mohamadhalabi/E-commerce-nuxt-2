@@ -16,7 +16,7 @@
     </nav>
 
     <div class="container">
-      <h1 class="h1-download">Downloads</h1>
+      <h1 class="h1-download">{{ $t("header.downloads") }}</h1>
       <div class="row">
         <div
           v-for="(product, index) in downloads"

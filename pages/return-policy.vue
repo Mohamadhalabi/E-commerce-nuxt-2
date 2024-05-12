@@ -12,7 +12,7 @@
             </nuxt-link>
           </li>
           <li class="breadcrumb-item active">
-            Return Policy
+            {{ $t('return.short_title') }}
           </li>
         </ol>
       </nav>
@@ -21,43 +21,45 @@
           <div class="row align-items-center">
             <div class="col-12">
               <div class="about_content">
-                <h1>Return & Refund Policy</h1>
+                <h1>{{ $t('return.title') }}</h1>
                 <p style="color:red">
-                  Note: Please be aware that the original products are not returnable or refundable. Only products that meet the eligibility criteria and are returned within 15 days of purchase will be considered for a refund or exchange. Thank you for your understanding.
+                  {{ $t('return.note')}}
                 </p>
-                <span class="policy">Eligibility for Refunds and Exchanges</span><br>
+                <span class="policy">{{ $t('return.eligibility')}}</span><br>
                 <ul class="privacy-policy-list">
-                  <li>Your item must be unused and in the same condition that you received it.</li>
-                  <li>The item must be in the original packaging.</li>
-                  <li>To complete your return, we require a receipt or proof of purchase.</li>
-                  <li>If you receive a refund, return shipping will be deducted from your refund.</li>
+                  <li>{{ $t('return.yourItem')}}</li>
+                  <li>{{ $t('return.TheItem')}}</li>
+                  <li>{{ $t('return.ToComplete')}}</li>
+                  <li>{{ $t('return.IfYou')}}</li>
                 </ul>
-                <span class="policy">Partial Refunds Are Granted (If Applicable)</span><br>
+                <span class="policy">{{ $t('return.Partial')}}</span><br>
                 <ul class="privacy-policy-list">
-                  <li>Any item not in its original condition is damaged or missing parts for reasons not due to our error.</li>
-                  <li>Any item that is returned more than 15 days after delivery.</li>
-                  <li>Once your return is received and inspected, we will send you an email to notify you that we have received your returned item.</li>
-                  <li>We will also notify you of the approval or rejection of your refund.</li>
-                  <li>If you are approved, then your refund will be processed, and a credit will automatically be applied to your credit card or original method of payment, and will be processed within 10 to 45 days depending on the issuing bank of the credit card.</li>
+                  <li>{{$t('return.anyItem')}}</li>
+                  <li>{{$t('return.anyItemThat')}}</li>
+                  <li>{{$t('return.onceYour')}}</li>
+                  <li>{{$t('return.WeWill')}}</li>
+                  <li>
+                    {{ $t('return.IfYouAre')}}
+                  </li>
                 </ul>
-                <span class="policy">Late Or Missing Refunds</span>
+                <span class="policy">{{ $t('return.LateOr')}}</span>
                 <p>
-                  If you have not received a refund yet, first check your bank account again. Then contact your credit card company, it may take some time before your refund is officially posted.
+                  {{ $t('return.ifYouHave')}}
                 </p>
                 <p>
-                  If you have done all of this and you still have not received your refund yet, please contact us at (+971) 50 442 9045 or at support@tlkeys.com
+                  {{ $t('return.ifyouhavedone')}}
                 </p>
-                <span class="policy">Non-Exchangeable Items</span><br>
+                <span class="policy">{{ $t('return.nonexchangable') }}</span><br>
                 <ul class="privacy-policy-list">
-                  <li>Items that are damaged or abused</li>
-                  <li>If the customer ordered the wrong item.</li>
-                  <li>Items can be exchanged for an identical item (in the case of a factory-defective item) but cannot be returned for a refund.</li>
+                  <li>{{ $t('return.damageorabused')}}</li>
+                  <li>{{ $t('return.ifthecustomer')}}</li>
+                  <li>{{$t('return.itemscanbe')}}</li>
                 </ul>
                 <span class="policy">
-                           Shipping
+                  {{ $t('return.Shipping')}}
                        </span>
                 <p>
-                  Depending on where you live, the time it may take for your exchanged product to reach you, may vary.
+                  {{ $t('return.dependingon')}}
                 </p>
               </div>
             </div>
