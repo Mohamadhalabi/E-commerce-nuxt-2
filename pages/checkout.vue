@@ -246,7 +246,7 @@
                   <td colspan="2">
                     <a @click="showAllResults = !showAllResults" class="checkout-table-pagination-a">
                       <button class="checkout-default-button" style="width: auto">
-                        {{ showAllResults ? 'Show Less' : 'See All Results' }}
+                        {{ showAllResults ? $t('shop.showLess') : $t('shop.seeAllResults') }}
                       </button><span v-if="!showAllResults" class="product-counter" style="color: white; font-size: 18px;">
                         ({{ checkoutData.products.length }})
                       </span>
@@ -724,14 +724,14 @@ export default {
         this.$notify({
           group: "errorMessage",
           type: "error",
-          text: "Please select An address",
+          text: this.$t('alerts.PleaseSelect')
         });
       }
       else if (this.dataForm.shipping_method == "") {
         this.$notify({
           group: "errorMessage",
           type: "error",
-          text: "Please Choose a shipping method",
+          text: this.$t('alerts.PleaseChoose')
         });
       } else {
         if (this.termsAndConditions == true) {
@@ -739,7 +739,7 @@ export default {
             this.$notify({
               group: "custom-notify",
               type: "error",
-              text: "Domestic Shipping / Pick up are only Available in the United Arab Emirates"
+              text: this.$t("alerts.domesticShipping"),
             })
           }
           else{
@@ -773,7 +773,7 @@ export default {
           this.$notify({
             group: "custom-notify",
             type: "error",
-            text: "Please accept the terms and conditions"
+            text: this.$t("alerts.acceptTerms"),
           })
         }
       }

@@ -27,7 +27,7 @@
         style="background-color: rgba(0, 57, 74, 0.8)"
         class="product-countdown-container w-100"
       >
-        <span class="product-countdown-title">Discount ends in:</span>
+        <span class="product-countdown-title">{{ $t("products.discountEndsIn") }}</span>
         <pv-count-down
           class="product-countdown countdown-compact"
           :until="product.discount.until"

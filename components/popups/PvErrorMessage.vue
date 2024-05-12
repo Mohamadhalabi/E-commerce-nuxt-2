@@ -24,7 +24,7 @@
             <span class="font-weight-bold p-2">{{props.item.text}}</span>
           </div>
           <div v-if="props.item.type ==='OutOfStockError'">
-            <nuxt-link to="/cart">
+            <nuxt-link :to="getLink('/cart')">
               <success-button class="p-2 px-sm-3 px-4 mx-1 mb-1" style="background-color: #a51017">cart
               </success-button>
             </nuxt-link>
@@ -40,8 +40,6 @@
 </template>
 
 <script>
-import PvGalleryImage from "~/components/product/partials/PvGalleryImage";
-import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import { mapGetters } from "vuex";
 import SuccessButton from "~/components/common/SuccessButton.vue";
 
@@ -56,10 +54,18 @@ export default {
     }
   },
   methods: {
+    getLink(route) {
+      if (this.getLang === 'en') {
+        return route; // Return the route as is without the language parameter
+      } else {
+        return `/${this.getLang}${route}`; // Include the language parameter
+      }
+    },
   },
 
   computed: {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("language", ["getLang"])
   },
 };
 </script>

@@ -291,7 +291,7 @@ export default {
             this.$notify({
               group: "errorMessage",
               type: "error",
-              text: "Email already exists",
+              text:  this.$t("alerts.emailAlready"),
             });
           } else {
             console.error(error);
@@ -301,7 +301,7 @@ export default {
         this.$notify({
           group: "errorMessage",
           type: "error",
-          text: "Enter a valid email",
+          text:  this.$t("alerts.enterValidEmail"),
         });
       }
     }

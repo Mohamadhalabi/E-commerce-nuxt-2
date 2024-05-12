@@ -22,7 +22,7 @@
             </ul>
           </div>
         </div>
-     <div class="header-dropdown m-0">
+        <div class="header-dropdown m-0">
           <a href="javascript:;">{{
               currentLocale.shortName
             }}</a>
@@ -30,16 +30,19 @@
             <ul>
               <li
                 v-for="locale in availableLocales"
-                :key="locale"
+                :key="locale[0]"
                 style="cursor: pointer"
                 @click="setLocale(locale[0])"
               >
                 <a href="javascript:;"
-                   style="text-transform: uppercase;">{{ locale[0]}}</a>
+                   style="padding-left: 10px">
+                  <img :src="locale[1].flag" alt="Flag" width="25px">
+                  {{ locale[1].language}}</a>
               </li>
             </ul>
           </div>
         </div>
+
 
         <div class="header-about-contact">
           <nuxt-link :to="getLink('/about')">
