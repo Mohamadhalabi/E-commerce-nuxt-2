@@ -186,6 +186,9 @@ export default {
     if(process.client) {
       let fullDomain = window.location.href;
       let expectedUrl = `https://www.tlkeys.com/${this.$i18n.locale}/pin-code`;
+      if(this.$i18n.locale =="en"){
+         expectedUrl = `https://www.tlkeys.com/pin-code`;
+      }
       if (fullDomain !== expectedUrl) {
         window.location.href = expectedUrl;
       }
