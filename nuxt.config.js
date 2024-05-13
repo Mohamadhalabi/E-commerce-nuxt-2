@@ -193,6 +193,7 @@ export default {
 
 
   router: {
+    middleware: ['language'],
     prefetchLinks: true,
     base: '/',
     linkActiveClass: '',

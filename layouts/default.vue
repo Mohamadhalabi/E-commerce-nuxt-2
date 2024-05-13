@@ -67,8 +67,6 @@ export default {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
   },
   mounted: function() {
-    // this.$store.dispatch('rtlStore/setLanguageFromURL');
-
     this.updateLanguageCode(this.$i18n.locale)
     api.defaults.headers["Accept-Language"] = this.$i18n.locale;
     if (this.isAuthenticated) {
