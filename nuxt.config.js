@@ -109,11 +109,12 @@ export default {
       langDir: 'translations/',
       defaultLocale: 'en',
       vueI18n: {
-        fallbackLocale: 'en'
+        fallbackLocale: ['en', 'fr','es'],
       },
       skipSettingLocaleOnNavigate: true
     }]
   ],
+
 
   modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image', 'cookie-universal-nuxt'],
   // bootstrapVue: {

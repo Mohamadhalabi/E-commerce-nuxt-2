@@ -11,7 +11,7 @@ export const mutations = {
 
 export const actions = {
   updateLanguageCode({ commit }, code) {
-      commit('setLanguageCode',code)
+    commit('setLanguageCode',code)
   }
 }
 
