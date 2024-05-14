@@ -360,41 +360,43 @@ export default {
         "_blank"
       );
     },
-    addToCompare(item) {
-      Api.get("/products/compares")
-        .then((response) => {
-        })
-        .catch((error) => {
-        });
-      Api.post("/products/compares", {product: item.slug})
-        .then((response) => {
-          this.$notify({
-            group: "custom-notify",
-            type: "success",
-            text: response.data.message,
-          });
-        })
-        .catch(() => {
-        });
-    },
+    // addToCompare(item) {
+    //   Api.get("/products/compares")
+    //     .then((response) => {
+    //     })
+    //     .catch((error) => {
+    //     });
+    //   Api.post("/products/compares", {product: item.slug})
+    //     .then((response) => {
+    //       this.$notify({
+    //         group: "custom-notify",
+    //         type: "success",
+    //         text: response.data.message,
+    //       });
+    //     })
+    //     .catch(() => {
+    //     });
+    // },
     plusQty: function () {
-      if (this.qty < this.product.stock) this.qty++;
+      // if (this.qty < this.product.stock)
+        this.qty++;
     },
     minusQty: function () {
-      if (this.qty > this.minPurchaseQty) this.qty--;
+      if (this.qty > this.minPurchaseQty)
+        this.qty--;
     },
     changeQty(e) {
       if(this.qty < this.minPurchaseQty){
         this.qty = this.minPurchaseQty
       }
     },
-    addCart: function (product) {
-      this.currentProduct = product;
-      document.querySelector(".cart-message.removed").style.display = "none";
-      document.querySelector(".cart-message.carted").style.display = "block";
-      this.addToCart({product: product});
-      this.removeFromWishlist({product: product.sku});
-    },
+    // addCart: function (product) {
+    //   this.currentProduct = product;
+    //   document.querySelector(".cart-message.removed").style.display = "none";
+    //   document.querySelector(".cart-message.carted").style.display = "block";
+    //   this.addToCart({product: product});
+    //   this.removeFromWishlist({product: product.sku});
+    // },
   },
 };
 </script>

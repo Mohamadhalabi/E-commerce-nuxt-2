@@ -184,7 +184,6 @@ export const actions = {
 
   changeQuantity: async function ({ commit, state }, payload) {
     if (localStorage.getItem('tokenEnded') == '1') {
-
       let product = payload.product;
       let cardItems = JSON.parse(localStorage.getItem('card')) || [];
       for (let item of cardItems) {

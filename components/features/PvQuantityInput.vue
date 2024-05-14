@@ -85,14 +85,15 @@ export default {
 
   methods: {
     changeQty: function (e) {
-      if (e.target.value > parseInt(this.product.stock))
-        this.currentQty = this.product.stock;
+      // if (e.target.value > parseInt(this.product.stock))
+      //   this.currentQty = this.product.stock;
       if (e.srcElement.valueAsNumber < 1) this.currentQty = 1;
       this.$emit("changeQty", {quantity: this.currentQty, product: this.product});
     },
 
     plusQty: function () {
-      if (this.currentQty < this.product.stock) this.currentQty++;
+      // if (this.currentQty < this.product.stock)
+      this.currentQty++;
       let dataForm = {
         quantity: this.currentQty,
         product: this.product,
