@@ -117,21 +117,21 @@ export default {
 
 
   modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image', 'cookie-universal-nuxt'],
-  // bootstrapVue: {
-  //   componentPlugins: [
-  //     'CardPlugin',
-  //     'FormInputPlugin',
-  //     'ModalPlugin',
-  //     'TablePlugin',
-  //     'CollapsePlugin',
-  //     'PaginationPlugin',
-  //     'ListGroupPlugin',
-  //     'FormTagsPlugin',
-  //     'AlertPlugin',
-  //     'ButtonPlugin',
-  //     'FormFilePlugin'
-  //   ],
-  // },
+  bootstrapVue: {
+    componentPlugins: [
+      'CardPlugin',
+      'FormInputPlugin',
+      'ModalPlugin',
+      'TablePlugin',
+      'CollapsePlugin',
+      'PaginationPlugin',
+      'ListGroupPlugin',
+      'FormTagsPlugin',
+      'AlertPlugin',
+      'ButtonPlugin',
+      'FormFilePlugin'
+    ],
+  },
 
   axios: {
     headers: {
