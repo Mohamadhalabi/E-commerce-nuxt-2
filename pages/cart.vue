@@ -178,9 +178,9 @@
           </table>
           <b-alert v-if="displayOutOfStock" show variant="danger">
             <i class="fa fa-exclamation-triangle"></i>
-            The selected quantity of the  Product(s) <span class="font-weight-bold" v-for="(outofstock,index) in outOfStockList" :key="index">
+            {{ $t("cart.outOfStock") }} <span class="font-weight-bold" v-for="(outofstock,index) in outOfStockList" :key="index">
           {{outofstock}}
-        </span> is currently not available
+        </span> {{ $t("cart.notavailable") }} {{ $t('cart.weWillTry') }}
           </b-alert>
           <base-button-icon1
             class="w-100 py-4"
@@ -196,7 +196,6 @@
             type="button"
             v-if="isAuthenticated"
             :outline="true"
-            :disabled="displayOutOfStock"
           >
             {{ $t("checkout.checkoutBtn") }}</base-button-icon1
           >

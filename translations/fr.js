@@ -184,6 +184,9 @@ export default
     freeShipping: "livraison gratuite!",
     delete: "Supprimer",
     cartTotal: "Total du panier",
+    outOfStock: "La quantité sélectionnée du produit",
+    notavailable: "n'est actuellement pas disponible",
+    weWillTry: ",mais nous essaierons de vous l'obtenir\n",
   },
   coupon: {
     CouponType: "Type de coupon",
@@ -324,6 +327,7 @@ export default
     SortCode: 'Code de tri',
     IBAN: 'IBAN',
     BIC: 'BIC',
+    outOfStock:"La quantité sélectionnée n'est actuellement pas disponible, mais nous essaierons de l'obtenir pour vous\n",
 
   },
   account: {

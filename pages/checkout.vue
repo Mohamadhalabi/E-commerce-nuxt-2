@@ -229,6 +229,9 @@
                             SKU: {{ product.sku }}
                           </span>
                         </p>
+                        <span style="color: red;font-weight: bold;font-size: 12px" v-if="product.quantity > product.stock">
+                          {{ $t("checkout.outOfStock") }}
+                        </span>
                       </div>
                       <div class="col-lg-4 col-md-6 col-sm-6 mt-auto mb-auto product-quantity-price text-lg-right text-md-right text-sm-right text-center">
                         <span class="product-qty">{{ product.quantity }} X</span>
@@ -389,7 +392,7 @@
                   "
                         class="py-4 w-100"
                         type="button"
-                        :disabled="hasBlockedCountry || displayOutOfStock"
+                        :disabled="hasBlockedCountry"
                         @click="createOrder"
                         :outline="true"
                       ><span v-if="!loadingOrder">
@@ -584,18 +587,18 @@ export default {
       vm.clickedCardIndex = 1;
       vm.handlePaymentMethod(vm.clickedCardIndex)
 
-      vm.getCartList().then(() => {
-        vm.cartList.forEach(item => {
-          if(item.quantity > item.stock){
-            vm.$notify({
-              group: "errorMessage",
-              type: "OutOfStockError",
-              text: "The quantity " + item.quantity +" for "+item.sku+ " is currently not available, please modify your cart",
-              duration: -1,
-            });
-          }
-        });
-      });
+      // vm.getCartList().then(() => {
+      //   vm.cartList.forEach(item => {
+      //     if(item.quantity > item.stock){
+      //       vm.$notify({
+      //         group: "errorMessage",
+      //         type: "OutOfStockError",
+      //         text: "The quantity " + item.quantity +" for "+item.sku+ " is currently not available, please modify your cart",
+      //         duration: -1,
+      //       });
+      //     }
+      //   });
+      // });
     });
   },
   beforeRouteLeave(to, from, next) {
