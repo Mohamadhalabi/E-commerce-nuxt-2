@@ -1,44 +1,23 @@
-import api from "~/api";
+// middleware/locale-redirect.js
 
-export default function ({ isHMR, app, store, route, params, error, redirect, req }) {
-  if (isHMR) return; // Ignore if called from Hot Module Replacement.
+export default function ({ app, route, redirect }) {
+  const cookies = app.$cookies;
+  const locale = cookies.get('locale') || 'en'; // default to English if no cookie is set
 
-  // Function to set new locale and redirect
-  function setLocaleAndRedirect(newLocale) {
-    app.$cookies.set('locale', newLocale); // Update cookie
-    app.i18n.locale = newLocale; // Update i18n locale
-    api.defaults.headers["Accept-Language"] = newLocale;
-    store.dispatch('updateLanguageCode', newLocale);
+  // Extract the current path without the locale prefix
+  const pathWithoutLocale = route.path.replace(/^\/(en|fr|es)/, '');
 
-    const basePath = route.fullPath.indexOf('/') === 0 ? route.fullPath.substring(1) : route.fullPath;
-    const pathParts = basePath.split('/');
-    const currentLocale = pathParts[0];
-    const locales = ['fr', 'es']; // Supported locales
+  // Check if the current path includes the locale prefix
+  const hasLocalePrefix = /^\/(fr|es)/.test(route.path);
 
-    if (locales.includes(currentLocale) && currentLocale !== newLocale) {
-      // let test = `/${newLocale}/${basePath.replace(currentLocale + '/', '')}`
-      redirect(`/${newLocale}/${basePath.replace(currentLocale + '/', '')}`);
-    } else if (!locales.includes(currentLocale)) {
-      redirect(`/${newLocale}/${basePath}`);
-    }
+  if (!hasLocalePrefix && locale !== 'en') {
+    // Redirect to the path with the appropriate locale prefix
+    return redirect(`/${locale}${pathWithoutLocale}`);
+  } else if (hasLocalePrefix && locale === 'en') {
+    // Redirect to the path without any locale prefix for English
+    return redirect(pathWithoutLocale || '/');
+  } else if (!hasLocalePrefix && locale === 'en' && route.path !== '/') {
+    // Redirect to the root path if no locale is set and path is not root
+    return redirect('/');
   }
-
-  let locale = null;
-
-  if (req && req.headers.cookie) {
-    // Server-side: parse cookies
-    const cookieparser = require('cookieparser');
-    locale = cookieparser.parse(req.headers.cookie).locale || 'en';
-  } else if (process.client) {
-    // Client-side: use cookies and localStorage
-    locale = app.$cookies.get('locale') || localStorage.getItem('locale') || 'en';
-
-    window.addEventListener('storage', (event) => {
-      if (event.key === 'locale' && event.newValue && event.newValue !== locale) {
-        setLocaleAndRedirect(event.newValue);
-      }
-    });
-  }
-
-  if (locale !== 'en') setLocaleAndRedirect(locale); // Apply locale if not English
 }
