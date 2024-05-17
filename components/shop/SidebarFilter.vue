@@ -171,7 +171,7 @@ export default {
       const axiosConfig = {
         baseURL: process.env.API_BASE_URL,
         headers:{
-          'Accept-Language': this.$cookies.get('locale') || this.$i18n.locale,
+          'Accept-Language': this.$i18n.locale,
           'Content-Type': 'application/json',
           'currency': currency,
           'Accept': 'application/json',

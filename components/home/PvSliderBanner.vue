@@ -119,7 +119,7 @@ export default {
       const responseBanner = await axios.get("sliders?type=banner",{
         baseURL: process.env.API_BASE_URL,
         headers:{
-          'Accept-Language': this.$cookies.get('locale') || this.$i18n.locale,
+          'Accept-Language': this.$i18n.locale,
           'Content-Type': 'application/json',
           'currency': this.$cookies.get('currency') || 'USD',
           'Accept': 'application/json',
@@ -137,7 +137,7 @@ export default {
       const response = await axios.get("products/random-products",{
         baseURL: process.env.API_BASE_URL,
         headers:{
-          'Accept-Language': this.$cookies.get('locale') || this.$i18n.locale,
+          'Accept-Language': this.$i18n.locale,
           'Content-Type': 'application/json',
           'currency': this.$cookies.get('currency') || 'USD',
           'Accept': 'application/json',
