@@ -87,7 +87,7 @@ export default {
     const response = await axios.get(`pin-code/offline-pincode`,{
       baseURL: process.env.API_BASE_URL,
       headers:{
-        'Accept-Language': app.$cookies.get('locale') || app.i18n.locale,
+        'Accept-Language': app.i18n.locale,
         'Content-Type': 'application/json',
         'currency': app.$cookies.get('currency') || 'USD',
         'Accept': 'application/json',

@@ -1,23 +1,34 @@
-// middleware/locale-redirect.js
+export default function ({ isHMR, app, store, route, params, error, redirect, req }) {
+  // Ignore if middleware is called from hot module replacement
+  if (isHMR) return;
 
-export default function ({ app, route, redirect }) {
-  const cookies = app.$cookies;
-  const locale = cookies.get('locale') || 'en'; // default to English if no cookie is set
+  // Get locale from cookies
+  let locale = null;
+  if (req) {
+    if (req.headers.cookie) {
+      const cookies = req.headers.cookie.split(';').reduce((acc, cookie) => {
+        const [key, value] = cookie.trim().split('=');
+        acc[key] = decodeURIComponent(value);
+        return acc;
+      }, {});
+      locale = cookies.locale;
+    }
+  }
 
-  // Extract the current path without the locale prefix
-  const pathWithoutLocale = route.path.replace(/^\/(en|fr|es)/, '');
+  // If no locale is found, use the default 'en'
+  if (!locale) locale = 'en';
 
-  // Check if the current path includes the locale prefix
-  const hasLocalePrefix = /^\/(fr|es)/.test(route.path);
+  // Check if the locale is valid
+  const validLocales = ['en', 'es', 'fr'];
+  if (!validLocales.includes(locale)) {
+    return error({ message: 'This locale is not supported.', statusCode: 400 });
+  }
 
-  if (!hasLocalePrefix && locale !== 'en') {
-    // Redirect to the path with the appropriate locale prefix
-    return redirect(`/${locale}${pathWithoutLocale}`);
-  } else if (hasLocalePrefix && locale === 'en') {
-    // Redirect to the path without any locale prefix for English
-    return redirect(pathWithoutLocale || '/');
-  } else if (!hasLocalePrefix && locale === 'en' && route.path !== '/') {
-    // Redirect to the root path if no locale is set and path is not root
-    return redirect('/');
+  // Redirect to the localized route if necessary
+  // Check if the route is already localized
+  if (!route.path.startsWith(`/${locale}`) && locale !== 'en') {
+    // Generate the new localized route
+    const localizedPath = `/${locale}${route.fullPath}`;
+    return redirect(localizedPath);
   }
 }
