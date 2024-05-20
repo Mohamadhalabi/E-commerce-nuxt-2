@@ -112,11 +112,11 @@
   </div>
 </template>
 <script>
-import Api from "~/api";
 import AutoComplate from "~/components/common/AutoComplate.vue";
 import BaseButtonIcon1 from "../BaseButtonIcon1.vue";
 import PvPriceBox from "~/components/product/partials/PvPriceBox";
 import {mapGetters} from "vuex";
+import axios from 'axios';
 
 export default {
   components: {
@@ -200,7 +200,17 @@ export default {
           if (this.selectedCategory != null && this.selectedCategory !== "shop") {
             query = `?search=${search_key}&categories=${this.selectedCategory}`;
           }
-          Api.get(`shop${query}`)
+          axios.get(`shop${query}`,{
+            baseURL: process.env.API_BASE_URL,
+            headers:{
+              'Accept-Language': this.$i18n.locale,
+              'Content-Type': 'application/json',
+              'currency': this.$cookies.get('currency') || 'USD',
+              'Accept': 'application/json',
+              'secret-key': process.env.SECRET_KEY,
+              'api-key': process.env.API_KEY,
+            },
+          })
             .then((response) => {
               this.productsBySearch = response.data.products;
               this.getProductsBySearchArrayLength = response.data.total;
