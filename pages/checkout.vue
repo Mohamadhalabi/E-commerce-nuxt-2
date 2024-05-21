@@ -386,10 +386,6 @@
 
 
                       <base-button-icon-1
-                        v-if="
-                    dataForm.payment_method == 'stripe_link_online' ||
-                    dataForm.payment_method == 'transfer_online'
-                  "
                         class="py-4 w-100"
                         type="button"
                         :disabled="hasBlockedCountry"
@@ -401,19 +397,19 @@
                         <b-spinner v-else class=""
                         /></base-button-icon-1>
                       <div class="mt-2">
-                        <PaypalBtn
-                          v-if="checkoutData && dataForm.payment_method == 'paypal'"
-                          ref="mediaRef"
-                          :payment-for="'order'"
-                          :amount="checkoutData.dolar_price.value"
-                          :coupon_code="dataForm.coupon_code"
-                          :shipping_method="dataForm.shipping_method"
-                          :address="dataForm.address"
-                          :is-valid="checkIsValidPayment && !hasBlockedCountry"
-                          :termsAndConditions="termsAndConditions"
-                          :is_uae="this.is_uae"
-                          :isActive="this.isActive"
-                        />
+<!--                        <PaypalBtn-->
+<!--                          v-if="checkoutData && dataForm.payment_method == 'paypal'"-->
+<!--                          ref="mediaRef"-->
+<!--                          :payment-for="'order'"-->
+<!--                          :amount="checkoutData.dolar_price.value"-->
+<!--                          :coupon_code="dataForm.coupon_code"-->
+<!--                          :shipping_method="dataForm.shipping_method"-->
+<!--                          :address="dataForm.address"-->
+<!--                          :is-valid="checkIsValidPayment && !hasBlockedCountry"-->
+<!--                          :termsAndConditions="termsAndConditions"-->
+<!--                          :is_uae="this.is_uae"-->
+<!--                          :isActive="this.isActive"-->
+<!--                        />-->
                       </div>
                     </div>
                   </td>
@@ -746,12 +742,18 @@ export default {
             })
           }
           else{
+
             this.loadingOrder = true;
             Api.post("/user/orders/create", this.dataForm)
               .then((response) => {
                 if (this.dataForm.payment_method == 'stripe_link_online') {
                   location.href = response.data.data.payment.stripe_url
-                } else {
+                }
+
+                else if(this.dataForm.payment_method == 'paypal'){
+                  location.href = response.data.data.paypal_url
+                }
+                else {
                   this.$router.push({
                     path: "/complete-order",
                     query: {
