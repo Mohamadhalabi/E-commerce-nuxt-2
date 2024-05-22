@@ -200,6 +200,7 @@ export default {
           if (this.selectedCategory != null && this.selectedCategory !== "shop") {
             query = `?search=${search_key}&categories=${this.selectedCategory}`;
           }
+          this.$nuxt.$loading.start()
           axios.get(`shop${query}`,{
             baseURL: process.env.API_BASE_URL,
             headers:{
@@ -212,6 +213,7 @@ export default {
             },
           })
             .then((response) => {
+              this.$nuxt.$loading.finish()
               this.productsBySearch = response.data.products;
               this.getProductsBySearchArrayLength = response.data.total;
               this.availableItems = this.productsBySearch.slice(0, 5);
