@@ -640,7 +640,7 @@ export default
       priority: 'Priority',
       show: 'Show',
       type: "Type",
-      showless:"show Less",
+      showLess:"show Less",
       seeAllResults:"See all results",
     },
 
