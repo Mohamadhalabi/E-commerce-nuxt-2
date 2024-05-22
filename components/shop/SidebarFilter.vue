@@ -185,7 +185,6 @@ export default {
           this.filter = response.data;
           this.total = this.filter.total;
           this.checked_items = this.filter.checked_items.items;
-          this.checked_items = this.checked_items.reverse();
           this.attributeFilters = this.filter.attributes;
           this.selected_category = response.data.categories.selected;
           this.selected_manufacture = response.data.manufacturers.selected;
