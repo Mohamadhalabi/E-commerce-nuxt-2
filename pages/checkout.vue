@@ -744,8 +744,10 @@ export default {
           else{
 
             this.loadingOrder = true;
+            this.$nuxt.$loading.start()
             Api.post("/user/orders/create", this.dataForm)
               .then((response) => {
+                this.$nuxt.$loading.finish()
                 if (this.dataForm.payment_method == 'stripe_link_online') {
                   location.href = response.data.data.payment.stripe_url
                 }

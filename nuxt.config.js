@@ -258,6 +258,7 @@ export default {
     height: '6px',
     throttle: 0,
     failedColor: 'red',
+    duration: 15000,
   },
 
 
