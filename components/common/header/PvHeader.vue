@@ -423,15 +423,12 @@ export default {
 
     setCurrency(currency) {
       api.defaults.headers["currency"] = currency;
-      this.setCurrencyValue(currency);
-      this.changeCurrency(currency);
-
       this.$cookies.set('currency',currency,{
         path: '/',
         maxAge: 60 * 60 * 24 * 7
       });
+      this.setCurrencyValue(currency)
       this.$nuxt.refresh();
-      window.location.reload()
     },
 
 
