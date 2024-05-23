@@ -111,8 +111,8 @@ export default {
         path: '/',
         maxAge: 60 * 60 * 24 * 7
       });
+      this.setCurrencyValue(currency)
       this.$nuxt.refresh();
-      window.location.reload()
     },
     getLink(route) {
       if (this.getLang === 'en') {
