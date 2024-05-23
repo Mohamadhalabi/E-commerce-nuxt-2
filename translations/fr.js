@@ -328,7 +328,8 @@ export default
     IBAN: 'IBAN',
     BIC: 'BIC',
     outOfStock:"La quantité sélectionnée n'est actuellement pas disponible, mais nous essaierons de l'obtenir pour vous\n",
-
+    selectAddress : "Veuillez sélectionner une adresse avant de choisir le mode de livraison",
+    selectAShipping:"Veuillez sélectionner un mode de livraison avant de choisir le mode de paiement"
   },
   account: {
     close: 'Fermer',
@@ -950,7 +951,8 @@ export default
     AddedToWishlist:"a été ajouté à votre liste de souhaits",
     alreadyInWishlist2:"Les produits sont déjà dans la liste de souhaits",
     viewWishlist: "Voir la liste de souhaits",
-    viewCompare: "Voir la comparaison"
+    viewCompare: "Voir la comparaison",
+    PleaseSelectPaymentMethod: "Veuillez choisir un moyen de paiement"
   }
 
 

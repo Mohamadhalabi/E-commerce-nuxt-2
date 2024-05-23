@@ -185,7 +185,9 @@ export default
     delete: 'Eliminar',
     cartTotal: 'Total del carrito',
     outOfStock: "La cantidad seleccionada del producto",
-    notavailable: "no está disponible actualmente"
+    notavailable: "no está disponible actualmente",
+    weWillTry:",pero intentaremos conseguirlo para ti\n",
+
   },
   coupon: {
     CouponType: 'Tipo de cupón',
@@ -328,7 +330,8 @@ export default
     IBAN: 'IBAN',
     BIC: 'BIC',
     outOfStock:"La cantidad seleccionada no está disponible actualmente, pero intentaremos conseguirla para usted.",
-    weWillTry:",pero intentaremos conseguirlo para ti\n",
+    selectAddress : "Por favor, seleccione una dirección antes de elegir el método de envío",
+    selectAShipping:"Por favor, seleccione un método de envío antes de elegir el método de pago",
   },
   account: {
     close: 'Cerrar',
@@ -892,6 +895,7 @@ export default
     AddedToWishlist:"se ha añadido a tu lista de deseos",
     alreadyInWishlist2:"Los productos ya están en la lista de deseos",
     viewWishlist: "Ver lista de deseos",
-    viewCompare: "Ver comparación"
+    viewCompare: "Ver comparación",
+    PleaseSelectPaymentMethod: "Por favor seleccione un método de pago",
   }
 };

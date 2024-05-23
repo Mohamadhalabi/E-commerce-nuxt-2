@@ -79,6 +79,7 @@
                 :checkout="true"
               />
             </div>
+            <h5 v-if="this.is_shipping_method_disabled" style="color: red;margin: 0;" class="text-center mt-2">* {{ $t('checkout.selectAddress') }}</h5>
             <transition name="slide">
               <div class="col-lg-12 mt-2 border-with-top-text-shipping-method">
                 <div class="row" :class="{ 'text-right': getIsAr }">
@@ -91,6 +92,7 @@
                             type="radio"
                             class="d-none"
                             :id="item"
+                            :disabled="is_shipping_method_disabled"
                             v-model="dataForm.shipping_method"
                             :value="item"
                             @click="GetShippingMethod(item)"
@@ -101,6 +103,7 @@
                             :src="`./images/payments_and_shipping/${item}-png.png`"
                             :alt="item"
                             :title="item"
+                            :class="{ 'custom-disabled-class': is_shipping_method_disabled }"
                           />
                           <img
                             v-if="item =='pick_up'"
@@ -108,6 +111,7 @@
                             :src="`./images/payments_and_shipping/pick-up.jpg`"
                             alt="Pick Up from our store"
                             title="Pick Up From Our Store!"
+                            :class="{ 'custom-disabled-class': is_shipping_method_disabled }"
                           />
                           <img
                             v-if="item =='domestic'"
@@ -115,20 +119,34 @@
                             :src="`./images/payments_and_shipping/domestic-shipping.png`"
                             alt="Domestic Shipping"
                             title="Domestic Shipping"
+                            :class="{ 'custom-disabled-class': is_shipping_method_disabled }"
                           />
                         </div>
                       </div>
                     </label>
+                    <input
+                      class="radio"
+                      type="radio"
+                      :disabled="is_shipping_method_disabled"
+                      v-model="dataForm.shipping_method"
+                      :value="item"
+                      @click="GetShippingMethod(item)"
+                    />
                   </div>
                 </div>
               </div>
             </transition>
-
+            <h5 v-if="this.is_payment_method_disabled" style="color: red;margin: 0;" class="text-center mt-2">* {{ $t('checkout.selectAShipping')}}</h5>
             <transition name="slide">
               <div class="col-lg-12 mt-4 border-with-top-text-payment-method">
                 <div class="row" :class="{ 'text-right': getIsAr }">
                   <div class="col-lg-4 mt-lg-4">
-                    <div class="card text-center" style="max-height: 100px!important;min-height: 100px" :class="{ 'payment-method-active': clickedCardIndex === 1 }" @click="handlePaymentMethod(1),CheckCardSelected()">
+                    <div
+                      class="card text-center paymentMethod-card"
+                      style="max-height: 100px!important; min-height: 100px"
+                      :class="{ 'payment-method-active': clickedCardIndex === 1 }"
+                      @click="handlePaymentMethod(1),CheckCardSelected()"
+                    >
                       <div class="card-body payment-method-card">
                         <div class="row">
                           <div class="col-lg-8 mt-auto mb-auto payment-method-text">
@@ -140,9 +158,25 @@
                         </div>
                       </div>
                     </div>
+                    <div class="text-center">
+                      <input
+                        class="radio"
+                        type="radio"
+                        :disabled="is_payment_method_disabled"
+                        v-model="clickedCardIndex"
+                        :value="1"
+                        @click="handlePaymentMethod(1),CheckCardSelected()"
+                      />
+                    </div>
                   </div>
+
                   <div class="col-lg-4 mt-lg-4">
-                    <div class="card text-center" style="max-height: 100px!important;min-height: 100px" :class="{ 'payment-method-active': clickedCardIndex === 2 }" @click="handlePaymentMethod(2),CheckCardSelected()">
+                    <div
+                      class="card text-center paymentMethod-card"
+                      style="max-height: 100px!important; min-height: 100px"
+                      :class="{ 'payment-method-active': clickedCardIndex === 2 }"
+                      @click="handlePaymentMethod(2),CheckCardSelected()"
+                    >
                       <div class="card-body payment-method-card">
                         <div class="row">
                           <div class="col-lg-8 mt-auto mb-auto payment-method-text">
@@ -154,9 +188,24 @@
                         </div>
                       </div>
                     </div>
+                    <div class="text-center">
+                      <input
+                        class="radio"
+                        type="radio"
+                        :disabled="is_payment_method_disabled"
+                        v-model="clickedCardIndex"
+                        :value="2"
+                        @click="handlePaymentMethod(2),CheckCardSelected()"
+                      />
+                    </div>
                   </div>
                   <div class="col-lg-4 mt-lg-4">
-                    <div class="card text-center" style="max-height: 100px!important;min-height: 100px" :class="{ 'payment-method-active': clickedCardIndex === 3 }" @click="handlePaymentMethod(3),CheckCardSelected()">
+                    <div
+                      class="card text-center paymentMethod-card"
+                      style="max-height: 100px!important; min-height: 100px"
+                      :class="{ 'payment-method-active': clickedCardIndex === 3 }"
+                      @click="handlePaymentMethod(3),CheckCardSelected()"
+                    >
                       <div class="card-body payment-method-card">
                         <div class="row">
                           <div class="col-lg-8 mt-auto mb-auto payment-method-text">
@@ -168,10 +217,21 @@
                         </div>
                       </div>
                     </div>
+                    <div class="text-center">
+                      <input
+                        class="radio"
+                        type="radio"
+                        :disabled="is_payment_method_disabled"
+                        v-model="clickedCardIndex"
+                        :value="3"
+                        @click="handlePaymentMethod(3),CheckCardSelected()"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </transition>
+
             <transition name="slide">
               <div class="col-lg-12 mt-2 bank-transfer-payment" v-if="clickedCardIndex == 3">
                 <div class="container mt-2">
@@ -479,7 +539,6 @@
       </div>
     </div>
     <AddressDialog
-      :address-info="selectedAddressToUpdate"
       :type-form="typeForm"
       @close="closedEvent"
     />
@@ -488,7 +547,6 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import Api from "~/api";
-import PaypalBtn from "~/components/common/PaypalBtn";
 import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
 import PvFreeShippingAmount from "~/pages/PvFreeShippingAmount.vue";
 import PvAddresses from "~/components/account/PvAddresses.vue";
@@ -497,41 +555,28 @@ export default {
     PvAddresses,
     PvFreeShippingAmount,
     AddressDialog: () => import("~/components/account/PvAddressFormModal"),
-    PaypalBtn,
     BaseButtonIcon1,
   },
   data: function () {
     return {
       is_uae:false,
+      is_shipping_method_disabled: true,
+      is_payment_method_disabled: true,
       termsAndConditions:false,
-      isActive:false,
       showAllResults: false,
-      showCardDialog: false,
-      clickedCardIndex: 1,
-      paymanetMethodCount: 1,
+      clickedCardIndex: null,
       checkIsValidPayment: false,
-      renderKey: 1,
       loadingOrder: false,
-      codeOpened: false,
-      accountOpened: false,
-      shipping_methods: [],
-      addressOpened: false,
-      copuonCode: null,
       checkoutData: null,
-      selectedAddressToUpdate: {},
       address: [],
-      myCards: [],
       selectedAddress:false,
       hasBlockedCountry: false,
       typeForm: "add",
       dataForm: {
         address: "",
-        payment_method: "stripe_link_online",
+        payment_method: "",
         card_name: "",
         card_id: "",
-        card_exp_month: "",
-        card_exp_year: "",
-        card_cvc: "",
         coupon_code: "",
         shipping_method: "",
       },
@@ -574,38 +619,9 @@ export default {
       deep: true,
     },
   },
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      // Execute logic here
-      vm.refetchPrice();
-      vm.reFetchShippingMethod();
-
-      vm.clickedCardIndex = 1;
-      vm.handlePaymentMethod(vm.clickedCardIndex)
-
-      // vm.getCartList().then(() => {
-      //   vm.cartList.forEach(item => {
-      //     if(item.quantity > item.stock){
-      //       vm.$notify({
-      //         group: "errorMessage",
-      //         type: "OutOfStockError",
-      //         text: "The quantity " + item.quantity +" for "+item.sku+ " is currently not available, please modify your cart",
-      //         duration: -1,
-      //       });
-      //     }
-      //   });
-      // });
-    });
+  mounted() {
+    this.refetchPrice()
   },
-  beforeRouteLeave(to, from, next) {
-    this.handlePaymentMethod(this.clickedCardIndex)
-    this.$notify({
-      group: "errorMessage",
-      clean: true
-    });
-    next();
-  },
-
   methods: {
     ...mapActions("shop", ["getCartList"]),
     getLink(route) {
@@ -647,37 +663,38 @@ export default {
         });
     },
     CheckCardSelected(){
-      const value = this.clickedCardIndex;
-      if(value !== null) {
-        // if(this.clickedCardIndex === 1 && value !== -1){
-        const spanElement = document.querySelector('.stepper-payment');
-        if (value) {
-          spanElement.style.backgroundColor = '#556b2f';
-        } else {
-          spanElement.style.backgroundColor = '#6c757d';
+      if(!this.is_payment_method_disabled) {
+        const value = this.clickedCardIndex;
+        if (value !== null) {
+          // if(this.clickedCardIndex === 1 && value !== -1){
+          const spanElement = document.querySelector('.stepper-payment');
+          if (value) {
+            spanElement.style.backgroundColor = '#556b2f';
+          } else {
+            spanElement.style.backgroundColor = '#6c757d';
+          }
         }
-        // }
       }
     },
     GetShippingMethod(value){
       const spanElement = document.querySelector('.stepper-shipping');
       if (value) {
         spanElement.style.backgroundColor = '#556b2f';
+        this.is_payment_method_disabled = false
       } else {
         spanElement.style.backgroundColor = '#6c757d';
       }
     },
     handlePaymentMethod(index) {
-      this.clickedCardIndex = index;
-
-      if(this.clickedCardIndex === 1){
-        this.dataForm.payment_method = "stripe_link_online"
-      }
-      else if(this.clickedCardIndex === 2){
-        this.dataForm.payment_method ="paypal"
-      }
-      else if(this.clickedCardIndex === 3){
-        this.dataForm.payment_method ="transfer_online"
+      if(!this.is_payment_method_disabled) {
+        this.clickedCardIndex = index;
+        if (this.clickedCardIndex === 1) {
+          this.dataForm.payment_method = "stripe_link_online"
+        } else if (this.clickedCardIndex === 2) {
+          this.dataForm.payment_method = "paypal"
+        } else if (this.clickedCardIndex === 3) {
+          this.dataForm.payment_method = "transfer_online"
+        }
       }
     },
     CheckIfDefaultExists(val) {
@@ -688,24 +705,9 @@ export default {
         spanElement.style.backgroundColor = '#6c757d';
       }
       this.selectedAddress = val;
-    },
-    reFetchShippingMethod() {
-      let shipping_methods = [];
-      for (
-        let index = 0;
-        index < this.$settings.shipping_methods.length;
-        index++
-      ) {
-        let obj = {
-          name: Object.keys(this.$settings.shipping_methods[index])[0],
-          value:
-            this.$settings.shipping_methods[index][
-              Object.keys(this.$settings.shipping_methods[index])[0]
-              ],
-        };
-        shipping_methods.push(obj);
+      if(this.selectedAddress){
+        this.is_shipping_method_disabled = false;
       }
-      this.shipping_methods = shipping_methods;
     },
 
     GetNewAddress(value){
@@ -732,7 +734,15 @@ export default {
           type: "error",
           text: this.$t('alerts.PleaseChoose')
         });
-      } else {
+      }
+      else if (this.dataForm.payment_method == ""){
+        this.$notify({
+          group: "errorMessage",
+          type: "error",
+          text: this.$t('alerts.PleaseSelectPaymentMethod')
+        });
+      }
+      else {
         if (this.termsAndConditions == true) {
           if(!this.is_uae && this.dataForm.shipping_method == "domestic" || !this.is_uae && this.dataForm.shipping_method =="pick_up"){
             this.$notify({
@@ -742,7 +752,6 @@ export default {
             })
           }
           else{
-
             this.loadingOrder = true;
             this.$nuxt.$loading.start()
             Api.post("/user/orders/create", this.dataForm)
@@ -825,10 +834,18 @@ export default {
     },
 
     removeCoupon() {
-      this.copuonCode = null;
       this.dataForm.coupon_code = null;
       this.refetchPrice();
     },
   },
 };
 </script>
+<style>
+.custom-disabled-class{
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+.paymentMethod-card{
+  margin-bottom: 1rem!important;
+}
+</style>
