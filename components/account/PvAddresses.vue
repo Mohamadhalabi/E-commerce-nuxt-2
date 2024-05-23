@@ -231,10 +231,6 @@ export default {
     ConfirmDelete,
     BaseButtonIcon1,
   },
-
-  mounted() {
-  },
-
   data: function () {
     return {
       close: false,
@@ -265,7 +261,7 @@ export default {
   methods: {
     getAddressClass(length) {
       if (length === 1) {
-        return 'col-xl-12';
+        return 'col-xl-4 col-lg-5 col-md-4 col-sm-6 col-12';
       } else if (length === 2) {
         return 'col-xl-4 col-lg-5 col-md-4 col-sm-6 col-12';
       } else if (length === 3 || length === 4) {
