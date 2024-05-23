@@ -65,10 +65,11 @@
           class=""
           style="border-radius: 6px;"
         >
-          <div v-if="address.default !== 1">
+          <div class="text-center">
           <b-card
-            :class="{'defoultCard': address.default && address !== selectedAddress, 'selectedCard': address === selectedAddress && clicked}"
+            :class="{'selectedCard': address === selectedAddress}"
             style="border-radius: 10px; margin-top: 3px"
+            class="address-card"
             @click="selectAddress(address)"
           >
             <!-- Add a radio button input inside the b-card -->
@@ -118,57 +119,63 @@
               </div>
             </template>
           </b-card>
+            <input
+              type="radio"
+              :name="'address-radio-' + index"
+              :checked="address === selectedAddress"
+              class="radio"
+            />
           </div>
-          <div v-else>
-            <b-card
-              :class="{'defoultCard': address.default && !clicked, 'selectedCard': address === selectedAddress && clicked}"
-              @click="selectAddress(address)"
-            >
-              <!-- Add a radio button input inside the b-card -->
-              <input
-                type="radio"
-                :name="'address-radio-' + index"
-                :checked="address === selectedAddress"
-                style="position: absolute; opacity: 0; pointer-events: none;"
-              />
-              <b-card-text class="addressInfoP">
-                <div class="mb-1">
-                    <span class="p-0">
-                      <b>{{ $t("checkout.addrress") }}: </b>
-                      {{`${address.address} ${address.city} ${address.country.country_name}` }}
-                    </span>
-                </div>
+<!--          <div v-else>-->
+<!--            <b-card-->
+<!--              :class="{'defoultCard': address.default && !clicked, 'selectedCard': address === selectedAddress && clicked}"-->
+<!--              @click="selectAddress(address)"-->
+<!--            >-->
+<!--              &lt;!&ndash; Add a radio button input inside the b-card &ndash;&gt;-->
+<!--              <input-->
+<!--                type="radio"-->
+<!--                :name="'address-radio-' + index"-->
+<!--                :checked="address === selectedAddress"-->
+<!--                style="position: absolute; opacity: 0; pointer-events: none;"-->
+<!--              />-->
+<!--              <b-card-text class="addressInfoP">-->
+<!--                <div class="mb-1">-->
+<!--                    <span class="p-0">-->
+<!--                      <b>{{ $t("checkout.addrress") }}: </b>-->
+<!--                      {{`${address.address} ${address.city} ${address.country.country_name}` }}-->
+<!--                    </span>-->
+<!--                </div>-->
 
-                <div class="">
-                  <span class="p-0"><b>{{ $t("checkout.phone") }}:</b> {{ `${address.phone}` }}</span>
-                </div>
-              </b-card-text>
+<!--                <div class="">-->
+<!--                  <span class="p-0"><b>{{ $t("checkout.phone") }}:</b> {{ `${address.phone}` }}</span>-->
+<!--                </div>-->
+<!--              </b-card-text>-->
 
-              <template #header>
-                <div style="text-align-last: justify">
-                  <a
-                    v-b-modal.modalConfirmDelete
-                    class="scalling"
-                    style="color: #f07905; cursor: pointer; display: inline-block"
-                    @click="openDeleteConfirm(address)"
-                  >
-                    <small
-                    ><i class="fa fa-trash-alt" />
-                      {{ $t("common.delete") }}</small
-                    >
-                  </a>
-                  <base-button-icon-1
-                    @click="openAddressFormModal(address),displayAddressInCheckout(), scrollToDiv()"
-                    :outline="true"
-                    class="px-2"
-                  >
-                    <i class="fa fa-edit" />
-                    {{ $t("common.edit") }}</base-button-icon-1
-                  >
-                </div>
-              </template>
-            </b-card>
-          </div>
+<!--              <template #header>-->
+<!--                <div style="text-align-last: justify">-->
+<!--                  <a-->
+<!--                    v-b-modal.modalConfirmDelete-->
+<!--                    class="scalling"-->
+<!--                    style="color: #f07905; cursor: pointer; display: inline-block"-->
+<!--                    @click="openDeleteConfirm(address)"-->
+<!--                  >-->
+<!--                    <small-->
+<!--                    ><i class="fa fa-trash-alt" />-->
+<!--                      {{ $t("common.delete") }}</small-->
+<!--                    >-->
+<!--                  </a>-->
+<!--                  <base-button-icon-1-->
+<!--                    @click="openAddressFormModal(address),displayAddressInCheckout(), scrollToDiv()"-->
+<!--                    :outline="true"-->
+<!--                    class="px-2"-->
+<!--                  >-->
+<!--                    <i class="fa fa-edit" />-->
+<!--                    {{ $t("common.edit") }}</base-button-icon-1-->
+<!--                  >-->
+<!--                </div>-->
+<!--              </template>-->
+<!--            </b-card>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -310,7 +317,7 @@ export default {
           scrollTopHandler();
 
           const hasDefaultOne = this.addresses.some(obj => obj.default === 1);
-          this.selectedAddress = this.addresses.find(address => address.default) || this.addresses[0];
+          this.selectedAddress = this.addresses.find(address => address.default);
           if(hasDefaultOne == true) {
             this.$emit("address",this.selectedAddress)
           }
@@ -357,5 +364,65 @@ export default {
   background-color: #892118!important;
   color: white!important;
   font-size: 14px!important;
+}
+</style>
+<style lang="scss">
+:root {
+  --card-line-height: 1.2em;
+  --card-padding: 1em;
+  --card-radius: 0.5em;
+  --color-green: #558309;
+  --color-gray: #e2ebf6;
+  --color-dark-gray: #c4d1e1;
+  --radio-border-width: 2px;
+  --radio-size: 1.5em;
+}
+
+.radio {
+  font-size: inherit;
+  margin: 0;
+  right: calc(var(--card-padding) + var(--radio-border-width));
+  top: calc(var(--card-padding) + var(--radio-border-width));
+}
+
+@supports(-webkit-appearance: none) or (-moz-appearance: none) {
+  .radio {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #fff;
+    border: var(--radio-border-width) solid var(--color-gray);
+    border-radius: 50%;
+    cursor: pointer;
+    height: var(--radio-size);
+    outline: none;
+    transition:
+      background 0.2s ease-out,
+      border-color 0.2s ease-out;
+    width: var(--radio-size);
+
+    &::after {
+      border: var(--radio-border-width) solid #fff;
+      border-top: 0;
+      border-left: 0;
+      content: '';
+      display: block;
+      height: 1rem;
+      margin-left: 4px;
+      margin-top: 7px;
+      transform:
+        rotate(45deg)
+        translate(-50%, -50%);
+      width: 0.5rem;
+    }
+
+    &:checked {
+      background: var(--color-green);
+      border-color: var(--color-green);
+    }
+  }
+}
+.address-card{
+  margin-bottom: 1rem!important;
+  min-height: 200px;
 }
 </style>

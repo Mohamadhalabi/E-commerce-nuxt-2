@@ -332,7 +332,8 @@ export default
       IBAN: 'IBAN',
       BIC: 'BIC',
       outOfStock:"*The selected quantity is currently not available, but we'll try to get it for you",
-
+      selectAddress:"Please select an address before choosing the shipping method",
+      selectAShipping:"Please select a shipping method before choosing the payment method",
     },
     account: {
       close: 'Close',
@@ -901,7 +902,7 @@ export default
       AddedToWishlist:"Has been added to your wishlist",
       alreadyInWishlist2:"The products already in wishlist",
       viewWishlist:"View Wishlist",
-      viewCompare:"View Compare"
-
+      viewCompare:"View Compare",
+      PleaseSelectPaymentMethod: "Please Select a payment method"
     }
   };
