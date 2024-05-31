@@ -30,13 +30,29 @@ export default {
     name: 'French',
     file: 'fr.js'
   },{
-      code: 'es',
+    code: 'es',
       flag: 'es',
       shortName: 'Es',
       dir: 'ltr',
       name: 'Spanish',
       file: 'es.js'
-    }
+    },
+    {
+    code: "ru",
+      flag:"ru",
+      ShortName: "Ru",
+      dir: "ltr",
+      name: "Russian",
+      file: "ru.js",
+    },
+    {
+      code: "de",
+      flag:"de",
+      ShortName: "De",
+      dir: "ltr",
+      name: "Deutsch",
+      file: "de.js",
+    },
   ],
 
   languages: [{
@@ -58,7 +74,17 @@ export default {
       code: 'es',
       flag: 'es',
       name: 'Spanish'
-    }
+    },
+    {
+      code: 'ru',
+      flag: 'ru',
+      name: 'Russian'
+    },
+    {
+      code: 'de',
+      flag: 'de',
+      name: 'Deutsch'
+    },
   ],
 
 }
