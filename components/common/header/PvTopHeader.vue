@@ -23,7 +23,14 @@
           </div>
         </div>
         <div class="header-dropdown m-0">
-          <a href="javascript:;">{{
+
+          <a
+            v-if="currentLocale.code ==='de'"
+            href="javascript:;">DE</a>
+          <a
+            v-if="currentLocale.code ==='ru'"
+            href="javascript:;">RU</a>
+          <a href="javascript:;" v-if="currentLocale.code !='de' && currentLocale.code !='ru'" >{{
               currentLocale.shortName
             }}</a>
           <div class="header-menu">
@@ -91,6 +98,12 @@ export default {
       return this.$settings.currencies.filter((i) => i !== this.currency);
     },
     currentLocale() {
+
+      console.log(this.$i18n.locales)
+
+      console.log(this.$i18n.locale)
+
+      console.log(this.$i18n.locales.find((i) => i.code === this.$i18n.locale))
       return this.$i18n.locales.find((i) => i.code === this.$i18n.locale);
     },
     availableLocales() {

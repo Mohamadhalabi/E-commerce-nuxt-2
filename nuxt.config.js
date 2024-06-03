@@ -109,9 +109,9 @@ export default {
       langDir: 'translations/',
       defaultLocale: 'en',
       vueI18n: {
-        fallbackLocale: ['en', 'fr','es'],
+        fallbackLocale: ['en', 'fr','es','de','ru'],
       },
-      skipSettingLocaleOnNavigate: true
+      skipSettingLocaleOnNavigate: false
     }]
   ],
 
