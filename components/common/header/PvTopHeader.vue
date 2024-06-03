@@ -98,12 +98,6 @@ export default {
       return this.$settings.currencies.filter((i) => i !== this.currency);
     },
     currentLocale() {
-
-      console.log(this.$i18n.locales)
-
-      console.log(this.$i18n.locale)
-
-      console.log(this.$i18n.locales.find((i) => i.code === this.$i18n.locale))
       return this.$i18n.locales.find((i) => i.code === this.$i18n.locale);
     },
     availableLocales() {
