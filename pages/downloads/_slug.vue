@@ -327,21 +327,7 @@
           v-for="(video, index) in videos"
           :key="index"
           class="downloadVedioWrapper col-md-4  position-relative mb-2 ">
-          <video-player :src="video.link" />
-
-          <div
-            style="
-              opacity: 0;
-              z-index: 2;
-              cursor: pointer;
-              top: 0px;
-              left: 0px;
-              right: 0px;
-            "
-            @click="openVedioModal(video)"
-            class="w-100 h-100 position-absolute border"
-          >
-          </div>
+          <iframe class="d-flex" style="width: 100%;min-height: 300px" frameBorder="0" :src="getEmbedUrl(video.link)" />
         </div>
       </div>
     </div>
@@ -355,9 +341,6 @@ import { baseSlider3 } from "~/utils/data/carousel";
 import PvBtnShare from "~/components/common/PvBtnShare.vue";
 import VideoPlayer from 'nuxt-video-player'
 import {mapGetters} from "vuex";
-
-require('nuxt-video-player/src/assets/css/main.css')
-
 export default {
   components: {
     VideoPlayer,
@@ -375,6 +358,7 @@ export default {
   },
   data: function () {
     return {
+      ShowVideoModal: false,
       meta_image: "",
       softwareName: "",
       softwareLink: "",
@@ -513,15 +497,14 @@ export default {
     ...mapGetters("language", ["getLang"]),
   },
   methods: {
-    openVedioModal: function (story) {
-      this.$modal.show(
-        () => import("~/components/home/PvStoryModal"),
-        { story },
-        {
-          adaptive: true,
-          class: "video-modal-container",
-        }
-      );
+    getEmbedUrl(link) {
+      const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/;
+      const match = link.match(regex);
+      if (match && match[1]) {
+        return `https://www.youtube.com/embed/${match[1]}`;
+      } else {
+        return ""; // or handle invalid URLs accordingly
+      }
     },
     getLink(route) {
       if (this.getLang === 'en') {

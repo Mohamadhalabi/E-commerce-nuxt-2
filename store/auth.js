@@ -13,6 +13,7 @@ export const getters = {
   StateUser: (state) => state.user,
   getToken: (state) => state.token,
   getEmail: (state) => state.email,
+  preferredLanguage: (state) => state.user ? state.user.preferred_language : 'en',
 };
 
 export const actions = {

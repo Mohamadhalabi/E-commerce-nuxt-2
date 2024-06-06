@@ -273,13 +273,11 @@ import PvTopHeader from "~/components/common/header/PvTopHeader.vue";
 export default {
   components: {
     PvTopHeader,
-    // PvTopNotice,
     PvLoggedIn,
     PvAuth,
     PvMainMenu,
     PvCartMenu,
     PvHeaderSearch,
-    PvSocialIcons,
   },
   data() {
     return {
@@ -289,7 +287,6 @@ export default {
       modalOpen: false,
       showModal: false,
       inputValue: "",
-      defCurrency: "USD",
       numbers: [1, 2, 3],
       isSearchVisible: false,
       searchKey:'',
