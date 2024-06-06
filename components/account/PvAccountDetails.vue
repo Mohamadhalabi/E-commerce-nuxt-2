@@ -25,6 +25,23 @@
               />
             </div>
 
+            <div class="col-lg-12 col-md-12 mb-3 p-0">
+              <label>{{ $t("auth.Language")}}</label>
+              <AutoComplate
+                :placeholder="profile.preferred_language"
+                :model="profile.preferred_language"
+                :allow-empty="false"
+                :options="[
+                  { name: 'English', value: 'en'},
+                  { name: 'French', value: 'fr' },
+                  { name: 'Spanish', value: 'es' },
+                  { name: 'German', value: 'de' },
+                  { name: 'Russian', value: 'ru' },
+                  ]"
+                @setValue="profile.preferred_language = $event.value"
+              />
+            </div>
+
             <!-- Company -->
             <div class="form-group mb-3">
               <label for="acc-company-name">
@@ -211,16 +228,13 @@
 </template>
 
 <script>
-// import VuePhoneNumberInput, {async} from "vue-phone-number-input";
-// import "vue-phone-number-input/dist/vue-phone-number-input.css";
-// import parsePhoneNumber from "libphonenumber-js";
-
 import {scrollTopHandler} from "~/utils";
 import Api from "~/api";
 import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import {mapActions} from "vuex";
-import {pick} from "lodash";
-
+import AutoComplate from "~/components/common/AutoComplate.vue";
+import PvError from "~/components/common/ErrorMessage.vue";
+import api from "~/api";
 export default {
   data: function () {
     return {
@@ -233,13 +247,14 @@ export default {
         website_url: "",
         type_of_business: "",
         avataFile: "",
+        preferred_language: "",
       },
       loadingSave: false,
       avatar: null,
     };
   },
   components: {
-    // VuePhoneNumberInput,
+    AutoComplate,
     BaseButtonIcon1,
   },
 
@@ -255,6 +270,7 @@ export default {
 
   methods: {
     ...mapActions('auth', ['setNewData']),
+    ...mapActions('language',['updateLanguageCode']),
 
     // typePhoneNum(phoneObj) {
     //   this.phoneFormated = phoneObj.formattedNumber;
@@ -284,9 +300,26 @@ export default {
       formData.append("company_name", this.profile.company_name);
       formData.append("website_url", this.profile.website_url);
       formData.append("avatar", this.avatar);
+      formData.append("language", this.profile.preferred_language);
 
       await Api.post("/user/profile", formData)
         .then((response) => {
+          let preffered_language = this.profile.preferred_language;
+          api.defaults.headers["Accept-Language"] = preffered_language;
+          this.$i18n.locale = preffered_language;
+          this.$cookies.set('locale',preffered_language,{
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7
+          });
+          this.updateLanguageCode(preffered_language);
+
+          if(preffered_language ==='en'){
+            this.$router.push(`/account?tab=account-details`);
+          }
+          else{
+            this.$router.push(`/${preffered_language}/account?tab=account-details`);
+          }
+
           scrollTopHandler();
           this.$notify({
             group: "custom-notify",
@@ -320,6 +353,8 @@ export default {
           this.profile.email = user.email;
           this.profile.phone = user.phone;
           this.profile.avatar = user.avatar;
+          this.profile.preferred_language = user.preffered_language;
+
           this.setNewData()
           if(user.company_name !== "null") {
             this.profile.company_name = user.company_name;

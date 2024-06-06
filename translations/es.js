@@ -81,7 +81,9 @@ export default
     callNow: 'LLÁMENOS AHORA',
     logged: 'Conectado como',
     thanks_for_registering: 'Gracias por registrarte',
-    thanks_for_registering_sub_title: 'Ahora, por favor revise su correo para verificar el correo electrónico, o puede ir a otras páginas.'
+    thanks_for_registering_sub_title: 'Ahora, por favor revise su correo para verificar el correo electrónico, o puede ir a otras páginas.',
+    companyName:"nombre de empresa",
+    Language:"Idioma",
   },
   dashboard: {
     dashboard: 'Panel de control',

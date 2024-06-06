@@ -81,7 +81,9 @@ export default
       callNow: 'CALL US NOW',
       logged: 'Logged in as',
       thanks_for_registering: 'thanks for registering',
-      thanks_for_registering_sub_title: 'Now please check your mail to verify the email, or you can go to other pages.'
+      thanks_for_registering_sub_title: 'Now please check your mail to verify the email, or you can go to other pages.',
+      companyName:"Company Name",
+      Language:"Language",
     },
     dashboard: {
       dashboard: 'Dashboard',

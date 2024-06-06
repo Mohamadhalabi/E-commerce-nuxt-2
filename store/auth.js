@@ -1,5 +1,6 @@
 import Api from '~/api';
 import { pick, includes } from 'lodash';
+import api from "~/api";
 
 export const state = () => ({
   user: null,
@@ -28,13 +29,23 @@ export const actions = {
   LogIn: async function ({ commit, dispatch }, user) {
     user = pick(user, ['email', 'password']);
     user = await Api.post('user/auth/login', user).then((res) => {
-      let u = pick(res.data.user, ['name', 'email', 'avatar']);
+      let u = pick(res.data.user, ['name', 'email', 'avatar','preferred_language']);
       let token = res.data.authorisation.token;
       commit('SET_USER', u);
       commit('SET_TOKEN', token);
       dispatch('compare/fetchList', null, { root: true });
       dispatch('shop/getCartList', null, { root: true });
       dispatch('fav/fetchWishlist', null, { root: true });
+
+      let preffered_language = res.data.user.preffered_language;
+
+      api.defaults.headers["Accept-Language"] = preffered_language;
+      this.$i18n.locale = preffered_language;
+      this.$cookies.set('locale',preffered_language,{
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7
+      });
+      dispatch('language/updateLanguageCode', preffered_language, { root: true });
 
       this._vm.$notify({
         group: 'custom-notify',
@@ -44,7 +55,12 @@ export const actions = {
 
       let currentPath = this.$router.currentRoute.fullPath;
       if (includes(currentPath, '/auth')) {
-        this.$router.push('/');
+        if(preffered_language =="en"){
+          this.$router.push(`/`);
+        }
+        else{
+          this.$router.push(`/${preffered_language}`);
+        }
       } else {
         this.$router.push({ path: currentPath, query: { logged_in: true } });
       }
