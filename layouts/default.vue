@@ -35,7 +35,7 @@ import {
   stickyHeaderHandler
 } from "~/utils";
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import localstorage from "~/plugins/localstorage";
+import Api from "~/api";
 export default {
   components: {
     PvHeader:() =>import("~/components/common/header/PvHeader.vue"),
