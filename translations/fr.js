@@ -81,7 +81,10 @@ export default
     callNow: "APPELEZ-NOUS MAINTENANT",
     logged: "Connecté en tant que",
     thanks_for_registering: "Merci de vous être inscrit",
-    thanks_for_registering_sub_title: "Veuillez maintenant vérifier votre e-mail pour confirmer l'adresse e-mail, ou vous pouvez aller sur d'autres pages."
+    thanks_for_registering_sub_title: "Veuillez maintenant vérifier votre e-mail pour confirmer l'adresse e-mail, ou vous pouvez aller sur d'autres pages.",
+    companyName:"Nom de l'entreprise",
+    Language:"Langue",
+
   },
   dashboard: {
     dashboard: "Tableau de bord",

@@ -81,7 +81,10 @@ export default
     callNow: 'RUFEN SIE UNS JETZT AN',
     logged: 'Angemeldet als',
     thanks_for_registering: 'Vielen Dank für die Registrierung',
-    thanks_for_registering_sub_title: 'Bitte überprüfen Sie nun Ihre E-Mail, um die E-Mail zu bestätigen, oder Sie können zu anderen Seiten gehen.'
+    thanks_for_registering_sub_title: 'Bitte überprüfen Sie nun Ihre E-Mail, um die E-Mail zu bestätigen, oder Sie können zu anderen Seiten gehen.',
+    companyName:"Name der Firma",
+    Language:"Sprache",
+
   },
   dashboard: {
     dashboard: 'Dashboard',

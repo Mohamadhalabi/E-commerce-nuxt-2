@@ -220,7 +220,7 @@
             </div>
 
             <div class="col-lg-6 col-md-6 pl-3">
-              <label> Company Name </label>
+              <label> {{ $t("auth.companyName") }} </label>
               <input
                 id="register-company_name"
                 v-model="form.company_name"
@@ -242,6 +242,23 @@
                 :class="{ 'mb-2': insideModal }"
               />
               <pv-error :error-msg="errorMsg.website_url" />
+            </div>
+            <div class="col-lg-12 col-md-12 pl-3 mb-3">
+              <label>{{ $t("auth.Language")}}</label>
+              <AutoComplate
+                placeholder="Preferred Language"
+                :model="form.PreferredLanguage"
+                :allow-empty="false"
+                :options="[
+                  { name: 'English', value: 'en'},
+                  { name: 'French', value: 'fr' },
+                  { name: 'Spanish', value: 'es' },
+                  { name: 'German', value: 'de' },
+                  { name: 'Russian', value: 'ru' },
+                  ]"
+                @setValue="form.PreferredLanguage = $event.value"
+              />
+              <pv-error :error-msg="errorMsg.company_name" />
             </div>
           </div>
 
@@ -315,6 +332,7 @@ export default {
         postal_code: "",
         company_name: "",
         website_url: "",
+        PreferredLanguage:"",
       },
       alertMessage: "",
       alertClass: "",
@@ -328,6 +346,11 @@ export default {
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
+    availableLocales() {
+      const currentLocale = this.$i18n.locale;
+      const locales = Object.entries(this.$settings.languages);
+      return locales.filter(([locale,]) => locale !== currentLocale);
+    }
   },
   mounted() {
   },
@@ -353,6 +376,7 @@ export default {
       formData.append("company_name", this.form.company_name);
       formData.append("website_url", this.form.website_url);
       formData.append("avatar", this.avatar);
+      formData.append("language", this.form.PreferredLanguage);
 
       Api.post("/user/auth/register", formData)
         .then((response) => {
