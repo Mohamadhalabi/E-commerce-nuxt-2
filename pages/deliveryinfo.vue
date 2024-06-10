@@ -138,7 +138,7 @@
                   {{ $t('deliveryinfo.checkSpam') }}
                 </p>
                 <p class="">
-                  <a href="/">tlkeys.com</a> 
+                  <a href="/">tlkeys.com</a>
                   {{ $t('deliveryinfo.willNot') }}
                 </p>
                 <p>
@@ -226,10 +226,10 @@ export default {
         //   name: "twitter:description",
         //   content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
         // },
-        {
-          rel: "shortcut icon",
-          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
-        },
+        // {
+        //   rel: "shortcut icon",
+        //   href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        // },
       ],
       script: [
         { type: 'application/ld+json', json: {

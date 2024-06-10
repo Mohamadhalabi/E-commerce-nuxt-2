@@ -7,11 +7,24 @@ const currency = 'USD';
 export default {
   // target: "static",
   head: {
-    link: [{ rel: 'icon', type: 'image/x-icon',href: "https://dev-srv.tlkeys.com/storage/images/seo/180x180.png"}],
+    link: [{rel: 'icon', type: 'image/x-icon', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png'},
+      {rel: 'shortcut icon', sizes: '16x16 24x24 32x32 48x48', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png'},
+      {rel: 'apple-touch-icon', sizes: '180x180', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png'},
+      {rel: 'apple-touch-icon', sizes: '152x152', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-152x152-precomposed.png'},
+      {rel: 'apple-touch-icon', sizes: '144x144', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-144x144-precomposed.png'},
+      {rel: 'apple-touch-icon', sizes: '120x120', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-120x120-precomposed.png'},
+      {rel: 'apple-touch-icon', sizes: '114x114', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-114x114-precomposed.png'},
+      {rel: 'apple-touch-icon', sizes: '76x76', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-76x76-precomposed.png'},
+      {rel: 'apple-touch-icon', sizes: '72x72', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-72x72-precomposed.png'},
+      {rel: 'icon', sizes: '192x192', href: 'https://www.tlkeys.com/images/icons/touch-icon-192x192.png'},
+      {rel: 'icon', sizes: '128x128', href: 'https://www.tlkeys.com/images/icons/touch-icon-128x128.png'},
+      {rel: 'icon', type: 'image/png', sizes: '32x32', href: 'https://www.tlkeys.com/images/icons/technolock-icon-32x32.png'}
+    ],
     meta: [
       {
         "http-equiv": "Content-Type", content: 'text/html; charset=utf-8'
       },
+      { name: 'msapplication-TileImage', content: 'https://www.tlkeys.com/images/icons/apple-touch-icon-144x144-precomposed.png'},
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         "http-equiv": "X-UA-Compatible",
@@ -34,7 +47,7 @@ export default {
       },
       {
         name:'apple-mobile-web-app-title', content:'Techno Lock Keys'
-      },
+      }
     ],
     script: [
       {
