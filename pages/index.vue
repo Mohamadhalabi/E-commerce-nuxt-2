@@ -4,10 +4,8 @@
       <pv-intro-section/>
       <home-page-search />
     <pv-slider-Banner class="desktop-only"  />
-      <div v-animate
-           :data-animation-delay="animationDelay"
-           data-animation-name="fadeInUpShorter"
-           class="container-fluid">
+      <div
+        class="container-fluid">
         <div class="container">
           <pv-latest-products
             :isIndexPage ="true"
@@ -16,9 +14,7 @@
           />
         </div>
       </div>
-      <div  v-animate
-            :data-animation-delay="animationDelay"
-            data-animation-name="fadeInUpShorter" class="container-fluid">
+      <div
         <div class="container">
           <pv-best-selling
             :isIndexPage ="true"
@@ -28,9 +24,6 @@
         </div>
       </div>
       <div
-        v-animate
-        :data-animation-delay="animationDelay"
-        data-animation-name="fadeInUpShorter"
         class="container-fluid">
         <div class="container">
           <pv-top-selling
@@ -40,17 +33,13 @@
           />
         </div>
       </div>
-      <div v-animate
-           :data-animation-delay="animationDelay"
+      <div
            data-animation-name="fadeInUpShorter"  class="container-fluid pt-4">
         <div class="container large-screen-only">
           <pv-line-banner class="mb-4" v-if="!isMobile" />
         </div>
       </div>
-      <div v-animate
-           :data-animation-delay="animationDelay"
-           data-animation-name="fadeInUpShorter" class="container-fluid"
-      >
+      <div>
         <div class="container">
           <div class="product-widgets-container row pb-2">
             <pv-on-sale-products
@@ -76,10 +65,7 @@
           </div>
         </div>
       </div>
-    <pv-manufacturers-section v-animate
-                              :data-animation-delay="animationDelay"
-                              data-animation-name="fadeInUpShorter" />
-
+    <pv-manufacturers-section/>
     <div style="background-color: #f07905">
       <div class="container">
         <div
@@ -117,12 +103,12 @@
   </main>
 </template>
 <script>
-import { mapGetters,mapActions } from "vuex";
-import api from "~/api";
+import {mapGetters} from "vuex";
+import api from '~/api';
 export default {
   head() {
     return {
-      title: "Techno Lock Keys Trading | Automotive Locksmith Services",
+      title: 'Techno Lock Keys Trading | Automotive Locksmith Services',
       link: [
         {
           rel: 'canonical',
@@ -131,7 +117,7 @@ export default {
       ],
       meta: [
         {
-          "http-equiv": "content-language",
+          "http-equiv": 'content-language',
           content: this.$i18n.locale,
         },
         {

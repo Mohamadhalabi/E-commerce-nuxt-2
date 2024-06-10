@@ -1,8 +1,5 @@
 <template >
   <div
-    v-animate
-    :data-animation-delay="animationDelay"
-    data-animation-name="fadeInUpShorter"
     style="max-width: 400px;"
     class="mb-2 product-default bg-white inner-quickview inner-icon pt-2 position-relative card-main-wrapper border shadow-sm rounded-10"
   >

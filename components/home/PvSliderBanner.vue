@@ -9,7 +9,6 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[0]"
-              v-animate
               background-image-url='"../images/home/backgrounds/background-1.webp"'
             ></pv-banner-card>
             <pv-banner-card
@@ -17,7 +16,6 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[5]"
-              v-animate
               background-image-url='"../images/home/backgrounds/background-2.webp"'
               :fourth_item="true"
             ></pv-banner-card>
@@ -26,7 +24,6 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[3]"
-              v-animate
               background-image-url='"../images/home/backgrounds/background-3.webp"'
               :fourth_item="true"
             >
@@ -68,7 +65,6 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[1]"
-              v-animate
               background-image-url='"../images/home/backgrounds/background-1.webp"'
             ></pv-banner-card>
             <pv-banner-card
@@ -76,7 +72,6 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[4]"
-              v-animate
               background-image-url='"../images/home/backgrounds/background-2.webp"'
               :fourth_item="true"
             ></pv-banner-card>
@@ -85,7 +80,6 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[2]"
-              v-animate
               background-image-url='"../images/home/backgrounds/background-3.webp"'
               :fourth_item="true"
             >

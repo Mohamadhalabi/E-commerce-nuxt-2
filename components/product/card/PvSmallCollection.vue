@@ -1,8 +1,5 @@
 <template>
   <div
-    v-animate
-    :data-animation-delay="animationDelay"
-    data-animation-name="fadeInUpShorter"
     class="col-xl-3 col-lg-6 col-sm-6  pb-lg-0 col-equal d-flex align-items-center justify-content-between flex-column"
   >
     <h3 class="section-sub-title px-2 w-100">

@@ -3,11 +3,7 @@
     <main class="main">
       <div class="container account-container custom-account-container">
         <div
-          class="row"
-          v-animate
-          :data-animation-delay="animationDelay"
-          data-animation-name="fadeInUpShorter"
-        >
+          class="row">
           <div
             class="sidebar widget widget-dashboard col-md-3 mb-5 col-12 order-0"
             sticky-container
