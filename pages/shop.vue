@@ -163,10 +163,10 @@ export default {
           name: "twitter:description",
           content: "With Techno lock keys, you can shop for all your locksmith supplies in one place and get the greatest rates and quality. Shop NOW!"
         },
-        {
-          rel: "shortcut icon",
-          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
-        },
+        // {
+        //   rel: "shortcut icon",
+        //   href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        // },
       ],
       script: [
         {

@@ -352,10 +352,10 @@ export default {
           name: "twitter:description",
           content: "Shopping Cart | Techno Lock Keys Trading"
         },
-        {
-          rel: "shortcut icon",
-          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
-        },
+        // {
+        //   rel: "shortcut icon",
+        //   href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        // },
       ],
     }
   },

@@ -128,15 +128,15 @@ export default {
           sizes: "16x16",
           href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
         },
-        {
-          rel: "shortcut icon",
-          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
-        },
-        {
-          rel: "apple-touch-icon",
-          sizes: "180x180",
-          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
-        },
+        // {
+        //   rel: "shortcut icon",
+        //   href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        // },
+        // {
+        //   rel: "apple-touch-icon",
+        //   sizes: "180x180",
+        //   href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        // },
         {
           "http-equiv": "content-language",
           content: this.$i18n.locale,
