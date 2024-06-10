@@ -33,8 +33,7 @@
           />
         </div>
       </div>
-      <div
-           data-animation-name="fadeInUpShorter"  class="container-fluid pt-4">
+      <div class="container-fluid pt-4">
         <div class="container large-screen-only">
           <pv-line-banner class="mb-4" v-if="!isMobile" />
         </div>
