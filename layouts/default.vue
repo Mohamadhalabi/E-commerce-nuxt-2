@@ -1,18 +1,11 @@
 <template>
   <div :dir="$dir()" :class="$i18n.locale === 'ar' ? 'ltrClass' : ''" @click="hideMobileSearch">
     <noscript v-html="iFrameCode" />
-    <vue-progress-bar />
-    <div class="page-wrapper position-relative">
-      <pv-header @isClicked="isClicked" />
-      <nuxt keep-alive />
-      <pv-footer/>
-      <div class="wishlist-popup">
-        <div class="wishlist-popup-msg">Product added!</div>
-      </div>
-    </div>
+    <pv-header @isClicked="isClicked" />
+    <nuxt keep-alive />
+    <pv-footer/>
     <pv-app-popup class="minipopup-area minipopup-top-area" />
-    <pv-product-popup
-      class="minipopup-area" />
+    <pv-product-popup class="minipopup-area" />
     <pv-error-message class="minipopup-area" />
     <pv-compare-popup class="minipopup-area" />
     <pv-wishlist-popup class="minipopup-area" />
