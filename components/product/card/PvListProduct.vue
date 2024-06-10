@@ -1,9 +1,6 @@
 <template>
   <div class="container">
   <div
-    v-animate
-    :data-animation-delay="this.animationDelay"
-    data-animation-name="fadeInUpShorter"
     class="product-default d-flex flex-column flex-sm-row
      align-items-center bg-white inner-quickview inner-icon pt-2
       position-relative

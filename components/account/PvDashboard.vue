@@ -1,7 +1,5 @@
 <template>
-  <div v-animate
-          :data-animation-delay="animationDelay"
-          data-animation-name="fadeInUpShorter" class="dashboard-content">
+  <div class="dashboard-content">
     <h3 class="account-sub-title  d-md-block mt-0 pt-1 ml-1">
       <i class="orange-1 sicon-drawer align-middle mx-2 pr-1" />
       {{ $t("account.dashboard") }}

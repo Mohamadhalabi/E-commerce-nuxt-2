@@ -34,9 +34,6 @@
       <pv-free-shipping-amount></pv-free-shipping-amount>
     </client-only>
     <div
-      v-animate
-      :data-animation-delay="animationDelay"
-      data-animation-name="fadeInUpShorter"
       v-if="cartList.length > 0"
       key="noEmpty"
       class="row account-container">

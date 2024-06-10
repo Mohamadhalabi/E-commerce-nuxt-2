@@ -13,22 +13,9 @@
           </li>
         </ol>
       </nav>
-      <div
-        v-animate
-        :data-animation-delay="animationDelay"
-        data-animation-name="fadeInUpShorter"
-        class="row"
-      >
-        <div
-          v-animate
-          :data-animation-delay="animationDelay"
-          data-animation-name="fadeInUpShorter"
-          class="col-lg-10"
-        >
+      <div class="row">
+        <div class="col-lg-10">
             <pv-product-list
-              v-animate
-              :data-animation-delay="animationDelay"
-              data-animation-name="fadeInUpShorter"
               @directionby="directionBy"
               @sortby="sortBy"
               @filters="displayFilters"

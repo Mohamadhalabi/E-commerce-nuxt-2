@@ -34,12 +34,7 @@
     <div v-if="download" class="container">
       <div class="row ">
         <!-- Begin:Left Side img -->
-        <div
-          v-animate
-          data-animation-delay="400"
-          data-animation-name="fadeInUpShorter"
-          class="col-lg-3 col-9 col-sm-6 col-md-4 ml-auto mr-auto "
-        >
+        <div class="col-lg-3 col-9 col-sm-6 col-md-4 ml-auto mr-auto">
           <figure class="post-media">
             <nuxt-link :to="getLink(`/downloads/${download.slug}`)">
               <nuxt-img
@@ -54,12 +49,7 @@
             </nuxt-link>
           </figure>
         </div>
-        <div
-          v-animate
-          data-animation-delay="600"
-          data-animation-name="fadeInUpShorter"
-          class="col-lg-9 col-12"
-        >
+        <div class="col-lg-9 col-12">
           <div class="post-body">
             <!-- Begin: Software -->
             <div

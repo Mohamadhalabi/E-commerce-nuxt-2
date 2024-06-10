@@ -5,8 +5,6 @@
     <Carousel
       class="rounded-5"
       :options="baseSlider6"
-      v-animate
-      data-animation-name="fadeInUpShorter"
     >
       <div
         v-for="(slide, index) in slides"

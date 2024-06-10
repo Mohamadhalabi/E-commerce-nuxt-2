@@ -25,9 +25,6 @@
         >
           <pv-card
             :product="product"
-            v-animate
-            :data-animation-delay="200 * index"
-            data-animation-name="fadeInUpShorter"
           />
         </div>
       </div>
