@@ -25,34 +25,41 @@
                   :open_graph="item['open_graph']"
                   :scal="item['scal']"
                   :description="item['description']"
-                />
+                >
               </figure>
             </div>
 
             <div
               class="col-sm-9 col-7 py-2 px-4 arrow-ltr rounded-5"
               style="background-color: rgb(225, 225, 225)"
-              :class="{ 'arrow-rtl': getIsAr }"
+              :class="{'arrow-rtl': getIsAr}"
             >
-              <h5 class="m-0 z-100">{{ item.user_name }}</h5>
-              <p class="m-0 z-100">{{ item.comment }}.</p>
+              <h5 class="m-0 z-100">
+                {{item.user_name}}
+              </h5>
+              <p class="m-0 z-100">
+                {{item.comment}}.
+              </p>
               <div class="ratings-container z-100 m-0">
                 <div class="product-ratings z-100">
                   <span
                     class="ratings"
-                    :style="{ width: `${item.rating * 20}%` }"
+                    :style="{width: `${item.rating * 20}%`}"
                   />
                 </div>
               </div>
 
-              <p style="z-index: 100" class="m-0 mt-1">
-                {{ $t("common.createdAt") }}: {{ item.created_at }}
+              <p
+                style="z-index: 100"
+                class="m-0 mt-1"
+              >
+                {{$t("common.createdAt")}}: {{item.created_at}}
               </p>
 
               <div
                 v-for="(item2, index2) in item.replies"
-                class="row"
                 :key="index2"
+                class="row"
               >
                 <div class="col-md-1 col-sm-2 col-4 border p-0">
                   <img
@@ -62,13 +69,16 @@
                     :src="$settings.website.default_images.s['url']"
                     alt=""
                     srcset=""
-                  />
+                  >
                 </div>
 
-                <div style="line-height: 1.3;" class="col-md-11 col-sm-10 col-8 border">
-                  {{ item2.comment }}
-                  <br />
-                  <span class="text-warning"> {{ item2.created_at }}</span>
+                <div
+                  style="line-height: 1.3;"
+                  class="col-md-11 col-sm-10 col-8 border"
+                >
+                  {{item2.comment}}
+                  <br>
+                  <span class="text-warning"> {{item2.created_at}}</span>
                 </div>
               </div>
             </div>
@@ -165,20 +175,23 @@
   </div>
  -->
     <div class="add-product-review">
-      <h3 v-if="ratings.length == 0" class="review-title">
-        {{ $t("review.firstReview") }}: “{{ product.title }}”
+      <h3
+        v-if="ratings.length == 0"
+        class="review-title"
+      >
+        {{$t("review.firstReview")}}: “{{product.title}}”
       </h3>
 
       <div class="form-group position-relative">
         <div class="d-flex align-items-center justify-content-between">
           <label>
-            {{ $t("review.your_review") }}
+            {{$t("review.your_review")}}
             <span class="required">*</span>
           </label>
 
           <div class="rating-form">
             <label for="rating">
-              {{ $t("review.YourRating") }}
+              {{$t("review.YourRating")}}
               <span class="required">*</span>
             </label>
             <span class="rating-stars">
@@ -188,8 +201,7 @@
                 href="javascript:;"
                 :class="`star-${number}`"
                 @click="setRating($event, number)"
-              >
-              </a>
+              />
             </span>
 
             <select
@@ -200,81 +212,82 @@
               style="display: none"
             >
               <option value>
-                {{ $t("review.rate") }}
+                {{$t("review.rate")}}
               </option>
               <option value="5">
-                {{ $t("review.perfect") }}
+                {{$t("review.perfect")}}
               </option>
               <option value="4">
-                {{ $t("review.good") }}
+                {{$t("review.good")}}
               </option>
               <option value="3">
-                {{ $t("review.average") }}
+                {{$t("review.average")}}
               </option>
               <option value="2">
-                {{ $t("review.NotBad") }}
+                {{$t("review.NotBad")}}
               </option>
-              <option value="1">Very poor</option>
+              <option value="1">
+                Very poor
+              </option>
             </select>
           </div>
         </div>
 
-        <base-button-icon-1
-          style="bottom: 0px; right: 0px"
-          @click="sendRating"
-          :outline="true"
-          class="position-absolute m-4 p-3 rounded-circle"
-        >
-          <span
-            ><svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="30"
-              viewBox="0 96 960 960"
-              width="30"
-              fill="#ff6800"
-            >
-              <path
-                d="M120 896V256l760 320-760 320Zm60-93 544-227-544-230v168l242 62-242 60v167Zm0 0V346v457Z"
-              />
-            </svg>
-          </span>
-        </base-button-icon-1>
 
         <b-form-textarea
           id="textarea-auto-height"
+          v-model="dataForm.comment"
           no-resize
           class="m-0"
-          placeholder="Write your review heare...."
-          v-model="dataForm.comment"
+          :placeholder="$t('review.writeYourReview')"
+        ></b-form-textarea>
+
+        <base-button-icon-1
+          style="position: relative!important;"
+          :outline="true"
+          class="position-absolute m-4 p-3 rounded-circle"
+          @click="sendRating"
         >
-        </b-form-textarea>
+          <span><svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="30"
+            viewBox="0 96 960 960"
+            width="30"
+            fill="#ff6800"
+          >
+            <path
+              d="M120 896V256l760 320-760 320Zm60-93 544-227-544-230v168l242 62-242 60v167Zm0 0V346v457Z"
+            />
+          </svg>
+          </span>
+        </base-button-icon-1>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
-import Api from "~/api";
+import {mapGetters} from 'vuex';
+import BaseButtonIcon1 from '~/components/common/BaseButtonIcon1.vue';
+import Api from '~/api';
 
 export default {
   components: {
-    BaseButtonIcon1,
+    BaseButtonIcon1
   },
 
   props: {
-    product: Object,
+    product: Object
   },
 
   data() {
     return {
       ratings: [],
       dataForm: {
-        rating: "",
-        comment: "",
-        product_slug: this.product.slug,
-      },
+        rating: '',
+        comment: '',
+        product_slug: this.product.slug
+      }
     };
   },
 
@@ -283,7 +296,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("rtlStore", ["getIsAr"]),
+    ...mapGetters('rtlStore', ['getIsAr'])
   },
 
   methods: {
@@ -294,49 +307,49 @@ export default {
         })
         .catch((error) => {
           this.$notify({
-            group: "errorMessage",
-            type: "success",
-            text: error.response.data.message,
+            group: 'errorMessage',
+            type: 'success',
+            text: error.response.data.message
           });
         });
     },
-    setRating: function (e, number) {
+    setRating: function(e, number) {
       this.dataForm.rating = number;
-      if (e.currentTarget.parentNode.querySelector(".active"))
+      if(e.currentTarget.parentNode.querySelector('.active'))
         e.currentTarget.parentNode
-          .querySelector(".active")
-          .classList.remove("active");
-      e.currentTarget.classList.add("active");
+          .querySelector('.active')
+          .classList.remove('active');
+      e.currentTarget.classList.add('active');
     },
     sendRating() {
-      /* Checling if the reating & comment is empty or n not */
-      if (this.dataForm.rating == "" || this.dataForm.comment == "") {
+      /* checling if the reating & comment is empty or n not */
+      if(this.dataForm.rating == '' || this.dataForm.comment == '') {
         this.$notify({
-          group: "custom-notify",
-          type: "error",
-          text: "reating and comment is required",
+          group: 'custom-notify',
+          type: 'error',
+          text: 'reating and comment is required'
         });
       } else {
-        Api.post("/products/review/create", this.dataForm)
+        Api.post('/products/review/create', this.dataForm)
           .then((response) => {
             (this.dataForm.comment = null),
-              (this.dataForm.rating = null),
-              this.$notify({
-                group: "custom-notify",
-                type: "success",
-                text: response.data.message,
-              });
+            (this.dataForm.rating = null),
+            this.$notify({
+              group: 'custom-notify',
+              type: 'success',
+              text: response.data.message
+            });
           })
           .catch((error) => {
             this.$notify({
-              group: "errorMessage",
-              type: "error",
-              text: error.response.data.message,
+              group: 'errorMessage',
+              type: 'error',
+              text: error.response.data.message
             });
           });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -73,10 +73,11 @@
                 <p class="off-animatin mb-0 call-us-now text-center font-weight-bold">
                   {{ $t("auth.callNow") }}
                 </p>
-                <span class=" contact-phone ls-n-10 mb-0">
-                  <a class="price-color font-weight-bold text-decoration-none"
-                     :href="`tel:${$settings.contact.phone_primary}`">
-                    {{ $settings.contact.phone_primary }}
+                <span class="contact-phone ls-n-10 mb-0 text-center">
+                  <a
+                    class="price-color font-weight-bold text-decoration-none"
+                    :href="`tel:${$t('auth.PhoneNumber')}`">
+                    {{$t('auth.PhoneNumber') }}
                   </a>
                 </span>
               </div>

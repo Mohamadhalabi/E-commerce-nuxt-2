@@ -255,7 +255,6 @@
         <pv-contactus
           :product="product"
           :type-contact="'product'"
-          :model-id="product.sku"
         />
       </div>
     </div>

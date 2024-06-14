@@ -84,7 +84,8 @@ export default
     thanks_for_registering_sub_title: 'Теперь, пожалуйста, проверьте свою почту, чтобы подтвердить электронную почту, или вы можете перейти на другие страницы.',
     companyName:"Название компании",
     Language:"Язык",
-
+    PhoneNumber: "+971543205641",
+    whatsappMessage:"Здравствуйте, я ищу помощь."
   },
   dashboard: {
     dashboard: 'Панель управления',
@@ -604,6 +605,7 @@ export default
     NotBad: 'Не так уж плохо',
     firstToReview: 'Будьте первым, кто оставит отзыв об этом продукте',
     firstReview: 'Будьте первым, кто оставит отзыв',
+    writeYourReview: 'Напишите ваш отзыв здесь...',
   },
 
   wishlist: {
