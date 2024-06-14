@@ -84,6 +84,8 @@ export default
     thanks_for_registering_sub_title: 'Ahora, por favor revise su correo para verificar el correo electrónico, o puede ir a otras páginas.',
     companyName:"nombre de empresa",
     Language:"Idioma",
+    PhoneNumber: "+971545240905",
+    whatsappMessage:"Hola, estoy buscando ayuda.",
   },
   dashboard: {
     dashboard: 'Panel de control',
@@ -599,6 +601,7 @@ export default
     NotBad: 'No está mal',
     firstToReview: 'Sé el primero en revisar este producto',
     firstReview: 'Sé el primero en revisar',
+    writeYourReview: 'Escribe tu reseña aquí...',
   },
 
   wishlist: {

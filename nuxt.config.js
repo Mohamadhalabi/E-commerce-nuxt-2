@@ -142,7 +142,8 @@ export default {
       'FormTagsPlugin',
       'AlertPlugin',
       'ButtonPlugin',
-      'FormFilePlugin'
+      'FormFilePlugin',
+      'FormTextareaPlugin',
     ],
   },
 

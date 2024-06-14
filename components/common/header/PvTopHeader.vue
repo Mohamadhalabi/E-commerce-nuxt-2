@@ -65,15 +65,15 @@
     </div>
     <div class="col-6 col-md-6 col-sm-6 col-lg-1 d-flex mt-auto mb-auto ml-auto mr-lg-1 justify-content-end">
       <div class="whatsapp-icon ml-2 mr-2" @click="sendWhatsAppMessage">
-        <i class="fab fa-whatsapp"></i>
+        <i class="fab fa-whatsapp cursor-pointer" style="cursor: pointer"></i>
       </div>
 
       <div class="map-icon ml-2 mr-2" @click="openGoogleMap">
-        <i class="fa fa-map-marker"></i>
+        <i class="fa fa-map-marker cursor-pointer" style="cursor: pointer"></i>
       </div>
 
       <div class="phone-icon ml-2 mr-2" @click="makePhoneCall">
-        <i class="fa fa-phone"></i>
+        <i class="fa fa-phone cursor-pointer" style="cursor: pointer"></i>
       </div>
       <pv-social-icons class="social-icons ml-2"/>
     </div>
@@ -140,14 +140,14 @@ export default {
     },
     sendWhatsAppMessage() {
       // Replace '1234567890' with the desired WhatsApp number
-      const whatsappNumber = '+971504429045';
+      const whatsappNumber = this.$t('auth.PhoneNumber');
       const whatsappMessage = 'Hello';
 
       // Create the WhatsApp link
       const whatsappLink = `https://api.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(whatsappMessage)}`;
 
       // Open the WhatsApp link
-      window.location.href = whatsappLink;
+      window.open(whatsappLink, '_blank');
     },
 
     openGoogleMap() {
@@ -155,18 +155,19 @@ export default {
       const mapLink = 'https://www.google.com/maps/place/Techno+Lock+Keys+Trading+(+%D8%AA%D9%83%D9%86%D9%88+%D9%84%D9%88%D9%83+%D9%84%D8%AA%D8%AC%D8%A7%D8%B1%D8%A9+%D8%A7%D9%84%D9%85%D9%81%D8%A7%D8%AA%D9%8A%D8%AD+)%E2%80%AD/@25.3199127,55.407002,15z/data=!4m5!3m4!1s0x0:0xc1d5d1a7ec3407f9!8m2!3d25.3199127!4d55.407002?coh=164777&entry=tt&shorturl=1';
 
       // Open the Google Maps link
-      window.location.href = mapLink;
+      window.open(mapLink, '_blank');
+
     },
 
     makePhoneCall() {
       // Replace '1234567890' with the desired phone number
-      const phoneNumber = '+971504429045';
+      const phoneNumber = this.$t('auth.PhoneNumber');
 
       // Create the phone call link
       const phoneLink = `tel:${phoneNumber}`;
 
       // Open the phone call link
-      window.location.href = phoneLink;
+      window.open(phoneLink, '_blank');
     },
   },
   mounted() {
@@ -181,7 +182,7 @@ export default {
 .whatsapp-icon ,.map-icon, .phone-icon{
   font-size: 16px;
 }
-@media screen and (max-width: 350px){
+@media screen and (max-width: 400px){
   .top-header{
     display: inline-block;
     text-align: center;

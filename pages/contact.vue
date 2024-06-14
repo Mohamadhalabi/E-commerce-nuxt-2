@@ -129,7 +129,8 @@
                 <i class="fas fa-mobile-alt mobile-phone" />
               </div>
               <div class="porto-sicon-description p-3">
-                {{ $settings.contact.whatsapp }}<br />
+                {{ $settings.contact.whatsapp }}
+                <br />
               </div>
             </div>
             <div class="porto-sicon-box d-flex align-items-center">

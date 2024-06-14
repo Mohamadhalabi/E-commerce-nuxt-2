@@ -79,11 +79,13 @@ export default
       website: 'Website',
       loginInstead: 'Login instead',
       callNow: 'CALL US NOW',
+      PhoneNumber: "+971504429045",
       logged: 'Logged in as',
       thanks_for_registering: 'thanks for registering',
       thanks_for_registering_sub_title: 'Now please check your mail to verify the email, or you can go to other pages.',
       companyName:"Company Name",
       Language:"Language",
+      whatsappMessage:"Hello, I am looking for assistance.",
     },
     dashboard: {
       dashboard: 'Dashboard',
@@ -608,6 +610,7 @@ export default
       NotBad: 'Not that bad',
       firstToReview: 'Be The First To Review This Product',
       firstReview: 'Be the first to review',
+      writeYourReview: 'Write your review here...',
     },
 
     wishlist: {

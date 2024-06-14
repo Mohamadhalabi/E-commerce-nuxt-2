@@ -84,7 +84,8 @@ export default
     thanks_for_registering_sub_title: "Veuillez maintenant vérifier votre e-mail pour confirmer l'adresse e-mail, ou vous pouvez aller sur d'autres pages.",
     companyName:"Nom de l'entreprise",
     Language:"Langue",
-
+    PhoneNumber: "+971545240905",
+    whatsappMessage:"Bonjour, je cherche de l'aide.",
   },
   dashboard: {
     dashboard: "Tableau de bord",
@@ -597,6 +598,7 @@ export default
     NotBad: 'Pas si mal',
     firstToReview: 'Soyez le premier à donner votre avis sur ce produit',
     firstReview: 'Soyez le premier à donner un avis',
+    writeYourReview: "Écrivez votre avis ici...",
   },
   wishlist: {
     wishlist: 'Liste de souhaits',
