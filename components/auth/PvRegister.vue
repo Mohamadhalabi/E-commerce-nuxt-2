@@ -362,7 +362,7 @@ export default {
 
     async Register() {
       let formData = new FormData(document.getElementById('registerForm'));
-    formData.append("mobile", this.form.mobile);
+    formData.append("phone", this.form.mobile);
       formData.append("name", this.form.name);
       formData.append("email", this.form.email);
       formData.append("city", this.form.city);
