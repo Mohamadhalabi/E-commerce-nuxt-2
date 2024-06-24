@@ -64,14 +64,14 @@
               class="d-none d-lg-block mt-1"
               :height="250"
               :width="250"
-              :rondomProduct="rondomProduct[1]"
+              :rondomProduct="rondomProduct[4]"
               background-image-url='"../images/home/backgrounds/background-1.webp"'
             ></pv-banner-card>
             <pv-banner-card
               class="d-none d-lg-block"
               :height="250"
               :width="250"
-              :rondomProduct="rondomProduct[4]"
+              :rondomProduct="rondomProduct[2]"
               background-image-url='"../images/home/backgrounds/background-2.webp"'
               :fourth_item="true"
             ></pv-banner-card>
@@ -79,7 +79,7 @@
               class="d-none d-lg-block mb-4"
               :height="250"
               :width="250"
-              :rondomProduct="rondomProduct[2]"
+              :rondomProduct="rondomProduct[1]"
               background-image-url='"../images/home/backgrounds/background-3.webp"'
               :fourth_item="true"
             >
