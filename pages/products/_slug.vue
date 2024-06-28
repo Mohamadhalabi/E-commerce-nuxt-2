@@ -15,7 +15,7 @@
               {{ $t("products.shop") }}
             </nuxt-link>
           </li>
-          <!-- <li
+          <li
             v-for="category in product.categories"
             :key="category.id"
             class="breadcrumb-item">
@@ -23,7 +23,7 @@
               :to="getLink('/'+category.slug)">
               {{ category.name }}
             </nuxt-link>
-          </li> -->
+          </li>
           <li v-if="loaded" class="breadcrumb-item active" aria-current="page">
             {{ product.short_title }}
           </li>
@@ -262,14 +262,14 @@ export default {
           {
             "@type": "ListItem",
             "position": 3,
-          //  "name": this.product.categories[0]['name'],
-           // "item": `${process.env.PUBLIC_PATH}${this.product.categories[0]['slug']}`,
+            "name": this.product.categories[0]['name'],
+            "item": `${process.env.PUBLIC_PATH}${this.product.categories[0]['slug']}`,
           },
           {
             "@type": "ListItem",
             "position": 4,
-           // "name": this.product.categories[1] && this.product.categories[1]['name'] ? this.product.categories[1]['name'] : '-',
-           // "item": `${process.env.PUBLIC_PATH}${this.product.categories[1] && this.product.categories[1]['slug'] ? this.product.categories[1]['slug'] : ''}`,
+            "name": this.product.categories[1] && this.product.categories[1]['name'] ? this.product.categories[1]['name'] : '-',
+            "item": `${process.env.PUBLIC_PATH}${this.product.categories[1] && this.product.categories[1]['slug'] ? this.product.categories[1]['slug'] : ''}`,
           },
           {
             "@type": "ListItem",
@@ -302,8 +302,8 @@ export default {
               {
                 "@type": "ListItem",
                 "position": 3,
-                //"name": this.product.categories[0]['name'], //
-                //"item": `${process.env.PUBLIC_PATH}${this.product.categories[0]['slug']}`,
+                "name": this.product.categories[0]['name'],
+                "item": `${process.env.PUBLIC_PATH}${this.product.categories[0]['slug']}`,
               },
               {
                 "@type": "ListItem",
