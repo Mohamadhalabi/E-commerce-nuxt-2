@@ -408,16 +408,53 @@
 
                     <div class="row p-3">
                       <div class="col-lg-8 checkout-table-body">
+                        <h6>Sub Total</h6>
+                      </div>
+                      <div class="col-lg-4 checkout-table-body text-align-end">
+                        <b class="total-price"
+                           style="font-weight: 600;font-size: 18px"
+                        >
+                        {{
+                            checkoutData.dolar_price.value  +
+                            checkoutData.dolar_price.currency
+                          }}
+                        </b>
+                      </div>
+                    </div>
+
+                    <div class="row p-3"  v-if="this.dataForm.payment_method == 'paypal' || this.dataForm.payment_method == 'stripe_link_online'">
+                      <div class="col-lg-8 checkout-table-body">
+                        <h6>Additional Fees (Paypal & Credit / Debit Cards)</h6>
+                      </div>
+                      <div class="col-lg-4 checkout-table-body text-align-end">
+                        <b class="total-price" style="font-weight: 600;font-size: 18px">
+                          3%
+                        </b>
+                      </div>
+                    </div>
+                    <div class="row p-3">
+                      <div class="col-lg-8 checkout-table-body">
                         <h4>{{ $t("checkout.total") }}</h4>
                       </div>
                       <div class="col-lg-4 checkout-table-body text-align-end">
                         <b class="total-price"
                            style="font-weight: 600;font-size: 22px"
-                        >{{
-                            checkoutData.dolar_price.value +
+                           v-if="this.dataForm.payment_method == 'paypal' || this.dataForm.payment_method == 'stripe_link_online'"
+                        >
+                        {{
+                            (checkoutData.dolar_price.value * 1.03).toFixed(2) +
                             checkoutData.dolar_price.currency
                           }}
                         </b>
+                        <b class="total-price" 
+                        style="font-weight: 600;font-size:22px"
+                        v-else
+                        >
+                         {{
+                            checkoutData.dolar_price.value +
+                            checkoutData.dolar_price.currency
+                          }}      
+                      </b>
                       </div>
                     </div>
 
