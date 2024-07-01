@@ -98,7 +98,7 @@
                           :qty="product.quantity"
                           :has_token="product.has_token_input"
                           :product="product"
-                          @change="changeQuantity"
+                          @changeQty="changeQuantity"
                         />
                         <span class="cart-price ml-4 m-auto">
                           {{product.price.currency + parseFloat(product.priceitem * product.quantity).toFixed(2) }}
@@ -210,7 +210,6 @@
           return `/${this.getLang}${route}`; // Include the language parameter
         }
       },
-      ...mapActions("shop", ["getCartList", "removeFromCart"]),
       showCartMenu: function () {
         if (localStorage.getItem("tokenEnded") == 1) {
           document.querySelector("body").classList.add("cart-opened");

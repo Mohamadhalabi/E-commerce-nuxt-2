@@ -313,39 +313,49 @@ export default {
     },
 
     getKeysAndRemotes: function(){
-      Api.get('/keys-and-remotes-menu')
+      if(JSON.parse(JSON.stringify(this.keysAndRemotes)).length == 0){
+        Api.get('/keys-and-remotes-menu')
         .then(response => {
           this.keysAndRemotes = response.data.data.menu.main_menu['Key-Remote'];
         })
         .catch(error => ({error: JSON.stringify(error)}));
+      }
     },
     getAccessoriesAndTools: function(){
-      Api.get('/accessories-tools-menu')
+      if(JSON.parse(JSON.stringify(this.accessoriesAndTools)).length == 0){
+        Api.get('/accessories-tools-menu')
         .then(response => {
           this.accessoriesAndTools = response.data.data.menu.main_menu['accessories-tools'];
         })
         .catch(error => ({error: JSON.stringify(error)}));
+      }
     },
     getDevicesAndMachines: function(){
-      Api.get('/device-machine-menu')
+      if(JSON.parse(JSON.stringify(this.devicesAndMachines)).length == 0){
+        Api.get('/device-machine-menu')
         .then(response => {
           this.devicesAndMachines = response.data.data.menu.main_menu['device_machines'];
         })
         .catch(error => ({error: JSON.stringify(error)}));
+      }
     },
     getManufacturers: function() {
-      Api.get('/manufacturers_menu')
+      if(JSON.parse(JSON.stringify(this.manufacturers)).length == 0){
+        Api.get('/manufacturers_menu')
         .then(response => {
           this.manufacturers = response.data.data.menu.main_menu.manufacturers
         })
         .catch(error => ({error: JSON.stringify(error)}));
+      }
     },
     getCars: function() {
-      Api.get(`/menu`)
+      if(JSON.parse(JSON.stringify(this.cars)).length == 0){
+        Api.get(`/menu`)
         .then(response => {
           this.cars = response.data.data.menu.main_menu.cars;
         })
-        .catch(error => ({error: JSON.stringify(error)}));
+        .catch(error => ({error: JSON.stringify(error)}));        
+      }
     },
     getLink(route) {
       if (this.getLang === 'en') {
