@@ -58,9 +58,9 @@ export const getters = {
 };
 
 export const actions = {
-  getCartList: async function ({ commit, dispatch }) {
+  getCartList: async function ({ commit }) {
 
-    dispatch('UPDATE_CART_ACTION')
+    // dispatch('UPDATE_CART_ACTION')
 
     if (localStorage.getItem('tokenEnded') == '1') {
       let cartList = JSON.parse(localStorage.getItem('card')) || [];

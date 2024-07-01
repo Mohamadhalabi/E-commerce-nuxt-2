@@ -301,6 +301,12 @@ export default {
       AccessoriesAndToolsMenuOpened: false,
       DeviceAndMachineMenuOpened: false,
       SoftwareAndTokenMenuOpened: false,
+
+      isFetchingDevicesAndMachines:false,
+      isFetchingAccessoriesAndTools: false,
+      isFetchingKeysAndRemotes: false,
+      isFetchingManufacturers: false,
+      isFetchingCars: false 
     };
   },
   methods: {
@@ -322,45 +328,83 @@ export default {
     closeSoftwareAndTokenMenu(){
       this.SoftwareAndTokenMenuOpened = false;
     },
-    getCars: function() {
-      Api.get(`/menu`)
-        .then(response => {
-          this.carMenuOpened = true
-          this.cars = response.data.data.menu.main_menu.cars;
-        })
-        .catch(error => ({error: JSON.stringify(error)}));
+    async getCars() {
+      if (this.cars.length === 0 && !this.isFetchingCars) {
+        this.isFetchingCars = true; // Set flag to true before making the request
+        await Api.get('/menu')
+          .then(response => {
+            this.carMenuOpened = true;
+            this.cars = response.data.data.menu.main_menu.cars;
+          })
+          .catch(error => {
+            console.error("Error fetching cars:", error);
+          })
+          .finally(() => {
+            this.isFetchingCars = false; // Reset flag after the request is done
+          });
+      }
     },
-    getManufacturers: function() {
-      Api.get('/manufacturers_menu')
-        .then(response => {
-          this.ManufacturerMenuOpened = true
-          this.manufacturers = response.data.data.menu.main_menu.manufacturers
-        })
-        .catch(error => ({error: JSON.stringify(error)}));
+   async getManufacturers() {
+      if (this.manufacturers.length === 0 && !this.isFetchingManufacturers) {
+        this.isFetchingManufacturers = true;
+        await Api.get('/manufacturers_menu')
+          .then(response => {
+            this.ManufacturerMenuOpened = true;
+            this.manufacturers = response.data.data.menu.main_menu.manufacturers;
+          })
+          .catch(error => {
+            console.error("Error fetching manufacturers:", error);
+          })
+          .finally(() => {
+            this.isFetchingManufacturers = false; // Reset flag after the request is done
+          });
+      }
     },
-    getKeysAndRemotes: function(){
-      Api.get('/keys-and-remotes-menu')
-        .then(response => {
-          this.keysAndRemoteMenuOpened = true
-          this.keysAndRemotes = response.data.data.menu.main_menu['Key-Remote'];
-        })
-        .catch(error => ({error: JSON.stringify(error)}));
+    async getKeysAndRemotes() {
+      if (this.keysAndRemotes.length === 0 && !this.isFetchingKeysAndRemotes) {
+        this.isFetchingKeysAndRemotes = true;
+        await Api.get('/keys-and-remotes-menu')
+          .then(response => {
+            this.keysAndRemoteMenuOpened = true;
+            this.keysAndRemotes = response.data.data.menu.main_menu['Key-Remote'];
+          })
+          .catch(error => {
+            console.error("Error fetching keys and remotes:", error);
+          })
+          .finally(() => {
+            this.isFetchingKeysAndRemotes = false; // Reset flag after the request is done
+          });
+      }
     },
-    getAccessoriesAndTools: function(){
-      Api.get('/accessories-tools-menu')
-        .then(response => {
-          this.AccessoriesAndToolsMenuOpened = true;
-          this.accessoriesAndTools = response.data.data.menu.main_menu['accessories-tools'];
-        })
-        .catch(error => ({error: JSON.stringify(error)}));
+    async getAccessoriesAndTools() {
+      if (this.accessoriesAndTools.length === 0 && !this.isFetchingAccessoriesAndTools) {
+        this.isFetchingAccessoriesAndTools = true; // Set flag to true before making the request
+        await Api.get('/accessories-tools-menu')
+          .then(response => {
+            this.AccessoriesAndToolsMenuOpened = true;
+            this.accessoriesAndTools = response.data.data.menu.main_menu['accessories-tools'];
+          })
+          .catch(error => {
+            console.error("Error fetching accessories and tools:", error);
+          })
+          .finally(() => {
+            this.isFetchingAccessoriesAndTools = false; // Reset flag after the request is done
+          });
+      }
     },
-    getDevicesAndMachines: function(){
-      Api.get('/device-machine-menu')
-        .then(response => {
+    async getDevicesAndMachines() {
+      if (this.devicesAndMachines.length === 0 && !this.isFetchingDevicesAndMachines) {
+        this.isFetchingDevicesAndMachines = true; // Set flag to true before making the request
+        try {
+          const response = await Api.get('/device-machine-menu');
           this.DeviceAndMachineMenuOpened = true;
           this.devicesAndMachines = response.data.data.menu.main_menu['device_machines'];
-        })
-        .catch(error => ({error: JSON.stringify(error)}));
+        } catch (error) {
+          console.error("Error fetching devices and machines:", error);
+        } finally {
+          this.isFetchingDevicesAndMachines = false; // Reset flag after the request is done
+        }
+      }
     },
       getLink(route) {
         if (this.getLang === 'en') {
