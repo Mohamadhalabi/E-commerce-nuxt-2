@@ -312,18 +312,28 @@ export default {
   methods: {
     closeCarMenu(){
       this.carMenuOpened = false;
+      this.isFetchingCars = false;
+      this.cars = []
     },
     closeManufacturerMenu(){
       this.ManufacturerMenuOpened = false;
+      this.isFetchingManufacturers = false;
+      this.manufacturers = [];
     },
     closeKeyAndRemotesMenu(){
       this.keysAndRemoteMenuOpened = false;
+      this.isFetchingKeysAndRemotes = false;
+      this.keysAndRemotes = [];
     },
     closeAccessoriesAndTools(){
       this.AccessoriesAndToolsMenuOpened = false;
+      this.accessoriesAndTools = [];
+      this.isFetchingAccessoriesAndTools = false;
     },
     closeDeviceAndMachineMenu(){
       this.DeviceAndMachineMenuOpened = false;
+      this.devicesAndMachines = []
+      this.isFetchingDevicesAndMachines = false;
     },
     closeSoftwareAndTokenMenu(){
       this.SoftwareAndTokenMenuOpened = false;
