@@ -87,18 +87,18 @@ export default {
   async fetch() {
     // this.$Progress.start();
 
-    if(this.error.statusCode == 404) {
-      const currentUrl = window.location.href;
-      api.post('redirect', {url: currentUrl}).then((res) => {
-        // this.$Progress.finish();
-        window.location.replace(res.data.new_route);
+    // if(this.error.statusCode == 404) {
+    //   const currentUrl = window.location.href;
+    //   api.post('redirect', {url: currentUrl}).then((res) => {
+    //     // this.$Progress.finish();
+    //     window.location.replace(res.data.new_route);
 
-      }).catch(()=>{
-        this.$Progress.fail();
-        this.show_error =true;
-      });
+    //   }).catch(()=>{
+    //     this.$Progress.fail();
+    //     this.show_error =true;
+    //   });
 
-    }
+    // }
   }
 };
 </script>
