@@ -10,7 +10,6 @@
         <div class="container justify-content-center">
           <div class="row justify-content-center w-100 py-2 main-menu">
             <!--Begin: Left Side -->
-
             <div>
               <button
                 class="mobile-menu-toggler"
@@ -263,11 +262,8 @@
 import PvMainMenu from "~/components/common/header/PvMainMenu";
 import PvCartMenu from "~/components/common/header/PvCartMenu";
 import PvHeaderSearch from "~/components/common/header/PvHeaderSearch";
-import PvSocialIcons from "~/components/common/PvSocialIcons";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import api from "~/api";
-import img from "~/static/images/blank.png";
-import Api from "~/api";
 import PvAuth from "~/components/common/header/PvAuth.vue";
 import PvLoggedIn from "~/components/common/header/PvLoggedIn.vue";
 import PvTopHeader from "~/components/common/header/PvTopHeader.vue";
@@ -286,28 +282,15 @@ export default {
       isScrolling: false,
       searchQuery:"",
       modalOpen: false,
-      showModal: false,
-      inputValue: "",
       numbers: [1, 2, 3],
-      isSearchVisible: false,
-      searchKey:'',
     };
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
     ...mapGetters("fav", ["getWishlistCounts"]),
     ...mapGetters("compare", ["getCounts"]),
     ...mapGetters("currency", ["currency"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
     ...mapGetters("language", ["getLang"]),
-
-    currentLocale() {
-      return this.$i18n.locales.find((i) => i.code === this.$i18n.locale);
-    },
-
-    availableLocales() {
-      return Object.entries(this.$settings.languages);
-    },
 
     availableCurrencies() {
       return this.$settings.currencies.filter((i) => i !== this.currency);
@@ -315,10 +298,6 @@ export default {
   },
   methods: {
     ...mapMutations("currency", ["setCurrencyValue"]),
-    ...mapMutations("rtlStore", ["setLan"]),
-    ...mapActions("compare", ["fetchList"]),
-    ...mapActions("fav", ["fetchWishlist"]),
-    ...mapActions("auth", ["LogOut"]),
     ...mapActions("language",["updateLanguageCode"]),
     ...mapMutations("header", ["changeCurrency"]),
 
@@ -345,50 +324,6 @@ export default {
     checkScroll() {
       this.isScrolling = window.scrollY > 300;
     },
-
-    closeModal(){
-      this.showModal = false;
-    },
-
-    searchProduct() {
-      if (this.searchKey =='') {
-        this.productsBySearch = [];
-      } else {
-        let query = `?search=${this.searchKey}`;
-        if (this.selectedCategory != null) {
-          query = `?search=${this.searchKey}&categories=${this.selectedCategory}`;
-        }
-        Api.get(`shop${query}`)
-          .then((response) => {
-            this.productsBySearch = response.data.products;
-            this.totalProduct = response.data.total;
-          })
-          .catch((error) => ({ error: JSON.stringify(error) }));
-      }
-    },
-    goToShop() {
-      if (!this.searchKey && !this.selectedCategory) return;
-      let query = "";
-      if (this.searchKey && this.selectedCategory == null) {
-        query = `?page=1&search=${this.searchKey}&`;
-      } else {
-        query = `?categories=${this.selectedCategory}&page=1&search=${this.searchKey}&`;
-      }
-      this.$router.push({ path: "shop", query: { filter: query } });
-    },
-
-    checkURL(url) {
-      if (url) {
-        return url;
-      } else {
-        return "https://cdn-icons-png.flaticon.com/512/7855/7855599.png";
-      }
-    },
-
-    myOrders() {
-      this.$router.push({ path: "/account", query: { tab: "orders" } });
-    },
-
     goToWishlist() {
       this.$router.push("/wishlist");
     },
@@ -429,14 +364,6 @@ export default {
       this.$nuxt.refresh();
     },
 
-
-    defalutAvatar(e) {
-      e.target.src = img;
-    },
-
-    toggleSearchInput() {
-      this.showSearchInput = !this.showSearchInput;
-    },
     handleScroll() {
       if (window.scrollY >= 350) {
         this.$refs.headerBottom.classList.add('d-lg-flex');

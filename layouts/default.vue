@@ -63,7 +63,7 @@ export default {
     this.updateLanguageCode(this.$i18n.locale)
     api.defaults.headers["Accept-Language"] = this.$i18n.locale;
     if (this.isAuthenticated) {
-      this.getCartList();
+      // this.getCartList();
       this.fetchList();
       this.fetchWishlist();
     }
