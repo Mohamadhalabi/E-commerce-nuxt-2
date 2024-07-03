@@ -113,7 +113,6 @@ import PvDetail from "~/components/product/PvDetail";
 import PvDescription from "~/components/product/PvDescription";
 import PvCollection from "~/components/product/card/PvCollection";
 import PvMediaNew from "~/components/product/PvMediaNew.vue"
-import Api from "~/api";
 import {mapGetters} from "vuex";
 import PvFreeShipping from "~/components/home/PvFreeShipping.vue";
 import PvNewArrival from "~/components/home/PvNewArrival.vue";
@@ -511,25 +510,6 @@ export default {
     ...mapGetters("header",["getCurrency"]),
   },
   methods: {
-    async getProduct() {
-      this.loaded = false;
-      Api.get(`products/${this.$route.params.slug}`)
-        .then((response) => {
-          this.product = response.data.product;
-          let productsArr =
-            JSON.parse(localStorage.getItem("lastProductsVisited")) || [];
-          productsArr.push(this.product);
-          this.related_products = response.data.related_products;
-          this.featured_products = response.data.featured_products;
-          this.best_selling_products = response.data.best_selling_products;
-          this.latest_products = response.data.latest_products;
-          this.top_rated_products = response.data.top_rated_products;
-          this.prev_product = response.data.next_previous_products[0];
-          this.next_product = response.data.next_previous_products[1];
-          this.loaded = true;
-        })
-        .catch((error) => ({ error: JSON.stringify(error) }));
-    },
     getLink(route) {
       if (this.getLang === 'en') {
         return route; // Return the route as is without the language parameter
