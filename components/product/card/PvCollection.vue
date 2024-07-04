@@ -1,5 +1,5 @@
 <template>
-  <div v-if="products" class="">
+  <div v-if="products">
     <div class="mb-2">
       <pv-section-title
         :title="collectionTitle"
@@ -45,15 +45,13 @@
 </template>
 
 <script>
-import PvProduct from '~/components/product/card/PvProduct';
-import PvSectionTitle from '~/components/common/PvSectionTitle.vue';
 import {mapGetters} from "vuex";
-import Carousel from "vue-ssr-carousel";
+import PvProduct from "~/components/product/card/PvProduct.vue";
 export default {
   components: {
+    Carousel: () => import("vue-ssr-carousel"),
     PvProduct,
-    Carousel,
-    PvSectionTitle,
+    PvSectionTitle: () => import("~/components/common/PvSectionTitle.vue"),
   },
   props: {
     isIndexPage: Boolean,
@@ -61,10 +59,6 @@ export default {
     products: Array,
     link:String,
     collectionTitle: String,
-    viewType: {
-      type: String,
-      default: 'product'
-    },
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"])

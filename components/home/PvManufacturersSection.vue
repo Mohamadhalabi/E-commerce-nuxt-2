@@ -63,8 +63,7 @@ import Api from "~/api";
 import Carousel from "vue-ssr-carousel";
 export default {
   components: {
-    Carousel
-    // PvCarouselManufactures:() => import("~/components/features/PvCarouselManufactures.vue")
+    Carousel: () => import("vue-ssr-carousel")
   },
   async fetch() {
     try {
@@ -76,50 +75,12 @@ export default {
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
-    brandSliderConfig() {
-      return {
-        speed: 1000,
-        slidesPerView: 8,
-        spaceBetween: 20,
-        autoplay: true,
-        breakpoints: {
-          420: {slidesPerView: 2},
-          576: {slidesPerView: 3, spaceBetween: 0},
-          768: {slidesPerView: 3},
-          991: {slidesPerView: 4},
-          1200: {slidesPerView: 5},
-        },
-        nav: true,
-        navigation: {
-          nextEl: this.getIsAr ? '.swiper-nav .swiper-prev' : '.swiper-nav .swiper-next',
-          prevEl: this.getIsAr ? '.swiper-nav .swiper-next' : '.swiper-nav .swiper-prev',
-        },
-      }
-    }
   },
   data: function () {
     return {
       manufacturers: [],
     };
   },
-  methods: {
-    handleSlideNext() {
-      if(this.getIsAr){
-        this.$refs.carouselManufactures.slidePrev()
-      }
-      else{
-        this.$refs.carouselManufactures.slideNext();
-      }
-    },
-    handleSlidePrevious() {
-      if(this.getIsAr){
-        this.$refs.carouselManufactures.slideNext();
-      }
-      else{
-        this.$refs.carouselManufactures.slidePrev()
-      }
-    }
-  }
 };
 </script>
 <style>

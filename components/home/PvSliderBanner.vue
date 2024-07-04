@@ -92,12 +92,11 @@
 </template>
 <script>
 import {mapGetters} from "vuex";
-import Carousel from 'vue-ssr-carousel';
 import axios from "axios";
 export default {
   components: {
     PvBannerCard: () => import("../product/card/PvBannerCard.vue"),
-    Carousel,
+    Carousel: () => import ("vue-ssr-carousel"),
   },
   computed: {
     ...mapGetters("header",["getCurrency"]),

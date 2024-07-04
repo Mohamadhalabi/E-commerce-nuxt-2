@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="from-demo-17">
     <div class="sticky-navbar">
       <div class="sticky-info">
@@ -81,4 +81,4 @@ export default {
     }
   }
 };
-</script>
+</script> -->

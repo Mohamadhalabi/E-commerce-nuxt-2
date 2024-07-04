@@ -198,7 +198,7 @@
                 <span class="cart-count badge-circle">{{ getCounts }}</span>
               </a>
               <a class="m-auto mt-1 ml-lg-3 cursor-pointer">
-                <pv-cart-menu />
+                <!-- <pv-cart-menu /> -->
               </a>
             </div>
           </div>
@@ -259,22 +259,16 @@
   </div>
 </template>
 <script>
-import PvMainMenu from "~/components/common/header/PvMainMenu";
-import PvCartMenu from "~/components/common/header/PvCartMenu";
-import PvHeaderSearch from "~/components/common/header/PvHeaderSearch";
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import api from "~/api";
-import PvAuth from "~/components/common/header/PvAuth.vue";
-import PvLoggedIn from "~/components/common/header/PvLoggedIn.vue";
-import PvTopHeader from "~/components/common/header/PvTopHeader.vue";
 export default {
   components: {
-    PvTopHeader,
-    PvLoggedIn,
-    PvAuth,
-    PvMainMenu,
-    PvCartMenu,
-    PvHeaderSearch,
+    PvTopHeader: () => import("~/components/common/header/PvTopHeader.vue"),
+    PvLoggedIn: () => import("~/components/common/header/PvLoggedIn.vue"),
+    PvAuth: () => import("~/components/common/header/PvAuth.vue"),
+    PvMainMenu: () => import("~/components/common/header/PvMainMenu"),
+    PvCartMenu: () => import("~/components/common/header/PvCartMenu"),
+    PvHeaderSearch: () => import("~/components/common/header/PvHeaderSearch.vue"),
   },
   data() {
     return {

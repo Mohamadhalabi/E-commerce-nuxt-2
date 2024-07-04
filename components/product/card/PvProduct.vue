@@ -131,27 +131,15 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import PvGalleryImage from "~/components/product/partials/PvGalleryImage";
-import PvLabelGroup from "~/components/product/partials/PvLabelGroup";
-import PvCartButton from "~/components/product/partials/PvCartButton";
-import PvCountDown from "~/components/product/partials/PvCountDown";
-import PvRating from "~/components/product/partials/PvRating";
-import PvPriceBox from "~/components/product/partials/PvPriceBox";
-import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
 export default {
   components: {
-    PvGalleryImage,
-    PvLabelGroup,
-    PvCartButton,
-    PvCountDown,
-    PvRating,
-    PvPriceBox,
-    BaseButtonIcon1,
-  },
-  data:function (){
-    return{
-      animationDelay : `100ms`
-    }
+    PvGalleryImage : () => import("~/components/product/partials/PvGalleryImage.vue"),
+    PvLabelGroup: () => import("~/components/product/partials/PvLabelGroup.vue"),
+    PvCartButton: () => import("~/components/product/partials/PvCartButton.vue"),
+    PvCountDown: () => import("~/components/product/partials/PvCountDown.vue"),
+    PvRating: () => import("~/components/product/partials/PvRating.vue"),
+    PvPriceBox: () => import("~/components/product/partials/PvPriceBox.vue"),
+    BaseButtonIcon1: () => import ("~/components/common/BaseButtonIcon1.vue"),
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),

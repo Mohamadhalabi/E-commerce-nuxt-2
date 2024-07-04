@@ -22,7 +22,6 @@
             :link="'best-seller'"
           />
         </div>
-      </div>
       <div
         class="container-fluid">
         <div class="container">
@@ -247,13 +246,6 @@ export default {
 
   data: function () {
     return {
-      animationDelay: '100ms',
-      isFreeShippingProducts: null,
-      latestProducts2: null,
-      bestSellingProducts2: null,
-      lastVisited: [],
-      topSelling: [],
-      topSellingThreeProducts: [],
       isMobile:false,
       email:"",
     };

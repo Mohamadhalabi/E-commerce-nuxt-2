@@ -229,7 +229,7 @@
                       <button
                         class="token-and-software-buttons"
                       >
-                        {{ capitalize(index) }}
+                        {{ index }}
                       </button>
                     </div>
                     <div class="">
@@ -282,13 +282,11 @@
   </div>
 </template>
 <script>
-import { capitalize } from "lodash";
 import {mapGetters} from "vuex";
 import Api from "~/api";
 export default {
   data: function () {
     return {
-      capitalize,
       manufacturers : [],
       cars: [],
       keysAndRemotes : [],
@@ -301,7 +299,6 @@ export default {
       AccessoriesAndToolsMenuOpened: false,
       DeviceAndMachineMenuOpened: false,
       SoftwareAndTokenMenuOpened: false,
-
       isFetchingDevicesAndMachines:false,
       isFetchingAccessoriesAndTools: false,
       isFetchingKeysAndRemotes: false,

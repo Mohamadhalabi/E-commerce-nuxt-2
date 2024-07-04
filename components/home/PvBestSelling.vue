@@ -7,11 +7,10 @@
   />
 </template>
 <script>
-import PvCollection from "~/components/product/card/PvCollection.vue";
 import axios from "axios";
 export default {
   components: {
-    PvCollection,
+    PvCollection: () => import ("~/components/product/card/PvCollection.vue"),
   },
   async fetch() {
     const best_seller = await axios.get("products/best-seller",{
