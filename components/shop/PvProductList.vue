@@ -241,7 +241,7 @@ export default {
     return {
       showStyle: "grid",
       viewType: null,
-      selectedNumber: 24,
+      selectedNumber: 16,
       show_not_found: false,
       products: [],
       direction: "asc",
