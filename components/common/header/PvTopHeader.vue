@@ -83,13 +83,11 @@
 </template>
 <script>
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import PvSocialIcons from "~/components/common/PvSocialIcons.vue";
 import api from "~/api";
 
 export default {
   components: {
-    PvSocialIcons
-
+    PvSocialIcons: () => import("~/components/common/PvSocialIcons.vue"),
   },
   computed:{
     ...mapGetters("currency", ["currency"]),

@@ -152,15 +152,15 @@
 <script>
 import Api from "~/api";
 import {mapGetters} from "vuex";
-import PvPriceBox from "~/components/product/partials/PvPriceBox.vue";
 import AutoComplate from "~/components/common/AutoComplate.vue";
-import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
 export default {
   name: "HomePageSearch",
   components: {
-    PvPriceBox,
+    PvPriceBox: () => import("~/components/product/partials/PvPriceBox.vue"),
     AutoComplate,
-    BaseButtonIcon1
+    BaseButtonIcon1: () => import("~/components/common/BaseButtonIcon1.vue"),
+    PvPriceBox: () => import("~/components/product/partials/PvPriceBox.vue"),
+
   },
   data: function () {
     return {
@@ -183,7 +183,6 @@ export default {
     ...mapGetters("language", ["getLang"]),
   },
   mounted: function () {
-    this.getSlides();
     this.getBrands();
   },
   methods: {
@@ -194,13 +193,6 @@ export default {
       else{
         this.$router.push(this.getLang+'/shop?search='+searchKey)
       }
-    },
-    getSlides: function () {
-      Api.get("sliders")
-        .then((response) => {
-          this.slides = response.data.result;
-        })
-        .catch((error) => ({ error: JSON.stringify(error) }));
     },
     goToShop: function () {
       let url = "/";
@@ -267,7 +259,6 @@ export default {
           this.timer = null; // delay time befor searching
           // this.$Progress.finish();
         }
-
         if (this.searchKey.length >= 3) {
           this.timer = setTimeout(() => {
             if (!this.searchKey || this.searchKey == " ") {
@@ -284,7 +275,6 @@ export default {
               })
               .catch((error) => ({error: JSON.stringify(error)}));
           }, 500);
-
           // this.$Progress.finish();
         }
       }

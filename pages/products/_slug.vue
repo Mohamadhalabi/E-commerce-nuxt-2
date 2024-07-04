@@ -111,7 +111,6 @@
 <script>
 import PvDetail from "~/components/product/PvDetail";
 import PvDescription from "~/components/product/PvDescription";
-import PvCollection from "~/components/product/card/PvCollection";
 import PvMediaNew from "~/components/product/PvMediaNew.vue"
 import {mapGetters} from "vuex";
 import PvFreeShipping from "~/components/home/PvFreeShipping.vue";
@@ -130,7 +129,7 @@ export default {
     PvNewArrival,
     PvFreeShipping,
     PvDescription,
-    PvCollection,
+    PvCollection: () => import("~/components/product/card/PvCollection.vue"),
     PvDetail
   },
   async asyncData({ params, redirect, app }) {

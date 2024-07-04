@@ -165,13 +165,12 @@
   </template>
 
   <script>
-  import BaseButtonIcon1 from "../BaseButtonIcon1.vue";
   import { mapGetters, mapActions } from "vuex";
-  import PvQuantityInput from "~/components/features/PvQuantityInput.vue";
   export default {
     components: {
-      PvQuantityInput,
-      BaseButtonIcon1,
+      PvQuantityInput: () => import("~/components/features/PvQuantityInput.vue"),
+      BaseButtonIcon1: () => import("../BaseButtonIcon1.vue"),
+
     },
     computed: {
       ...mapGetters("auth", ["isAuthenticated","StateUser"]),

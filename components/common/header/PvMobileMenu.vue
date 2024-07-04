@@ -24,21 +24,6 @@
           <span class="mobile-menu-close" @click="hideMobileMenu">
             <i class="fa fa-times" />
           </span>
-
-<!--          <input-->
-<!--            v-model="searchKey"-->
-<!--            type="text"-->
-<!--            class="py-3 mx-auto nosubmit bg-white rounded-5"-->
-<!--            placeholder="Search..."-->
-<!--            required-->
-<!--            @input="searchProduct"-->
-<!--            @keyup.enter="goToShop"-->
-<!--          />-->
-          <!-- <button
-            class="btn icon-search text-white bg-transparent p-0"
-            type="submit"
-          /> -->
-
           <div class="live-search-list">
             <div v-if="productsBySearch.length > 0" class="search-suggests">
               <b-list-group
@@ -130,26 +115,14 @@
 </template>
 
 <script>
-import PvMainMenuMonile from "~/components/common/PvMainMenuMonile";
-import BaseButtonIcon1 from "../BaseButtonIcon1.vue";
-import PvPriceBox from "~/components/product/partials/PvPriceBox.vue";
-import Api from "~/api";
-
 export default {
   components: {
-    PvMainMenuMonile,
-    PvPriceBox,
-    BaseButtonIcon1,
+    PvPriceBox: () => import("~/components/product/partials/PvPriceBox.vue"),
+    BaseButtonIcon1: () => import("../BaseButtonIcon1"),
+    PvMainMenuMonile: () => import("~/components/common/PvMainMenuMonile"),
   },
   data: function () {
     return {
-      catOpened: false,
-      var1Opened: false,
-      var2Opened: false,
-      prodOpened: false,
-      prod1Opened: false,
-      prod2Opened: false,
-      pageOpened: false,
       searchKey: "",
       productsBySearch: [],
       totalProduct:null,
@@ -159,46 +132,6 @@ export default {
     hideMobileMenu: function () {
       document.querySelector("body").classList.remove("mmenu-active");
     },
-    searchProduct() {
-      if (!this.searchKey || this.searchKey == " ") {
-        this.productsBySearch = [];
-      } else {
-        if (this.timer) {
-          clearTimeout(this.timer);
-          this.timer = null;
-        }
-        this.timer = setTimeout(() => {
-          if (!this.searchKey || this.searchKey == " ") {
-            this.productsBySearch = [];
-            return;
-          }
-
-          let query = `?search=${this.searchKey}`;
-          if (this.selectedCategory != null) {
-            query = `?search=${this.searchKey}&categories=${this.selectedCategory}`;
-          }
-          Api.get(`shop${query}`)
-            .then((response) => {
-              this.productsBySearch = response.data.products;
-              this.totalProduct = response.data.total;
-            })
-            .catch((error) => ({ error: JSON.stringify(error) }));
-        }, 500);
-      }
-    },
-    goToShop() {
-      if (!this.searchKey && !this.selectedCategory) return;
-      let query = "";
-      if (this.searchKey && this.selectedCategory == null) {
-        query = `?page=1&search=${this.searchKey}&`;
-      } else {
-        query = `?categories=${this.selectedCategory}&page=1&search=${this.searchKey}&`;
-      }
-      this.$router.push({ path: "shop", query: { filter: query } });
-    },
-    showSearchForm: function (e) {
-      e.currentTarget.closest(".header-search").classList.add("show");
-    },
   },
 };
 </script>
@@ -207,9 +140,7 @@ export default {
 .live-search-list span {
   display: inline-block;
 }
-
 /* Search */
-
 form.nosubmit {
   color: #555;
   display: flex;

@@ -32,14 +32,6 @@
               : (selectedCategory = null)
           "
         />
-<!--        <b-form-select-->
-<!--              v-model="selectedCategory"-->
-<!--              :options="categories || []"-->
-<!--          :text-field="`name_${$i18n.locale}`"-->
-<!--          :value-field="`value_${$i18n.locale}`"-->
-<!--          :placeholder="$t('home.selectCategory')"-->
-<!--          ></b-form-select>-->
-
       </div>
       <button class="btn icon-magnifier" title="search" @click="goToShop" />
       <div class="live-search-list">
@@ -112,17 +104,15 @@
   </div>
 </template>
 <script>
-import AutoComplate from "~/components/common/AutoComplate.vue";
-import BaseButtonIcon1 from "../BaseButtonIcon1.vue";
-import PvPriceBox from "~/components/product/partials/PvPriceBox";
 import {mapGetters} from "vuex";
 import axios from 'axios';
+import AutoComplate from "~/components/common/AutoComplate.vue";
 
 export default {
   components: {
+    BaseButtonIcon1: () => import("../BaseButtonIcon1.vue"),
+    PvPriceBox: () => import("~/components/product/partials/PvPriceBox"),
     AutoComplate,
-    BaseButtonIcon1,
-    PvPriceBox,
   },
   data: function () {
     return {
@@ -276,8 +266,6 @@ export default {
   },
 };
 </script>
-
-
 <style>
 #search_term {
   background: #fff !important;

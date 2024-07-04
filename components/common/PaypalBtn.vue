@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <div id="smart-button-container">
       <div style="text-align: center; position: relative;">
@@ -224,4 +224,4 @@ export default {
   height: 100%;
   background: #ffffff80;
 }
-</style>
+</style> -->

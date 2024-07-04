@@ -132,7 +132,6 @@
 import PvProduct from "~/components/product/card/PvProduct.vue";
 import PvListProduct from "~/components/product/card/PvListProduct.vue";
 import { scrollTopHandler } from "~/utils";
-import PvCollection from "~/components/product/card/PvCollection.vue";
 import NotFound from "~/components/shop/NotFound.vue";
 import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import {mapGetters} from "vuex";
@@ -142,7 +141,7 @@ export default {
   components: {
     BaseButtonIcon1,
     NotFound,
-    PvCollection,
+    PvCollection: () => import("~/components/product/card/PvCollection.vue"),
     PvProduct,
     PvListProduct,
   },

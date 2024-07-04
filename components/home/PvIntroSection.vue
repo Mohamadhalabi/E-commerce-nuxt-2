@@ -36,9 +36,6 @@
               <i class="nextButton fa fa-chevron-right"></i>
             </template>
           </Carousel>
-
-
-
         </div>
       </div>
     </section>
@@ -47,12 +44,10 @@
 <script>
 import { mapGetters } from "vuex";
 import Api from "~/api";
-import Carousel from 'vue-ssr-carousel';
 
 export default {
   components: {
-    Carousel,
-    // PvCarousel:() => import("~/components/features/PvCarousel"),
+    Carousel: () => import("vue-ssr-carousel"),
   },
   async fetch() {
     try {
@@ -69,20 +64,6 @@ export default {
   },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
-    // HomeSliderConfig() {
-    //   return{
-    //     autoplay: true,
-    //     autoplaySpeed: 5000,
-    //     fade:true,
-    //     changeDelay:1000,
-    //     mobileFirst: true,
-    //     navButtons:true,
-    //     timing: 'ease',
-    //     dots: false,
-    //     slidesToShow: 1,
-    //     speed: 1000,
-    //   }
-    // }
   },
 };
 </script>

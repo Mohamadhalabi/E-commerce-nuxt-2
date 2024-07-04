@@ -7,13 +7,11 @@
   />
 </template>
 <script>
-import Api from "~/api";
 import {mapGetters} from "vuex";
-import PvCollection from "~/components/product/card/PvCollection.vue";
 import axios from "axios";
 export default {
   components: {
-    PvCollection,
+    PvCollection : () => import("~/components/product/card/PvCollection.vue"),
   },
   computed: {
     ...mapGetters("header",["getCurrency"])
@@ -23,7 +21,7 @@ export default {
           baseURL: process.env.API_BASE_URL,
           headers:{
             'Accept-Language': this.$i18n.locale,
-              'Content-Type': 'application/json',
+            'Content-Type': 'application/json',
             'currency': this.$cookies.get('currency') || 'USD',
             'Accept': 'application/json',
             'secret-key': process.env.SECRET_KEY,
@@ -42,12 +40,5 @@ export default {
       topSelling: null,
     };
   },
-  watch: {
-    getCurrency() {
-      Api.get("products/top-selling-products").then((response) => {
-        this.topSelling = response.data.top_selling;
-      })
-    },
-  }
 }
 </script>

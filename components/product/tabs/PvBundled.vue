@@ -13,10 +13,9 @@
   </div>
 </template>
 <script>
-import PvCollection from '~/components/product/card/PvCollection';
 export default {
   components: {
-    PvCollection
+    PvCollection:() => import("~/components/product/card/PvCollection.vue")
   },
   props: {
     bundled: {
