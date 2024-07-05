@@ -20,7 +20,6 @@
 <script>
 import api from "~/api";
 import "static/css/ltrStyle.css";
-import PvFooter from "~/components/common/PvFooter.vue";
 import {
   resizeHandler,
   scrollTop,
@@ -28,11 +27,10 @@ import {
   stickyHeaderHandler
 } from "~/utils";
 import {mapActions, mapGetters, mapMutations} from "vuex";
-import Api from "~/api";
 export default {
   components: {
     PvHeader:() =>import("~/components/common/header/PvHeader.vue"),
-    PvFooter,
+    PvFooter: () => import("~/components/common/PvFooter.vue"),
     PvAppPopup:() => import("~/components/popups/PvAppPopup"),
     PvProductPopup:() => import("~/components/popups/PvProductPopup"),
     PvMobileMenu:() => import("~/components/common/header/PvMobileMenu"),

@@ -3,6 +3,8 @@ const version = process.env.version;
 
 const {locale, availableLocales, fallbackLocale} = config.locales;
 const currency = 'USD';
+const TerserPlugin = require('terser-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 export default {
   // target: "static",
@@ -181,8 +183,15 @@ export default {
   render: {
     asyncScript:true,
     http2: {
-      push:true,
-    }
+      pushAssets: (req, res, publicPath, preloadFiles) =>
+        preloadFiles
+          .filter(f => f.asType === 'script' && f.file === 'runtime.js')
+          .map(f => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`),
+    },
+    bundleRenderer: {
+      shouldPrefetch: () => false,
+      shouldPreload: (fileWithoutQuery, asType) => ["script", "style"].includes(asType),
+    },
   },
 
   auth: {
@@ -240,7 +249,7 @@ export default {
       minifyJS: true,
     },
     extractCSS: {
-      ignoreOrder: false
+      ignoreOrder: true
     },
     optimizeCSS: true,
     publicPath: '/secure',
@@ -259,6 +268,22 @@ export default {
       img: ({ isDev }) => isDev ? `[path][name].[ext]` : `img/[name].[contenthash:7].${version}.[ext]`,
       font: ({ isDev }) => isDev ? `[path][name].[ext]` : `fonts/[name].[contenthash:7].${version}.[ext]`,
       video: ({ isDev }) => isDev ? `[path][name].[ext]` : `videos/[name].[contenthash:7].${version}.[ext]`
+    },
+
+    extend(config, { isDev, isClient }) {
+      // Use terser plugin for production build
+      if (!isDev && isClient) {
+        config.optimization.minimizer = [
+          new TerserPlugin({
+            terserOptions: {
+              compress: {
+                drop_console: true,
+              },
+            },
+          }),
+          new OptimizeCSSAssetsPlugin({})
+        ];
+      }
     },
   },
 
