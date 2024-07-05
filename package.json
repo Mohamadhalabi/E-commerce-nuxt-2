@@ -29,8 +29,7 @@
     "fs-extra": "8.1.0",
     "json-schema-faker": "0.5.0-rcv.44",
     "json-server": "0.17.0",
-    "optimize-css-assets-webpack-plugin": "^6.0.1",
-    "terser-webpack-plugin": "^5.3.10"
+    "terser-webpack-plugin": "^4.2.3"
   },
   "dependencies": {
     "@nuxt/image": "^0.7.1",
@@ -38,12 +37,9 @@
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/dotenv": "1.4.1",
     "@nuxtjs/google-gtag": "^1.0.4",
-    "@nuxtjs/i18n": "^7.3.0",
     "@nuxtjs/style-resources": "1.2.1",
     "bootstrap-vue": "^2.23.1",
-    "cookie-parser": "^1.4.6",
     "cookie-universal-nuxt": "^2.2.2",
-    "cookieparser": "^0.1.0",
     "nuxt": "2.17.3",
     "nuxt-i18n": "^6.28.1",
     "nuxt-precompress": "^0.5.9",
@@ -56,7 +52,6 @@
     "vue-slide-toggle": "1.1.1",
     "vue-ssr-carousel": "^2.5.0",
     "vue2-flip-countdown": "^1.0.0",
-    "vue2-google-maps": "0.10.7",
     "vuex-persistedstate": "^4.1.0",
     "webpack": "4.46.0"
   }

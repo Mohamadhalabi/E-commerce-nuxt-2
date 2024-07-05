@@ -12,7 +12,7 @@ export default {
       default: false
     }
   },
-  created: function() {
+  mounted: function() {
     if(this.changePath)
       this.$router.push({path: this.$route.path});
   },

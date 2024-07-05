@@ -129,21 +129,16 @@
 </template>
 
 <script>
-import PvProduct from "~/components/product/card/PvProduct.vue";
-import PvListProduct from "~/components/product/card/PvListProduct.vue";
 import { scrollTopHandler } from "~/utils";
-import NotFound from "~/components/shop/NotFound.vue";
-import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
-import {mapGetters} from "vuex";
 import axios from "axios";
 
 export default {
   components: {
-    BaseButtonIcon1,
-    NotFound,
+    BaseButtonIcon1: () => import("../common/BaseButtonIcon1.vue"),
+    NotFound: () => import("~/components/shop/NotFound.vue"),
     PvCollection: () => import("~/components/product/card/PvCollection.vue"),
-    PvProduct,
-    PvListProduct,
+    PvProduct: () => import("~/components/product/card/PvProduct.vue"),
+    PvListProduct: () => import("~/components/product/card/PvListProduct.vue"),
   },
   head() {
     return {
@@ -246,7 +241,6 @@ export default {
       direction: "asc",
       length: 12,
       pageCount: 1,
-      md: "",
       selectedPage: 1,
       type: {
         type: String,
@@ -261,22 +255,9 @@ export default {
       this.type = this.$route.query.list_view ? "list" : "grid";
       this.fetchProducts();
     },
-    async getCurrency() {
-      await this.fetchProducts()
-    },
-  },
-  created: function () {
-    // setTimeout(() => {
-    //   this.show_not_found = true;
-    // }, 3000);
-    // if (this.$route.query.hasOwnProperty("page")) {
-    //   this.selectedPage = this.$route.query.page;
-    // }
-    // this.type = this.$route.query.list_view ? "list" : "grid";
-    // this.getProduct(this.slug);
+
   },
   computed: {
-    ...mapGetters("header",["getCurrency"]),
     isSelected() {
       if (this.showStyle === "grid") {
         return true;

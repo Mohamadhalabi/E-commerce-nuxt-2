@@ -327,7 +327,6 @@
 <script>
 import Api from "~/api";
 import PvMedia from "~/components/downloads/PvMedia.vue";
-import { baseSlider3 } from "~/utils/data/carousel";
 import PvBtnShare from "~/components/common/PvBtnShare.vue";
 import VideoPlayer from 'nuxt-video-player'
 import {mapGetters} from "vuex";
@@ -350,20 +349,11 @@ export default {
     return {
       ShowVideoModal: false,
       meta_image: "",
-      softwareName: "",
-      softwareLink: "",
       productTitle:'',
       urlLink: null,
-      baseSlider3,
       download: null,
-      loaded: false,
-      screenShorts: [],
       gallery: [],
       videos: [],
-      videoOptions: {
-        autoplay: false,
-        controls: true,
-      },
     };
   },
   head() {

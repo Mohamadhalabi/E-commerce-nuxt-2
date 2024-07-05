@@ -3,8 +3,6 @@ const version = process.env.version;
 
 const {locale, availableLocales, fallbackLocale} = config.locales;
 const currency = 'USD';
-const TerserPlugin = require('terser-webpack-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 export default {
   // target: "static",
@@ -241,7 +239,7 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    analyze: false,
+    analyze: true,
     minifyCSS: true,
     minifyJS: true,
     html: {
@@ -269,22 +267,19 @@ export default {
       font: ({ isDev }) => isDev ? `[path][name].[ext]` : `fonts/[name].[contenthash:7].${version}.[ext]`,
       video: ({ isDev }) => isDev ? `[path][name].[ext]` : `videos/[name].[contenthash:7].${version}.[ext]`
     },
+    optimization:{
+      minimize: true,
+      minimizer: [
 
-    extend(config, { isDev, isClient }) {
-      // Use terser plugin for production build
-      if (!isDev && isClient) {
-        config.optimization.minimizer = [
-          new TerserPlugin({
-            terserOptions: {
-              compress: {
-                drop_console: true,
-              },
-            },
-          }),
-          new OptimizeCSSAssetsPlugin({})
-        ];
+      ],
+      splitChunks: {
+        chunks: 'all',
+        automaticNameDelimiter: '.',
+        name: undefined,
+        cacheGroups: {}
+    
       }
-    },
+    }
   },
 
   generate: {

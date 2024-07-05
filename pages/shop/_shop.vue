@@ -166,23 +166,17 @@
   </main>
 </template>
 <script>
-import ShopBanner from '~/components/shop/PvShopBanner';
-import PvProductList from "~/components/shop/PvProductList.vue";
-import SidebarFilter from "~/components/shop/SidebarFilter.vue";
-import PvTabs from "~/components/features/PvTabs.vue";
 import {isEmpty} from "lodash";
-import ImageModal from "~/components/product/ImageModal.vue";
-import PvContactus from "~/components/product/tabs/PvContactus.vue";
 import {scrollTopHandler} from "~/utils";
 export default {
   name: 'ShopTemplate',
   components: {
-    PvContactus,
-    ImageModal,
-    PvTabs,
-    PvProductList,
-    ShopBanner,
-    SidebarFilter,
+    PvContactus: () => import("~/components/product/tabs/PvContactus.vue"),
+    ImageModal: () => import("~/components/product/ImageModal.vue"),
+    PvTabs: () => import("~/components/features/PvTabs.vue"),
+    PvProductList: () => import("~/components/shop/PvProductList.vue"),
+    ShopBanner: () => import("~/components/shop/PvShopBanner.vue"),
+    SidebarFilter: () => import("~/components/shop/SidebarFilter.vue"),
   },
   props: {
     category: {
@@ -198,7 +192,6 @@ export default {
   data() {
     return {
       isSticky: false,
-      page: 1,
       orderBy: 'created_at',
       directionBy: 'asc',
       slugtype: null,
@@ -213,6 +206,11 @@ export default {
     };
   },
   created() {
+    console.log(this.category)
+    console.log(this.manufacturer)
+    console.log(this.brand)
+
+
     if (this.category) {
       this.slug = this.category.slug;
       this.description = this.category.description;

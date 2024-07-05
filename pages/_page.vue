@@ -26,9 +26,10 @@
 </template>
 <script>
 import api from "~/api";
-import ShopTemplate from "~/pages/shop/_shop.vue";
 export default {
-  components: { ShopTemplate },
+  components: { 
+    ShopTemplate :()=> import ("~/pages/shop/_shop.vue")
+  },
   async asyncData({ params }) {
     const { data } = await api.get(`pages/${params.page}`);
     return {
@@ -93,18 +94,6 @@ export default {
             "name" : this.page.title,
             "description" : this.page.meta_description,
             "email": "info@tlkeys.com",
-            // "telephone": "+47-99-999-9999",
-            // "address": {
-            //   "@type": "PostalAddress",
-            //   "streetAddress": "Rue Improbable 99",
-            //   "addressLocality": "Paris",
-            //   "addressCountry": "FR",
-            //   "addressRegion": "Ile-de-France",
-            //   "postalCode": "75001"
-            // },
-            // "vatID": "FR12345678901",
-            // "iso6523Code": "0199:724500PMK2A2M1SQQ228"
-
           }
         },
       ]
@@ -232,22 +221,6 @@ export default {
         property: "og:image",
         content: this.page.meta_image,
       });
-      // head_data["meta"].push({
-      //   property: "twitter:card",
-      //   content: "summary",
-      // });
-      // head_data["meta"].push({
-      //   property: "twitter:site",
-      //   content: `${this.$settings.social_media.twitter}`,
-      // });
-      // head_data["meta"].push({
-      //   property: "twitter:title",
-      //   content: this.page.meta_title,
-      // });
-      // head_data["meta"].push({
-      //   property: "twitter:description",
-      //   content: this.page.meta_description,
-      // });
     }
 
     return head_data;
