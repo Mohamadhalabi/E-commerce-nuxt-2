@@ -109,28 +109,19 @@
 </template>
 
 <script>
-import PvDetail from "~/components/product/PvDetail";
-import PvDescription from "~/components/product/PvDescription";
-import PvMediaNew from "~/components/product/PvMediaNew.vue"
 import {mapGetters} from "vuex";
-import PvFreeShipping from "~/components/home/PvFreeShipping.vue";
-import PvNewArrival from "~/components/home/PvNewArrival.vue";
-import PvTopSellingThreeProducts from "~/components/home/PvTopSellingThreeProducts.vue";
-import PvOnSaleProducts from "~/components/home/PvOnSaleProducts.vue";
-import PvBtnShare from "~/components/common/PvBtnShare.vue";
 import axios from "axios";
-
 export default {
   components: {
-    PvMediaNew,
-    PvBtnShare,
-    PvOnSaleProducts,
-    PvTopSellingThreeProducts,
-    PvNewArrival,
-    PvFreeShipping,
-    PvDescription,
+    PvMediaNew: () => import("~/components/product/PvMediaNew.vue"),
+    PvBtnShare: () => import("~/components/common/PvBtnShare.vue"),
+    PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
+    PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
+    PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
+    PvFreeShipping: () => import("~/components/home/PvFreeShipping.vue"),
+    PvDescription: () => import("~/components/product/PvDescription.vue"),
     PvCollection: () => import("~/components/product/card/PvCollection.vue"),
-    PvDetail
+    PvDetail: () => import("~/components/product/PvDetail.vue")
   },
   async asyncData({ params, redirect, app }) {
     const { data } = await axios.get(`products/${params.slug}`,{
@@ -150,10 +141,6 @@ export default {
       product: data.product,
       tokens: data.tokens,
       related_products: data.related_products,
-      featured_products : data.featured_products,
-      best_selling_products : data.best_selling_products,
-      latest_products: data.latest_products,
-      top_rated_products: data.top_rated_products,
       prev_product: data.next_previous_products[0],
       next_product: data.next_previous_products[1],
     };
@@ -162,30 +149,10 @@ export default {
     return {
       product: null,
       tokens: null,
-      featuredProducts: null,
-      bestSellingProducts: null,
-      isNewArrivalProducts: null,
-      isFreeShippingProducts: null,
       related_products: null,
-      featured_products: null,
-      best_selling_products: null,
-      latest_products: null,
-      top_rated_products: null,
       prev_product: null,
       next_product: null,
       loaded: false,
-      latestProducts: null,
-      topRatedProducts: null,
-      latestProducts2: null,
-      bestSellingProducts2: null,
-      parentCategoryLink: null,
-      SubCategory: null,
-      SubCategoryLink: null,
-      short_tile: null,
-      childCategory: null,
-      ParentCategory: null,
-      isSalePriceEqualToPrice:"-",
-      currency:"",
     };
   },
   head() {

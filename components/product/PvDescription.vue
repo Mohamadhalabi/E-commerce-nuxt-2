@@ -264,30 +264,21 @@
 </template>
 
 <script>
-import PvTabs from "~/components/features/PvTabs";
-import PvModels from "~/components/product/tabs/PvModels";
-import PvReviews from "~/components/product/tabs/PvReviews";
-import PvPdf from "~/components/product/tabs/PvPdf";
-import PvProduct from "~/components/product/card/PvProduct";
-import PvContactus from "~/components/product/tabs/PvContactus";
 import { isEmpty } from "lodash";
-import PvProductRow from "~/components/product/card/PvProductRow.vue";
-import PvProductBundel from "~/components/product/card/PvProductBundel.vue";
 import {mapGetters} from "vuex";
-import ImageModal from "~/components/product/ImageModal.vue";
 export default {
   components: {
-    ImageModal,
-    PvProductBundel,
-    PvProductRow,
-    PvTabs,
+    ImageModal: () => import("~/components/product/ImageModal.vue"),
+    PvProductBundel: () => import("~/components/product/card/PvProductBundel.vue"),
+    PvProductRow: () => import("~/components/product/card/PvProductRow.vue"),
+    PvTabs: () => import("~/components/features/PvTabs.vue"),
     PvAttributes: () => import("~/components/product/tabs/PvAttributes"),
-    PvModels,
+    PvModels: () => import("~/components/product/tabs/PvModels.vue"),
     PvSupport:() => import("~/components/product/tabs/PvSupport"),
-    PvReviews,
-    PvProduct,
-    PvPdf,
-    PvContactus,
+    PvReviews:() => import("~/components/product/tabs/PvReviews.vue"),
+    PvProduct: () => import("~/components/product/card/PvProduct.vue"),
+    PvPdf: () => import("~/components/product/tabs/PvPdf.vue"),
+    PvContactus: () => import("~/components/product/tabs/PvContactus.vue"),
   },
 
   props: {
@@ -296,16 +287,8 @@ export default {
   data: function () {
     return {
       isEmpty,
-      loadedData: false,
-      ImageFromDescription:'',
-      isModalOpen: false,
       flippedArrows: [],
-      selectedImage: null,
       selectedImageUrl: '',
-      videoOptions: {
-        autoplay: false,
-        controls: true,
-      },
     };
   },
   computed: {

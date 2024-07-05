@@ -257,30 +257,20 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
-import PvPriceBox from "~/components/product/partials/PvPriceBox";
-import PvProductNav from "~/components/product/partials/PvProductNav";
-import PvWishlistButton from "~/components/product/partials/PvWishlistButton";
-import PvCountDown from "~/components/product/partials/PvCountDown";
-import PvInputToken from "~/components/product/partials/PvInputToken";
-import Api from "~/api";
-import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
-import PvOffers from "./tabs/PvOffers.vue";
-import PvCompareButton from './partials/PvCompareButton.vue';
-import PvRating from "~/components/product/partials/PvRating.vue";
 import AutoComplate from "~/components/common/AutoComplate.vue";
 
 export default {
   components: {
     AutoComplate,
-    PvRating,
-    PvPriceBox,
-    PvProductNav,
-    PvWishlistButton,
-    PvInputToken,
-    PvCountDown,
-    BaseButtonIcon1,
-    PvOffers,
-    PvCompareButton,
+    PvRating: () => import ("~/components/product/partials/PvRating.vue"),
+    PvPriceBox: () => import ("~/components/product/partials/PvPriceBox.vue"),
+    PvProductNav: () => import ("~/components/product/partials/PvProductNav.vue"),
+    PvWishlistButton: () => import ("~/components/product/partials/PvWishlistButton.vue"),
+    PvInputToken: () => import("~/components/product/partials/PvInputToken.vue"),
+    PvCountDown: () => import("~/components/product/partials/PvCountDown.vue"),
+    BaseButtonIcon1: () => import("../common/BaseButtonIcon1.vue"),
+    PvOffers: () => import("./tabs/PvOffers.vue"),
+    PvCompareButton: () => import("./partials/PvCompareButton.vue"),
   },
   props: {
     product: Object,
@@ -294,7 +284,6 @@ export default {
   data: function () {
     return {
       qty: 1,
-      socialMedia: [],
       models: null,
       showDismissibleAlert: true,
       minPurchaseQty:0,
@@ -360,25 +349,8 @@ export default {
         "_blank"
       );
     },
-    // addToCompare(item) {
-    //   Api.get("/products/compares")
-    //     .then((response) => {
-    //     })
-    //     .catch((error) => {
-    //     });
-    //   Api.post("/products/compares", {product: item.slug})
-    //     .then((response) => {
-    //       this.$notify({
-    //         group: "custom-notify",
-    //         type: "success",
-    //         text: response.data.message,
-    //       });
-    //     })
-    //     .catch(() => {
-    //     });
-    // },
+
     plusQty: function () {
-      // if (this.qty < this.product.stock)
         this.qty++;
     },
     minusQty: function () {
@@ -390,13 +362,6 @@ export default {
         this.qty = this.minPurchaseQty
       }
     },
-    // addCart: function (product) {
-    //   this.currentProduct = product;
-    //   document.querySelector(".cart-message.removed").style.display = "none";
-    //   document.querySelector(".cart-message.carted").style.display = "block";
-    //   this.addToCart({product: product});
-    //   this.removeFromWishlist({product: product.sku});
-    // },
   },
 };
 </script>
