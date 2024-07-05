@@ -11,16 +11,6 @@
     </h3>
     <vue-slide-toggle :open="opened" class="filter-border-bottom">
       <div class="widget-body">
-<!--        <drop-down-item-->
-<!--          class="mt-1"-->
-<!--          v-if="item.type === 'dropdown'"-->
-<!--          :items="item.items"-->
-<!--          :group="item.group"-->
-<!--          :selectedCategory="selectedCategory"-->
-<!--          :slugtype="slugtype"-->
-<!--          @filter-query="filterQuery"-->
-<!--          @filterquery="filterQuery2"-->
-<!--        />-->
         <checkbox-item-category
             class="mt-1"
             v-if="item.type === 'checkbox_category'"
@@ -43,16 +33,6 @@
           :slugtype="slugtype"
           @filter-query="filterQuery"
         />
-<!--        <drop-down-manufacture-item-->
-<!--          class="mt-1"-->
-<!--          v-if="item.type ==='dropdown_manufactures'"-->
-<!--          :selectedManufacture="selectedManufacture"-->
-<!--          :items="item.items"-->
-<!--          :group="item.group"-->
-<!--          :slugtype="slugtype"-->
-<!--          @filter-query="filterQuery"-->
-<!--        />-->
-
       </div>
     </vue-slide-toggle>
   </div>
@@ -92,23 +72,18 @@
 </template>
 
 <script>
-import DropDownManufactureItem from "~/components/shop/itemType/DropDownManufactureItem.vue";
-import DropDownItem from "~/components/shop/itemType/DropDownItem.vue";
-import RadioButtonItem from "~/components/shop/itemType/RadioButtonItem.vue";
-import CheckboxItem from "~/components/shop/itemType/CheckboxItem.vue";
-import CheckboxItemCategory from '~/components/shop/itemType/CheckboxItemCategory.vue';
 import { VueSlideToggle } from "vue-slide-toggle";
 import { mapGetters } from "vuex";
 
 export default {
   name: "FilterItem",
   components: {
-    DropDownManufactureItem,
-    RadioButtonItem,
-    CheckboxItem,
-    DropDownItem,
+    DropDownManufactureItem:() => import("~/components/shop/itemType/DropDownManufactureItem.vue"),
+    RadioButtonItem:() => import("~/components/shop/itemType/RadioButtonItem.vue"),
+    CheckboxItem: () => import("~/components/shop/itemType/CheckboxItem.vue"),
+    DropDownItem: () => import("~/components/shop/itemType/DropDownItem"),
     VueSlideToggle,
-    CheckboxItemCategory
+    CheckboxItemCategory: () => import("~/components/shop/itemType/CheckboxItemCategory.vue")
   },
   props: {
     opened: Boolean,
@@ -122,17 +97,13 @@ export default {
       type: [Object, Array],
       required: false,
     },
-    selectedCategory: String,
-    selectedManufacture: String,
   },
   data() {
     return {
       openFilters: [],
-      attributeOpened: {}, // Track the opened state for each attribute item
     };
   },
-  created() {
-    // alert(this.selectedManufacture)
+  mounted() {
     if (this.name === "checkboxes") {
       this.opened = true;
     }
@@ -159,12 +130,6 @@ export default {
     },
     filterQuery(data) {
         this.$emit("filter-query", data);
-    },
-    filterQuery2(data) {
-        this.$emit("filter-query", data);
-    },
-    toggleAttributeOpened(index) {
-      this.$set(this.attributeOpened, index, !this.attributeOpened[index]);
     },
   },
   computed: {

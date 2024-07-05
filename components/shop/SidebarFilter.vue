@@ -18,8 +18,6 @@
           </base-button-icon-1>
 
         </nuxt-link>
-<!--        <span class="close-btn" @click="$bvModal.hide('bv-modal-example2')">X</span>-->
-
       </div>
 
       <div>
@@ -63,9 +61,6 @@
 </template>
 
 <script>
-import api from "~/api";
-import FilterItem from "~/components/shop/FilterItem.vue";
-import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import {mapGetters} from "vuex";
 import {scrollTopHandler} from "~/utils";
 import axios from "axios";
@@ -74,8 +69,12 @@ export default {
   name: "SidebarFilter",
 
   components: {
-    FilterItem,
-    BaseButtonIcon1,
+    FilterItem: () => import("~/components/shop/FilterItem.vue"),
+    BaseButtonIcon1: () => import("../common/BaseButtonIcon1.vue"),
+  },
+
+  async fetch(){
+   await explodeFilter(this.$route.query) 
   },
 
   props: {
@@ -116,9 +115,6 @@ export default {
       },
     },
   },
-  created() {
-    this.explodeFilter(this.$route.query);
-  },
   computed:{
     ...mapGetters("language", ["getLang"]),
   },
@@ -145,15 +141,8 @@ export default {
       this.slugtype = slug_type
       let dataForm = {
         categories: this.category,
-        colors: "",
         brands: this.brand,
-        types: "",
         manufacturers: this.manufacturer,
-        models: "",
-        years: "",
-        lowest_price: "",
-        highest_price: "",
-        search: "",
         attributes: query,
         slug_type: slug_type,
         language: this.getLang,
@@ -165,7 +154,6 @@ export default {
           : true;
       }
 
-      const locale = this.$i18n.locale;
       const currency = this.$cookies.get('currency') || 'USD';
 
       const axiosConfig = {
