@@ -276,7 +276,6 @@
 import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
-    PvQuantitySelect: () => import("~/components/features/PvQuantitySelect.vue"),
     PvFreeShippingAmount:() => import("~/pages/PvFreeShippingAmount.vue"),
     PvQuantityInput: () => import("~/components/features/PvQuantityInput.vue"),
     BaseButtonIcon1: () => import("~/components/common/BaseButtonIcon1.vue"),
