@@ -274,11 +274,13 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import PvQuantityInput from "~/components/features/PvQuantityInput";
-import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
-import Api from "~/api";
-import PvQuantitySelect from "~/components/features/PvQuantitySelect.vue";
 export default {
+  components: {
+    PvQuantitySelect: () => import("~/components/features/PvQuantitySelect.vue"),
+    PvFreeShippingAmount:() => import("~/pages/PvFreeShippingAmount.vue"),
+    PvQuantityInput: () => import("~/components/features/PvQuantityInput.vue"),
+    BaseButtonIcon1: () => import("~/components/common/BaseButtonIcon1.vue"),
+  },
   head() {
     return {
       title: "Cart | Techno Lock Keys Trading",
@@ -349,63 +351,20 @@ export default {
           name: "twitter:description",
           content: "Shopping Cart | Techno Lock Keys Trading"
         },
-        // {
-        //   rel: "shortcut icon",
-        //   href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
-        // },
       ],
     }
-  },
-  components: {
-    PvQuantitySelect,
-    PvFreeShippingAmount:() => import("~/pages/PvFreeShippingAmount.vue"),
-    PvQuantityInput,
-    BaseButtonIcon1,
-  },
-  data() {
-    return {
-      showInvalideMessage:false,
-      dataForm: {
-        address: "",
-        payment_method: "stripe",
-        card_name: "",
-        card_id: "",
-        card_exp_month: "",
-        card_exp_year: "",
-        card_cvc: "",
-        coupon_code: "",
-        shipping_method: "ups",
-      },
-      free_shipping: 0,
-      max: 1000,
-      current: 900,
-      animationDelay: `100ms`,
-      outOfStockItems: [],
-    };
   },
   computed: {
     ...mapGetters("language", ["getLang"]),
     ...mapGetters("shop", [
-      "cartCount",
       "cartList",
-      "cartProductsPrice",
       "cartCurrency",
-      "cartTotalDiscount",
       "cartPaymentPrice",
       "displayOutOfStock",
       "outOfStockList",
     ]),
     ...mapGetters("auth", ["isAuthenticated","StateUser"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
-    progressBarWidth() {
-      const percentage = (this.cartPaymentPrice / this.$settings.shipping_methods[4].free_shipping) * 100;
-      return `${percentage}%`;
-    },
-    progressColor() {
-      if (this.current <= this.max) {
-        return "#f8912d";
-      }
-    }
   },
 
   methods: {
@@ -416,42 +375,6 @@ export default {
       } else {
         return `/${this.getLang}${route}`; // Include the language parameter
       }
-    },
-    hiddenErrorMessage(event) {
-      this.showInvalideMessage = false;
-    },
-    refetchPrice() {
-      let query = "?";
-      if (this.dataForm.address) {
-        query += `address=${this.dataForm.address}&`;
-      }
-
-      if(this.dataForm.shipping_method ==""){
-        query += `shipping_method=${"dhl"}&`;
-      }
-      else if (this.dataForm.shipping_method !="") {
-        query += `shipping_method=${this.dataForm.shipping_method}&`;
-      }
-      if (this.dataForm.coupon_code) {
-        query += `coupon_code=${this.dataForm.coupon_code}`;
-      }
-      Api.get(`/user/orders/checkout${query}`)
-        .then((response) => {
-          this.checkoutData = response.data;
-          if(this.dataForm.shipping_method ==""){
-            this.checkoutData.shipping_cost.value = 0.00
-          }
-          this.checkHasBlockedCountry(this.checkoutData.products);
-        })
-        .catch((error) => {
-          console.log(error)
-          this.showInvalideMessage = true;
-          this.$notify({
-            group: "errorMessage",
-            type: "error",
-            text: "The selected coupon code is invalid.",
-          });
-        });
     },
   },
 
