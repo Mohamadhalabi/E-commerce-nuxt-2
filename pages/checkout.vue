@@ -584,15 +584,12 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import Api from "~/api";
-import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
-import PvFreeShippingAmount from "~/pages/PvFreeShippingAmount.vue";
-import PvAddresses from "~/components/account/PvAddresses.vue";
 export default {
   components: {
-    PvAddresses,
-    PvFreeShippingAmount,
+    PvAddresses: () => import("~/components/account/PvAddresses.vue"),
+    PvFreeShippingAmount: () => import("~/pages/PvFreeShippingAmount.vue"),
     AddressDialog: () => import("~/components/account/PvAddressFormModal"),
-    BaseButtonIcon1,
+    BaseButtonIcon1: () => import("~/components/common/BaseButtonIcon1.vue"),
   },
   data: function () {
     return {
@@ -656,7 +653,7 @@ export default {
       deep: true,
     },
   },
-  mounted() {
+  async fetch() {
     this.refetchPrice()
   },
   methods: {
