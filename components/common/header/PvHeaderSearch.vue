@@ -175,6 +175,7 @@ export default {
     },
     searchProduct() {
       if (this.searchKey.length >= 3) {
+        this.$nuxt.$loading.start()
         let str = this.searchKey;
         str = str.replace(/ +(?= )/g,'');
         let search_key = str.replace(/#/g, "# "); // Add a space after #
@@ -190,7 +191,6 @@ export default {
           if (this.selectedCategory != null && this.selectedCategory !== "shop") {
             query = `?search=${search_key}&categories=${this.selectedCategory}`;
           }
-          this.$nuxt.$loading.start()
           axios.get(`shop${query}`,{
             baseURL: process.env.API_BASE_URL,
             headers:{
