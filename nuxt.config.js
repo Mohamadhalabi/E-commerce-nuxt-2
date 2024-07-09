@@ -267,16 +267,13 @@ export default {
     },
     optimization:{
       minimize: true,
-      minimizer: [
-
-      ],
       splitChunks: {
         chunks: 'all',
         automaticNameDelimiter: '.',
-        name: undefined,
+        name: true,
         cacheGroups: {}
-    
-      }
+      },
+      runtimeChunk: true,
     },
     terser: {
       terserOptions:{
