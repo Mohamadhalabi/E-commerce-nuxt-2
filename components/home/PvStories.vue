@@ -217,4 +217,7 @@ export default {
     padding: 10px;
   }
 }
+div.ssr-carousel-track{
+  justify-content: start!important;
+}
 </style>
