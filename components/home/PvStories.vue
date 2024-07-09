@@ -103,9 +103,7 @@
                   :src="getEmbedUrl(selectedStory.value)" />
 
           <img v-if="showModalImage && selectedStory.type === 'image'" :src="selectedStory.value"
-               alt="Modal Image" style="max-width: 900px;max-height: 900px" class="modal-image rounded-6">
-
-
+               alt="Modal Image" class="modal-image rounded-6">
           <button
             v-if="this.showModalImage"
             title="Close (Esc)"
@@ -189,5 +187,34 @@ export default {
   background-color: rgba(0, 0, 0, 0.8);
   padding: 0!important;
   border: 0!important;
+}
+.close-image-modal{
+  position: fixed!important;
+  top: 0!important;
+  background: transparent;
+  color: white;
+  font-size: 25px;
+  right: 0;
+  border: 0;
+  z-index: 10000
+}
+.modal-image{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+  z-index: 9999999999;
+  min-width:700px;
+  min-height: 700px;
+  max-width: 700px;
+  max-height: 700px
+}
+
+@media screen and (max-width: 992px){
+  .modal-image{
+    padding: 10px;
+  }
 }
 </style>

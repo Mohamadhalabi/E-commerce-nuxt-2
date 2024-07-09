@@ -1,13 +1,14 @@
 <template>
   <div>
-    <img
+    <nuxt-img
       :id="'myimage-' + image[size].id"
       :src="image[size].url"
       :width="image[size].width"
       :height="image[size].height"
       class="rounded-5"
       style="border: 1px solid #e7e7e6!important;"
-    >
+      :alt="image[size].alt"
+    />
   </div>
 </template>
 

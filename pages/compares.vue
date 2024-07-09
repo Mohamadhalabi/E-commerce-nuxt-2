@@ -18,10 +18,9 @@
    </div>
 </template>
 <script>
-import PvCompareTable from '~/components/common/PvCompareTable.vue'
 export default {
   components: {
-    PvCompareTable,
+    PvCompareTable: () => import("~/components/common/PvCompareTable.vue"),
   },
 }
 </script>

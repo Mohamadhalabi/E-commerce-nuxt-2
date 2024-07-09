@@ -6,10 +6,11 @@
         <ImageMagnifier v-if="index === currentIndex" :image="image" size="l" :isMouseInside="isMouseInside" />
       </div>
       <div class="showOnMobile">
-        <img
+        <nuxt-img
           :src="image['l']['url']"
           v-if="index === currentIndex"
           class="rounded-5"
+          :alt="image['l']['alt']"
           style="border: 1px solid #e7e7e6!important;"
         />
       </div>

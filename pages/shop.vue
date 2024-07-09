@@ -47,18 +47,13 @@
 </template>
 
 <script>
-import { scrollTopHandler } from "~/utils";
 import Api from "~/api";
 import {mapGetters} from "vuex";
-import PvProductList from "~/components/shop/PvProductList.vue";
 
 export default {
-  directives: {
-    // Sticky: () => import("vue-sticky-directive"),
-  },
   components: {
     SidebarFilter: () => import("~/components/shop/SidebarFilter.vue"),
-    PvProductList,
+    PvProductList: () => import("~/components/shop/PvProductList.vue"),
   },
   data: function () {
     return {
@@ -150,10 +145,6 @@ export default {
           name: "twitter:description",
           content: "With Techno lock keys, you can shop for all your locksmith supplies in one place and get the greatest rates and quality. Shop NOW!"
         },
-        // {
-        //   rel: "shortcut icon",
-        //   href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
-        // },
       ],
       script: [
         {
@@ -248,44 +239,6 @@ export default {
         .catch((err) => {
           console.log(err);
         });
-    },
-    changePage(page) {
-      this.queryFilter.page = page;
-      scrollTopHandler();
-    },
-    setPage(val) {
-      this.queryFilter.page = val;
-    },
-    showMore(product) {
-      let searchKey = "";
-
-      if (this.$route.query.filter.includes("search")) {
-        searchKey = this.$route.query.filter
-          .substring(
-            this.$route.query.filter.indexOf("search"),
-            this.$route.query.filter.length
-          )
-          .substring(
-            this.$route.query.filter
-              .substring(
-                this.$route.query.filter.indexOf("search"),
-                this.$route.query.filter.length
-              )
-              .indexOf("=") + 1,
-            this.$route.query.filter.substring(
-              this.$route.query.filter.indexOf("search"),
-              this.$route.query.filter.length
-            ).length - 1
-          );
-      }
-      let query = "";
-      this.$router.push({ path: "shop", query: { filter: query } });
-      this.viewType = "product";
-
-      this.$nextTick(() => {
-        this.getProduct(this.$route.query.filter);
-      });
-
     },
     directionBy(data) {
       this.directionby = data;

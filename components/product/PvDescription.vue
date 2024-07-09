@@ -226,9 +226,7 @@
         role="tabpanel"
         aria-labelledby="product-tab-support"
       >
-        <client-only>
-          <pv-support :type-support="'product'" :model-id="product.sku" />
-        </client-only>
+        <pv-support :type-support="'product'" :model-id="product.sku" />
       </div>
 
       <div

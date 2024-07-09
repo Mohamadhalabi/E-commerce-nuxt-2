@@ -89,10 +89,8 @@
 </template>
 
 <script>
-import { scrollTopHandler } from "~/utils";
 import CardsDialog from "~/components/account/PvCardFormModal";
 import ConfirmDelete from "~/components/common/ConfirmCardDelete";
-// import VuePaycard from "vue-paycard";
 
 import { isEmpty } from "lodash";
 import Api from "~/api";
