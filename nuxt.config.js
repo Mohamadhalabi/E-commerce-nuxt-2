@@ -246,9 +246,7 @@ export default {
       minifyCSS: true,
       minifyJS: true,
     },
-    extractCSS: {
-      ignoreOrder: true
-    },
+    extractCSS: true,
     optimizeCSS: true,
     publicPath: '/secure',
     babel: {
@@ -278,6 +276,12 @@ export default {
         name: undefined,
         cacheGroups: {}
     
+      }
+    },
+    terser: {
+      terserOptions:{
+        compress: true,
+        mangle: true,
       }
     }
   },
