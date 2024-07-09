@@ -165,7 +165,7 @@ export default {
     debug: true, // enable to track in dev mode
   },
   image: {
-    quality: 100,
+    quality: 1,
     format: ['webp'],
     domains: ['dev-srv.tlkeys.com'],
     screens: {

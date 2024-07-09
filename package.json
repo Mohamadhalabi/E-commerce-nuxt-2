@@ -28,8 +28,7 @@
     "eslint-plugin-vue": "9.4.0",
     "fs-extra": "8.1.0",
     "json-schema-faker": "0.5.0-rcv.44",
-    "json-server": "0.17.0",
-    "terser-webpack-plugin": "^4.2.3"
+    "json-server": "0.17.0"
   },
   "dependencies": {
     "@nuxt/image": "^0.7.1",
@@ -41,6 +40,7 @@
     "bootstrap-vue": "^2.23.1",
     "cookie-universal-nuxt": "^2.2.2",
     "nuxt": "2.17.3",
+    "nuxt-booster": "^2.2.10",
     "nuxt-i18n": "^6.28.1",
     "nuxt-precompress": "^0.5.9",
     "nuxt-video-player": "^1.0.17",
