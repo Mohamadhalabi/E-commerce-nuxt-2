@@ -387,14 +387,13 @@
 	}
 
 	> li > ul {
-		left: -15px;
+		// left: -15px;
 	}
 
 	.megamenu {
 		top: 100%;
-		left: -15px;
 		border-top: none;
-
+		width: 100%;
 		img {
 			height: 100%;
 			object-fit: cover;
@@ -409,12 +408,6 @@
 			@include css(color, menu, main, mega, active-color);
 			@include css(background, menu, main, mega, active-background);
 		}
-	}
-
-	.nolink {
-		@include css(color, menu, main, nolink, color);
-		@include css(background, menu, main, nolink, background);
-		@include css(font-weight, menu, main, nolink, font-weight);
 	}
 }
 

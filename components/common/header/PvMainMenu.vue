@@ -11,7 +11,7 @@
             {{ $t("header.Cars") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu megamenu-car p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+        <div class="megamenu custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
              v-if="carMenuOpened"
              @click="closeCarMenu()"
              v-for="(item, key) in cars" :key="key">
@@ -46,7 +46,8 @@
             {{ $t("header.Manufactures") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width megamenu-2cols bg-white"
+        style="left:0!important"
              v-if="ManufacturerMenuOpened"
              @click="closeManufacturerMenu()"
              v-for="(item, key) in manufacturers" :key="key">
@@ -81,7 +82,8 @@
             {{ $t("header.keysAndRemote") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width megamenu-2cols bg-white"
+        style="left:0!important"
              v-if="keysAndRemoteMenuOpened"
              @click="closeKeyAndRemotesMenu()"
              v-for="(item, key) in keysAndRemotes" :key="key">
@@ -116,7 +118,8 @@
             {{ $t("header.AccessoriesAndTools") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width megamenu-2cols bg-white"
+        style="left:0!important"
              v-if="AccessoriesAndToolsMenuOpened"
              @click="closeAccessoriesAndTools()"
              v-for="(item, key) in accessoriesAndTools" :key="key">
@@ -152,7 +155,8 @@
             {{ $t("header.DeviceAndMachine") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width megamenu-2cols bg-white"
+        style="left:0!important"
              v-if="DeviceAndMachineMenuOpened"
              @click="closeDeviceAndMachineMenu()"
              v-for="(item, key) in devicesAndMachines" :key="key">
@@ -177,6 +181,15 @@
             </ul>
           </div>
         </div>
+      </li>
+      <li class="left-menu-items">
+        <nuxt-link
+          :to="getLink('/emulators')"
+          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
+          <span class="header-main-menu">
+            {{ $t("header.Emulators") }}
+          </span>
+        </nuxt-link>
       </li>
       <li
         @mouseover="SoftwareAndTokenMenuOpened = true"
@@ -211,7 +224,8 @@
         </nuxt-link>
 
         <div
-          class="megamenu custom-megamenu p-0 megamenu-fixed-width w-100 megamenu-2cols bg-white"
+          class="megamenu custom-megamenu p-0 megamenu-fixed-width megamenu-2cols bg-white"
+          style="left:0!important"
           v-if="SoftwareAndTokenMenuOpened"
         >
           <div class="row bg-white m-0">

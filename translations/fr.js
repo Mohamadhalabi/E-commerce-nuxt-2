@@ -149,6 +149,7 @@ export default
     Cars: "Voitures",
     downloads: "Téléchargements",
     PinCode : "Code PIN",
+    Emulators: "Émulateurs",
   },
   footer: {
     description: "Fondée en 1997, Techno Lock Keys Trading est votre partenaire serrurier de confiance depuis plus de deux décennies. Nous sommes dédiés à répondre à vos besoins de sécurité avec professionnalisme et expertise. De la découpe de clés à l'installation de systèmes de sécurité avancés, nous avons tout ce qu'il vous faut. Votre tranquillité d'esprit est notre priorité.",

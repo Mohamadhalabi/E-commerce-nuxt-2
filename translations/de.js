@@ -149,6 +149,7 @@ export default
     Cars: "Autos",
     downloads: "Downloads",
     PinCode : 'PIN-Code',
+    Emulators: "Emulatoren",
   },
   footer: {
     description: 'Seit 1997 steht Techno Lock Keys Trading als Ihr vertrauenswürdiger Partner im Bereich Schlosserei zur Verfügung. Seit über zwei Jahrzehnten sind wir darauf spezialisiert, Ihre Sicherheitsbedürfnisse mit Professionalität und Fachkompetenz zu erfüllen. Von der Schlüsselanfertigung bis zur Installation fortschrittlicher Sicherheitssysteme sind wir für Sie da. Ihr Wohlbefinden hat für uns oberste Priorität.',

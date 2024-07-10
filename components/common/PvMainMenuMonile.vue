@@ -90,6 +90,14 @@
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
       @click="closeAllNav()"
       >
+        <nuxt-link :to="getLink('/emulators')" class="d-flex">
+          <p class="mobile-menu-links">{{ $t("header.Emulators") }}</p>
+        </nuxt-link>
+      </li>
+      <hr class="mt-0 mb-0 dashed">
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      @click="closeAllNav()"
+      >
         <nuxt-link :to="getLink('/downloads')" class="d-flex">
           <p class="mobile-menu-links">{{ $t("header.downloads") }}</p>
         </nuxt-link>
