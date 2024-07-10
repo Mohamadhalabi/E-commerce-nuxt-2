@@ -149,6 +149,7 @@ export default
       Cars: "Cars",
       downloads: "Downloads",
       PinCode : 'Pin Code',
+      Emulators: "Emulators",
     },
     footer: {
       description: 'Established in 1997, Techno Lock Keys Trading has been your trusted locksmith partner for over two decades. We are dedicated to ensuring your security needs are met with professionalism and expertise. From key cutting to advanced security system installations, we\'ve got you covered. Your peace of mind is our priority.',
