@@ -3,112 +3,80 @@
     <noscript v-html="iFrameCode" />
     <pv-header @isClicked="isClicked" />
     <nuxt keep-alive />
-    <pv-footer/>
+    <pv-footer />
     <pv-app-popup class="minipopup-area minipopup-top-area" />
     <pv-product-popup class="minipopup-area" />
     <pv-error-message class="minipopup-area" />
     <pv-compare-popup class="minipopup-area" />
     <pv-wishlist-popup class="minipopup-area" />
-
-    <a id="scroll-top" href="javascript:;" title="Top" role="button" @click="scrollToTop">
-      <i class="icon-angle-up" />
-    </a>
-    <pv-mobile-menu />
+    <div v-if="isMobile" class="mobile-only">
+      <pv-mobile-menu />
+    </div>
   </div>
 </template>
 
 <script>
-import api from "~/api";
-import "static/css/ltrStyle.css";
 import {
-  resizeHandler,
-  scrollTop,
-  showScrollTopHandler,
   stickyHeaderHandler
 } from "~/utils";
-import {mapActions, mapGetters, mapMutations} from "vuex";
+
 export default {
   components: {
-    PvHeader:() =>import("~/components/common/header/PvHeader.vue"),
+    PvHeader: () => import("~/components/common/header/PvHeader.vue"),
     PvFooter: () => import("~/components/common/PvFooter.vue"),
-    PvAppPopup:() => import("~/components/popups/PvAppPopup"),
-    PvProductPopup:() => import("~/components/popups/PvProductPopup"),
-    PvMobileMenu:() => import("~/components/common/header/PvMobileMenu"),
-    PvErrorMessage:() => import("~/components/popups/PvErrorMessage.vue"),
-    PvComparePopup:() =>import("~/components/popups/PvComparePopup.vue"),
-    PvWishlistPopup:() => import("~/components/popups/PvWishlistPopup.vue"),
-  },
-  watch: {
-    $route: function() {
-      resizeHandler();
-      // this.$modal.hideAll();
-      document.getElementById("search_term").value = "";
-    },
+    PvAppPopup: () => import("~/components/popups/PvAppPopup"),
+    PvProductPopup: () => import("~/components/popups/PvProductPopup"),
+    PvErrorMessage: () => import("~/components/popups/PvErrorMessage.vue"),
+    PvComparePopup: () => import("~/components/popups/PvComparePopup.vue"),
+    PvWishlistPopup: () => import("~/components/popups/PvWishlistPopup.vue"),
   },
   data() {
     return {
       isSearchInputClicked: false,
-      ScrollToFooter: false,
-      currencyValue:"",
+      isMobile: false,
       iFrameCode: '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWSSMVC7" height="0" width="0" style="display:none;visibility:hidden"></iframe>',
     };
   },
-
-  computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
-  },
-  mounted: function() {
-    this.updateLanguageCode(this.$i18n.locale)
-    api.defaults.headers["Accept-Language"] = this.$i18n.locale;
-    if (this.isAuthenticated) {
-      this.fetchList();
-      this.fetchWishlist();
-    }
+  mounted() {
     window.addEventListener("scroll", stickyHeaderHandler, { passive: true });
-    window.addEventListener("scroll", showScrollTopHandler, { passive: true });
-    window.addEventListener("resize", stickyHeaderHandler);
-    window.addEventListener("resize", resizeHandler);
+    this.checkIfMobile();
+    window.addEventListener('resize', this.checkIfMobile);
   },
-
-  unmounted: function() {
-    window.removeEventListener("scroll", showScrollTopHandler, { passive: true });
+  beforeDestroy() {
     window.removeEventListener("scroll", stickyHeaderHandler, { passive: true });
-    window.removeEventListener("resize", stickyHeaderHandler);
-    window.removeEventListener("resize", resizeHandler);
+    window.removeEventListener('resize', this.checkIfMobile);
   },
-
   methods: {
-    ...mapActions("compare", ["fetchList"]),
-    ...mapActions("fav", ["fetchWishlist"]),
-    ...mapActions("language",["updateLanguageCode"]),
-    ...mapMutations("auth", ["LOGOUT"]),
-
-    isClicked(val){
-      this.isSearchInputClicked = val
+    async checkIfMobile() {
+      this.isMobile = window.innerWidth <= 767;
+      if (this.isMobile) {
+        const { default: PvMobileMenu } = await import("~/components/common/header/PvMobileMenu");
+        this.$options.components.PvMobileMenu = PvMobileMenu;
+        this.$forceUpdate();
+      }
     },
-    scrollToTop: function() {
-      scrollTop(false);
+    isClicked(val) {
+      this.isSearchInputClicked = val;
     },
-    hideMobileSearch: function() {
+    hideMobileSearch() {
       if (document.querySelector(".header-search.header-search-inline")) {
         let headerSearch = document.querySelector(".header-search.header-search-inline");
         headerSearch.classList.remove("show");
         headerSearch.querySelector(".header-search-wrapper").classList.remove("show");
-
       }
       if (document.querySelector(".search-suggests")) {
-        if (this.isSearchInputClicked == true) {
-          document.querySelector(".search-suggests").setAttribute("style", "display: block");
-        }
-        if(this.isSearchInputClicked == false)
-        {
-          document.querySelector(".search-suggests").setAttribute("style", "display: none");
-        }
+        document.querySelector(".search-suggests").style.display = this.isSearchInputClicked ? 'block' : 'none';
       }
+    },
+  },
+  watch: {
+    $route() {
+      document.getElementById("search_term").value = "";
     },
   },
 };
 </script>
+
 <style>
 @media screen and (max-width: 767px) {
   .mobile-only {
@@ -129,13 +97,8 @@ export default {
   }
 }
 
-body{
-  width:100%;
-  overflow-x:hidden;
-  overflow-y:hidden;
-}
-@media screen and (max-width: 992px){
-  .top-notice{
+@media screen and (max-width: 992px) {
+  .top-notice {
     display: none!important;
   }
 }

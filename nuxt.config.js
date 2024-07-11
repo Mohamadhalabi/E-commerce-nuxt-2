@@ -6,6 +6,10 @@ const currency = 'USD';
 
 export default {
   // target: "static",
+  "scripts": {
+    "build:modern": "nuxt build --modern=server",
+    "start:modern": "nuxt start --modern=server"
+  },
   head: {
     link: [{rel: 'icon', type: 'image/x-icon', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png'},
       {rel: 'shortcut icon', sizes: '16x16 24x24 32x32 48x48', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png'},
@@ -94,6 +98,8 @@ export default {
     '@static/sass/style.scss',
     'vue-multiselect/dist/vue-multiselect.min.css',
     '@static/css/agile.css',
+    '@static/css/ltrstyle.css'
+    // static/css/ltrStyle.css
 
   ],
 
@@ -280,7 +286,9 @@ export default {
         compress: true,
         mangle: true,
       }
-    }
+    },
+    modern: true,
+    aggressiveCodeRemoval: true
   },
 
   generate: {
