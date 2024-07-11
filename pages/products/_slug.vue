@@ -489,6 +489,10 @@ export default {
       left: 0,
       behavior: 'auto'
     });
+    this.$Progress.finish();
+  },
+  beforeMount: function(){
+    this.$Progress.start();
   },
   computed:{
     ...mapGetters("language", ["getLang"]),

@@ -109,6 +109,7 @@ export default {
     {src: '@plugins/directives/sticky.js', ssr: true},
     {src: '@plugins/direction-control.js', ssr: true}, // rTL
     {src: '@plugins/vue-awesome-swiper.js', ssr: true},
+    {src: '~/plugins/vue-progressbar.js', ssr: false},
   ],
 
   buildModules: [
@@ -298,6 +299,8 @@ export default {
     failedColor: 'red',
     duration: 15000,
   },
+  // loading: false,
+  // loadingIndicator: false,
 
 
   pageTransition: 'page',

@@ -1,5 +1,6 @@
 <template>
   <div :dir="$dir()" :class="$i18n.locale === 'ar' ? 'ltrClass' : ''" @click="hideMobileSearch">
+    <vue-progress-bar/>
     <noscript v-html="iFrameCode" />
     <pv-header @isClicked="isClicked" />
     <nuxt keep-alive />
