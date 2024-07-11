@@ -98,7 +98,7 @@ export default {
     '@static/sass/style.scss',
     'vue-multiselect/dist/vue-multiselect.min.css',
     '@static/css/agile.css',
-    '@static/css/ltrstyle.css'
+    '@static/css/ltrStyle.css'
     // static/css/ltrStyle.css
 
   ],
