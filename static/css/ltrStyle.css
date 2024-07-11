@@ -961,3 +961,9 @@ align-items: center !important;
 font-weight: 500 !important;
 font-size: 1.4rem !important;
  }
+
+ body{
+    width:100%;
+    overflow-x:hidden;
+    overflow-y:hidden;  
+ }

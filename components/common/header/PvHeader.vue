@@ -335,19 +335,6 @@ export default {
       document.getElementById("mySidenav6").style.width = "0";
       document.querySelector("body").classList.add("mmenu-active");
     },
-
-
-    setLocale(locale) {
-      api.defaults.headers["Accept-Language"] = locale;
-      this.$i18n.setLocale(locale);
-      this.$i18n.locale = locale;
-      this.$cookies.set('locale',locale,{
-        path: '/',
-        maxAge: 60 * 60 * 24 * 7
-      });
-      this.updateLanguageCode(locale)
-    },
-
     setCurrency(currency) {
       api.defaults.headers["currency"] = currency;
       this.$cookies.set('currency',currency,{
