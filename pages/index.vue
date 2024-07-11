@@ -9,8 +9,8 @@
     <LazyHydrate when-idle>
       <home-page-search />
     </LazyHydrate>
-    <LazyHydrate when-visible>
-      <pv-slider-Banner class="desktop-only"  />
+    <LazyHydrate when-idle>
+      <pv-slider-banner class="desktop-only"  />
     </LazyHydrate>
       <div
         class="container-fluid">

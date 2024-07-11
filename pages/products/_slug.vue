@@ -29,24 +29,30 @@
           </li>
         </ol>
         <div class="mt-auto">
-          <PvBtnShare  />
+          <LazyHydrate when-idle>
+            <PvBtnShare />
+          </LazyHydrate>
         </div>
       </nav>
       <div class="product-single-container container product-single-default">
         <div v-if="product" class="row">
           <div class="col-xl-5 col-lg-6 col-md-6 col-12 product-single-gallery">
+            <LazyHydrate when-idle>
             <pv-media-new :product="product" />
+            </LazyHydrate>
             <div class="text-center">
               <span class="sku-color d-lg-none d-md-none">SKU: {{ product.sku }}</span>
             </div>
           </div>
           <div class="col-xl-7 col-lg-6 col-md-5 col-sm-12 col-12 product-single-details">
-            <pv-detail
+            <LazyHydrate when-idle>
+              <pv-detail
               :product="product"
               :tokens="tokens"
               :prev-product="prev_product"
               :next-product="next_product"
             />
+            </LazyHydrate>  
           </div>
         </div>
       </div>
@@ -58,11 +64,13 @@
         <div class="tab-content col-lg-12 mb-7" />
       </div>
       <div>
-        <pv-description
+        <LazyHydrate when-visible>
+          <pv-description
           v-if="product"
           :product="product"
           class="container"
         />
+        </LazyHydrate>
       </div>
       <pv-collection
         v-if="product.work_with_blade.length > 0"
@@ -71,13 +79,14 @@
         class="container"
       />
 
-
-      <pv-collection
+      <LazyHydrate when-visible>
+        <pv-collection
         v-if="related_products.length > 1"
         :products="related_products"
         :collection-title="$t('products.relatedProducts')"
         class="container"
       />
+      </LazyHydrate>
       <hr class="mt-0 m-b-5 container" />
 
       <div
@@ -85,22 +94,30 @@
       >
         <div class="container">
           <div class="product-widgets-container row pb-2">
-            <pv-on-sale-products
+            <LazyHydrate when-visible>
+              <pv-on-sale-products
               :collection-title="$t('home.onSaleProduct')"
               :animation-delay="'200'"
-            />
-            <pv-top-selling-three-products
+            />  
+            </LazyHydrate>
+            <LazyHydrate when-visible>
+              <pv-top-selling-three-products
               :collection-title="$t('home.topSellingProduct')"
               :animation-delay="'500'"
             />
-            <pv-new-arrival
+            </LazyHydrate>
+            <LazyHydrate when-visible>
+              <pv-new-arrival
               :collection-title="$t('home.newarrivalproducts')"
               :animation-delay="'800'"
             />
-            <pv-free-shipping
+            </LazyHydrate>
+            <LazyHydrate when-visible>
+              <pv-free-shipping
               :collection-title="$t('home.freeshoppingproducts')"
               :animation-delay="'1100'"
             />
+            </LazyHydrate>
           </div>
         </div>
       </div>
@@ -111,8 +128,10 @@
 <script>
 import {mapGetters} from "vuex";
 import axios from "axios";
+import LazyHydrate from 'vue-lazy-hydration';
 export default {
   components: {
+    LazyHydrate,
     PvMediaNew: () => import("~/components/product/PvMediaNew.vue"),
     PvBtnShare: () => import("~/components/common/PvBtnShare.vue"),
     PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
