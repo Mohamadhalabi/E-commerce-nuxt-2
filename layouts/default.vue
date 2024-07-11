@@ -19,7 +19,6 @@
 import {
   stickyHeaderHandler
 } from "~/utils";
-
 export default {
   components: {
     PvHeader: () => import("~/components/common/header/PvHeader.vue"),
