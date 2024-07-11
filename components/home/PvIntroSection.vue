@@ -25,6 +25,7 @@
                   alt="Slider"
                   :open_graph="slide['open_graph']"
                   :scal="slide['scal']"
+                  loading="lazy"
                   :description="slide['description']" />
               </a>
             </div>
@@ -43,15 +44,22 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
-import Api from "~/api";
-
+import axios from "axios";
 export default {
   components: {
     Carousel: () => import("vue-ssr-carousel"),
   },
   async fetch() {
     try {
-      const response = await Api.get("sliders");
+      const response = await axios.get(`sliders`,{
+      baseURL: process.env.API_BASE_URL,
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'secret-key': process.env.SECRET_KEY,
+        'api-key': process.env.API_KEY,
+      }
+    });
       this.slides = response.data.result;
     } catch (error) {
       console.error('Error fetching data: ', error);

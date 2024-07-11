@@ -290,7 +290,6 @@ export default {
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email)) {
         // Assuming `api` is an instance of Axios or similar HTTP client
         api.post("/subscribe", { email: this.email }).then((response) => {
-          console.log(response);
         }).catch((error) => {
           if (error.response.status === 400) {
             this.$notify({

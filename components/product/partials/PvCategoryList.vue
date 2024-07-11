@@ -24,12 +24,6 @@ export default {
       default: true,
     },
   },
-  /* created() {
-    if (this.products.categories) {
-
-      console.log(this.products.categories.length);
-    }
-  }, */
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },

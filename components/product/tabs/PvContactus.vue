@@ -157,11 +157,6 @@ export default {
   computed: {
     ...mapGetters('auth', ['isAuthenticated', 'StateUser']),
   },
-  mounted() {
-    if(process.client){
-      console.log(this.StateUser)
-    }
-  },
   methods: {
     async sendMessage() {
       Api.post('/contact-us', this.dataForm)
