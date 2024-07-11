@@ -206,11 +206,6 @@ export default {
     };
   },
   created() {
-    console.log(this.category)
-    console.log(this.manufacturer)
-    console.log(this.brand)
-
-
     if (this.category) {
       this.slug = this.category.slug;
       this.description = this.category.description;

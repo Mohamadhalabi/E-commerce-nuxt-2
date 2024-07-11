@@ -1,7 +1,5 @@
 import axios from 'axios';
-import store from 'vuex';
 import { state } from '/store/currency'
-import config from '~/configs';
 
 // Check if localStorage is available (client-side)
 const isLocalStorageAvailable = process.client && typeof localStorage !== 'undefined';

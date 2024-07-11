@@ -83,24 +83,6 @@ export default {
       this.product["serial_number"] = this.serial_number;
     }
   },
- /*  created() {
-     this.serial_number = this.tokens;
-    this.qty = this.serial_number.length;
-    if (!this.qty) {
-
-      let product_cart = JSON.parse(localStorage.getItem('card')) || [];
-
-      product_cart.forEach((item) => {
-        console.log('i am item')
-        console.log(item.slug)
-
-        if (   this.products.slug=== item.slug) {
-            this.serial_number = item.serial_number;
-        }
-
-      });
-    }
-  }, */
   methods: {
     ...mapActions("shop", ["addToCart"]),
     ...mapActions("compare", ["fetchList", "addToList"]),

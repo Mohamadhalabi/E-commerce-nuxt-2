@@ -91,15 +91,13 @@ export default {
     __dangerouslyDisableSanitizers: ['script']
   },
   css: [
-    // '@static/css/bootstrap.min.css',
     '@static/css/porto-icons.min.css',
     '@static/css/steper.css',
     '@static/vendor/fontawesome-free/css/all.min.css',
     '@static/sass/style.scss',
     'vue-multiselect/dist/vue-multiselect.min.css',
     '@static/css/agile.css',
-    '@static/css/ltrStyle.css'
-    // static/css/ltrStyle.css
+    // '@static/css/ltrStyle.css'
 
   ],
 
@@ -108,9 +106,6 @@ export default {
     {src: '@plugins/settings.js', ssr: true},
     {src: '@plugins/localstorage.js', ssr: false},
     {src: '@plugins/filters.js', ssr: true},
-    // {src: '@plugins/vue-progressbar.js', ssr: true},
-    // {src: '@plugins/directives/animate.js', ssr: true},
-    // {src: '@plugins/directives/parallax.js', ssr: false},
     {src: '@plugins/directives/sticky.js', ssr: true},
     {src: '@plugins/direction-control.js', ssr: true}, // rTL
     {src: '@plugins/vue-awesome-swiper.js', ssr: true},
@@ -245,7 +240,7 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
-    analyze: true,
+    analyze: false,
     minifyCSS: true,
     minifyJS: true,
     html: {
