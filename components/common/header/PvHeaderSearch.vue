@@ -175,7 +175,7 @@ export default {
     },
     searchProduct() {
       if (this.searchKey.length >= 3) {
-        this.$nuxt.$loading.start()
+        this.$Progress.start();
         let str = this.searchKey;
         str = str.replace(/ +(?= )/g,'');
         let search_key = str.replace(/#/g, "# "); // Add a space after #
@@ -186,7 +186,6 @@ export default {
           this.timer = null;
         }
         this.timer = setTimeout(() => {
-          // this.$Progress.start();
           let query = `?search=${search_key}`;
           if (this.selectedCategory != null && this.selectedCategory !== "shop") {
             query = `?search=${search_key}&categories=${this.selectedCategory}`;
@@ -203,18 +202,19 @@ export default {
             },
           })
             .then((response) => {
-              this.$nuxt.$loading.finish()
+              this.$Progress.finish();
               this.productsBySearch = response.data.products;
               this.getProductsBySearchArrayLength = response.data.total;
               this.availableItems = this.productsBySearch.slice(0, 5);
               // this.$Progress.finish();
             })
             .catch((error) => {
-              // this.$Progress.fail();
+              this.$Progress.fail();
               return {error: JSON.stringify(error)};
             });
         }, 500);
       }
+
       if(this.searchKey.length <3){
         this.productsBySearch = [];
       }

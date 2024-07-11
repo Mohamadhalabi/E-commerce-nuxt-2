@@ -11,6 +11,7 @@
           v-if="index === currentIndex"
           class="rounded-5"
           :alt="image['l']['alt']"
+          loading="lazy"
           style="border: 1px solid #e7e7e6!important;"
         />
       </div>
