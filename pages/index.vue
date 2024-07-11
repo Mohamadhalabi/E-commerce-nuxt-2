@@ -257,12 +257,12 @@ export default {
   components: {
     // PvNewsletterModal,
     LazyHydrate,
-    PvStories: () => import("~/components/home/PvStories"),
+    // PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
-    PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
+    // PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
     PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
-    PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
+    // PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
     PvLatestProducts: () => import("~/components/home/PvLatestProducts.vue"),
     PvBestSelling: () => import("~/components/home/PvBestSelling.vue"),
     PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
@@ -282,8 +282,22 @@ export default {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
   methods: {
+    async checkIfMobile() {
+      this.isMobile = window.innerWidth <= 767;
+      if (!this.isMobile) {
+        const { default: PvStories } = await import("~/components/home/PvStories");
+        this.$options.components.PvStories = PvStories;
+        
+        const { default: PvSliderBanner } = await import("~/components/home/PvSliderBanner.vue");
+        this.$options.components.PvSliderBanner = PvSliderBanner;
+
+        const { default: PvLineBanner } = await import("~/components/home/PvLineBanner.vue");
+        this.$options.components.PvLineBanner = PvLineBanner;
+        this.$forceUpdate();
+      }
+    },
+
     handleResize() {
-      if(process.client)
       this.isMobile = window.innerWidth < 768;
     },
     Subscribe(){
@@ -315,6 +329,9 @@ export default {
       this.isMobile = window.innerWidth < 768;
       window.addEventListener('resize', this.handleResize);
     }
+    this.checkIfMobile();
+    window.addEventListener('resize', this.checkIfMobile);
+
   },
   beforeDestroy() {
     // Remove the resize event listener when the component is destroyed
