@@ -266,6 +266,11 @@ export default {
       }
     },
   },
+  mounted() {
+    if(this.$route.query.page != undefined){
+      this.selectedPage = this.$route.query.page
+    }
+  },
   methods: {
     async fetchProducts(){
       let tempQuery = "";
