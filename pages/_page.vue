@@ -25,13 +25,23 @@
   </div>
 </template>
 <script>
-import api from "~/api";
+import axios from "axios";
 export default {
   components: { 
     ShopTemplate :()=> import ("~/pages/shop/_shop.vue")
   },
-  async asyncData({ params }) {
-    const { data } = await api.get(`pages/${params.page}`);
+  async asyncData({ params, app }) {
+    const { data } = await axios.get(`pages/${params.page}`,{
+      baseURL: process.env.API_BASE_URL,
+      headers:{
+        'Accept-Language': app.i18n.locale,
+        'Content-Type': 'application/json',
+        'currency': app.$cookies.get('currency') || 'USD',
+        'Accept': 'application/json',
+        'secret-key': process.env.SECRET_KEY,
+        'api-key': process.env.API_KEY,
+      },
+    });
     return {
       page: data,
     };
