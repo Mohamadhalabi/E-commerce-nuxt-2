@@ -20,7 +20,7 @@
 import {
   stickyHeaderHandler
 } from "~/utils";
-import "static/css/ltrStyle.css";
+// import "static/css/ltrStyle.css";
 export default {
   components: {
     PvHeader: () => import("~/components/common/header/PvHeader.vue"),

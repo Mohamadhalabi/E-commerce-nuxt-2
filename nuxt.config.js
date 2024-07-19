@@ -91,13 +91,13 @@ export default {
     __dangerouslyDisableSanitizers: ['script']
   },
   css: [
+    '@static/sass/style.scss',
+    '@static/css/ltrStyle.css',
+    'vue-multiselect/dist/vue-multiselect.min.css',
     '@static/css/porto-icons.min.css',
     '@static/css/steper.css',
     '@static/vendor/fontawesome-free/css/all.min.css',
-    '@static/sass/style.scss',
-    'vue-multiselect/dist/vue-multiselect.min.css',
     '@static/css/agile.css',
-    // '@static/css/ltrStyle.css'
 
   ],
 
