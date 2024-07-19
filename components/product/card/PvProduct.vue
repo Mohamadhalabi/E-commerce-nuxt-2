@@ -58,7 +58,7 @@
         >
           <div>
             <nuxt-link :to="getLink('/products/'+product.slug)">
-             <h2 class="product-h2 mb-0">{{ truncateTitle(product.title, 75) }}</h2>
+             <h2 class="product-h2 mb-0" style="font-size:13px;">{{ truncateTitle(product.title, 75) }}</h2>
             </nuxt-link>
           </div>
         </div>
@@ -259,11 +259,6 @@ export default {
   transition: all 0.2s ease-out;
   box-shadow: 0px 1px 2px #2ba968;
 }
-.product-h2{
-  font-size: 13px;
-
-}
-
 @media screen and (max-width: 1435px) and (min-width: 1200px){
   .product-card-information{
     height: 200px;
