@@ -37,14 +37,14 @@
               </span>
             </div>
             <div class="col-12">
-              <h2 class="product-title" style="font-size: 10px">
+              <h3 class="product-title" style="font-size: 12px;margin-top: 2px">
                 <nuxt-link :to="getLink('/products/'+product.slug)">
                   {{ product.short_title }}
                 </nuxt-link>
-              </h2>
+              </h3>
             </div>
             <div class="col-12">
-              <span class="d-block sku-color" style="font-size: 10px"
+              <span class="d-block sku-color" style="font-size: 12px"
               >SKU:{{ product.sku }}</span
               >
             </div>
