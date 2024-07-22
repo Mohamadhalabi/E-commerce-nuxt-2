@@ -280,14 +280,17 @@
         :key="name"
         :class="{ active: item.link === currentItem }"
         class="right-menu-items"
-      >
+        :style="item.name.en === 'Pin Code' ? 'background-color:red;height:52.5px' : ''"
+        >
         <nuxt-link
           v-if="item.link"
           :to="getLink('/'+item.link)"
           :class="{ active: item.link === currentItem }"
           class="d-flex align-items-center flex-column download-pin-code"
         >
-          <span class="header-main-menu">
+          <span class="header-main-menu"
+          :style="item.name.en === 'Pin Code' ? 'background-color:red' : ''"
+          >
             {{item.name[$i18n.locale] ? item.name[$i18n.locale] : item.name.en}}
           </span>
         </nuxt-link>
