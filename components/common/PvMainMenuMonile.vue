@@ -104,10 +104,11 @@
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      style="background-color:red;"
       @click="closeAllNav()"
       >
         <nuxt-link :to="getLink('/pin-code')" class="d-flex">
-          <p class="mobile-menu-links">{{ $t("header.PinCode") }}</p>
+          <p class="mobile-menu-links" style="color:white">{{ $t("header.PinCode") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">
