@@ -47,9 +47,9 @@
           >
             <nuxt-link
               class="categoryLink"
-              :to="getLink('/'+product.categories[product.categories.length - 1].slug)"
+              :to="getLink('/'+product.categories['slug'])"
             >
-              {{ product.categories[product.categories.length - 1].name }}
+              {{ product.categories['title'] }}
             </nuxt-link>
           </div>
         </div>
