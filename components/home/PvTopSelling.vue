@@ -17,7 +17,7 @@ export default {
     ...mapGetters("header",["getCurrency"])
   },
   async fetch() {
-        const topSellingProducts = await axios.get("products/top-selling-products",{
+        const topSellingProducts = await axios.get("products/top-selling-products2",{
           baseURL: process.env.API_BASE_URL,
           headers:{
             'Accept-Language': this.$i18n.locale,

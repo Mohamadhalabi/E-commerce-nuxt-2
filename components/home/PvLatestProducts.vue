@@ -13,7 +13,7 @@ export default {
     PvCollection: () => import("~/components/product/card/PvCollection.vue"),
   },
   async fetch() {
-    const new_arrival = await axios.get("products/new-arrival",{
+    const new_arrival = await axios.get("products/new-arrival2",{
       baseURL: process.env.API_BASE_URL,
       headers:{
         'Accept-Language': this.$i18n.locale,
