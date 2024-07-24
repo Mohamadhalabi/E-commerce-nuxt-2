@@ -24,8 +24,6 @@ export default {
         'api-key': process.env.API_KEY,
       },
     })
-    console.log("TEST");
-    console.log(new_arrival.data.new_arrival);
     this.isNewArrivalProducts = new_arrival.data.new_arrival;
   },
   props: {
