@@ -16,7 +16,7 @@ export default {
     link:String,
   },
   async fetch() {
-    const getOnSaleProducts = await axios.get("shop?on_sale=1&length=3",{
+    const getOnSaleProducts = await axios.get("products/on-sale-products",{
       baseURL: process.env.API_BASE_URL,
       headers:{
         'Accept-Language': this.$i18n.locale,

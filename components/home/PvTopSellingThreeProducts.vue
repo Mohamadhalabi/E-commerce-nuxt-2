@@ -16,7 +16,7 @@ export default {
     link: String,
   },
   async fetch() {
-    const topSellingProducts = await axios.get("products/top-selling-products",{
+    const topSellingProducts = await axios.get("products/top-selling-three",{
       baseURL: process.env.API_BASE_URL,
       headers:{
         'Accept-Language': this.$i18n.locale,
@@ -27,7 +27,7 @@ export default {
         'api-key': process.env.API_KEY,
       }
     });
-    this.topSellingThreeProducts = topSellingProducts.data.top_selling.slice(0,3);
+    this.topSellingThreeProducts = topSellingProducts.data.top_selling;
   },
   data: function () {
     return {
