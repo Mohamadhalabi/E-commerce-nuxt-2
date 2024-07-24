@@ -16,7 +16,7 @@ export default {
     link: String,
   },
   async fetch() {
-    const getFreeShippingProducts = await axios.get("shop?is_free_shipping=1&length=3",{
+    const getFreeShippingProducts = await axios.get("products/free-shipping-three",{
       baseURL: process.env.API_BASE_URL,
       headers:{
         'Accept-Language': this.$i18n.locale,
