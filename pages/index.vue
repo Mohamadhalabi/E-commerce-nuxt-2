@@ -77,13 +77,13 @@
               :link="'new-arrival'"
             />
             </LazyHydrate>
-            <LazyHydrate when-visible>
+            <!-- <LazyHydrate when-visible>
             <pv-free-shipping
               :collection-title="$t('home.freeshoppingproducts')"
               :animation-delay="'1100'"
               :link="'free-shipping'"
             />
-            </LazyHydrate>
+            </LazyHydrate> -->
           </div>
         </div>
       </div>
@@ -269,7 +269,7 @@ export default {
     PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
     PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
     PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
-    PvFreeShipping:() => import("~/components/home/PvFreeShipping.vue"),
+    // PvFreeShipping:() => import("~/components/home/PvFreeShipping.vue"),
   },
 
   data: function () {

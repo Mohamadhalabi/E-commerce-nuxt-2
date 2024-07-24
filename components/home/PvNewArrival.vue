@@ -13,7 +13,7 @@ export default {
     PvSmallCollection: () => import("~/components/product/card/PvSmallCollection.vue"),
   },
   async fetch() {
-    const new_arrival = await axios.get("products/new-arrival",{
+    const new_arrival = await axios.get("products/new-arrival-three",{
       baseURL: process.env.API_BASE_URL,
       headers:{
         'Accept-Language': this.$i18n.locale,
@@ -24,7 +24,9 @@ export default {
         'api-key': process.env.API_KEY,
       },
     })
-    this.isNewArrivalProducts = new_arrival.data.new_arrival.slice(0,3);
+    console.log("TEST");
+    console.log(new_arrival.data.new_arrival);
+    this.isNewArrivalProducts = new_arrival.data.new_arrival;
   },
   props: {
     link: String,
