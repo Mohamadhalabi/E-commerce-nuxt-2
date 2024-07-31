@@ -10,11 +10,11 @@
       >
         <div class="off-animatin product-label label-sale">
           <template v-if="product.discount.type === 'fixed'">
-            {{ product.discount.value + product.price.currency }}
+            {{ (product.discount.value  * product.price.exchange_rate).toFixed(2) + product.price.currency }}
             off
           </template>
           <template v-else-if="product.discount.type === 'percent'">
-            {{ this.$options.filters.discountFormat(product.discount.value) }}%
+            {{ this.$options.filters.discountFormat((product.discount.value * product.price.exchange_rate).toFixed(2)) }}%
             off
           </template>
         </div>
