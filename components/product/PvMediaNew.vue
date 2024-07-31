@@ -54,7 +54,7 @@ import Carousel from "vue-ssr-carousel";
 import PvLabelGroup from "~/components/product/partials/PvLabelGroup.vue";
 
 export default {
-  name: "Example4",
+  name: "Media New",
   components: {PvLabelGroup, ImageMagnifier, Carousel },
   props: {
     product: Object,
