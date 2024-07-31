@@ -274,7 +274,6 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import Api from "~/api";
 export default {
   components: {
     PvQuantitySelect: () => import("~/components/features/PvQuantitySelect.vue"),
