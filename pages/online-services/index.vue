@@ -29,7 +29,7 @@
         :key="item.sku"
         class="col-7 col-sm-5 col-md-4 col-lg-3 col-xl-3 mb-2"
       >
-        <pv-product-online-services :product="item" />
+        <pv-product :product="item" />
       </div>
     </div>
   </div>
@@ -38,10 +38,11 @@
 <script>
 import {mapGetters} from "vuex";
 import Api from "~/api";
-import PvProductOnlineServices from "~/components/product/card/PvProductOnlineServices.vue";
 export default {
   name: "index",
-  components: {PvProductOnlineServices},
+  components: {
+    PvProduct: () => import("~/components/product/card/PvProduct.vue"),
+  },
   computed: {
     ...mapGetters('rtlStore',['getIsAr']),
     ...mapGetters("language", ["getLang"]),
