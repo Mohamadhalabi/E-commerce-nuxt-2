@@ -77,11 +77,10 @@
 <script>
 import Api from '~/api';
 import { mapGetters } from 'vuex';
-import PvProduct from "~/components/product/card/PvProduct.vue";
 import axios from "axios";
 export default {
   components: {
-    PvProduct,
+    PvProduct: () => import("~/components/product/card/PvProduct.vue"),
   },
   async asyncData({ app }) {
     const response = await axios.get(`pin-code/offline-pincode`,{
