@@ -3,7 +3,7 @@
     class="mb-2 product-default bg-white inner-quickview inner-icon pt-2 position-relative card-main-wrapper border shadow-sm rounded-10"
   >
     <figure class="img-effect shadow">
-      <nuxt-link :to="`/online-services/${product.slug}`">
+      <nuxt-link :to="`/products/${product.slug}`">
         <img loading="lazy" :src="product.image" style="" />
       </nuxt-link>
     </figure>
@@ -27,8 +27,8 @@
         </div>
         <div class="col-lg-12 text-center mt-1 product-short-title mb-1 mb-lg-0 mb-md-0">
           <div>
-            <nuxt-link :to="`/online-services/${product.slug}`">
-              {{ product.short_title[$i18n.locale] }}
+            <nuxt-link :to="`/products/${product.slug}`">
+              {{ product.short_title }}
             </nuxt-link>
           </div>
         </div>
@@ -38,9 +38,9 @@
             <i
               class="fab fa-sm fa-whatsapp"
               style="font-size: 20px; color: #556b2f; cursor: pointer"
-              @click="goToWhatsApp(product.short_title[$i18n.locale])"
+              @click="goToWhatsApp(product.short_title)"
             />
-            <small class="contact-us" @click="goToWhatsApp(product.short_title[$i18n.locale])">{{
+            <small class="contact-us" @click="goToWhatsApp(product.short_title)">{{
                 $t("products.ContactUsToSendYouThePrice")
               }}</small>
           </div>
@@ -59,7 +59,7 @@
       <button
         v-if="!(product.hide_price == 0)"
         class="w-100 mx-1 whatsapp-button"
-        @click="goToWhatsApp(product.short_title[$i18n.locale])"
+        @click="goToWhatsApp(product.short_title)"
       >
         <i
           style="font-size: larger"
