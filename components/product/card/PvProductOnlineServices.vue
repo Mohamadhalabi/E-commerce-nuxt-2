@@ -27,7 +27,7 @@
         </div>
         <div class="col-lg-12 text-center mt-1 product-short-title mb-1 mb-lg-0 mb-md-0">
           <div>
-            <nuxt-link :to="`/products/${product.slug}`">
+            <nuxt-link :to="`/online-services/${product.slug}`">
               {{ product.short_title[$i18n.locale] }}
             </nuxt-link>
           </div>
