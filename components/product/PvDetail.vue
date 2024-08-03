@@ -22,7 +22,7 @@
 <!--    <hr class="short-divider"/>-->
     <div class="row">
       <div class="col">
-        <div v-if="product.categories[0].slug ==  'pin-code-offline'">
+        <div v-if="product.categories[0].slug == 'pin-code-offline' ||  (product.categories[0].slug == 'Online-Services' && product.price.value != 0 )">
           <pv-price-box class="mb-2 mt-1" :product="product" />
         </div>
         <pv-price-box class="mb-2 mt-1" v-if="product.hide_price == 0" :product="product"/>

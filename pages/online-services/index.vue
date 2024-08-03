@@ -37,7 +37,7 @@
 
 <script>
 import {mapGetters} from "vuex";
-import Api from "~/api";
+import axios from "axios";
 export default {
   name: "index",
   components: {
@@ -48,10 +48,20 @@ export default {
     ...mapGetters("language", ["getLang"]),
   },
 
-  async asyncData({ params }) {
-    const response  = await Api.get(`search/online-services-products`);
+  async asyncData({ params , app}) {
+    const response  = await axios.get(`search/online-services-products`,{
+            baseURL: process.env.API_BASE_URL,
+            headers:{
+              'Accept-Language': app.i18n.locale,
+              'Content-Type': 'application/json',
+              'currency': app.$cookies.get('currency') || 'USD',
+              'Accept': 'application/json',
+              'secret-key': process.env.SECRET_KEY,
+              'api-key': process.env.API_KEY,
+            },
+          });
     return {
-      products : response.data
+      products : response.data.products
     }
   },
   data() {
