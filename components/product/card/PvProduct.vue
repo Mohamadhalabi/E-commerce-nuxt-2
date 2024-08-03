@@ -93,16 +93,16 @@
     <!-- Begin:Buttons -->
     <div class="d-flex align-items-streach justify-content-center py-2 mt-4 mt-lg-2 mt-md-2">
       <button
-        v-if="!(product.hide_price == 0)"
-        class="w-100 mx-1 whatsapp-button"
-        @click="handleWhatsAppClick(product)"
+      v-if="product.hide_price != 0 || product.categories.slug == 'Online-Services'"
+      class="w-100 mx-1 whatsapp-button"
+      @click="handleWhatsAppClick(product)"
       >
         <i
           style="font-size: larger"
           class="py-2 px-5 rounded-3 fab fa-whatsapp"
         ></i>
       </button>
-
+      
       <base-button-icon-1
         v-else-if="!product.has_token && !product.has_cover"
         class="px-2 py-2 mx-1 w-100"
@@ -117,6 +117,7 @@
         :outline="true"
       >{{ $t("wishlist.addToCart") }}
       </base-button-icon-1>
+
       <base-button-icon-1
         class="px-2 py-2 mx-1 w-100"
         @click="openQuickview"
