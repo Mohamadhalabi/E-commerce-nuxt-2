@@ -32,6 +32,7 @@
         <pv-product :product="item" />
       </div>
     </div>
+      <div class="category-desc mt-1 mb-2" v-html="category.description" />
   </div>
 </template>
 
@@ -48,7 +49,7 @@ export default {
     ...mapGetters("language", ["getLang"]),
   },
 
-  async asyncData({ params , app}) {
+  async asyncData({ app }) {
     const response  = await axios.get(`search/online-services-products`,{
             baseURL: process.env.API_BASE_URL,
             headers:{
@@ -61,17 +62,19 @@ export default {
             },
           });
     return {
-      products : response.data.products
+      products : response.data.products,
+      category: response.data.category
     }
   },
   data() {
     return {
       products: [],
+      category: null,
     };
   },
   head() {
     return {
-      title: "Techno Lock Keys Trading | Online Services",
+      title: this.category.meta_title,
       link: [
         {
           rel: 'canonical',
@@ -85,7 +88,7 @@ export default {
         },
         {
           name: 'description',
-          content: "Techno Lock Keys | Online Services"
+          content: this.category.meta_description,
         },
         {
           name: "og:type",
@@ -97,11 +100,11 @@ export default {
         },
         {
           name: "og:title",
-          content: "Techno Lock Keys Trading | Automotive Locksmith Services",
+          content: this.category.meta_title,
         },
         {
           name: "og:description",
-          content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
+          content: this.category.meta_description,
         },
         {
           name: "og:url",
@@ -133,66 +136,87 @@ export default {
         },
         {
           name: "twitter:title",
-          content: 'Techno Lock Keys Trading | Automotive Locksmith Services',
+          content: this.category.meta_title,
         },
         {
           name: "twitter:description",
-          content: "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators"
+          content: this.category.meta_description,
         },
-        // {
-        //   rel: "shortcut icon",
-        //   href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
-        // },
+        {
+          rel: "shortcut icon",
+          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        },
       ],
       script: [
         {
-          // type: 'application/ld+json', json: {
-          //   "@context": "https://schema.org",
-          //   "@type": "WebPage",
-          //   "products": this.products.map(product => {
-          //     const productData = {
-          //       "@type": "Product",
-          //       "name": product.title,
-          //       "url": process.env.PUBLIC_PATH + product.slug,
-          //       "description": product['seo_description'],
-          //       "brand": {
-          //         "@type": "Brand",
-          //         "name": product.manufacturer,
-          //       },
-          //       "image": product.gallery[0]['l']['url'],
-          //       "additionalImage": product.gallery[1]['l']['url'],
-          //       "sameAs": process.env.PUBLIC_PATH + "products/" + product.canonical,
-          //       "sku": product.sku,
-          //       "weight": product.weight,
-          //       "offers": {
-          //         "@type": "Offer",
-          //         "price": product.price.value,
-          //         "salePrice": product.sale_price.value === product.price.value ? 0 : product.sale_price.value,
-          //         "priceCurrency": product.price.code,
-          //         "availability": product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-          //         "url": process.env.PUBLIC_PATH + "products/" + product.slug,
-          //       }
-          //     };
-          //
-          //     // Add review information only if avg_rating is not null or 0
-          //     if (product.avg_rating !== null && product.avg_rating !== 0) {
-          //       productData.review = {
-          //         "@type": "Review",
-          //         "reviewRating": {
-          //           "@type": "Rating",
-          //           "ratingValue": product.avg_rating,
-          //           "bestRating": product.best_rating,
-          //         },
-          //         "author": {
-          //           "@type": "Person",
-          //           "name": product.author_review
-          //         }
-          //       };
-          //     }
-          //     return productData;
-          //   })
-          // }
+          type: 'application/ld+json', json: {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "products": this.products.map(product => {
+              const productData = {
+                "@type": "Product",
+                "name": product.title,
+                "url": process.env.PUBLIC_PATH + product.slug,
+                "description": product['seo_description'],
+                "brand": {
+                  "@type": "Brand",
+                  "name": product.manufacturer,
+                },
+                "image": product.gallery[0]['l']['url'],
+                "additionalImage": product.gallery[1]['l']['url'],
+                "sameAs": process.env.PUBLIC_PATH + "products/" + product.canonical,
+                "sku": product.sku,
+                "weight": product.weight,
+                "offers": {
+                  "@type": "Offer",
+                  "price": product.price.value,
+                  "salePrice": product.sale_price.value === product.price.value ? 0 : product.sale_price.value,
+                  "priceCurrency": product.price.code,
+                  "availability": product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+                  "url": process.env.PUBLIC_PATH + "products/" + product.slug,
+                }
+              };
+          
+              // Add review information only if avg_rating is not null or 0
+              if (product.avg_rating !== null && product.avg_rating !== 0) {
+                productData.review = {
+                  "@type": "Review",
+                  "reviewRating": {
+                    "@type": "Rating",
+                    "ratingValue": product.avg_rating,
+                    "bestRating": product.best_rating,
+                  },
+                  "author": {
+                    "@type": "Person",
+                    "name": product.author_review
+                  }
+                };
+              }
+              return productData;
+            })
+          },
         },
+        {
+          type: "application/ld+json",
+          json: {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: this.$t("products.home"),
+                item: "https:www.tlkeys.com/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: this.$t("online.onlineServices"),
+                item: "https:www.tlkeys.com/online-services",
+              },
+            ],
+          },
+        }
       ]
     }
   },
