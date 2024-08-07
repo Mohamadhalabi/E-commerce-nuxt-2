@@ -18,8 +18,13 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 import img from "~/static/images/blank.png";
+import api from "~/api";
 export default {
-
+  mounted(){
+    if(this.isAuthenticated){
+      api.post("user/auth/last-login", { userId: this.StateUser.id })
+    }
+  },
   computed: {
     ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
     ...mapGetters("language", ["getLang"]),
