@@ -17,6 +17,9 @@
     <div v-if="product.summary_name && product.summary_name != product.title" class="product-desc">
       <h2 class="summary-name">{{ product.summary_name }}</h2>
     </div>
+    <div v-if="product.note" class="pb-4">
+      <span class="product_note">* {{ product.note }}</span>
+    </div>
     <hr class="mb-1 mt-0">
     <pv-rating :product="product" :hide-reviews="false"/>
 <!--    <hr class="short-divider"/>-->
@@ -383,5 +386,10 @@ export default {
   color: #556b2f;
   letter-spacing: -.01em;
   width: calc( 100% - 70px );
+}
+.product_note{
+  font-size:18px;
+  color:#f52020;
+  font-weight: bold;
 }
 </style>
