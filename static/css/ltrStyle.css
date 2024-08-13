@@ -464,11 +464,6 @@
     .mobileHeaderNav .nav-categories {
         margin-top: 10px;
     }
-
-    .mobile-menu-container {
-        /*max-width: 100%;*/
-    }
-
     .mobileHeaderNav .nav-categories li {
         max-width: 100% !important;
         /*display: block !important;*/
