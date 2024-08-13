@@ -13,26 +13,8 @@
         >
           <div class="row mb-2">
             <div
-              class="col-sm-2 col-5 d-flex align-items-center justify-content-center"
-            >
-              <figure>
-                <img
-                  loading="lazy"
-                  :src="item.avatar"
-                  alt="author"
-                  width="50"
-                  style="height: 50px; object-fit: contain"
-                  :open_graph="item['open_graph']"
-                  :scal="item['scal']"
-                  :description="item['description']"
-                >
-              </figure>
-            </div>
-
-            <div
-              class="col-sm-9 col-7 py-2 px-4 arrow-ltr rounded-5"
+              class="col-sm-12 col-12 py-2 px-4 rounded-5"
               style="background-color: rgb(225, 225, 225)"
-              :class="{'arrow-rtl': getIsAr}"
             >
               <h5 class="m-0 z-100">
                 {{item.user_name}}
@@ -41,44 +23,12 @@
                 {{item.comment}}.
               </p>
               <div class="ratings-container z-100 m-0">
-                <div class="product-ratings z-100">
+                <div class="product-ratings ">
                   <span
                     class="ratings"
-                    :style="{width: `${item.rating * 20}%`}"
+                    :style="$options.filters.ratingFormat(item.rating , true)"
+                    :class="getIsAr ? 'end-0' : ''"
                   />
-                </div>
-              </div>
-
-              <p
-                style="z-index: 100"
-                class="m-0 mt-1"
-              >
-                {{$t("common.createdAt")}}: {{item.created_at}}
-              </p>
-
-              <div
-                v-for="(item2, index2) in item.replies"
-                :key="index2"
-                class="row"
-              >
-                <div class="col-md-1 col-sm-2 col-4 border p-0">
-                  <img
-                    loading="lazy"
-                    class="rounded-circle"
-                    style="width: 50px; height: 50px"
-                    :src="$settings.website.default_images.s['url']"
-                    alt=""
-                    srcset=""
-                  >
-                </div>
-
-                <div
-                  style="line-height: 1.3;"
-                  class="col-md-11 col-sm-10 col-8 border"
-                >
-                  {{item2.comment}}
-                  <br>
-                  <span class="text-warning"> {{item2.created_at}}</span>
                 </div>
               </div>
             </div>
@@ -87,93 +37,7 @@
       </div>
 
       <div class="divider" />
-
-      <!-- <div class="add-products-review">
-      <h3 class="review-title">
-        {{ $t("review.AddReview") }}
-      </h3>
-
-      <form action="#" class="comment-form m-0 text-right">
-        <div class="rating-form">
-          <label for="rating">
-            {{ $t("review.YourRating") }}
-            <span class="required">*</span>
-          </label>
-
-          <div class="">
-            <div class="rating-stars">
-              <a
-                v-for="number in [1, 2, 3, 4, 5]"
-                :key="`rating${number}`"
-                href="javascript:;"
-                :class="`star-${number}`"
-                @click="setRating($event, number)"
-              >
-
-              </a>
-            </div>
-
-            <select id="rating" name="rating" required style="display: none">
-              <option value>
-                {{ $t("review.rate") }}
-              </option>
-              <option value="5">
-                {{ $t("review.rate") }}
-                Perfect
-              </option>
-              <option value="4">
-                {{ $t("review.good") }}
-              </option>
-              <option value="3">
-                {{ $t("review.average") }}
-              </option>
-              <option value="2">
-                {{ $t("review.NotBad") }}
-              </option>
-              <option value="1">
-                {{ $t("review.VeryPoor") }}
-              </option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label>
-            {{ $t("review.your_review") }}
-            <span class="required">*</span>
-          </label>
-          <textarea
-            v-model="dataForm.comment"
-            cols="5"
-            rows="6"
-            class="form-control form-control-sm"
-          />
-        </div>
-
-        <input
-          type="submit"
-          class="btn btn-primary"
-          value="Submit"
-          @click="sendRating"
-        />
-      </form>
-    </div> -->
     </div>
-
-    <!-- <div v-else class="products-reviews-content">
-    <h3 class="reviews-title">
-      {{ $t("review.reviews") }}
-    </h3>
-
-    <p>
-      {{ $t("review.firstToReview") }}
-    </p>
-
-    <div class="divider" />
-
-
-  </div>
- -->
     <div class="add-product-review">
       <h3
         v-if="ratings.length == 0"
@@ -351,31 +215,4 @@ export default {
     }
   }
 };
-</script>
-
-<style  scoped>
-.z-100 {
-  z-index: 100 !important;
-}
-.arrow-ltr {
-  position: relative;
-}
-
-.arrow-ltr::after {
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  background: rgb(225, 225, 225);
-  transform: translate(-50%, -50%) rotate(45deg);
-  text-align: center;
-  top: 50%;
-  left: -1px;
-  z-index: -1;
-}
-
-.arrow-rtl::after {
-  transform: translate(50%, -50%) rotate(45deg);
-  right: -1px;
-}
-</style>
+</script> 
