@@ -299,71 +299,72 @@ export default {
           }
         })
       };
-      if(this.product.avg_rating !=0)
-      head_data["script"].push({
-        type: 'application/ld+json',
-        json: {
-          "@context": "https://schema.org/",
-          "@type": "Product",
-          "name": this.product.title,
-          "image": this.product.main_image,
-          "additionalImage": this.product.secondary_image,
-          "video":this.product.videos_link,
-          "compatibleWith":  this.product.compatible_products_slug,
-          "bundledProduct": this.product.bundled_products_slug,
-          "gallery": this.product.schema_gallery,
-          "description": this.product.meta.description,
-          "sameAs": this.product.canonical,
-          "sku": this.product.sku,
-          "brand": {
-            "@type": "Brand",
-            "name": this.product.specifications.manufacturer ?? "-"
-          },
-          "weight": this.product.weight,
-          "offers": this.product.offers.length > 0 ? this.product.offers.map(offer => ({
-            "@type": "Offer",
-            "price": offer.price.value,
-            "salePrice": this.product.sale_price.value,
-            "priceCurrency": this.product.price.code,
-            "priceValidUntil": formatDate(this.product.price.until),
-            "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-            "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-            "eligibleQuantity": {
-              "@type": "QuantitativeValue",
-              "value": offer.from
-            }
-          })) : [{
-            "@type": "Offer",
-            "price": this.product.price.value,
-            "salePrice": this.product.sale_price.value,
-            "priceCurrency": this.product.price.code,
-            "priceValidUntil": formatDate(this.product.price.until),
-            "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-            "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-            "eligibleQuantity": {
-              "@type": "QuantitativeValue",
-              "value": 1
-            }
-          }],
-          "review": {
-            "@type": "Review",
-            "reviewRating": {
-              "@type": "Rating",
-              "ratingValue": this.product.avg_rating,
-              "bestRating": this.product.best_rating,
+      if (this.product.total_reviews > 0) {
+        head_data["script"].push({
+          type: 'application/ld+json',
+          json: {
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": this.product.title,
+            "image": this.product.main_image,
+            "additionalImage": this.product.secondary_image,
+            "video": this.product.videos_link,
+            "compatibleWith": this.product.compatible_products_slug,
+            "bundledProduct": this.product.bundled_products_slug,
+            "gallery": this.product.schema_gallery,
+            "description": this.product.meta.description,
+            "sameAs": this.product.canonical,
+            "sku": this.product.sku,
+            "brand": {
+              "@type": "Brand",
+              "name": this.product.specifications.manufacturer ?? "-"
             },
-            "author": {
-              "@type": "Person",
-              "name": this.product.author_review
-            }
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": this.product.avg_rating,
-            "reviewCount": this.product.total_reviews
-          },
+            "weight": this.product.weight,
+            "offers": this.product.offers.length > 0 ? this.product.offers.map(offer => ({
+              "@type": "Offer",
+              "price": offer.price.value,
+              "salePrice": this.product.sale_price.value,
+              "priceCurrency": this.product.price.code,
+              "priceValidUntil": formatDate(this.product.price.until),
+              "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
+              "eligibleQuantity": {
+                "@type": "QuantitativeValue",
+                "value": offer.from
+              }
+            })) : [{
+              "@type": "Offer",
+              "price": this.product.price.value,
+              "salePrice": this.product.sale_price.value,
+              "priceCurrency": this.product.price.code,
+              "priceValidUntil": formatDate(this.product.price.until),
+              "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
+              "eligibleQuantity": {
+                "@type": "QuantitativeValue",
+                "value": 1
+              }
+            }],
+            "review": this.product.rating.map(item => ({
+              "@type": "Review",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": item.rating,
+              },
+              "author": {
+                "@type": "Person",
+                "name": item.user
+              }
+            })),
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": this.product.avg_rating,
+              "reviewCount": this.product.total_reviews
+          }
         }
       });
+    }
+
       else{
         head_data["script"].push({
           type: 'application/ld+json',

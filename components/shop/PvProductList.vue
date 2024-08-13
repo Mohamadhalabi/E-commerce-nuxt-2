@@ -173,20 +173,20 @@ export default {
               };
 
               // Add review information only if avg_rating is not null or 0
-              if (product.avg_rating !== null && product.avg_rating !== 0) {
-                productData.review = {
-                  "@type": "Review",
-                  "reviewRating": {
-                    "@type": "Rating",
-                    "ratingValue": product.avg_rating,
-                    "bestRating": product.best_rating,
-                  },
-                  "author": {
-                    "@type": "Person",
-                    "name": product.author_review
-                  }
-                };
-              }
+              // if (product.avg_rating !== null && product.avg_rating !== 0) {
+              //   productData.review = {
+              //     "@type": "Review",
+              //     "reviewRating": {
+              //       "@type": "Rating",
+              //       "ratingValue": product.avg_rating,
+              //       "bestRating": product.best_rating,
+              //     },
+              //     "author": {
+              //       "@type": "Person",
+              //       "name": product.author_review
+              //     }
+              //   };
+              // }
               return productData;
             })
           }
