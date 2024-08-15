@@ -138,16 +138,16 @@
           >{{ $t("products.PDF") }} ({{ product.pdf.length }})</a
         >
       </li>
-
       <li class="nav-item">
         <a
           id="product-tab-contactus"
           class="nav-link"
+          :class="{ active: isEmpty(product.description) }"
           data-toggle="tab"
           href="#product-contactus-content"
           role="tab"
           aria-controls="product-contactus-content"
-          aria-selected="false"
+          aria-selected="true"
           >{{ $t("products.contactus") }}</a
         >
       </li>
@@ -220,14 +220,15 @@
 
         </div>
       </div>
-      <div
+      <!-- <div
         id="product-support-content"
         class="tab-pane fade"
+        :class="{ active: isEmpty(product.description) }"
         role="tabpanel"
         aria-labelledby="product-tab-support"
       >
         <pv-support :type-support="'product'" :model-id="product.sku" />
-      </div>
+      </div> -->
 
       <div
         id="product-reviews-content"
@@ -247,6 +248,7 @@
       <div
         id="product-contactus-content"
         class="tab-pane fade"
+        :class="{ 'show active ': isEmpty(product.description) }"
         role="tabpanel"
         aria-labelledby="product-tab-contactus"
       >
