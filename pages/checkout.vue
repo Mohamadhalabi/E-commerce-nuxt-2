@@ -15,11 +15,15 @@
             <a href="javascript:;">{{ $t("dashboard.checkout") }}</a>
           </li>
         </ol>
-        <button type="button" class="border-0 bg-white" @click="generatePdf()">
-          <img src="../static/images/pdf-logo.png" class="pdf-logo" alt="PDF Button">
-        </button>
       </nav>
       <template v-if="cartList.length > 0">
+        <div class="row">
+          <div class="col-12 p-0">
+            <button type="button" class="p-lg-0 border-0 bg-white float-right" @click="generatePdf()">
+              <img src="../static/images/pdf-logo.png" class="pdf-logo" alt="PDF Button">
+            </button>
+          </div>
+        </div>
         <div class="row">
           <div class="col-lg-8">
             <pv-free-shipping-amount class="p-3" :checkout="true"></pv-free-shipping-amount>

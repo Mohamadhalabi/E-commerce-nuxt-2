@@ -301,7 +301,7 @@ export default
     product: 'Продукт',
     cardEmpty: 'Нет товаров в корзине.',
     NoProductsCompares: 'Нет товаров в вашем списке сравнения',
-    subtotal: 'Промежуточный итог',
+    subtotal: 'Промежуточный итог(без доставки)',
     coupon: 'Купон',
     applay: 'Применить',
     total: 'Всего',

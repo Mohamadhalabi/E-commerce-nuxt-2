@@ -17,19 +17,6 @@
         </div>
       </nav>
     </div>
-    <div v-if="cartList.length > 0">
-      <button
-        @click="clearCart({ StateUser })"
-        style="background-color: #892118;
-        color: white;border-radius: 10px;
-        padding: 15px"
-        type="button"
-        :outline="true"
-        class="py-3 mb-1 font-weight-bold">
-        <i style="color: white;" class="fa fa-trash remove-button"></i>
-        Empty Cart
-      </button>
-    </div>
     <client-only>
       <pv-free-shipping-amount></pv-free-shipping-amount>
     </client-only>
@@ -38,7 +25,7 @@
       key="noEmpty"
       class="row account-container">
       <div class="col-lg-8">
-        <table class="table table-bordered table-striped mt-0 table-responsive-md"
+        <table class="table table-bordered table-striped mt-0 table-responsive-md mb-1"
                  :class="{'text-right':getIsAr}">
             <thead class="thead-dark">
               <tr class="text-center bg-white vertical-align-middle">
@@ -136,6 +123,17 @@
               </tr>
             </tbody>
           </table>
+          <button
+        @click="clearCart({ StateUser })"
+        style="background-color: #892118;
+        color: white;border-radius: 10px;
+        padding: 15px"
+        type="button"
+        :outline="true"
+        class="py-3 mb-1 font-weight-bold">
+        <i style="color: white;" class="fa fa-trash remove-button"></i>
+        Empty Cart
+      </button>
       </div>
       <div class="col-lg-4">
         <div class="order-summary">
