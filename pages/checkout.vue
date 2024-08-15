@@ -282,7 +282,7 @@
                   <td>
                     <div class="row">
                       <div class="col-lg-1 col-md-1 col-sm-1 col-2 align-center m-auto">
-                        <i class="fa fa-trash remove-button" @click="removeFromCart({ product, index }),refetchPrice()"></i>
+                        <i class="fa fa-trash remove-button" @click="refetchPrice(),removeFromCart({ product, index })"></i>
                       </div>
                       <div class="col-lg-2 col-md-2 col-sm-2 col-3 align-center m-auto">
                         <nuxt-link :to="getLink('/products/'+product.slug)">
@@ -840,6 +840,8 @@ export default {
     },
 
     refetchPrice() {
+      this.$nuxt.refresh()
+
       this.$Progress.start();
       let query = "?";
       if (this.dataForm.address) {
