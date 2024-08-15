@@ -303,7 +303,7 @@ export default
       product: 'Product',
       cardEmpty: 'No products in the cart.',
       NoProductsCompares: 'No products in your compare list',
-      subtotal: 'Subtotal',
+      subtotal: 'Subtotal (Without shipping)',
       coupon: 'Coupon',
       applay: 'Applay',
       total: 'Total',
@@ -339,6 +339,7 @@ export default
       outOfStock:"*The selected quantity is currently not available, but we'll try to get it for you",
       selectAddress:"Please select an address before choosing the shipping method",
       selectAShipping:"Please select a shipping method before choosing the payment method",
+      blocked_product: "*You can not complete your order because you added a blocked country product. Please change your address or remove the product ",
     },
     account: {
       close: 'Close',

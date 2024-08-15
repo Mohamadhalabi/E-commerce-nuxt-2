@@ -277,6 +277,9 @@
                 >
                   <td>
                     <div class="row">
+                      <div class="col-lg-1 col-md-1 col-sm-1 col-2 align-center m-auto">
+                        <i class="fa fa-trash remove-button" @click="removeFromCart({ product, index }),refetchPrice()"></i>
+                      </div>
                       <div class="col-lg-2 col-md-2 col-sm-2 col-3 align-center m-auto">
                         <nuxt-link :to="getLink('/products/'+product.slug)">
                           <img :src="product.gallery[0].s.url" class="ml-auto mr-auto" :alt="product.gallery[0].s.alt" />
@@ -293,7 +296,7 @@
                           {{ $t("checkout.outOfStock") }}
                         </span>
                       </div>
-                      <div class="col-lg-4 col-md-6 col-sm-6 mt-auto mb-auto product-quantity-price text-lg-right text-md-right text-sm-right text-center">
+                      <div class="col-lg-3 col-md-5 col-sm-5 mt-auto mb-auto product-quantity-price text-lg-right text-md-right text-sm-right text-center">
                         <span class="product-qty">{{ product.quantity }} X</span>
                         <span
                           v-if="product.price"
@@ -475,12 +478,15 @@
                       <p
                         v-if="hasBlockedCountry"
                         class="mt-2"
-                        style="font-size: 12px; color: #ff8181"
+                        style="font-size: 14px; color: #ff8181"
                       >
-                        You can not complate order becuse you are added blocked
-                        country product
+                      <!-- {{ $t("checkout.blocked_product") }} -->
+                      <div v-for="(product, index) in checkoutData.products" :key="`cart-product-${index}`">
+                        <span v-if="product.message != null" style="font-size: 16px; color: #ff8181;font-weight:bold">
+                          * {{ product.message }} ({{ product.sku }})
+                        </span>
+                      </div>
                       </p>
-
 
                       <base-button-icon-1
                         class="py-4 w-100"
@@ -653,11 +659,11 @@ export default {
       deep: true,
     },
   },
-  async fetch() {
+  mounted() {
     this.refetchPrice()
   },
   methods: {
-    ...mapActions("shop", ["getCartList"]),
+    ...mapActions("shop", ["removeFromCart"]),
     getLink(route) {
       if (this.getLang === 'en') {
         return route; // Return the route as is without the language parameter
@@ -830,7 +836,7 @@ export default {
     },
 
     refetchPrice() {
-      // this.$Progress.start();
+      this.$Progress.start();
       let query = "?";
       if (this.dataForm.address) {
         query += `address=${this.dataForm.address}&`;
@@ -851,7 +857,7 @@ export default {
             this.checkoutData.shipping_cost.value = 0.00
           }
           this.checkHasBlockedCountry(this.checkoutData.products);
-          // this.$Progress.finish();
+          this.$Progress.finish();
         })
         .catch((error) => {
           console.log(error)
