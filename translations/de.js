@@ -299,7 +299,7 @@ export default
     product: 'Produkt',
     cardEmpty: 'Keine Produkte im Warenkorb.',
     NoProductsCompares: 'Keine Produkte in Ihrer Vergleichsliste',
-    subtotal: 'Zwischensumme',
+    subtotal: 'Zwischensumme(ohne Versand)',
     coupon: 'Gutschein',
     applay: 'Anwenden',
     total: 'Gesamt',

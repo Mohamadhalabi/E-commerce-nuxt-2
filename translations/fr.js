@@ -299,7 +299,7 @@ export default
     product: 'Produit',
     cardEmpty: 'Aucun produit dans le panier.',
     NoProductsCompares: 'Aucun produit dans votre liste de comparaison',
-    subtotal: 'Sous-total',
+    subtotal: 'Sous-total(sans expédition)',
     coupon: 'Coupon',
     applay: 'Appliquer',
     total: 'Total',

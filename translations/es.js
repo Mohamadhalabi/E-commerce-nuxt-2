@@ -301,7 +301,7 @@ export default
     product: 'Producto',
     cardEmpty: 'No hay productos en el carrito.',
     NoProductsCompares: 'No hay productos en tu lista de comparación',
-    subtotal: 'Subtotal',
+    subtotal: 'Subtotal(sin envío)',
     coupon: 'Cupón',
     applay: 'Aplicar',
     total: 'Total',
