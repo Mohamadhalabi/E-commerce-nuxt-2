@@ -291,7 +291,7 @@ export default {
     subFolders: false,
     fallback: '404.html'
   },
-  ssr: true,
+  ssr: false,
   loading: {
     color: '#f07905',
     height: '6px',

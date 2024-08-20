@@ -138,9 +138,9 @@
       </div>
     </div>
 
-    <div v-if="orders.length != 0" class="ordersList">
-      <div class="table-responsive">
-        <table class="table table-striped table-bordered" style="margin-bottom: 1rem;">
+  
+    
+        <table class="table table-striped table-bordered table-responsive-md" v-if="orders.length != 0">
           <thead style="vertical-align: middle;text-align: center">
           <tr style="background-color: #3e3e3e">
             <th class="order-table-header">#</th>
@@ -190,7 +190,7 @@
           </tr>
           </tbody>
         </table>
-      </div>
+      
 
       <b-pagination
         v-if="total_pages > 1"
@@ -201,7 +201,6 @@
         size="lg"
         @input="changePage(page)"
       />
-    </div>
     <div v-else-if="loadingOrders == true">
       <b-spinner variant="primary" label="Spinning" />
     </div>

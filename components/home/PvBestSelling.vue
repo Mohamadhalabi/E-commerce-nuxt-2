@@ -1,5 +1,6 @@
 <template>
   <pv-collection
+  style="padding: 25px;"
     :isIndexPage ="true"
     :products="bestSellingProducts2"
     :collectionTitle="$t('home.bestSellingProducts')"

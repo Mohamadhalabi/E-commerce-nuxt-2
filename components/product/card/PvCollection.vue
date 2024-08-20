@@ -9,7 +9,7 @@
     <Carousel
       :slides-per-page="5"
       :show-dots='true'
-      :autoplay-delay="4"
+      :autoplay-delay="11114"
       :gutter="20"
       :show-arrows="true"
       :peek-right="5"
