@@ -63,7 +63,7 @@
         </div>
       </div>
     </div>
-    <div class="col-6 col-md-6 col-sm-6 col-lg-1 d-flex mt-auto mb-auto ml-auto mr-lg-1 justify-content-end">
+    <div class="col-6 col-md-6 col-sm-6 col-lg-1 d-flex mt-auto mb-auto ml-auto mr-lg-1 justify-content-end social-iconss">
       <div class="whatsapp-icon ml-2 mr-2" @click="sendWhatsAppMessage">
         <i class="fab fa-whatsapp cursor-pointer" style="cursor: pointer"></i>
       </div>
@@ -184,6 +184,12 @@ export default {
   .top-header{
     display: inline-block;
     text-align: center;
+  }
+}
+@media screen and (max-width: 776px){
+  .social-iconss{
+    justify-content: center!important;
+    margin:auto!important;
   }
 }
 </style>

@@ -91,7 +91,7 @@
       </div>
     </div>
     <!-- Begin:Buttons -->
-    <div class="d-flex align-items-streach justify-content-center py-2 mt-4 mt-lg-2 mt-md-2">
+    <div class="d-lg-flex align-items-streach justify-content-center py-2 mt-4 mt-lg-2 mt-md-2">
       <button
       v-if="product.hide_price != 0 || product.categories.slug == 'Online-Services'"
       class="w-100 mx-1 whatsapp-button"
@@ -119,7 +119,7 @@
       </base-button-icon-1>
 
       <base-button-icon-1
-        class="px-2 py-2 mx-1 w-100"
+        class="px-2 py-2 mx-1 w-100 mt-1 mt-lg-0"
         @click="openQuickview"
         :outline="true"
       >{{ $t("wishlist.QuickView") }}

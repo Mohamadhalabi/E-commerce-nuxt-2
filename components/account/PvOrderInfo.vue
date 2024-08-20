@@ -14,150 +14,127 @@
           <b-card-header class="pa-0 rounded">
             <div class="row justify-content-between">
               <div class="col-12 col-md-10">
-                <span class="text-warning"
-                ><i
-                  style="
-                      border: 1px solid rgb(219, 219, 219);
-                      background: rgb(255, 255, 255);
-                      height: 45px;
-                      width: 45px;
-                      text-align: center;
-                      display: inline-block;
-                      margin: auto;
-                      line-height: 45px;
-                      border-radius: 50%;
-                    "
-                  class="fa fa-box fa-lg"
-                  orange
-                /></span>
-                <label
-                  class="orderId"
-                  style="position: relative; top: 5px; left: 10px"
-                >{{ $t("orders.orderId") }}<br/>
-                  <span style="font-weight: 400">{{
-                      order.order_id
-                    }}</span></label
-                >
-                <span
-                  class="d-md-inline-block d-none orderCargo"
-                  style="
-                    height: 35px;
-                    position: relative;
-                    top: 7px;
-                    left: 15px;
-                    border-left: 1px solid #aaa;
-                  "
-                />
-                <label style="position: relative; left: 10px; top: 6px"
-                >{{ $t("orders.cargoCompany") }}<br/>
-                  <span
-                    style="font-weight: 400"
-                    v-text="
-                      order.shipping_method
-                        ? order.shipping_method
-                        : $t('common.notAvailable')
-                    "
-                  /></label>
+    <div class="d-flex">
+        <span class="text-warning">
+            <i
+                style="
+                    border: 1px solid rgb(219, 219, 219);
+                    background: rgb(255, 255, 255);
+                    height: 45px;
+                    width: 45px;
+                    text-align: center;
+                    display: inline-block;
+                    margin: auto;
+                    line-height: 45px;
+                    border-radius: 50%;
+                "
+                class="fa fa-box fa-lg"
+            ></i>
+        </span>
+        <label class="orderId" style="position: relative; top: 5px; left: 10px">
+            {{ $t("orders.orderId") }}<br />
+            <span style="font-weight: 400">{{ order.order_id }}</span>
+        </label>
+    </div>
 
-                <span
-                  v-if="order.created_at"
-                  class="d-md-inline-block d-none orderCargo"
-                  style="
-                    height: 35px;
-                    position: relative;
-                    top: 7px;
-                    left: 15px;
-                    border-left: 1px solid #aaa;
-                  "
-                />
-                <label style="position: relative; left: 10px; top: 6px"
-                >{{ $t("orders.created_at") }}<br/>
-                  <span
-                    style="font-weight: 400"
-                    @click="window.open('#', '_blank')"
-                    v-text="order.created_at"
-                  /></label>
+    <div class="d-flex">
+        <span
+            class="orderCargo"
+            style="
+                height: 35px;
+                position: relative;
+                top: 7px;
+                left: 15px;
+                border-left: 1px solid #aaa;
+            "
+        ></span>
+        <label style="position: relative; left: 10px; top: 6px">
+            {{ $t("orders.cargoCompany") }}:
+            <span
+                style="font-weight: 400"
+                v-text="order.shipping_method ? order.shipping_method : $t('common.notAvailable')"
+            ></span>
+        </label>
+    </div>
 
-                <span
-                  v-if="order.weight || order.type == 'pin_code'"
-                  class="d-md-inline-block d-none orderCargo"
-                  style="
-                    height: 35px;
-                    position: relative;
-                    top: 7px;
-                    left: 15px;
-                    border-left: 1px solid #aaa;
-                  "
-                />
+    <div class="d-flex" v-if="order.created_at">
+        <span
+            class="orderCargo"
+            style="
+                height: 35px;
+                position: relative;
+                top: 7px;
+                left: 15px;
+                border-left: 1px solid #aaa;
+            "
+        ></span>
+        <label style="position: relative; left: 10px; top: 6px">
+            {{ $t("orders.created_at") }}:
+            <span
+                style="font-weight: 400"
+                @click="window.open('#', '_blank')"
+                v-text="order.created_at"
+            ></span>
+        </label>
+    </div>
 
-                <label
-                  class="orderId"
-                  style="position: relative; top: 5px; left: 10px"
-                >{{ $t("orders.orderStatus") }}<br/>
-
-                  <label
-                    v-if="order.status == 'Completed'"
-                    class="text-success mb-1"
-                  >
-                    <i class="fa fa-check"/> {{ order.status }}
-                  </label>
-                  <label
-                    v-else-if="order.status == 'Processing'"
-                    class="text-warning mb-1"
-                  >
-                    <i class="fa fa-hourglass-start"/> {{ order.status }}
-                  </label>
-                  <label
-                    v-else-if="order.status == 'Pending Payment'"
-                    class="text-warning mb-1"
-                  >
-                    <i class="fa fa-spinner"/> {{ order.status }}
-                  </label>
-                  <label
-                    v-else-if="order.status == 'Canceled'"
-                    class="text-danger mb-1"
-                  >
-                    <i class="fa fa-times-circle"/> {{ order.status }}
-                  </label>
-                  <label
-                    v-else-if="order.status == 'Refunded'"
-                    class="text-danger mb-1"
-                  >
-                    <i class="fa fa-times-circle"/> {{ order.status }}
-                  </label>
-                  <label
-                    v-else-if="order.status == 'Failed'"
-                    class="text-danger mb-1"
-                  >
-                    <i class="fa fa-exclamation"/> {{ order.status }}
-                  </label>
-                  <label
-                    v-else-if="order.status == 'On hold'"
-                    class="text-warning mb-1"
-                  >
-                    <i class="fa fa-exclamation-triangle"/> {{ order.status }}
-                  </label>
+    <div class="d-flex" v-if="order.weight || order.type == 'pin_code'">
+        <span
+            class="orderCargo"
+            style="
+                height: 35px;
+                position: relative;
+                top: 7px;
+                left: 15px;
+                border-left: 1px solid #aaa;
+            "
+        ></span>
+        <label class="orderId" style="position: relative; top: 5px; left: 10px">
+            {{ $t("orders.orderStatus") }}:
+            <span>
+                <label v-if="order.status == 'Completed'" class="text-success mb-1">
+                    <i class="fa fa-check"></i> {{ order.status }}
                 </label>
+                <label v-else-if="order.status == 'Processing'" class="text-warning mb-1">
+                    <i class="fa fa-hourglass-start"></i> {{ order.status }}
+                </label>
+                <label v-else-if="order.status == 'Pending Payment'" class="text-warning mb-1">
+                    <i class="fa fa-spinner"></i> {{ order.status }}
+                </label>
+                <label v-else-if="order.status == 'Canceled'" class="text-danger mb-1">
+                    <i class="fa fa-times-circle"></i> {{ order.status }}
+                </label>
+                <label v-else-if="order.status == 'Refunded'" class="text-danger mb-1">
+                    <i class="fa fa-times-circle"></i> {{ order.status }}
+                </label>
+                <label v-else-if="order.status == 'Failed'" class="text-danger mb-1">
+                    <i class="fa fa-exclamation"></i> {{ order.status }}
+                </label>
+                <label v-else-if="order.status == 'On hold'" class="text-warning mb-1">
+                    <i class="fa fa-exclamation-triangle"></i> {{ order.status }}
+                </label>
+            </span>
+        </label>
+    </div>
 
-                <span
-                  v-if="order.weight && order.weight != 0"
-                  class="d-md-inline-block d-none orderCargo"
-                  style="
-                    height: 35px;
-                    position: relative;
-                    top: 7px;
-                    left: 15px;
-                    border-left: 1px solid #aaa;
-                  "
-                />
+    <div class="d-flex" v-if="order.weight && order.weight != 0">
+        <span
+            class="orderCargo"
+            style="
+                height: 35px;
+                position: relative;
+                top: 7px;
+                left: 15px;
+                border-left: 1px solid #aaa;
+            "
+        ></span>
+        <label style="position: relative; left: 10px; top: 6px">
+            {{ $t("orders.weight") }}:
+            <span style="font-weight: 400" v-text="`${order.weight} KG`"></span>
+        </label>
+    </div>
+</div>
 
-                <label
-                  v-if="order.weight && order.weight != 0"
-                  style="position: relative; left: 10px; top: 6px"
-                >{{ $t("orders.weight") }}<br/>
-                  <span style="font-weight: 400" v-text="`${order.weight} KG`"
-                  /></label>
-              </div>
 
               <div
                 v-if="order.type == 'order'"
