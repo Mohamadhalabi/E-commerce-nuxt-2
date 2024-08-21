@@ -75,25 +75,11 @@
         <label>Date:</label>
         <div class="input-group" data-provide="datepicker">
           <input type="date" class="form-control"
-                 @change="DateSorting($event)"
-                 style="min-height: 50px"
-                 @setValue="date = $event.value"
+          style="font-size:16px;"
+          @change="DateSorting($event)"
+          @setValue="date = $event.value"
           >
         </div>
-<!--        <AutoComplate-->
-<!--          placeholder="Shipping Method"-->
-<!--          :model="shippingMethodSorting"-->
-<!--          :defulte-name="shippingMethodSorting"-->
-<!--          :options="[-->
-<!--            { name: 'All', value: 'All'},-->
-<!--            { name: 'Dhl', value: 'dhl'},-->
-<!--            { name: 'Aramex', value: 'aramex' },-->
-<!--            { name: 'Ups', value: 'ups' },-->
-<!--            { name: 'Fedex', value: 'fedex' },-->
-
-<!--          ]"-->
-<!--          @setValue="shippingMethodSorting = $event.value"-->
-<!--        />-->
       </div>
 
       <div class="col-md-3 col-12 mt-lg-2">
