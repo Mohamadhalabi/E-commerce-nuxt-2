@@ -355,7 +355,7 @@ export default {
   mounted() {
   },
   methods: {
-    ...mapActions("auth", ["LogIn"]),
+    ...mapActions("Auth", ["LogIn"]),
     submit: async function () {
       await this.Register(this.form);
     },

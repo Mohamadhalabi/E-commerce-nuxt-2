@@ -269,7 +269,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('auth', ['setNewData']),
+    ...mapActions('Auth', ['setNewData']),
     ...mapActions('language',['updateLanguageCode']),
 
     // typePhoneNum(phoneObj) {

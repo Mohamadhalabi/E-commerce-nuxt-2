@@ -155,7 +155,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters('auth', ['isAuthenticated', 'StateUser']),
+    ...mapGetters('Auth', ['isAuthenticated', 'StateUser']),
   },
   methods: {
     async sendMessage() {
