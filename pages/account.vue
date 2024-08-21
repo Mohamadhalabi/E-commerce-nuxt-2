@@ -318,25 +318,6 @@
                       {{ StateUser.seller.name }}
                     </h4>
                   </nuxt-link>
-
-                  <div class="d-flex align-items-center justify-content-around">
-                    <nuxt-link
-                      v-if="StateUser && StateUser.seller.skype"
-                      :to="StateUser.seller.skype"
-                    >
-                      <i
-                        class="bg-light social-icon fab fa-skype text-warning"
-                      ></i>
-                    </nuxt-link>
-
-                    <nuxt-link
-                      v-if="StateUser && StateUser.seller.facebook"
-                      :to="StateUser.seller.facebook"
-                    ><i
-                      class="bg-light social-icon icon-facebook text-warning"
-                    ></i
-                    ></nuxt-link>
-                  </div>
                 </div>
               </div>
 
@@ -355,7 +336,7 @@
                   "
                 >
                   <i
-                    class="bg-light social-icon fab fa-whatsapp text-warning"
+                    class="bg-white social-icon fab fa-whatsapp text-warning"
                   ></i>
                   {{ StateUser.seller.whatsapp_number }}
                 </nuxt-link>
@@ -365,7 +346,7 @@
                   :to="'mailto:' + StateUser.seller.email"
                 >
                   <i
-                    class="bg-light social-icon fa fa-envelope text-warning"
+                    class="bg-white social-icon fa fa-envelope text-warning"
                   ></i>
                   {{ StateUser.seller.email }}
                 </nuxt-link>
@@ -373,7 +354,7 @@
                 <nuxt-link
                   v-if="StateUser && StateUser.seller.phone"
                   :to="'tel:' + StateUser.seller.phone"
-                ><i class="bg-light social-icon fa fa-phone text-warning"></i>
+                ><i class="bg-white social-icon fa fa-phone text-warning"></i>
                   {{ StateUser.seller.phone }}</nuxt-link
                 >
               </span>
@@ -553,7 +534,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("Auth", ["isAuthenticated", "StateUser"]),
     ...mapGetters("shop", ["cartCount"]),
     ...mapGetters("fav", ["getWishlistCounts"]),
     ...mapGetters("compare", ["getCounts"]),
@@ -590,7 +571,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("auth", ["LogOut"]),
+    ...mapActions("Auth", ["LogOut"]),
 
     changeTab(query) {
       this.$router.push({ path: "account", query: { tab: query } });

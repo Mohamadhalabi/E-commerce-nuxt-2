@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("Auth", ["isAuthenticated", "StateUser"]),
     ...mapGetters("language", ["getLang"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
     availableCurrencies() {
@@ -34,7 +34,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions("auth", ["LogOut"]),
+    ...mapActions("Auth", ["LogOut"]),
     defalutAvatar(e) {
       e.target.src = img;
     },

@@ -629,7 +629,7 @@ export default {
   },
   computed: {
     ...mapGetters("language", ["getLang"]),
-    ...mapGetters("auth", ["isAuthenticated","StateUser"]),
+    ...mapGetters("Auth", ["isAuthenticated","StateUser"]),
     ...mapGetters("shop", [
       "cartList",
       "cartProductsPrice",

@@ -14,7 +14,7 @@ import {mapActions, mapGetters} from "vuex";
 
 export default {
   computed:{
-    ...mapGetters("auth", ["isAuthenticated","StateUser"]),
+    ...mapGetters("Auth", ["isAuthenticated","StateUser"]),
   },
   methods:{
     ...mapActions("shop", [ "getCartList", "clearCart"]),

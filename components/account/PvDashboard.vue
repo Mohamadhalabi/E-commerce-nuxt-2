@@ -145,7 +145,7 @@ export default {
     wishlistCount: Number,
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("Auth", ["isAuthenticated", "StateUser"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
   data:function (){

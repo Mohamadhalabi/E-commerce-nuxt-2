@@ -55,7 +55,7 @@ import {mapGetters} from "vuex";
 export default {
   components: { BaseButtonIcon1 },
   computed: {
-    ...mapGetters("auth", ["getEmail"]),
+    ...mapGetters("Auth", ["getEmail"]),
   },
   data() {
     return {

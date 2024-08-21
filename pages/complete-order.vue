@@ -68,7 +68,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("Auth", ["isAuthenticated", "StateUser"]),
     getOrderId() {
       return this.$route.query.orderId;
     },
