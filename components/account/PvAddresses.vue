@@ -126,56 +126,6 @@
               class="radio"
             />
           </div>
-<!--          <div v-else>-->
-<!--            <b-card-->
-<!--              :class="{'defoultCard': address.default && !clicked, 'selectedCard': address === selectedAddress && clicked}"-->
-<!--              @click="selectAddress(address)"-->
-<!--            >-->
-<!--              &lt;!&ndash; Add a radio button input inside the b-card &ndash;&gt;-->
-<!--              <input-->
-<!--                type="radio"-->
-<!--                :name="'address-radio-' + index"-->
-<!--                :checked="address === selectedAddress"-->
-<!--                style="position: absolute; opacity: 0; pointer-events: none;"-->
-<!--              />-->
-<!--              <b-card-text class="addressInfoP">-->
-<!--                <div class="mb-1">-->
-<!--                    <span class="p-0">-->
-<!--                      <b>{{ $t("checkout.addrress") }}: </b>-->
-<!--                      {{`${address.address} ${address.city} ${address.country.country_name}` }}-->
-<!--                    </span>-->
-<!--                </div>-->
-
-<!--                <div class="">-->
-<!--                  <span class="p-0"><b>{{ $t("checkout.phone") }}:</b> {{ `${address.phone}` }}</span>-->
-<!--                </div>-->
-<!--              </b-card-text>-->
-
-<!--              <template #header>-->
-<!--                <div style="text-align-last: justify">-->
-<!--                  <a-->
-<!--                    v-b-modal.modalConfirmDelete-->
-<!--                    class="scalling"-->
-<!--                    style="color: #f07905; cursor: pointer; display: inline-block"-->
-<!--                    @click="openDeleteConfirm(address)"-->
-<!--                  >-->
-<!--                    <small-->
-<!--                    ><i class="fa fa-trash-alt" />-->
-<!--                      {{ $t("common.delete") }}</small-->
-<!--                    >-->
-<!--                  </a>-->
-<!--                  <base-button-icon-1-->
-<!--                    @click="openAddressFormModal(address),displayAddressInCheckout(), scrollToDiv()"-->
-<!--                    :outline="true"-->
-<!--                    class="px-2"-->
-<!--                  >-->
-<!--                    <i class="fa fa-edit" />-->
-<!--                    {{ $t("common.edit") }}</base-button-icon-1-->
-<!--                  >-->
-<!--                </div>-->
-<!--              </template>-->
-<!--            </b-card>-->
-<!--          </div>-->
         </div>
       </div>
     </div>
@@ -194,23 +144,23 @@
         >
       </div>
       <div class="address text-center" v-if="addresses && !isEmpty(addresses) && this.close == true">
-        <base-button-icon-1
+        <!-- <base-button-icon-1
           style="width: 150px;"
           class="py-4 close-button"
           @click="closeAddNewAddress()"
           :outline="true"
         > Close</base-button-icon-1
-        >
+        > -->
       </div>
     </div>
     <AddressDialog
-      ref="myDiv"
       :address-info="selectedAddressToUpdate"
       :type-form="typeForm"
       :checkout="checkout"
       :displayAddressFormInCheckout =displayAddressFormInCheckout
       @close="closedEvent"
       @buttonPressed="ButtonPressed"
+      @formClosed="formClosed"
     />
     <ConfirmDelete :api="apiToDelete" @close="closedEvent" />
   </div>
@@ -282,19 +232,15 @@ export default {
       this.$emit("address",address)
     },
     scrollToDiv() {
-      // const element = this.$refs.myDiv;
-      // const offset = element.$el.offsetTop + 0;
-      // window.scrollTo({
-      //   top: offset,
-      //   behavior: 'smooth'
-      // });
-
       this.close = true
     },
     ButtonPressed(newValue){
       this.displayAddressFormInCheckout = newValue
       this.clicked = false
       this.close = false
+    },
+    formClosed(newValue) {
+      this.displayAddressFormInCheckout = newValue;
     },
     displayAddressInCheckout(){
       this.displayAddressFormInCheckout = true;
