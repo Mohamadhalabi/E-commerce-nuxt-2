@@ -10,6 +10,8 @@ export default {
     "build:modern": "nuxt build --modern=server",
     "start:modern": "nuxt start --modern=server"
   },
+  modern: true, // Enables modern mode in both server and client side
+
   head: {
     link: [{rel: 'icon', type: 'image/x-icon', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png'},
       {rel: 'shortcut icon', sizes: '16x16 24x24 32x32 48x48', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png'},
