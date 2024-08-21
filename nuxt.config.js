@@ -94,7 +94,7 @@ export default {
     '@static/sass/style.scss',
     '@static/css/ltrStyle.css',
     'vue-multiselect/dist/vue-multiselect.min.css',
-    '@static/css/porto-icons.min.css',
+    // '@static/css/porto-icons.min.css',
     '@static/css/steper.css',
     '@static/vendor/fontawesome-free/css/all.min.css',
     '@static/css/agile.css',
@@ -217,7 +217,6 @@ export default {
 
 
   router: {
-    // middleware: ['language'],
     prefetchLinks: true,
     base: '/',
     linkActiveClass: '',
@@ -291,7 +290,7 @@ export default {
     subFolders: false,
     fallback: '404.html'
   },
-  ssr: false,
+  ssr: true,
   loading: {
     color: '#f07905',
     height: '6px',

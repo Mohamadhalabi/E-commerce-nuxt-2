@@ -28,7 +28,7 @@
 				size: 12px,
 				space: 1.5rem,
 				weight: false,
-				content: '\e81a'
+				content: '➤'
 			)
 		)
 	)
@@ -71,7 +71,6 @@
 			@include css( content, breadcrumb, divider, content);
 			@include css( font-size, breadcrumb, divider, size);
 			@include css( font-weight, breadcrumb, divider, weight);
-			font-family: 'porto';
 			vertical-align: middle;
 			margin-top: -2px;
 		}

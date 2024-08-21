@@ -23,7 +23,6 @@
           </div>
         </div>
         <div class="header-dropdown m-0">
-
           <a
             v-if="currentLocale.code ==='de'"
             href="javascript:;">DE</a>
