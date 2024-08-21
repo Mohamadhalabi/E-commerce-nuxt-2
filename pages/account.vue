@@ -534,7 +534,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("Auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
     ...mapGetters("shop", ["cartCount"]),
     ...mapGetters("fav", ["getWishlistCounts"]),
     ...mapGetters("compare", ["getCounts"]),
@@ -571,7 +571,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("Auth", ["LogOut"]),
+    ...mapActions("auth", ["LogOut"]),
 
     changeTab(query) {
       this.$router.push({ path: "account", query: { tab: query } });

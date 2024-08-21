@@ -48,8 +48,8 @@ export default {
     ...mapGetters("language", ["getLang"]),
   },
   methods: {
-    ...mapActions("Auth", ["LogIn"]),
-    ...mapMutations("Auth", ["SET_USER", "SET_TOKEN"]),
+    ...mapActions("auth", ["LogIn"]),
+    ...mapMutations("auth", ["SET_USER", "SET_TOKEN"]),
     ...mapActions("shop", ["afterLogOutCart", "getCartList", "addToCart"]),
     ...mapActions("compare", ["afterLogOutCompare", "fetchList", "addToList"]),
     ...mapActions("fav", [

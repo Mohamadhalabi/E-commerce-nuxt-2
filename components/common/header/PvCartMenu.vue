@@ -173,7 +173,7 @@
 
     },
     computed: {
-      ...mapGetters("Auth", ["isAuthenticated","StateUser"]),
+      ...mapGetters("auth", ["isAuthenticated","StateUser"]),
       ...mapGetters("shop", [
         "cartCount",
         "cartList",

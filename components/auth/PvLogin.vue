@@ -157,8 +157,8 @@ export default {
     test(){
       alert("TEST")
     },
-    ...mapActions("Auth", ["LogIn","ResetPasswordEmail"]),
-    ...mapMutations("Auth", ["SET_USER", "SET_TOKEN"]),
+    ...mapActions("auth", ["LogIn","ResetPasswordEmail"]),
+    ...mapMutations("auth", ["SET_USER", "SET_TOKEN"]),
     ...mapActions("shop", ["afterLogOutCart", "getCartList", "addToCart"]),
     ...mapActions("compare", ["afterLogOutCompare", "fetchList", "addToList"]),
     ...mapActions("fav", [

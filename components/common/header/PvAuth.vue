@@ -44,14 +44,14 @@ import img from "~/static/images/blank.png";
 export default {
 
   computed: {
-    ...mapGetters("Auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
     ...mapGetters("language", ["getLang"]),
     availableCurrencies() {
       return this.$settings.currencies.filter((i) => i !== this.currency);
     },
   },
   methods: {
-    ...mapActions("Auth", ["LogOut"]),
+    ...mapActions("auth", ["LogOut"]),
     defalutAvatar(e) {
       e.target.src = img;
     },
