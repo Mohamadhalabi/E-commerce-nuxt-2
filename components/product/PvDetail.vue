@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex align-items-center">
+    <div class="d-flex title-prev-next-products">
       <h1 class="product-title">
         {{ product.title }}
       </h1>
@@ -391,5 +391,14 @@ export default {
   font-size:18px;
   color:#f52020;
   font-weight: bold;
+}
+.title-prev-next-products{
+  flex-direction: row;
+}
+
+@media screen and (max-width: 993px){
+  .title-prev-next-products{
+    flex-direction: column-reverse;
+  }
 }
 </style>

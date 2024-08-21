@@ -36,7 +36,7 @@
       </nav>
       <div class="product-single-container container product-single-default">
         <div v-if="product" class="row">
-          <div class="col-xl-5 col-lg-6 col-md-6 col-12 product-single-gallery">
+          <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-12 product-single-gallery">
             <LazyHydrate when-idle>
             <pv-media-new :product="product" />
             </LazyHydrate>
@@ -44,7 +44,7 @@
               <span class="sku-color d-lg-none d-md-none">SKU: {{ product.sku }}</span>
             </div>
           </div>
-          <div class="col-xl-7 col-lg-6 col-md-5 col-sm-12 col-12 product-single-details">
+          <div class="col-xl-7 col-lg-7 col-md-5 col-sm-6 col-12 product-single-details">
             <LazyHydrate when-idle>
               <pv-detail
               :product="product"
@@ -85,6 +85,7 @@
         :products="related_products"
         :collection-title="$t('products.relatedProducts')"
         class="container"
+        style="padding: 35px"
       />
       </LazyHydrate>
       <hr class="mt-0 m-b-5 container" />
