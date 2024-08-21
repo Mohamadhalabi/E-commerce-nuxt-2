@@ -77,7 +77,7 @@ export default {
     BaseButtonIcon1
   },
   computed: {
-    ...mapGetters("Auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
   },
   data: function () {
     return {

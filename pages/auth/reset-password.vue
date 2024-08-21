@@ -98,7 +98,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('Auth', ['LogIn']),
+    ...mapActions('auth', ['LogIn']),
 
     resetPassword() {
       const data = {

@@ -86,7 +86,7 @@ export default {
       "cartTotalDiscount",
       "cartPaymentPrice",
     ]),
-    ...mapGetters("Auth", ["isAuthenticated","StateUser"]),
+    ...mapGetters("auth", ["isAuthenticated","StateUser"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
     ...mapGetters("fav",["getWishlistList"]),
     progressBarWidth() {

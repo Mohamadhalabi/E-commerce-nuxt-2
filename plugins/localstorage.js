@@ -6,7 +6,7 @@ export default function({store}) {
   window.onNuxtReady(() => {
     createPersistedState({
       key: 'tlkeys',
-      paths: ['Auth', 'cart', 'wishlist']
+      paths: ['auth', 'cart', 'wishlist']
     })(store);
   });
 }

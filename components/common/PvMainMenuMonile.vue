@@ -305,7 +305,7 @@ export default {
   },
   computed: {
     ...mapGetters("language", ["getLang"]),
-    ...mapGetters("Auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
     totalLength: function() {
       const mainMenuLength = Object.keys(this.$settings.main_menu).length;
       const menusLength = Object.keys(this.$settings.menus).length;
