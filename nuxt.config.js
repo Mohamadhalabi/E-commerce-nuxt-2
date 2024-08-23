@@ -104,6 +104,8 @@ export default {
   ],
 
   plugins: [
+    {src: '~/plugins/user.js', ssr: true},
+
     {src: '@plugins/index.js', ssr: false},
     {src: '@plugins/settings.js', ssr: true},
     {src: '@plugins/localstorage.js', ssr: false},
@@ -210,6 +212,7 @@ export default {
           user: {url: '/me', method: 'post', propertyName: 'data'}
         },
         user: {
+          property: false,
         },
         tokenType: 'Bearer'
       }

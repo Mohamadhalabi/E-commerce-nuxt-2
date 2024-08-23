@@ -2,7 +2,6 @@ import Vue from 'vue';
 import VModal from 'vue-js-modal';
 import Notifications from 'vue-notification';
 // import VueLazyLoad from 'vue-lazyload';
-
 Vue.use(VModal);
 Vue.use(Notifications);
 

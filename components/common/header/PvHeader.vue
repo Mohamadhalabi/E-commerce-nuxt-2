@@ -80,12 +80,73 @@
                   </a>
                 </span>
               </div>
-              <no-ssr>
-                <PvLoggedIn />
-              </no-ssr>
-              <no-ssr>
-                <PvAuth />
-              </no-ssr>
+                <!-- <PvLoggedIn />
+                <PvAuth /> -->
+
+                <div v-if="StateUser">
+                  <nuxt-link :to="getLink('/account')" class="header-icon">
+                    <div class="header-user">
+                      <i
+                        class=""
+                        :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">
+                        <nuxt-img
+                          format="webp"
+                          v-if="StateUser.avatar"
+                          :src="checkURL(StateUser.avatar)"
+                          width="50"
+                          height="50"
+                          alt="Avatar"
+                        />
+                      </i>
+                      <template>
+                        <div class="header-dropdown">
+                          <p class="desktop-only" style="text-decoration: none !important;" href="javascript:;">
+                            {{ StateUser.name }}
+                          </p>
+                          <div class="header-menu border-0">
+                            <ul class="account-menu-ul">
+                              <li class="account-menu-li"><span class="account-list" @click.prevent="myOrders">
+                                {{ $t("account.orders") }}
+                              </span>
+                              </li>
+                              <li class="account-menu-li">
+                                <span class="account-list" @click="LogOut">{{ $t("account.log_out") }}</span>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </template>
+                      <div class="header-userinfo d-none d-lg-block">
+                        <span class="d-inline-block font2 line-height-1"> </span>
+                      </div>
+                    </div>
+                  </nuxt-link>
+                </div>
+                <div v-else>
+                  
+                </div>
+
+
+                <div v-if="!StateUser">
+                  <nuxt-link :to="getLink('/auth/login')" class="header-icon mx-2">
+                    <div class="header-user">
+                      <i class="fa fa-user" />
+                      <div
+                        class="header-userinfo d-lg-block desktop-only"
+                        :class="getIsAr ? 'text-right' : ''">
+                                    <span class="d-inline-block font2 line-height-1">
+                                      {{ $t("header.welcome") }}
+                                    </span>
+                        <p class="mb-0 font-weight-bold login-register">
+                          {{ $t("header.login") }}
+                        </p>
+                      </div>
+                    </div>
+                  </nuxt-link>
+                </div>
+                <div v-else>
+                  
+                </div>
 
 
               <div class="d-flex">
@@ -280,6 +341,10 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("authentication", ["StateUser"]),
+
+
+
     ...mapGetters("fav", ["getWishlistCounts"]),
     ...mapGetters("compare", ["getCounts"]),
     ...mapGetters("currency", ["currency"]),
@@ -291,9 +356,17 @@ export default {
     },
   },
   methods: {
+    ...mapActions("auth", ["LogOut"]),
     ...mapMutations("currency", ["setCurrencyValue"]),
     ...mapActions("language",["updateLanguageCode"]),
     ...mapMutations("header", ["changeCurrency"]),
+    checkURL(url) {
+      if (url) {
+        return url;
+      } else {
+        return "https://cdn-icons-png.flaticon.com/512/7855/7855599.png";
+      }
+    },
 
     SearchInputClicked(val){
       this.$emit('isClicked',val)
