@@ -629,13 +629,10 @@ export default {
   },
   computed: {
     ...mapGetters("language", ["getLang"]),
-    ...mapGetters("auth", ["isAuthenticated","StateUser"]),
+    ...mapGetters("authentication", ["isAuthenticated","StateUser"]),
     ...mapGetters("shop", [
       "cartList",
-      "cartProductsPrice",
       "cartCurrency",
-      "cartPaymentPrice",
-      "displayOutOfStock",
     ]),
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
@@ -842,6 +839,9 @@ export default {
     refetchPrice() {
       this.$nuxt.refresh()
 
+      const authToken = this.$cookies.get('authToken');
+
+
       this.$Progress.start();
       let query = "?";
       if (this.dataForm.address) {
@@ -856,6 +856,7 @@ export default {
       if (this.dataForm.coupon_code) {
         query += `coupon_code=${this.dataForm.coupon_code}`;
       }
+      Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
       Api.get(`/user/orders/checkout${query}`)
         .then((response) => {
           this.checkoutData = response.data;

@@ -59,10 +59,8 @@ export const getters = {
 
 export const actions = {
   getCartList: async function ({ commit }) {
-
-    // dispatch('UPDATE_CART_ACTION')
-
-    if (localStorage.getItem('tokenEnded') == '1') {
+    const authToken = this.$cookies.get('authToken');
+    if (authToken == undefined) {
       let cartList = JSON.parse(localStorage.getItem('card')) || [];
       let totalPrice = {
         currency: cartList[0] ? cartList[0]['price']['currency'] : null,
@@ -92,13 +90,15 @@ export const actions = {
       commit('UPDATE_CART', response);
 
     } else {
+      Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
       let response = await Api.get('cart');
       await commit('UPDATE_CART', response.data);
     }
   },
 
   addToCart: async function ({ commit }, payload) {
-    if (localStorage.getItem('tokenEnded') == 1) {
+    const authToken = this.$cookies.get('authToken');    
+    if (authToken == undefined) {
       if (!payload['quantity']) {
         payload['quantity'] = 1;
       }
@@ -149,12 +149,13 @@ export const actions = {
       });
       return;
     }
-    if (localStorage.getItem('tokenEnded') == '1') return;
+    if (authToken == undefined) return;
 
     payload.product = payload.sku;
     payload.quantity = payload.quantity || 1;
     let product = pick(payload, ['product', 'quantity', 'short_title', 'price', 'serial_number', 'gallery','cover_model']);
 
+    Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
     Api.post('cart', product)
       .then(() => {
         let response = Api.get('cart');
@@ -183,7 +184,8 @@ export const actions = {
   },
 
   changeQuantity: async function ({ commit, state }, payload) {
-    if (localStorage.getItem('tokenEnded') == '1') {
+    const authToken = this.$cookies.get('authToken');    
+    if (authToken == undefined) {
       let product = payload.product;
       let cardItems = JSON.parse(localStorage.getItem('card')) || [];
       for (let item of cardItems) {
@@ -210,6 +212,7 @@ export const actions = {
     };
 
     await commit('toggleDispaly');
+    Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
     const res = await Api.post('cart/change-quantity', dataForm);
     let response = await Api.get('cart');
     await commit('UPDATE_CART', response.data);
@@ -218,22 +221,17 @@ export const actions = {
   },
 
   clearCart: async function ({ commit }, payload) {
-    if (localStorage.getItem("tokenEnded") === '1') {
-      // Clear the cart in local storage
+    const authToken = this.$cookies.get('authToken');  
+    console.log(payload);  
+    if (authToken == undefined) {
       if (process.client) {
         localStorage.removeItem('card');
       }
-      // Reset the cart in the state
       commit('RESET_CART', []);
-      // Notify the user
-      // this._vm.$notify({
-      //   group: 'addProduct',
-      //   type: 'success',
-      //   text: 'Your cart has been cleared',
-      // });
     } else {
       // If the user is logged in, clear the cart on the server side
       try {
+        Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
         await Api.post(`cart/empty/${payload.StateUser.id}`);
         // Reset the cart in the state
         commit('RESET_CART', []);
@@ -251,7 +249,8 @@ export const actions = {
   },
 
   removeFromCart: async function ({ commit }, payload) {
-    if (localStorage.getItem('tokenEnded') == '1') {
+    const authToken = this.$cookies.get('authToken');    
+    if (authToken == undefined) {
       let cartList = JSON.parse(localStorage.getItem('card'));
       cartList.splice(parseInt(payload.index), 1);
       if(process.client)
@@ -297,6 +296,7 @@ export const actions = {
 
 
     } else {
+      Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
       await Api.post(`cart/${payload.product.cart_id}`);
       this._vm.$notify({
         group: 'addProduct',

@@ -31,6 +31,7 @@ export default {
     PvComparePopup: () => import("~/components/popups/PvComparePopup.vue"),
     PvWishlistPopup: () => import("~/components/popups/PvWishlistPopup.vue"),
   },
+
   data() {
     return {
       isSearchInputClicked: false,

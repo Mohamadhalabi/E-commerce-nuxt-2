@@ -613,7 +613,7 @@ export default {
     pincodeoffline: "بين كود اوف لاين",
     togetpincode:"للحصول على اسم المستخدم وكلمة المرور، يرجى شراء إحدى المنتجات التالية",
     related:"منتجات بين كود ذات الصلة",
-    orderUsingWhatsapp:"الطلب باستخدام الواتساب",
+    orderUsingWhatsapp:"الطلب عبر الواتساب",
   },
   services: {
     unlockServices: "خدمات فتح الريموتات",
