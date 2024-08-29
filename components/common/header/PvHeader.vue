@@ -28,7 +28,7 @@
                   v-if="!isMobile"
                   format="webp"
                   sizes="xs:100px sm:200px md:400px lg:500px xl:800px"
-                  class="logo-image" title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
+                  class="logo-image p-2" title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
                 <nuxt-img
                   v-else
                   format="webp"
@@ -68,7 +68,7 @@
             <div class="d-flex align-items-center">
               <div
                 class="contact-widget d-none d-lg-flex flex-column"
-                :class="getIsAr ? 'text-right' : ''">
+                :class="getIsAr ? 'text-right' : 'contact-widget-en'">
                 <p class="off-animatin mb-0 call-us-now text-center font-weight-bold">
                   {{ $t("auth.callNow") }}
                 </p>
@@ -128,8 +128,8 @@
 
 
                 <div v-if="!StateUser">
-                  <nuxt-link :to="getLink('/auth/login')" class="header-icon mx-2">
-                    <div class="header-user">
+                  <nuxt-link :to="getLink('/auth/login')" class="header-icon mx-5">
+                    <div class="header-user text-center">
                       <i class="fa fa-user" />
                       <div
                         class="header-userinfo d-lg-block desktop-only"

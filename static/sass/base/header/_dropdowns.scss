@@ -124,12 +124,9 @@
 // 2. Header Dropdown
 
 .header-dropdowns, .header-about-contact {
-	display: flex;
-	display: -ms-flexbox;
 	align-items: center;
-	-ms-flex-align: center;
-  color: #535250;
-  font-size: 14px;
+	color: #535250;
+	font-size: 14px;
 }
 
 // Dropdown Menu Triangle
@@ -149,8 +146,8 @@
 }
 
 .header-about-contact{
-  padding-left: 15px;
-  margin-top: 3px;
+//   padding-left: 15px;
+//   margin-top: 3px;
 }
 // General Header Dropdown
 .header-dropdown {
@@ -159,7 +156,7 @@
 	@include css( font-size, header, dropdown, font, size );
 	@include css( font-weight, header, dropdown, font, weight );
 	line-height: 1.5;
-	padding: 5px 0;
+	padding: 10px 0;
 
 	// Top Anchor
 	> a {
@@ -579,5 +576,15 @@ button.noselect.w-100.py-3.mt-1.checkout-button.outline {
 		.dropdown-menu {
 			width: 262px;
 		}
+	}
+}
+
+.lang-currency{
+	justify-content: space-evenly;
+}
+
+@media screen and (max-width:575px){
+	.lang-currency{
+		justify-content: start;
 	}
 }

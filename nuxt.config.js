@@ -105,7 +105,7 @@ export default {
 
   plugins: [
     {src: '~/plugins/user.js', ssr: true},
-
+    {src : '~/plugins/i18n-watch.js', ssr: true},
     {src: '@plugins/index.js', ssr: false},
     {src: '@plugins/settings.js', ssr: true},
     {src: '@plugins/localstorage.js', ssr: false},
