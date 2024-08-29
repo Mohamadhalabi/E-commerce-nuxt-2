@@ -283,7 +283,6 @@
 
   .header {
       .contact-widget {
-          padding-left: 1.4rem;
           font-size: 1.4rem;
 
           p {
@@ -305,6 +304,9 @@
               line-height: 1.7rem;
               text-decoration: underline;
           }
+      }
+      .contact-widget-en{
+        padding-left: 1.4rem;
       }
   }
 
@@ -490,7 +492,8 @@
           margin-left: 1.4rem;
 
           i {
-              margin-right: 1.5rem;
+              margin-right: 1rem;
+              margin-left: 1rem;
               width: 52px;
               height: 52px;
               border-radius: 50%;

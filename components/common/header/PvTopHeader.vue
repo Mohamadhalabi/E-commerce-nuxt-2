@@ -1,5 +1,5 @@
 <template>
-  <div class="row top-header">
+  <div class="row top-header flex-column-sm-reverse">
     <div class="d-none d-lg-flex col-lg-6 ">
       <div class="top-notice-container top-n" :class="{'text-right': getIsAr}">
         <p class="mb-auto mt-auto welcome-text">{{$t('common.WelcomeTo')}}
@@ -8,8 +8,8 @@
       </div>
     </div>
     <div class="col-6 col-md-6 col-sm-6 col-lg-3">
-      <div class="d-flex align-items-center justify-content-lg-center">
-        <div class="header-dropdown m-0" style="margin-top: 3px!important;">
+      <div class="d-flex align-items-center lang-currency">
+        <div class="header-dropdown m-0">
           <a class="header-icons" href="javascript:;">{{ currency }}</a>
           <div class="header-menu text-center">
             <ul>
@@ -50,31 +50,31 @@
         </div>
 
 
-        <div class="header-about-contact">
+        <div class="header-about-contact d-sm-flex d-md-flex d-lg-flex d-none">
           <nuxt-link :to="getLink('/about')">
             {{ $t("header.about") }}
           </nuxt-link>
         </div>
-        <div class="header-about-contact">
+        <div class="header-about-contact d-sm-flex d-md-flex d-lg-flex d-none">
           <nuxt-link :to="getLink('/contact')">
             {{ $t("header.contact") }}
           </nuxt-link>
         </div>
       </div>
     </div>
-    <div class="col-6 col-md-6 col-sm-6 col-lg-1 d-flex mt-auto mb-auto ml-auto mr-lg-1 justify-content-end social-iconss">
-      <div class="whatsapp-icon ml-2 mr-2" @click="sendWhatsAppMessage">
+    <div class="col-6 col-md-6 col-sm-6 col-lg-3 d-flex justify-content-end">
+      <div class="whatsapp-icon mt-auto mb-auto" @click="sendWhatsAppMessage">
         <i class="fab fa-whatsapp cursor-pointer" style="cursor: pointer"></i>
       </div>
 
-      <div class="map-icon ml-2 mr-2" @click="openGoogleMap">
+      <div class="map-icon mt-auto mb-auto" @click="openGoogleMap">
         <i class="fa fa-map-marker cursor-pointer" style="cursor: pointer"></i>
       </div>
 
-      <div class="phone-icon ml-2 mr-2" @click="makePhoneCall">
+      <div class="phone-icon mt-auto mb-auto" @click="makePhoneCall">
         <i class="fa fa-phone cursor-pointer" style="cursor: pointer"></i>
       </div>
-      <pv-social-icons class="social-icons ml-2"/>
+      <pv-social-icons class="social-icons d-sm-flex d-md-flex d-lg-flex d-none"/>
     </div>
   </div>
 
@@ -178,17 +178,6 @@ export default {
 <style scoped>
 .whatsapp-icon ,.map-icon, .phone-icon{
   font-size: 16px;
-}
-@media screen and (max-width: 400px){
-  .top-header{
-    display: inline-block;
-    text-align: center;
-  }
-}
-@media screen and (max-width: 776px){
-  .social-iconss{
-    justify-content: center!important;
-    margin:auto!important;
-  }
+  margin:10px;
 }
 </style>

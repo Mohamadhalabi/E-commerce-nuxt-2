@@ -86,7 +86,7 @@ export default {
     },
     goToWhatsApp(product) {
       window.open(
-        `https://api.whatsapp.com/send?phone=00905525700100&text=Could I please have the price of the ${product.short_title}`,
+        `https://api.whatsapp.com/send?phone=971544179287&text=Could I please have the price of the ${product.short_title}`,
         "_blank"
       );
     },

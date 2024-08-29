@@ -33,7 +33,6 @@
           "
         />
       </div>
-      <button class="btn icon-magnifier" title="search" @click="goToShop" />
       <div class="live-search-list">
         <div v-if="searchKey.length > 0" class="search-suggests">
           <b-list-group>
@@ -271,6 +270,7 @@ export default {
   background: #fff !important;
 }
 .autoComplateClass .multiselect__tags {
+  background-color: transparent;
   border: 0px;
   margin-top: 3%;
   width: 100%
