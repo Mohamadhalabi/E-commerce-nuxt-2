@@ -1,5 +1,4 @@
 <template>
-  <no-ssr>
     <main class="main">
       <div class="container account-container custom-account-container">
         <div
@@ -244,20 +243,6 @@
                     </span>
                     </a>
                   </li>
-
-<!--                  <li class="nav-item custom-nav-item" style="cursor: pointer">-->
-<!--                    <a-->
-<!--                      class="nav-link custom-nav-link"-->
-<!--                      :class="$route.query.tab == 'support' ? 'active' : ''"-->
-<!--                      @click="changeTab('support')"-->
-<!--                    >-->
-<!--                      <i class="sicon-wrench" />-->
-<!--                      <span class="d-inline-block">{{-->
-<!--                      $t("dashboard.support")-->
-<!--                    }}</span>-->
-<!--                    </a>-->
-<!--                  </li>-->
-
                   <li v-if="isAuthenticated" class="custom-nav-item">
                     <a
                       href="javascript:;"
@@ -411,7 +396,6 @@
         </div>
       </div>
     </main>
-  </no-ssr>
 </template>
 
 <script>
@@ -534,7 +518,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("authentication", ["isAuthenticated", "StateUser"]),
     ...mapGetters("shop", ["cartCount"]),
     ...mapGetters("fav", ["getWishlistCounts"]),
     ...mapGetters("compare", ["getCounts"]),
@@ -571,7 +555,7 @@ export default {
   },
 
   methods: {
-    ...mapActions("auth", ["LogOut"]),
+    ...mapActions("authentication", ["LogOut"]),
 
     changeTab(query) {
       this.$router.push({ path: "account", query: { tab: query } });

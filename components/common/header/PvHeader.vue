@@ -105,12 +105,14 @@
                           </p>
                           <div class="header-menu border-0">
                             <ul class="account-menu-ul">
-                              <li class="account-menu-li"><span class="account-list" @click.prevent="myOrders">
-                                {{ $t("account.orders") }}
+                              <li class="account-menu-li"><span class="account-list">
+                                <nuxt-link :to="getLink('/account?tab=orders')">
+                                  {{ $t("account.orders") }}
+                                </nuxt-link>
                               </span>
                               </li>
                               <li class="account-menu-li">
-                                <span class="account-list" @click="LogOut">{{ $t("account.log_out") }}</span>
+                                <span class="account-list" @click="afterLogOutCart(),LogOut()">{{ $t("account.log_out") }}</span>
                               </li>
                             </ul>
                           </div>
@@ -188,13 +190,13 @@
           <div class="row text-center w-100">
             <div class="col-lg-9 mt-auto mb-auto text-left">
               <nuxt-link
-                class="price-color font-weight-bold"
-                :to="getLink('/shop?offers')">
-                <i class="fa fa-percent">
+                class="font-weight-bold"
+                :to="getLink('/downloads')">
+                <i class="fa fa-download">
                 </i>
                 <span class="ml-1 mr-lg-2"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.Offer") }}
+                  {{ $t("header.downloads") }}
                 </span>
               </nuxt-link>
               <nuxt-link :to="getLink('/shop?free-shipping')">
@@ -270,13 +272,13 @@
           <div class="row text-center w-100">
             <div class="row text-center w-100">
               <div class="col-lg-2 m-auto">
-                <nuxt-link :to="getLink('/shop?offers')"
-                           class="price-color font-weight-bold"
+                <nuxt-link :to="getLink('/downloads')"
+                           class="font-weight-bold"
                 >
-                  <i class="fa fa-percent">
+                  <i class="fa fa-download">
                   </i>
                   <span class="ml-1">
-                  {{ $t("header.Offer") }}
+                  {{ $t("header.downloads") }}
                 </span>
                 </nuxt-link>
               </div>
@@ -342,9 +344,6 @@ export default {
   },
   computed: {
     ...mapGetters("authentication", ["StateUser"]),
-
-
-
     ...mapGetters("fav", ["getWishlistCounts"]),
     ...mapGetters("compare", ["getCounts"]),
     ...mapGetters("currency", ["currency"]),
@@ -356,10 +355,11 @@ export default {
     },
   },
   methods: {
-    ...mapActions("auth", ["LogOut"]),
+    ...mapActions("authentication", ["LogOut"]),
     ...mapMutations("currency", ["setCurrencyValue"]),
     ...mapActions("language",["updateLanguageCode"]),
     ...mapMutations("header", ["changeCurrency"]),
+    ...mapActions("shop",["afterLogOutCart"]),
     checkURL(url) {
       if (url) {
         return url;

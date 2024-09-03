@@ -145,7 +145,7 @@ export default {
     wishlistCount: Number,
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("authentication", ["isAuthenticated", "StateUser"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
   data:function (){
@@ -154,7 +154,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("shop", ["getCartList"]),
+    ...mapActions("shop", ["getCartList","afterLogOutCart"]),
     ...mapActions("compare", ["fetchList"]),
     ...mapActions("fav", ["fetchWishlist"]),
     head() {
@@ -168,13 +168,13 @@ export default {
       scrollTopHandler();
     },
     LogOut() {
+
+      this.afterLogOutCart();
       // this.$Progress.start();
       this.$auth.logout().then((res) => {
-        localStorage.setItem("tokenEnded", 1);
+        // localStorage.setItem("tokenEnded", 1);
 
-        this.fetchList();
-        this.fetchWishlist();
-        this.getCartList();
+
 
         this.$router.push("/");
       });

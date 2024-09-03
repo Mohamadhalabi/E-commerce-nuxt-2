@@ -310,7 +310,9 @@ export const actions = {
   },
 
   afterLogOutCart: async function ({ commit }, payload) {
+    localStorage.removeItem('card');
     await commit('RESET_CART', []);
+    
   },
 
   UPDATE_CART_ACTION: async function (state, payload) {
