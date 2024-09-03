@@ -94,7 +94,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("authentication", ["isAuthenticated", "StateUser"]),
     ...mapGetters("language", ["getLang"])
   },
 };

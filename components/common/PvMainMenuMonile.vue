@@ -305,7 +305,7 @@ export default {
   },
   computed: {
     ...mapGetters("language", ["getLang"]),
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("authentication", ["isAuthenticated", "StateUser"]),
     totalLength: function() {
       const mainMenuLength = Object.keys(this.$settings.main_menu).length;
       const menusLength = Object.keys(this.$settings.menus).length;
@@ -421,7 +421,7 @@ export default {
     LogOut() {
       // this.$Progress.start();
       this.$auth.logout().then((res) => {
-        localStorage.setItem("tokenEnded", 1);
+        // localStorage.setItem("tokenEnded", 1);
         this.fetchList();
         this.fetchWishlist();
         this.getCartList();

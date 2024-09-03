@@ -185,7 +185,7 @@ export default {
       title: JSON.parse(this.$settings.seo.meta_title)[this.$i18n.locale],
     }
   },
-  created() {
+  mounted() {
     this.getWhatsNews();
   },
   computed: {

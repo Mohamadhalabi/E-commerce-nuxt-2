@@ -105,15 +105,16 @@ export default {
   methods: {
     ...mapActions("authentication", ["LogIn", "ResetPasswordEmail"]),
     ...mapMutations("authentication", ["SET_USER", "SET_TOKEN"]),
-    ...mapActions("shop", ["afterLogOutCart", "getCartList", "addToCart"]),
-    ...mapActions("compare", ["afterLogOutCompare", "fetchList", "addToList"]),
+    ...mapActions("shop", ["getCartList", "addToCart"]),
+    ...mapActions("compare", ["fetchList", "addToList"]),
     ...mapActions("fav", ["afterLogOutWishlist", "fetchWishlist", "addToWishlist"]),
 
     submit: async function () {
       try {
         // Make a request to the login endpoint
         const response = await this.$axios.post('/user/auth/login', this.form);
-
+        
+      
         // Save the token in cookies
         this.$cookies.set('authToken', response.data.authorisation.token, {
           path: '/', // Available throughout the entire site
@@ -129,6 +130,9 @@ export default {
 
         // Set the token for axios globally
         this.$axios.setToken(response.data.token, 'Bearer');
+
+        
+        this.fetchDatafronLocalStorage();
 
         // Redirect to the original page or the home page
         const redirectTo = this.$route.query.redirectTo || '/';

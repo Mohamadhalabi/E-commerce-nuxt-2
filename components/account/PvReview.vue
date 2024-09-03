@@ -181,7 +181,7 @@ export default {
 
   },
   computed: {
-    ...mapGetters("auth", ["isAuthenticated", "StateUser"]),
+    ...mapGetters("authentication", ["isAuthenticated", "StateUser"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
   methods: {

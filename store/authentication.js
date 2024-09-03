@@ -81,7 +81,6 @@ export const actions = {
     const response = await Api.post('user/auth/logout');
     await commit('LOGOUT');
     await this.$router.push('/auth/login');
-    localStorage.setItem('tokenEnded', 1);
     await this._vm.$notify({
       group: 'addProduct',
       type: 'success',
@@ -140,17 +139,21 @@ export const mutations = {
 
   SET_TOKEN: function (state, token) {
     Api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    localStorage.setItem('tokenEnded', 0);
-    localStorage.setItem('version', process.env.version);
+    // localStorage.setItem('tokenEnded', 0);
+    this.$cookies.set('authToken',token)
     state.token = token;
   },
 
   LOGOUT: function (state) {
-    state.user = null;
-    state.token = null;
-    localStorage.removeItem('card');
-    localStorage.removeItem('tlkeys');
-    localStorage.clear();
+    // Clear the token from the Axios defaults
     delete Api.defaults.headers.common['Authorization'];
+    
+    // Remove the token from cookies
+    this.$cookies.remove('authToken'); // Remove the authentication token from cookies
+        
+    // Reset user state
+    state.user = null; // Reset user state
+    state.token = null; // Reset token state
+    
   },
 };

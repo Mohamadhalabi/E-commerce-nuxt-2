@@ -276,22 +276,33 @@
 
       <!-- 2 -->
       <li
-        v-for="(item, name, index) in $settings.menus"
-        :key="name"
-        :class="{ active: item.link === currentItem }"
         class="right-menu-items"
-        :style="item.name.en === 'Pin Code' ? 'background-color:red;height:52.5px' : ''"
+        style="background-color:red;height:52.5px"
         >
         <nuxt-link
-          v-if="item.link"
-          :to="getLink('/'+item.link)"
-          :class="{ active: item.link === currentItem }"
+          :to="getLink('/pin-code')"
           class="d-flex align-items-center flex-column download-pin-code"
         >
           <span class="header-main-menu"
-          :style="item.name.en === 'Pin Code' ? 'background-color:red' : ''"
-          >
-            {{item.name[$i18n.locale] ? item.name[$i18n.locale] : item.name.en}}
+          style="background-color:red">
+          {{ $t("pincode.pincode") }}
+          </span>
+        </nuxt-link>
+      </li>
+
+      <li
+        class="right-menu-items"
+        style="background-color:orange;height:52.5px"
+        >
+        <nuxt-link
+          :to="getLink('/shop?offers')"
+          class="d-flex align-items-center flex-column download-pin-code"
+        >
+          <span class="header-main-menu"
+          style="background-color:orange">
+          <i class="fa fa-percent mr-2" style="font-size:16px">
+          </i>
+          {{ $t("header.Offer") }}
           </span>
         </nuxt-link>
       </li>
@@ -466,10 +477,9 @@ export default {
   margin-bottom: auto;
   background-color: #3e3e3e;
   max-height: 49px;
-  padding-left:5px;
-  padding-right: 5px;
   display: flex;
   justify-content: center;
+  align-items: center;;
 }
 .left-menu-items, .right-menu-items{
   border-right: 1px solid #585a5e!important;
