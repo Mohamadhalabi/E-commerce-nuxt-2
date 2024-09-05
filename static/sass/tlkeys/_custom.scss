@@ -514,7 +514,6 @@ $nav-items-width: 100%/$nav-items;
   max-width: $nav-items-width;
   flex: 0 0 $nav-items-width;
   border: 0 solid $orange-color;
-  //height: 93px;
   &, > a i {
     transition: all .2s ease-in-out;
   }
@@ -545,20 +544,6 @@ $nav-items-width: 100%/$nav-items;
     }
   }
 }
-
-//@keyframes gradient-animation {
-//  0% {
-//    border-image: linear-gradient(to right, #da5555, #ff6800) 1;
-//  }
-//  50% {
-//    border-image: linear-gradient(to right, #ff6800, #da5555) 1;
-//  }
-//  100% {
-//    border-image: linear-gradient(to right, #da5555, #ff6800) 1;
-//  }
-//}
-
-
 // megamenus
 $megamenu-items-per-row: 10;
 .megamenu.custom-megamenu {

@@ -84,11 +84,10 @@
                 <PvAuth /> -->
 
                 <div v-if="StateUser">
-                  <nuxt-link :to="getLink('/account')" class="header-icon">
                     <div class="header-user">
                       <i
                         class=""
-                        :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">
+                        :class="StateUser.avatar ? 'user-avatar' : 'fa fa-user'">
                         <nuxt-img
                           format="webp"
                           v-if="StateUser.avatar"
@@ -105,14 +104,32 @@
                           </p>
                           <div class="header-menu border-0">
                             <ul class="account-menu-ul">
-                              <li class="account-menu-li"><span class="account-list">
+                              <li class="account-menu-li text-center">
+                                <nuxt-link :to="getLink('/account?tab=dashboard')">
+                                  {{ $t("dashboard.dashboard") }}
+                                </nuxt-link>
+                              </li>
+                              <hr class="logged-in-menu">
+                              <li class="account-menu-li text-center">
+                                <nuxt-link :to="getLink('/account?tab=account-details')">
+                                  {{ $t("dashboard.accountDetails") }}
+                                </nuxt-link>
+                              </li>
+                              <hr class="logged-in-menu">
+                              <li class="account-menu-li text-center">
                                 <nuxt-link :to="getLink('/account?tab=orders')">
                                   {{ $t("account.orders") }}
                                 </nuxt-link>
-                              </span>
                               </li>
-                              <li class="account-menu-li">
-                                <span class="account-list" @click="afterLogOutCart(),LogOut()">{{ $t("account.log_out") }}</span>
+                              <hr class="logged-in-menu">
+                              <li class="account-menu-li text-center">
+                                <nuxt-link :to="getLink('/account?tab=addresses')">
+                                  {{ $t("dashboard.myAddresses") }}
+                                </nuxt-link>
+                              </li>
+                              <hr class="logged-in-menu">
+                              <li class="account-menu-li text-center pt-1">
+                                <span class="account-list" @click="LogOut">{{ $t("account.log_out") }}</span>
                               </li>
                             </ul>
                           </div>
@@ -122,7 +139,6 @@
                         <span class="d-inline-block font2 line-height-1"> </span>
                       </div>
                     </div>
-                  </nuxt-link>
                 </div>
                 <div v-else>
                   
@@ -524,5 +540,11 @@ export default {
   .mobile-logo{
     max-width: 200px;
   }
+}
+.logged-in-menu{
+  margin: 0;
+  border-top: 2px dotted #E6E6E6;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 </style>

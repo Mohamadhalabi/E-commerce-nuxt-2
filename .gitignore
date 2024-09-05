@@ -95,3 +95,6 @@ yarn.lock
 
 # Mock API
 mock_data/
+
+# Pacakge.Json
+package-lock.json

@@ -510,14 +510,6 @@
           margin-left: 1.4rem;
       }
   }
-
-//   @include mq(1260px, max) {
-//       .nav-categories > li {
-//           flex: 0 0 12.5%;
-//           max-width: 12.5%;
-//       }
-//   }
-
   @include mq(lg, max) {
       .header-search {
           font-size: 1.4rem;

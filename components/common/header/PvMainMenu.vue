@@ -277,7 +277,7 @@
       <!-- 2 -->
       <li
         class="right-menu-items"
-        style="background-color:red;height:52.5px"
+        style="background-color:red;height:52.6px"
         >
         <nuxt-link
           :to="getLink('/pin-code')"
@@ -292,11 +292,11 @@
 
       <li
         class="right-menu-items"
-        style="background-color:orange;height:52.5px"
+        style="background-color:orange;height:52.6px"
         >
         <nuxt-link
           :to="getLink('/shop?offers')"
-          class="d-flex align-items-center flex-column download-pin-code"
+          class="d-flex align-items-center flex-column"
         >
           <span class="header-main-menu"
           style="background-color:orange">
@@ -633,9 +633,6 @@ export default {
     width: 95px!important;
     height: 95px!important;
   }
-}
-
-.nav-categories{
 }
 @media screen and (max-width: 1200px){
   li.sub-menu-items{

@@ -68,7 +68,7 @@
                   :class="
                     profile.avatar && profile.avatar !== ''
                       ? 'user-avatar'
-                      : 'sicon-user'
+                      : 'fa fa-user'
                   "
                 >
                 </i>
