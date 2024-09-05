@@ -184,7 +184,8 @@
 		margin: 0;
 		padding: .5rem 0;
 		background: white;
-		@include css( box-shadow, header, dropdown, shadow );
+		@include css( header, dropdown );
+		box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 		transition: transform .2s ease-out;
 		opacity: 0;
 		visibility: hidden;
