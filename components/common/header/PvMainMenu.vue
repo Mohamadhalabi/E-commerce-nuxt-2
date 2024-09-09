@@ -277,14 +277,14 @@
       <!-- 2 -->
       <li
         class="right-menu-items"
-        style="background-color:red;height:52.6px"
+        style="background-color:orange;height:52.6px"
         >
         <nuxt-link
           :to="getLink('/pin-code')"
           class="d-flex align-items-center flex-column download-pin-code"
         >
           <span class="header-main-menu"
-          style="background-color:red">
+          style="background-color:orange">
           {{ $t("pincode.pincode") }}
           </span>
         </nuxt-link>
@@ -292,14 +292,14 @@
 
       <li
         class="right-menu-items"
-        style="background-color:orange;height:52.6px"
+        style="background-color:red;height:52.6px"
         >
         <nuxt-link
           :to="getLink('/shop?offers')"
           class="d-flex align-items-center flex-column"
         >
           <span class="header-main-menu"
-          style="background-color:orange">
+          style="background-color:red">
           <i class="fa fa-percent mr-2" style="font-size:16px">
           </i>
           {{ $t("header.Offer") }}
