@@ -80,7 +80,7 @@ export default {
     },
     forgotPassword() {
       this.$store
-        .dispatch("auth/forgotPassword", this.email)
+        .dispatch("authentication/forgotPassword", this.email)
         .then((res) => {
           /*   this.message = res.data.message;
         this.$modal.show('success');  */
