@@ -108,7 +108,7 @@ export default {
       };
 
       this.$store
-        .dispatch('auth/resetPassword', data)
+        .dispatch('authentication/resetPassword', data)
         .then((res) => {
           this.message = res.data.message;
           // Log in the user after successfully resetting the password
