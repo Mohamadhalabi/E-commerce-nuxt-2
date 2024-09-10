@@ -178,6 +178,23 @@ export default {
     ShopBanner: () => import("~/components/shop/PvShopBanner.vue"),
     SidebarFilter: () => import("~/components/shop/SidebarFilter.vue"),
   },
+  head() {
+    // Check if there are any query parameters in the URL
+    const hasQueryParams = !!Object.keys(this.$route.query).length;
+
+    if (hasQueryParams) {
+      return {
+        meta: [
+          {
+            name: 'robots',
+            content: 'noindex, nofollow'
+          }
+        ]
+      };
+    }
+    // Return an empty object if no query parameters
+    return {};
+  },
   props: {
     category: {
       type: Object
