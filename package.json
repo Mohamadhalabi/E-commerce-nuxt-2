@@ -46,6 +46,7 @@
     "nuxt-video-player": "^1.0.17",
     "postcss": "^8.4.37",
     "sass": "1.32.8",
+    "sass-loader": "^10.4.1",
     "vue-js-modal": "^2.0.1",
     "vue-lazy-hydration": "^2.0.0-beta.4",
     "vue-multiselect": "^2.1.8",

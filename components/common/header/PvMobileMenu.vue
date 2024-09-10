@@ -175,6 +175,7 @@ form.nosubmit {
   border: none;
   position: sticky;
   top: 25px;
+  background-color: transparent;
 }
 
 input.nosubmit {
