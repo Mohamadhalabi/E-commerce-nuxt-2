@@ -51,11 +51,11 @@
                 class="form-control"
                 @change="handleChange">
                 <option value="4">4</option>
-                <option value="8">8</option>
                 <option value="12">12</option>
                 <option value="16">16</option>
                 <option value="20">20</option>
                 <option value="24">24</option>
+                <option value="8">All</option>
               </select>
             </div>
             <i
@@ -82,6 +82,7 @@
         >
           <pv-product :product="item" />
         </div>
+        <div ref="scrollObserver"></div> <!-- Intersection observer trigger point -->
       </div>
       <template v-else class="row">
          <div
@@ -91,6 +92,7 @@
           >
           <pv-list-product :product="item"></pv-list-product>
           </div>
+          <div ref="scrollObserver"></div> <!-- Intersection observer trigger point -->
       </template>
       <b-pagination
         v-if="pageCount > 1"
@@ -239,9 +241,12 @@ export default {
       show_not_found: false,
       products: [],
       direction: "asc",
-      length: 12,
       pageCount: 1,
       selectedPage: 1,
+      productObj: [],
+      rawObj: [],
+
+      page: 1,
       type: {
         type: String,
         default: "grid",
@@ -253,6 +258,7 @@ export default {
   watch: {
     $route: function () {
       this.type = this.$route.query.list_view ? "list" : "grid";
+      this.selectedPage = this.$route.query.page;
       this.fetchProducts();
     },
 
@@ -270,25 +276,25 @@ export default {
     if(this.$route.query.page != undefined){
       this.selectedPage = this.$route.query.page
     }
+    this.fetchProducts(); // Initial fetch
+    this.scroll(); // Setup infinite scroll
   },
   methods: {
-    async fetchProducts(){
+    async fetchProducts() {
       let tempQuery = "";
       let displayType = "normal";
       if (this.$route.query.hasOwnProperty("categories") || this.category) {
         displayType = "normal";
       }
-      if (this.slugtype == "category") {
+      if (this.slugtype === "category") {
         tempQuery += `categories=${this.slug}`;
-      } else if (this.slugtype == "manufacturer") {
+      } else if (this.slugtype === "manufacturer") {
         tempQuery += `manufacturers=${this.slug}`;
-      } else if (this.slugtype == "brand") {
+      } else if (this.slugtype === "brand") {
         tempQuery += `brands=${this.slug}`;
       }
       for (const property in this.$route.query) {
-        tempQuery += `&${property}${
-          this.$route.query[property] ? `=${this.$route.query[property]}` : ""
-        }`;
+        tempQuery += `&${property}${this.$route.query[property] ? `=${this.$route.query[property]}` : ""}`;
       }
       switch (this.ordering) {
         case "type":
@@ -325,9 +331,11 @@ export default {
           break;
       }
       let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
-      const { data } = await axios.get(`search/product${query}`,{
+      if(this.selectedNumber == "8") query += `&page=${this.page}`;
+
+      const { data } = await axios.get(`search/product${query}`, {
         baseURL: process.env.API_BASE_URL,
-        headers:{
+        headers: {
           'Accept-Language': this.$i18n.locale,
           'Content-Type': 'application/json',
           'currency': this.$cookies.get('currency') || 'USD',
@@ -336,18 +344,35 @@ export default {
           'api-key': process.env.API_KEY,
         }
       });
-      this.products = data.products;
-      if(this.products.length === 0 ){
-        this.show_not_found = true
+      if(this.selectedNumber == "8"){
+        this.products.push(...data.products);
+      }else{
+        this.products = data.products;;
+      }
+      if (data.products.length === 0) {
+        this.show_not_found = true;
       }
       if (data.products[0]["category"]) {
         this.viewType = "categories";
       } else {
         this.viewType = "product";
       }
-
       this.pageCount = data.total_pages;
-
+    },
+    scroll() {
+      if(this.selectedNumber == "8"){
+        let observer = new IntersectionObserver((entries) => {
+          // Check if the scrollObserver is intersecting (visible)
+          if (entries[0].isIntersecting) {
+            this.page++;
+            if (this.page <= this.pageCount) {
+              this.fetchProducts();
+            }
+          }
+        });
+        // Observe the scrollObserver reference
+        observer.observe(this.$refs.scrollObserver);
+      }
     },
     clickedFilter(){
       this.$emit('filters',true)
@@ -356,6 +381,8 @@ export default {
       this.showStyle = style;
     },
     handleChange() {
+      this.page = 1;
+      this.scroll();
       this.fetchProducts();
       this.$router.push({ path: this.$route.path, query: {
             ...this.$route.query,
@@ -363,9 +390,11 @@ export default {
           }, });
     },
     changeOrder() {
+      this.page = 1;
       this.fetchProducts();
     },
     changeDirection() {
+      this.page = 1;
       this.fetchProducts();
     },
     changePage(page) {
