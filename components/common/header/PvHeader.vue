@@ -291,11 +291,11 @@
                 <nuxt-link :to="getLink('/downloads')"
                            class="font-weight-bold"
                 >
-                  <i class="fa fa-download">
-                  </i>
-                  <span class="ml-1">
-                  {{ $t("header.downloads") }}
-                </span>
+                  <p class="off-animatin mb-0 call-us-now text-center font-weight-bold">
+                    <i class="fa fa-download">
+                    </i>
+                    {{ $t("header.downloads") }}
+                  </p>
                 </nuxt-link>
               </div>
               <div class="col-lg-2 m-auto">

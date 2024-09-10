@@ -104,7 +104,7 @@
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      style="background-color:red;"
+      style="background-color:orange;"
       @click="closeAllNav()"
       >
         <nuxt-link :to="getLink('/pin-code')" class="d-flex">
@@ -121,10 +121,11 @@
       </li>
       <hr class="mt-0 mb-0 dashed">
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
+      style="background-color:red;"
       @click="closeAllNav()"
       >
         <nuxt-link :to="getLink('/shop?offers')" class="d-flex">
-          <p class="mobile-menu-links-red">{{ $t("header.Offer") }}</p>
+          <p class="mobile-menu-links" style="color:white">{{ $t("header.Offer") }}</p>
         </nuxt-link>
       </li>
       <hr class="mt-0 mb-0 dashed">
