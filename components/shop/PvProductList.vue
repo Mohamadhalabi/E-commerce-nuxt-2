@@ -95,7 +95,7 @@
           <div ref="scrollObserver"></div> <!-- Intersection observer trigger point -->
       </template>
       <b-pagination
-        v-if="pageCount > 1"
+        v-if="pageCount > 1 && selectedNumber !=8"
         v-model="selectedPage"
         :total-rows="pageCount"
         :per-page="1"
