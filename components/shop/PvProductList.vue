@@ -381,6 +381,7 @@ export default {
       this.showStyle = style;
     },
     handleChange() {
+      this.products = [];
       this.page = 1;
       this.scroll();
       this.fetchProducts();
@@ -405,7 +406,6 @@ export default {
           page: this.selectedPage,
         },
       });
-      // this.getProduct(this.slug);
       scrollTopHandler();
     },
     showMore(category) {
@@ -422,8 +422,6 @@ export default {
 </script>
 
 <style scoped>
-.product-default {
-}
 .filters{
   font-size: 16px;
 }
