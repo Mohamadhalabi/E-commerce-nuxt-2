@@ -44,6 +44,7 @@
     "nuxt-i18n": "^6.28.1",
     "nuxt-precompress": "^0.5.9",
     "nuxt-video-player": "^1.0.17",
+    "nuxt-vitalizer": "^0.10.0",
     "postcss": "^8.4.37",
     "sass": "1.32.8",
     "sass-loader": "^10.4.1",
