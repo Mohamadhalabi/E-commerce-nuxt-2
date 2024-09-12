@@ -307,20 +307,13 @@ export default {
             "@context": "https://schema.org/",
             "@type": "Product",
             "name": this.product.title,
-            "image": this.product.main_image,
-            "additionalImage": this.product.secondary_image,
-            "video": this.product.videos_link,
-            "compatibleWith": this.product.compatible_products_slug,
-            "bundledProduct": this.product.bundled_products_slug,
-            "gallery": this.product.schema_gallery,
+            "image": [this.product.main_image,this.product.secondary_image,this.product.schema_gallery],
             "description": this.product.meta.description,
-            "sameAs": this.product.canonical,
             "sku": this.product.sku,
             "brand": {
               "@type": "Brand",
               "name": this.product.specifications.manufacturer ?? "-"
             },
-            "weight": this.product.weight,
             "offers": this.product.offers.length > 0 ? this.product.offers.map(offer => ({
               "@type": "Offer",
               "price": offer.price.value,
@@ -335,22 +328,18 @@ export default {
               }
             })) : [{
               "@type": "Offer",
+              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
               "price": this.product.price.value,
               "salePrice": this.product.sale_price.value,
-              "priceCurrency": this.product.price.code,
               "priceValidUntil": formatDate(this.product.price.until),
+              "priceCurrency": this.product.price.code,
               "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-              "eligibleQuantity": {
-                "@type": "QuantitativeValue",
-                "value": 1
-              }
             }],
             "review": this.product.rating.map(item => ({
               "@type": "Review",
               "reviewRating": {
                 "@type": "Rating",
-                "ratingValue": item.rating,
+                "ratingValue": item.rating.toFixed(2), // Limit rating to 2 decimal places
               },
               "author": {
                 "@type": "Person",
@@ -359,7 +348,7 @@ export default {
             })),
             "aggregateRating": {
               "@type": "AggregateRating",
-              "ratingValue": this.product.avg_rating,
+              "ratingValue": this.product.avg_rating.toFixed(2),
               "reviewCount": this.product.total_reviews
           }
         }
@@ -373,20 +362,13 @@ export default {
             "@context": "https://schema.org/",
             "@type": "Product",
             "name": this.product.title,
-            "image": this.product.main_image,
-            "additionalImage": this.product.secondary_image,
-            "video":this.product.videos_link,
-            "compatibleWith":  this.product.compatible_products_slug,
-            "bundledProduct": this.product.bundled_products_slug,
-            "gallery": this.product.schema_gallery,
+            "image": [this.product.main_image,this.product.secondary_image,this.product.schema_gallery],
             "description": this.product.meta.description,
-            "sameAs": this.product.canonical,
             "sku": this.product.sku,
             "brand": {
               "@type": "Brand",
               "name": this.product.specifications.manufacturer ?? "-"
             },
-            "weight": this.product.weight,
             "offers": this.product.offers.length > 0 ? this.product.offers.map(offer => ({
               "@type": "Offer",
               "price": offer.price.value,
@@ -401,12 +383,12 @@ export default {
               }
             })) : [{
               "@type": "Offer",
+              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
               "price": this.product.price.value,
               "salePrice": this.product.sale_price.value,
-              "priceCurrency": this.product.price.code,
               "priceValidUntil": formatDate(this.product.price.until),
+              "priceCurrency": this.product.price.code,
               "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
               "eligibleQuantity": {
                 "@type": "QuantitativeValue",
                 "value": 1
