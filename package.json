@@ -37,6 +37,7 @@
     "@nuxtjs/dotenv": "1.4.1",
     "@nuxtjs/google-gtag": "^1.0.4",
     "@nuxtjs/style-resources": "1.2.1",
+    "@nuxtjs/web-vitals": "^0.2.7",
     "bootstrap-vue": "^2.23.1",
     "cookie-universal-nuxt": "^2.2.2",
     "nuxt": "2.18.1",
@@ -57,6 +58,7 @@
     "vue-ssr-carousel": "^2.5.0",
     "vue2-flip-countdown": "^1.0.0",
     "vuex-persistedstate": "^4.1.0",
+    "web-vitals": "^4.2.3",
     "webpack": "4.46.0"
   }
 }
