@@ -5,22 +5,24 @@
   "author": "d-themes",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && nuxt start",
+    "dev": "nuxt2",
+    "build": "nuxt2 build",
+    "start": "SET NODE_OPTIONS=--openssl-legacy-provider && nuxt2 start",
     "lint": "eslint **/*.{js,vue} --color",
     "generate": "nuxt generate",
     "generate-mock": "babel-node api/generateMock.js --color",
     "preserve-mock": "npm run generate-mock",
     "serve-mock": "json-server mock_data/db.json --port 4001 --routes api/routes.json --color",
-    "watch": "nuxt --watch"
+    "watch": "nuxi dev"
   },
   "devDependencies": {
     "@babel/core": "7.18.13",
     "@babel/eslint-parser": "7.18.9",
     "@babel/node": "7.18.10",
-    "@babel/preset-env": "7.18.10",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/preset-env": "^7.18.10",
     "@faker-js/faker": "7.4.0",
+    "@nuxt/bridge": "^3.3.1",
     "@nuxtjs/auth": "4.9.1",
     "chalk": "3.0.0",
     "eslint": "8.22.0",
@@ -28,7 +30,8 @@
     "eslint-plugin-vue": "9.4.0",
     "fs-extra": "8.1.0",
     "json-schema-faker": "0.5.0-rcv.44",
-    "json-server": "0.17.0"
+    "json-server": "0.17.0",
+    "nuxi": "^3.13.1"
   },
   "dependencies": {
     "@nuxt/image": "^0.7.1",
@@ -57,7 +60,7 @@
     "vue-slide-toggle": "1.1.1",
     "vue-ssr-carousel": "^2.5.0",
     "vue2-flip-countdown": "^1.0.0",
-    "vuex-persistedstate": "^4.1.0",
+    "vuex-persistedstate": "^3.2.1",
     "web-vitals": "^4.2.3",
     "webpack": "4.46.0"
   }
