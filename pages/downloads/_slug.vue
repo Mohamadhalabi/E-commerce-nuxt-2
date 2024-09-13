@@ -13,7 +13,7 @@
               {{ $t("common.dashboard") }}
             </nuxt-link>
           </li>
-          <li v-if="loaded" aria-current="page" class="breadcrumb-item active">
+          <li aria-current="page" class="breadcrumb-item active">
             {{ download.title }}
           </li>
         </ol>
@@ -418,12 +418,12 @@ export default {
               "@type": "ListItem",
               "position": 2,
               "name": "Downloads",
-              "item": "https://www.tlkeys.com/downloads"
+              "item":  process.env.PUBLIC_PATH + "downloads/"
             },
               {
                 "@type" : "ListItem",
                 "position": 3,
-                "name": process.env.PUBLIC_PATH + "downloads/" + this.download.slug,
+                "name": process.env.PUBLIC_PATH + "downloads/" + this.download.title,
               }
             ]
           }
