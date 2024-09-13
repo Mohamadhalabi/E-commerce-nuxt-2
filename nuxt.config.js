@@ -1,11 +1,13 @@
 import config from './configs';
 const version = process.env.version;
+import { defineNuxtConfig } from '@nuxt/bridge'
 
 const {locale, availableLocales, fallbackLocale} = config.locales;
 const currency = 'USD';
 
-export default {
+export default defineNuxtConfig ({
   // target: "static",
+  bridge:true,
   "scripts": {
     "build:modern": "nuxt build --modern=server",
     "start:modern": "nuxt start --modern=server"
@@ -245,6 +247,8 @@ export default {
     '~/middleware/redirects.js',
   ],
   build: {
+    transpile: ['cookie-es'],
+    
     analyze: false,
     minifyCSS: true,
     minifyJS: true,
@@ -311,7 +315,7 @@ export default {
 
   server: {
     port: 4000,
-    host: process.env.host
+    host: 'localhost'  // Correctly defined as a string
   },
   nuxtPrecompress: {
     enabled: true, // Enable in production
@@ -349,4 +353,4 @@ export default {
       minRatio: 0.8,
     },
   },
-};
+});
