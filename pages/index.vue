@@ -12,7 +12,7 @@
     <LazyHydrate when-idle>
       <pv-slider-banner class="desktop-only"  />
     </LazyHydrate>
-      <div
+    <div
         class="container-fluid">
         <div class="container">
           <LazyHydrate when-visible> 
@@ -53,8 +53,7 @@
           </LazyHydrate>
         </div>
       </div>
-      <div>
-        <div class="container">
+      <div class="container">
           <div class="product-widgets-container row pb-2">
             <LazyHydrate when-visible>
             <pv-on-sale-products
@@ -86,11 +85,10 @@
             </LazyHydrate>
           </div>
         </div>
-      </div>
-      <LazyHydrate when-visible>
-    <pv-manufacturers-section/>
-    </LazyHydrate>
-    <div style="background-color: #f07905">
+        <LazyHydrate when-visible>
+          <pv-manufacturers-section/>
+        </LazyHydrate>
+        <div style="background-color: #f07905">
       <div class="container">
         <div
           class="p-3 justify-content-center">
@@ -257,19 +255,19 @@ export default {
   components: {
     // PvNewsletterModal,
     LazyHydrate,
-    // PvStories: () => import("~/components/home/PvStories"),
+    PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
-    // PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
-    PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
-    // PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
+    PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
     PvLatestProducts: () => import("~/components/home/PvLatestProducts.vue"),
     PvBestSelling: () => import("~/components/home/PvBestSelling.vue"),
     PvTopSelling: () => import("~/components/home/PvTopSelling.vue"),
+    PvLineBanner: () => import("~/components/home/PvLineBanner.vue"),
     PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
     PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
     PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
     PvFreeShipping:() => import("~/components/home/PvFreeShipping.vue"),
+    PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
   },
 
   data: function () {
@@ -282,20 +280,20 @@ export default {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
   methods: {
-    async checkIfMobile() {
-      this.isMobile = window.innerWidth <= 767;
-      if (!this.isMobile) {
-        const { default: PvStories } = await import("~/components/home/PvStories");
-        this.$options.components.PvStories = PvStories;
+    // async checkIfMobile() {
+    //   this.isMobile = window.innerWidth <= 767;
+    //   if (!this.isMobile) {
+    //     const { default: PvStories } = await import("~/components/home/PvStories");
+    //     this.$options.components.PvStories = PvStories;
         
-        const { default: PvSliderBanner } = await import("~/components/home/PvSliderBanner.vue");
-        this.$options.components.PvSliderBanner = PvSliderBanner;
+    //     const { default: PvSliderBanner } = await import("~/components/home/PvSliderBanner.vue");
+    //     this.$options.components.PvSliderBanner = PvSliderBanner;
 
-        const { default: PvLineBanner } = await import("~/components/home/PvLineBanner.vue");
-        this.$options.components.PvLineBanner = PvLineBanner;
-        this.$forceUpdate();
-      }
-    },
+    //     const { default: PvLineBanner } = await import("~/components/home/PvLineBanner.vue");
+    //     this.$options.components.PvLineBanner = PvLineBanner;
+    //     this.$forceUpdate();
+    //   }
+    // },
 
     handleResize() {
       this.isMobile = window.innerWidth < 768;
@@ -329,8 +327,8 @@ export default {
       this.isMobile = window.innerWidth < 768;
       window.addEventListener('resize', this.handleResize);
     }
-    this.checkIfMobile();
-    window.addEventListener('resize', this.checkIfMobile);
+    // this.checkIfMobile();
+    // window.addEventListener('resize', this.checkIfMobile);
 
   },
   beforeDestroy() {

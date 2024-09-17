@@ -100,3 +100,5 @@ mock_data/
 package-lock.json
 package-lock.json
 package.json
+
+.output

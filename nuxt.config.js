@@ -175,7 +175,6 @@ export default defineNuxtConfig ({
   image: {
     quality: 1,
     format: ['webp'],
-    domains: ['dev-srv.tlkeys.com'],
     screens: {
       'xs': 320,
       'sm': 640,
@@ -244,7 +243,7 @@ export default defineNuxtConfig ({
     }
   },
   serverMiddleware: [
-    '~/middleware/redirects.js',
+    // '~/middleware/redirects.js',
   ],
   build: {
     transpile: ['cookie-es'],
