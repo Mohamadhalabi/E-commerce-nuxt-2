@@ -7,7 +7,7 @@
             <nuxt-link
               :to="getLink('/')"
             >
-              <nuxt-img
+              <img
                 format="webp"
                 loading="lazy"
                 src="/images/logo-footer.png"
