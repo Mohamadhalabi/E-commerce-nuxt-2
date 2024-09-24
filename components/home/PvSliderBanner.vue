@@ -138,8 +138,6 @@ export default {
           'api-key': process.env.API_KEY,
         }
       });
-
-      console.log(response.data.products)
       this.rondomProduct = response.data.products;
     } catch (error){
       console.log(error)

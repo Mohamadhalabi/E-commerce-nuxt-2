@@ -222,7 +222,6 @@ export const actions = {
 
   clearCart: async function ({ commit }, payload) {
     const authToken = this.$cookies.get('authToken');  
-    console.log(payload);  
     if (authToken == undefined) {
       if (process.client) {
         localStorage.removeItem('card');
