@@ -12,20 +12,19 @@
         class="swiper-slide boxed-slide rounded-5"
         :class="`boxed-slide-${index}`"
       >
-          <img
-            style="width: 100%"
-            class="slide-bg ml-auto mr-auto"
-            :src="slide.image"
-            alt="banner"
-
-          />
+      <img
+        style="width: 100%"
+        class="slide-bg ml-auto mr-auto"
+        :src="slide.image"
+        alt="banner"
+        />
       </div>
     </Carousel>
     <div class="container mt-3">
       <div class="d-flex">
         <h1 class="text-center unlock-service-title">{{ $t("services.unlockServices") }}</h1>
         <button type="button" class="border-0 bg-white " @click="downloadPDF">
-          <img src="../static/images/pdf-logo.png" class="pdf-logo mb-1" alt="PDF Button">
+          <img src="https://www.tlkeys.com/static/images/pdf-logo.png" class="pdf-logo mb-1" alt="PDF Button">
         </button>
       </div>
 
@@ -109,7 +108,7 @@
     <div class="container mt-lg-3">
       <div class="row">
         <div class="col-lg-6">
-          <img src="images/unlock-remote-services/unlocking-service-1.jpg" class="m-auto" width="80%" />
+          <img src="/images/unlock-remote-services/unlocking-service-1.jpg" class="m-auto" width="80%" />
         </div>
         <div class="col-lg-6">
           <h3 class="h3-unlock-remote">{{ $t("services.toEnsure") }}</h3>
@@ -144,7 +143,7 @@
           </p>
         </div>
         <div class="col-lg-6">
-          <img src="images/unlock-remote-services/unlocking-service-2.jpg" class="m-auto" width="80%" />
+          <img src="/images/unlock-remote-services/unlocking-service-2.jpg" class="m-auto" width="80%" />
         </div>
       </div>
     </div>
@@ -154,8 +153,8 @@
 <script>
 import Carousel from 'vue-ssr-carousel';
 import {baseSlider6} from "~/utils/data/carousel";
-import Api from "~/api";
 import {mapGetters} from "vuex";
+import axios from 'axios';
 
 export default {
   name: "unlock-remote-services",
@@ -174,7 +173,18 @@ export default {
 
   mounted() {
     // this.$Progress.start();
-    Api.get("/unlock-remote")
+    axios.get(`/unlock-remote`,{
+            baseURL: process.env.API_BASE_URL,
+            headers:{
+              'Accept-Language': this.$i18n.locale,
+              'Content-Type': 'application/json',
+              'currency': this.$cookies.get('currency') || 'USD',
+              'Accept': 'application/json',
+              'secret-key': process.env.SECRET_KEY,
+              'api-key': process.env.API_KEY,
+            },
+          })
+
       .then((response) => {
         const data = response.data; // Assuming response.data is the array you provided
         this.uniqueMakes = [...new Set(data.map(item => item.make))];
@@ -189,9 +199,9 @@ export default {
 
         this.items = this.rows.map(item => ({
           image: item.image,
-          make: item.make,
-          model: item.model,
-          description: item.description,
+          make: item.make[this.$i18n.locale],
+          model: item.model[this.$i18n.locale],
+          description: item.description[this.$i18n.locale],
           year: item.year,
         }));
         // this.$Progress.finish();
@@ -262,10 +272,10 @@ export default {
       uniqueModels: [],
       uniqueFromToYears: [],
       slides: [
-        { image: "images/unlock-remote-sliders/alpha-romeo.jpg" },
-        { image: "images/unlock-remote-sliders/kia.jpg" },
-        { image: "images/unlock-remote-sliders/chrysler.jpg" },
-        { image: "images/unlock-remote-sliders/hyundai.jpg" },
+        { image: "/images/unlock-remote-sliders/alpha-romeo.jpg" },
+        { image: "/images/unlock-remote-sliders/kia.jpg" },
+        { image: "/images/unlock-remote-sliders/chrysler.jpg" },
+        { image: "/images/unlock-remote-sliders/hyundai.jpg" },
 
       ],
       rows: [],
