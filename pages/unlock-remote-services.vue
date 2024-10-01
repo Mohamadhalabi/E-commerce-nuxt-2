@@ -171,46 +171,145 @@ export default {
     }
   },
 
-  mounted() {
-    // this.$Progress.start();
-    axios.get(`/unlock-remote`,{
-            baseURL: process.env.API_BASE_URL,
-            headers:{
-              'Accept-Language': this.$i18n.locale,
-              'Content-Type': 'application/json',
-              'currency': this.$cookies.get('currency') || 'USD',
-              'Accept': 'application/json',
-              'secret-key': process.env.SECRET_KEY,
-              'api-key': process.env.API_KEY,
-            },
-          })
-
-      .then((response) => {
-        const data = response.data; // Assuming response.data is the array you provided
-        this.uniqueMakes = [...new Set(data.map(item => item.make))];
-        this.uniqueModels = [...new Set(data.map(item => item.model))];
-        this.uniqueFromToYears = [...new Set(data.map(item => `${item.from} - ${item.to}`))];
-        this.rows = response.data.map(item => ({
-          ...item,
-          year: `${item.from} - ${item.to}`,
-          image: item.image
-        }));
-
-
-        this.items = this.rows.map(item => ({
-          image: item.image,
-          make: item.make[this.$i18n.locale],
-          model: item.model[this.$i18n.locale],
-          description: item.description[this.$i18n.locale],
-          year: item.year,
-        }));
-        // this.$Progress.finish();
-      })
-      .catch((error) => {
-        console.error("An error occurred:", error);
-      });
-    this.$emit("unlock-remote", true);
+  head() {
+    return {
+      title: this.$t("header.unlockService"),
+      link: [
+        {
+          rel: 'canonical',
+          href: 'https://www.tlkeys.com/unlock-remote-services',
+        },
+      ],
+      meta: [
+        {
+          "http-equiv": "content-language",
+          content: this.$i18n.locale,
+        },
+        {
+          name: 'description',
+          content: this.$t("services.technolockkeys"),
+        },
+        {
+          name: "og:type",
+          content: "website",
+        },
+        {
+          name: "og:site_name",
+          content: "Techno Lock Keys",
+        },
+        {
+          name: "og:title",
+          content: this.$t("services.unlockServices"),
+        },
+        {
+          name: "og:description",
+          content: this.$t("services.technolockkeys"),
+        },
+        {
+          name: "og:url",
+          content: "https://www.tlkeys.com/unlock-remote-services",
+        },
+        {
+          name: "og:image",
+          content: "https://dev-srv.tlkeys.com/storage/images/seo/og-image.jpg",
+        },
+        {
+          name: "og:image:alt",
+          content: this.$settings.seo.meta_image.l.alt,
+        },
+        {
+          name: "og:image:height",
+          content: "627",
+        },
+        {
+          name: "og:image:width",
+          content: "1200",
+        },
+        {
+          name: "twitter:card",
+          content: "summary",
+        },
+        {
+          name: "twitter:site",
+          content: `${this.$settings.social_media.twitter}`,
+        },
+        {
+          rel: "shortcut icon",
+          href: "https://dev-srv.tlkeys.com/storage/images/seo/favicon-tlkeys.png",
+        },
+      ],
+      script: [
+        {
+          type: "application/ld+json",
+          json: {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: [
+              {
+                "@type": "ListItem",
+                position: 1,
+                name: this.$t("products.home"),
+                item: "https:www.tlkeys.com/",
+              },
+              {
+                "@type": "ListItem",
+                position: 2,
+                name: this.$t("services.unlockServices"),
+                item: "https:www.tlkeys.com/online-services",
+              },
+            ],
+          },
+        }
+      ]
+    }
   },
+
+  async asyncData({ app, $axios, $cookies, error }) {
+  try {
+    const response = await $axios.get(`/unlock-remote`, {
+      baseURL: process.env.API_BASE_URL,
+      headers: {
+        'Accept-Language': app.i18n.locale,
+        'Content-Type': 'application/json',
+        'currency': $cookies.get('currency') || 'USD',
+        'Accept': 'application/json',
+        'secret-key': process.env.SECRET_KEY,
+        'api-key': process.env.API_KEY,
+      },
+    });
+
+    const data = response.data;
+
+    const uniqueMakes = [...new Set(data.map(item => item.make))];
+    const uniqueModels = [...new Set(data.map(item => item.model))];
+    const uniqueFromToYears = [...new Set(data.map(item => `${item.from} - ${item.to}`))];
+
+    const rows = data.map(item => ({
+      ...item,
+      year: `${item.from} - ${item.to}`,
+      image: item.image,
+    }));
+
+    const items = rows.map(item => ({
+      image: item.image,
+      make: item.make[app.i18n.locale],
+      model: item.model[app.i18n.locale],
+      description: item.description[app.i18n.locale],
+      year: item.year,
+    }));
+
+    return {
+      uniqueMakes,
+      uniqueModels,
+      uniqueFromToYears,
+      rows,
+      items,
+    };
+  } catch (e) {
+    console.error("An error occurred:", e);
+    error({ statusCode: 500, message: 'Failed to load data' });
+  }
+},
   data() {
     return {
       fields: [
