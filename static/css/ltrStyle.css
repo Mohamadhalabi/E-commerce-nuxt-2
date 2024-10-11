@@ -676,6 +676,23 @@ a:hover {
     transform-origin: center center center;
 }
 
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .pulse-animation {
+    animation: pulse 2s infinite;
+  }
+  
+
 @keyframes off-animation {
     0% {
         transform: scale(0.9);
