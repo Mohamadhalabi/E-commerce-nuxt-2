@@ -205,12 +205,12 @@
             <div class="col-lg-9 mt-auto mb-auto text-left">
               <nuxt-link
                 class="font-weight-bold"
-                :to="getLink('/downloads')">
-                <i class="fa fa-download">
+                :to="getLink('/shop?offers')">
+                <i class="fa fa-percentage font-weight-bold">
                 </i>
-                <span class="ml-1 mr-lg-2"
+                <span class="ml-1 mr-lg-2 off-animatin mb-0 call-us-now text-center font-weight-bold"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.downloads") }}
+                  {{ $t("header.Offer") }}
                 </span>
               </nuxt-link>
               <nuxt-link :to="getLink('/shop?free-shipping')">
@@ -241,6 +241,17 @@
                   {{ $t("header.unlockService") }}
                 </span>
               </nuxt-link>
+
+
+              <nuxt-link :to="getLink('/shop?new-arrival')">
+                <i class="fa fa-chevron-circle-down font-weight-bold"></i>
+                <span style="color:red" class="header-icons ml-1 mr-lg-2 font-weight-bold"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
+                  {{ $t("home.newarrivalproducts") }}
+                </span>
+              </nuxt-link>
+
+              
             </div>
             <div class="col-lg-3 d-flex">
               <i class="fa fa-search m-auto search-icon" @click="openModal">
@@ -286,16 +297,17 @@
           <div class="row text-center w-100">
             <div class="row text-center w-100">
               <div class="col-lg-2 m-auto">
-                <nuxt-link :to="getLink('/downloads')"
+                <nuxt-link :to="getLink('/shop?offers')"
                            class="font-weight-bold"
                 >
                   <p class="off-animatin mb-0 call-us-now text-center font-weight-bold">
-                    <i class="fa fa-download">
+                    <i class="fa fa-percentage">
                     </i>
-                    {{ $t("header.downloads") }}
+                    {{ $t("header.Offer") }}
                   </p>
                 </nuxt-link>
               </div>
+
               <div class="col-lg-2 m-auto">
                 <nuxt-link :to="getLink('/shop?free-shipping')">
                   <i class="fas fa-shipping-fast"></i>
@@ -326,6 +338,19 @@
                   <span class="header-icons online-services ml-1">
                    {{ $t("header.unlockService") }}
                 </span>
+                </nuxt-link>
+              </div>
+
+
+              <div class="col-lg-2 m-auto">
+                <nuxt-link :to="getLink('/shop?new-arrival')"
+                           class="font-weight-bold"
+                >
+                  <p class="pulse-animation mb-0 call-us-now text-center font-weight-bold" style="color:red;font-weight:bold">
+                    <i class="fa fa-chevron-circle-down">
+                    </i>
+                    {{ $t("home.newarrivalproducts") }}
+                  </p>
                 </nuxt-link>
               </div>
             </div>

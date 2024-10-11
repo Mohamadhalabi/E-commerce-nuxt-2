@@ -275,6 +275,24 @@
       </li>
 
       <!-- 2 -->
+
+
+
+      <li
+        class="right-menu-items"
+        style="height:52.6px"
+        >
+        <nuxt-link
+          :to="getLink('/downloads')"
+          class="d-flex align-items-center flex-column"
+        >
+          <span class="header-main-menu">
+          {{ $t("header.downloads") }}
+          </span>
+        </nuxt-link>
+      </li>
+
+
       <li
         class="right-menu-items"
         style="background-color:orange;height:52.6px"
@@ -290,22 +308,6 @@
         </nuxt-link>
       </li>
 
-      <li
-        class="right-menu-items"
-        style="background-color:red;height:52.6px"
-        >
-        <nuxt-link
-          :to="getLink('/shop?offers')"
-          class="d-flex align-items-center flex-column"
-        >
-          <span class="header-main-menu"
-          style="background-color:red">
-          <i class="fa fa-percent mr-2" style="font-size:16px">
-          </i>
-          {{ $t("header.Offer") }}
-          </span>
-        </nuxt-link>
-      </li>
     </ul>
   </div>
 </template>
