@@ -328,7 +328,7 @@ export default {
         country_id: null,
         state: "",
         street: "",
-        address: null,
+        address: "",
         postal_code: "",
         company_name: "",
         website_url: "",
@@ -361,8 +361,17 @@ export default {
     },
 
     async Register() {
-      let formData = new FormData(document.getElementById('registerForm'));
-    formData.append("phone", this.form.mobile);
+      let registerForm = document.getElementById('registerForm');
+      if (!registerForm) {
+        return this.$notify({
+          group: "errorMessage",
+          type: "error",
+          text: "Register form not found",
+        });
+      }
+
+      let formData = new FormData(registerForm);
+      formData.append("phone", this.form.mobile);
       formData.append("name", this.form.name);
       formData.append("email", this.form.email);
       formData.append("city", this.form.city);
@@ -378,31 +387,38 @@ export default {
       formData.append("avatar", this.avatar);
       formData.append("language", this.form.PreferredLanguage);
 
-      Api.post("/user/auth/register", formData)
-        .then((response) => {
-          this.$notify({
-            group: "custom-notify",
-            type: "success",
-            text: response.data.data.message,
-          });
-          const user = { email: this.form.email, password: this.form.password };
-          return this.LogIn(user);
-        })
-        .catch((error) => {
-          let errorObj = error.response.data.data;
-          let message = "";
-          if (Object.keys(errorObj).length) {
-            message = error.response.data.data[Object.keys(errorObj)[0]][0];
-          } else {
-            message = error.response.data.message;
-          }
-          this.$notify({
-            group: "errorMessage",
-            type: "error",
-            text: message,
-          });
+      if (this.form.address.length < 7) {
+        this.$notify({
+          group: "errorMessage",
+          type: "error",
+          text: "Please enter a valid address",
         });
+        return;
+      }
+
+      try {
+        const response = await Api.post("/user/auth/register", formData);
+        this.$notify({
+          group: "custom-notify",
+          type: "success",
+          text: response.data.data.message,
+        });
+        const user = { email: this.form.email, password: this.form.password };
+        await this.LogIn(user);
+      } catch (error) {
+        let errorObj = error.response?.data?.data || {};
+        let message = Object.keys(errorObj).length
+          ? errorObj[Object.keys(errorObj)[0]][0]
+          : error.response?.data?.message || "An error occurred";
+        
+        this.$notify({
+          group: "errorMessage",
+          type: "error",
+          text: message,
+        });
+      }
     },
+
 
     getCountries() {
       Api.post("/countries")
