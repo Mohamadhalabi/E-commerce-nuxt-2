@@ -202,7 +202,7 @@
         ref="headerBottom">
         <div class="container">
           <div class="row text-center w-100">
-            <div class="col-lg-9 mt-auto mb-auto text-left">
+            <div class="col-lg-10 mt-auto mb-auto text-left">
               <nuxt-link
                 class="font-weight-bold"
                 :to="getLink('/shop?offers')">
@@ -253,7 +253,7 @@
 
               
             </div>
-            <div class="col-lg-3 d-flex">
+            <div class="col-lg-2 d-flex">
               <i class="fa fa-search m-auto search-icon" @click="openModal">
               </i>
               <div class="header-dropdown m-auto">

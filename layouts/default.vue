@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     async checkIfMobile() {
-      this.isMobile = window.innerWidth <= 767;
+      this.isMobile = window.innerWidth <= 993;
       if (this.isMobile) {
         const { default: PvMobileMenu } = await import("~/components/common/header/PvMobileMenu");
         this.$options.components.PvMobileMenu = PvMobileMenu;
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style>
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 993px) {
   .mobile-only {
     display: block;
   }
@@ -89,19 +89,13 @@ export default {
     display: none;
   }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 993px) {
   .mobile-only {
     display: none;
   }
 
   .desktop-only {
     display: contents;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  .top-notice {
-    display: none!important;
   }
 }
 </style>

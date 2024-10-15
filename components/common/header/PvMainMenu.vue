@@ -488,6 +488,7 @@ export default {
 }
 .header-li-titles{
   height: 50px!important;
+  padding: 10px;
 }
 .hoverable {
   transition: transform 0.3s ease;

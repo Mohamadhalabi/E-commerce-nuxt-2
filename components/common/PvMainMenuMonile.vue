@@ -318,10 +318,6 @@ export default {
     ...mapActions("compare", ["fetchList"]),
     ...mapActions("fav", ["fetchWishlist"]),
 
-    test(){
-      alert("test")
-    },
-
     getKeysAndRemotes: function(){
       if(JSON.parse(JSON.stringify(this.keysAndRemotes)).length == 0){
         Api.get('/keys-and-remotes-menu')
