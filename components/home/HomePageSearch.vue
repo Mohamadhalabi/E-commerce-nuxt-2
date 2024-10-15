@@ -5,11 +5,10 @@
     </div>
     <div class="box-shadow-none third-menu">
       <div class="row d-flex home-page-search mb-3 mb-lg-0 justify-content-center">
-        <div class="col-xl-5 col-lg-6 col-12 mt-lg-0 mt-2 col-md-12 d-lg-flex justify-content-xl-end align-center text-center" style="align-items: center;">
+        <div class="col-xl-5 col-lg-12 col-md-12 d-flex justify-content-center" style="align-items: center;margin:auto!important">
           <span class="search-by-fcc mr-2">
             {{ $t("home.SearchFCCID") }} {{ $t("home.orSearchPartNumber")}}
           </span>
-          <div>
             <div class="searchProductStyle p-3">
               <form class="nosubmit2"
                     @submit.prevent="onEnter(searchKey)"
@@ -95,24 +94,21 @@
                 </b-list-group-item>
               </b-list-group>
             </div>
-          </div>
         </div>
-        <div class="col-xl-7 col-lg-12 m-auto pl-5 pr-5 mb-2">
-          <div class="" action="#" method="get">
-            <div class="row d-lg-flex justify-content-center d-block home-page-search">
-              <div class="mt-auto mb-auto text-center">
-                <span class="search-by-fcc mt-2 mt-lg-0 mr-2">
-                  {{ $t('home.searchByCar') }}
-                </span>
-              </div>
-              <div class="ml-lg-2 mb-1 mb-lg-0 mt-1 mt-lg-0 search-by-car">
-                <AutoComplate
-                  v-model="brand"
-                  :placeholder="$t('home.selectBrand')"
-                  :options="brands"
-                  class="search-by-car-input"
-                  :item-text="'brand'"
-                  @setValue="$event ? (brand = $event.slug) : (brand = null),getModelsByBrand()"/>
+        <div class="col-xl-7 col-lg-12 col-md-12 m-auto d-lg-flex d-md-flex justify-content-center pl-5 pr-5 mb-2 mt-md-2 mb-md-2">
+          <div class="mt-auto mb-auto text-center">
+            <span class="search-by-fcc mt-2 mt-lg-0 mr-2">
+              {{ $t('home.searchByCar') }}
+            </span>
+          </div>
+              <div class="ml-lg-2 mb-1 mb-lg-0 mt-1 search-by-car">
+              <AutoComplate
+              v-model="brand"
+              :placeholder="$t('home.selectBrand')"
+              :options="brands"
+              class="search-by-car-input"
+              :item-text="'brand'"
+              @setValue="$event ? (brand = $event.slug) : (brand = null),getModelsByBrand()"/>
               </div>
               <div class="ml-lg-2 mb-1 mb-lg-0 search-by-car">
                 <AutoComplate
@@ -141,9 +137,7 @@
                   class="py-3 w-100">
                   <i class="icon sicon-magnifier"></i>
                 </base-button-icon-1>
-                </div>
             </div>
-          </div>
         </div>
       </div>
     </div>
