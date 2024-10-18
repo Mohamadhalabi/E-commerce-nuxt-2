@@ -70,13 +70,15 @@
           v-for="(video, index) in product.videos"
           :key="index"
           class="downloadVedioWrapper col-md-14 col-sm-6 col-12 mb-2">
-          <iframe class="d-flex" style="width: 100%;min-height: 300px"  :src="getEmbedUrl(video.link)" />
+          <video v-if="getEmbedUrl(video.link) == ''" class="d-flex" style="width: 100%" controls>
+            <source :src="video.link" type="video/mp4">
+          </video>
+
+          <iframe class="d-flex" style="width: 100%;min-height: 300px" :src="getEmbedUrl(video.link)" v-else />
         </div>
       </div>
     </div>
-
     <div>
-
   <pv-tabs class="product-single-tabs">
     <ul
       class="nav bg-white nav-tabs"
