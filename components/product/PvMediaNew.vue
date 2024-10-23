@@ -1,21 +1,9 @@
 <template>
   <div>
     <pv-label-group :product="product" style="padding-right: 25px!important;padding-top: 10px!important;" />
-    <div v-for="(image, index) in product.gallery" :key="index" class="slide rounded-5" ref="main" @mouseenter="mouseEntered" @mouseleave="mouseLeft">
-      <div class="showOnDesktop">
-        <ImageMagnifier v-if="index === currentIndex" :image="image" size="l" :isMouseInside="isMouseInside" />
-      </div>
-      <div class="showOnMobile">
-        <nuxt-img
-          :src="image['l']['url']"
-          v-if="index === currentIndex"
-          class="rounded-5"
-          :alt="image['l']['alt']"
-          loading="lazy"
-          style="border: 1px solid #e7e7e6!important;"
-        />
-      </div>
-    </div>
+    
+    <!-- Pass currentIndex to ImageMagnifier -->
+    <ImageMagnifier :image="product.gallery" :currentIndex="currentIndex" size="l" :isMouseInside="isMouseInside" />
 
     <Carousel
       thumbnails
@@ -29,7 +17,6 @@
         :key="index"
         style="padding: 10px"
         class="thumbnail-image"
-        :class="`slide--${index} slide--thumbniail`"
         @click="gotoMainCarousel(index)"
       >
         <img
@@ -55,7 +42,7 @@ import PvLabelGroup from "~/components/product/partials/PvLabelGroup.vue";
 
 export default {
   name: "Media New",
-  components: {PvLabelGroup, ImageMagnifier, Carousel },
+  components: { PvLabelGroup, ImageMagnifier, Carousel },
   props: {
     product: Object,
   },
@@ -63,12 +50,12 @@ export default {
     return {
       highlightImage: false,
       isMouseInside: false,
-      currentIndex: 0
+      currentIndex: 0, // Track the current index for the main image
     };
   },
   methods: {
     gotoMainCarousel(index) {
-      this.currentIndex = index;
+      this.currentIndex = index; // Update the main image when a thumbnail is clicked
       this.highlightImage = true;
     },
     mouseEntered() {
@@ -80,15 +67,3 @@ export default {
   },
 };
 </script>
-<style>
-@media screen and (max-width: 993px){
-  .showOnDesktop{
-    display: none;
-  }
-}
-@media screen and (min-width: 993px){
-  .showOnMobile{
-    display: none;
-  }
-}
-</style>
