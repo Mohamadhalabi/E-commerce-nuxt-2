@@ -1,182 +1,119 @@
 <template>
   <div>
-    <!-- Image that triggers the modal on click -->
+    <!-- Display the main image and open the modal on click -->
     <nuxt-img
-      :id="'myimage-' + image[size].id"
-      :src="image[size].url"
-      :width="image[size].width"
-      :height="image[size].height"
-      class="rounded-5"
+      :src="image[currentIndex]['l'].url"
+      :width="image[currentIndex]['l'].width"
+      :height="image[currentIndex]['l'].height"
+      class="rounded-5 w-100"
+      :alt="image[currentIndex]['l'].alt"
       style="border: 1px solid #e7e7e6!important; cursor: pointer;"
-      :alt="image[size].alt"
       @click="showImageModal"
     />
 
-    <!-- Modal to display the image -->
-    <b-modal v-model="isModalVisible" style="width:100vw;height: 100vh"  centered hide-footer hide-header>
-      <nuxt-img
-        :src="image[size].url"
-        :width="image[size].width"
-        :height="image[size].height"
-        class="rounded-5 w-100"
-        :alt="image[size].alt"
-      />
+    <!-- Modal to display the images and allow scrolling -->
+    <b-modal v-model="isModalVisible" size="lg" centered hide-header hide-footer>
+      <div class="position-relative">
+        <!-- Left Button (Previous) -->
+        <div>
+          <b-button
+            class="position-absolute left-arrow primary"
+            @click="prevImage"
+            :disabled="currentIndex === 0"
+          >
+            <i class="fa fa-chevron-left"></i>
+          </b-button>
+        </div>
+
+        <!-- Main Image -->
+        <div class="text-center">
+          <nuxt-img
+            :src="image[currentIndex]['l'].url"
+            :width="image[currentIndex]['l'].width"
+            :height="image[currentIndex]['l'].height"
+            class="rounded-5"
+            :alt="image[currentIndex]['l'].alt"
+            @click="closeImageModal"
+          />
+        </div>
+
+        <!-- Right Button (Next) -->
+        <div>
+          <b-button
+            class="position-absolute right-arrow"
+            variant="primary"
+            @click="nextImage"
+            :disabled="currentIndex === image.length - 1"
+          >
+            <i class="fa fa-chevron-right"></i>
+          </b-button>
+        </div>
+      </div>
     </b-modal>
   </div>
 </template>
 
-
 <script>
 export default {
-  data() {
-    return {
-      isMouseOnImage: false,
-      isModalVisible: false,
-    };
-  },
   props: {
-    image: Object,
+    image: Array, // Image array passed from parent
+    currentIndex: {
+      type: Number,
+      default: 0, // Default to the first image
+    },
     size: {
       type: String,
-      default: 'l'
+      default: 'l',
     },
-    isMouseInside:Boolean,
-    highlightImage:Boolean,
+  },
+  data() {
+    return {
+      isModalVisible: false, // Control modal visibility
+    };
   },
   methods: {
     showImageModal() {
-      this.isModalVisible = true;
+      this.isModalVisible = true; // Open modal when the image is clicked
     },
-    // resetMagnifier() {
-    //   const imgID = "myimage-" + this.image[this.size].id;
-    //   const img = document.getElementById(imgID);
-
-    //   // Remove any existing magnifier glass
-    //   const existingGlass = img.parentElement.querySelector(".img-magnifier-glass");
-    //   if (existingGlass) {
-    //     existingGlass.remove();
-    //   }
-
-    //   // Initialize the magnifier again
-    //   this.initializeMagnifier();
-    // },
-    // initializeMagnifier() {
-    //   const imgID = "myimage-" + this.image[this.size].id;
-    //   const zoom = 3;
-
-    //   const img = document.getElementById(imgID);
-
-    //   // Create a new magnifier glass
-    //   const glass = document.createElement("DIV");
-    //   glass.setAttribute("class", "img-magnifier-glass");
-
-    //   img.parentElement.insertBefore(glass, img);
-
-    //   // Set background properties for the magnifier glass
-    //   glass.style.backgroundImage = `url('${img.src}')`;
-    //   glass.style.backgroundRepeat = "no-repeat";
-    //   glass.style.backgroundSize = `${img.width * zoom}px ${img.height * zoom}px`;
-    //   glass.style.zIndex= `999`;
-    //   glass.style.overflow =`hidden`;
-
-
-    //   const bw = 2;
-    //   const w = glass.offsetWidth / 1.5;
-    //   const h = glass.offsetHeight / 1.5;
-
-    //   // Execute a function when someone moves the magnifier glass over the image
-    //   glass.addEventListener("mousemove", moveMagnifier);
-    //   img.addEventListener("mousemove", moveMagnifier);
-
-    //   // Also handle touch events for touch screens
-    //   glass.addEventListener("touchmove", moveMagnifier);
-    //   img.addEventListener("touchmove", moveMagnifier);
-
-    //   function moveMagnifier(e) {
-    //     e.preventDefault();
-
-    //     const pos = getCursorPos(e);
-    //     let x = pos.x;
-    //     let y = pos.y;
-
-    //     if (x > img.width - (w / zoom)) {
-    //       x = img.width - (w / zoom);
-    //     }
-    //     if (x < w / zoom) {
-    //       x = w / zoom;
-    //     }
-    //     if (y > img.height - (h / zoom)) {
-    //       y = img.height - (h / zoom);
-    //     }
-    //     if (y < h / zoom) {
-    //       y = h / zoom;
-    //     }
-
-    //     glass.style.left = `${x - w}px`;
-    //     glass.style.top = `${y - h}px`;
-    //     glass.style.backgroundPosition = `-${(x * zoom) - w + bw}px -${(y * zoom) - h + bw}px`;
-    //   }
-
-    //   function getCursorPos(e) {
-    //     const a = img.getBoundingClientRect();
-    //     let x = 0;
-    //     let y = 0;
-
-    //     e = e || window.event;
-    //     x = e.pageX - a.left - window.pageXOffset;
-    //     y = e.pageY - a.top - window.pageYOffset;
-
-    //     return { x, y };
-    //   }
-    // }
+    closeImageModal() {
+      this.isModalVisible = false; // Close modal when the image in modal is clicked
+    },
+    prevImage() {
+      if (this.currentIndex > 0) {
+        this.currentIndex--; // Navigate to the previous image
+      }
+    },
+    nextImage() {
+      if (this.currentIndex < this.image.length - 1) {
+        this.currentIndex++; // Navigate to the next image
+      }
+    },
   },
-  // watch: {
-  //   image: {
-  //     immediate: true,
-  //     handler() {
-  //       this.$nextTick(() => {
-  //         this.resetMagnifier();
-  //       });
-  //     }
-  //   },
-  //   isMouseInside(val){
-  //     if(val === false) {
-  //       const imgID = "myimage-" + this.image[this.size].id;
-  //       const img = document.getElementById(imgID);
-
-  //       // Remove any existing magnifier glass
-  //       const existingGlass = img.parentElement.querySelector(".img-magnifier-glass");
-  //       if (existingGlass) {
-  //         existingGlass.remove();
-  //       }
-  //     }
-  //     if(val === false){
-  //       // this.initializeMagnifier()
-  //     }
-  //   },
-  // }
 };
 </script>
 
-<style>
-.img-magnifier-glass {
-  position: absolute;
-  border: 1px solid #000;
-  border-radius: 50%;
-  cursor: none;
-  /* Set the size of the magnifier glass: */
-  width: 300px;
-  height: 300px;
-  /* Set initial positioning for the magnifier glass: */
-  left: -9999px;
-  top: -9999px;
-  /* Use 'cover' to prevent duplication and address lagging on edges: */
-  background-size: cover;
-  overflow: hidden;
+<style scoped>
+/* Style for left button */
+.left-arrow {
+  top: 50%;
+  left: -130px; /* Move the button outside the image */
+  transform: translateY(-50%);
+  z-index: 1;
 }
-@media screen and (max-width: 992px) {
-  .img-magnifier-glass{
-    display: none;
-  }
+
+/* Style for right button */
+.right-arrow {
+  top: 50%;
+  right: -130px; /* Move the button outside the image */
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+/* Ensure that the image is centered in the modal */
+.text-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 </style>
