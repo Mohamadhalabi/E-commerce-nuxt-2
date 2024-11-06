@@ -32,7 +32,7 @@
                 <div
                   class="form-footer mb-0 d-felx align-items-center justify-content-between"
                 >
-                  <nuxt-link to="/auth/login" class="m-0 p-0">
+                  <nuxt-link to="/auth/login-register" class="m-0 p-0">
                     {{ $t("forgotPassword.clickHere") }}
                   </nuxt-link>
                   <base-button-icon-1 type="submit" class="p-2" :outline="true">{{

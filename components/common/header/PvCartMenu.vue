@@ -143,7 +143,7 @@
 
               <nuxt-link
                 @click.native="hideCartMenu"
-                v-else :to="getLink('/auth/login')">
+                v-else :to="getLink('/auth/login-register')">
                  <base-button-icon1
                   :outline="true"
                   class="w-100 py-3 mt-1 checkout-button"

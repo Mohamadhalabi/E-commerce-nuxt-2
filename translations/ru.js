@@ -85,7 +85,9 @@ export default
     companyName:"Название компании",
     Language:"Язык",
     PhoneNumber: "+971543205641",
-    whatsappMessage:"Здравствуйте, я ищу помощь."
+    whatsappMessage:"Здравствуйте, я ищу помощь.",
+    loginRegisterTitle: "Вход / Регистрация",
+    loginRegisterDescription: "Войдите или зарегистрируйтесь на нашем сайте, Techno Lock Keys Trading."
   },
   dashboard: {
     dashboard: 'Панель управления',

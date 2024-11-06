@@ -144,7 +144,7 @@
 
 
                 <div v-if="!StateUser">
-                  <nuxt-link :to="getLink('/auth/login')" class="header-icon mx-5">
+                  <nuxt-link :to="getLink('/auth/login-register')" class="header-icon mx-5">
                     <div class="header-user text-center">
                       <i class="fa fa-user" />
                       <div

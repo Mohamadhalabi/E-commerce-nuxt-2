@@ -86,6 +86,8 @@ export default
       companyName:"Company Name",
       Language:"Language",
       whatsappMessage:"Hello, I am looking for assistance.",
+      loginRegisterTitle:"Login / Register",
+      loginRegisterDescription: "Login or register on our website, Techno Lock Keys Trading."
     },
     dashboard: {
       dashboard: 'Dashboard',

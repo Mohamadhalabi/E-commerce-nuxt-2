@@ -20,11 +20,13 @@
                 <label>
                   {{ $t("orders.country") }}
                 </label>
+                <span class="required">*</span>
                 <AutoComplate
                   v-model="form.country_id"
                   :options="countries"
                   :defulte-name="typeForm == 'edit' ? form.countryName : ''"
                   @setValue="form.country_id = $event.id"
+                  required
                 />
               </div>
             </div>
@@ -34,12 +36,14 @@
                 <label for="city">
                   {{ $t("orders.city") }}
                 </label>
+                <span class="required">*</span>
                 <input
                   id="city"
                   v-model="form.city"
                   class="form-control"
                   type="text"
                   name="city"
+                  required
                 />
               </div>
             </div>
@@ -79,12 +83,14 @@
                 <label for="postal_code">
                   {{ $t("orders.postal_code") }}
                 </label>
+                <span class="required">*</span>
                 <input
                   id="postal_code"
                   v-model="form.postal_code"
                   class="form-control"
                   type="text"
                   name="postal_code"
+                  required
                 />
               </div>
             </div>
@@ -94,11 +100,13 @@
                 <label for="phone">
                   {{ $t("orders.phone") }}
                 </label>
+                <span class="required">*</span>
                 <input
                   type="text"
                   class="form-control"
                   v-model="form.phone"
                   name="phone Number"
+                  required
                 />
               </div>
             </div>
@@ -108,11 +116,13 @@
                 <label for="address">
                   {{ $t("account.address") }}
                 </label>
+                <span class="required">*</span>
                 <input
                   id="address"
                   v-model="form.address"
                   class="form-control"
                   name="address"
+                  required
                 />
               </div>
             </div>

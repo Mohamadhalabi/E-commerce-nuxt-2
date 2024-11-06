@@ -61,18 +61,12 @@
       <div class="text-center">
         <base-button-icon-1
           :outline="true"
-          class="py-4 mb-2"
+          class="py-4"
           type="submit"
           style="background-color: #25262b; border-color: #25262b"
           :class="insideModal ? 'btn-block' : 'w-100'"
           >{{ $t("login.title") }}
         </base-button-icon-1>
-
-        <nuxt-link to="/auth/register">
-          <base-button-icon-1 :outline="false" class="py-4 w-100">
-            {{ $t("login.registerNow") }}
-          </base-button-icon-1>
-        </nuxt-link>
       </div>
     </form>
   </div>

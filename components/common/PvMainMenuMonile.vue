@@ -18,12 +18,12 @@
       </div>
     </div>
     <div v-else class="text-center" @click="closeAllNav()">
-      <nuxt-link :to="getLink('/auth/login')">
+      <nuxt-link :to="getLink('/auth/login-register')">
         <button class="w-25 login-button" >
           {{ $t("login.title") }}
         </button>
       </nuxt-link>
-      <nuxt-link :to="getLink('/auth/register')">
+      <nuxt-link :to="getLink('/auth/login-register')">
         <button class="w-25 register-button">
           {{ $t("login.registerNow") }}
         </button>

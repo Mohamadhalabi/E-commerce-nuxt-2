@@ -102,7 +102,6 @@ export default {
         profile_picture: responsePayload.picture
       };
       this.$store.dispatch('auth/loginWithGoogle', user).then((res)=> {
-        // this.$modal.hideAll();
         this.$store.dispatch('auth/setUser', res.data.data);
       });
     },
@@ -116,12 +115,9 @@ export default {
               const user = {
                 name: userResponse.name,
                 userID: userResponse.id
-              // email: userResponse.email,
-              // profile_picture: userResponse.picture
               };
               this.$store.dispatch('auth/loginWithFacebook', user).then((res)=> {
                 this.$store.dispatch('auth/setUser', res.data.data);
-                // this.$store.dispatch('auth/setUser', res);
               });
             }
           });

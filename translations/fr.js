@@ -86,6 +86,8 @@ export default
     Language:"Langue",
     PhoneNumber: "+971545240905",
     whatsappMessage:"Bonjour, je cherche de l'aide.",
+    loginRegisterTitle: "Connexion / Inscription",
+    loginRegisterDescription: "Connectez-vous ou inscrivez-vous sur notre site Web, Techno Lock Keys Trading."
   },
   dashboard: {
     dashboard: "Tableau de bord",
