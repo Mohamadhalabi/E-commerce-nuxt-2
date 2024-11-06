@@ -35,8 +35,6 @@ const errorHandler = (error) => {
     // Remove token and handle the redirection on the client side
     if (isLocalStorageAvailable) {
       localStorage.removeItem('tlkeys');
-      // localStorage.setItem('tokenEnded', 1);
-      // window.location.href = '/auth/login';
     }
   }
   return Promise.reject(error);

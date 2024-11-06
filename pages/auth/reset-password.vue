@@ -48,16 +48,9 @@
                   />
                 </div>
                 <div class="form-footer mb-0 d-flex align-items-center justify-content-between w-100">
-                  <nuxt-link to="/auth/login">
+                  <nuxt-link to="/auth/login-register">
                     {{ $t("forgotPassword.clickHereToLogIn") }}
                   </nuxt-link>
-
-                  <!-- <button
-                    type="submit"
-                    class="btn btn-md btn-primary form-footer-right font-weight-normal text-transform-none mr-0"
-                  >
-                    {{ $t("forgotPassword.resetPassword") }}
-                  </button> -->
                   <base-button-icon-1
                     type="submit"
                     :outline="true"

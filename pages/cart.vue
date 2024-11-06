@@ -196,7 +196,7 @@
           >
 
           <nuxt-link v-else
-                     :to="getLink('/auth/login/')"
+                     :to="getLink('/auth/login-register')"
           >
             <base-button-icon1 type="button" :outline="true" class="py-4 w-100">
               {{ $t("checkout.loginToGoToCheckout") }}

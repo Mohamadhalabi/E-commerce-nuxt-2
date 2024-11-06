@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="getLink('/auth/login')" class="header-icon mx-2" v-if="!isAuthenticated">
+  <nuxt-link :to="getLink('/auth/login-register')" class="header-icon mx-2" v-if="!isAuthenticated">
     <div class="header-user">
       <i class="fa fa-user" />
       <div

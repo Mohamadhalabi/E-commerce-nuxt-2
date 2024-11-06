@@ -15,7 +15,7 @@
               </nuxt-link>
             </div>
             <div class="col">
-              <nuxt-link class="w-100 mx-3" style="color: #ff6800 !important;" to="/auth/login">
+              <nuxt-link class="w-100 mx-3" style="color: #ff6800 !important;" to="/auth/login-register">
                 <base-button-icon-1 :outline="true" class="w-100 py-4">
                   {{ $t('login.title') }}
                 </base-button-icon-1>

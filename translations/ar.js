@@ -73,8 +73,9 @@ export default {
     callNow: 'اتصل بنا الآن',
     logged: 'لقد سجلت الدخول',
     thanks_for_registering: 'شكرا على التسجيل',
-    thanks_for_registering_sub_title: 'الان يرجى مراجعة بريدك من اجل التحقق من الأيميل، او يمكن الذهاب إلى صفحات اخرى'
-
+    thanks_for_registering_sub_title: 'الان يرجى مراجعة بريدك من اجل التحقق من الأيميل، او يمكن الذهاب إلى صفحات اخرى',
+    loginRegisterTitle: "Iniciar sesión / Registrarse",
+    loginRegisterDescription: "Inicia sesión o regístrate en nuestro sitio web, Techno Lock Keys Trading."
   },
   dashboard: {
     dashboard: 'التحكم',
