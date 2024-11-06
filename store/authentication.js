@@ -80,7 +80,7 @@ export const actions = {
   LogOut: async function ({ commit }) {
     const response = await Api.post('user/auth/logout');
     await commit('LOGOUT');
-    await this.$router.push('/auth/login');
+    await this.$router.push('/auth/login-register');
     await this._vm.$notify({
       group: 'addProduct',
       type: 'success',
