@@ -79,7 +79,7 @@
         class="container"
       />
 
-      <LazyHydrate when-visible>
+      <!-- <LazyHydrate when-visible>
         <pv-collection
         v-if="related_products.length > 1"
         :products="related_products"
@@ -87,7 +87,7 @@
         class="container"
         style="padding: 35px"
       />
-      </LazyHydrate>
+      </LazyHydrate> -->
       <hr class="mt-0 m-b-5 container" />
 
       <div
@@ -160,7 +160,7 @@ export default {
     return {
       product: data.product,
       tokens: data.tokens,
-      related_products: data.related_products,
+      // related_products: data.related_products,
       prev_product: data.next_previous_products[0],
       next_product: data.next_previous_products[1],
     };
