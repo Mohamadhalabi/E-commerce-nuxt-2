@@ -78,48 +78,32 @@
         :collection-title="'Works with this blade'"
         class="container"
       />
+      <div ref="relatedProducts" class="related-products-section container">
+        <div v-if="related_products && related_products.length">
+          <pv-collection
+          :products="related_products"
+          :collection-title="$t('products.relatedProducts')"
+          class="container"
+        />
+        </div>
+      </div>
 
-      <!-- <LazyHydrate when-visible>
-        <pv-collection
-        v-if="related_products.length > 1"
-        :products="related_products"
-        :collection-title="$t('products.relatedProducts')"
-        class="container"
-        style="padding: 35px"
-      />
-      </LazyHydrate> -->
       <hr class="mt-0 m-b-5 container" />
-
-      <div
-        class="product-widgets-container container mx-auto row pb-2"
-      >
-        <div class="container">
-          <div class="product-widgets-container row pb-2">
-            <LazyHydrate when-visible>
-              <pv-on-sale-products
-              :collection-title="$t('home.onSaleProduct')"
-              :animation-delay="'200'"
+      <div class="product-widgets-container container mx-auto row pb-2">
+        <div class="container" style="display: contents;">
+            <pv-on-sale-products
+            :collection-title="$t('home.onSaleProduct')"
             />  
-            </LazyHydrate>
-            <LazyHydrate when-visible>
-              <pv-top-selling-three-products
-              :collection-title="$t('home.topSellingProduct')"
-              :animation-delay="'500'"
+            <pv-top-selling-three-products
+            :collection-title="$t('home.topSellingProduct')"
             />
-            </LazyHydrate>
-            <LazyHydrate when-visible>
               <pv-new-arrival
               :collection-title="$t('home.newarrivalproducts')"
-              :animation-delay="'800'"
             />
-            </LazyHydrate>
-            <LazyHydrate when-visible>
               <pv-free-shipping
               :collection-title="$t('home.freeshoppingproducts')"
-              :animation-delay="'1100'"
             />
-            </LazyHydrate>
-          </div>
+
         </div>
       </div>
       </div>
@@ -160,7 +144,6 @@ export default {
     return {
       product: data.product,
       tokens: data.tokens,
-      // related_products: data.related_products,
       prev_product: data.next_previous_products[0],
       next_product: data.next_previous_products[1],
     };
@@ -170,6 +153,7 @@ export default {
       product: null,
       tokens: null,
       related_products: null,
+      relatedProductsLoaded: false,
       prev_product: null,
       next_product: null,
       loaded: false,
@@ -474,10 +458,18 @@ export default {
       behavior: 'auto'
     });
     this.$Progress.finish();
+    this.initializeObserver();
   },
   beforeMount: function(){
     this.$Progress.start();
   },
+
+  beforeDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  },
+
   computed:{
     ...mapGetters("language", ["getLang"]),
     ...mapGetters("header",["getCurrency"]),
@@ -490,6 +482,43 @@ export default {
         return `/${this.getLang}${route}`; // Include the language parameter
       }
     },
+    initializeObserver() {
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          const [entry] = entries;
+          if (entry.isIntersecting && !this.relatedProductsLoaded) {
+            this.loadRelatedProducts();
+            this.relatedProductsLoaded = true; // Prevent repeated requests
+          }
+        },
+        { root: null, rootMargin: "0px", threshold: 0.1 }
+      );
+
+      if (this.$refs.relatedProducts) {
+        this.observer.observe(this.$refs.relatedProducts);
+      }
+    },
+    async loadRelatedProducts() {
+      try {
+        const { data } = await axios.get(`related-products`, {
+          baseURL: process.env.API_BASE_URL,
+          headers: {
+            "Accept-Language": this.$i18n.locale,
+            "Content-Type": "application/json",
+            "currency": this.$cookies.get("currency") || "USD",
+            "Accept": "application/json",
+            "secret-key": process.env.SECRET_KEY,
+            "api-key": process.env.API_KEY,
+          },
+          params: {
+            sku: this.product.sku
+          },
+        });
+        this.related_products = data.related_products;
+      } catch (error) {
+        console.error("Failed to load related products:", error);
+      }
+    }
   },
 };
 </script>
