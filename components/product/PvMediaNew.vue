@@ -28,6 +28,7 @@
         :src="image['s'].url"
         :alt="getAltText(image['s'].url)"
         style="border: 1px solid #e7e7e6!important;"
+        loading="lazy"
         />
       </div>
       <template #back-arrow="{ disabled }">
