@@ -15,7 +15,7 @@
     </div>
 
     <div v-if="product.summary_name && product.summary_name != product.title" class="product-desc">
-      <h2 class="summary-name">{{ product.summary_name }}</h2>
+      <h2 class="summary-name" style="font-size: 22px; font-weight: bold; color: #556b2f; letter-spacing: -.01em; width: calc( 100% - 70px );">{{ product.summary_name }}</h2>
     </div>
     <div v-if="product.note" class="pb-4">
       <span class="product_note">* {{ product.note }}</span>
@@ -381,11 +381,6 @@ export default {
   box-shadow: 0px 1px 2px #2ba968;
 }
 .summary-name{
-  font-size: 22px;
-  font-weight: bold;
-  color: #556b2f;
-  letter-spacing: -.01em;
-  width: calc( 100% - 70px );
 }
 .product_note{
   font-size:18px;
