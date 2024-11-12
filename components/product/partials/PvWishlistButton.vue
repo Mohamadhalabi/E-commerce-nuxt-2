@@ -6,7 +6,7 @@
     class="btn-icon-wish added-wishlist"
     :title="$t('products.goToWishlist')"
   >
-    <i :class="parent != 'products-card' ? 'icon-wishlist-2' : 'icon-heart'" />
+    <i :class="parent != 'products-card' ? 'fa fa-heart' : 'fa fa-heart'" />
     <span v-if="parent === 'products-detail'">{{$t('products.goToWishlist')}}</span>
   </nuxt-link>
 
@@ -18,7 +18,7 @@
     :title="$t('products.addWishlist')"
     @click="addToWishlist(product)"
   >
-    <i :class="parent != 'products-card' ? 'icon-wishlist-2' : 'icon-heart'" />
+    <i :class="parent != 'products-card' ? 'fa fa-heart' : 'fa fa-heart'" />
     <span v-if="parent === 'products-detail'">{{$t('products.addWishlist')}}</span>
   </a>
 </template>

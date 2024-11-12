@@ -152,6 +152,7 @@
             <button
               class=" btn-outline btn-down-icon bootstrap-touchspin-down"
               type="button"
+              aria-label="minus"
               :disabled="product.hide_price != '0'"
               @click="minusQty"
               :style="getIsAr ? 'border-radius: 0px 6px 6px 0px' : 'border-radius:6px 0px 0px 6px ;'"
@@ -171,6 +172,7 @@
             v-model.number="qty"
             class="horizontal-quantity form-control bg-transparent"
             type="text"
+            aria-label="quantity"
             :max="product.stock"
             :min="qty"
             :disabled="product.hide_price != '0'"
@@ -184,6 +186,7 @@
               :style="getIsAr ? 'border-radius:6px 0px 0px 6px' : 'border-radius:0px 6px 6px 0px !important;'"
               class="btn-outline btn-up-icon bootstrap-touchspin-up"
               type="button"
+              aria-label="plus"
               :disabled="product.hide_price != '0'"
               @click="plusQty"
             >
@@ -221,10 +224,11 @@
         </button>
       </div>
 
-      <div class="d-flex flex-column p-3">
+      <div class="d-flex flex-column p-3 button-container">
         <pv-wishlist-button class="p-0" :product="product" :parent="'products-detail'" />
-        <pv-compare-button class="p-0" :product="product" parent="product-detail"></pv-compare-button>
+        <pv-compare-button class="p-0 mt-1" :product="product" parent="product-detail"></pv-compare-button>
       </div>
+
 
     </div>
     <div v-if="product.has_cover">

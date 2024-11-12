@@ -19,10 +19,15 @@
         class="thumbnail-image"
         @click="gotoMainCarousel(index)"
       >
-        <img
-          class="rounded-5"
-          :src="image['s'].url"
-          style="border: 1px solid #e7e7e6!important;"
+        <nuxt-img
+        sizes="sm:150px md:150px lg:150px"
+        format="webp"
+        width="150"
+        height="150"
+        class="rounded-5"
+        :src="image['s'].url"
+        :alt="getAltText(image['s'].url)"
+        style="border: 1px solid #e7e7e6!important;"
         />
       </div>
       <template #back-arrow="{ disabled }">
@@ -54,6 +59,13 @@ export default {
     };
   },
   methods: {
+    getAltText(url) {
+      // Get the last part of the URL after the last '/'
+      const fileName = url.split('/').pop();
+      // Remove the file extension and replace hyphens with spaces
+      const altText = fileName.replace(/-+/g, ' ').replace(/\.[^/.]+$/, '');
+      return altText;
+    },
     gotoMainCarousel(index) {
       this.currentIndex = index; // Update the main image when a thumbnail is clicked
       this.highlightImage = true;

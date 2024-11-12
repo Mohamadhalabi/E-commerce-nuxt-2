@@ -22,6 +22,7 @@
       <div class="autoComplateClass">
         <AutoComplate
         style="width: 220px;text-align:end"
+        aria-label="select a category"
           v-model="selectedCategory"
           :placeholder="$t('home.selectCategory')"
           :options="categories || []"

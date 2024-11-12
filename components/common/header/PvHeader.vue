@@ -24,14 +24,17 @@
             <div
               class="d-flex align-items-center flex-md-row flex-lg-grow-1 ">
               <nuxt-link :to="getLink('/')">
-                <img
+                <nuxt-img
                   v-if="!isMobile"
                   format="webp"
-                  class="logo-image p-2" title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
-                <img
+                  class="logo-image p-2"
+                  sizes="sm:100vw md:50vw lg:400px"
+                  title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
+                <nuxt-img
                   v-else
                   format="webp"
                   class="mobile-logo"
+                  sizes="sm:100vw md:50vw lg:400px"
                   title="Techno lock logo" src="/images/logos/techno-lock-logo-mobile.webp" alt="tlk Logo" />
               </nuxt-link>
               <pv-header-search

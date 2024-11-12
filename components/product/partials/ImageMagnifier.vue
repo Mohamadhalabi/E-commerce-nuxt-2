@@ -9,6 +9,10 @@
       :alt="image[currentIndex]['l'].alt"
       style="border: 1px solid #e7e7e6!important; cursor: pointer;"
       @click="showImageModal"
+      format="webp"
+      sizes="sm:100vw md:50vw lg:400px"
+      width="500"
+      height="500"
     />
 
     <!-- Modal to display the images and allow scrolling -->

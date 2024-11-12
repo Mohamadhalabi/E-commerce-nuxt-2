@@ -85,6 +85,9 @@
       role="tablist"
       style="position: sticky;margin-bottom: 10px;"
     >
+    <li v-if="!product.description && !product.frequently_asked_questions && product.total_reviews === 0 && product.pdf.length === 0">
+      {{ $t("products.noInformationAvailable") }}
+    </li>
       <li
         class="nav-item"
         v-if="product.description && !isEmpty(product.description)"
