@@ -170,9 +170,9 @@ export default ({
 
   'google-gtag':{
     id: 'G-5G2DSZVBJ9', // required
-    debug: true, // enable to track in dev mode
   },
   image: {
+    domains: ['dev-srv.tlkeys.com'],
     quality: 1,
     format: ['webp'],
     screens: {

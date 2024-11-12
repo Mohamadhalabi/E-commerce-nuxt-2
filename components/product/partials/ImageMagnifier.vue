@@ -10,9 +10,10 @@
       style="border: 1px solid #e7e7e6!important; cursor: pointer;"
       @click="showImageModal"
       format="webp"
-      sizes="sm:100vw md:50vw lg:400px"
+      sizes="sm:100vw md:50vw lg:600px"
       width="500"
       height="500"
+      loading="lazy"
     />
 
     <!-- Modal to display the images and allow scrolling -->
