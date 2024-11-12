@@ -4,12 +4,12 @@
       v-for="(product,index) in [prevProduct, nextProduct]"
       :key="index"
       :class="[{disabled: !product || isEmpty(product)}, (index === 0 ? 'product-prev' : 'product-next')]"
-    >
+      >
       <nuxt-link
         v-if="product && !isEmpty(product)"
         :key="index === 0 ? 'toPrevProduct' : 'toNextProduct'"
-        :to="getLink('/products/'+product.slug)"
-      >
+        aria-label="next, prev products"
+        :to="getLink('/products/'+product.slug)">
         <span class="product-link" />
         <span class="product-popup">
           <span class="box-content">
@@ -21,11 +21,7 @@
           </span>
         </span>
       </nuxt-link>
-
-      <a
-        v-else
-        href="javascript:;"
-      >
+      <a v-else href="javascript:;" aria-label="No product available">
         <span class="product-link" />
       </a>
     </div>

@@ -1308,7 +1308,7 @@ input:checked ~ .accordion-content {
 }
 
 .second-top-notice {
-  color: #f07905;
+  color: #AB5907;
 }
 
 @keyframes text-animation {
@@ -1430,6 +1430,9 @@ input:checked ~ .accordion-content {
 .multiselect__option--selected {
   background-color: #ffd453;
   color: #fff;
+}
+.multiselect__placeholder{
+  color: #757575!important;
 }
 h1.home-page-h1{
   font-size: 24px;

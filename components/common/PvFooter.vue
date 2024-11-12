@@ -21,7 +21,7 @@
           </div>
           <div class="row">
             <div class="col-lg-5 m-b-4">
-              <h6 class="footer-desc text-white font-weight-normal" v-html="$t('footer.description')"/>
+              <p class="footer-desc text-white font-weight-bold" v-html="$t('footer.description')"/>
               <div class="row ls-0 footer-question">
                 <div class="col-12">
                 </div>

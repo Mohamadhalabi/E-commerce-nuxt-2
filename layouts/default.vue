@@ -22,6 +22,13 @@ import {
 } from "~/utils";
 // import "static/css/ltrStyle.css";
 export default {
+  head() {
+    return {
+      htmlAttrs: {
+        lang: this.$i18n?.locale || 'en'
+      },
+    }
+  },
   components: {
     PvHeader: () => import("~/components/common/header/PvHeader.vue"),
     PvFooter: () => import("~/components/common/PvFooter.vue"),
