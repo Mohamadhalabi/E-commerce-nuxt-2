@@ -52,6 +52,14 @@
               {{ product.categories['title'] }}
             </nuxt-link>
           </div>
+          <div v-if="product.categories.length > 1">
+            <nuxt-link
+              class="categoryLink"
+              :to="getLink('/' + product.categories[1].slug)"
+            >
+              {{ product.categories[1].name }}
+            </nuxt-link>
+          </div>
         </div>
         <div class="col-lg-12 text-center mt-1 product-short-title"
              :class="{'product-short-title-index': isIndexPage, 'product-short-title': !isIndexPage }"

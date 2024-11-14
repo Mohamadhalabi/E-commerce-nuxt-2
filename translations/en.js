@@ -529,6 +529,7 @@ export default
     },
 
     products: {
+      clearance_sale: "Clearance Sale",
       bought_bundle_together: "Single Products",
       all: "all",
       home: 'Home',

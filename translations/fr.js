@@ -823,6 +823,7 @@ export default
 
   },
   products: {
+    clearance_sale: "Vente de Déstockage",
     bought_bundle_together: "Produits individuels",
     all: "tous",
     home: 'Accueil',

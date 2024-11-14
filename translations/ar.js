@@ -468,6 +468,7 @@ export default {
     noAddress: 'ليس هناك عناوين',
   },
   product: {
+    clearance_sale: "تخفيضات التصفيات",
     bought_bundle_together: "اشترى حزمة معًا",
     home: 'الرئيسية',
     all: 'الجميع',

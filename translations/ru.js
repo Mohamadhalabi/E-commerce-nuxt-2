@@ -523,6 +523,7 @@ export default
   },
 
   products: {
+    clearance_sale: "Распродажа",
     bought_bundle_together: "Одиночные товары",
     all: "все",
     home: 'Главная',
