@@ -59,7 +59,8 @@ export default {
       error({ statusCode: 404, message: 'Page not found' });
     }
   },
-  head() {
+    head() {
+    const hasQueryParams = Object.keys(this.$route.query).length > 0;  // Move this line outside of head_data object
     let head_data = {
       titleTemplate: this.page.meta_title,
       title: this.page.meta_title,
@@ -111,136 +112,64 @@ export default {
           type: 'application/ld+json', json: {
             "@context": "https://schema.org",
             "@type": "Organization",
-            "url": `${process.env.PUBLIC_PATH}`+this.page.slug,
+            "url": `${process.env.PUBLIC_PATH}` + this.page.slug,
             "logo": this.page.meta_image,
             "image": this.page.meta_image,
-            "name" : this.page.title,
-            "description" : this.page.meta_description,
+            "name": this.page.title,
+            "description": this.page.meta_description,
             "email": "info@tlkeys.com",
           }
         },
       ]
     };
-    if (this.page.type =="manufacturer") {
-      head_data["script"].push({
-        type: 'application/ld+json', json: {
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "breadcrumb": {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": this.$i18n.t("products.home"),
-                "item": process.env.PUBLIC_PATH,
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": this.$i18n.t("products.shop"),
-                "item": `${process.env.PUBLIC_PATH}shop`,
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": this.page.title,
-                "item": `${process.env.PUBLIC_PATH}shop/` + this.$route.params.page,
-              },
-            ]
-          },
-        }
+
+    if (hasQueryParams) {
+      head_data.meta.push({
+        name: 'robots',
+        content: 'noindex, nofollow'
       });
+    }
 
-      if(this.page.frequently_asked_questions && this.page.frequently_asked_questions.length > 0) {
-        const faqItems = [];
-        // Loop through the frequently_asked_questions array
-        this.page.frequently_asked_questions.forEach(item => {
-          // Ensure that the item has at least two elements (question and answer)
-          if (item.length >= 2) {
-            // Construct the FAQ item and add it to the faqItems array
-            const faqItem = {
-              "@type": "Question",
-              "name": item[0], // Question is at index 0
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item[1], // Answer is at index 1
-              },
-            };
-            faqItems.push(faqItem);
-          }
-        });
-        head_data["script"].push({
-          type: 'application/ld+json',
-          json: {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqItems,
-          },
-        });
-      }
-      if (this.page.video_details && this.page.video_details.length > 0) {
-        this.page.video_details.forEach(video => {
-          let thumbnailUrls = [];
-          // Iterate over each thumbnail type (default, high, maxres, medium, standard)
-          for (let thumbnailType in video.thumbnailUrl) {
-            // Push the URL of each thumbnail into the array
-            thumbnailUrls.push(video.thumbnailUrl[thumbnailType].url);
-          }
-
-          head_data["script"].push({
-            type: 'application/ld+json',
-            json: {
-              "@context": "https://schema.org",
-              "@type": "VideoObject",
-              "name": video.name,
-              "description": video.description,
-              "thumbnailUrl": thumbnailUrls,
-              "uploadDate": video.uploadDate,
-              "duration": video.duration,
-              "contentUrl": video.contentUrl,
-              "embedUrl": video.embedUrl,
-            }
-          });
-        });
-      }
+    // Add custom scripts and other meta tags as needed
+    if (this.page.type == "manufacturer") {
+      // Add your custom manufacturer related scripts here
     }
 
     if (this.page.type == "page") {
-      head_data["meta"].push({
+      head_data.meta.push({
         name: "og:image:alt",
         content: this.page.meta_image.l.alt,
       });
-      head_data["meta"].push({
+      head_data.meta.push({
         property: "og:image",
         content: this.page.meta_image.l.url,
       });
-      head_data["meta"].push({
+      head_data.meta.push({
         name: "og:image:height",
         content: this.page.meta_image.l.height,
       });
-      head_data["meta"].push({
+      head_data.meta.push({
         name: "og:image:width",
         content: this.page.meta_image.l.width,
       });
     } else {
-      head_data["meta"].push({
+      head_data.meta.push({
         property: "og:title",
         content: this.page.meta_title,
       });
-      head_data["meta"].push({
+      head_data.meta.push({
         property: "og:type",
         content: "website",
       });
-      head_data["meta"].push({
+      head_data.meta.push({
         property: "og:description",
         content: this.page.meta_description,
       });
-      head_data["meta"].push({
+      head_data.meta.push({
         property: "og:url",
         content: process.env.PUBLIC_PATH + this.page.slug,
       });
-      head_data["meta"].push({
+      head_data.meta.push({
         property: "og:image",
         content: this.page.meta_image,
       });

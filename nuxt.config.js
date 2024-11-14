@@ -257,7 +257,7 @@ export default ({
     },
     extractCSS: true,
     optimizeCSS: true,
-    publicPath: '/secure',
+    publicPath: '/publicpath',
     babel: {
       compact: true
     },
