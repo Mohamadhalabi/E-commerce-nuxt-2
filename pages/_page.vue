@@ -30,21 +30,34 @@ export default {
   components: { 
     ShopTemplate :()=> import ("~/pages/shop/_shop.vue")
   },
-  async asyncData({ params, app }) {
-    const { data } = await axios.get(`pages/${params.page}`,{
-      baseURL: process.env.API_BASE_URL,
-      headers:{
-        'Accept-Language': app.i18n.locale,
-        'Content-Type': 'application/json',
-        'currency': app.$cookies.get('currency') || 'USD',
-        'Accept': 'application/json',
-        'secret-key': process.env.SECRET_KEY,
-        'api-key': process.env.API_KEY,
-      },
-    });
-    return {
-      page: data,
-    };
+    async asyncData({ params, app, error }) {
+    try {
+      const { data } = await axios.get(`pages/${params.page}`, {
+        baseURL: process.env.API_BASE_URL,
+        headers: {
+          'Accept-Language': app.i18n.locale,
+          'Content-Type': 'application/json',
+          'currency': app.$cookies.get('currency') || 'USD',
+          'Accept': 'application/json',
+          'secret-key': process.env.SECRET_KEY,
+          'api-key': process.env.API_KEY,
+        },
+      });
+
+      // Check if the page data exists
+      if (!data) {
+        // Trigger a 404 error
+        error({ statusCode: 404, message: 'Page not found' });
+        return; // Ensure no further processing occurs
+      }
+
+      return {
+        page: data,
+      };
+    } catch (e) {
+      // Trigger a 404 error if the API request fails
+      error({ statusCode: 404, message: 'Page not found' });
+    }
   },
   head() {
     let head_data = {
