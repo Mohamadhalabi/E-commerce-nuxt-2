@@ -519,6 +519,7 @@ export default
     noAddress: 'No hay direcciones disponibles'
   },
   products: {
+    clearance_sale: "Venta de Liquidación",
     bought_bundle_together: "Productos individuales",
     all: "todos",
     home: 'Inicio',

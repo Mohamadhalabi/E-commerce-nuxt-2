@@ -165,21 +165,6 @@ export default {
       return;
     }
   },
-  layout(context) {
-
-    return 'error';
-    // Check for the error status code
-    const statusCode = context.error && context.error.statusCode;
-
-    // Return the specific layout based on the error status code
-    if (statusCode === 404) {
-      return 'error';
-    } else if (statusCode === 500) {
-      return 'error500';
-    }
-    // return 'default';
-  },
-
   data: function () {
     return {
       product: null,

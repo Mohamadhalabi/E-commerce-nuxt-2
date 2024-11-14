@@ -521,6 +521,7 @@ export default
   },
 
   products: {
+    clearance_sale: "Abverkauf",
     bought_bundle_together: "Einzelprodukte",
     all: "alle",
     home: 'Startseite',
