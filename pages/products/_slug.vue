@@ -127,27 +127,59 @@ export default {
     PvCollection: () => import("~/components/product/card/PvCollection.vue"),
     PvDetail: () => import("~/components/product/PvDetail.vue")
   },
-  async asyncData({ params, redirect, app }) {
-    const { data } = await axios.get(`products/${params.slug}`,{
-      baseURL: process.env.API_BASE_URL,
-      headers:{
-        'Accept-Language': app.i18n.locale,
-        'Content-Type': 'application/json',
-        'currency': app.$cookies.get('currency') || 'USD',
-        'Accept': 'application/json',
-        'secret-key': process.env.SECRET_KEY,
-        'api-key': process.env.API_KEY,
+  async asyncData({ params, redirect, app, error }) {
+    try {
+      const { data } = await axios.get(`products/${params.slug}`, {
+        baseURL: process.env.API_BASE_URL,
+        headers: {
+          'Accept-Language': app.i18n.locale,
+          'Content-Type': 'application/json',
+          'currency': app.$cookies.get('currency') || 'USD',
+          'Accept': 'application/json',
+          'secret-key': process.env.SECRET_KEY,
+          'api-key': process.env.API_KEY,
+        }
+      });
+
+      // Check if the product exists
+      if (!data.product) {
+        // Trigger a 404 error
+        error({ statusCode: 404, message: 'Product not found' });
+        return;
       }
-    });
-    if (data.product.slug !== params.slug)
-      redirect(`/products/${data.product.slug}`);
-    return {
-      product: data.product,
-      tokens: data.tokens,
-      prev_product: data.next_previous_products[0],
-      next_product: data.next_previous_products[1],
-    };
+
+      // Redirect to the correct URL if the slug is different
+      if (data.product.slug !== params.slug) {
+        redirect(`/products/${data.product.slug}`);
+      }
+
+      return {
+        product: data.product,
+        tokens: data.tokens,
+        prev_product: data.next_previous_products[0],
+        next_product: data.next_previous_products[1],
+      };
+    } catch (e) {
+      // Trigger a 404 error if the API request fails
+      error({ statusCode: 404, message: 'Product not found' });
+      return;
+    }
   },
+  layout(context) {
+
+    return 'error';
+    // Check for the error status code
+    const statusCode = context.error && context.error.statusCode;
+
+    // Return the specific layout based on the error status code
+    if (statusCode === 404) {
+      return 'error';
+    } else if (statusCode === 500) {
+      return 'error500';
+    }
+    // return 'default';
+  },
+
   data: function () {
     return {
       product: null,

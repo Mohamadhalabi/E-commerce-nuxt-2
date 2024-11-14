@@ -1,76 +1,19 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div  class="main">
-    <p v-if="$fetchState.pending">
-      Loading...
-    </p>
-    <div  v-if="this.show_error">
-      <nav
-        aria-label="breadcrumb"
-        class="breadcrumb-nav"
-      >
-        <div class="container">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-              <nuxt-link
-                to="/"
-                class="router-link-active"
-              >
-                Home
-              </nuxt-link>
-            </li>
-            <li
-              aria-current="page"
-              class="breadcrumb-item active"
-            >
-              404
-            </li>
-          </ol>
-        </div>
-      </nav>
-      <div class="container">
-        <div class="container">
-          <div class="row romnn">
-            <img
-              src="~/static/images/notfound.jpg"
-              alt="404 page not found image"
-            >
-
-            <div
-              class="buttonn"
-              style="position: absolute;
-    display: flex;
-    list-style: none;"
-            >
-              <li class="nav-item">
-                <nuxt-link
-                  to="/"
-                  class="nav-link btn btn-warning"
-                  style="margin: auto 10px;color: #fff;padding: 10px;"
-                >
-                  Proceed to Home Page
-                </nuxt-link>
-              </li>
-              <li class="nav-item">
-                <nuxt-link
-                  to="/contact"
-                  class="nav-link btn btn-warning"
-                  style="margin: auto 10px;color: #fff;padding: 10px;"
-                >
-                  Contact Us
-                </nuxt-link>
-              </li>
-            </div>
-          </div>
-        </div>
+  <div id="notfound">
+    <div class="notfound">
+      <div class="notfound-404">
+        <div></div>
+        <h1>404</h1>
       </div>
+      <h2>Page not found</h2>
+      <p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
+      <a href="/">home page</a>
     </div>
   </div>
 </template>
 
 <script>
-import api from '~/api';
-
 export default {
   props: {
     error: {
@@ -84,21 +27,112 @@ export default {
       show_error:false
     }
   },
-  async fetch() {
-    // this.$Progress.start();
-
-    // if(this.error.statusCode == 404) {
-    //   const currentUrl = window.location.href;
-    //   api.post('redirect', {url: currentUrl}).then((res) => {
-    //     // this.$Progress.finish();
-    //     window.location.replace(res.data.new_route);
-
-    //   }).catch(()=>{
-    //     this.$Progress.fail();
-    //     this.show_error =true;
-    //   });
-
-    // }
-  }
 };
 </script>
+<style scoped>
+    #notfound {
+      position: relative;
+      height: 100vh;
+    }
+
+    #notfound .notfound {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .notfound {
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .notfound .notfound-404 {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0px auto 50px;
+    }
+
+    .notfound .notfound-404>div:first-child {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: #ffa200;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+      border: 5px dashed #000;
+      border-radius: 5px;
+    }
+
+    .notfound .notfound-404>div:first-child:before {
+      content: '';
+      position: absolute;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      top: -5px;
+      -webkit-box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.1) inset;
+      box-shadow: 0px 0px 0px 5px rgba(0, 0, 0, 0.1) inset;
+      border-radius: 5px;
+    }
+
+    .notfound .notfound-404 h1 {
+      font-family: 'Cabin', sans-serif;
+      color: #000;
+      font-weight: 700;
+      margin: 0;
+      font-size: 90px;
+      position: absolute;
+      top: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+      left: 50%;
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .notfound h2 {
+      font-family: 'Cabin', sans-serif;
+      font-size: 33px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 7px;
+    }
+
+    .notfound p {
+      font-family: 'Cabin', sans-serif;
+      font-size: 16px;
+      color: #000;
+      font-weight: 400;
+    }
+
+    .notfound a {
+      font-family: 'Cabin', sans-serif;
+      display: inline-block;
+      padding: 10px 25px;
+      background-color: #8f8f8f;
+      border: none;
+      border-radius: 40px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      text-decoration: none;
+      -webkit-transition: 0.2s all;
+      transition: 0.2s all;
+    }
+
+    .notfound a:hover {
+      background-color: #2c2c2c;
+    }
+</style>
