@@ -28,6 +28,8 @@
                     class="sub-menu-images"
                     :src="i.image.s.url"
                   />
+                </nuxt-link>
+                <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image && i.image.s">
                   <div class="brand-name">
                     <span>{{ i.name[$i18n.locale] }}</span>
                   </div>
@@ -46,7 +48,7 @@
             {{ $t("header.Manufactures") }} <span class="hoverable">&#x025BE;</span>
           </span>
         </nuxt-link>
-        <div class="megamenu custom-megamenu p-0 megamenu-fixed-width megamenu-2cols bg-white"
+        <div class="megamenu custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
         style="left:0!important"
              v-if="ManufacturerMenuOpened"
              @click="closeManufacturerMenu()"
@@ -56,7 +58,7 @@
               <li
                 v-for="(i,key2) in item"
                 :key="key2"
-                class="bg-white logo-item-car p-0 with-box-shadow sub-menu-items"
+                class="bg-white logo-item-car p-0 with-box-shadow sub-menu-cars"
               >
                 <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image && i.image.s">
                   <nuxt-img
@@ -64,10 +66,12 @@
                     class="sub-menu-images"
                     :src="i.image.s.url"
                   />
+                </nuxt-link>
+                <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image && i.image.s">
                   <div class="brand-name">
                     <span>{{ i.name[$i18n.locale] }}</span>
                   </div>
-                </nuxt-link>
+                </nuxt-link> 
               </li>
             </ul>
           </div>
@@ -100,6 +104,8 @@
                     class="sub-menu-images"
                     :src="i.image"
                   />
+                </nuxt-link>
+                <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image">
                   <div class="brand-name">
                     <span>{{ i.name[$i18n.locale] }}</span>
                   </div>
@@ -136,6 +142,8 @@
                     class="sub-menu-images"
                     :src="i.image"
                   />
+                </nuxt-link>
+                <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image">
                   <div class="brand-name">
                     <span>{{ i.name[$i18n.locale] }}</span>
                   </div>
@@ -173,6 +181,8 @@
                     class="sub-menu-images"
                     :src="i.image"
                   />
+                </nuxt-link>
+                <nuxt-link :to="getLink('/'+i.slug)" v-if="i.image">
                   <div class="brand-name">
                     <span>{{ i.name[$i18n.locale] }}</span>
                   </div>
@@ -260,6 +270,8 @@
                             :alt="i.name[$i18n.locale]"
                             class="software-token-image"
                           />
+                        </nuxt-link>
+                        <nuxt-link :to="getLink('/'+i.slug)">
                           <div class="brand-name">
                             <span> {{ i.name[$i18n.locale] }}</span>
                           </div>
@@ -521,7 +533,6 @@ export default {
 
 .logo-item, .logo-item-car {
   position: relative;
-  overflow-y: hidden;
 }
 
 .brand-name {
@@ -599,62 +610,14 @@ export default {
 
 
 .sub-menu-items{
-  width: 128.7px!important;
-  height: 128.7px!important;
 }
 .sub-menu-cars{
-  width: 100.6px!important;
-  height: 100.6px!important;
 }
 .sub-menu-items-software-token{
-  width: 117.8px!important;
-  height: 117.8px!important;
 }
 
 
-@media screen and (max-width: 1600px){
-}
 
-@media screen and (max-width: 1435px){
-  li.sub-menu-items{
-    width: 102px!important;
-    height: 102px!important;
-  }
-  .header-main-menu{
-    font-size: smaller!important;
-  }
-  .sub-menu-items-software-token{
-    width: 94.7px!important;
-    height: 94.7px!important;
-  }
-  .sub-menu-cars{
-    width: 94.3px!important;
-    height: 94.3px!important;
-  }
-}
-@media screen and (max-width: 1300px){
-  li.sub-menu-items{
-    width: 95px!important;
-    height: 95px!important;
-  }
-}
-@media screen and (max-width: 1200px){
-  li.sub-menu-items{
-    width: 96px!important;
-    height: 96px!important;
-  }
-  .header-main-menu{
-    font-size: smaller!important;
-  }
-  .sub-menu-items-software-token{
-    width: 79.7px!important;
-    height: 79.7px!important;
-  }
-  .sub-menu-cars{
-    width: 86.6px!important;
-    height: 86.6px!important;
-  }
-}
 .download-pin-code{
   height: 50px;
 }

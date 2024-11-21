@@ -223,8 +223,6 @@
 			min-width: 0;
 
 			a {
-				padding: 7px 8px 8px 0;
-
 				@include css(font-family, menu, mega, family);
 				@include css(font-size, menu, mega, size);
 				@include css(font-weight, menu, mega, weight);
