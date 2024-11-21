@@ -542,6 +542,7 @@ export default {
   font-size: 10px;
   overflow: hidden;
   padding: 11px;
+  transform: translate(-50%, -50%);
 }
 @media screen and (max-width: 1435px)
 {
