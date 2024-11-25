@@ -336,14 +336,19 @@ export default {
     PvBtnShare,
     PvMedia,
   },
-  async asyncData({ params }) {
-    const { data } = await Api.get(`downloads/${params.slug}`)
+  async asyncData({ params, error }) {
+  try {
+    const { data } = await Api.get(`downloads/${params.slug}`);
     return {
       download: data.download,
       sources: data.download.videos,
       productTitle: data.download.title,
-      videos: data.download.video
+      videos: data.download.video,
     };
+  } catch (err) {
+    // Use Nuxt's error function to set a 404 status and custom message
+    error({ statusCode: 404, message: 'Page not found' });
+    }
   },
   data: function () {
     return {
