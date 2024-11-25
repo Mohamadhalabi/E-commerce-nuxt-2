@@ -38,13 +38,24 @@ import PvCard from "~/components/downloads/PvCard";
 import { scrollTopHandler } from "~/utils";
 export default {
   head() {
+    const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
     return {
       title: "Downloads | Techno Lock Keys Trading",
       link: [
         {
           rel: 'canonical',
-          href: 'https://www.tlkeys.com/downloads',
+          href: process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/downloads',
         },
+        ...this.$i18n.availableLocales.map(loc => ({
+            rel: 'alternate',
+            hreflang: loc,
+            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + (loc !== 'en' ? `/${loc}` : '') + '/downloads'
+        })),
+        {
+            rel: 'alternate',
+            hreflang: 'x-default',
+            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + '/downloads'
+        }
       ],
       meta: [
         { hid: 'description', name: 'description', content: "Discover all the necessary download files at Techno lock Keys, a premier wholesale distributor. Techno lock Keys is recognized as one of the top distributors." },

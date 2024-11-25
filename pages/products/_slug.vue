@@ -189,6 +189,16 @@ export default {
             rel: 'canonical',
             href: this.product.canonical,
           },
+          ...this.$i18n.availableLocales.map(loc => ({
+            rel: 'alternate',
+            hreflang: loc,
+            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + (loc !== 'en' ? `/${loc}` : '') + '/products/' + this.product.slug
+          })),
+          {
+            rel: 'alternate',
+            hreflang: 'x-default',
+            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + '/products/' + this.product.slug
+          }
         ],
         meta: [
           {

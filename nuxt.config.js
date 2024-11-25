@@ -130,7 +130,7 @@ export default ({
       langDir: 'translations/',
       defaultLocale: 'en',
       vueI18n: {
-        fallbackLocale: ['en', 'fr','es','de','ru'],
+        fallbackLocale: ['en', 'fr','es','de','ru','ar'],
       },
       skipSettingLocaleOnNavigate: false
     }]

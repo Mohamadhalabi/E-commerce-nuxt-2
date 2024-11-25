@@ -362,20 +362,23 @@ export default {
     };
   },
   head() {
+    const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
     return {
       link: [
         {
           rel: 'canonical',
-          href: process.env.PUBLIC_PATH + "downloads/" + this.download.slug,
+          href: process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/downloads/' + this.download.slug,
         },
+        ...this.$i18n.availableLocales.map(loc => ({
+            rel: 'alternate',
+            hreflang: loc,
+            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + (loc !== 'en' ? `/${loc}` : '') + '/downloads/' + this.download.slug
+        })),
         {
-          rel: 'alternate',
-          hreflang: 'en',
-        },
-        {
-          rel: 'alternate',
-          hreflang: 'ar',
-        },
+            rel: 'alternate',
+            hreflang: 'x-default',
+            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + '/downloads/' + this.download.slug
+        }
       ],
       titleTemplate: this.download ? this.download.meta_title : null,
       title: this.download ? this.download.meta_title : null,

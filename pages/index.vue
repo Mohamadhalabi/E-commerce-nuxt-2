@@ -130,13 +130,24 @@ import api from '~/api';
 import LazyHydrate from 'vue-lazy-hydration';
 export default {
   head() {
+    const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
     return {
       title: 'Techno Lock Keys Trading | Automotive Locksmith Services',
       link: [
         {
           rel: 'canonical',
-          href: 'https://www.tlkeys.com/',
+          href: process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/',
         },
+        ...this.$i18n.availableLocales.map(loc => ({
+            rel: 'alternate',
+            hreflang: loc,
+            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + (loc !== 'en' ? `/${loc}` : '')
+        })),
+        {
+            rel: 'alternate',
+            hreflang: 'x-default',
+            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + '/'
+        }
       ],
       meta: [
         {
