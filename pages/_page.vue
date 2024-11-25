@@ -61,13 +61,14 @@ export default {
   },
     head() {
     const hasQueryParams = Object.keys(this.$route.query).length > 0;  // Move this line outside of head_data object
+    const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
     let head_data = {
       titleTemplate: this.page.meta_title,
       title: this.page.meta_title,
       link: [
         {
           rel: 'canonical',
-          href: process.env.PUBLIC_PATH + this.$route.params.page,
+          href: process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/' + this.$route.params.page,
         },
       ],
       meta: [
@@ -91,37 +92,64 @@ export default {
                 "@type": "ListItem",
                 "position": 1,
                 "name": this.$i18n.t("products.home"),
-                "item": process.env.PUBLIC_PATH,
+                "item": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix,
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": this.$i18n.t("products.shop"),
-                "item": `${process.env.PUBLIC_PATH}shop`,
+                "item": `${process.env.PUBLIC_PATH_WITHOUT_SLASH}` + languagePrefix + '/shop',
               },
               {
                 "@type": "ListItem",
                 "position": 3,
                 "name": this.page.title,
-                "item": `${process.env.PUBLIC_PATH}shop/` + this.$route.params.page,
+                "item": `${process.env.PUBLIC_PATH_WITHOUT_SLASH}` + languagePrefix + '/shop/' + this.$route.params.page,
               },
             ]
           }
         },
         {
-          type: 'application/ld+json', json: {
-            "@context": "https://schema.org",
+          type: 'application/ld+json', 
+          json: {
+            "@context": "https://schema.org/",
             "@type": "Organization",
-            "url": `${process.env.PUBLIC_PATH}` + this.page.slug,
-            "logo": this.page.meta_image,
-            "image": this.page.meta_image,
-            "name": this.page.title,
-            "description": this.page.meta_description,
-            "email": "info@tlkeys.com",
+            "name": "Techno Lock Keys Trading",
+            "url": "https://www.tlkeys.com/",
+            "image": "https://www.tlkeys.com/images/logos/techno-lock-desktop-logo.webp",
+            "description": "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators.",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Industrial No. 5, behind Maliah Road., shop No. 8",
+              "addressCountry": "AE"
+            },
+            "telephone": "+971504429045",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "8:00",
+                "closes": "18:00"
+              }
+            ],
+            "priceRange": "$$",
+            "paymentAccepted": "Cash, Credit Card, Paypal",
+            "sameAs": [
+              "https://www.facebook.com/technolockkeys_world/",
+              "https://twitter.com/techno_lock",
+              "https://api.whatsapp.com/send?phone=971504429045"
+            ]
           }
         },
-      ]
-    };
+      ],
+    }
 
     if (hasQueryParams) {
       head_data.meta.push({
@@ -129,12 +157,6 @@ export default {
         content: 'noindex, nofollow'
       });
     }
-
-    // Add custom scripts and other meta tags as needed
-    if (this.page.type == "manufacturer") {
-      // Add your custom manufacturer related scripts here
-    }
-
     if (this.page.type == "page") {
       head_data.meta.push({
         name: "og:image:alt",
@@ -162,19 +184,14 @@ export default {
         content: "website",
       });
       head_data.meta.push({
-        property: "og:description",
-        content: this.page.meta_description,
-      });
-      head_data.meta.push({
-        property: "og:url",
-        content: process.env.PUBLIC_PATH + this.page.slug,
-      });
-      head_data.meta.push({
         property: "og:image",
         content: this.page.meta_image,
       });
     }
-
+    head_data.meta.push({
+      property:"og:url",
+      content : process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/' + this.$route.params.page,
+    });
     return head_data;
   },
 };

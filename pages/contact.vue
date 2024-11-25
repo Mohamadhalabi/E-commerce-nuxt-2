@@ -354,7 +354,7 @@ export default {
               "streetAddress": this.$t('contact.uaeAddress'),
               "addressCountry": "AE"
             },
-            "telephone": "+971 6 542 1313",
+            "telephone": "+971504429045",
             "openingHoursSpecification": [
               {
                 "@type": "OpeningHoursSpecification",
