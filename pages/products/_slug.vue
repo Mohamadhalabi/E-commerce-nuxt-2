@@ -150,7 +150,7 @@ export default {
 
       // Redirect to the correct URL if the slug is different
       if (data.product.slug !== params.slug) {
-        redirect(`/products/${data.product.slug}`);
+        redirect(301, `/products/${data.product.slug}`);
       }
 
       return {
