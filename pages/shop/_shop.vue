@@ -242,11 +242,9 @@ export default {
     },
     sortBy(sortBy) {
       this.orderBy = sortBy;
-      this.getProduct(this.slug);
     },
     changeDirection(directionBy) {
       this.directionBy = directionBy;
-      this.getProduct(this.slug);
     },
     flipArrow(index) {
       const currentIndex = this.flippedArrows.indexOf(index);
