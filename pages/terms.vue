@@ -180,7 +180,7 @@ export default {
               "streetAddress": "Industrial No. 5, behind Maliah Road., shop No. 8",
               "addressCountry": "AE"
             },
-            "telephone": "+971 6 542 1313",
+            "telephone": "+971504429045",
             "openingHoursSpecification": [
               {
                 "@type": "OpeningHoursSpecification",

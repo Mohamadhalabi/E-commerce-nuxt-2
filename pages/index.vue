@@ -217,7 +217,7 @@ export default {
               "streetAddress": "Industrial No. 5, behind Maliah Road., shop No. 8",
               "addressCountry": "AE"
             },
-            "telephone": "+971 6 542 1313",
+            "telephone": "+971504429045",
             "openingHoursSpecification": [
               {
                 "@type": "OpeningHoursSpecification",
@@ -242,13 +242,6 @@ export default {
             ]
           }
         },
-        { type: 'application/ld+json', json: {
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            "url": "https://www.tlkeys.com",
-            "logo": this.$settings.website.system_logo_black.l.url
-          }
-        }
       ]
     }
   },
