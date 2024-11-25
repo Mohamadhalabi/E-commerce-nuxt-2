@@ -59,140 +59,155 @@ export default {
       error({ statusCode: 404, message: 'Page not found' });
     }
   },
-    head() {
-    const hasQueryParams = Object.keys(this.$route.query).length > 0;  // Move this line outside of head_data object
-    const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
-    let head_data = {
-      titleTemplate: this.page.meta_title,
-      title: this.page.meta_title,
-      link: [
-        {
-          rel: 'canonical',
-          href: process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/' + this.$route.params.page,
-        },
-      ],
-      meta: [
-        {
-          name: "description",
-          content: this.page.meta_description,
-        },
-        {
-          name: "og:description",
-          content: this.page.meta_description,
-        },
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          json: {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": this.$i18n.t("products.home"),
-                "item": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix,
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": this.$i18n.t("products.shop"),
-                "item": `${process.env.PUBLIC_PATH_WITHOUT_SLASH}` + languagePrefix + '/shop',
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": this.page.title,
-                "item": `${process.env.PUBLIC_PATH_WITHOUT_SLASH}` + languagePrefix + '/shop/' + this.$route.params.page,
-              },
-            ]
-          }
-        },
-        {
-          type: 'application/ld+json', 
-          json: {
-            "@context": "https://schema.org/",
-            "@type": "Organization",
-            "name": "Techno Lock Keys Trading",
-            "url": "https://www.tlkeys.com/",
-            "image": "https://www.tlkeys.com/images/logos/techno-lock-desktop-logo.webp",
-            "description": "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators.",
-            "address": {
-              "@type": "PostalAddress",
-              "streetAddress": "Industrial No. 5, behind Maliah Road., shop No. 8",
-              "addressCountry": "AE"
-            },
-            "telephone": "+971504429045",
-            "openingHoursSpecification": [
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Saturday",
-                  "Sunday"
-                ],
-                "opens": "8:00",
-                "closes": "18:00"
-              }
-            ],
-            "priceRange": "$$",
-            "paymentAccepted": "Cash, Credit Card, Paypal",
-            "sameAs": [
-              "https://www.facebook.com/technolockkeys_world/",
-              "https://twitter.com/techno_lock",
-              "https://api.whatsapp.com/send?phone=971504429045"
-            ]
-          }
-        },
-      ],
-    }
+  head() {
+  const hasQueryParams = Object.keys(this.$route.query).length > 0;  // Move this line outside of head_data object
+  const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
 
-    if (hasQueryParams) {
-      head_data.meta.push({
-        name: 'robots',
-        content: 'noindex, nofollow'
-      });
-    }
-    if (this.page.type == "page") {
-      head_data.meta.push({
-        name: "og:image:alt",
-        content: this.page.meta_image.l.alt,
-      });
-      head_data.meta.push({
-        property: "og:image",
-        content: this.page.meta_image.l.url,
-      });
-      head_data.meta.push({
-        name: "og:image:height",
-        content: this.page.meta_image.l.height,
-      });
-      head_data.meta.push({
-        name: "og:image:width",
-        content: this.page.meta_image.l.width,
-      });
-    } else {
-      head_data.meta.push({
-        property: "og:title",
-        content: this.page.meta_title,
-      });
-      head_data.meta.push({
-        property: "og:type",
-        content: "website",
-      });
-      head_data.meta.push({
-        property: "og:image",
-        content: this.page.meta_image,
-      });
-    }
+  let head_data = {
+    titleTemplate: this.page.meta_title,
+    title: this.page.meta_title,
+    link: [
+      {
+        rel: 'canonical',
+        href: process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/' + this.$route.params.page,
+      },
+      // hreflang implementation - dynamically generated based on availableLocales
+      ...this.$i18n.availableLocales.map(loc => ({
+        rel: 'alternate',
+        hreflang: loc,
+        href: process.env.PUBLIC_PATH_WITHOUT_SLASH + (loc !== 'en' ? `/${loc}` : '') + '/' + this.$route.params.page
+      })),
+      // Fallback hreflang for default locale (this will help search engines find the main language version)
+      {
+        rel: 'alternate',
+        hreflang: 'x-default',
+        href: process.env.PUBLIC_PATH_WITHOUT_SLASH + '/' + this.$route.params.page
+      }
+    ],
+    meta: [
+      {
+        name: "description",
+        content: this.page.meta_description,
+      },
+      {
+        name: "og:description",
+        content: this.page.meta_description,
+      },
+    ],
+    script: [
+      {
+        type: 'application/ld+json',
+        json: {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": this.$i18n.t("products.home"),
+              "item": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix,
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": this.$i18n.t("products.shop"),
+              "item": `${process.env.PUBLIC_PATH_WITHOUT_SLASH}` + languagePrefix + '/shop',
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": this.page.title,
+              "item": `${process.env.PUBLIC_PATH_WITHOUT_SLASH}` + languagePrefix + '/shop/' + this.$route.params.page,
+            },
+          ]
+        }
+      },
+      {
+        type: 'application/ld+json',
+        json: {
+          "@context": "https://schema.org/",
+          "@type": "Organization",
+          "name": "Techno Lock Keys Trading",
+          "url": "https://www.tlkeys.com/",
+          "image": "https://www.tlkeys.com/images/logos/techno-lock-desktop-logo.webp",
+          "description": "Techno Lock Keys provides a wide range of auto keys, remotes, diagnostics, cutting machines, programming devices, Fobs, transponder keys, and emulators.",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Industrial No. 5, behind Maliah Road., shop No. 8",
+            "addressCountry": "AE"
+          },
+          "telephone": "+971504429045",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Saturday",
+                "Sunday"
+              ],
+              "opens": "8:00",
+              "closes": "18:00"
+            }
+          ],
+          "priceRange": "$$",
+          "paymentAccepted": "Cash, Credit Card, Paypal",
+          "sameAs": [
+            "https://www.facebook.com/technolockkeys_world/",
+            "https://twitter.com/techno_lock",
+            "https://api.whatsapp.com/send?phone=971504429045"
+          ]
+        }
+      },
+    ],
+  };
+
+  if (hasQueryParams) {
     head_data.meta.push({
-      property:"og:url",
-      content : process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/' + this.$route.params.page,
+      name: 'robots',
+      content: 'noindex, nofollow'
     });
-    return head_data;
-  },
+  }
+  if (this.page.type == "page") {
+    head_data.meta.push({
+      name: "og:image:alt",
+      content: this.page.meta_image.l.alt,
+    });
+    head_data.meta.push({
+      property: "og:image",
+      content: this.page.meta_image.l.url,
+    });
+    head_data.meta.push({
+      name: "og:image:height",
+      content: this.page.meta_image.l.height,
+    });
+    head_data.meta.push({
+      name: "og:image:width",
+      content: this.page.meta_image.l.width,
+    });
+  } else {
+    head_data.meta.push({
+      property: "og:title",
+      content: this.page.meta_title,
+    });
+    head_data.meta.push({
+      property: "og:type",
+      content: "website",
+    });
+    head_data.meta.push({
+      property: "og:image",
+      content: this.page.meta_image,
+    });
+  }
+  head_data.meta.push({
+    property: "og:url",
+    content: process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + '/' + this.$route.params.page,
+  });
+
+  return head_data;
+},
+
 };
 </script>
