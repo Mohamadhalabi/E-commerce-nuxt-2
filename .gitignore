@@ -102,3 +102,6 @@ package-lock.json
 package.json
 
 .output
+
+# htaccess
+.htaccess
