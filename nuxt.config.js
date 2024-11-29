@@ -243,7 +243,7 @@ export default ({
     }
   },
   serverMiddleware: [
-    // '~/middleware/redirects.js',
+    '~/middleware/redirects.js',
   ],
   build: {
     transpile: ['cookie-es'],

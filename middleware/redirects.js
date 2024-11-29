@@ -602,7 +602,11 @@ export default function(req, res, next) {
     {
       from:"/products/Original-Ford-F-150-2017-Smart-Key-Remote-3-Buttons-868MHz-ID49-Chip-GB5T-15K601-DB-36157",
       to:"/products/SUNSHINE-LC-AD15-Infrared-Thermal-Imaging-Analyzing-Camera-400W-3D-36157"
-    }
+    },
+    {
+      from:"/products/Lonsdor-Toyota-Corolla-LT30-01-Universal-Smart-Key-Board-4-Buttons",
+      to:"/products/lonsdor-lt30-01-4a-universal-smart-remote-pcb"
+    },
 
 
   ]
