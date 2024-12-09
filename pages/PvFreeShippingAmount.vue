@@ -134,74 +134,67 @@ export default {
         });
     },
     generatePdf() {
-      let idsWithQuantities = [];
-      this.cartList.forEach(item => {
-        idsWithQuantities.push({
-          id: item.id,
-          sku: item.sku,
-          quantity: item.quantity,
-          one_piece_price: item.priceitem,
-          product_image: item.gallery[0]['m']['url'],
-          product_title: item.title
-        });
+  let idsWithQuantities = [];
+  this.cartList.forEach(item => {
+    idsWithQuantities.push({
+      id: item.id,
+      sku: item.sku,
+      quantity: item.quantity,
+      one_piece_price: item.priceitem,
+      product_image: item.gallery[0]['m']['url'],
+      product_title: item.title
+    });
+  });
+
+  if (this.StateUser != null) {
+    this.$Progress.start(); // Start the progress bar before making the request
+    Api.post(`/generate-pdf`, {
+      user: this.StateUser.id,
+      currency: this.cartCurrency
+    })
+      .then((response) => {
+        if (response.data.pdf) {
+          const pdfBinary = atob(response.data.pdf);
+          const pdfArray = new Uint8Array(pdfBinary.length);
+          for (let i = 0; i < pdfBinary.length; i++) {
+            pdfArray[i] = pdfBinary.charCodeAt(i);
+          }
+          const pdfBlob = new Blob([pdfArray], { type: 'application/pdf' });
+          const pdfUrl = URL.createObjectURL(pdfBlob);
+          window.open(pdfUrl, '_blank');
+        }
+        this.$Progress.finish();
+      })
+      .catch((error) => {
+        console.error('Error generating PDF:', error);
+        this.$Progress.finish(); // Ensure the progress bar finishes on error
       });
-      if (this.StateUser != null) {
-        Api.get(`/generate-pdf`, {params: {user: this.StateUser.id, currency: this.cartCurrency}})
-          .then((response) => {
-            // Assuming the response contains the base64-encoded PDF data as 'pdf'
-            if (response.data.pdf) {
-              // Convert base64 to binary data
-              const pdfBinary = atob(response.data.pdf);
+  } else {
+    this.$Progress.start(); // Start the progress bar before making the request
+    Api.post(`/generate-pdf-without-auth`, {
+      products: idsWithQuantities,
+      currency: this.cartCurrency
+    })
+      .then((response) => {
+        if (response.data.pdf) {
+          const pdfBinary = atob(response.data.pdf);
+          const pdfArray = new Uint8Array(pdfBinary.length);
+          for (let i = 0; i < pdfBinary.length; i++) {
+            pdfArray[i] = pdfBinary.charCodeAt(i);
+          }
+          const pdfBlob = new Blob([pdfArray], { type: 'application/pdf' });
+          const pdfUrl = URL.createObjectURL(pdfBlob);
+          window.open(pdfUrl, '_blank');
+        }
+        this.$Progress.finish();
+      })
+      .catch((error) => {
+        console.error('Error generating PDF:', error);
+        this.$Progress.finish(); // Ensure the progress bar finishes on error
+      });
+  }
+}
 
-              // Convert the binary data to a Uint8Array
-              const pdfArray = new Uint8Array(pdfBinary.length);
-              for (let i = 0; i < pdfBinary.length; i++) {
-                pdfArray[i] = pdfBinary.charCodeAt(i);
-              }
-
-              // Create a Blob from the Uint8Array
-              const pdfBlob = new Blob([pdfArray], {type: 'application/pdf'});
-
-              // Create a URL for the Blob
-              const pdfUrl = URL.createObjectURL(pdfBlob);
-
-              // Open the PDF in a new tab or window
-              window.open(pdfUrl, '_blank');
-            }
-          })
-          .catch((error) => {
-            console.error('Error generating PDF:', error);
-          });
-      }
-      else{
-        Api.get(`/generate-pdf-without-auth`, {params: {products: idsWithQuantities, currency: this.cartCurrency}})
-          .then((response) => {
-            // Assuming the response contains the base64-encoded PDF data as 'pdf'
-            if (response.data.pdf) {
-              // Convert base64 to binary data
-              const pdfBinary = atob(response.data.pdf);
-
-              // Convert the binary data to a Uint8Array
-              const pdfArray = new Uint8Array(pdfBinary.length);
-              for (let i = 0; i < pdfBinary.length; i++) {
-                pdfArray[i] = pdfBinary.charCodeAt(i);
-              }
-
-              // Create a Blob from the Uint8Array
-              const pdfBlob = new Blob([pdfArray], {type: 'application/pdf'});
-
-              // Create a URL for the Blob
-              const pdfUrl = URL.createObjectURL(pdfBlob);
-
-              // Open the PDF in a new tab or window
-              window.open(pdfUrl, '_blank');
-            }
-          })
-          .catch((error) => {
-            console.error('Error generating PDF:', error);
-          });
-      }
-    }
 
   },
 };
