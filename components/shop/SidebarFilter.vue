@@ -226,6 +226,9 @@ export default {
         if (index > -1) {
           selector.splice(index, 1);
           if (!selector.length) {
+            if(tempQuery.brands == tempQuery[data.type]){
+              Object.keys(tempQuery).forEach(key => delete tempQuery[key]);
+            }
             delete tempQuery[data.type];
           } else {
             tempQuery[data.type] = selector.toString();
