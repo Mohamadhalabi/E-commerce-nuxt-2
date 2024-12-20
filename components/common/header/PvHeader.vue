@@ -205,7 +205,7 @@
         ref="headerBottom">
         <div class="container">
           <div class="row text-center w-100">
-            <div class="col-lg-10 mt-auto mb-auto text-left">
+            <div class="col-lg-12 m-auto text-center">
               <nuxt-link
                 class="font-weight-bold"
                 :to="getLink('/shop?offers')">
@@ -254,9 +254,24 @@
                 </span>
               </nuxt-link>
 
+              <nuxt-link :to="getLink('/shop?end-of-year-promotion')">
+                <i class="fa fa-gift font-weight-bold"></i>
+                <span 
+                  style="color:#CB880C" 
+                  class="header-icons ml-1 mr-lg-2 font-weight-bold pulse-animation-end-of-year"
+                  :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'"
+                >
+                  Year-End Deals
+                </span>
+              </nuxt-link>
+
+
+              
+              <i class="fa fa-search m-auto search-icon" @click="openModal">
+              </i>
               
             </div>
-            <div class="col-lg-2 d-flex">
+            <!-- <div class="col-lg-1 d-flex">
               <i class="fa fa-search m-auto search-icon" @click="openModal">
               </i>
               <div class="header-dropdown m-auto">
@@ -272,26 +287,7 @@
                   </ul>
                 </div>
               </div>
-
-              <a
-                class="header-icon position-relative m-auto mt-1 ml-lg-3 cursor-pointer"
-                title="wishlist"
-              >
-                <i class="fa fa-heart" @click="goToWishlist" />
-                <span class="cart-count badge-circle">{{
-                    getWishlistCounts
-                  }}</span>
-              </a>
-              <a
-                class="header-icon position-relative ComparesBtn m-auto mt-1 ml-lg-3 cursor-pointer"
-                title="Compares">
-                <i class="fa fa-shuffle" @click="goToCompares" />
-                <span class="cart-count badge-circle">{{ getCounts }}</span>
-              </a>
-              <a class="m-auto mt-1 ml-lg-3 cursor-pointer">
-                <!-- <pv-cart-menu /> -->
-              </a>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -299,7 +295,7 @@
         <div class="container">
           <div class="row text-center w-100">
             <div class="row text-center w-100">
-              <div class="col-lg-2 m-auto">
+              <!-- <div class="col-lg-1 m-auto">
                 <nuxt-link :to="getLink('/shop?offers')"
                            class="font-weight-bold"
                 >
@@ -308,6 +304,18 @@
                     </i>
                     {{ $t("header.Offer") }}
                   </p>
+                </nuxt-link>
+              </div> -->
+              <div class="col-lg-2 m-auto">
+                <nuxt-link :to="getLink('/shop?end-of-year-promotion')">
+                <i class="fa fa-gift font-weight-bold"></i>
+                <span 
+                  style="color:#CB880C" 
+                  class="header-icons ml-1 mr-lg-2 font-weight-bold pulse-animation-end-of-year"
+                  :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'"
+                >
+                Year-End Deals
+                </span>
                 </nuxt-link>
               </div>
 
@@ -572,5 +580,25 @@ export default {
   border-top: 2px dotted #E6E6E6;
   padding-top: 2px;
   padding-bottom: 2px;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pulse-animation-end-of-year {
+  display: inline-block;
+  animation: pulse 1.5s infinite ease-in-out;
 }
 </style>
