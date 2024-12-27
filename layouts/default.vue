@@ -23,9 +23,12 @@
       hide-header
       @hidden="onModalHidden"
     >
-      <a href="https://www.tlkeys.com/shop?end-of-year-promotion">
-        <img class="modal-image-popup" src="https://www.tlkeys.com/images/end-of-year-popup.webp">
-      </a>
+      <nuxt-link to="/shop?end-of-year-promotion">
+        <a @click="closeModal">
+          <img class="modal-image-popup" src="https://www.tlkeys.com/images/end-of-year-popup.webp">      
+        </a>
+      </nuxt-link>
+ 
     </b-modal>
       <button
       v-if="this.showModal"
