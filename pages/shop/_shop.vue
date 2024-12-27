@@ -287,7 +287,4 @@ export default {
 img{
   cursor: pointer;
 }
-.modal-body{
-  padding: 10px!important;
-}
 </style>
