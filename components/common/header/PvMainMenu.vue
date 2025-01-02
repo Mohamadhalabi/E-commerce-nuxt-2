@@ -157,7 +157,7 @@
         <nav
           v-if="DeviceAndMachineMenuOpened"
           class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          @click="closeAccessoriesAndTools()"
+          @click="closeDeviceAndMachineMenu()"
           v-for="(item, key) in devicesAndMachines"
           :key="key">
           <div class="row bg-white m-0">
@@ -182,38 +182,97 @@
         </nav>
       </nav>
 
-      <!-- <nav class="left-menu-items" @click="getKeysAndRemotes()">
+      <nav class="left-menu-items">
+        <nuxt-link
+          :to="getLink('/emulators')"
+          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
+          <span class="header-main-menu">
+            {{ $t("header.Emulators") }}
+          </span>
+        </nuxt-link>
+      </nav>
+
+
+      <nav class="left-menu-items" @click="getSoftwareAndTokens()">
         <nuxt-link
           :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
           <span class="header-main-menu">
-            {{ $t("header.keysAndRemote") }}
+            Software & Tokens
           </span>
         </nuxt-link>
         <nav
-          v-if="keysAndRemoteMenuOpened"
+          v-if="SoftwareAndTokenMenuOpened"
           class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          @click="closeKeyAndRemotesMenu()"
-          v-for="(item, key) in keysAndRemotes"
+          @click="closeSoftwareAndTokenMenu()"
+          v-for="(item, key) in softwareAndTokens"
           :key="key">
           <div class="row bg-white m-0">
-            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
-              <div
-                v-for="(i, key2) in item"
-                :key="key2"
-                class="bg-white logo-item p-0 with-box-shadow sub-menu-cars">
-                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image && i.image.s">
-                  <nuxt-img
-                    format="webp"
-                    class="sub-menu-images"
-                    :src="i.image.s.url"
-                  />
-                </nuxt-link>
+            <div class="col-6 software-menu-right-border pl-0 pr-0">
+              <div class="p-4">
+                <button class="token-and-software-buttons">Software</button>
               </div>
-            </nav>
+              <nav class="d-flex flex-wrap bg-white p-0">
+                <div
+                  v-for="(i, key2) in item.software"
+                  :key="key2"
+                  class="bg-white p-0 with-box-shadow software-token-items">
+                  <nuxt-link :to="getLink('/' + i.slug)">
+                    <nuxt-img
+                      format="webp"
+                      class="sub-menu-images p-2"
+                      :src="i.image['s'].url"
+                    />
+                  </nuxt-link>
+                </div>
+              </nav>
+            </div>
+            <div class="col-6 pr-0 pl-0">
+              <div class="p-4">
+                <button class="token-and-software-buttons">Token</button>                
+              </div>
+              <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
+                <div
+                  v-for="(i, key2) in item.token"
+                  :key="key2"
+                  class="bg-white p-0 with-box-shadow software-token-items">
+                  <nuxt-link :to="getLink('/' + i.slug)">
+                    <nuxt-img
+                      format="webp"
+                      class="sub-menu-images p-2"
+                      :src="i.image['s'].url"
+                    />
+                  </nuxt-link>
+                </div>
+              </nav>
+            </div>
           </div>
         </nav>
-      </nav> -->
+      </nav>
+
+
+
+      <nav class="left-menu-items">
+        <nuxt-link
+          :to="getLink('/downloads')"
+          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
+          <span class="header-main-menu">
+            {{ $t("header.downloads") }}
+          </span>
+        </nuxt-link>
+      </nav>
+
+
+      <nav class="left-menu-items">
+        <nuxt-link
+          :to="getLink('/pin-code')"
+          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
+          <span class="header-main-menu">
+            {{ $t("header.PinCode") }}
+          </span>
+        </nuxt-link>
+      </nav>
+
 
     </nav>
   </div>
@@ -242,7 +301,8 @@ export default {
       isFetchingAccessoriesAndTools: false,
       isFetchingKeysAndRemotes: false,
       isFetchingManufacturers: false,
-      isFetchingCars: false 
+      isFetchingCars: false,
+      isFetchingSoftwareAndToken: false, 
     };
   },
   mounted(){
@@ -253,7 +313,7 @@ export default {
   },
   methods: {
     handleGlobalClick(event) {
-      if(this.carMenuOpened || this.ManufacturerMenuOpened || this.keysAndRemoteMenuOpened || this.AccessoriesAndToolsMenuOpened){
+      if(this.carMenuOpened || this.ManufacturerMenuOpened || this.keysAndRemoteMenuOpened || this.AccessoriesAndToolsMenuOpened || this.DeviceAndMachineMenuOpened || this.SoftwareAndTokenMenuOpened){
         this.closeCarMenu();
         this.closeManufacturerMenu();
         this.closeKeyAndRemotesMenu();
@@ -362,6 +422,17 @@ export default {
         }
       }
     },
+    async getSoftwareAndTokens(){
+      try{
+        const response = await Api.get('/software-and-token');
+        this.SoftwareAndTokenMenuOpened = true;
+        this.softwareAndTokens = response.data.data.menu.main_menu['tokens-software'];
+      }catch(error){
+        console.log("Error Fetching Token and software Menu:", error);
+      } finally{
+        this.isFetchingSoftwareAndToken = false;
+      }
+    },
       getLink(route) {
         if (this.getLang === 'en') {
           return route; // Return the route as is without the language parameter
@@ -400,7 +471,10 @@ export default {
   max-height: 49px;
   display: flex;
   justify-content: center;
-  align-items: center;;
+  align-items: center;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 13.5px;
 }
 .left-menu-items, .right-menu-items{
   border-right: 1px solid #585a5e!important;
@@ -546,9 +620,17 @@ export default {
 
 
 .custom-megamenu{
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   z-index: 1000;
   position: absolute;
   left: 0;
+  border-bottom: 0;
+    -o-border-image: linear-gradient(90deg, #892118, #ff6800) 1;
+    border-image: linear-gradient(90deg, #892118, #ff6800) 1;
+    border-left: 0;
+    border-right: 0;
+    border-top: 4px solid #844701 !important;
+    transform: translateY(0);
 }
 
 </style>

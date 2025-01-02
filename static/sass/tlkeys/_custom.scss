@@ -509,6 +509,24 @@ button.mfp-close {
 
 $nav-items: 9;
 $nav-items-width: 100%/$nav-items;
+
+
+$software-token-items: 6;
+$softare-token-width : 100%/$software-token-items;
+
+
+.left-menu-items{
+  width: $nav-items-width;
+}
+.software-token-items{
+  width: $softare-token-width!important;
+}
+
+.software-menu-right-border {
+  border-right: 3px solid #ddd; /* Adjust color and width as needed */
+}
+
+
 .from-demo-26 .nav-categories > li {
   margin: 0;
   max-width: $nav-items-width;
