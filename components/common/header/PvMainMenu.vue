@@ -2,11 +2,13 @@
   <div class="header-menu main-nav" :class="{ 'text-right': getIsAr }">
     <nav class="menu nav-categories header-main-menu">
       <!-- Cars Menu -->
-      <nav class="left-menu-items" @click="getCars()">
+      <nav class="left-menu-items" @click="getCars()" :class="{ 'orange-background': carMenuOpened }">
         <nuxt-link
           :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
+          <span class="header-main-menu" 
+          :class="{ 'orange-background': carMenuOpened }"
+          >
             {{ $t("header.Cars") }}
           </span>
         </nuxt-link>
@@ -37,11 +39,11 @@
 
 
 
-      <nav class="left-menu-items" @click="getManufacturers()">
+      <nav class="left-menu-items" @click="getManufacturers()" :class="{ 'orange-background': ManufacturerMenuOpened }">
         <nuxt-link
           :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
+          <span class="header-main-menu" :class="{ 'orange-background': ManufacturerMenuOpened }">
             {{ $t("header.Manufactures") }}
           </span>
         </nuxt-link>
@@ -71,11 +73,11 @@
       </nav>
 
       
-      <nav class="left-menu-items" @click="getKeysAndRemotes()">
+      <nav class="left-menu-items" @click="getKeysAndRemotes()" :class="{ 'orange-background': keysAndRemoteMenuOpened }">
         <nuxt-link
           :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
+          <span class="header-main-menu" :class="{ 'orange-background': keysAndRemoteMenuOpened }">
             {{ $t("header.keysAndRemote") }}
           </span>
         </nuxt-link>
@@ -108,11 +110,11 @@
       </nav>
 
 
-      <nav class="left-menu-items" @click="getAccessoriesAndTools()">
+      <nav class="left-menu-items" @click="getAccessoriesAndTools()" :class="{ 'orange-background': AccessoriesAndToolsMenuOpened }">
         <nuxt-link
           :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
+          <span class="header-main-menu" :class="{ 'orange-background': AccessoriesAndToolsMenuOpened }">
             {{ $t("header.AccessoriesAndTools") }}
           </span>
         </nuxt-link>
@@ -146,11 +148,11 @@
 
 
 
-      <nav class="left-menu-items" @click="getDevicesAndMachines()">
+      <nav class="left-menu-items" @click="getDevicesAndMachines()" :class="{ 'orange-background': DeviceAndMachineMenuOpened }">
         <nuxt-link
           :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
+          <span class="header-main-menu" :class="{ 'orange-background': DeviceAndMachineMenuOpened }">
             {{ $t("header.DeviceAndMachine") }}
           </span>
         </nuxt-link>
@@ -193,12 +195,12 @@
       </nav>
 
 
-      <nav class="left-menu-items" @click="getSoftwareAndTokens()">
+      <nav class="left-menu-items" @click="getSoftwareAndTokens()" :class="{ 'orange-background': SoftwareAndTokenMenuOpened }">
         <nuxt-link
           :to="getLink('#')"
           class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
-            Software & Tokens
+          <span class="header-main-menu" :class="{ 'orange-background': SoftwareAndTokenMenuOpened }">
+            {{ $t("header.TokensAndSoftware") }}
           </span>
         </nuxt-link>
         <nav
@@ -210,7 +212,7 @@
           <div class="row bg-white m-0">
             <div class="col-6 software-menu-right-border pl-0 pr-0">
               <div class="p-4">
-                <button class="token-and-software-buttons">Software</button>
+                <button class="token-and-software-buttons">{{ $t("common.software")}}</button>
               </div>
               <nav class="d-flex flex-wrap bg-white p-0">
                 <div
@@ -229,7 +231,7 @@
             </div>
             <div class="col-6 pr-0 pl-0">
               <div class="p-4">
-                <button class="token-and-software-buttons">Token</button>                
+                <button class="token-and-software-buttons">{{ $t("common.token")}}</button>                
               </div>
               <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
                 <div
@@ -324,8 +326,8 @@ export default {
     },
     closeCarMenu(){
       this.carMenuOpened = false;
-      this.isFetchingCars = false;
-      this.cars = []
+      // this.isFetchingCars = false;
+      // this.cars = []
     },
     closeManufacturerMenu(){
       this.ManufacturerMenuOpened = false;
@@ -351,6 +353,7 @@ export default {
       this.SoftwareAndTokenMenuOpened = false;
     },
     async getCars() {
+      if(!this.carMenuOpened){
         this.isFetchingCars = true; // Set flag to true before making the request
         await Api.get('/menu')
           .then(response => {
@@ -363,23 +366,32 @@ export default {
           .finally(() => {
             this.isFetchingCars = false; // Reset flag after the request is done
           });
+        }
+        else{
+          this.carMenuOpened = !this.carMenuOpened
+        }
     },
    async getManufacturers() {
-        this.isFetchingManufacturers = true;
-        await Api.get('/manufacturers_menu')
-          .then(response => {
-            this.ManufacturerMenuOpened = true;
-            this.manufacturers = response.data.data.menu.main_menu.manufacturers;
-          })
-          .catch(error => {
-            console.error("Error fetching manufacturers:", error);
-          })
-          .finally(() => {
-            this.isFetchingManufacturers = false; // Reset flag after the request is done
-          });
-    },
+    if(!this.ManufacturerMenuOpened){
+      this.isFetchingManufacturers = true;
+      await Api.get('/manufacturers_menu')
+      .then(response => {
+        this.ManufacturerMenuOpened = true;
+        this.manufacturers = response.data.data.menu.main_menu.manufacturers;
+      })
+      .catch(error => {
+        console.error("Error fetching manufacturers:", error);
+      })
+      .finally(() => {
+        this.isFetchingManufacturers = false; // Reset flag after the request is done
+      });
+    }else{
+      this.ManufacturerMenuOpened = !this.ManufacturerMenuOpened
+    }
+  },
     async getKeysAndRemotes() {
-      this.isFetchingKeysAndRemotes = true;
+      if(!this.keysAndRemoteMenuOpened){
+        this.isFetchingKeysAndRemotes = true;
       await Api.get('/keys-and-remotes-menu')
       .then(response => {
         this.keysAndRemoteMenuOpened = true;
@@ -391,9 +403,13 @@ export default {
       .finally(() => {
         this.isFetchingKeysAndRemotes = false; // Reset flag after the request is done
       });
+      }else{
+        this.keysAndRemoteMenuOpened = !this.keysAndRemoteMenuOpened;
+      }
     },
     async getAccessoriesAndTools() {
-      if (this.accessoriesAndTools.length === 0 && !this.isFetchingAccessoriesAndTools) {
+      if(!this.AccessoriesAndToolsMenuOpened){
+        if (this.accessoriesAndTools.length === 0 && !this.isFetchingAccessoriesAndTools) {
         this.isFetchingAccessoriesAndTools = true; // Set flag to true before making the request
         await Api.get('/accessories-tools-menu')
           .then(response => {
@@ -407,9 +423,13 @@ export default {
             this.isFetchingAccessoriesAndTools = false; // Reset flag after the request is done
           });
       }
+      }else{
+        this.AccessoriesAndToolsMenuOpened = !this.AccessoriesAndToolsMenuOpened;
+      }
     },
     async getDevicesAndMachines() {
-      if (this.devicesAndMachines.length === 0 && !this.isFetchingDevicesAndMachines) {
+      if(!this.DeviceAndMachineMenuOpened){
+        if (this.devicesAndMachines.length === 0 && !this.isFetchingDevicesAndMachines) {
         this.isFetchingDevicesAndMachines = true; // Set flag to true before making the request
         try {
           const response = await Api.get('/device-machine-menu');
@@ -421,9 +441,13 @@ export default {
           this.isFetchingDevicesAndMachines = false; // Reset flag after the request is done
         }
       }
+      }else{
+        this.DeviceAndMachineMenuOpened = !this.DeviceAndMachineMenuOpened;
+      }
     },
     async getSoftwareAndTokens(){
-      try{
+      if(!this.SoftwareAndTokenMenuOpened){
+        try{
         const response = await Api.get('/software-and-token');
         this.SoftwareAndTokenMenuOpened = true;
         this.softwareAndTokens = response.data.data.menu.main_menu['tokens-software'];
@@ -431,6 +455,9 @@ export default {
         console.log("Error Fetching Token and software Menu:", error);
       } finally{
         this.isFetchingSoftwareAndToken = false;
+      }
+      }else{
+        this.SoftwareAndTokenMenuOpened = !this.SoftwareAndTokenMenuOpened
       }
     },
       getLink(route) {
@@ -525,7 +552,7 @@ export default {
     width: 10%; /* Adjust based on desired width for large screens */
     flex-grow: 1; /* Allow it to expand based on available space */
   }
-  .logo-item:nth-last-child(-n+2){
+  .logo-item:nth-last-child(-n+9){
     flex-grow: 0.0005;
   }
 
@@ -632,5 +659,7 @@ export default {
     border-top: 4px solid #844701 !important;
     transform: translateY(0);
 }
-
+.orange-background{
+  background-color: orange;
+}
 </style>

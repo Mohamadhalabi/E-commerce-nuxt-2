@@ -23,9 +23,9 @@
       hide-header
       @hidden="onModalHidden"
     >
-      <nuxt-link to="/shop?end-of-year-promotion">
+      <nuxt-link to="/shop?offers">
         <a @click="closeModal">
-          <img class="modal-image-popup" src="https://www.tlkeys.com/images/end-of-year-popup.webp">      
+          <img class="modal-image-popup" src="https://www.tlkeys.com/images/70-percent-discount-popup.jpg">      
         </a>
       </nuxt-link>
  

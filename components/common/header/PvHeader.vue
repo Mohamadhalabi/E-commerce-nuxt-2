@@ -253,17 +253,17 @@
                   {{ $t("home.newarrivalproducts") }}
                 </span>
               </nuxt-link>
-
-              <nuxt-link :to="getLink('/shop?end-of-year-promotion')">
+<!-- 
+              <nuxt-link :to="getLink('/shop?offers')">
                 <i class="fa fa-gift font-weight-bold"></i>
                 <span 
                   style="color:#CB880C" 
                   class="header-icons ml-1 mr-lg-2 font-weight-bold pulse-animation-end-of-year"
                   :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'"
                 >
-                  Year-End Deals
+                {{ $t("header.Offer") }}
                 </span>
-              </nuxt-link>
+              </nuxt-link> -->
 
 
               
@@ -295,7 +295,7 @@
         <div class="container">
           <div class="row text-center w-100">
             <div class="row text-center w-100">
-              <!-- <div class="col-lg-1 m-auto">
+              <div class="col-lg-1 m-auto">
                 <nuxt-link :to="getLink('/shop?offers')"
                            class="font-weight-bold"
                 >
@@ -305,8 +305,8 @@
                     {{ $t("header.Offer") }}
                   </p>
                 </nuxt-link>
-              </div> -->
-              <div class="col-lg-2 m-auto">
+              </div>
+              <!-- <div class="col-lg-2 m-auto">
                 <nuxt-link :to="getLink('/shop?end-of-year-promotion')">
                 <i class="fa fa-gift font-weight-bold"></i>
                 <span 
@@ -317,7 +317,7 @@
                 Year-End Deals
                 </span>
                 </nuxt-link>
-              </div>
+              </div> -->
 
               <div class="col-lg-2 m-auto">
                 <nuxt-link :to="getLink('/shop?free-shipping')">
