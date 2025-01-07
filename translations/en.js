@@ -115,6 +115,7 @@ export default
       checkout: 'Checkout',
     },
     header: {
+      promotion: 'Promotion',
       shipping_cart: 'Cart',
       you_are_in: 'you are logged in',
       subtotal: 'subtotal',

@@ -115,6 +115,7 @@ export default
     checkout: "Paiement",
   },
   header: {
+    promotion: 'Promotion',
     shipping_cart: "Panier",
     you_are_in: "vous êtes connecté",
     subtotal: "sous-total",

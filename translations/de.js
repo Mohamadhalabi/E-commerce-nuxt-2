@@ -115,6 +115,7 @@ export default
     checkout: 'Zur Kasse gehen',
   },
   header: {
+    promotion: 'Werbung',
     shipping_cart: 'Warenkorb',
     you_are_in: 'Sie sind angemeldet',
     subtotal: 'Zwischensumme',

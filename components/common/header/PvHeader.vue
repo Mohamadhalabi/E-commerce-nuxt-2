@@ -207,163 +207,125 @@
           <div class="row text-center w-100">
             <div class="col-lg-12 m-auto text-center">
               <nuxt-link
-                class="font-weight-bold"
+                class="font-weight-bold off-animatin call-us-now"
                 :to="getLink('/shop?offers')">
-                <i class="fa fa-percentage font-weight-bold">
-                </i>
-                <span class="ml-1 mr-lg-2 off-animatin mb-0 call-us-now text-center font-weight-bold"
+                <i class="fa fa-percentage font-weight-bold"></i>
+                <span class="ml-1 mr-lg-2"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("header.Offer") }}
                 </span>
               </nuxt-link>
-              <nuxt-link :to="getLink('/shop?free-shipping')">
-                <i class="fas fa-shipping-fast"></i>
+              <nuxt-link
+                class="font-weight-bold"
+                style="color: #cc8607"
+                :to="getLink('/shop?promotion')">
+                <i class="fa fa-gift font-weight-bold"></i>
+                <span class="ml-1 mr-lg-2"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
+                  {{ $t("header.promotion") }}
+                </span>
+              </nuxt-link>
+              <nuxt-link class="font-weight-bold" :to="getLink('/shop?free-shipping')">
+                <i class="fas fa-shipping-fast font-weight-bold"></i>
                 <span class="ml-1 mr-lg-2"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("header.FreeShipping") }}
                 </span>
               </nuxt-link>
-              <nuxt-link :to="getLink('/shop?bundled')">
-                <i class="fa fa-boxes"></i>
+              <nuxt-link class="font-weight-bold" :to="getLink('/shop?bundled')">
+                <i class="fa fa-boxes font-weight-bold"></i>
                 <span class="ml-1  mr-lg-2"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("header.Bundles") }}
                 </span>
               </nuxt-link>
-              <nuxt-link :to="getLink('/online-services')">
-                <i class="fa fa-wrench"></i>
-                <span class="header-icons online-services ml-1  mr-lg-2"
+              <nuxt-link class="font-weight-bold" :to="getLink('/online-services')">
+                <i class="fa fa-wrench font-weight-bold"></i>
+                <span class="ml-1  mr-lg-2"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("header.OnlineServices") }}
                 </span>
               </nuxt-link>
-              <nuxt-link :to="getLink('/unlock-remote-services')">
-                <i class="fa fa-lock"></i>
-                <span class="header-icons online-services ml-1 mr-lg-2"
+              <nuxt-link class="font-weight-bold" :to="getLink('/unlock-remote-services')">
+                <i class="fa fa-lock font-weight-bold"></i>
+                <span class="ml-1  mr-lg-2"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("header.unlockService") }}
                 </span>
               </nuxt-link>
 
 
-              <nuxt-link :to="getLink('/shop?new-arrival')">
+              <nuxt-link class="font-weight-bold" :to="getLink('/shop?new-arrival')" style="color:red;">
                 <i class="fa fa-chevron-circle-down font-weight-bold"></i>
-                <span style="color:red" class="header-icons ml-1 mr-lg-2 font-weight-bold"
+                <span class="ml-1  mr-lg-2"
                       :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("home.newarrivalproducts") }}
                 </span>
               </nuxt-link>
-<!-- 
-              <nuxt-link :to="getLink('/shop?offers')">
-                <i class="fa fa-gift font-weight-bold"></i>
-                <span 
-                  style="color:#CB880C" 
-                  class="header-icons ml-1 mr-lg-2 font-weight-bold pulse-animation-end-of-year"
-                  :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'"
-                >
-                {{ $t("header.Offer") }}
-                </span>
-              </nuxt-link> -->
-
-
-              
-              <i class="fa fa-search m-auto search-icon" @click="openModal">
-              </i>
-              
             </div>
-            <!-- <div class="col-lg-1 d-flex">
-              <i class="fa fa-search m-auto search-icon" @click="openModal">
-              </i>
-              <div class="header-dropdown m-auto">
-                <a class="header-icons" href="javascript:;">{{ currency }}</a>
-                <div class="header-menu text-center">
-                  <ul>
-                    <li
-                      v-for="currency in availableCurrencies"
-                      :key="currency"
-                      @click="setCurrency(currency)">
-                      <a href="javascript:;">{{ currency }}</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
       <div class="d-lg-flex d-none header-bottom sticky-header desktop-sticky3 box-shadow-none second-menu">
         <div class="container">
           <div class="row text-center w-100">
-            <div class="row text-center w-100">
-              <div class="col-lg-1 m-auto">
-                <nuxt-link :to="getLink('/shop?offers')"
-                           class="font-weight-bold"
-                >
-                  <p class="off-animatin mb-0 call-us-now text-center font-weight-bold">
-                    <i class="fa fa-percentage">
-                    </i>
-                    {{ $t("header.Offer") }}
-                  </p>
-                </nuxt-link>
-              </div>
-              <!-- <div class="col-lg-2 m-auto">
-                <nuxt-link :to="getLink('/shop?end-of-year-promotion')">
-                <i class="fa fa-gift font-weight-bold"></i>
-                <span 
-                  style="color:#CB880C" 
-                  class="header-icons ml-1 mr-lg-2 font-weight-bold pulse-animation-end-of-year"
-                  :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'"
-                >
-                Year-End Deals
+            <div class="col-lg-12 m-auto text-center">
+              <nuxt-link
+                class="font-weight-bold off-animatin call-us-now"
+                :to="getLink('/shop?offers')">
+                <i class="fa fa-percentage font-weight-bold"></i>
+                <span class="ml-1 mr-lg-2"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
+                  {{ $t("header.Offer") }}
                 </span>
-                </nuxt-link>
-              </div> -->
-
-              <div class="col-lg-2 m-auto">
-                <nuxt-link :to="getLink('/shop?free-shipping')">
-                  <i class="fas fa-shipping-fast"></i>
-                  <span class="ml-1">
+              </nuxt-link>
+              <nuxt-link
+                class="font-weight-bold"
+                style="color: #cc8607"
+                :to="getLink('/shop?promotion')">
+                <i class="fa fa-gift font-weight-bold"></i>
+                <span class="ml-1 mr-lg-2"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
+                  {{ $t("header.promotion") }}
+                </span>
+              </nuxt-link>
+              <nuxt-link class="font-weight-bold" :to="getLink('/shop?free-shipping')">
+                <i class="fas fa-shipping-fast font-weight-bold"></i>
+                <span class="ml-1 mr-lg-2"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("header.FreeShipping") }}
                 </span>
-                </nuxt-link>
-              </div>
-              <div class="col-lg-2 m-auto">
-                <nuxt-link :to="getLink('/shop?bundled')">
-                  <i class="fa fa-boxes"></i>
-                  <span class="ml-1">
+              </nuxt-link>
+              <nuxt-link class="font-weight-bold" :to="getLink('/shop?bundled')">
+                <i class="fa fa-boxes font-weight-bold"></i>
+                <span class="ml-1  mr-lg-2"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("header.Bundles") }}
                 </span>
-                </nuxt-link>
-              </div>
-              <div class="col-lg-2 m-auto services">
-                <nuxt-link :to="getLink('/online-services')" class="m-auto">
-                  <i class="fa fa-wrench"></i>
-                  <span class="header-icons online-services ml-1">
+              </nuxt-link>
+              <nuxt-link class="font-weight-bold" :to="getLink('/online-services')">
+                <i class="fa fa-wrench font-weight-bold"></i>
+                <span class="ml-1  mr-lg-2"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
                   {{ $t("header.OnlineServices") }}
                 </span>
-                </nuxt-link>
-              </div>
-              <div class="col-lg-2 m-auto services">
-                <nuxt-link :to="getLink('/unlock-remote-services')">
-                  <i class="fa fa-lock"></i>
-                  <span class="header-icons online-services ml-1">
-                   {{ $t("header.unlockService") }}
+              </nuxt-link>
+              <nuxt-link class="font-weight-bold" :to="getLink('/unlock-remote-services')">
+                <i class="fa fa-lock font-weight-bold"></i>
+                <span class="ml-1  mr-lg-2"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
+                  {{ $t("header.unlockService") }}
                 </span>
-                </nuxt-link>
-              </div>
+              </nuxt-link>
 
 
-              <div class="col-lg-2 m-auto">
-                <nuxt-link :to="getLink('/shop?new-arrival')"
-                           class="font-weight-bold"
-                >
-                  <p class="pulse-animation mb-0 call-us-now text-center font-weight-bold" style="color:red;font-weight:bold">
-                    <i class="fa fa-chevron-circle-down">
-                    </i>
-                    {{ $t("home.newarrivalproducts") }}
-                  </p>
-                </nuxt-link>
-              </div>
+              <nuxt-link class="font-weight-bold" :to="getLink('/shop?new-arrival')" style="color:red;">
+                <i class="fa fa-chevron-circle-down font-weight-bold"></i>
+                <span class="ml-1  mr-lg-2"
+                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
+                  {{ $t("home.newarrivalproducts") }}
+                </span>
+              </nuxt-link>
             </div>
           </div>
         </div>

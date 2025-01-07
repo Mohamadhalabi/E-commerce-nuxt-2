@@ -102,6 +102,7 @@ export default {
 
   },
   header: {
+    promotion: 'عرض ترويجي',
     shipping_cart: 'عربة الشحن',
     you_are_in: 'لقد سجلت الدخول',
     subtotal: 'المجموع الفرعي',
