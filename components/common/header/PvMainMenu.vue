@@ -15,7 +15,6 @@
         <nav
           v-if="carMenuOpened"
           class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          @click="closeCarMenu()"
           v-for="(item, key) in cars"
           :key="key">
           <div class="row bg-white m-0">
@@ -50,7 +49,6 @@
         <nav
           v-if="ManufacturerMenuOpened"
           class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          @click="closeManufacturerMenu()"
           v-for="(item, key) in manufacturers"
           :key="key">
           <div class="row bg-white m-0">
@@ -84,7 +82,6 @@
         <nav
           v-if="keysAndRemoteMenuOpened"
           class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          @click="closeKeyAndRemotesMenu()"
           v-for="(item, key) in keysAndRemotes"
           :key="key">
           <div class="row bg-white m-0">
@@ -121,7 +118,6 @@
         <nav
           v-if="AccessoriesAndToolsMenuOpened"
           class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          @click="closeAccessoriesAndTools()"
           v-for="(item, key) in accessoriesAndTools"
           :key="key">
           <div class="row bg-white m-0">
@@ -159,7 +155,6 @@
         <nav
           v-if="DeviceAndMachineMenuOpened"
           class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          @click="closeDeviceAndMachineMenu()"
           v-for="(item, key) in devicesAndMachines"
           :key="key">
           <div class="row bg-white m-0">
@@ -206,7 +201,6 @@
         <nav
           v-if="SoftwareAndTokenMenuOpened"
           class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          @click="closeSoftwareAndTokenMenu()"
           v-for="(item, key) in softwareAndTokens"
           :key="key">
           <div class="row bg-white m-0">
@@ -268,8 +262,8 @@
       <nav class="left-menu-items">
         <nuxt-link
           :to="getLink('/pin-code')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
+          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles bg-red">
+          <span class="header-main-menu bg-red">
             {{ $t("header.PinCode") }}
           </span>
         </nuxt-link>
@@ -331,23 +325,15 @@ export default {
     },
     closeManufacturerMenu(){
       this.ManufacturerMenuOpened = false;
-      this.isFetchingManufacturers = false;
-      this.manufacturers = [];
     },
     closeKeyAndRemotesMenu(){
       this.keysAndRemoteMenuOpened = false;
-      this.isFetchingKeysAndRemotes = false;
-      this.keysAndRemotes = [];
     },
     closeAccessoriesAndTools(){
       this.AccessoriesAndToolsMenuOpened = false;
-      this.accessoriesAndTools = [];
-      this.isFetchingAccessoriesAndTools = false;
     },
     closeDeviceAndMachineMenu(){
       this.DeviceAndMachineMenuOpened = false;
-      this.devicesAndMachines = []
-      this.isFetchingDevicesAndMachines = false;
     },
     closeSoftwareAndTokenMenu(){
       this.SoftwareAndTokenMenuOpened = false;
@@ -661,5 +647,8 @@ export default {
 }
 .orange-background{
   background-color: orange;
+}
+.bg-red{
+  background-color: red;
 }
 </style>
