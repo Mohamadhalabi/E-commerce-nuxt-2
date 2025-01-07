@@ -115,6 +115,7 @@ export default
     checkout: 'Pagar',
   },
   header: {
+    promotion: 'Promoción',
     shipping_cart: 'Carrito',
     you_are_in: 'Has iniciado sesión',
     subtotal: 'Subtotal',

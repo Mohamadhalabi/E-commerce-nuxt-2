@@ -115,6 +115,7 @@ export default
     checkout: 'Оформление заказа',
   },
   header: {
+    promotion: 'Промоция',
     shipping_cart: 'Корзина',
     you_are_in: 'вы вошли в систему',
     subtotal: 'итог',
