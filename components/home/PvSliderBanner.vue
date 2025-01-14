@@ -9,14 +9,14 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[4]"
-              background-image-url='"../images/home/backgrounds/background-1.webp"'
+              background-image-url='"../images/backgrounds/left-side-1.jpg"'
             ></pv-banner-card>
             <pv-banner-card
               class="d-none d-lg-block"
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[5]"
-              background-image-url='"../images/home/backgrounds/background-2.webp"'
+              background-image-url='"../images/backgrounds/left-side-2.jpg"'
               :fourth_item="true"
             ></pv-banner-card>
             <pv-banner-card
@@ -24,7 +24,7 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[2]"
-              background-image-url='"../images/home/backgrounds/background-3.webp"'
+              background-image-url='"../images/backgrounds/left-side-3.jpg"'
               :fourth_item="true"
             >
             </pv-banner-card>
@@ -65,14 +65,14 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[0]"
-              background-image-url='"../images/home/backgrounds/background-1.webp"'
+              background-image-url='"../images/backgrounds/right-side-1.jpg"'
             ></pv-banner-card>
             <pv-banner-card
               class="d-none d-lg-block"
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[1]"
-              background-image-url='"../images/home/backgrounds/background-2.webp"'
+              background-image-url='"../images/backgrounds/right-side-2.jpg"'
               :fourth_item="true"
             ></pv-banner-card>
             <pv-banner-card
@@ -80,7 +80,7 @@
               :height="250"
               :width="250"
               :rondomProduct="rondomProduct[3]"
-              background-image-url='"../images/home/backgrounds/background-3.webp"'
+              background-image-url='"../images/backgrounds/right-side-3.jpg"'
               :fourth_item="true"
             >
             </pv-banner-card>

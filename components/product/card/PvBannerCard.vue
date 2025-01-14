@@ -37,19 +37,18 @@
             </span>
           </h2>
         </div>
-        <div class="col-xl-6 col-lg-6">
-          <div style="z-index: 1 !important" class="">
+        <div class="col-xl-6 col-lg-6 m-auto">
             <nuxt-img
               format="webp"
               loading="lazy"
               :alt="rondomProduct['png_image'][0]['s'].alt"
               :src="getImageUrl()"
-              class="mr-0 product_image_png"
+              class="m-auto"
+              :style="computedStyle"
               :class="{
                 'image-with-effect': true,
                 }"
             />
-          </div>
         </div>
       </div>
     </div>
@@ -73,6 +72,12 @@ export default {
   },
   computed:{
     ...mapGetters("language", ["getLang"]),
+      computedStyle() {
+      if (this.left && window.innerWidth > 1400) {
+        return { marginLeft: '35px !important' };
+      }
+      return {};
+    },
   },
   methods: {
     getLink(route) {
@@ -94,7 +99,8 @@ export default {
     },
     getBackgroundImageStyle() {
       return `background-image: url(${this.backgroundImageUrl});` +
-          'background-repeat: no-repeat;'
+          'background-repeat: no-repeat;'+
+          'background-size: 100% 200px'
     },
   },
 };
@@ -175,18 +181,11 @@ img.image-with-effect:hover {
   .home-page-slider{
     min-height: 200px;
   }
-  .left-banner{
-    min-height: 310px;
-  }
-  .left-banner-image{
-    margin-top: 15%!important;
-  }
+
 }
 
 @media screen and (min-width: 1200px){
-  .left-banners{
-    padding-top: 15%;
-  }
+
 }
 .custom_color{
   color: white;

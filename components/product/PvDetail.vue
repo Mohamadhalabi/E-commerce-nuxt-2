@@ -351,10 +351,18 @@ export default {
     },
 
     goToWhatsApp() {
-      window.open(
+      if(this.product.id == 6822){
+        window.open(
+        `https://api.whatsapp.com/send?phone=+905531468475&text=Could I have more details about the product ${this.product.title}`,
+        "_blank"
+        );     
+      }
+      else{
+        window.open(
         `https://api.whatsapp.com/send?phone=${this.$settings.contact.whatsapp}&text=Could I have more details about the product ${this.product.title}`,
         "_blank"
-      );
+        );
+      }
     },
 
     plusQty: function () {
