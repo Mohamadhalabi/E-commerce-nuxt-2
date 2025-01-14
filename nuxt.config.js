@@ -59,12 +59,6 @@ export default ({
     ],
     script: [
       {
-        hid: 'tawk.to',
-        src: 'https://embed.tawk.to/62eb896454f06e12d88cddba/1g9k11d13',
-        defer: true,
-        async: true,
-      },
-      {
         hid: 'google-tag-manager',
         innerHTML: String.raw`
       (function(w,d,s,l,i){

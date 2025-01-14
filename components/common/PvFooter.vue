@@ -174,6 +174,12 @@
 import {mapGetters} from "vuex";
 
 export default {
+  mounted() {
+    const script = document.createElement('script');
+    script.src = 'https://embed.tawk.to/62eb896454f06e12d88cddba/1g9k11d13';
+    script.async = true;
+    document.body.appendChild(script);
+  },
   computed:{
     ...mapGetters("language", ["getLang"]),
   },
