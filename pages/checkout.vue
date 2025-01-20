@@ -429,7 +429,7 @@
                       </div>
                     </div>
 
-                    <div class="row p-3"  v-if="this.dataForm.payment_method == 'paypal' || this.dataForm.payment_method == 'stripe_link_online'">
+                    <div class="row p-3"  v-if="this.dataForm.payment_method == 'paypal' || this.dataForm.payment_method == 'ccavenue'">
                       <div class="col-lg-8 checkout-table-body">
                         <h6>Additional Fees (Paypal & Credit / Debit Cards)</h6>
                       </div>
@@ -446,7 +446,7 @@
                       <div class="col-lg-4 checkout-table-body text-align-end">
                         <b class="total-price"
                            style="font-weight: 600;font-size: 22px"
-                           v-if="this.dataForm.payment_method == 'paypal' || this.dataForm.payment_method == 'stripe_link_online'"
+                           v-if="this.dataForm.payment_method == 'paypal' || this.dataForm.payment_method == 'ccavenue'"
                         >
                         {{
                             (checkoutData.dolar_price.value * 1.03).toFixed(2) +
@@ -730,7 +730,7 @@ export default {
       if(!this.is_payment_method_disabled) {
         this.clickedCardIndex = index;
         if (this.clickedCardIndex === 1) {
-          this.dataForm.payment_method = "stripe_link_online"
+          this.dataForm.payment_method = "ccavenue"
         } else if (this.clickedCardIndex === 2) {
           this.dataForm.payment_method = "paypal"
         } else if (this.clickedCardIndex === 3) {
@@ -798,8 +798,16 @@ export default {
             Api.post("/user/orders/create", this.dataForm)
               .then((response) => {
                 this.$nuxt.$loading.finish()
-                if (this.dataForm.payment_method == 'stripe_link_online') {
-                  location.href = response.data.data.payment.stripe_url
+
+                console.log(response);
+
+                if (this.dataForm.payment_method == 'ccavenue') {
+
+                  let order_id = response.data.data.order[order_id];
+
+                  let total = response.data.data.total['value'];
+
+                  location.href = "https://dev-srv.tlkeys.com/online-order?order_id{{order_id}}"
                 }
 
                 else if(this.dataForm.payment_method == 'paypal'){
