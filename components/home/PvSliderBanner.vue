@@ -6,15 +6,15 @@
           <div class="d-flex flex-column align-items-center justify-content-between col-xl-4 col-lg-4 col-md-8 ml-auto mr-auto">
             <pv-banner-card
               class="d-none d-lg-block mt-1"
-              :height="250"
-              :width="250"
               :rondomProduct="rondomProduct[4]"
+              :is_left="true"
               background-image-url='"../images/backgrounds/left-side-1.jpg"'
             ></pv-banner-card>
             <pv-banner-card
               class="d-none d-lg-block"
               :height="250"
               :width="250"
+              :is_left="true"
               :rondomProduct="rondomProduct[5]"
               background-image-url='"../images/backgrounds/left-side-2.jpg"'
               :fourth_item="true"
@@ -23,6 +23,7 @@
               class="d-none d-lg-block mb-4"
               :height="250"
               :width="250"
+              :is_left="true"
               :rondomProduct="rondomProduct[2]"
               background-image-url='"../images/backgrounds/left-side-3.jpg"'
               :fourth_item="true"
@@ -45,7 +46,7 @@
                   <nuxt-img
                     format="webp"
                     loading="lazy"
-                    class="slide-bg rounded-5 ml-auto mr-auto mt-1"
+                    class="slide-bg rounded-5 ml-auto mr-auto mt-1 p-0"
                     :src="slide.image"
                     width="450"
                     height="650"
