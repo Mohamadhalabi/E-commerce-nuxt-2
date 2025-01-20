@@ -1,16 +1,15 @@
 <template>
   <nuxt-link
-    :to="getLink('/products/'+rondomProduct.slug)"
-    class="top-notice-image w-100"
-     :style="getBackgroundImageStyle()"
-  >
+  :to="getLink('/products/'+rondomProduct.slug)"
+  class="top-notice-image"
+  :style="getBackgroundImageStyle()">
     <div class="postiton-relative d-flex align-items-center flex-column">
       <div class="row home-page-slider">
         <div class="col-xl-6 col-lg-6 mt-auto mb-auto">
-          <h2 class="w-100 ml-lg-5 h5-home-page text-center mt-1 mt-lg-2">
+          <h2 class="w-100 h5-home-page text-center mb-0">
             <p
                 class="m-0"
-                :class="{'custom_color': custom_color}">
+                :class="{'white-color': is_left}">
               {{ rondomProduct["short_title"] }}
             </p>
             <span class="" v-if="rondomProduct.offer && rondomProduct.offer.length !=0">
@@ -38,17 +37,18 @@
           </h2>
         </div>
         <div class="col-xl-6 col-lg-6 m-auto">
-            <nuxt-img
-              format="webp"
-              loading="lazy"
-              :alt="rondomProduct['png_image'][0]['s'].alt"
-              :src="getImageUrl()"
-              class="m-auto"
-              :style="computedStyle"
-              :class="{
-                'image-with-effect': true,
-                }"
-            />
+          <nuxt-img
+            format="webp"
+            loading="lazy"
+            :alt="rondomProduct['png_image'][0]['s'].alt"
+            :src="getImageUrl()"
+            :style="computedStyle"
+            :class="[
+              is_left ? 'ml-auto mr-0' : 'ml-0 mr-auto',
+              'product_image',
+              'image-with-effect'
+            ]"
+          />
         </div>
       </div>
     </div>
@@ -66,16 +66,16 @@ export default {
     backgroundImageUrl: String,
     secondBackround: Boolean,
     left: Boolean,
-    custom_color:Boolean,
+    is_left:Boolean,
     third_item:Boolean,
     fourth_item:Boolean,
   },
   computed:{
     ...mapGetters("language", ["getLang"]),
       computedStyle() {
-      if (this.left && window.innerWidth > 1400) {
-        return { marginLeft: '35px !important' };
-      }
+      // if (this.left && window.innerWidth > 1400) {
+      //   return { marginLeft: '35px !important' };
+      // }
       return {};
     },
   },
@@ -88,14 +88,15 @@ export default {
       }
     },
     getImageUrl() {
-      if (this.width === 350 && this.height === 350) {
-        return this.rondomProduct.png_image[0]['l']['url'];
-      }
-      else if (this.width === 250 && this.height === 250) {
-        return this.rondomProduct.png_image[0]['m']['url'];
-      } else {
-        return '';
-      }
+      return this.rondomProduct.png_image[0]['m']['url'];
+      // if (this.width === 350 && this.height === 350) {
+      //   return this.rondomProduct.png_image[0]['l']['url'];
+      // }
+      // else if (this.width === 250 && this.height === 250) {
+      //   return this.rondomProduct.png_image[0]['m']['url'];
+      // } else {
+      //   return '';
+      // }
     },
     getBackgroundImageStyle() {
       return `background-image: url(${this.backgroundImageUrl});` +
@@ -107,6 +108,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.home-page-slider{
+    height: 200px;
+  }
+
 @media screen and (max-width: 992px) {
   img.mx-auto.rounded-5.shadow.border {
     height: 350px;
@@ -152,8 +158,6 @@ img.image-with-effect:hover {
 }
 
 @media screen and (max-width: 993px){
-  .top-notice-image{
-  }
   img.image-with-effect{
     width: 250px;
     height: 250px;
@@ -168,45 +172,15 @@ img.image-with-effect:hover {
 }
 
 .h5-home-page{
-  font-size: 16px;
-  margin: 0!important;
+  font-size: 15px;
   padding: 15px;
 }
-@media screen and (max-width: 1200px){
+@media screen and (max-width :1200px){
   .h5-home-page{
-    font-size: 14px;
+    font-size:12px;
   }
 }
-@media screen and (min-width: 1435px){
-  .home-page-slider{
-    min-height: 200px;
-  }
-
-}
-
-@media screen and (min-width: 1200px){
-
-}
-.custom_color{
+.white-color{
   color: white;
-}
-
-@media screen and (min-width: 1436px) {
-  .product_image_png {
-    margin-left: 25px;
-    width: 180px;
-  }
-}
-@media screen and (max-width: 1435px) {
-  .product_image_png{
-    width: 140px!important;
-    margin-left: 20px;
-  }
-}
-@media screen and (max-width: 1200px){
-  .product_image_png{
-    width: 120px!important;
-    margin-left: 20px;
-  }
 }
 </style>
