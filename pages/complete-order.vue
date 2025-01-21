@@ -38,7 +38,7 @@ import BaseButtonIcon1 from "~/components/common/BaseButtonIcon1.vue";
 import PvSuccess from "~/components/common/PvSuccess.vue";
 
 import PvVerifyMailUnSuccess from "~/components/auth/PvVerifyMailUnSuccess.vue";
-import {mapGetters, mapMutations} from 'vuex';
+import {mapGetters} from 'vuex';
 
 export default {
   components: {
@@ -53,20 +53,6 @@ export default {
       messageError: null
     };
   },
-  // created() {
-  //   this.$Progress.finish();
-  // },
-  // beforeCreate() {
-  //   this.$Progress.start();
-  //
-  // },
-  head() {
-    return {
-      // titleTemplate: JSON.parse(this.$settings.seo.meta_title)[this.$i18n.locale],
-      // title: JSON.parse(this.$settings.seo.meta_title)[this.$i18n.locale]
-    }
-  },
-
   computed: {
     ...mapGetters("authentication", ["isAuthenticated", "StateUser"]),
     getOrderId() {
@@ -83,9 +69,6 @@ export default {
     myOrders() {
       this.$router.push({path: "/account", query: {tab: "orders"}});
     },
-  },
-  mounted() {
-    // this.RESET_CART();
   },
 };
 </script>

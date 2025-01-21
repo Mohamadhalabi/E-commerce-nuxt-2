@@ -798,17 +798,18 @@ export default {
             Api.post("/user/orders/create", this.dataForm)
               .then((response) => {
                 this.$nuxt.$loading.finish()
+                if (this.dataForm.payment_method === 'ccavenue') {
 
-                console.log(response);
+                  let order_id = response.data.data.order['order_id']; // Corrected property access
+                  let total = response.data.data.payment.amount;
 
-                if (this.dataForm.payment_method == 'ccavenue') {
+                  // Add 3% to the total
+                  total = (total * 1.03).toFixed(2); // Keep two decimal places for precision
 
-                  let order_id = response.data.data.order[order_id];
-
-                  let total = response.data.data.total['value'];
-
-                  location.href = "https://dev-srv.tlkeys.com/online-order?order_id{{order_id}}"
+                  // Redirect to the online order page with the order ID and total amount
+                  location.href = `https://dev-srv.tlkeys.com/online-order?order_id=${order_id}&amount=${total}`;
                 }
+
 
                 else if(this.dataForm.payment_method == 'paypal'){
                   location.href = response.data.data.paypal_url
