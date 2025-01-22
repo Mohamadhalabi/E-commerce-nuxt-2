@@ -4,12 +4,10 @@
   class="top-notice-image"
   :style="getBackgroundImageStyle()">
     <div class="postiton-relative d-flex align-items-center flex-column">
-      <div class="row home-page-slider">
+      <div class="row home-page-slider" :style="{ 'flex-direction': is_left ? 'row' : 'row-reverse' }">
         <div class="col-xl-6 col-lg-6 mt-auto mb-auto">
           <h2 class="w-100 h5-home-page text-center mb-0">
-            <p
-                class="m-0"
-                :class="{'white-color': is_left}">
+            <p class="m-0 white-color">
               {{ rondomProduct["short_title"] }}
             </p>
             <span class="" v-if="rondomProduct.offer && rondomProduct.offer.length !=0">
