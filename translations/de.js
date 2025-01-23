@@ -329,7 +329,7 @@ export default
     IfYouHaveAcoupon: 'Wenn Sie einen Gutscheincode haben, wenden Sie ihn jetzt an',
     applyCoupon: 'Gutschein anwenden',
     creditDebitCard: 'Kredit- / Debitkarte',
-    buyNowPayLater: 'Jetzt kaufen, später bezahlen',
+    buyNowPayLater: 'Banküberweisung',
     bank: 'Bank',
     accountNumber: 'Kontonummer',
     SortCode: 'Sortiercode',

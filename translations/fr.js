@@ -329,7 +329,7 @@ export default
     IfYouHaveAcoupon: 'Si vous avez un code coupon, veuillez l\'appliquer maintenant',
     applyCoupon: 'Appliquer le coupon',
     creditDebitCard: 'Carte de crédit / débit',
-    buyNowPayLater: 'Achetez maintenant, payez plus tard',
+    buyNowPayLater: 'Virement bancaire',
     bank: 'Banque',
     accountNumber: 'Numéro de compte',
     SortCode: 'Code de tri',
