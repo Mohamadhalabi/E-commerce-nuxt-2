@@ -333,7 +333,7 @@ export default
       IfYouHaveAcoupon: 'If you have a coupon code, please apply it now',
       applyCoupon: 'Apply coupon',
       creditDebitCard: 'Credit / Debit Card',
-      buyNowPayLater: 'Buy Now, Pay Later',
+      buyNowPayLater: 'Bank Transfer',
       bank: 'bank',
       accountNumber: 'Account Number',
       SortCode: 'Sort Code',

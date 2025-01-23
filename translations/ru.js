@@ -331,7 +331,7 @@ export default
     IfYouHaveAcoupon: 'Если у вас есть код купона, пожалуйста, примените его сейчас',
     applyCoupon: 'Применить купон',
     creditDebitCard: 'Кредитная / Дебетовая карта',
-    buyNowPayLater: 'Покупай сейчас, плати позже',
+    buyNowPayLater: 'Банковский перевод',
     bank: 'Банк',
     accountNumber: 'Номер счета',
     SortCode: 'Код отделения',

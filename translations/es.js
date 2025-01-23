@@ -331,7 +331,7 @@ export default
     IfYouHaveAcoupon: 'Si tienes un código de cupón, aplícalo ahora',
     applyCoupon: 'Aplicar cupón',
     creditDebitCard: 'Tarjeta de crédito / débito',
-    buyNowPayLater: 'Compra ahora, paga después',
+    buyNowPayLater: 'Transferencia bancaria',
     bank: 'Banco',
     accountNumber: 'Número de cuenta',
     SortCode: 'Código de clasificación',
