@@ -1,13 +1,12 @@
 import config from './configs';
 const version = process.env.version;
-// import { defineNuxtConfig } from '@nuxt/bridge'
+import { defineNuxtConfig } from '@nuxt/bridge'
 
 const {locale, availableLocales, fallbackLocale} = config.locales;
 const currency = 'USD';
 
-export default ({
-  // target: "static",
-  // bridge:true,
+export default defineNuxtConfig({
+  bridge: true,
   "scripts": {
     "build:modern": "nuxt build --modern=server",
     "start:modern": "nuxt start --modern=server"
@@ -240,8 +239,12 @@ export default ({
     '~/middleware/redirects.js',
   ],
   build: {
+    loaders: {
+      scss: {
+        implementation: require('sass')
+      }
+    },
     transpile: ['cookie-es'],
-    
     analyze: false,
     minifyCSS: true,
     minifyJS: true,
