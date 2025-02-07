@@ -90,25 +90,26 @@ export default ({
   },
   css: [
     '@static/sass/style.scss',
-    '@static/css/ltrStyle.css',
-    'vue-multiselect/dist/vue-multiselect.min.css',
+    // '@static/css/ltrStyle.css',
+    // 'vue-multiselect/dist/vue-multiselect.min.css',
     // '@static/css/porto-icons.min.css',
     '@static/css/steper.css',
-    '@static/vendor/fontawesome-free/css/all.min.css',
+    // '@static/vendor/fontawesome-free/css/all.min.css',
     '@static/css/agile.css',
-
+    'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
   ],
 
   plugins: [
-    {src: '~/plugins/user.js', ssr: true},
-    {src : '~/plugins/i18n-watch.js', ssr: true},
+    {src: '~/plugins/bootstrap.js', ssr:false },
+    {src: '~/plugins/user.js', ssr: false},
+    // {src : '~/plugins/i18n-watch.js', ssr: true},
     {src: '@plugins/index.js', ssr: false},
     {src: '@plugins/settings.js', ssr: true},
-    {src: '@plugins/localstorage.js', ssr: false},
-    {src: '@plugins/filters.js', ssr: true},
-    {src: '@plugins/directives/sticky.js', ssr: true},
+    // {src: '@plugins/localstorage.js', ssr: false},
+    // {src: '@plugins/filters.js', ssr: true},
+    // {src: '@plugins/directives/sticky.js', ssr: true},
     {src: '@plugins/direction-control.js', ssr: true}, // rTL
-    {src: '@plugins/vue-awesome-swiper.js', ssr: true},
+    // {src: '@plugins/vue-awesome-swiper.js', ssr: false},
     {src: '~/plugins/vue-progressbar.js', ssr: false},
   ],
 
@@ -131,23 +132,23 @@ export default ({
   ],
 
 
-  modules: ['bootstrap-vue/nuxt', '@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image', 'cookie-universal-nuxt'],
-  bootstrapVue: {
-    componentPlugins: [
-      'CardPlugin',
-      'FormInputPlugin',
-      'ModalPlugin',
-      'TablePlugin',
-      'CollapsePlugin',
-      'PaginationPlugin',
-      'ListGroupPlugin',
-      'FormTagsPlugin',
-      'AlertPlugin',
-      'ButtonPlugin',
-      'FormFilePlugin',
-      'FormTextareaPlugin',
-    ],
-  },
+  modules: ['@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image', 'cookie-universal-nuxt'],
+  // bootstrapVue: {
+  //   componentPlugins: [
+  //     'CardPlugin',
+  //     'FormInputPlugin',
+  //     'ModalPlugin',
+  //     'TablePlugin',
+  //     'CollapsePlugin',
+  //     'PaginationPlugin',
+  //     'ListGroupPlugin',
+  //     'FormTagsPlugin',
+  //     'AlertPlugin',
+  //     'ButtonPlugin',
+  //     'FormFilePlugin',
+  //     'FormTextareaPlugin',
+  //   ],
+  // },
 
   axios: {
     headers: {
@@ -160,8 +161,6 @@ export default ({
     },
     baseURL: process.env.API_BASE_URL
   },
-
-
   'google-gtag':{
     id: 'G-5G2DSZVBJ9', // required
   },
@@ -241,8 +240,7 @@ export default ({
   ],
   build: {
     transpile: ['cookie-es'],
-    
-    analyze: false,
+    analyze: true,
     minifyCSS: true,
     minifyJS: true,
     html: {
@@ -326,20 +324,14 @@ export default ({
 
     // build time compression settings
     gzip: {
-      // should compress to gzip?
       enabled: true,
-      // compression config
-      // https://www.npmjs.com/package/compression-webpack-plugin
       filename: '[path].gz[query]', // middleware will look for this filename
       threshold: 10240,
       minRatio: 0.8,
       compressionOptions: { level: 9 },
     },
     brotli: {
-      // should compress to brotli?
       enabled: true,
-      // compression config
-      // https://www.npmjs.com/package/compression-webpack-plugin
       filename: '[path].br[query]', // middleware will look for this filename
       compressionOptions: { level: 11 },
       threshold: 10240,

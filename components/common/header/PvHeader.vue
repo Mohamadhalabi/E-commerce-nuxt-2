@@ -6,193 +6,113 @@
       </div>
     </div>
     <header class="header">
-      <div class="header-middle sticky-header mobile-sticky">
-        <div class="container justify-content-center">
-          <div class="row justify-content-center w-100 py-2 main-menu">
-            <!--Begin: Left Side -->
-            <div>
-              <button
-                class="mobile-menu-toggler"
-                type="button"
-                @click="showMobileMenu"
-              >
-                <i class="fas fa-bars">
-                  <div v-for="number in numbers" :key="number"></div>
-                </i>
-              </button>
-            </div>
-            <div
-              class="d-flex align-items-center flex-md-row flex-lg-grow-1 ">
-              <nuxt-link :to="getLink('/')">
-                <nuxt-img
-                  v-if="!isMobile"
-                  format="webp"
-                  class="logo-image p-2"
-                  sizes="sm:100vw md:50vw lg:400px"
-                  title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
-                <nuxt-img
-                  v-else
-                  format="webp"
-                  class="mobile-logo"
-                  sizes="sm:100vw md:50vw lg:400px"
-                  title="Techno lock logo" src="/images/logos/techno-lock-logo-mobile.webp" alt="tlk Logo" />
-              </nuxt-link>
-              <pv-header-search
-                @SearchInputClicked="SearchInputClicked"
-                class="d-sm-block" />
-              <div class="small-devices-only d-flex">
-                <div class="mb-auto mt-auto">
-                  <a
-                    class="header-icon position-relative mx-2 cursor-pointer"
-                    title="search"
-                    @click="openModal"
-                  >
-                    <i class="fa fa-search mt-auto"></i>
-                  </a>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+      <!-- Logo -->
+       <a class="navbar-brand d-flex align-items-center" href="/">
+        <nuxt-link :to="getLink('/')">
+          <nuxt-img
+          format="webp"
+          class="logo-image p-2"
+          sizes="sm:100vw md:50vw lg:400px"
+          title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
+        </nuxt-link>
+      </a>
+      <!-- Mobile Toggle -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <!-- Search Bar & Category -->
+        <pv-header-search
+        @SearchInputClicked="SearchInputClicked" />
+        <!-- Right Section -->
+        <ul class="navbar-nav ms-auto align-items-center">
+          <!-- Call Us -->
+          <li class="nav-item d-none d-lg-block contact-widget">
+            <p class="off-animatin mb-0 call-us-now text-center">
+              {{ $t("auth.callNow") }}
+            </p>
+            <span class="ls-n-10 mb-0 text-center">
+              <a
+              :href="`tel:${$t('auth.PhoneNumber')}`">
+              {{$t('auth.PhoneNumber') }}
+            </a>
+            </span>
+          </li>
+
+          <!-- Login/Register -->
+          <li class="nav-item">
+            <nuxt-link class="nav-link d-flex align-items-center" 
+            :to="getLink('/auth/login-register')">
+              <div class="header-user">
+                <i class="fa fa-user"></i>
+                <div class="welcome-login">
+                  <span>
+                    {{ $t("header.welcome") }}
+                  </span>
+                  <span class="font-weight-bold">
+                    {{ $t("header.login") }}
+                  </span>
                 </div>
-                <b-modal v-model="modalOpen" class="modal-title" title="Find Your Product" centered hide-footer>
-                  <div class="d-flex flex-column">
-                    <div class="mb-2">
-                      <label for="search-input" class="mr-2">Search:</label>
-                      <input id="search-input" type="text" v-model="searchQuery" class="form-control w-100">
-                    </div>
-                    <div class="d-flex justify-content-start">
-                      <button @click="search" class="search-button btn btn-primary ml-auto mr-auto">Search</button>
-                    </div>
-                  </div>
-                </b-modal>
               </div>
-            </div>
-            <!-- End: Left Side -->
+            </nuxt-link>
+          </li>
 
-            <!--Begin: Right Side-->
-            <div class="d-flex align-items-center">
-              <div
-                class="contact-widget d-none d-lg-flex flex-column"
-                :class="getIsAr ? 'text-right' : 'contact-widget-en'">
-                <p class="off-animatin mb-0 call-us-now text-center font-weight-bold">
-                  {{ $t("auth.callNow") }}
-                </p>
-                <span class="contact-phone ls-n-10 mb-0 text-center">
-                  <a
-                    class="price-color font-weight-bold text-decoration-none"
-                    :href="`tel:${$t('auth.PhoneNumber')}`">
-                    {{$t('auth.PhoneNumber') }}
-                  </a>
-                </span>
-              </div>
-                <!-- <PvLoggedIn />
-                <PvAuth /> -->
+          <li class="nav-item p-2">
+            <a class="header-icon position-relative cursor-pointer mt-auto mb-auto">
+              <nuxt-img 
+              width="32px" 
+              height="32px"
+              loading="lazy" 
+              src="/images/icons/heart.svg"
+              alt="Heart Icon" 
+              @click="goToWishlist"
+              />
+              <span class="cart-count badge-circle">{{getWishlistCounts}}</span>
+            </a>
+          </li>
+          <li class="nav-item p-2">
+            <a class="header-icon position-relative cursor-pointer mt-auto mb-auto">
+              <nuxt-img 
+              width="32px" 
+              height="32px"
+              loading="lazy" 
+              src="/images/icons/shuffle.svg"
+              alt="Shuffle Icon" 
+              @click="goToCompares"
+              />
+              <span class="cart-count badge-circle">{{getCounts}}</span>
+            </a>
+          </li>
+          <li class="nav-item p-2">
+            <pv-cart-menu />
+          </li>
 
-                <div v-if="StateUser">
-                    <div class="header-user">
-                      <i
-                        class=""
-                        :class="StateUser.avatar ? 'user-avatar' : 'fa fa-user'">
-                        <img
-                          format="webp"
-                          v-if="StateUser.avatar"
-                          :src="checkURL(StateUser.avatar)"
-                          width="50"
-                          height="50"
-                          alt="Avatar"
-                        />
-                      </i>
-                      <template>
-                        <div class="header-dropdown">
-                          <p class="desktop-only" style="text-decoration: none !important;" href="javascript:;">
-                            {{ StateUser.name }}
-                          </p>
-                          <div class="header-menu border-0">
-                            <ul class="account-menu-ul">
-                              <li class="account-menu-li text-center">
-                                <nuxt-link :to="getLink('/account?tab=dashboard')">
-                                  {{ $t("dashboard.dashboard") }}
-                                </nuxt-link>
-                              </li>
-                              <hr class="logged-in-menu">
-                              <li class="account-menu-li text-center">
-                                <nuxt-link :to="getLink('/account?tab=account-details')">
-                                  {{ $t("dashboard.accountDetails") }}
-                                </nuxt-link>
-                              </li>
-                              <hr class="logged-in-menu">
-                              <li class="account-menu-li text-center">
-                                <nuxt-link :to="getLink('/account?tab=orders')">
-                                  {{ $t("account.orders") }}
-                                </nuxt-link>
-                              </li>
-                              <hr class="logged-in-menu">
-                              <li class="account-menu-li text-center">
-                                <nuxt-link :to="getLink('/account?tab=addresses')">
-                                  {{ $t("dashboard.myAddresses") }}
-                                </nuxt-link>
-                              </li>
-                              <hr class="logged-in-menu">
-                              <li class="account-menu-li text-center pt-1">
-                                <span class="account-list" @click="LogOut">{{ $t("account.log_out") }}</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </template>
-                      <div class="header-userinfo d-none d-lg-block">
-                        <span class="d-inline-block font2 line-height-1"> </span>
-                      </div>
-                    </div>
-                </div>
-                <div v-else>
-                  
-                </div>
-
-
-                <div v-if="!StateUser">
-                  <nuxt-link :to="getLink('/auth/login-register')" class="header-icon mx-5">
-                    <div class="header-user text-center">
-                      <i class="fa fa-user" />
-                      <div
-                        class="header-userinfo d-lg-block desktop-only"
-                        :class="getIsAr ? 'text-right' : ''">
-                                    <span class="d-inline-block font2 line-height-1">
-                                      {{ $t("header.welcome") }}
-                                    </span>
-                        <p class="mb-0 font-weight-bold login-register">
-                          {{ $t("header.login") }}
-                        </p>
-                      </div>
-                    </div>
-                  </nuxt-link>
-                </div>
-                <div v-else>
-                  
-                </div>
-
-
-              <div class="d-flex">
-                <a
-                  class="header-icon position-relative mx-2 cursor-pointer mt-auto mb-auto"
-                  title="wishlist"
-                >
-                  <i class="fa fa-heart" @click="goToWishlist" />
-                  <span class="cart-count badge-circle">{{getWishlistCounts}}</span>
-                </a>
-
-                <a
-                  class="header-icon position-relative ComparesBtn mx-2 cursor-pointer mt-auto mb-auto"
-                  title="Compares">
-                  <i class="fa fa-shuffle" @click="goToCompares" />
-                  <span class="cart-count badge-circle">{{ getCounts }}</span>
-                </a>
-
-                <a class="mx-2 cursor-pointer mt-auto mb-auto">
-                  <pv-cart-menu />
-                </a>
-              </div>
-            </div>
-            <!-- End : Right Side -->
-          </div>
-        </div>
+          <!-- Wishlist & Cart -->
+          <!-- <li class="nav-item position-relative">
+            <a href="#" class="nav-link">
+              <i class="bi bi-heart fs-5"></i>
+              <span v-if="wishlistCount > 0" class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                {{ wishlistCount }}
+              </span>
+            </a>
+          </li>
+          <li class="nav-item position-relative">
+            <a href="#" class="nav-link">
+              <i class="bi bi-cart fs-5"></i>
+              <span v-if="cartCount > 0" class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                {{ cartCount }}
+              </span>
+            </a>
+          </li> -->
+        </ul>
       </div>
+    </div>
+  </nav>
+
+
+
       <div
         class="header-bottom sticky-header d-none d-lg-flex desktop-sticky box-shadow-none first-menu">
         <div class="container">
@@ -509,9 +429,6 @@ export default {
   .services {
     display: contents!important;
   }
-}
-.search-icon:hover{
-  cursor: pointer;
 }
 
 @media screen and (min-width:1200px) {

@@ -481,53 +481,25 @@ figure {
 }
 
 // 2.3) Ratings
-.ratings-container {
-    line-height: 1;
-    margin: 0 0 12px 1px;
-    cursor: pointer;
-    position: relative;
+.star {
+    width: 20px;
+    height: 20px;
     display: inline-block;
-
-    .product-ratings,
-    .ratings {
-        position: relative;
-        display: inline-block;
-        font-size: 11px;
-        letter-spacing: 0.1em;
-        font-family: 'Font Awesome 5 Free';
-        font-weight: 900;
-    }
-
-    .product-ratings {
-        height: 11px;
-
-        &:before {
-            content: '';
-            color: rgba(0, 0, 0, 0.16);
-        }
-
-        &:hover {
-            .tooltiptext {
-                visibility: visible;
-                opacity: 1;
-            }
-        }
-    }
-
-    .ratings {
-        position: absolute;
-        top: 0;
-        left: 0;
-        white-space: nowrap;
-        overflow: hidden;
-
-        &:before {
-            content: '';
-            color:#f17805;
-        }
-    }
-}
-
+    background-color: #ccc; /* Empty star color */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  
+  .star.filled {
+    background-color: orange; /* Filled star color */
+  }
+  
+  .star.half {
+    background: linear-gradient(to right, orange 50%, #ccc 50%); /* Half-filled star */
+  }
+  
+  .star.empty {
+    background-color: #ccc; /* Empty star color */
+  }
 // 2.4) Product Select Group
 .product-select-group {
     display: flex;
@@ -1233,16 +1205,16 @@ figure {
 
 // Full Width & No Gaps - Will be deprecated.
 .full-width {
-    padding-left: 10px;
-    padding-right: 10px;
+    // padding-left: 10px;
+    // padding-right: 10px;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
 
-    [class*='col-'] {
-        padding-right: 10px;
-        padding-left: 10px;
-    }
+    // [class*='col-'] {
+    //     padding-right: 10px;
+    //     padding-left: 10px;
+    // }
 }
 
 .no-gaps {

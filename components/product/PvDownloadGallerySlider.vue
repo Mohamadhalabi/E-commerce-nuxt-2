@@ -176,17 +176,6 @@ export default {
 };
 </script>
 <style scoped>
-/* .vue-lb-modal-image {
-  padding: unset !important;
-  height: unset !important;
-} */
-/* .vue-lb-container{
-  flex-direction: column;
-}
-.vue-lb-content{
-  border: 1px solid red;
-} */
-
 .rounded-10 {
   border-radius: 10px;
 }

@@ -53,25 +53,6 @@
 	}
 }
 
-.dropdown-arrow {
-	&:after {
-		content: '\e819';
-		border: 0;
-		margin: -5px 2px 0 11px;
-		font-size: 15px;
-		font-family: porto;
-		width: auto;
-		height: auto;
-	}
-
-	.badge-circle {
-    color: white;
-		top: 3px;
-		left: 19px;
-		z-index: 1;
-	}
-}
-
 .cart-dropdown .mobile-cart {
  	display: none;
     position: fixed;
@@ -104,11 +85,6 @@
     right: 1rem;
 	}
 }
-
-.cart-product-info {
-	color: $navy-dark-color;
-}
-
 .cart-opened {
 	.cart-overlay {
 		position: fixed;
@@ -145,10 +121,6 @@
 	transform: translateY(-1rem);
 }
 
-.header-about-contact{
-//   padding-left: 15px;
-//   margin-top: 3px;
-}
 // General Header Dropdown
 .header-dropdown {
 	position: relative;
@@ -280,32 +252,6 @@
 	.product-details {
 		margin-bottom: 3px;
 		font-size: 1.3rem;
-	}
-
-	.btn-remove {
-		position: absolute;
-		top: 40px;
-		right: 10px;
-		width: 2rem;
-		height: 2rem;
-		border-radius: 50%;
-		color: inherit;
-		background-color: white;
-		box-shadow: 0 2px 6px rgba($navy-color,0.5);
-		text-align: center;
-		line-height: 2rem;
-		font-size: 1.8rem;
-		font-weight: 500;
-
-		span {
-			display: block;
-			margin-top: 1px;
-		}
-
-		&:hover,
-		&:focus {
-			color: $primary-color;
-		}
 	}
 
 	.sticky-header & {
@@ -447,126 +393,6 @@ button.noselect.w-100.py-3.mt-1.checkout-button.outline {
 
 // 4. Compare Dropdown
 
-.compare-dropdown {
-	.dropdown-toggle {
-		text-transform: uppercase;
-
-		i {
-			margin-top: -.2rem;
-			margin-right: .2rem;
-
-			&:before {
-				margin: 0;
-			}
-		}
-
-		&:after {
-			display: none;
-		}
-	}
-}
-
-.compare-products {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-
-	.product {
-		position: relative;
-		margin: 0;
-		padding: .5rem 0;
-		box-shadow: none !important;
-
-		&:hover {
-			box-shadow: none;
-		}
-	}
-
-	.product-title {
-		margin: 0;
-		color: $navy-dark-color;
-		font-size: 1.1rem;
-		font-weight: 400;
-		line-height: 1.35;
-		text-transform: uppercase;
-	}
-
-	.btn-remove {
-		display: -ms-flexbox;
-		display: flex;
-		position: absolute;
-		top: 50%;
-		right: 0;
-		-ms-flex-align: center;
-		align-items: center;
-		-ms-flex-pack: center;
-		justify-content: center;
-		width: 2.3rem;
-		height: 2.3rem;
-		margin-top: -1.2rem;
-		padding: .5rem 0;
-		color: $navy-light-color;
-		font-size: 1.3rem;
-		line-height: 1;
-		text-align: center;
-		overflow: hidden;
-	}
-}
-
-.compare-actions {
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-align: center;
-	align-items: center;
-	margin-top: 2rem;
-
-	.action-link {
-		display: inline-block;
-		color: $navy-light-color;
-		font-size: 1.1rem;
-		text-transform: uppercase;
-	}
-
-	.btn {
-		min-width: 110px;
-		margin-left: auto;
-		padding: .9rem 1rem;
-		border: 0;
-		border-radius: .2rem;
-		color: white;
-		font-size: 1.2rem;
-		font-weight: 400;
-		letter-spacing: .025rem;
-		text-align: center;
-		text-transform: uppercase;
-	}
-}
-
-.btn-remove {
-	position: absolute;
-	top: -10px;
-	right: -8px;
-	width: 2rem;
-	height: 2rem;
-	border-radius: 50%;
-	color: $navy-light-color;
-	background-color: white;
-	box-shadow: 0 2px 6px 0 rgba($navy-color,0.4);
-	text-align: center;
-	line-height: 2rem;
-
-	&:hover,
-	&:focus {
-		color: $primary-color;
-	}
-}
-
-.icon-cancel:before {
-	content: "";
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-}
-
 // 5. Responsive
 
 @include mq(lg) {
@@ -607,13 +433,6 @@ button.noselect.w-100.py-3.mt-1.checkout-button.outline {
 		}
 	}
 }
-
-@include mq(sm, max) {
-	.compare-dropdown {
-		display: none;
-	}
-}
-
 @media (max-width: 480px) {
 	.cart-dropdown, .compare-dropdown {
 		.dropdown-menu {
@@ -621,7 +440,6 @@ button.noselect.w-100.py-3.mt-1.checkout-button.outline {
 		}
 	}
 }
-
 .lang-currency{
 	justify-content: space-evenly;
 }

@@ -121,13 +121,6 @@ $config: ();
 	}
 }
 
-// CSS for only Internet Explorer 10, 11
-@mixin only_for_ie() {
-	@media (-ms-high-contrast: active), (-ms-high-contrast: none) {
-		@content;
-	}
-}
-
 // CSS for only Edge
 @mixin only_for_edge() {
 	@supports (-ms-ime-align:auto) {

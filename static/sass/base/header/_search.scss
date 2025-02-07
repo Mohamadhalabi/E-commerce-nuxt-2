@@ -19,6 +19,16 @@
 
 // # Variables
 
+#search_term{
+	max-width: 90%;
+	background-color: #fff;
+}
+.select-category{
+	max-width: 90%;
+	border: 0;
+	text-align: center;
+}
+
 @include set-default(
 	(
 		header: (
@@ -79,12 +89,6 @@
 	.select-custom  {
 		@include css( background, header, search, background );
 	}
-
-	@include only_for_ie() {
-		.form-control {
-			flex: 1;
-		}
-	}
 	.form-control::placeholder {
 		color: $navy-light2-color;
 	}
@@ -106,26 +110,6 @@
 			color: #333;
 		}
 	}
-}
-
-// Pointer
-.search-toggle:after {
-	content: '';
-	position: absolute;
-	right: calc(50% - 10px);
-	bottom: -10px;
-	border: 10px solid transparent;
-	@include css( border-bottom-color, header, search, border, color );
-
-	.header-search:not(.show) & {
-		display: none;
-	}
-}
-
-// Search Toggle
-.search-toggle i:before {
-	@include css( font-size, header, search, toggle, size );
-	@include css( font-weight, header, search, toggle, weight );
 }
 
 .header-search-category {
@@ -214,26 +198,9 @@
 	}
 }
 
-// 2. Header Search Popup
-
-.header-search-popup {
-	// 2.2) Form Control
-	.form-control {
-		min-width: 266px;
-		padding: 4px 22px;
-		font-size: 1.4rem;
-		line-height: 20px;
-
-		&:focus {
-			border: $navy-light3-color;
-		}
-	}
-}
-
 // 3. Header Search Inline
 
 .header-search-inline {
-
 	// 3.1) Form Control
 	.form-control {
 		min-width: 21rem;

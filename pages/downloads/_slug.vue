@@ -328,7 +328,7 @@
 import Api from "~/api";
 import PvMedia from "~/components/downloads/PvMedia.vue";
 import PvBtnShare from "~/components/common/PvBtnShare.vue";
-import VideoPlayer from 'nuxt-video-player'
+// import VideoPlayer from 'nuxt-video-player'
 import {mapGetters} from "vuex";
 export default {
   components: {
