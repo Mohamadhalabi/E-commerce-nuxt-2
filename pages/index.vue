@@ -125,9 +125,8 @@
   </main>
 </template>
 <script>
-import {mapGetters} from "vuex";
-import api from '~/api';
-import LazyHydrate from 'vue-lazy-hydration';
+// import {mapGetters} from "vuex";
+// import api from '~/api';
 export default {
   head() {
     const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
@@ -257,7 +256,7 @@ export default {
     }
   },
   components: {
-    // PvNewsletterModal,
+    PvNewsletterModal,
     LazyHydrate,
     PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
@@ -281,23 +280,23 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("rtlStore", ["getIsAr"]),
+    // ...mapGetters("rtlStore", ["getIsAr"]),
   },
   methods: {
-    // async checkIfMobile() {
-    //   this.isMobile = window.innerWidth <= 767;
-    //   if (!this.isMobile) {
-    //     const { default: PvStories } = await import("~/components/home/PvStories");
-    //     this.$options.components.PvStories = PvStories;
+    async checkIfMobile() {
+      this.isMobile = window.innerWidth <= 767;
+      if (!this.isMobile) {
+        const { default: PvStories } = await import("~/components/home/PvStories");
+        this.$options.components.PvStories = PvStories;
         
-    //     const { default: PvSliderBanner } = await import("~/components/home/PvSliderBanner.vue");
-    //     this.$options.components.PvSliderBanner = PvSliderBanner;
+        const { default: PvSliderBanner } = await import("~/components/home/PvSliderBanner.vue");
+        this.$options.components.PvSliderBanner = PvSliderBanner;
 
-    //     const { default: PvLineBanner } = await import("~/components/home/PvLineBanner.vue");
-    //     this.$options.components.PvLineBanner = PvLineBanner;
-    //     this.$forceUpdate();
-    //   }
-    // },
+        const { default: PvLineBanner } = await import("~/components/home/PvLineBanner.vue");
+        this.$options.components.PvLineBanner = PvLineBanner;
+        this.$forceUpdate();
+      }
+    },
 
     handleResize() {
       this.isMobile = window.innerWidth < 768;
@@ -331,8 +330,8 @@ export default {
       this.isMobile = window.innerWidth < 768;
       window.addEventListener('resize', this.handleResize);
     }
-    // this.checkIfMobile();
-    // window.addEventListener('resize', this.checkIfMobile);
+    this.checkIfMobile();
+    window.addEventListener('resize', this.checkIfMobile);
 
   },
   beforeDestroy() {
