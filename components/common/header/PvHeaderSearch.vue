@@ -2,38 +2,46 @@
   <div
     class="header-search header-search-inline header-search-category text-right"
   >
-    <div class="header-search-wrapper">
-      <label for="search_term" class="sr-only">
-        {{ $t("common.search") }}
-      </label>
-      <input
-        id="search_term"
-        v-model="searchKey"
-        class="form-control"
-        type="text"
-        name="search_term"
-        :placeholder="$t('home.searchInput')"
-        autocomplete="off"
-        @input="searchProduct(),isInputClicked = true; $emit('SearchInputClicked', isInputClicked)"
-        @click="isInputClicked = true; $emit('SearchInputClicked', isInputClicked),searchProduct()"
-        @blur="isInputClicked = false; $emit('SearchInputClicked', isInputClicked) "
-        @keyup.enter="goToShop"
+  <div class="header-search-wrapper d-flex align-items-center">
+      <nuxt-img 
+        width="32px" 
+        height="32px"
+        loading="lazy" 
+        src="/images/icons/search-2.svg"
+        alt="Search icon" 
+        @click="goToShop"
+        class="search-icon me-2"
       />
-      <div class="autoComplateClass">
-        <AutoComplate
-        style="width: 220px;text-align:end"
-        aria-label="select a category"
-          v-model="selectedCategory"
-          :placeholder="$t('home.selectCategory')"
-          :options="categories || []"
-          :item-text="`name_${$i18n.locale}`"
-          @setValue="
-            $event
-              ? (selectedCategory = $event.slug)
-              : (selectedCategory = null)
-          "
-        />
+      <div class="row w-100">
+        <div class="col-7">
+          <input
+            id="search_term"
+            v-model="searchKey"
+            class="form-control"
+            type="text"
+            name="search_term"
+            :placeholder="$t('home.searchInput')"
+            autocomplete="off"
+            @input="searchProduct(), isInputClicked = true; $emit('SearchInputClicked', isInputClicked)"
+            @focus="isInputClicked = true; $emit('SearchInputClicked', isInputClicked); searchProduct()"
+            @blur="isInputClicked = false; $emit('SearchInputClicked', isInputClicked)"
+            @keyup.enter="goToShop"
+          />
+        </div>
+        <div class="col-5">
+          <select class="form-select select-category" v-model="selectedCategory">
+            <option value="Select a category">{{ $t('home.selectCategory') }}</option>
+            <option 
+              v-for="category in categories" 
+              :key="category.slug" 
+              :value="category.slug"
+            >
+              {{ category[`name_${$i18n.locale}`] }}
+            </option>
+          </select>
+        </div>
       </div>
+    </div>
       <div class="live-search-list">
         <div v-if="searchKey.length > 0" class="search-suggests">
           <b-list-group>
@@ -117,7 +125,7 @@ export default {
   data: function () {
     return {
       isInputClicked:false,
-      selectedCategory: null,
+      selectedCategory: "Select a category",
       searchKey: "",
       timer: null,
       categories: [],
@@ -267,10 +275,7 @@ export default {
 };
 </script>
 <style>
-#search_term {
-  background: #fff !important;
-}
-.autoComplateClass .multiselect__tags {
+/* .autoComplateClass .multiselect__tags {
   background-color: transparent;
   border: 0px;
   margin-top: 3%;
@@ -304,5 +309,5 @@ span.multiselect__placeholder{
 }
 .search-image:hover{
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-}
+} */
 </style>

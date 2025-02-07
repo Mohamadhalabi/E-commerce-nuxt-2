@@ -12,16 +12,6 @@ export default async ({ $cookies, $axios, store }) => {
         return null;  // Return null in case of error
       }
     } 
-    
-    // else {
-    //   const userData = $cookies.get('userData');
-    //   if (userData) {
-    //     // If no token but userData exists, set it in Vuex
-    //     const parsedUserData = JSON.parse(userData);
-    //     store.commit('SET_USER', parsedUserData);
-    //     return parsedUserData;  // Return user data from cookies
-    //   }
-    // }
     return null;  // Return null if no user data is available
   };
   

@@ -70,21 +70,3 @@ export default {
   }
 };
 </script>
-<!--<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>-->
-<style>
-.multiselectClass .multiselect__option--highlight {
-  background-color: #f07905;
-}
-
-.multiselectClass .multiselect__option--selected.multiselect__option--highlight {
-  background-color: #f07905;
-}
-
-.multiselect__content-wrapper .multiselect__element {
-  padding: 0 !important
-}
-
-.multiselect__content-wrapper {
-}
-
-</style>

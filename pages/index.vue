@@ -1,7 +1,7 @@
 <template>
   <main class="main">
     <LazyHydrate when-idle>
-      <pv-stories class="desktop-only" />    
+      <!-- <pv-stories class="desktop-only" />     -->
     </LazyHydrate>
     <LazyHydrate when-idle>
       <pv-intro-section/>

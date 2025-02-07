@@ -1,7 +1,7 @@
 <template>
-  <div class="row top-header flex-column-sm-reverse">
+  <div class="row">
     <div class="d-none d-lg-flex col-lg-6 ">
-      <div class="top-notice-container top-n" :class="{'text-right': getIsAr}">
+      <div class="top-notice-container" :class="{'text-right': getIsAr}">
         <p class="mb-auto mt-auto welcome-text">{{$t('common.WelcomeTo')}}
           <span class="second-top-notice">{{$t('common.tlkeys')}}</span>
         </p>
@@ -40,8 +40,7 @@
                 style="cursor: pointer"
                 @click="setLocale(locale[0])"
               >
-                <a href="javascript:;"
-                   style="padding-left: 10px">
+                <a href="javascript:;">
                   <img :src="locale[1].flag" alt="Flag" width="25px">
                   {{ locale[1].language}}</a>
               </li>

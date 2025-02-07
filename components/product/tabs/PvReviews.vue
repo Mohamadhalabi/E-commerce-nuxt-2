@@ -26,7 +26,6 @@
                 <div class="product-ratings ">
                   <span
                     class="ratings"
-                    :style="$options.filters.ratingFormat(item.rating , true)"
                     :class="getIsAr ? 'end-0' : ''"
                   />
                 </div>

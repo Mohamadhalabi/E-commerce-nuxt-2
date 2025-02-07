@@ -15,7 +15,7 @@
     </div>
 
     <!-- Modal -->
-    <b-modal
+    <!-- <b-modal
       v-model="showModal"
       centered
       title="Welcome"
@@ -38,7 +38,7 @@
       @click="closeModal"
       >
       X
-    </button>
+    </button> -->
   </div>
 </template>
 

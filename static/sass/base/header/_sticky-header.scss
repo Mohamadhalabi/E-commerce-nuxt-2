@@ -46,25 +46,6 @@
 		}
 	}
 
-	&.header-middle.fixed {
-		/* @include css( height, header, middle, sticky, height ); */
-		@include css( padding-top, header, middle, sticky, padding-top );
-		@include css( padding-bottom, header, middle, sticky, padding-bottom );
-	}
-
-	&.deprecated-sticky {
-		&:not(.fixed) {
-			.logo,
-			.cart-dropdown {
-				display: none;
-			}
-		}
-
-		&.fixed .main-nav {
-			width: auto;
-		}
-	}
-
 	.main &:not(.fixed) {
 		> .container {
 			padding-left: 0;
@@ -125,39 +106,6 @@
 		.mmenu-active & {
 			left: 260px;
 			transition: all .25s;
-		}
-	}
-
-	.sticky-info {
-		flex: 0 0 20%;
-		max-width: 20%;
-		padding: 1rem 0;
-
-		&:not(:last-child) {
-			border-right: 1px solid $navy-light3-color;
-		}
-
-		a {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			color: $navy-color;
-			font-family: $second-font-family;
-			font-size: 9px;
-			font-weight: 600;
-			text-transform: uppercase;
-		}
-
-		i {
-			font-size: 27px;
-			font-weight: 400;
-
-			span {
-				font-style: normal;
-				right: -4px;
-				top: 3px;
-			}
 		}
 	}
 }

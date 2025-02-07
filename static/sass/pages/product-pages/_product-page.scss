@@ -42,7 +42,6 @@ $product-single-thumbnail-gutter: 3px !default;
 		top: 2px;
 		font-size: 20px;
 		font-weight: 900;
-		font-family: 'Font Awesome 5 Free';
 		color: #0cc485;
 	}
 
@@ -119,7 +118,6 @@ $product-single-thumbnail-gutter: 3px !default;
 	&:before {
 		content: '\e810';
 		font-size: 1.8rem;
-		font-family: 'porto';
 		margin-right: 6px;
 	}
 }
@@ -174,7 +172,6 @@ $product-single-thumbnail-gutter: 3px !default;
 
 				&:after {
 					margin-left: 8px;
-					font-family: 'Font Awesome 5 Free';
 					content: "\f00c";
 					font-weight: 600;
 					font-size: 1.6rem;
@@ -195,7 +192,6 @@ $product-single-thumbnail-gutter: 3px !default;
 			&:before {
 				content: "\e8ba";
 				margin-top: -2px;
-				font-family: "Porto";
 				font-weight: 600;
 				font-size: 1.8rem;
 				margin-right: 7px;
@@ -262,7 +258,6 @@ $product-single-thumbnail-gutter: 3px !default;
             border-radius: 14px;
             text-align: center;
             text-decoration: none;
-            font-family: 'porto';
         }
 
         .product-prev .product-link::before {
@@ -594,10 +589,9 @@ main .sticky-header {
 		.price-box {
 			margin: 0;
 			color: #2b2b2d;
-			font-family: 'Oswald', 'Poppins';
 			font-weight: 400;
 			line-height: normal;
-      height: 30px;
+			height: 30px;
 		}
 
 		.old-price {
@@ -742,7 +736,6 @@ main .sticky-header {
 				top: 50%;
 				left: 50%;
 				transform: translateX(-50%) translateY(-50%);
-				font-family: 'porto';
 				font-size: 1.1rem;
 				line-height: 1;
 				content: '\e84e';
@@ -1136,7 +1129,6 @@ main .sticky-header {
 			display: inline-block;
 			margin-top: -2px;
 			vertical-align: middle;
-			font-family: "Font Awesome 5 Free";
 			font-weight: 900;
 			margin-right: 1.8rem;
 			color: #21293c;
@@ -1401,7 +1393,6 @@ main .sticky-header {
 		left: 0;
 		height: 14px;
 		line-height: 1;
-		font-family: 'Font Awesome 5 Free';
 		text-indent: 0;
 		overflow: hidden;
 		white-space: nowrap;

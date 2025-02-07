@@ -1,197 +1,8 @@
 // Base
 
-// # Content
-// 1. Heade ----------
-//    1.1) Header Base
-//    1.2) Header Element
-//         1.2.1) Header Top Notice
-//         1.2.2) Header Main Nav
-//         1.2.3) Header Cart Dropdown
-//         1.2.4) Header Search
-//         1.2.5) Header Other Icons
-
-// 2. Footer --------
-//    2.1) Footer Base
-//    2.2) Footer Element
-//         2.2.1) Footer Widget Contact Info
-//         2.2.2) Footer Social Icons
-//         2.2.3) Footer tagcloud
-//         2.2.4) Footer Newsletter
-
-// 3. Component ---------
-//    3.1) Breadcrumb
-//    3.2) Social Icons
-//    3.3) Product Default
-
-// 4. Responsive
-
-// // 1. Heade ----------
-// // 1.1) Header Base
-// .header {
-//     z-index: 1000;
-//     width: 100%;
-//     margin: 0 6px;
-// }
-//
-// .sticky-header.fixed {
-//     padding: 8px 0;
-// }
-//
-// .header-top {
-//     font-family: $font-family;
-//
-//     .header-right {
-//         margin-bottom: 1px;
-//     }
-// }
-//
-// .header-middle .header-right {
-//     padding-right: 2.6rem;
-// }
-//
-// .elements-header {
-//     margin: 0;
-//
-//     .header-top {
-//         border-bottom: 1px solid $navy-light3-color;
-//         padding: 1.3rem;
-//     }
-//
-//     .header-middle {
-//         padding: 2.7rem 0;
-//     }
-//
-//     .sticky-header.fixed {
-//         padding: 8px 0;
-//     }
-// }
-//
-// // 1.2) Header Element
-// // 1.2.1) Header Top Notice
-// .top-notice {
-//     padding: .9rem 2rem 1.1rem;
-//
-//     .category {
-//         margin: 0 2px 0 1px;
-//     }
-//
-//     small {
-//         margin-left: 6px;
-//         letter-spacing: .03em;
-//     }
-//
-//     h5 {
-//         margin-right: 3px;
-//     }
-// }
-//
-// // 1.2.2) Header Main Nav
-// .main-nav {
-//     margin-left: 6.4rem;
-//
-//     .menu>li {
-//         margin-right: 3.7rem;
-//
-//         >a {
-//             font-size: 13px;
-//         }
-//     }
-//
-//     .tip.hot {
-//         top: -5px;
-//         right: -8px;
-//         padding: 2px;
-//         font-size: 9px;
-//         font-style: normal;
-//         background-color: #eb2771;
-//         border-color: #eb2771;
-//
-//         &::before {
-//             right: auto;
-//             top: 100%;
-//             margin-top: 0;
-//             border-top-color: #eb2771;
-//         }
-//     }
-// }
-//
-// .menu.sf-arrows > li > .sf-with-ul:after {
-//     content: none;
-// }
-//
-// // 1.2.3) Header Cart Dropdown
-// .badge-circle {
-//     top: 0px;
-//     left: 17px;
-// }
-//
-// .dropdown-arrow {
-//     .badge-circle {
-//         top: -1px;
-//         left: 17px;
-//         z-index: 2;
-//     }
-//
-// 	&:after {
-// 		position: absolute;
-// 		right: -2.8rem;
-// 		font-size: 17px;
-//         top: 10px;
-// 	}
-// }
-//
-// .dropdown-toggle i {
-//     display: inline-block;
-//     margin-top: -2px;
-//     font-size: 2.5rem;
-// }
-//
-// // 1.2.4) Header Search
-// .header-search-wrapper {
-//     font-family: "Open Sans", sans-serif;
-//     color: $navy-light-color;
-//
-//     input::placeholder {
-//         font-family: "Open Sans", sans-serif;
-//         font-size: 13px;
-//         font-weight: 300;
-//         color: $navy-light-color;
-//     }
-// }
-//
-// .header-search-popup .form-control {
-//     min-width: 23.6rem;
-// }
-//
-// .header-search i {
-//     font-size: 1.9rem;
-// }
-//
-// .search-toggle:after {
-//     right: calc( 50% - 1px );
-// }
-//
-// // 1.2.5) Header Other Icons
-// .header-icon {
-//     &.header-wishlist {
-//         margin-right: 2.8rem;
-//         margin-bottom: 3px;
-//     }
-//
-//     &.header-icon-user {
-//         margin-right: 2.3rem;
-//         margin-bottom: 3px;
-//     }
-// }
-
-// from demo 26
 // from demo\_demo-base.scss
 .from-demo-26 {
   // Elements
-  .form-control {
-      font-family: $second-font-family;
-  }
-
   .btn-lg {
       padding: 1.15em 2.25em;
       line-height: 1.3333;
@@ -284,10 +95,11 @@
   .header {
       .contact-widget {
           font-size: 1.4rem;
-
+          margin-left: 5px;
+          margin-right: 5px;
           p {
               font-size: .8em;
-              font-weight: 500;
+              font-weight: bold;
               line-height: 1.6rem;
           }
 
@@ -298,27 +110,18 @@
           }
 
           a {
-              color: $primary-color;
+              color: #f52020;
               font-size: 1.2rem;
-              font-weight: 500;
+              font-weight: bold;
               line-height: 1.7rem;
-              text-decoration: underline;
+              text-decoration: none;
           }
-      }
-      .contact-widget-en{
-        padding-left: 1.4rem;
       }
   }
 
   .header-middle .header-right .separator {
       margin-left: 28px;
       height: 24.5px;
-  }
-
-  // Dropdown
-  .cart-dropdown {
-      margin-bottom: 2px;
-      margin-right: 1px;
   }
 
   // Header Icon
@@ -333,19 +136,6 @@
           transition: none;
       }
   }
-
-  // .sicon-bag {
-  //     border-color: $primary-color-dark;
-  // }
-
-  .cart-count {
-      top: -4px;
-      right: -5px;
-      background: $primary-color;
-      font-family: $second-font-family;
-      font-size: 1rem;
-  }
-
   .header-user {
       display: flex;
       align-items: center;
@@ -385,7 +175,7 @@
       .form-control {
           flex: 1;
           font-family: $second-font-family;
-          padding: 0 0 0 2.5rem;
+          padding: 0 0 0 1.5rem;
       }
 
       .select-custom:after {
@@ -489,8 +279,6 @@
       }
 
       .header-user {
-          margin-left: 1.4rem;
-
           i {
               margin-right: 1rem;
               margin-left: 1rem;
@@ -530,88 +318,88 @@
 
 // from demo 37
 // from demo\_demo-base.scss
-.from-demo-37 {
-  // 1.2.5) Header Category Nav
-  .thumb-item {
-  	&.active a {
-  		color: #ff7272;
-  	}
+// .from-demo-37 {
+//   // 1.2.5) Header Category Nav
+//   .thumb-item {
+//   	&.active a {
+//   		color: #ff7272;
+//   	}
 
-  	a {
-  		border: 1px solid $grey-color;
-      padding: 3px;
-      border-radius: 50%;
-      color: $navy-light-color;
-  		&:hover {
-        border: 1px solid $orange-color;
-  			color: $secondary-color
-  		}
-  	}
+//   	a {
+//   		border: 1px solid $grey-color;
+//       padding: 3px;
+//       border-radius: 50%;
+//       color: $navy-light-color;
+//   		&:hover {
+//         border: 1px solid $orange-color;
+//   			color: $secondary-color
+//   		}
+//   	}
 
-  	i:before {
-  		position: absolute;
-  		top: 50%;
-  		left: 0;
-  		right: 0;
-  		line-height: 1;
-  		font-size: 28px;
-  		color: white;
-  		margin-top: -14px;
-  		text-align: center;
-  	}
-  }
-  .thumb-item2 {
-    &.active a {
-      color: #ff7272;
-    }
+//   	i:before {
+//   		position: absolute;
+//   		top: 50%;
+//   		left: 0;
+//   		right: 0;
+//   		line-height: 1;
+//   		font-size: 28px;
+//   		color: white;
+//   		margin-top: -14px;
+//   		text-align: center;
+//   	}
+//   }
+//   .thumb-item2 {
+//     &.active a {
+//       color: #ff7272;
+//     }
 
-    a {
-      border: 1px solid $orange-color;
-      padding: 3px;
-      border-radius: 50%;
-      color: $navy-light-color;
-      &:hover {
-        border: 1px solid $orange-color;
-        color: $secondary-color
-      }
-    }
+//     a {
+//       border: 1px solid $orange-color;
+//       padding: 3px;
+//       border-radius: 50%;
+//       color: $navy-light-color;
+//       &:hover {
+//         border: 1px solid $orange-color;
+//         color: $secondary-color
+//       }
+//     }
 
-    i:before {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      line-height: 1;
-      font-size: 28px;
-      color: white;
-      margin-top: -14px;
-      text-align: center;
-    }
-  }
+//     i:before {
+//       position: absolute;
+//       top: 50%;
+//       left: 0;
+//       right: 0;
+//       line-height: 1;
+//       font-size: 28px;
+//       color: white;
+//       margin-top: -14px;
+//       text-align: center;
+//     }
+//   }
 
 
-  .thumb-item i,
-  .thumb-info-image, .thumb-item2 i {
-      display: flex;
-    background-position: center center;
-        background-repeat: no-repeat;
-        background-size: 100% auto;
-        border-radius: 50%;
-        top: 0px;
-       position: relative;
+//   .thumb-item i,
+//   .thumb-info-image, .thumb-item2 i {
+//       display: flex;
+//     background-position: center center;
+//         background-repeat: no-repeat;
+//         background-size: 100% auto;
+//         border-radius: 50%;
+//         top: 0px;
+//        position: relative;
 
-  }
-  .thumb-item2 i{
-    display: flex;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: 100% auto;
-    border-radius: 50%;
-    top: 0px;
-    position: relative;
+//   }
+//   .thumb-item2 i{
+//     display: flex;
+//     background-position: center center;
+//     background-repeat: no-repeat;
+//     background-size: 100% auto;
+//     border-radius: 50%;
+//     top: 0px;
+//     position: relative;
 
-  }
-}
+//   }
+// }
 
 .from-demo-17 {
   .footer-desc {
