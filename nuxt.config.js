@@ -1,12 +1,10 @@
 import config from './configs';
 const version = process.env.version;
-import { defineNuxtConfig } from '@nuxt/bridge'
 
-const {locale, availableLocales, fallbackLocale} = config.locales;
+const {locale, availableLocales} = config.locales;
 const currency = 'USD';
 
-export default defineNuxtConfig({
-  bridge: true,
+export default ({
   "scripts": {
     "build:modern": "nuxt build --modern=server",
     "start:modern": "nuxt start --modern=server"

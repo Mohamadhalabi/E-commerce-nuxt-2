@@ -1,5 +1,5 @@
 <template>
-  <multiselect
+  <!-- <multiselect
   v-model="selecteVal"
   class="multiselectClass"
   :options="options"
@@ -8,15 +8,15 @@
   :show-labels="false"
   :searchable="true"
   @input="updateValueAction"
-    />
+    /> -->
 </template>
 
 <script>
-import Multiselect from 'vue-multiselect';
+// import Multiselect from 'vue-multiselect';
 
 export default {
   components: {
-    Multiselect
+    // Multiselect
   },
   props: {
     options: [],

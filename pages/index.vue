@@ -1,93 +1,67 @@
 <template>
   <main class="main">
-    <LazyHydrate when-idle>
       <!-- <pv-stories class="desktop-only" />     -->
-    </LazyHydrate>
-    <LazyHydrate when-idle>
       <pv-intro-section/>
-    </LazyHydrate>
-    <LazyHydrate when-idle>
       <home-page-search />
-    </LazyHydrate>
-    <LazyHydrate when-idle>
       <pv-slider-banner class="desktop-only"  />
-    </LazyHydrate>
     <div
         class="container-fluid">
         <div class="container">
-          <LazyHydrate when-visible> 
           <pv-latest-products
             :isIndexPage ="true"
             :collectionTitle="$t('home.latestProducts')"
             :link="'new-arrival'"
           />
-          </LazyHydrate>
         </div>
       </div>
       <div
         <div class="container">
-          <LazyHydrate when-visible>
           <pv-best-selling
             :isIndexPage ="true"
             :collectionTitle="$t('home.bestSellingProducts')"
             :link="'best-seller'"
           />
-          </LazyHydrate>
         </div>
       <div
         class="container-fluid">
         <div class="container">
-          <LazyHydrate when-visible>
           <pv-top-selling
             :isIndexPage ="true"
             :collectionTitle="$t('home.topSellingProduct')"
             :link="'top-selling'"
           />
-          </LazyHydrate>
         </div>
       </div>
       <div class="container-fluid pt-4">
         <div class="container large-screen-only">
-          <LazyHydrate when-visible>
           <pv-line-banner class="mb-4" v-if="!isMobile" />
-          </LazyHydrate>
         </div>
       </div>
       <div class="container">
           <div class="product-widgets-container row pb-2">
-            <LazyHydrate when-visible>
             <pv-on-sale-products
               :collection-title="$t('home.onSaleProduct')"
               :animation-delay="'200'"
               :link="'discount'"
             />
-            </LazyHydrate>
-            <LazyHydrate when-visible>
             <pv-top-selling-three-products
               :collection-title="$t('home.topSellingProduct')"
               :animation-delay="'500'"
               :link="'top-selling'"
             />
-            </LazyHydrate>
-            <LazyHydrate when-visible>
             <pv-new-arrival
               :collection-title="$t('home.newarrivalproducts')"
               :animation-delay="'800'"
               :link="'new-arrival'"
             />
-            </LazyHydrate>
-            <LazyHydrate when-visible>
             <pv-free-shipping
               :collection-title="$t('home.freeshoppingproducts')"
               :animation-delay="'1100'"
               :link="'free-shipping'"
             />
-            </LazyHydrate>
           </div>
         </div>
-        <LazyHydrate when-visible>
           <pv-manufacturers-section/>
-        </LazyHydrate>
         <div style="background-color: #f07905">
       <div class="container">
         <div
@@ -256,8 +230,6 @@ export default {
     }
   },
   components: {
-    PvNewsletterModal,
-    LazyHydrate,
     PvStories: () => import("~/components/home/PvStories"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
