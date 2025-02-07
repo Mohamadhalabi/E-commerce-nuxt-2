@@ -29,30 +29,30 @@
           </li>
         </ol>
         <div class="mt-auto">
-          <LazyHydrate when-idle>
+          <!-- <LazyHydrate when-idle> -->
             <PvBtnShare />
-          </LazyHydrate>
+          <!-- </LazyHydrate> -->
         </div>
       </nav>
       <div class="product-single-container container product-single-default">
         <div v-if="product" class="row">
           <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-12 product-single-gallery">
-            <LazyHydrate when-idle>
+            <!-- <LazyHydrate when-idle> -->
             <pv-media-new :product="product" />
-            </LazyHydrate>
+            <!-- </LazyHydrate> -->
             <div class="text-center">
               <span class="sku-color d-lg-none d-md-none">SKU: {{ product.sku }}</span>
             </div>
           </div>
           <div class="col-xl-7 col-lg-7 col-md-5 col-sm-6 col-12 product-single-details">
-            <LazyHydrate when-idle>
+            <!-- <LazyHydrate when-idle> -->
               <pv-detail
               :product="product"
               :tokens="tokens"
               :prev-product="prev_product"
               :next-product="next_product"
             />
-            </LazyHydrate>  
+            <!-- </LazyHydrate>   -->
           </div>
         </div>
       </div>
@@ -64,13 +64,13 @@
         <div class="tab-content col-lg-12 mb-7" />
       </div>
       <div>
-        <LazyHydrate when-visible>
+        <!-- <LazyHydrate when-visible> -->
           <pv-description
           v-if="product"
           :product="product"
           class="container"
         />
-        </LazyHydrate>
+        <!-- </LazyHydrate> -->
       </div>
       <pv-collection
         v-if="product.work_with_blade.length > 0"
@@ -113,10 +113,10 @@
 <script>
 import {mapGetters} from "vuex";
 import axios from "axios";
-import LazyHydrate from 'vue-lazy-hydration';
+// import LazyHydrate from 'vue-lazy-hydration';
 export default {
   components: {
-    LazyHydrate,
+    // LazyHydrate,
     PvMediaNew: () => import("~/components/product/PvMediaNew.vue"),
     PvBtnShare: () => import("~/components/common/PvBtnShare.vue"),
     PvOnSaleProducts: () => import("~/components/home/PvOnSaleProducts.vue"),
