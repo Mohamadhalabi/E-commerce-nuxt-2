@@ -284,55 +284,6 @@
     background-position: left 5px,left 50px,45px 58px,left 95px,45px 103px,left 140px,45px 148px,left 185px,45px 193px,left 230px,45px 238px,left 275px,45px 283px
 }
 
-.skeleton-body {
-    .product-single-container, .product-single-gallery {
-        img {
-            background-color: $orange-light2-color;
-        }
-    }
-
-    .skel-pro-small {
-        &::before {
-            padding-top: 23.5%;
-            background-size: 24% 100%, 20% 15px, 25% 20px, 48% 80px, 10% 15px, 15% 15px, 20% 30px, 24% 40px;
-            background-position: left 0, calc(26% * 100 / (100 - 20)) calc(50% - 80px + 25px / 2),
-                calc(26% * 100 / (100 - 25)) calc(50% - 80px + 20px / 2 + 30px), calc(26% * 100 / (100 - 48)) calc(50% - 80px + 80px / 2 + 80px),
-                calc(76% * 100 / (100 - 10)) calc(50% - 82px + 15px / 2), calc(76% * 100 / (100 - 15)) calc(50% - 82px + 15px / 2 + 30px),
-                calc(78% * 100 / (100 - 20)) calc(50% - 82px + 30px / 2 + 80px), calc(76% * 100 / (100 - 24)) calc(50% - 82px + 40px / 2 + 125px);
-        }
-    }
-
-    .skel-pro-small {
-        &::before {
-            content: '';
-            display: block;
-            width: 100%;
-            background-repeat: no-repeat;
-            background-image: linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0),
-                linear-gradient($orange-light2-color 100%, transparent 0), linear-gradient($orange-light2-color 100%, transparent 0);
-        }
-
-        &::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            right: -50%;
-            bottom: -50%;
-            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 80%);
-            animation: skeletonloading 1.5s infinite;
-        }
-    }
-}
-
 .skeleton-body.product-layout-transparent .summary-before {
     padding-top: 42%;
 

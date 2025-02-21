@@ -16,8 +16,7 @@
 
       <div
         v-if="product.discount && product.discount.until"
-        class="product-countdown-container"
-      >
+        class="product-countdown-container">
         <span class="product-countdown-title">{{ $t('products.discountEndsIn') }}:</span>
         <pv-count-down
           class="product-countdown countdown-compact"

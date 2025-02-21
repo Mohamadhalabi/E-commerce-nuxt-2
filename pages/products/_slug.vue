@@ -24,35 +24,29 @@
               {{ category.name }}
             </nuxt-link>
           </li>
-          <li v-if="loaded" class="breadcrumb-item active" aria-current="page">
+          <li class="breadcrumb-item active" aria-current="page">
             {{ product.short_title }}
           </li>
         </ol>
         <div class="mt-auto">
-          <!-- <LazyHydrate when-idle> -->
-            <PvBtnShare />
-          <!-- </LazyHydrate> -->
+          <PvBtnShare />
         </div>
       </nav>
-      <div class="product-single-container container product-single-default">
-        <div v-if="product" class="row">
-          <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-12 product-single-gallery">
-            <!-- <LazyHydrate when-idle> -->
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-12">
             <pv-media-new :product="product" />
-            <!-- </LazyHydrate> -->
             <div class="text-center">
               <span class="sku-color d-lg-none d-md-none">SKU: {{ product.sku }}</span>
             </div>
           </div>
           <div class="col-xl-7 col-lg-7 col-md-5 col-sm-6 col-12 product-single-details">
-            <!-- <LazyHydrate when-idle> -->
-              <pv-detail
-              :product="product"
-              :tokens="tokens"
-              :prev-product="prev_product"
-              :next-product="next_product"
-            />
-            <!-- </LazyHydrate>   -->
+            <pv-detail
+            :product="product"
+            :tokens="tokens"
+            :prev-product="prev_product"
+            :next-product="next_product"
+          />
           </div>
         </div>
       </div>
