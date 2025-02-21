@@ -1,10 +1,9 @@
 <template>
   <div>
-    <pv-label-group :product="product" style="padding-right: 25px!important;padding-top: 10px!important;" />
-    
-    <!-- Pass currentIndex to ImageMagnifier -->
+    <div class="product-default">
+      <pv-label-group :product="product" style="top:auto!important" />
+    </div>
     <ImageMagnifier :image="product.gallery" :currentIndex="currentIndex" size="l" :isMouseInside="isMouseInside" />
-
     <Carousel
       thumbnails
       ref="thumbnails"

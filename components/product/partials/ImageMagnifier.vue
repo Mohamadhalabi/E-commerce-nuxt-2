@@ -19,8 +19,7 @@
     <!-- Modal to display the images and allow scrolling -->
     <b-modal v-model="isModalVisible" size="lg" centered hide-header hide-footer>
       <div class="position-relative">
-        <!-- Left Button (Previous) -->
-        <div>
+        <!-- <div>
           <b-button
             class="position-absolute left-arrow primary"
             @click="prevImage"
@@ -28,10 +27,10 @@
           >
             <i class="fa fa-chevron-left"></i>
           </b-button>
-        </div>
+        </div> -->
 
         <!-- Main Image -->
-        <div class="text-center">
+        <!-- <div class="text-center">
           <nuxt-img
             :src="image[currentIndex]['l'].url"
             :width="image[currentIndex]['l'].width"
@@ -40,10 +39,10 @@
             :alt="image[currentIndex]['l'].alt"
             @click="closeImageModal"
           />
-        </div>
+        </div> -->
 
         <!-- Right Button (Next) -->
-        <div>
+        <!-- <div>
           <b-button
             class="position-absolute right-arrow"
             variant="primary"
@@ -52,7 +51,7 @@
           >
             <i class="fa fa-chevron-right"></i>
           </b-button>
-        </div>
+        </div> -->
       </div>
     </b-modal>
   </div>
