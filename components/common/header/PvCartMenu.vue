@@ -11,41 +11,17 @@
       </a>
       <div class="cart-overlay" @click="hideCartMenu" />
       <div
-        style="z-index: 99999!important;"
+        style="z-index: 99999!important;position: fixed"
         class="dropdown-menu mobile-cart"
         :class="{
           'left-0': getIsAr,
           'transform-reverse': getIsAr,
           'right-auto': getIsAr,
         }">
-        <a
-          href="javascript:;"
-          title="Close (Esc)"
-          class="btn-close"
-          :class="{ closeButtonToRightRtl: getIsAr }"
-          @click="hideCartMenu">
-          <button
-            title="Close (Esc)"
-            type="button"
-            class="position-absolute close-button"
-            @click="$emit('close')">
-            ×
-          </button>
-        </a>
-
         <div class="dropdownmenu-wrapper custom-scrollbar">
-          <div class="dropdown-cart-header d-flex">
+          <div class="dropdown-cart-header">
             <div class="second" v-if="cartList.length > 0">
-              <button
-                @click="clearCart({ StateUser })"
-                style="background-color: #892118;color: white;border-radius: 10px;font-size: 13px;margin-left: 5px"
-                type="button"
-                :outline="true"
-                class="py-1 mb-1 font-weight-bold">
-                <i style="color: white;font-size: 13px;" class="fa fa-trash remove-button"></i>
-                Empty Cart
-              </button>
-              <span class="ml-5">
+              <span class="">
                 {{ $t("header.shipping_cart") }}
               </span>
             </div>
@@ -55,29 +31,25 @@
               <div
                 v-for="(product, index) in cartList"
                 :key="product.sku"
-                class="product py-3 mb-1 position-relative">
-                <a
-                  href="javascript:;"
-                  title="Remove Product"
-                  class="btn-close"
-                  :class="{ closeButtonToRightRtl: getIsAr }"
-                  @click="removeFromCart({ product, index })">
-                  <button
+                class="product mb-1 position-relative">
+                <button
                     title="Close (Esc)"
                     type="button"
+                    @click="removeFromCart({ product, index })"
                     class="position-absolute close-button">
                     ×
                   </button>
-                </a>
                 <div class="mx-1">
                   <figure>
                     <nuxt-link :to="getLink('/products/'+product.slug)">
-                      <img
+                      <nuxt-img
                         loading="lazy"
-                      width="150"
-                      height="150"
-                      :src="product.gallery[0]['s']['url']"
-                      alt="">
+                        width="150"
+                        class="side-cart-images"
+                        height="150"
+                        :src="product.gallery[0]['s']['url']"
+                        :alt="product.short_title">
+                      </nuxt-img>
                     </nuxt-link>
                   </figure>
                 </div>
@@ -89,23 +61,17 @@
                       {{ product.short_title }}
                     </nuxt-link>
                   </h4>
-
-                  <h6 class="my-2 fw-bold">
-                    <div class="row">
-                      <div class="col-lg-12 sku-color"> {{$t('products.sku')}} :{{ product.sku }}</div>
-                      <div class="col-lg-12 text-dark d-flex mt-1">
-                        <pv-quantity-input
+                    <div class="col-lg-12 sku-color mt-1"> {{$t('products.sku')}} :{{ product.sku }}</div>
+                    <pv-quantity-input
                           :qty="product.quantity"
                           :has_token="product.has_token_input"
                           :product="product"
+                          class="mt-1"
                           @changeQty="changeQuantity"
-                        />
-                        <span class="cart-price ml-4 m-auto">
+                      />
+                      <span class="price-color p-4">
                           {{product.price.currency + parseFloat(product.priceitem * product.quantity).toFixed(2) }}
-                        </span>
-                      </div>
-                    </div>
-                   </h6>
+                      </span>
                   <div class="w-100 d-flex align-items-center">
                   </div>
                 </div>

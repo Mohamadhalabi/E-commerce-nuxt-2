@@ -30,6 +30,8 @@ body {
   letter-spacing: 0.5px; /* Example letter spacing */
   -moz-osx-font-smoothing: grayscale; /* Font smoothing for macOS */
   -webkit-font-smoothing: antialiased; /* Font smoothing for WebKit browsers */
+  @include css( letter-spacing, body, letter-spacing );
+  overflow-x: hidden;
 }
 // html {
 // 	font-size: 62.5%;
@@ -46,7 +48,7 @@ body {
 // 	font-size: #{$font-size};
 // 	font-weight: 400;
 // 	line-height: 1.4;
-// 	@include css( letter-spacing, body, letter-spacing );
+	// @include css( letter-spacing, body, letter-spacing );
 // 	font-family: $font-family;
 // 	-moz-osx-font-smoothing: grayscale;
 // 	-webkit-font-smoothing: antialiased;
@@ -362,12 +364,6 @@ body.modal-open {
 		background: rgba(204,204,204,0.5);
 	}
 }
-
-.page-item:first-child .page-link {
-	border-top-left-radius: 0;
-	border-bottom-left-radius: 0;
-}
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(359deg); }

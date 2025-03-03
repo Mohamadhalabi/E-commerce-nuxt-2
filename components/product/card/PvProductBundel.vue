@@ -63,10 +63,7 @@
             class="w-100 mx-1 whatsapp-button"
             @click="goToWhatsApp(product)"
           >
-            <i
-              style="font-size: larger"
-              class="py-2 px-5 rounded-3 fab fa-whatsapp"
-            ></i>
+          <img src="/images/icons/whatsapp-logo.svg" width="20px" />
           </button>
         </div>
       </div>

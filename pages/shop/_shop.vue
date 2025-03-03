@@ -142,7 +142,7 @@
           </div>
         </div>
       </div>
-      <div class="filter-modal">
+      <!-- <div class="filter-modal">
         <b-modal
           id="bv-modal-example2"
           v-model="openModal" centered hide-header hide-footer>
@@ -161,7 +161,7 @@
         >
           X
         </button>
-      </div>
+      </div> -->
     </div>
   </main>
 </template>

@@ -2,55 +2,57 @@
   <div class="product-single-qty">
 
     <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
-      <span class="input-group-btn input-group-prepend" v-if="!has_token">
-        <button
-
-          class="btn btn-outline btn-down-icon bootstrap-touchspin-down"
-          style="transition: none !important"
-          type="button"
-          :disabled="getDisplay"
-          @click="minusQty"
-          :style="getIsAr ? 'border-radius: 0px 6px 6px 0px' : 'border-radius:6px 0px 0px 6px ;'"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="18"
-            viewBox="0 96 960 960"
-            width="18"
-          >
-            <path d="M200 606v-60h560v60H200Z"/>
-          </svg>
-        </button>
-      </span>
-
-      <input
-        class="horizontal-quantity form-control"
-        type="number"
-        :value="currentQty"
-        :max="product.stock"
-        @change="changeQty($event)"
-        readonly
-      />
-
-      <span class="input-group-btn input-group-append" v-if="!has_token">
-        <button
-          :style="getIsAr ? 'border-radius:6px 0px 0px 6px' : 'border-radius:0px 6px 6px 0px !important;'"
-          class="btn btn-outline btn-up-icon bootstrap-touchspin-up"
-          type="button"
-          style="transition: none !important"
-          :disabled="getDisplay"
-          @click="plusQty($event)"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            height="18"
-            viewBox="0 96 960 960"
-            width="18"
-          >
-            <path d="M450 856V606H200v-60h250V296h60v250h250v60H510v250h-60Z"/>
-          </svg>
-        </button>
-      </span>
+        <div v-if="product.hide_price == 0 && !has_token" class="input-group w-100 bootstrap-touchspin bootstrap-touchspin-injected">
+          <span>
+            <button
+              class="quantity-button"
+              type="button"
+              aria-label="minus"
+              :disabled="product.hide_price != '0'"
+              @click="minusQty"
+              :style="getIsAr ? 'border-radius: 0px 6px 6px 0px' : 'border-radius:6px 0px 0px 6px ;'"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 96 960 960"
+                width="18"
+              >
+                <path d="M200 606v-60h560v60H200Z"/>
+              </svg>
+            </button>
+          </span>
+          <input
+            class="horizontal-quantity form-control bg-transparent"
+            type="number"
+            style="text-align: center;font-size: 13px;padding:5px;border: 1px solid #892118!important;text-align: right;"
+            :value="currentQty"
+            :max="product.stock"
+            @change="changeQty($event)"
+            readonly
+          />
+          <span class="input-group-btn input-group-append">
+            <button
+              :style="getIsAr ? 'border-radius:6px 0px 0px 6px' : 'border-radius:0px 6px 6px 0px !important;'"
+              class="quantity-button"
+              type="button"
+              style="transition: none !important"
+              :disabled="getDisplay"
+              @click="plusQty($event)"
+              >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="18"
+                viewBox="0 96 960 960"
+                width="18"
+              >
+                <path
+                  d="M450 856V606H200v-60h250V296h60v250h250v60H510v250h-60Z"
+                />
+              </svg>
+            </button>
+          </span>
+        </div>
     </div>
   </div>
 
@@ -100,10 +102,15 @@ export default {
     },
 
     minusQty: function () {
-      if(this.currentQty <= this.product.min_purchase_qty) {
-        this.currentQty = this.product.min_purchase_qty
-      } else{
+      if (this.currentQty <= this.product.min_purchase_qty) {
+        this.currentQty = this.product.min_purchase_qty;
+      } else {
         this.currentQty--;
+      }
+
+      // Ensure currentQty doesn't go below 1
+      if (this.currentQty < 1) {
+        this.currentQty = 1;
       }
 
       let dataForm = {

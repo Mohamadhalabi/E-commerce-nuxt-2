@@ -74,16 +74,6 @@
 		display: block;
 		transform: none !important;
 	}
-
-	.btn-close {
-		position: absolute;
-		top: 0.5rem;
-		font-size: 3.3rem;
-		color: black;
-		font-weight: 300 !important;
-    z-index: 9999;
-    right: 1rem;
-	}
 }
 .cart-opened {
 	.cart-overlay {
@@ -195,7 +185,6 @@
 .cart-dropdown {
 	.dropdownmenu-wrapper {
     overflow-x: hidden;
-		//padding: 2rem;
 		overflow-y: auto;
 		height: 100%;
 
@@ -214,7 +203,7 @@
 		display: -ms-flexbox;
 		display: flex;
 		margin: 0 ;
-		padding: 2rem 0;
+		padding: 1rem 0;
 		-ms-flex-align: center;
 		align-items: center;
 		border-bottom: 1px solid #e6ebee;
@@ -251,7 +240,7 @@
 
 	.product-details {
 		margin-bottom: 3px;
-		font-size: 1.3rem;
+		font-size: 1.5rem;
 	}
 
 	.sticky-header & {
@@ -360,10 +349,14 @@ button.noselect.w-100.py-3.mt-1.checkout-button.outline {
 .dropdown-cart-header {
 	font-size: 2rem;
 	font-family: $second-font-family;
-
+	text-align: center;
 	a:hover {
 		text-decoration: underline;
 	}
+}
+.side-cart-images{
+	width: 80px;
+	min-width: 80px;
 }
 
 .dropdown-cart-action {

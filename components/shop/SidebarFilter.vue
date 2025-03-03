@@ -25,14 +25,9 @@
           <li
             v-for="item in checked_items"
             :key="item.slug"
-            class="border p-1 shadow-sm rounded-2 filtergroup"
-          >
+            class="border p-1 shadow-sm rounded-2 filtergroup d-flex">
+            <img src="/images/icons/icons8-x-button.svg" style="margin-left:3px;margin-right: 5px;" width="20px" @click="filterQuery({ slug: item.slug, type: item.group })" />
             {{ item.name }}
-            <i
-              @click="filterQuery({ slug: item.slug, type: item.group })"
-              class="mx-1 fa fa-times-circle pt-2 filter-close"
-              style="margin-top: -5px"
-            ></i>
           </li>
         </ul>
       </div>

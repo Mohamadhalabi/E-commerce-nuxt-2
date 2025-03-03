@@ -782,12 +782,6 @@ a:hover {
 .table-spacing tr {
   margin-bottom: 10px!important;
 }
-.additional-product-items{
-  border-bottom: 2px solid;
-  border-image: linear-gradient(to right, #da5555, #ff6800) 1;
-  border-image-slice: 1;
-  padding: 10px;
-}
 
 .vjs-poster{
   border: 10px solid white;

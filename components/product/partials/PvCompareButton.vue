@@ -2,11 +2,12 @@
   <nuxt-link
     v-if="isComparedList"
     to="/compares"
+    class="d-flex"
     :title="$t('products.goToCompare')"
 
   >
-  <i class="fa fa-random red mx-1" />
-  <span>{{
+  <img src="/images/icons/shuffle.svg" alt="wishlist" />
+  <span style="margin-top: 4px;">{{
       $t("products.goToCompare")
     }}</span>
   </nuxt-link>
@@ -14,12 +15,12 @@
   <a
   v-else
   href="javascript:;"
-  class="btn-icon-wish"
+  class="btn-icon-wish d-flex"
   :title="$t('products.addCompare')"
   @click="addToList(product)"
   >
-  <i class="fa fa-random mx-1" />
-  <span>{{
+  <img src="/images/icons/shuffle.svg" alt="wishlist" />
+  <span style="margin-top: 4px;">{{
       $t("products.addCompare")
     }}</span>
   </a>

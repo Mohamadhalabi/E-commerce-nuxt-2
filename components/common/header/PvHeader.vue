@@ -124,130 +124,80 @@
         style="z-index: 999"
         ref="headerBottom">
         <div class="container">
-          <div class="row text-center w-100">
-            <div class="col-lg-12 m-auto text-center">
-              <nuxt-link
-                class="font-weight-bold off-animatin call-us-now"
-                :to="getLink('/shop?offers')">
-                <i class="fa fa-percentage font-weight-bold"></i>
-                <span class="ml-1 mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.Offer") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link
-                class="font-weight-bold"
-                style="color: #cc8607"
-                :to="getLink('/shop?promotion')">
-                <i class="fa fa-gift font-weight-bold"></i>
-                <span class="ml-1 mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.promotion") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link class="font-weight-bold" :to="getLink('/shop?free-shipping')">
-                <i class="fas fa-shipping-fast font-weight-bold"></i>
-                <span class="ml-1 mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.FreeShipping") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link class="font-weight-bold" :to="getLink('/shop?bundled')">
-                <i class="fa fa-boxes font-weight-bold"></i>
-                <span class="ml-1  mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.Bundles") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link class="font-weight-bold" :to="getLink('/online-services')">
-                <i class="fa fa-wrench font-weight-bold"></i>
-                <span class="ml-1  mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.OnlineServices") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link class="font-weight-bold" :to="getLink('/unlock-remote-services')">
-                <i class="fa fa-lock font-weight-bold"></i>
-                <span class="ml-1  mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.unlockService") }}
-                </span>
-              </nuxt-link>
-
-
-              <nuxt-link class="font-weight-bold" :to="getLink('/shop?new-arrival')" style="color:red;">
-                <i class="fa fa-chevron-circle-down font-weight-bold"></i>
-                <span class="ml-1  mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("home.newarrivalproducts") }}
-                </span>
-              </nuxt-link>
-            </div>
-          </div>
+          <!-- offers -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?offers')">
+            <img src="/images/icons/offer.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
+            {{ $t("header.Offer") }}
+          </nuxt-link>
+          <!-- promotion -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?promotion')">
+            <img src="/images/icons/gift.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
+            {{ $t("header.promotion") }}
+          </nuxt-link>
+          <!-- free shipping -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?free-shipping')">
+            <img src="/images/icons/free-shipping.svg" class="second-menu-images" alt="Free Shipping" width="25px" />
+            {{ $t("header.FreeShipping") }}
+          </nuxt-link>
+          <!-- Bundles -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?bundled')">
+            <img src="/images/icons/bundles.svg" class="second-menu-images" alt="Bundles" width="25px" />
+            {{ $t("header.Bundles") }}
+          </nuxt-link>
+          <!-- Online Services -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/online-services')">
+            <img src="/images/icons/wrench.svg" class="second-menu-images" alt="Online Services" width="25px" />
+            {{ $t("header.OnlineServices") }}
+          </nuxt-link>
+          <!-- Unlock Remote Services -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/unlock-remote-services')">
+            <img src="/images/icons/unlock-services.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
+            {{ $t("header.unlockService") }}
+          </nuxt-link>
+          <!-- New Arrival -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/new-arrival')">
+            <img src="/images/icons/new-arrival.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
+            {{ $t("home.newarrivalproducts") }}
+          </nuxt-link>
         </div>
       </div>
-      <div class="d-lg-flex d-none header-bottom sticky-header desktop-sticky3 box-shadow-none second-menu">
+      <div class="header-bottom sticky-header second-menu d-none d-lg-flex justify-content-center">
         <div class="container">
-          <div class="row text-center w-100">
-            <div class="col-lg-12 m-auto text-center">
-              <nuxt-link
-                class="font-weight-bold off-animatin call-us-now"
-                :to="getLink('/shop?offers')">
-                <i class="fa fa-percentage font-weight-bold"></i>
-                <span class="ml-1 mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.Offer") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link
-                class="font-weight-bold"
-                style="color: #cc8607"
-                :to="getLink('/shop?promotion')">
-                <i class="fa fa-gift font-weight-bold"></i>
-                <span class="ml-1 mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.promotion") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link class="font-weight-bold" :to="getLink('/shop?free-shipping')">
-                <i class="fas fa-shipping-fast font-weight-bold"></i>
-                <span class="ml-1 mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.FreeShipping") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link class="font-weight-bold" :to="getLink('/shop?bundled')">
-                <i class="fa fa-boxes font-weight-bold"></i>
-                <span class="ml-1  mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.Bundles") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link class="font-weight-bold" :to="getLink('/online-services')">
-                <i class="fa fa-wrench font-weight-bold"></i>
-                <span class="ml-1  mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.OnlineServices") }}
-                </span>
-              </nuxt-link>
-              <nuxt-link class="font-weight-bold" :to="getLink('/unlock-remote-services')">
-                <i class="fa fa-lock font-weight-bold"></i>
-                <span class="ml-1  mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("header.unlockService") }}
-                </span>
-              </nuxt-link>
-
-
-              <nuxt-link class="font-weight-bold" :to="getLink('/shop?new-arrival')" style="color:red;">
-                <i class="fa fa-chevron-circle-down font-weight-bold"></i>
-                <span class="ml-1  mr-lg-2"
-                      :class="getIsAr ? 'ml-xl-5' : 'mr-xl-5'">
-                  {{ $t("home.newarrivalproducts") }}
-                </span>
-              </nuxt-link>
-            </div>
-          </div>
+          <!-- offers -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?offers')">
+            <img src="/images/icons/offer.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
+            {{ $t("header.Offer") }}
+          </nuxt-link>
+          <!-- promotion -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?promotion')">
+            <img src="/images/icons/gift.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
+            {{ $t("header.promotion") }}
+          </nuxt-link>
+          <!-- free shipping -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?free-shipping')">
+            <img src="/images/icons/free-shipping.svg" class="second-menu-images" alt="Free Shipping" width="25px" />
+            {{ $t("header.FreeShipping") }}
+          </nuxt-link>
+          <!-- Bundles -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?bundled')">
+            <img src="/images/icons/bundles.svg" class="second-menu-images" alt="Bundles" width="25px" />
+            {{ $t("header.Bundles") }}
+          </nuxt-link>
+          <!-- Online Services -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/online-services')">
+            <img src="/images/icons/wrench.svg" class="second-menu-images" alt="Online Services" width="25px" />
+            {{ $t("header.OnlineServices") }}
+          </nuxt-link>
+          <!-- Unlock Remote Services -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/unlock-remote-services')">
+            <img src="/images/icons/unlock-services.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
+            {{ $t("header.unlockService") }}
+          </nuxt-link>
+          <!-- New Arrival -->
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/new-arrival')">
+            <img src="/images/icons/new-arrival.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
+            {{ $t("home.newarrivalproducts") }}
+          </nuxt-link>
         </div>
       </div>
     </header>
@@ -271,7 +221,6 @@ export default {
       isScrolling: false,
       searchQuery:"",
       modalOpen: false,
-      numbers: [1, 2, 3],
     };
   },
   computed: {
@@ -387,6 +336,9 @@ export default {
   .currency-language {
     justify-content: center;
   }
+}
+.second-menu-images{
+  margin-right: 5px;
 }
 @media screen and (min-width: 992px)
 {

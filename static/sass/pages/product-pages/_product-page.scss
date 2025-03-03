@@ -296,13 +296,10 @@ $product-single-thumbnail-gutter: 3px !default;
         }
 	}
 	.price-box {
-		//margin-bottom: 2.3rem;
-		color: $primary-color-dark;
 		font-weight: 600;
-		font-family: $shop-second-font-family;
+		color: #f52020;
 	}
 	.product-price {
-		color: #f52020!important;
 		font-size: 30px;
 		letter-spacing: -.02em;
 		vertical-align: middle;
@@ -319,6 +316,23 @@ $product-single-thumbnail-gutter: 3px !default;
 			margin-left: .4rem;
 		}
 	}
+
+	
+.product-single-qty {
+	.horizontal-quantity {
+	  padding: .2rem;
+	  height: 24px;
+	  width: 36px;
+	  background-color: $orange-light2-color;
+	  font-size: 1.3rem;
+	  text-align: center;
+	  border: 1px solid $dark-red-color!important;
+	}
+  
+	.btn {
+	  border-style: none;
+	}
+  }
 
 	.add-wishlist:before {
 		margin-right: .3rem;
@@ -480,10 +494,13 @@ main .sticky-header {
 }
 
 // 2.3) Single Info List
+.sku-color{
+	color: rgb(85, 107, 47);
+	font-weight: bold;
+}
 .single-info-list {
 	margin-bottom: 1.7rem;
 	padding: 0;
-	font-size: 1.2rem;
 	line-height: 1.5;
 	letter-spacing: .005em;
 	text-transform: uppercase;
