@@ -468,7 +468,6 @@ figure {
 }
 
 .product-price {
-    color: $primary-color-dark;
     font-size: 2.3rem;
     line-height: 0.8;
 }
@@ -606,72 +605,7 @@ figure {
 .product-single-qty {
     display: inline-block;
     max-width: 104px;
-    vertical-align: middle;
-
-    .bootstrap-touchspin.input-group {
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        max-width: none;
-        padding-right: 0;
-    }
-
-    .bootstrap-touchspin .form-control {
-        width: 2.7em;
-        height: 36px;
-        padding: 10px 2px;
-        color: $navy-color;
-        font-size: 1.4rem;
-        font-family: $second-font-family;
-        text-align: center;
-    }
-
-    .bootstrap-touchspin .form-control,
-    .bootstrap-touchspin .form-control:not(:focus),
-    .btn-outline:not(:disabled):not(.disabled):active {
-        border-color: #dae2e6;
-    }
-
-    .btn {
-        width: 2.2em;
-        padding: 0;
-    }
-
-    .btn.btn-down-icon:hover,
-    .btn.btn-up-icon:hover {
-        &:before,
-        &:after {
-            background-color: $primary-color;
-        }
-    }
-
-    .btn.btn-outline {
-        border-color: $navy-light3-color;
-    }
-
-    .btn.btn-down-icon:after,
-    .btn.btn-up-icon:before,
-    .btn.btn-up-icon:after {
-        display: none;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 9px;
-        height: 1px;
-        margin-left: -0.55rem;
-        background: $navy-color;
-        content: '';
-    }
-
-    .btn.btn-up-icon:before {
-        transform: rotate(90deg);
-    }
-
-    .horizontal-quantity {
-        &::-webkit-outer-spin-button,
-        &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-        }
-    }
+    text-align: center;
 }
 
 // 2.6) Config Swatch List
@@ -1565,6 +1499,11 @@ figure {
         border-color: $primary-color;
         color: white;
     }
+}
+.quantity-button{
+    height: 100%;
+    background: #fff;
+    border: 1px solid $dark-red-color;
 }
 
 // 3.12) Product Type - Product List

@@ -102,11 +102,14 @@ export const actions = {
       if (!payload['quantity']) {
         payload['quantity'] = 1;
       }
+      if(payload.stock == 0){
+        commit('UPDATE_PRODUCT_STATUS', `<b>${payload.sku}</b> is out of stock, but we will try to get it for you.`);
+        commit('UPDATE_PRODUCT_SKU', payload.sku);
+      }
 
       let cartListCheck = JSON.parse(localStorage.getItem('card')) || [];
 
       cartListCheck.forEach((item, index) => {
-
         if (item.slug == payload.slug) {
 
           cartListCheck.splice(index, 1);
@@ -149,11 +152,11 @@ export const actions = {
       });
       return;
     }
-    if (authToken == undefined) return;
 
+    if (authToken == undefined) return;
     payload.product = payload.sku;
     payload.quantity = payload.quantity || 1;
-    let product = pick(payload, ['product', 'quantity', 'short_title', 'price', 'serial_number', 'gallery','cover_model']);
+    let product = pick(payload, ['product', 'quantity', 'short_title', 'price', 'serial_number','cover_model']);
 
     Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
     Api.post('cart', product)
@@ -169,7 +172,6 @@ export const actions = {
         response.then((res) => {
           commit('UPDATE_CART', res.data);
         });
-
       })
       .catch((error) => {
         let message = error.response.data.message;

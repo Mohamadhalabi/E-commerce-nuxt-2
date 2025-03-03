@@ -16,44 +16,46 @@
       loading="lazy"
     />
 
-    <!-- Modal to display the images and allow scrolling -->
-    <b-modal v-model="isModalVisible" size="lg" centered hide-header hide-footer>
-      <div class="position-relative">
-        <!-- <div>
-          <b-button
-            class="position-absolute left-arrow primary"
-            @click="prevImage"
-            :disabled="currentIndex === 0"
-          >
-            <i class="fa fa-chevron-left"></i>
-          </b-button>
-        </div> -->
+    <!-- Modal -->
+    <div class="modal" v-if="isModalVisible" @click.self="closeImageModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="position-relative">
+            <!-- Left Button (Previous) -->
+            <button
+              type="button"
+              class="position-absolute left-arrow btn-secondary"
+              @click="prevImage"
+              :disabled="currentIndex === 0"
+            >
+              <img src="/images/icons/left-arrow.svg" alt="Previous" width="40px" />
+            </button>
 
-        <!-- Main Image -->
-        <!-- <div class="text-center">
-          <nuxt-img
-            :src="image[currentIndex]['l'].url"
-            :width="image[currentIndex]['l'].width"
-            :height="image[currentIndex]['l'].height"
-            class="rounded-5"
-            :alt="image[currentIndex]['l'].alt"
-            @click="closeImageModal"
-          />
-        </div> -->
+            <!-- Main Image -->
+            <div class="text-center">
+              <nuxt-img
+                :src="image[currentIndex]['l'].url"
+                :width="image[currentIndex]['l'].width"
+                :height="image[currentIndex]['l'].height"
+                class="rounded-5"
+                style="max-width:40vw!important;"
+                :alt="image[currentIndex]['l'].alt"
+              />
+            </div> 
 
-        <!-- Right Button (Next) -->
-        <!-- <div>
-          <b-button
-            class="position-absolute right-arrow"
-            variant="primary"
-            @click="nextImage"
-            :disabled="currentIndex === image.length - 1"
-          >
-            <i class="fa fa-chevron-right"></i>
-          </b-button>
-        </div> -->
+            <!-- Right Button (Next) -->
+            <button
+              type="button"
+              class="position-absolute right-arrow btn-secondary"
+              @click="nextImage"
+              :disabled="currentIndex === image.length - 1"
+            >
+              <img src="/images/icons/right-arrow.svg" alt="Next" width="40px" />
+            </button>
+          </div>
+        </div>
       </div>
-    </b-modal>
+    </div>
   </div>
 </template>
 
@@ -100,7 +102,7 @@ export default {
 /* Style for left button */
 .left-arrow {
   top: 50%;
-  left: -130px; /* Move the button outside the image */
+  left: -15vw; /* Move the button outside the image */
   transform: translateY(-50%);
   z-index: 1;
 }
@@ -108,9 +110,16 @@ export default {
 /* Style for right button */
 .right-arrow {
   top: 50%;
-  right: -130px; /* Move the button outside the image */
+  right: -15vw; /* Move the button outside the image */
   transform: translateY(-50%);
   z-index: 1;
+}
+
+.left-arrow, .right-arrow {
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 /* Ensure that the image is centered in the modal */

@@ -1,58 +1,49 @@
 <template>
   <div>
+    <!-- Product H1 Title  -->
     <div class="d-flex title-prev-next-products">
       <h1 class="product-title">
         {{ product.title }}
       </h1>
-
+      <!-- Next And Previous Products  -->
       <div>
         <pv-product-nav
-          v-if="isProductNav"
           :prev-product="prevProduct"
           :next-product="nextProduct"
         ></pv-product-nav>
       </div>
     </div>
-
-    <div v-if="product.summary_name && product.summary_name != product.title" class="product-desc">
-      <h2 class="summary-name" style="font-size: 22px; font-weight: bold; color: #556b2f; letter-spacing: -.01em; width: calc( 100% - 70px );">{{ product.summary_name }}</h2>
+    <!-- Product Summary Name  -->
+    <div v-if="product.summary_name != product.title" class="product-desc">
+      <h2 class="summary-name">{{ product.summary_name }}</h2>
     </div>
+    <!-- Product Note  -->
     <div v-if="product.note" class="pb-4">
       <span class="product_note">* {{ product.note }}</span>
     </div>
-    <hr class="mb-1 mt-0">
+    <hr>
+    <!-- Product Reviews  -->
     <pv-rating :product="product" :hide-reviews="false"/>
-<!--    <hr class="short-divider"/>-->
+    <!-- Product Details  -->
     <div class="row">
       <div class="col">
         <div v-if="product.categories[0].slug == 'pin-code-offline' ||  (product.categories[0].slug == 'Online-Services' && product.price.value != 0 )">
-          <pv-price-box class="mb-2 mt-1" :product="product" />
+          <pv-price-box class="mb-2" :product="product" />
         </div>
-        <pv-price-box class="mb-2 mt-1" v-if="product.hide_price == 0" :product="product"/>
-      <div v-else style="text-align: start; display: flex">
-        <i
-          class="fab fa-sm fa-whatsapp mb-auto mt-auto p-1"
-          style="font-size: 20px; color: #2ba968; cursor: pointer"
-          @click="goToWhatsApp(product)"
-        />
-        <span
-          class="d-inline-block p-1 font-weight-bold"
+        <pv-price-box class="mb-2" v-if="product.hide_price == 0" :product="product"/>
+        <div v-else class="d-flex">
+          <img src="/images/icons/whatsapp-logo.svg" @click="goToWhatsApp(product)" width="20px" />
+          <span
+          class="d-inline-block p-2 font-weight-bold"
           @click="goToWhatsApp(product)"
           style="position: relative; color: #f52020; cursor: pointer;font-size: 14px"
-        >
+          >
           To order this product, please click on the WhatsApp icon and contact us.
         </span>
       </div>
-
       <div
-        v-if="product.discount &&
-          product.offers &&
-          product.discount.until &&
-          product.stock
-          "
-        class="product-countdown-container-two mt-1"
-      >
-        <h5 class="daily-deal-title">{{ $t("products.discountEndsIn") }}:</h5>
+      v-if="product.discount && product.offers && product.discount.until && product.stock">
+      <h5 class="daily-deal-title">{{ $t("products.discountEndsIn") }}:</h5>
         <pv-count-down
           class="product-countdown countdown-compact"
           :until="product.discount.until"
@@ -60,13 +51,12 @@
         />
       </div>
 
-      <ul class="single-info-list">
-        <li class="sku-color mt-1 " v-if="product.sku">
-          {{ $t("products.sku") }}:
-          <strong class="sku-color ">{{ product.sku }}</strong>
+      <ul>
+        <li class="sku-color mt-1">
+          {{ $t("products.sku") }}: {{ product.sku }}
         </li>
 
-        <li>
+        <li class="mt-1">
           {{ $t("products.category") }}:
           <strong>
             <i>
@@ -84,7 +74,7 @@
           </strong>
         </li>
 
-        <li v-if="models">
+        <li v-if="models" class="mt-1">
           {{ $t("products.cars") }}:
           <span v-for="(model, index) in models.split(',')">
           <a
@@ -100,7 +90,7 @@
           <span v-if="index < models.split(',').length - 1">, </span>
         </span>
         </li>
-        <li v-if="product.specifications.manufacturer">
+        <li v-if="product.specifications.manufacturer" class="mt-1">
           {{ $t("products.MANUFACTURER") }}:
           <a :href="getLink('https://www.tlkeys.com/' + product.specifications.manufacturer.toLowerCase().replace(/\s+/g, '-'))">
             <strong>
@@ -146,11 +136,10 @@
       <div class="product-single-qty">
         <div
           v-if="product.hide_price == 0"
-          class="input-group w-100 bootstrap-touchspin bootstrap-touchspin-injected"
-        >
-          <span class=" input-group-btn input-group-prepend">
+          class="input-group w-100 bootstrap-touchspin bootstrap-touchspin-injected">
+          <span>
             <button
-              class=" btn-outline btn-down-icon bootstrap-touchspin-down"
+              class="quantity-button"
               type="button"
               aria-label="minus"
               :disabled="product.hide_price != '0'"
@@ -179,12 +168,10 @@
             @change="changeQty($event)"
           />
 
-
-
           <span class="input-group-btn input-group-append">
             <button
               :style="getIsAr ? 'border-radius:6px 0px 0px 6px' : 'border-radius:0px 6px 6px 0px !important;'"
-              class="btn-outline btn-up-icon bootstrap-touchspin-up"
+              class="quantity-button"
               type="button"
               aria-label="plus"
               :disabled="product.hide_price != '0'"
@@ -214,14 +201,7 @@
       >
         {{ $t("products.addCart") }}</base-button-icon-1>
       <div v-else class="d-flex align-items-center">
-        <button ontouchstart
-                class="whatsapp-button"
-                @click="handleWhatsAppClick(product)">
-          <i
-            style="font-size: 20px"
-            class="py-2 px-5 rounded-3 fab fa-whatsapp"
-          ></i>
-        </button>
+        <img src="/images/whatsapp-button.png" width="200px" @click="goToWhatsApp(product)"  />
       </div>
 
       <div class="d-flex flex-column p-3 button-container">
@@ -243,18 +223,9 @@
           "
       />
     </div>
+
     <div v-if="ProductStatus !== null && ProductSKU === product.sku">
-      <b-alert
-          variant="danger"
-          class="font-weight-bold"
-          dismissible
-          fade
-          :show="showDismissibleAlert"
-          @dismissed="showDismissibleAlert=true"
-      >    <b-icon icon="exclamation-circle-fill" variant="danger"></b-icon>
-        <i class="fa fa-exclamation-triangle"></i>
-        {{ ProductStatus }}
-      </b-alert>
+      <div class="alert alert-danger" role="alert" v-html="ProductStatus" />
     </div>
     <PvInputToken
       :product="product"
@@ -381,18 +352,12 @@ export default {
 };
 </script>
 <style>
-.whatsapp-button{
-  background-color: #2ba968;
-  border: 1px solid #2ba968;
-  border-radius: 6px;
-  transition: all 0.2s ease-in;
-  font-size: 1em;
-  font-weight: 500;
-  color: white;
-  transition: all 0.2s ease-out;
-  box-shadow: 0px 1px 2px #2ba968;
-}
 .summary-name{
+  font-size: 22px;
+  font-weight: bold;
+  color: #556b2f; 
+  letter-spacing: -.01em;
+  width: calc( 100% - 70px );
 }
 .product_note{
   font-size:18px;

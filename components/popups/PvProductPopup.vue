@@ -68,7 +68,6 @@
 
 <script>
 import PvGalleryImage from "~/components/product/partials/PvGalleryImage";
-import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import { mapGetters } from "vuex";
 import SuccessButton from "~/components/common/SuccessButton.vue";
 

@@ -11,7 +11,9 @@
       :class="{ 'text-right': getIsAr }"
       @submit.prevent="submit"
     >
-      <label for="login-email">
+    <div class="row">
+      <div class="col-12">
+        <label for="login-email">
         {{ $t("common.email") }}
         <span class="required">*</span>
       </label>
@@ -19,12 +21,13 @@
         id="login-email"
         v-model="form.email"
         type="email"
-        class="form-input form-wide"
+        class="form-input w-100"
         :class="{ 'mb-2': insideModal }"
         required
       />
-
-      <label for="login-password">
+      </div>
+      <div class="col-12">
+        <label for="login-password">
         {{ $t("common.password") }}
         <span class="required">*</span>
       </label>
@@ -32,15 +35,12 @@
         id="login-password"
         v-model="form.password"
         type="password"
-        class="form-input form-wide"
+        class="form-input w-100"
         :class="{ 'mb-2': insideModal }"
         required
       />
-
-      <b v-if="this.token === ''" class="text-danger">
-        {{ $t("common.pleaseCheckRecaptch") }}
-      </b>
-
+      </div>
+    </div>
       <div
         class="form-footer d-flex align-items-center justify-content-between"
         :class="{ 'flex-row-reverse': getIsAr }"

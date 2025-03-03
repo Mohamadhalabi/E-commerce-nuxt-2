@@ -61,10 +61,6 @@
         class="w-100 mx-1 whatsapp-button"
         @click="goToWhatsApp(product.short_title)"
       >
-        <i
-          style="font-size: larger"
-          class="py-2 px-5 rounded-3 fab fa-whatsapp"
-        ></i>
       </button>
 
       <base-button-icon-1
@@ -81,12 +77,6 @@
         :outline="true"
       >{{ $t("wishlist.addToCart") }}
       </base-button-icon-1>
-<!--      <base-button-icon-1-->
-<!--        class="px-2 py-2 mx-1 w-100"-->
-<!--        @click="openQuickview"-->
-<!--        :outline="true"-->
-<!--      >{{ $t("wishlist.QuickView") }}-->
-<!--      </base-button-icon-1>-->
     </div>
 
     <!-- End:Buttons -->

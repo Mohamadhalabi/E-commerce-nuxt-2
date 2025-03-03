@@ -79,18 +79,14 @@
             :gridPrice="true"
           />
           <div v-else style="justify-content: center; display: flex;position: relative;bottom: 5px">
-            <i
-              class="fab fa-sm fa-whatsapp mb-auto mt-auto p-1"
-              style="font-size: 20px; color: #2ba968; cursor: pointer"
-              @click="goToWhatsApp(product)"
-            />
+            <img src="/images/icons/whatsapp-logo.svg" width="20px" @click="goToWhatsApp(product)" />
             <span
               class="d-inline-block p-1 font-weight-bold"
               @click="goToWhatsApp(product)"
               style="position: relative; color: #f52020; cursor: pointer;font-size: 14px"
             >
-          Contact Us
-        </span>
+            {{ $t("products.ContactUsToSendYouThePrice") }}
+            </span>
           </div>
         </div>
         <div class="col-lg-12 text-center">
@@ -105,10 +101,12 @@
       class="w-100 mx-1 whatsapp-button"
       @click="handleWhatsAppClick(product)"
       >
-        <i
+        <!-- <i
           style="font-size: larger"
           class="py-2 px-5 rounded-3 fab fa-whatsapp"
-        ></i>
+        ></i> -->
+        <img src="/images/icons/whatsapp-logo.svg" width="20px" />
+        {{ $t("products.ContactUsToSendYouThePrice") }}
       </button>
       
       <base-button-icon-1
@@ -267,108 +265,17 @@ export default {
   color: white;
   transition: all 0.2s ease-out;
   box-shadow: 0px 1px 2px #2ba968;
-}
-@media screen and (max-width: 1435px) and (min-width: 1200px){
-  .product-card-information{
-    height: 200px;
-  }
-  .product-card-information-index{
-    height: 200px;
-  }
-  .category-name{
-    height: 40px;
-  }
-  .product-short-title{
-    height: 85px;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media screen and (max-width: 1200px){
-  .product-card-information-index{
-    height: 180px;
-  }
-  .product-short-title-index{
-    height: 80px;
-  }
-}
-
-@media screen and (max-width: 993px){
-  .product-card-information-index{
-    height: 180px;
-  }
-  .product-short-title-index{
-    height: 80px;
-  }
-}
-
-@media screen and (max-width: 767px)
-{
-  .product-short-title{
-    height: 90px;
-  }
-  .product-card-information{
-    height: 180px;
-  }
-  .category-name{
-    height: 20px;
-  }
-}
-
-@media screen and (max-width: 575px){
-  .category-name {
-    height: 20px!important;
-  }
-  .product-short-title{
-    height: 80px;
-  }
-  .product-card-information{
-    height: 160px;
-  }
-}
-
-@media screen and (max-width: 400px){
-  .product-card-information{
-    height: 180px;
-  }
+@media screen and (max-width:767px){
   .product-short-title{
     height: 100px;
   }
-}
-
-@media screen and (max-width: 500px) {
-  .product-short-title-index {
-    height: 110px!important;
-  }
-  .product-card-information-index{
+  .product-card-information, .product-card-information-index{
     height: 200px;
   }
 }
-
-@media screen and (max-width: 400px) {
-  .product-short-title-index {
-    height: 135px!important;
-  }
-  .product-card-information-index{
-    height: 225px;
-  }
-}
-
-@media screen and (max-width: 350px){
-  .category-name {
-    height: 10px!important;
-  }
-  .product-card-information{
-    height: 140px;
-  }
-  .product-short-title{
-    height: 70px!important;
-  }
-  .product-card-information-index{
-    height: 160px;
-  }
-  .product-short-title-index{
-    height: 80px!important;
-  }
-}
-
 </style>

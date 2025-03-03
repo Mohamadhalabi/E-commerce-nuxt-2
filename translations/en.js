@@ -559,7 +559,7 @@ export default
       discountEndsIn: 'Discount Ends In',
       sku: 'SKU',
       category: 'Category',
-      MANUFACTURER: 'MANUFACTURER',
+      MANUFACTURER: 'Manufacturer',
       Color: 'Color',
       Weight: 'Weight',
       addCard: 'add To Cart',

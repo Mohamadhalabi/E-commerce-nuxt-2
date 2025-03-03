@@ -86,6 +86,7 @@ export default ({
     __dangerouslyDisableSanitizers: ['script']
   },
   css: [
+    '@static/css/bootstrap.min.css',// Import Bootstrap CSS
     '@static/sass/style.scss',
     // '@static/css/ltrStyle.css',
     // 'vue-multiselect/dist/vue-multiselect.min.css',
@@ -93,7 +94,6 @@ export default ({
     '@static/css/steper.css',
     // '@static/vendor/fontawesome-free/css/all.min.css',
     '@static/css/agile.css',
-    'bootstrap/dist/css/bootstrap.min.css' // Import Bootstrap CSS
   ],
 
   plugins: [

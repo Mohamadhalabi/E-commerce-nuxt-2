@@ -2,7 +2,7 @@
   <div class="d-flex attributes-table">
     <div class="attribute-table">
       <div
-        class="pr-2 pl-2 w-100"
+        class="p-2"
         :style="{
         width: '100%'
       }"

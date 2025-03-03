@@ -47,7 +47,7 @@
                     class="d-inline-block mx-1"
                   />
                   <div>
-                    <span style="color: #535250;font-size: 14px;">{{ product["short_title"] }}</span>
+                    <span>{{ product["short_title"] }}</span>
                     <div class="sku-color" style="margin-bottom: 5px;">Sku:{{ product.sku }}</div>
 
                     <pv-price-box

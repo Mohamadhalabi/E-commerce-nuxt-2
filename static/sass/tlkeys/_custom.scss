@@ -281,14 +281,6 @@ button.mfp-close {
 .product-details .ratings-container .product-ratings .tooltiptext {
   white-space: nowrap;
 }
-
-.product-countdown-container-two .countdown-section {
-  background-color: #892118;
-  border-radius: 50%;
-  //background-color: $orange-color;
-
-}
-
 .product-single-details .single-info-list > li > strong > div {
   display: inline-block;
 }
@@ -1349,7 +1341,8 @@ input:checked ~ .accordion-content {
   border-radius: 50%;
   border: none;
   font-size: large;
-  right: 0px;
+  right: 5px;
+  top:0;
   transition: background-color 0.3s ease;
 }
 
@@ -1363,6 +1356,10 @@ input:checked ~ .accordion-content {
   color: #f52020;
   font-size: 30px;
   font-weight: bold
+}
+.price-color{
+  color: #f52020;
+  font-weight: bold;
 }
 .to-get-pin-code{
   color: #f52020;
@@ -1838,5 +1835,28 @@ form.nosubmit [type="search"]::-webkit-search-cancel-button, form.nosubmit2 [typ
   width: 90%;
 }
 //end of home page fcc id and part number search
+.additional-product-items{
+  border-bottom: 2px solid;
+  border-image: linear-gradient(to right, #da5555, #ff6800) 1;
+  border-image-slice: 1;
+  padding: 10px;
+}
 
+// pagination
 
+.pagination {
+  --bs-pagination-padding-x: 1rem !important;
+  --bs-pagination-padding-y: 0.5rem !important;
+  --bs-pagination-font-size: 1.8rem !important;
+  --bs-pagination-bg: #f5f5f5 !important; /* Change background */
+  --bs-pagination-border-radius: 8px !important; /* Rounded corners */
+  --bs-pagination-color: black !important; /* Change color */
+  --bs-pagination-hover-color: #fff !important;
+  --bs-pagination-hover-bg: #ff6800 !important;
+  --bs-pagination-hover-border-color: #ff6800 !important;
+  --bs-pagination-active-bg: #ff6800 !important;
+  --bs-pagination-active-border-color: #ff6800 !important;
+}
+ul.VuePagination__pagination{
+  justify-content: center;
+}
