@@ -8,9 +8,7 @@
         data-start-top="500"
         data-offset-top="60">
         <div class="filters d-flex d-lg-none">
-          <i class="fa fa-sliders-h"
-             @click="clickedFilter()"
-          > Filters</i>
+        <button @click="clickedFilter()" class="btn btn-secondary ml-2 mb-2">Filters</button>
         </div>
         <div class="toolbox-left">
           <div class="row">
@@ -85,7 +83,7 @@
         <div
           v-for="item in products"
           :key="item.sku"
-            class="custom-col col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3 mb-2"
+            class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3 mb-2"
         >
           <pv-product :product="item" />
         </div>
@@ -346,7 +344,14 @@ export default {
       }
     },
     clickedFilter(){
-      this.$emit('filters',true)
+      this.$modal.show(
+        () => import("~/components/shop/SidebarFilter.vue"),
+        {
+          adaptive: true,
+          height:"500",
+          class: "p-3",
+        }
+      );
     },
     selectShowStyle(style) {
       this.showStyle = style;
@@ -405,12 +410,6 @@ export default {
     width: 100%;
     margin-bottom: 15px;
     margin-top: 15px;
-  }
-}
-@media screen and (max-width: 350px){
-  .col-6{
-    flex: 0 0 100%;
-    max-width: 100%;
   }
 }
 @media screen and (max-width: 767px){

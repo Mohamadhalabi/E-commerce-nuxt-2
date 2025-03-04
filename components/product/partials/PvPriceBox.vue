@@ -4,13 +4,13 @@
       <span
         v-if="product.discount.type =='fixed'"
         :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
-        class="product-price price-color font-weight-bold mt-0">
+        class="price-color font-weight-bold mt-0">
         {{(product.price.value - (product.discount.value * product.price.exchange_rate)).toFixed(2)}}{{product.price.currency}}
       </span>
       <span
         v-else
         :class="{ 'highlighted': hasDuplicate(product.discount.value) }"
-        class="product-price price-color font-weight-bold mt-0">
+        class="price-color font-weight-bold mt-0">
         {{(product.price.value - (product.price.value * (product.discount.value / 100))).toFixed(2)}}{{product.price.currency}}
       </span>
       <span
@@ -24,7 +24,7 @@
     <template v-else-if="product.is_sale==1 && (product.price.value != product.sale_price.value)">
       <span
         :class="{ 'highlighted': hasDuplicate(product.sale_price.value) }"
-        class="product-price price-color font-weight-bold mt-0">
+        class="price-color font-weight-bold mt-0">
         {{ product.sale_price.currency + product.sale_price.value }}
       </span>
       <span
@@ -43,7 +43,7 @@
       </span>
     </template>
     <template v-else>
-      <span class="product-price price-color mb-1"
+      <span class="price-color mb-1"
             :class="{ 'highlighted': hasDuplicate(product.price.value), 'homePageSearch': homePageSearch === true }"
       >
         {{ product.price.currency + product.price.value }}

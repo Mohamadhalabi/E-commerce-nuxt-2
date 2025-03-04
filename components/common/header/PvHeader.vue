@@ -8,7 +8,7 @@
     <header class="header">
       <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
-      <!-- Logo -->
+        <!-- Logo -->
        <a class="navbar-brand d-flex align-items-center" href="/">
         <nuxt-link :to="getLink('/')">
           <nuxt-img
@@ -18,11 +18,6 @@
           title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
         </nuxt-link>
       </a>
-      <!-- Mobile Toggle -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarContent">
         <!-- Search Bar & Category -->
         <pv-header-search
         @SearchInputClicked="SearchInputClicked" />
@@ -88,41 +83,15 @@
           <li class="nav-item p-2">
             <pv-cart-menu />
           </li>
-
-          <!-- Wishlist & Cart -->
-          <!-- <li class="nav-item position-relative">
-            <a href="#" class="nav-link">
-              <i class="bi bi-heart fs-5"></i>
-              <span v-if="wishlistCount > 0" class="badge bg-danger position-absolute top-0 start-100 translate-middle">
-                {{ wishlistCount }}
-              </span>
-            </a>
-          </li>
-          <li class="nav-item position-relative">
-            <a href="#" class="nav-link">
-              <i class="bi bi-cart fs-5"></i>
-              <span v-if="cartCount > 0" class="badge bg-danger position-absolute top-0 start-100 translate-middle">
-                {{ cartCount }}
-              </span>
-            </a>
-          </li> -->
         </ul>
-      </div>
+     </div>
+   </nav>
+   <div class="header-bottom sticky-header d-none d-lg-flex desktop-sticky box-shadow-none first-menu">
+    <div class="container">
+      <pv-main-menu />
     </div>
-  </nav>
-
-
-
-      <div
-        class="header-bottom sticky-header d-none d-lg-flex desktop-sticky box-shadow-none first-menu">
-        <div class="container">
-          <pv-main-menu />
-        </div>
-      </div>
-      <div
-        class="d-none header-bottom sticky-header desktop-sticky2 box-shadow-none second-menu"
-        style="z-index: 999"
-        ref="headerBottom">
+    </div>
+    <div class="d-none header-bottom sticky-header desktop-sticky2 box-shadow-none second-menu" style="z-index: 999" ref="headerBottom">
         <div class="container">
           <!-- offers -->
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?offers')">
@@ -220,7 +189,6 @@ export default {
       isMobile: false,
       isScrolling: false,
       searchQuery:"",
-      modalOpen: false,
     };
   },
   computed: {
@@ -258,9 +226,6 @@ export default {
       } else {
         return `/${this.getLang}${route}`; // Include the language parameter
       }
-    },
-    openModal() {
-      this.modalOpen = true;
     },
 
     search(){

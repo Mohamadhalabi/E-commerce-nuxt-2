@@ -2,7 +2,7 @@
   <div class="product-single-qty">
 
     <div class="input-group bootstrap-touchspin bootstrap-touchspin-injected">
-        <div v-if="product.hide_price == 0 && !has_token" class="input-group w-100 bootstrap-touchspin bootstrap-touchspin-injected">
+      <div v-if="product.hide_price == 0 && !has_token" class="input-group w-100 bootstrap-touchspin bootstrap-touchspin-injected">
           <span>
             <button
               class="quantity-button"
@@ -25,7 +25,7 @@
           <input
             class="horizontal-quantity form-control bg-transparent"
             type="number"
-            style="text-align: center;font-size: 13px;padding:5px;border: 1px solid #892118!important;text-align: right;"
+            style="text-align: center;font-size: 13px;padding:5px;border: 1px solid #892118!important;"
             :value="currentQty"
             :max="product.stock"
             @change="changeQty($event)"

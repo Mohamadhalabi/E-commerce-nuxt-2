@@ -1,7 +1,7 @@
 <template >
   <div
     style="max-width: 400px;"
-    class="mb-2 product-default bg-white inner-quickview inner-icon pt-2 position-relative card-main-wrapper border shadow-sm rounded-10"
+    class="mb-2 product-default bg-white inner-quickview pt-2 position-relative card-main-wrapper border shadow-sm rounded-10"
   >
     <figure class="img-effect shadow">
       <nuxt-link :to="getLink('/products/'+product.slug)">
@@ -66,7 +66,7 @@
         >
           <div>
             <nuxt-link :to="getLink('/products/'+product.slug)">
-             <h2 class="product-h2 mb-0" style="font-size:13px;">{{ truncateTitle(product.title, 75) }}</h2>
+             <h2 class="product-h2 mb-0" style="">{{ truncateTitle(product.title, 75) }}</h2>
             </nuxt-link>
           </div>
         </div>
@@ -198,16 +198,6 @@ export default {
 </script>
 
 <style scoped>
-.mt-10 {
-  margin-top: 1.5rem;
-}
-
-.top-details * {
-  z-index: 1;
-  margin: 0px !important;
-}
-
-
 .price-box {
   display: flex;
   align-items: center;
@@ -215,6 +205,9 @@ export default {
   flex-direction: column;
   position: relative;
   bottom: 0px;
+}
+.product-h2{
+  font-size: 15px;
 }
 
 .rounded-10 {
@@ -242,15 +235,27 @@ export default {
 
 }
 .product-card-information, .product-card-information-index{
-  height: 180px;
+  height: 200px;
 }
 .product-short-title{
   font-weight: 900;
-  height: 70px;
+  height: 90px;
 }
 .product-short-title-index{
   height: 80px;
 }
+
+@media screen and (max-width:1400px){
+  .product-short-title{
+    height: 100px;
+  }
+}
+@media screen and (max-width:1200px){
+  .product-short-title{
+    height: 90px;
+  }
+}
+
 .product-short-title:hover{
   text-decoration: underline;
 }
@@ -269,13 +274,39 @@ export default {
   align-items: center;
   justify-content: center;
 }
-
 @media screen and (max-width:767px){
   .product-short-title{
-    height: 100px;
+    height: 120px;
+  }
+  .product-card-information, .product-card-information-index{
+    height: 220px;
+  }
+}
+@media screen and (max-width:575px){
+  .product-short-title{
+    height: 90px;
   }
   .product-card-information, .product-card-information-index{
     height: 200px;
+  }
+  .product-h2{
+    font-size: 13px;
+  }
+}
+@media screen and (max-width:380px){
+  .product-short-title{
+    height: 100px;
+  }
+}
+@media screen and (max-width:320px){
+  .product-short-title{
+    height: 120px;
+  }
+  .product-card-information, .product-card-information-index{
+    height: 230px;
+  }
+  .product-h2{
+    font-size: 13px;
   }
 }
 </style>

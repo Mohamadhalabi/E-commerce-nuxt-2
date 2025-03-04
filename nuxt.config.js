@@ -86,7 +86,7 @@ export default ({
     __dangerouslyDisableSanitizers: ['script']
   },
   css: [
-    '@static/css/bootstrap.min.css',// Import Bootstrap CSS
+    'bootstrap/dist/css/bootstrap.min.css',// Import Bootstrap CSS
     '@static/sass/style.scss',
     // '@static/css/ltrStyle.css',
     // 'vue-multiselect/dist/vue-multiselect.min.css',
@@ -104,7 +104,7 @@ export default ({
     {src: '@plugins/settings.js', ssr: true},
     // {src: '@plugins/localstorage.js', ssr: false},
     // {src: '@plugins/filters.js', ssr: true},
-    // {src: '@plugins/directives/sticky.js', ssr: true},
+    {src: '@plugins/directives/sticky.js', ssr: false},
     {src: '@plugins/direction-control.js', ssr: true}, // rTL
     // {src: '@plugins/vue-awesome-swiper.js', ssr: false},
     {src: '~/plugins/vue-progressbar.js', ssr: false},
