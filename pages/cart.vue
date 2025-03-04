@@ -50,10 +50,10 @@
               <tr
                 v-for="(product, index) in cartList"
                 :key="product.sku" :class="{ out_of_stock_class: outOfStockList.includes(product.sku) }">
-                <td class="text-center vertical-align-middle">
-                  <i class="fa fa-trash remove-button" @click="removeFromCart({ product, index })"></i>
+                <td class="text-center vertical-align-middle" :class="{ border_top_red: outOfStockList.includes(product.sku) }">
+                  <img src="/images/icons/remove-svgrepo-com.svg" width="50" @click="removeFromCart({product, index})" />
                 </td>
-                <td class="vertical-align-middle">
+                <td class="vertical-align-middle" :class="{ border_top_red: outOfStockList.includes(product.sku) }">
                   <div class="row">
                     <div class="col-xl-4 col-lg-5 col-md-3 col-sm-6 col-12 m-auto">
                       <figure
@@ -87,8 +87,8 @@
                   </div>
                 </td>
 
-                <td class="price-color text-center font-weight-bold vertical-align-middle" style="">
-                  <div v-if="isAuthenticated">
+                <td class="text-center font-weight-bold vertical-align-middle" :class="{ border_top_red: outOfStockList.includes(product.sku) }">
+                  <div class="price-color" v-if="isAuthenticated">
                     <span class="old-price mt-auto mb-auto" v-if="product.price_without_sale != product.sale_price.value">
                     </span>
                     <span>{{product.price.currency + product.sale_price.value}}</span>
@@ -103,7 +103,7 @@
                   </div>
                 </td>
 
-                <td class="text-center" style="vertical-align: middle">
+                <td class="text-center" style="vertical-align: middle" :class="{ border_top_red: outOfStockList.includes(product.sku) }">
                   <pv-quantity-input
                     :qty="product.quantity"
                     :has_token="product.has_token_input"
@@ -112,8 +112,8 @@
                   />
                 </td>
 
-                <td class="price-color text-center font-weight-bold" style="vertical-align: middle">
-                  <span class="subtotal-price">
+                <td class="price-color text-center font-weight-bold" style="vertical-align: middle" :class="{ border_top_red: outOfStockList.includes(product.sku) }">
+                  <span class="price-color subtotal-price">
                     {{
                       product.price.currency +
                       parseFloat(product.priceitem * product.quantity).toFixed(2)
@@ -171,12 +171,12 @@
               </tr>
             </tfoot>
           </table>
-          <b-alert v-if="displayOutOfStock" show variant="danger">
+          <span v-if="displayOutOfStock" class="text-danger lh-base">
             <i class="fa fa-exclamation-triangle"></i>
             {{ $t("cart.outOfStock") }} <span class="font-weight-bold" v-for="(outofstock,index) in outOfStockList" :key="index">
-          {{outofstock}}
-        </span> {{ $t("cart.notavailable") }} {{ $t('cart.weWillTry') }}
-          </b-alert>
+            {{outofstock}}
+            </span> {{ $t("cart.notavailable") }} {{ $t('cart.weWillTry') }}
+          </span>
           <base-button-icon1
             class="w-100 py-4"
             @click="
@@ -438,8 +438,7 @@ export default {
 .mix-blend-multiply{
   mix-blend-mode: multiply;
 }
-.out_of_stock_class{
-  background-color: red;
-  border: 2px solid red
+.out_of_stock_class, .border_top_red{
+  border:1px solid red!important;
 }
 </style>

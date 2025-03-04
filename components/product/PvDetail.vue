@@ -8,6 +8,7 @@
       <!-- Next And Previous Products  -->
       <div>
         <pv-product-nav
+          v-if="isProductNav"
           :prev-product="prevProduct"
           :next-product="nextProduct"
         ></pv-product-nav>

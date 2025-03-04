@@ -1360,6 +1360,7 @@ input:checked ~ .accordion-content {
 .price-color{
   color: #f52020;
   font-weight: bold;
+  font-size: 1.6rem;
 }
 .to-get-pin-code{
   color: #f52020;
@@ -1859,4 +1860,15 @@ form.nosubmit [type="search"]::-webkit-search-cancel-button, form.nosubmit2 [typ
 }
 ul.VuePagination__pagination{
   justify-content: center;
+}
+.btn{
+  --bs-btn-font-size: 1.6rem!important;
+}
+
+@media screen and (max-width:992px){
+  .container{
+    max-width: 100%;
+    padding-left:15px;
+    padding-right:15px;
+  }
 }

@@ -24,21 +24,19 @@
       <div class="col-md-6 product-single-details mb-0">
         <pv-detail
           :product="product"
-          :is-product-nav="false"
+          :isProductNav="false"
         />
       </div>
-
-
-      <button
-              title="Close (Esc)"
-              type="button"
-              class="position-absolute"
-              style="border-radius: 50%; border: none;font-size: large; top: -25px; right: 0px;"
-              @click="$emit('close')"
-            >
-              ×
-            </button>
     </div>
+    <button
+    title="Close (Esc)"
+    type="button"
+    class=""
+    style="border-radius: 50%; border: none;font-size: large; top: -25px; right: 0px;position: absolute;right:5px;top:5px;"
+    @click="$emit('close')"
+    >
+    ×
+  </button>
   </div>
 </template>
 

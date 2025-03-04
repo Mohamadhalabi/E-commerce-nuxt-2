@@ -69,7 +69,7 @@ export default {
   },
 
   async fetch(){
-   await explodeFilter(this.$route.query) 
+  //  await explodeFilter(this.$route.query) 
   },
 
   props: {

@@ -14,7 +14,7 @@
         </ol>
       </nav>
       <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-10 col-12">
             <pv-product-list
               @directionby="directionBy"
               @sortby="sortBy"
@@ -23,7 +23,7 @@
         </div>
         <div class="sidebar-overlay" @click="hideSidebar" />
         <aside
-          class="sidebar-shop col-lg-2 order-lg-first mobile-sidebar p-0"
+          class="sidebar-shop col-lg-2 order-lg-first d-none d-lg-block p-0"
           sticky-container
         >
           <div sticky-offset="{top: 75}">
@@ -32,7 +32,7 @@
         </aside>
       </div>
     </div>
-    <b-modal
+    <!-- <b-modal
       v-model="openModal" hide-header hide-footer>
       <div
         class="sidebar-shop col-lg-2 order-lg-first p-4"
@@ -42,7 +42,7 @@
           <sidebar-filter />
         </div>
       </div>
-    </b-modal>
+    </b-modal> -->
   </main>
 </template>
 
@@ -251,10 +251,3 @@ export default {
   },
 };
 </script>
-<style>
-@media screen and (max-width: 993px){
-  .mobile-sidebar{
-    display: none;
-  }
-}
-</style>
