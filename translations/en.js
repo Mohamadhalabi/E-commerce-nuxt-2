@@ -58,7 +58,7 @@ export default
       threeDaysAgo: '3 days ago',
       readed: 'Readed',
       loading: 'loading...',
-      areDelete: 'Are You sure to delete this item',
+      areDelete: 'Are you sure you want to delete this address?',
       thereisnoreviewyet: 'there is no review yet',
       createdAt: 'Created at',
       passwordUpdatedSuccessfully: 'Password updated successfully',

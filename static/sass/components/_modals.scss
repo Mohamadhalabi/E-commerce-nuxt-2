@@ -126,21 +126,6 @@
 		margin-bottom: 3%;
 	}
 }
-
-@include mq(lg, max) {
-	.vm--container.quickview-modal .vm--modal {
-		position: absolute;
-		top: 3% !important;
-		right: 3% !important;
-		bottom: 3% !important;
-		left: 3% !important;
-		width: 94% !important;
-		max-width: 932px !important;
-		overflow-y: auto;
-	}
-}
-
-
 .vm--container .vm--overlay {
 	background: rgba(119, 119, 119, 0.4);
 }

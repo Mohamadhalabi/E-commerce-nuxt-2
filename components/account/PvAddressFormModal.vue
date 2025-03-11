@@ -1,14 +1,8 @@
 <template>
   <div v-if="buttonPressed == true">
-    <div
-      class="modal-wrapper custom-modal-form p-2"
-      :class="$i18n.locale == 'ar' ? 'ltrClass' : ''"
-    >
+    <div class="modal-wrapper custom-modal-form p-2" :class="$i18n.locale == 'ar' ? 'ltrClass' : ''">
       <div class="container">
-        <div
-          class="d-flex align-items-center w-100 justify-content-between mb-3"
-          :class="{ 'flex-row-reverse': getIsAr }"
-        >
+        <div class="d-flex align-items-center w-100 justify-content-between mb-3" :class="{ 'flex-row-reverse': getIsAr }">
           <h2 class="title m-0 mt-2">
             {{ typeForm == "edit" ? "Update Address" : "Create Address" }}
           </h2>
@@ -21,13 +15,18 @@
                   {{ $t("orders.country") }}
                 </label>
                 <span class="required">*</span>
-                <AutoComplate
+                <select
+                  class="form-control"
+                  style="font-size: 16px;"
                   v-model="form.country_id"
-                  :options="countries"
-                  :defulte-name="typeForm == 'edit' ? form.countryName : ''"
-                  @setValue="form.country_id = $event.id"
-                  required
-                />
+                  required>
+                  <option 
+                    v-for="country in countries" 
+                    :key="country.id"
+                    :value="country.id">
+                    {{ country.name }}
+                  </option>
+                </select>
               </div>
             </div>
 
