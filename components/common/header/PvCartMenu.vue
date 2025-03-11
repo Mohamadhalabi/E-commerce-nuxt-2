@@ -54,7 +54,7 @@
                   </figure>
                 </div>
                 <div
-                  class="product-details m-0 p-0 mx-1"
+                  class="product-details m-0 p-0"
                   :class="{ 'text-right': getIsAr }">
                   <h4 class="product-title m-0 p-0" style="max-width: 75%">
                     <nuxt-link :to="getLink('/products/'+product.slug)">
