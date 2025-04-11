@@ -312,7 +312,7 @@ export default {
             "@context": "https://schema.org/",
             "@type": "Product",
             "name": this.product.title,
-            "image": [this.product.main_image,this.product.secondary_image,this.product.schema_gallery],
+            "image": [this.product.main_image,this.product.secondary_image],
             "description": this.product.meta.description,
             "sku": this.product.sku,
             "brand": {
@@ -367,7 +367,7 @@ export default {
             "@context": "https://schema.org/",
             "@type": "Product",
             "name": this.product.title,
-            "image": [this.product.main_image,this.product.secondary_image,this.product.schema_gallery],
+            "image": [this.product.main_image,this.product.secondary_image],
             "description": this.product.meta.description,
             "sku": this.product.sku,
             "brand": {
