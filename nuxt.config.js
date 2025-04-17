@@ -234,6 +234,7 @@ export default ({
   },
   serverMiddleware: [
     '~/middleware/redirects.js',
+    '~/middleware/force410.js',
   ],
   build: {
     loaders: {
