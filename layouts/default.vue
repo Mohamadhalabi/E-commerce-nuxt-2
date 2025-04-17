@@ -55,6 +55,22 @@ export default {
     PvComparePopup: () => import("~/components/popups/PvComparePopup.vue"),
     PvWishlistPopup: () => import("~/components/popups/PvWishlistPopup.vue"),
   },
+  // add no follow,noindex to the page if there are query params in the URL
+  // this is to prevent search engines from indexing the page with query params
+  head() {
+    const hasQueryParams = Object.keys(this.$route.query).length > 0;
+    return hasQueryParams
+      ? {
+          meta: [
+            {
+              hid: 'robots',
+              name: 'robots',
+              content: 'noindex, nofollow',
+            },
+          ],
+        }
+      : {};
+    },
   data() {
     return {
       isSearchInputClicked: false,
