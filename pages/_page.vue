@@ -60,7 +60,6 @@ export default {
     }
   },
   head() {
-  const hasQueryParams = Object.keys(this.$route.query).length > 0;  // Move this line outside of head_data object
   const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
 
   let head_data = {
@@ -163,13 +162,6 @@ export default {
       },
     ],
   };
-
-  if (hasQueryParams) {
-    head_data.meta.push({
-      name: 'robots',
-      content: 'noindex, nofollow'
-    });
-  }
   if (this.page.type == "page") {
     head_data.meta.push({
       name: "og:image:alt",
