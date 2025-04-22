@@ -415,18 +415,18 @@ export default {
     },
     async getDevicesAndMachines() {
       if(!this.DeviceAndMachineMenuOpened){
-        if (this.devicesAndMachines.length === 0 && !this.isFetchingDevicesAndMachines) {
-        this.isFetchingDevicesAndMachines = true; // Set flag to true before making the request
-        try {
-          const response = await Api.get('/device-machine-menu');
-          this.DeviceAndMachineMenuOpened = true;
-          this.devicesAndMachines = response.data.data.menu.main_menu['device_machines'];
-        } catch (error) {
-          console.error("Error fetching devices and machines:", error);
-        } finally {
-          this.isFetchingDevicesAndMachines = false; // Reset flag after the request is done
-        }
-      }
+        this.isFetchingDevicesAndMachines = true;
+        await Api.get('/device-machine-menu')
+        .then(response => {
+            this.DeviceAndMachineMenuOpened = true;
+            this.devicesAndMachines = response.data.data.menu.main_menu['device_machines'];
+        })
+      .catch(error => {
+        console.error("Error fetching Device and machines:", error);
+      })
+      .finally(() => {
+        this.isFetchingDevicesAndMachines = false;
+      });
       }else{
         this.DeviceAndMachineMenuOpened = !this.DeviceAndMachineMenuOpened;
       }
