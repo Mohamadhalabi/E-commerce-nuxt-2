@@ -127,46 +127,46 @@ export default {
     PvProduct: () => import("~/components/product/card/PvProduct.vue"),
     PvListProduct: () => import("~/components/product/card/PvListProduct.vue"),
   },
-  head() {
-  return {
-    script: [
-      {
-        type: 'application/ld+json',
-        json: {
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "products": this.products.map(product => {
-            const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
-            const productData = {
-              "@type": "Product",
-              "name": product.title,
-              "url": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + "/products/" + product.slug,
-              "description": product['seo_description'],
-              "brand": {
-                "@type": "Brand",
-                "name": product.manufacturer,
-              },
-              "image": product.gallery[0]['l']['url'],
-              "additionalImage": product.gallery[1]['l']['url'],
-              "sameAs": product.canonical,
-              "sku": product.sku,
-              "weight": product.weight,
-              "offers": {
-                "@type": "Offer",
-                "price": product.price.value,
-                "salePrice": product.sale_price.value === product.price.value ? 0 : product.sale_price.value,
-                "priceCurrency": product.price.code,
-                "availability": product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-                "url": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + "/products/" + product.slug,
-              }
-            };
-            return productData;
-          })
-        }
-      },
-    ]
-  };
-},
+//   head() {
+//   return {
+//     script: [
+//       {
+//         type: 'application/ld+json',
+//         json: {
+//           "@context": "https://schema.org",
+//           "@type": "WebPage",
+//           "products": this.products.map(product => {
+//             const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
+//             const productData = {
+//               "@type": "Product",
+//               "name": product.title,
+//               "url": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + "/products/" + product.slug,
+//               "description": product['seo_description'],
+//               "brand": {
+//                 "@type": "Brand",
+//                 "name": product.manufacturer,
+//               },
+//               "image": product.gallery[0]['l']['url'],
+//               "additionalImage": product.gallery[1]['l']['url'],
+//               "sameAs": product.canonical,
+//               "sku": product.sku,
+//               "weight": product.weight,
+//               "offers": {
+//                 "@type": "Offer",
+//                 "price": product.price.value,
+//                 "salePrice": product.sale_price.value === product.price.value ? 0 : product.sale_price.value,
+//                 "priceCurrency": product.price.code,
+//                 "availability": product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+//                 "url": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + "/products/" + product.slug,
+//               }
+//             };
+//             return productData;
+//           })
+//         }
+//       },
+//     ]
+//   };
+// },
 
 
   async fetch() {
