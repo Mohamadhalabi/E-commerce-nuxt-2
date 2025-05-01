@@ -1,5 +1,5 @@
 <template>
-  <div class="product-nav">
+  <div class="product-nav" data-nosnippet>
     <div
       v-for="(product,index) in [prevProduct, nextProduct]"
       :key="index"
