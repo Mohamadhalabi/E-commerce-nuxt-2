@@ -116,7 +116,7 @@ export default {
               "@type": "ListItem",
               "position": 3,
               "name": this.page.title,
-              "item": `${process.env.PUBLIC_PATH_WITHOUT_SLASH}` + languagePrefix + '/shop/' + this.$route.params.page,
+              "item": `${process.env.PUBLIC_PATH_WITHOUT_SLASH}` + languagePrefix + '/' + this.$route.params.page,
             },
           ]
         }
