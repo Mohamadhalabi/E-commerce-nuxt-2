@@ -1,8 +1,7 @@
 <template >
   <div
     style="max-width: 400px;"
-    class="mb-2 product-default bg-white inner-quickview pt-2 position-relative card-main-wrapper border shadow-sm rounded-10"
-  >
+    class="mb-2 product-default bg-white inner-quickview pt-2 position-relative card-main-wrapper border shadow-sm rounded-10" data-nosnippet>
     <figure class="img-effect shadow">
       <nuxt-link :to="getLink('/products/'+product.slug)">
         <template v-for="image in product.gallery.slice(0, 2)">
