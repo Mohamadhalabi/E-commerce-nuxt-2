@@ -171,284 +171,205 @@ export default {
     };
   },
   head() {
-    let head_data = {
-        titleTemplate: this.product.meta.title
-          ? this.product.meta.title
-          : this.product.title,
-        title: this.product.meta.title
-          ? this.product.meta.title
-          : this.product.title,
-        link: [
-          {
-            rel: 'canonical',
-            href: this.product.canonical,
-          },
-          ...this.$i18n.availableLocales.map(loc => ({
-            rel: 'alternate',
-            hreflang: loc,
-            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + (loc !== 'en' ? `/${loc}` : '') + '/products/' + this.product.slug
-          })),
-          {
-            rel: 'alternate',
-            hreflang: 'x-default',
-            href: process.env.PUBLIC_PATH_WITHOUT_SLASH + '/products/' + this.product.slug
-          }
-        ],
-        meta: [
-          {
-            "http-equiv": "content-language",
-            content: this.$i18n.locale,
-          },
-          {
-            name: "description",
-            content: this.product.meta.description,
-          },
-          {
-            name: "og:title",
-            content: this.product.meta.title
-          },
-          {
-            name: "og:description",
-            content: this.product.meta.description,
-          },
-          {
-            property: "og:image",
-            content: this.product.open_graph,
-          },
-          {
-            property: "og:type",
-            content: "product",
-          },
-          {
-            property: "og:site_name",
-            content: "Techno Lock Keys"
-          },
-          {
-            property: "og:url",
-            content:  `${process.env.PUBLIC_PATH_WITHOUT_SLASH}`+this.$route.fullPath,
-          },
-        ],
-        script: []
+    function formatDate(dateString) {
+      if (dateString !== undefined) {
+        var date = new Date(dateString);
+        var year = date.getFullYear();
+        var month = ("0" + (date.getMonth() + 1)).slice(-2);
+        var day = ("0" + date.getDate()).slice(-2);
+        return year + "-" + month + "-" + day;
+      } else {
+        var lastDayOfYear = new Date(new Date().getFullYear(), 11, 31);
+        var year = lastDayOfYear.getFullYear();
+        var month = ("0" + (lastDayOfYear.getMonth() + 1)).slice(-2);
+        var day = ("0" + lastDayOfYear.getDate()).slice(-2);
+        return year + "-" + month + "-" + day;
       }
-      if(this.product.categories[1])
-      head_data["script"].push({
+    }
+
+    const head_data = {
+      titleTemplate: this.product.meta.title || this.product.title,
+      title: this.product.meta.title || this.product.title,
+      link: [
+        {
+          rel: 'canonical',
+          href: this.product.canonical,
+        },
+        ...this.$i18n.availableLocales.map(loc => ({
+          rel: 'alternate',
+          hreflang: loc,
+          href: process.env.PUBLIC_PATH_WITHOUT_SLASH + (loc !== 'en' ? `/${loc}` : '') + '/products/' + this.product.slug
+        })),
+        {
+          rel: 'alternate',
+          hreflang: 'x-default',
+          href: process.env.PUBLIC_PATH_WITHOUT_SLASH + '/products/' + this.product.slug
+        }
+      ],
+      meta: [
+        { "http-equiv": "content-language", content: this.$i18n.locale },
+        { name: "description", content: this.product.meta.description },
+        { name: "og:title", content: this.product.meta.title },
+        { name: "og:description", content: this.product.meta.description },
+        { property: "og:image", content: this.product.open_graph },
+        { property: "og:type", content: "product" },
+        { property: "og:site_name", content: "Techno Lock Keys" },
+        { property: "og:url", content: process.env.PUBLIC_PATH_WITHOUT_SLASH + this.$route.fullPath },
+      ],
+      script: []
+    };
+
+    // BreadcrumbList
+    const breadcrumbs = [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": this.$i18n.t("products.home"),
+        "item": process.env.PUBLIC_PATH,
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": this.$i18n.t("products.shop"),
+        "item": `${process.env.PUBLIC_PATH}shop`,
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": this.product.categories[0]?.name || '-',
+        "item": `${process.env.PUBLIC_PATH}${this.product.categories[0]?.slug || ''}`,
+      }
+    ];
+
+    if (this.product.categories[1]) {
+      breadcrumbs.push({
+        "@type": "ListItem",
+        "position": 4,
+        "name": this.product.categories[1]?.name || '-',
+        "item": `${process.env.PUBLIC_PATH}${this.product.categories[1]?.slug || ''}`,
+      });
+      breadcrumbs.push({
+        "@type": "ListItem",
+        "position": 5,
+        "name": this.product.title,
+        "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
+      });
+    } else {
+      breadcrumbs.push({
+        "@type": "ListItem",
+        "position": 4,
+        "name": this.product.title,
+        "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
+      });
+    }
+
+    head_data.script.push({
       type: 'application/ld+json',
       json: {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": this.$i18n.t("products.home"),
-            "item": process.env.PUBLIC_PATH,
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": this.$i18n.t("products.shop"),
-            "item": `${process.env.PUBLIC_PATH}shop`,
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": this.product.categories[0]['name'],
-            "item": `${process.env.PUBLIC_PATH}${this.product.categories[0]['slug']}`,
-          },
-          {
-            "@type": "ListItem",
-            "position": 4,
-            "name": this.product.categories[1] && this.product.categories[1]['name'] ? this.product.categories[1]['name'] : '-',
-            "item": `${process.env.PUBLIC_PATH}${this.product.categories[1] && this.product.categories[1]['slug'] ? this.product.categories[1]['slug'] : ''}`,
-          },
-          {
-            "@type": "ListItem",
-            "position": 5,
-            "name": this.product.title,
-            "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
-          }
-          ]
+        "itemListElement": breadcrumbs
       }
-      });
-      else{
-        head_data["script"].push({
-          type: 'application/ld+json',
-          json: {
-            "@context": "https://schema.org",
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": this.$i18n.t("products.home"),
-                "item": process.env.PUBLIC_PATH,
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": this.$i18n.t("products.shop"),
-                "item": `${process.env.PUBLIC_PATH}shop`,
-              },
-              {
-                "@type": "ListItem",
-                "position": 3,
-                "name": this.product.categories[0]['name'],
-                "item": `${process.env.PUBLIC_PATH}${this.product.categories[0]['slug']}`,
-              },
-              {
-                "@type": "ListItem",
-                "position": 4,
-                "name": this.product.title,
-                "item": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
-              }
-            ]
-          }
-        })
+    });
+
+    // Product schema
+    const offerList = this.product.offers.length > 0 ? this.product.offers.map(offer => ({
+      "@type": "Offer",
+      "price": offer.price.value,
+      "priceCurrency": this.product.price.code,
+      "priceValidUntil": formatDate(this.product.price.until),
+      "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+      "url": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
+      "eligibleQuantity": {
+        "@type": "QuantitativeValue",
+        "value": offer.from
+      },
+      "itemCondition": "https://schema.org/NewCondition"
+    })) : [{
+      "@type": "Offer",
+      "price": this.product.price.value,
+      "priceCurrency": this.product.price.code,
+      "priceValidUntil": formatDate(this.product.price.until),
+      "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+      "url": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
+      "itemCondition": "https://schema.org/NewCondition",
+      "eligibleQuantity": {
+        "@type": "QuantitativeValue",
+        "value": 1
+      }
+    }];
+
+    const productSchema = {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "@id": `${process.env.PUBLIC_PATH}products/${this.product.slug}`,
+      "name": this.product.title,
+      "image": [
+        this.product.main_image,
+        ...(this.product.secondary_image && this.product.secondary_image !== "https://dev-srv.tlkeys.com/backend/media/svg/files/blank-image.svg"
+          ? [this.product.secondary_image]
+          : [])
+      ],
+      "description": this.product.meta.description,
+      "sku": this.product.sku,
+      "brand": {
+        "@type": "Brand",
+        "name": this.product.specifications.manufacturer ?? "-"
+      },
+      "offers": offerList
+    };
+
+    if (this.product.total_reviews > 0) {
+      productSchema.review = this.product.rating.map(item => ({
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": item.rating.toFixed(2)
+        },
+        "author": {
+          "@type": "Person",
+          "name": item.user || "Anonymous"
+        }
+      }));
+      productSchema.aggregateRating = {
+        "@type": "AggregateRating",
+        "ratingValue": this.product.avg_rating.toFixed(2),
+        "reviewCount": this.product.total_reviews
       };
-      if (this.product.total_reviews > 0) {
-        head_data["script"].push({
-          type: 'application/ld+json',
-          json: {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": this.product.title,
-            "image": [
-                this.product.main_image,
-                ...(this.product.secondary_image !== "https://dev-srv.tlkeys.com/backend/media/svg/files/blank-image.svg"
-                  ? [this.product.secondary_image]
-                  : [])
-              ],
-            "description": this.product.meta.description,
-            "sku": this.product.sku,
-            "brand": {
-              "@type": "Brand",
-              "name": this.product.specifications.manufacturer ?? "-"
-            },
-            "offers": this.product.offers.length > 0 ? this.product.offers.map(offer => ({
-              "@type": "Offer",
-              "price": offer.price.value,
-              "salePrice": this.product.sale_price.value,
-              "priceCurrency": this.product.price.code,
-              "priceValidUntil": formatDate(this.product.price.until),
-              "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-              "eligibleQuantity": {
-                "@type": "QuantitativeValue",
-                "value": offer.from
-              }
-            })) : [{
-              "@type": "Offer",
-              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-              "price": this.product.price.value,
-              "salePrice": this.product.sale_price.value,
-              "priceValidUntil": formatDate(this.product.price.until),
-              "priceCurrency": this.product.price.code,
-              "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-            }],
-            "review": this.product.rating.map(item => ({
-              "@type": "Review",
-              "reviewRating": {
-                "@type": "Rating",
-                "ratingValue": item.rating.toFixed(2), // Limit rating to 2 decimal places
-              },
-              "author": {
-                "@type": "Person",
-                "name": item.user
-              }
-            })),
-            "aggregateRating": {
-              "@type": "AggregateRating",
-              "ratingValue": this.product.avg_rating.toFixed(2),
-              "reviewCount": this.product.total_reviews
+    }
+
+    head_data.script.push({
+      type: 'application/ld+json',
+      json: productSchema
+    });
+
+    // FAQ schema
+    if (this.product.frequently_asked_questions?.length > 0) {
+      const faqItems = this.product.frequently_asked_questions
+        .filter(item => item.length >= 2)
+        .map(item => ({
+          "@type": "Question",
+          "name": item[0],
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item[1]
           }
+        }));
+      head_data.script.push({
+        type: 'application/ld+json',
+        json: {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": faqItems
         }
       });
     }
 
-      else{
-        head_data["script"].push({
-          type: 'application/ld+json',
-          json: {
-            "@context": "https://schema.org/",
-            "@type": "Product",
-            "name": this.product.title,
-            "image": [
-              this.product.main_image,
-              ...(this.product.secondary_image !== "https://dev-srv.tlkeys.com/backend/media/svg/files/blank-image.svg"
-                ? [this.product.secondary_image]
-                : [])
-            ],
-            "description": this.product.meta.description,
-            "sku": this.product.sku,
-            "brand": {
-              "@type": "Brand",
-              "name": this.product.specifications.manufacturer ?? "-"
-            },
-            "offers": this.product.offers.length > 0 ? this.product.offers.map(offer => ({
-              "@type": "Offer",
-              "price": offer.price.value,
-              "salePrice": this.product.sale_price.value,
-              "priceCurrency": this.product.price.code,
-              "priceValidUntil": formatDate(this.product.price.until),
-              "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-              "eligibleQuantity": {
-                "@type": "QuantitativeValue",
-                "value": offer.from
-              }
-            })) : [{
-              "@type": "Offer",
-              "url": process.env.PUBLIC_PATH + "products/" + this.product.slug,
-              "price": this.product.price.value,
-              "salePrice": this.product.sale_price.value,
-              "priceValidUntil": formatDate(this.product.price.until),
-              "priceCurrency": this.product.price.code,
-              "availability": this.product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-              "eligibleQuantity": {
-                "@type": "QuantitativeValue",
-                "value": 1
-              }
-            }]
-          }
-        });
-      }
-      if(this.product.frequently_asked_questions && this.product.frequently_asked_questions.length > 0) {
-        const faqItems = [];
-        // Loop through the frequently_asked_questions array
-        this.product.frequently_asked_questions.forEach(item => {
-          // Ensure that the item has at least two elements (question and answer)
-          if (item.length >= 2) {
-            // Construct the FAQ item and add it to the faqItems array
-            const faqItem = {
-              "@type": "Question",
-              "name": item[0], // Question is at index 0
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item[1], // Answer is at index 1
-              },
-            };
-            faqItems.push(faqItem);
-          }
-        });
-        head_data["script"].push({
-          type: 'application/ld+json',
-          json: {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": faqItems,
-          },
-        });
-      }
-    if (this.product.video_details && this.product.video_details.length > 0) {
+    // Video schema
+    if (this.product.video_details?.length > 0) {
       this.product.video_details.forEach(video => {
-        let thumbnailUrls = [];
-        // Iterate over each thumbnail type (default, high, maxres, medium, standard)
-        for (let thumbnailType in video.thumbnailUrl) {
-          // Push the URL of each thumbnail into the array
-          thumbnailUrls.push(video.thumbnailUrl[thumbnailType].url);
-        }
-
-        head_data["script"].push({
+        const thumbnailUrls = Object.values(video.thumbnailUrl).map(t => t.url);
+        head_data.script.push({
           type: 'application/ld+json',
           json: {
             "@context": "https://schema.org",
@@ -459,28 +380,13 @@ export default {
             "uploadDate": video.uploadDate,
             "duration": video.duration,
             "contentUrl": video.contentUrl,
-            "embedUrl": video.embedUrl,
+            "embedUrl": video.embedUrl
           }
         });
       });
     }
-    function formatDate(dateString) {
-      if(dateString !== undefined){
-        var date = new Date(dateString);
-        var year = date.getFullYear();
-        var month = ("0" + (date.getMonth() + 1)).slice(-2);
-        var day = ("0" + date.getDate()).slice(-2);
-        return year + "-" + month + "-" + day;
-      }
-      else{
-        var lastDayOfYear = new Date(new Date().getFullYear(), 11, 31);
-        var year = lastDayOfYear.getFullYear();
-        var month = ("0" + (lastDayOfYear.getMonth() + 1)).slice(-2);
-        var day = ("0" + lastDayOfYear.getDate()).slice(-2);
-        return year + "-" + month + "-" + day;
-      }
-    }
-    return head_data
+
+    return head_data;
   },
   mounted: function () {
     window.scrollTo({
