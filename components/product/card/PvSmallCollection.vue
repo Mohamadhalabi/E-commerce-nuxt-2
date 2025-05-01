@@ -1,5 +1,5 @@
 <template>
-  <div class="col-12 d-flex align-items-center justify-content-between flex-column">
+  <div class="col-12 d-flex align-items-center justify-content-between flex-column" data-nosnippet>
     <h3 class="section-sub-title px-2 w-100">
       <nuxt-link :to="UrlLink">
         {{collectionTitle}}

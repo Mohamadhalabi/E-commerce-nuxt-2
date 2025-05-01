@@ -1,5 +1,5 @@
 <template>
-  <div v-if="products">
+  <div v-if="products" data-nosnippet>
     <div class="mb-2">
       <pv-section-title
         :title="collectionTitle"
