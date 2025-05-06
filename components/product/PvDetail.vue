@@ -133,6 +133,7 @@
     <div
       class="product-action d-lg-flex  align-items-center"
       v-if="!product.has_token_input || product.specifications.manufacturer =='TMPRO'"
+      data-nosnippet
     >
       <div class="product-single-qty">
         <div
@@ -209,8 +210,6 @@
         <pv-wishlist-button class="p-0" :product="product" :parent="'products-detail'" />
         <pv-compare-button class="p-0 mt-1" :product="product" parent="product-detail"></pv-compare-button>
       </div>
-
-
     </div>
     <div v-if="product.has_cover">
       <AutoComplate
