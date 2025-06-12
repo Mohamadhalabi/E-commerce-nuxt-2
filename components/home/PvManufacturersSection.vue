@@ -1,12 +1,9 @@
 <template>
-  <section v-if="manufacturers.length > 0" ref="manufacturersWrapper">
-    <div class="container mb-0">
-      <h4 class="section-title mt-0" style="border-bottom: 1px solid #32323224">
-        {{ $t("home.shopByBrand") }}
-      </h4>
+  <div v-if="manufacturers.length > 0" ref="manufacturersWrapper">
+    <div class="container mb-1 mt-2" style="border-radius: 10px;padding: 10px;">
       <Carousel
         :slides-per-page="8"
-        :autoplay-delay="3"
+        :autoplay-delay="2"
         :paginate-by-slide="true"
         :responsive="[
           { maxWidth: 1200, slidesPerPage: 6 },
@@ -19,14 +16,13 @@
           v-for="manufacturer in manufacturers"
           :key="manufacturer.slug"
           class="swiper-slide px-3"
-          style="max-width: 100% !important; max-height: 100%  !important;"
         >
           <nuxt-link :to="`${manufacturer.slug}`">
             <nuxt-img
               loading="lazy"
               format="webp"
-              width="200px"
-              height="200px"
+              width="100px"
+              height="100px"
               :src="manufacturer.image.s.url"
               :title="manufacturer.image.s.description"
               :alt="manufacturer.image.s.alt"
@@ -34,12 +30,13 @@
               :scal="manufacturer.image.s.scal"
               :description="manufacturer.image.s.description"
               class="manufacture-images"
+              style="mix-blend-mode:multiply;"
             />
           </nuxt-link>
         </div>
       </Carousel>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -100,27 +97,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.manufacture-images {
-  margin-bottom: 10px;
-}
-
-img.manufacture-images {
-  filter: grayscale(100%);
-  transition: transform 0.3s, filter 0.3s;
-}
-
-img.manufacture-images:hover {
-  transform: scale(1.1);
-  filter: none;
-}
-
-.carousel-container {
-  position: relative;
-}
-
-.manufactureresContainer {
-  width: 90%;
-}
-</style>

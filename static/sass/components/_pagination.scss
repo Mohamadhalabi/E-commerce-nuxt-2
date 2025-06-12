@@ -152,7 +152,7 @@ $p-pagination-font-weight: 600 !default;
 	color: inherit;
 	line-height: 2.1em;
 	text-align: center;
-
+	font-size: 14px!important;
 	&:hover,
 	&:focus {
 		color: $p-pagination-color;

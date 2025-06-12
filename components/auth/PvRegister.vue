@@ -1,40 +1,48 @@
 <template>
   <div :class="{ container: insideModal }" class="registerFoem">
     <div class="col-lg-12 col-md-12">
-      <form id="registerForm"
+      <form
+        id="registerForm"
         action="#"
         :class="{ 'mb-0': insideModal }"
-        @submit.prevent="submit">
+        @submit.prevent="submit"
+      >
         <div class="row" :class="{ 'text-right': getIsAr }">
-          <div class="col-lg-12 col-md-12" style="display: contents">
-            <div class="col-lg-6 col-md-12 pr-3">
+          <!-- Full Name + Phone -->
+          <div class="row w-100">
+            <div class="col-lg-6 col-md-12 mb-3">
               <label for="register-name">
                 {{ $t("auth.fullName") }}
                 <span class="required">*</span>
               </label>
               <input
-              id="register-name"
-              v-model="form.name"
-              class="form-input form-wide"
-              type="text"
-              :class="{ 'mb-2': insideModal }"
-              required
+                id="register-name"
+                v-model="form.name"
+                class="form-input form-wide w-100"
+                type="text"
+                required
               />
               <pv-error :error-msg="errorMsg.name" />
             </div>
-            <div class="col-lg-6 col-md-12 pr-3">
+
+            <div class="col-lg-6 col-md-12 mb-3">
               <label for="acc-phone">
                 {{ $t("account.phone") }}
                 <span class="required">*</span>
               </label>
               <input
+                id="acc-phone"
                 v-model="form.mobile"
-                class="form-input form-wide"
+                class="form-input form-wide w-100"
                 type="text"
-                :class="{'mb-2':insideModal}" />
+                required
+              />
             </div>
+          </div>
 
-            <div class="col-lg-6 col-md-12 pr-3 mt-lg-3">
+          <!-- Email + Password -->
+          <div class="row w-100">
+            <div class="col-lg-6 col-md-12 mb-3">
               <label for="register-email">
                 {{ $t("auth.emailAddress") }}
                 <span class="required">*</span>
@@ -42,15 +50,14 @@
               <input
                 id="register-email"
                 v-model="form.email"
-                class="form-input form-wide"
+                class="form-input form-wide w-100"
                 type="email"
-                :class="{ 'mb-2': insideModal }"
                 required
               />
               <pv-error :error-msg="errorMsg.email" />
             </div>
 
-            <div class="col-lg-6 col-md-12 pr-3 mt-lg-3">
+            <div class="col-lg-6 col-md-12 mb-3">
               <label for="register-password">
                 {{ $t("auth.password") }}
                 <span class="required">*</span>
@@ -58,30 +65,30 @@
               <input
                 id="register-password"
                 v-model="form.password"
-                class="form-input form-wide"
+                class="form-input form-wide w-100"
                 type="password"
-                :class="{ 'mb-2': insideModal }"
                 required
               />
               <pv-error :error-msg="errorMsg.password" />
-            </div> 
+            </div>
           </div>
-
-          <div class="col-lg-12">
+        </div>
+                  <div class="col-lg-12">
             <div class="mt-1 mt-lg-3 col-lg-9 col-md-12 mr-auto ml-auto">
               <base-button-icon-1
                 :outline="true"
                 :class="insideModal ? 'btn-block' : 'w-100'"
-                class="py-4 register-button">
+                class="py-4 register-button"
+              >
                 {{ $t("auth.register") }}
               </base-button-icon-1>
             </div>
           </div>
-        </div>
       </form>
     </div>
   </div>
 </template>
+
 <script>
 import { mapActions, mapGetters } from "vuex";
 import AutoComplate from "~/components/common/AutoComplate.vue";

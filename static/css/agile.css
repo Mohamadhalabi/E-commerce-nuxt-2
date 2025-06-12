@@ -27,19 +27,11 @@
 }
 @media screen and (max-width: 993px){
   .ssr-carousel-right-icon{
-    position: absolute;
-    left: 5px;
-    bottom: 0;
-    width: 35px;
-    height: 35px;
+    display: none;
   }
 
   .ssr-carousel-left-icon{
-    position: absolute;
-    right: 5px;
-    bottom: 0;
-    width: 35px;
-    height: 35px;
+    display: none;
   }
 }
 i.prevButton.fa.fa-chevron-left , i.nextButton.fa.fa-chevron-right{

@@ -205,17 +205,6 @@ export default {
   background-color: #f5ae6786;
 }
 
-.price-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  bottom: 0px;
-}
-
-
-
 /* .products-default {
   height: auto !important;
 } */

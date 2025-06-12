@@ -84,7 +84,7 @@
                 </div>
                 <ImageModal :imageUrl="selectedImageUrl" ref="imageModal" />
 
-                <div v-if="frequently_asked_questions && !isEmpty(frequently_asked_questions)" id="faq-content" class="tab-pane fade" role="tabpanel" aria-labelledby="product-tab-faq" ref="contentContainer">
+                <!-- <div v-if="frequently_asked_questions && !isEmpty(frequently_asked_questions)" id="faq-content" class="tab-pane fade" role="tabpanel" aria-labelledby="product-tab-faq" ref="contentContainer">
                   <div v-for="(faq, index) in frequently_asked_questions" :key="index">
                     <b-card no-body class="mb-1">
                       <b-button class="pdf-button" block v-b-toggle="'accordion-' + index" @click="flipArrow(index)">
@@ -102,7 +102,7 @@
                       </b-collapse>
                     </b-card>
                   </div>
-                </div>
+                </div> -->
 
                 <div
                   id="video-tab-content"
@@ -273,7 +273,6 @@ export default {
   background-color: #FBFBFB;
   box-shadow: rgb(0 0 0 / 20%) 0px 1px 10px;
   padding: 30px;
-  font-size: 1.7rem;
   line-height: 1.5;
 }
 #bv-modal-example2{

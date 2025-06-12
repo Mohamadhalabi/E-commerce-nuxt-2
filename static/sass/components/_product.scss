@@ -462,8 +462,13 @@ figure {
 // 2.2) Price - Old & Current Price, Price-Box
 .old-price {
     text-decoration: line-through;
-    font-size: 1.6rem;
+    font-size: 0.9rem;
     color: #a6a6a6;
+}
+@media screen and (max-width: 767px){
+    .old-price{
+        font-size: 14px;
+    }
 }
 
 .product-price {
@@ -472,10 +477,8 @@ figure {
 }
 
 .price-box {
-    margin-bottom: 1.4rem;
     font-weight: 600;
     font-family: $font-family;
-    line-height: 1;
 }
 
 // 2.3) Ratings
@@ -920,7 +923,6 @@ figure {
     }
 
     .price-box {
-        margin-bottom: 1.5rem;
         font-family: $font-family;
     }
 

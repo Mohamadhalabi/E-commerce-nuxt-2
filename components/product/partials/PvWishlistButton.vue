@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link
+  <!-- <nuxt-link
     v-if="isWishlisted"
     to="/wishlist"
     :class="{'add-wishlist': parent === 'products-detail'}"
@@ -19,8 +19,8 @@
     @click="addToWishlist(product)"
   >
     <img src="/images/icons/heart.svg" alt="wishlist" />
-    <span v-if="parent === 'products-detail'">{{$t('products.addWishlist')}}</span>
-  </a>
+    <span class="v-if="parent === 'products-detail'">{{$t('products.addWishlist')}}</span>
+  </a> -->
 </template>
 
 <script>

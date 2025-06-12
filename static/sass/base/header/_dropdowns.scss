@@ -225,13 +225,9 @@
 	}
 
 	.product-title {
-		padding-right: 1.5rem;
-		margin-bottom: 1.1rem;
-		font-size: 1.4rem;
 		line-height: 19px;
 		color: $primary-color-dark;
 		font-weight: 500;
-    max-width: 175px;
 
 		a {
 			color: $primary-color-dark;
@@ -240,7 +236,7 @@
 
 	.product-details {
 		margin-bottom: 3px;
-		font-size: 1.5rem;
+		font-size: 16px;
 	}
 
 	.sticky-header & {
@@ -431,14 +427,5 @@ button.noselect.w-100.py-3.mt-1.checkout-button.outline {
 		.dropdown-menu {
 			width: 262px;
 		}
-	}
-}
-.lang-currency{
-	justify-content: space-evenly;
-}
-
-@media screen and (max-width:575px){
-	.lang-currency{
-		justify-content: start;
 	}
 }

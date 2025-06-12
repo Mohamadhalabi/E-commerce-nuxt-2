@@ -100,7 +100,7 @@
                     {{ product.sku }}
                   </td>
 
-                  <td class="price-color text-center font-weight-bold" style="vertical-align: middle">
+                  <td class="text-center font-weight-bold" style="vertical-align: middle;color:red">
                     {{ product.price.currency + product.price.value }}
                   </td>
 
@@ -112,8 +112,8 @@
                     />
                   </td>
 
-                  <td class="text-center font-weight-bold" style="vertical-align: middle">
-                    <span class="price-color subtotal-price">
+                  <td class="text-center font-weight-bold" style="vertical-align: middle;color:red">
+                    <span class="subtotal-price">
                       {{
                         product.price.currency +
                         (product.price.value * product.quantity).toFixed(2)

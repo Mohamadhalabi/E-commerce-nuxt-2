@@ -24,7 +24,7 @@
         <div class="col-9 col-xl-8 col-lg-9 col-sm-8 m-auto">
           <div class="row ">
             <div class="col-12 float-left">
-              <pv-price-box class="m-0" v-if="product.hide_price == 0" :product="product" />
+              <pv-price-box smallProducts="true" class="m-0" v-if="product.hide_price == 0" :product="product" />
               <span v-else style="color: #556b2f">
                 <i
                   class="fab fa-sm fa-whatsapp"

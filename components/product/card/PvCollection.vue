@@ -1,17 +1,11 @@
 <template>
   <div v-if="products" data-nosnippet>
-    <div class="mb-2">
-      <pv-section-title
-        :title="collectionTitle"
-        :link="link"
-      ></pv-section-title>
-    </div>
     <Carousel
-      :slides-per-page="5"
+      :slides-per-page="4"
       :show-dots='true'
       :autoplay-delay="11114"
       :gutter="20"
-      :show-arrows="true"
+      :show-arrows="false"
       :peek-right="5"
       :peek-left="5"
       :responsive='[
@@ -51,7 +45,6 @@ export default {
   components: {
     Carousel: () => import("vue-ssr-carousel"),
     PvProduct,
-    PvSectionTitle: () => import("~/components/common/PvSectionTitle.vue"),
   },
   props: {
     isIndexPage: Boolean,

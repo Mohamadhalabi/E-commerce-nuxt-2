@@ -1,170 +1,131 @@
 <template>
   <div class="from-demo-26">
     <div class="bg-light-gray">
-      <div class="container p-lg-3 text-center">
+      <div class="container text-center">
         <PvTopHeader />
       </div>
     </div>
     <header class="header">
       <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container">
-        <!-- Logo -->
-       <a class="navbar-brand d-flex align-items-center" href="/">
-        <nuxt-link :to="getLink('/')">
-          <nuxt-img
-          format="webp"
-          class="logo-image p-2"
-          sizes="sm:100vw md:50vw lg:400px"
-          title="Techno lock logo" src="/images/logos/techno-lock-desktop-logo.webp" alt="tlk Logo" />
-        </nuxt-link>
-      </a>
-        <!-- Search Bar & Category -->
-        <pv-header-search
-        @SearchInputClicked="SearchInputClicked" />
-        <!-- Right Section -->
-        <ul class="navbar-nav ms-auto align-items-center">
-          <!-- Call Us -->
-          <li class="nav-item d-none d-lg-block contact-widget">
-            <p class="off-animatin mb-0 call-us-now text-center">
-              {{ $t("auth.callNow") }}
-            </p>
-            <span class="ls-n-10 mb-0 text-center">
-              <a
-              :href="`tel:${$t('auth.PhoneNumber')}`">
-              {{$t('auth.PhoneNumber') }}
-            </a>
-            </span>
-          </li>
+          <!-- Mobile Header Layout (screens < 992px) -->
+          <div class="d-flex d-lg-none justify-content-between align-items-center w-100 px-2 py-2">
+            <!-- Hamburger -->
+            <button class="hamburger-btn" @click="showMobileMenu" aria-label="Toggle mobile menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
 
-          <!-- Login/Register -->
-          <li class="nav-item">
-            <nuxt-link class="nav-link d-flex align-items-center" 
-            :to="getLink('/auth/login-register')">
-              <div class="header-user">
-                <i class="fa fa-user"></i>
-                <div class="welcome-login">
-                  <span>
-                    {{ $t("header.welcome") }}
-                  </span>
-                  <span class="font-weight-bold">
-                    {{ $t("header.login") }}
-                  </span>
-                </div>
+            <!-- Logo -->
+              <nuxt-link :to="getLink('/')">
+                <nuxt-img
+                  format="webp"
+                  class="logo-image mobile-logo"
+                  sizes="sm:100vw md:50vw lg:400px"
+                  title="Techno lock logo"
+                  src="/images/logos/techno-lock-desktop-logo.webp"
+                  alt="tlk Logo"
+                />
+              </nuxt-link>
+
+            <!-- Login & Cart -->
+            <div class="d-flex align-items-center gap-2">
+              <nuxt-link :to="getLink('/auth/login-register')" class="d-flex align-items-center">
+                <img src="/images/icons/avatar.png" class="person-icon" width="30" height="30" />
+              </nuxt-link>
+              <div style="min-width: 36px;">
+                <pv-cart-menu />
               </div>
-            </nuxt-link>
-          </li>
+            </div>
+          </div>
 
-          <li class="nav-item p-2">
-            <a class="header-icon position-relative cursor-pointer mt-auto mb-auto">
-              <nuxt-img 
-              width="32px" 
-              height="32px"
-              loading="lazy" 
-              src="/images/icons/heart.svg"
-              alt="Heart Icon" 
-              @click="goToWishlist"
-              />
-              <span class="cart-count badge-circle">{{getWishlistCounts}}</span>
-            </a>
-          </li>
-          <li class="nav-item p-2">
-            <a class="header-icon position-relative cursor-pointer mt-auto mb-auto">
-              <nuxt-img 
-              width="32px" 
-              height="32px"
-              loading="lazy" 
-              src="/images/icons/shuffle.svg"
-              alt="Shuffle Icon" 
-              @click="goToCompares"
-              />
-              <span class="cart-count badge-circle">{{getCounts}}</span>
-            </a>
-          </li>
-          <li class="nav-item p-2">
-            <pv-cart-menu />
-          </li>
-        </ul>
-     </div>
-   </nav>
-   <div class="header-bottom sticky-header d-none d-lg-flex desktop-sticky box-shadow-none first-menu">
-    <div class="container">
-      <pv-main-menu />
-    </div>
-    </div>
-    <div class="d-none header-bottom sticky-header desktop-sticky2 box-shadow-none second-menu" style="z-index: 999" ref="headerBottom">
+          <!-- Mobile Search Bar -->
+          <div class="d-lg-none w-100 mt-2 px-2">
+            <pv-header-search @SearchInputClicked="SearchInputClicked" />
+          </div>
+
+          <!-- Desktop Header Layout (screens >= 992px) -->
+          <div class="row d-none d-lg-flex align-items-center w-100">
+            <div class="col-lg-3">
+                <nuxt-link :to="getLink('/')">
+                  <nuxt-img
+                    format="webp"
+                    class="logo-image p-2"
+                    sizes="sm:100vw md:50vw lg:400px"
+                    title="Techno lock logo"
+                    src="/images/logos/techno-lock-desktop-logo.webp"
+                    alt="tlk Logo"
+                  />
+                </nuxt-link>
+            </div>
+            <div class="col-lg-6">
+              <pv-header-search @SearchInputClicked="SearchInputClicked" />
+            </div>
+            <div class="col-lg-3 d-flex align-items-center" v-if="!this.StateUser">
+              <nuxt-link class="nav-link d-flex align-items-center me-3" :to="getLink('/auth/login-register')">
+                <div class="header-user">
+                  <img src="/images/icons/avatar.png" class="person-icon" width="32px" height="32px" />
+                  <div class="welcome-login">
+                    <p>{{ $t("header.welcome") }}</p>
+                    <p class="font-weight-bold">{{ $t("header.login") }}</p>
+                  </div>
+                </div>
+              </nuxt-link>
+              <div class="p-2 cart-border">
+                <pv-cart-menu />
+              </div>
+            </div>
+
+            <div class="col-lg-3 d-flex align-items-center" v-else>
+              <nuxt-link class="nav-link d-flex align-items-center me-3" :to="getLink('/auth/login-register')">
+                <div class="header-user">
+                  <PvAuth />
+                </div>
+              </nuxt-link>
+              <div class="p-2 cart-border">
+                <pv-cart-menu />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </nav>
+
+      <!-- Menus below header -->
+      <div class="header-bottom sticky-header d-none d-lg-flex desktop-sticky box-shadow-none first-menu">
         <div class="container">
-          <!-- offers -->
-          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?offers')">
-            <img src="/images/icons/offer.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
-            {{ $t("header.Offer") }}
-          </nuxt-link>
-          <!-- promotion -->
-          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?promotion')">
-            <img src="/images/icons/gift.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
-            {{ $t("header.promotion") }}
-          </nuxt-link>
-          <!-- free shipping -->
-          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?free-shipping')">
-            <img src="/images/icons/free-shipping.svg" class="second-menu-images" alt="Free Shipping" width="25px" />
-            {{ $t("header.FreeShipping") }}
-          </nuxt-link>
-          <!-- Bundles -->
-          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?bundled')">
-            <img src="/images/icons/bundles.svg" class="second-menu-images" alt="Bundles" width="25px" />
-            {{ $t("header.Bundles") }}
-          </nuxt-link>
-          <!-- Online Services -->
-          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/online-services')">
-            <img src="/images/icons/wrench.svg" class="second-menu-images" alt="Online Services" width="25px" />
-            {{ $t("header.OnlineServices") }}
-          </nuxt-link>
-          <!-- Unlock Remote Services -->
-          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/unlock-remote-services')">
-            <img src="/images/icons/unlock-services.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
-            {{ $t("header.unlockService") }}
-          </nuxt-link>
-          <!-- New Arrival -->
-          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/new-arrival')">
-            <img src="/images/icons/new-arrival.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
-            {{ $t("home.newarrivalproducts") }}
-          </nuxt-link>
+          <pv-main-menu />
         </div>
       </div>
-      <div class="header-bottom sticky-header second-menu d-none d-lg-flex justify-content-center">
+      <div class="header-bottom sticky-header second-menu d-none d-lg-flex justify-content-center shadow-sm">
         <div class="container">
-          <!-- offers -->
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?offers')">
             <img src="/images/icons/offer.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
             {{ $t("header.Offer") }}
           </nuxt-link>
-          <!-- promotion -->
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?promotion')">
             <img src="/images/icons/gift.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
             {{ $t("header.promotion") }}
           </nuxt-link>
-          <!-- free shipping -->
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?free-shipping')">
             <img src="/images/icons/free-shipping.svg" class="second-menu-images" alt="Free Shipping" width="25px" />
             {{ $t("header.FreeShipping") }}
           </nuxt-link>
-          <!-- Bundles -->
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?bundled')">
             <img src="/images/icons/bundles.svg" class="second-menu-images" alt="Bundles" width="25px" />
             {{ $t("header.Bundles") }}
           </nuxt-link>
-          <!-- Online Services -->
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/online-services')">
             <img src="/images/icons/wrench.svg" class="second-menu-images" alt="Online Services" width="25px" />
             {{ $t("header.OnlineServices") }}
           </nuxt-link>
-          <!-- Unlock Remote Services -->
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/unlock-remote-services')">
             <img src="/images/icons/unlock-services.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
             {{ $t("header.unlockService") }}
           </nuxt-link>
-          <!-- New Arrival -->
-          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/new-arrival')">
-            <img src="/images/icons/new-arrival.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
+          <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?new-arrival')">
+            <img src="/images/icons/new-arrival.svg" class="second-menu-images" alt="New Arrival" width="25px" />
             {{ $t("home.newarrivalproducts") }}
           </nuxt-link>
         </div>
@@ -172,23 +133,24 @@
     </header>
   </div>
 </template>
+
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import api from "~/api";
 export default {
   components: {
     PvTopHeader: () => import("~/components/common/header/PvTopHeader.vue"),
-    PvLoggedIn: () => import("~/components/common/header/PvLoggedIn.vue"),
+    PvHeaderSearch: () => import("~/components/common/header/PvHeaderSearch.vue"),
     PvAuth: () => import("~/components/common/header/PvAuth.vue"),
     PvMainMenu: () => import("~/components/common/header/PvMainMenu"),
     PvCartMenu: () => import("~/components/common/header/PvCartMenu"),
-    PvHeaderSearch: () => import("~/components/common/header/PvHeaderSearch.vue"),
   },
   data() {
     return {
       isMobile: false,
       isScrolling: false,
       searchQuery:"",
+      numbers: [1, 2, 3],
     };
   },
   computed: {
@@ -358,7 +320,6 @@ export default {
 }
 @media screen and (min-width: 993px){
   .logo-image{
-    width: 350px
   }
 }
 @media screen and (max-width: 992px){
@@ -366,9 +327,15 @@ export default {
     max-width: 350px;
   }
 }
-@media screen and (max-width: 400px){
+@media screen and (max-width: 500px){
   .mobile-logo{
     max-width: 200px;
+  }
+}
+
+@media screen and (max-width: 350px){
+  .mobile-logo{
+    max-width: 150px;
   }
 }
 .logged-in-menu{

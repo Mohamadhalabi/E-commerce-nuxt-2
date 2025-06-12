@@ -1,19 +1,7 @@
 <template>
   <nuxt-link  :to="getLink('/account')" class="header-icon" v-if="isAuthenticated">
     <div class="header-user">
-      <i
-        class=""
-        :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">
-        <nuxt-img
-          format="webp"
-          v-if="StateUser.avatar"
-          :src="checkURL(StateUser.avatar)"
-          @error="defalutAvatar"
-          width="50"
-          height="50"
-          alt="Avatar"
-        />
-      </i>
+      <img src="/images/icons/avatar.png" class="person-icon" width="32px" height="32px" />
       <template>
         <div class="header-dropdown">
           <p class="desktop-only" style="text-decoration: none !important;" href="javascript:;">

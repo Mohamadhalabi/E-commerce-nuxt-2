@@ -37,8 +37,6 @@
 // 1. Sidebar
 
 .sidebar-shop {
-	font-size: $sidebar-font-size;
-
 	.product-widget {
 		.product-title {
 			margin-bottom: .4rem;
@@ -71,7 +69,6 @@
 		margin: 0;
 		@include css(color, category, sidebar, title, color);
 		@include css(font-family, category, sidebar, title, family);
-		@include css(font-size, category, sidebar, title, size);
 		@include css(font-weight, category, sidebar, title, weight);
 		@include css(padding-bottom, category, sidebar, title, padding-bottom);
 		@include css(border-bottom, category, sidebar, title, border-bottom);

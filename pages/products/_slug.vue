@@ -72,7 +72,7 @@
         :collection-title="'Works with this blade'"
         class="container"
       />
-      <div ref="relatedProducts" class="related-products-section container">
+      <!-- <div ref="relatedProducts" class="related-products-section container">
         <div v-if="related_products && related_products.length">
           <pv-collection
           :products="related_products"
@@ -80,7 +80,7 @@
           class="container"
         />
         </div>
-      </div>
+      </div> -->
 
       <hr class="mt-0 m-b-5 container" />
       <div class="product-widgets-container container mx-auto row pb-2">

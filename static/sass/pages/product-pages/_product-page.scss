@@ -47,7 +47,7 @@ $product-single-thumbnail-gutter: 3px !default;
 
 	span {
 		color: $primary-color-dark;
-		font-size: 1.6rem;
+		font-size: 16px;
 	}
 }
 
@@ -89,7 +89,7 @@ $product-single-thumbnail-gutter: 3px !default;
 	/* justify-content: center; */
     padding: 17px 8px;
 	color: $primary-color-dark;
-	font-size: 1.2rem;
+	font-size: 16px;
 	font-weight: 700;
 	font-family: $shop-second-font-family;
 	letter-spacing: -.015em;
@@ -183,7 +183,7 @@ $product-single-thumbnail-gutter: 3px !default;
 	.product-title {
 		margin-bottom: 1.1rem;
 		color: $primary-color-dark;
-		font-size: 2.7rem;
+		font-size: 1.8rem;
 		font-weight: 700;
 		letter-spacing: -.01em;
 		line-height: 35px;
@@ -238,14 +238,14 @@ $product-single-thumbnail-gutter: 3px !default;
         }
 
         .product-prev .product-link::before {
-			content: '🢀';
-			font-size:16px;
+			content: '←';
+			font-size: 25px;
 			display: block;
 		}
 
         .product-next .product-link::before {
-			content: '🢂';
-			font-size:16px;
+			content: '→';
+			font-size: 25px;
 			display: block;
         }
 
@@ -308,7 +308,7 @@ $product-single-thumbnail-gutter: 3px !default;
 	.old-price {
 		position: relative;
 		color: #a7a7a7;
-		font-size: 1.9rem;
+		font-size: 20px;
 		font-weight: 400;
 		vertical-align: middle;
 
@@ -324,7 +324,7 @@ $product-single-thumbnail-gutter: 3px !default;
 	  height: 24px;
 	  width: 36px;
 	  background-color: $orange-light2-color;
-	  font-size: 1.3rem;
+	  font-size: 13px;
 	  text-align: center;
 	  border: 1px solid $dark-red-color!important;
 	}
@@ -347,7 +347,6 @@ $product-single-thumbnail-gutter: 3px !default;
 	}
 
 	.ratings-container {
-		margin-bottom: 2.1rem;
 		display: flex;
 		align-items: center;
 
@@ -407,7 +406,7 @@ $product-single-thumbnail-gutter: 3px !default;
 
 		.form-control {
 			height: 48px;
-			font-size: 1.6rem;
+			font-size: 16px;
 			font-weight: 700;
 			background: transparent;
 		}
@@ -497,6 +496,12 @@ main .sticky-header {
 .sku-color{
 	color: rgb(85, 107, 47);
 	font-weight: bold;
+	font-size: 0.9rem;
+}
+@media screen and (max-width: 767px){
+	.sku-color{
+		font-size: 16px;
+	}
 }
 .single-info-list {
 	margin-bottom: 1.7rem;
@@ -705,17 +710,10 @@ main .sticky-header {
 	}
 
 	.nav.nav-tabs .nav-link {
-		font-family: $shop-font-family;
-		font-size: 1.3rem;
-
 		&:hover,
 		&.active {
 			border-bottom-color: $primary-color-dark;
 		}
-	}
-
-	.nav-item {
-		font-size: 1.3rem;
 	}
 }
 .product-desc-content {

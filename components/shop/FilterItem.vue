@@ -1,6 +1,6 @@
 <template>
   <div v-if="item.group != 'attributes'">
-    <h3 class="widget-title">
+    <span class="widget-title">
         <a
           data-toggle="collapse"
           href="javascript:;"
@@ -8,7 +8,7 @@
           @click="opened = !opened"
         >{{ item.group_name }}
         </a>
-    </h3>
+      </span>
     <vue-slide-toggle :open="opened" class="filter-border-bottom">
       <div class="widget-body">
         <checkbox-item-category
@@ -226,7 +226,6 @@ a.attributesfiltersClosed,a.attributesfiltersOpened{
 }
 .widget-title{
   text-transform: capitalize;
-  font-size:1.1em;
   color: #333E48;
 }
 .filter-border-bottom {

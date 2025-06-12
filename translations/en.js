@@ -65,6 +65,10 @@ export default
       failedToChangeThePassword: 'Failed to change the password try agin',
       WelcomeTo:'Welcome To',
       tlkeys:'Techno Lock Keys',
+      rotatingMessages: [
+        "Same Day shipping until 4PM GMT+4",
+        "Free Shipping for eligible orders over $10000"
+      ],
     },
     auth: {
       phoneNumber: 'Phone number',

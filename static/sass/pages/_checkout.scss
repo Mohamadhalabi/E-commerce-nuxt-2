@@ -241,6 +241,11 @@
 	//	}
 	//}
 
+	.cart-subtotal{
+		font-size: 18px;
+		color: $red-color;
+	}
+
 	.order-shipping {
 		td {
 			padding-top: 1.2rem;
@@ -291,8 +296,8 @@
 		}
 
 		.total-price {
-			color: $navy-color;
-			font-size: 2.2rem;
+			color: $price-color;
+			font-size: 23px;
 		}
 	}
 }

@@ -10,9 +10,12 @@
     <pv-error-message class="minipopup-area"/>
     <pv-compare-popup class="minipopup-area"/>
     <pv-wishlist-popup class="minipopup-area"/>
-    <div v-if="isMobile" class="mobile-only">
-      <pv-mobile-menu/>
-    </div>
+    <component
+      v-if="isMobile"
+      :is="mobileMenuComponent"
+      class="mobile-only"
+    />
+
 
     <!-- Modal -->
     <!-- <b-modal
@@ -75,6 +78,7 @@ export default {
     return {
       isSearchInputClicked: false,
       isMobile: false,
+      mobileMenuComponent: null,
       showModal: false,
       iFrameCode: '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWSSMVC7" height="0" width="0" style="display:none;visibility:hidden"></iframe>',
     };
@@ -97,10 +101,9 @@ export default {
   methods: {
     async checkIfMobile() {
       this.isMobile = window.innerWidth <= 993;
-      if (this.isMobile) {
-        const { default: PvMobileMenu } = await import("~/components/common/header/PvMobileMenu");
-        this.$options.components.PvMobileMenu = PvMobileMenu;
-        this.$forceUpdate();
+      if (this.isMobile && !this.mobileMenuComponent) {
+        const { default: PvMobileMenu } = await import("~/components/common/header/PvMobileMenu.vue");
+        this.mobileMenuComponent = PvMobileMenu;
       }
     },
     isClicked(val) {
@@ -128,11 +131,11 @@ export default {
       this.onModalHidden();
     },
   },
-  watch: {
-    $route() {
-      document.getElementById("search_term").value = "";
-    },
-  },
+  // watch: {
+  //   $route() {
+  //     document.getElementById("search_term").value = "";
+  //   },
+  // },
 };
 </script>
 <style>

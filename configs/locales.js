@@ -7,16 +7,18 @@ export default {
   fallbackLocale: 'en',
 
   // availabled locales for user selection
-  availableLocales: [{
+availableLocales: [
+  {
     code: 'en',
-    flag: 'us',
+    flag: 'https://dev-srv.tlkeys.com/storage/images/languages/enflag.jpg',
     shortName: 'En',
     dir: 'ltr',
     name: 'English',
     file: 'en.js'
-  }, {
+  },
+  {
     code: 'ar',
-    flag: 'ar',
+    flag: 'https://dev-srv.tlkeys.com/storage/images/languages/arflag.jpg',
     shortName: 'Ar',
     dir: 'rtl',
     name: 'Arabic',
@@ -24,14 +26,15 @@ export default {
   },
   {
     code: 'fr',
-    flag: 'fr',
+    flag: 'https://dev-srv.tlkeys.com/storage/images/languages/frflag.jpg',
     shortName: 'Fr',
     dir: 'ltr',
     name: 'French',
     file: 'fr.js'
-  }, {
+  },
+  {
     code: 'es',
-    flag: 'es',
+    flag: 'https://dev-srv.tlkeys.com/storage/images/languages/esflag.jpg',
     shortName: 'Es',
     dir: 'ltr',
     name: 'Spanish',
@@ -39,50 +42,20 @@ export default {
   },
   {
     code: 'ru',
-    flag: 'ru',
-    ShortName: 'Ru',
+    flag: 'https://dev-srv.tlkeys.com/storage/images/languages/ruflag.jpg',
+    shortName: 'Ru',
     dir: 'ltr',
     name: 'Russian',
-    file: 'ru.js',
+    file: 'ru.js'
   },
   {
     code: 'de',
-    flag: 'de',
-    ShortName: 'De',
+    flag: 'https://dev-srv.tlkeys.com/storage/images/languages/deflag.jpg',
+    shortName: 'De',
     dir: 'ltr',
     name: 'Deutsch',
-    file: 'de.js',
-  }],
-
-  languages: [{
-    code: 'en',
-    flag: 'us',
-    name: 'English'
-  },
-  {
-    code: 'ar',
-    flag: 'ar',
-    name: 'Arabic'
-  },
-  {
-    code: 'fr',
-    flag: 'fr',
-    name: 'French',
-  },
-  {
-    code: 'es',
-    flag: 'es',
-    name: 'Spanish'
-  },
-  {
-    code: 'ru',
-    flag: 'ru',
-    name: 'Russian'
-  },
-  {
-    code: 'de',
-    flag: 'de',
-    name: 'Deutsch'
-  }]
+    file: 'de.js'
+  }
+],
 
 };

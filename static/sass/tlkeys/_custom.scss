@@ -431,11 +431,30 @@ button.mfp-close {
 .from-demo-26 .cart-count {
   background-color: #f52020;
   right: auto;
-  left: 28px - 16px + 5px;
-  width: auto;
-  min-width: 16px;
-  padding: 0 6px;
+  left: 19px;
+  padding: 0 8px;
   border-radius: 1.6rem*.5;
+  top: -8px;
+  font-size: 14px;
+}
+.cart-border{
+  border-left: 1px solid #CED4DA;
+  width: 64px;
+}
+
+
+.person-icon {
+  width: 40px;
+  padding: 3px;
+  border-radius: 50%;
+  border: 1px solid #CED4DA;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 993px){
+.from-demo-26 .cart-count{
+  width: auto;
+}
 }
 
 .from-demo-26 .header-search {
@@ -508,14 +527,12 @@ button.mfp-close {
 
 .from-demo-26 .header-menu {
   width: 100%;
-  //border-bottom: 1px solid $navy-light3-color;
   background-color: white;
   overflow: visible;
 }
-
 .welcome-login{
-  display: grid;
-  text-align: center;
+  justify-content: center;
+  font-size: 14px;
 }
 
 .font-weight-bold{
@@ -787,7 +804,6 @@ $megamenu-items-per-row: 10;
 
     > i {
       margin-right: 1.3rem;
-      font-size: 2.4rem;
       vertical-align: middle;
       transition: all 0.3s;
     }
@@ -832,9 +848,6 @@ $megamenu-items-per-row: 10;
   border-radius: 6px;
   &, i, h3 {
     transition: all 0.2s ease-in-out;
-  }
-  i {
-    font-size: 4rem;
   }
   h3 {
     font-weight: 500;
@@ -1054,6 +1067,10 @@ $megamenu-items-per-row: 10;
   font-size: 16px;
 }
 
+.single-product-description span{
+  display: none;
+}
+
 .single-product-description h2{
   color: #892118;
   font-size: 26px;
@@ -1143,7 +1160,7 @@ $megamenu-items-per-row: 10;
 
 .single-product-description ol, .single-product-description ul {
   margin-top: 1rem;
-  font-size: 1.7rem;
+  font-size: 16px;
   color: #535250
 }
 
@@ -1280,12 +1297,11 @@ input:checked ~ .accordion-content {
   color: $red-color;
 }
 .top-notice-container {
-  color: black;
-  font-size: 2.26rem;
-  text-transform: uppercase;
+  color: $text-color;
+  text-transform: capitalize;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .welcome-text {
   font-weight: bold;
@@ -1338,7 +1354,7 @@ input:checked ~ .accordion-content {
   border-radius: 50%;
   border: none;
   font-size: large;
-  right: 5px;
+  left: 10px;
   top:0;
   transition: background-color 0.3s ease;
 }
@@ -1357,7 +1373,12 @@ input:checked ~ .accordion-content {
 .price-color{
   color: #f52020;
   font-weight: bold;
-  font-size: 1.6rem;
+  font-size: 23px;
+}
+@media screen and (max-width: 767px){
+  .price-color{
+    font-size: 16px;
+  }
 }
 .to-get-pin-code{
   color: #f52020;
@@ -1384,16 +1405,14 @@ input:checked ~ .accordion-content {
   z-index: 9999;
 }
 .second-menu{
-  background-color: #f6f6f6;
+  background-color: #F9F9F9;
   height: 50px;
   margin: auto;
   top:50px!important;
   font-size: 16px;
 }
-.third-menu{
-  background-color: #3e3e3e;
-  color: white;
-  margin: auto;
+.search-bar-wrapper {
+  background-color: #F9F9F9;
 }
 .main-nav{
   border-top: none;
@@ -1648,7 +1667,7 @@ td.action{
   background-color: #555;
 }
 // end of custom scroll
-.text-warning,{
+.text-warning{
   color: #fc8006!important;
 }
 .btn-warning{
@@ -1660,7 +1679,6 @@ td.action{
 .home-page-title {
   position: relative;
   display: inline-block;
-  font-size: 2em;
   text-transform: uppercase;
   font-weight: normal;
 }
@@ -1838,6 +1856,8 @@ form.nosubmit [type="search"]::-webkit-search-cancel-button, form.nosubmit2 [typ
   border-image: linear-gradient(to right, #da5555, #ff6800) 1;
   border-image-slice: 1;
   padding: 10px;
+  font-size: 28px;
+  margin-top: 15px;
 }
 
 // pagination
@@ -1862,14 +1882,29 @@ ul.VuePagination__pagination{
   --bs-btn-font-size: 1.6rem!important;
 }
 
-.form-control{
-  font-size:1.6rem!important;
-}
-
 @media screen and (max-width:992px){
   .container{
     max-width: 100%;
     padding-left:15px;
     padding-right:15px;
   }
+}
+
+
+.dark-gray-background{
+  background-color: #3E3E3E;
+}
+
+.dark-blue-background {
+  background-color: #0D5067;
+}
+
+.page-link{
+  font-size: 16px!important;
+}
+
+// bootstrap overwrite
+
+.container{
+  max-width: 1400px!important;
 }

@@ -8,34 +8,25 @@
         data-start-top="500"
         data-offset-top="60">
         <div class="filters d-flex d-lg-none">
-        <button @click="clickedFilter()" class="btn btn-secondary ml-2 mb-2">Filters</button>
+          <button @click="clickedFilter()" class="btn btn-secondary ml-2 mb-2">Filters</button>
         </div>
         <div class="toolbox-left">
           <div class="row">
             <div class="col-6">
               <div class="toolbox-item toolbox-sort pl-1">
-            <label>{{ $t("shop.sort_by") }}</label>
+                <label>{{ $t("shop.sort_by") }}</label>
                 <div class="select-custom">
                   <select
                     style="width:10vw;font-size:1.3rem"
                     v-model="ordering"
                     name="orderby"
                     class="form-control"
-                    @change="changeOrder"
-                  >
+                    @change="changeOrder">
                     <option value="type">{{ $t("shop.type")}}</option>
-                    <option value="title_a_to_z">
-                      {{ $t("shop.title_a_to_z") }}
-                    </option>
-                    <option value="title_z_to_a">
-                      {{ $t("shop.title_z_to_a") }}
-                    </option>
-                    <option value="price_high_low">
-                      {{ $t("shop.price_high_low") }}
-                    </option>
-                    <option value="price_low_high">
-                      {{ $t("shop.price_low_high") }}
-                    </option>
+                    <option value="title_a_to_z">{{ $t("shop.title_a_to_z") }}</option>
+                    <option value="title_z_to_a">{{ $t("shop.title_z_to_a") }}</option>
+                    <option value="price_high_low">{{ $t("shop.price_high_low") }}</option>
+                    <option value="price_low_high">{{ $t("shop.price_low_high") }}</option>
                     <option value="oldest">{{ $t("shop.oldest") }}</option>
                     <option value="newest">{{ $t("shop.newest") }}</option>
                     <option value="priority">{{ $t("shop.priority") }}</option>
@@ -47,32 +38,22 @@
               <div class="toolbox-item toolbox-sort" style="float: inline-end;">
                 <label>Per Page</label>
                 <div class="mx-3 select-custom">
-                    <select
-                      style="font-size:1.3rem"
-                      v-model="selectedNumber"
-                      name="selectedNumber"
-                      class="form-control"
-                      @change="handleChange">
-                      <option value="4">4</option>
-                      <option value="12">12</option>
-                      <option value="16">16</option>
-                      <option value="20">20</option>
-                      <option value="24">24</option>
-                      <option value="8">All</option>
-                    </select>
-                  </div>
-                  <i
-                    @click="selectShowStyle('grid')"
-                    style="cursor: pointer; font-size: 1.8rem"
-                    :class="{ 'orange-1': isSelected }"
-                    class="mx-2 icon-mode-grid"
-                  />
-                  <i
-                    @click="selectShowStyle('list')"
-                    style="cursor: pointer; font-size: 1.8rem"
-                    :class="{ 'orange-1': !isSelected }"
-                    class="mx-2 icon-mode-list"
-                  />
+                  <select
+                    style="font-size:1.3rem"
+                    v-model="selectedNumber"
+                    name="selectedNumber"
+                    class="form-control"
+                    @change="handleChange">
+                    <option :value="4">4</option>
+                    <option :value="12">12</option>
+                    <option :value="16">16</option>
+                    <option :value="20">20</option>
+                    <option :value="24">24</option>
+                    <option :value="8">All</option>
+                  </select>
+                </div>
+                <i @click="selectShowStyle('grid')" style="cursor: pointer; font-size: 1.8rem" :class="{ 'orange-1': isSelected }" class="mx-2 icon-mode-grid" />
+                <i @click="selectShowStyle('list')" style="cursor: pointer; font-size: 1.8rem" :class="{ 'orange-1': !isSelected }" class="mx-2 icon-mode-list" />
               </div>
             </div>
           </div>
@@ -83,31 +64,50 @@
         <div
           v-for="item in products"
           :key="item.sku"
-            class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3 mb-2"
-        >
+          class="col-6 col-sm-4 col-md-4 col-lg-4 col-xl-3">
           <pv-product :product="item" />
         </div>
-        <div ref="scrollObserver"></div> <!-- Intersection observer trigger point -->
+        <div ref="scrollObserver"></div>
       </div>
+
       <template v-else class="row">
-         <div
-            v-for="item in products"
-            :key="item.sku"
-            class="col-12 mb-3"
-          >
-          <pv-list-product :product="item"></pv-list-product>
-          </div>
-          <div ref="scrollObserver"></div> <!-- Intersection observer trigger point -->
+        <div
+          v-for="item in products"
+          :key="item.sku"
+          class="col-12 mb-3">
+          <pv-list-product :product="item" />
+        </div>
+        <div ref="scrollObserver"></div>
       </template>
-      <div v-if="pageCount > 1 && selectedNumber !== 8">
-        <pagination
-        style="justify-content: center;"
-        v-model="selectedPage"
-        :records="total_products"
-        :per-page="selectedNumber"
-        :options="{ chunk: 5 , edgeNavigation: true, chunksNavigation: scroll,format:false, texts: {count:'', first: '<<', last: '>>', prev: '<', next: '>'} }"
-        @paginate="changePage(parseInt(selectedPage))"
-         />
+
+      <div v-if="pageCount > 1 && selectedNumber !== 8" class="d-flex justify-content-center mt-4">
+        <nav>
+          <ul class="pagination flex-wrap justify-content-center">
+            <li class="page-item" :class="{ disabled: selectedPage === 1 }">
+              <a class="page-link" href="#" @click.prevent="changePage(selectedPage - 1)">&laquo;</a>
+            </li>
+
+            <li
+              v-for="page in visiblePages"
+              :key="page"
+              class="page-item"
+              :class="{ active: selectedPage === page, disabled: page === '...' }"
+            >
+              <a
+                class="page-link"
+                :class="{ 'bg-orange text-white border-0': selectedPage === page }"
+                href="#"
+                @click.prevent="typeof page === 'number' && changePage(page)"
+              >
+                {{ page }}
+              </a>
+            </li>
+
+            <li class="page-item" :class="{ disabled: selectedPage === pageCount }">
+              <a class="page-link" href="#" @click.prevent="changePage(selectedPage + 1)">&raquo;</a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>
@@ -240,6 +240,31 @@ export default {
       } else if (this.showStyle === "list") {
         return false;
       }
+    },
+    visiblePages() {
+      const total = this.pageCount;
+      const current = parseInt(this.selectedPage);
+      const pages = [];
+
+      // Always include first page
+      if (current > 4) {
+        pages.push(1);
+        pages.push('...');
+      }
+
+      for (let i = current - 3; i <= current + 3; i++) {
+        if (i > 0 && i <= total) {
+          pages.push(i);
+        }
+      }
+
+      // Always include last page
+      if (current < total - 3) {
+        pages.push('...');
+        pages.push(total);
+      }
+
+      return pages;
     },
   },
   mounted() {
@@ -375,16 +400,9 @@ export default {
       this.fetchProducts();
     },
     changePage(page) {
+      if (page === this.selectedPage) return;
       if (page >= 1 && page <= this.pageCount) {
-        this.selectedPage = page;
-      this.$router.push({
-        query: {
-          ...this.$route.query,
-          page: this.selectedPage,
-        },
-      });
-      scrollTopHandler();
-      
+        this.$router.push({ query: { ...this.$route.query, page } });
       }
     },
     showMore(category) {
@@ -401,20 +419,33 @@ export default {
 </script>
 
 <style scoped>
-.filters{
+.filters {
   font-size: 16px;
 }
-
-@media screen and (max-width: 400px){
-  .filters{
+@media screen and (max-width: 400px) {
+  .filters {
     width: 100%;
     margin-bottom: 15px;
     margin-top: 15px;
   }
 }
-@media screen and (max-width: 767px){
-  .icon-mode-list{
+@media screen and (max-width: 767px) {
+  .icon-mode-list {
     display: none;
   }
 }
+.pagination.flex-wrap {
+  flex-wrap: wrap;
+  row-gap: 0.25rem;
+}
+.bg-orange {
+  background-color: #ff6600 !important;
+}
+
+.page-item.active .page-link {
+  background-color: #ff6600 !important;
+  color: white !important;
+  border: none !important;
+}
+
 </style>

@@ -1,35 +1,5 @@
 <template>
   <div class="">
-    <div v-if="isAuthenticated">
-      <div class="customer-avatar d-flex align-items-center" >
-        <nuxt-img
-          format="webp"
-          loading="lazy"
-          v-if="StateUser.avatar"
-          :src="checkURL(StateUser.avatar)"
-          @error="defaultAvatar"
-          width="60"
-          height="60"
-          alt="Avatar"
-          class="ml-3 mobile-avatar"/>
-        <span class="ml-3 font-weight-bold user-name">
-        {{StateUser.name}}
-        </span>
-      </div>
-    </div>
-    <div v-else class="text-center" @click="closeAllNav()">
-      <nuxt-link :to="getLink('/auth/login-register')">
-        <button class="w-25 login-button" >
-          {{ $t("login.title") }}
-        </button>
-      </nuxt-link>
-      <nuxt-link :to="getLink('/auth/login-register')">
-        <button class="w-25 register-button">
-          {{ $t("login.registerNow") }}
-        </button>
-      </nuxt-link>
-    </div>
-    <hr class="mt-1 mb-0 dashed">
     <ul class="menu main-menu nav-categories">
       <div @click="closeAllNav()">
         <nuxt-link :to="getLink('/')">
@@ -38,121 +8,127 @@
           </li>
         </nuxt-link>
       </div>
+
       <hr class="mt-0 mb-0 dashed">
+
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-          <p
-            @click="KeyRemoteMenu(),getKeysAndRemotes()"
-            class="pt-3 mb-1 mobile-menu-links">{{ $t("header.keysAndRemote") }}</p>
-        <span @click="KeyRemoteMenu(),getKeysAndRemotes()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
+        <div class="d-flex justify-content-between align-items-center w-100" @click="KeyRemoteMenu(),getKeysAndRemotes()">
+          <span class="mobile-menu-links">{{ $t("header.keysAndRemote") }}</span>
+          <span class="mobile-menu-toggle-button">&#x25BE;</span>
+        </div>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
+
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-          <p
-            @click="accessoriesMenu(),getAccessoriesAndTools()"
-            class="pt-3 mb-1 mobile-menu-links">{{ $t("header.AccessoriesAndTools") }}</p>
-        <span @click="accessoriesMenu(),getAccessoriesAndTools()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
+        <div class="d-flex justify-content-between align-items-center w-100" @click="accessoriesMenu(),getAccessoriesAndTools()">
+          <span class="mobile-menu-links">{{ $t("header.AccessoriesAndTools") }}</span>
+          <span class="mobile-menu-toggle-button">&#x25BE;</span>
+        </div>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
+
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-          <p
-            @click="DeviceMachineMenu(),getDevicesAndMachines()"
-            class="pt-3 mb-1 mobile-menu-links">{{ $t("header.DeviceAndMachine")}}</p>
-        <span @click="DeviceMachineMenu(),getDevicesAndMachines()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
+        <div class="d-flex justify-content-between align-items-center w-100" @click="DeviceMachineMenu(),getDevicesAndMachines()">
+          <span class="mobile-menu-links">{{ $t("header.DeviceAndMachine") }}</span>
+          <span class="mobile-menu-toggle-button">&#x25BE;</span>
+        </div>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
+
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <p
-          @click="manufacturersMenu(),getManufacturers()"
-          class="pt-3 mb-1 mobile-menu-links">
-          {{ $t("header.Manufactures") }}
-        </p>
-        <span @click="manufacturersMenu(),getManufacturers()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
+        <div class="d-flex justify-content-between align-items-center w-100" @click="manufacturersMenu(),getManufacturers()">
+          <span class="mobile-menu-links">{{ $t("header.Manufactures") }}</span>
+          <span class="mobile-menu-toggle-button">&#x25BE;</span>
+        </div>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
+
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <p
-          @click="tokenSoftwareMenu()"
-          class="pt-3 mb-1 mobile-menu-links">
-          {{ $t("header.TokensAndSoftware") }}
-        </p>
-        <span @click="tokenSoftwareMenu()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
+        <div class="d-flex justify-content-between align-items-center w-100" @click="tokenSoftwareMenu()">
+          <span class="mobile-menu-links">{{ $t("header.TokensAndSoftware") }}</span>
+          <span class="mobile-menu-toggle-button">&#x25BE;</span>
+        </div>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
+
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <p
-          @click="carsMenu(),getCars()"
-          class="pt-3 mb-1 mobile-menu-links">
-          {{ $t("header.Cars") }}
-        </p>
-        <span @click="carsMenu(),getCars()" class="float-right mb-2 mobile-menu-toggle-button">&#x025BE;</span>
+        <div class="d-flex justify-content-between align-items-center w-100" @click="carsMenu(),getCars()">
+          <span class="mobile-menu-links">{{ $t("header.Cars") }}</span>
+          <span class="mobile-menu-toggle-button">&#x25BE;</span>
+        </div>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      @click="closeAllNav()"
-      >
-        <nuxt-link :to="getLink('/emulators')" class="d-flex">
-          <p class="mobile-menu-links">{{ $t("header.Emulators") }}</p>
+
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4" @click="closeAllNav()">
+        <nuxt-link :to="getLink('/emulators')" class="d-flex w-100 justify-content-between align-items-center">
+          <span class="mobile-menu-links">{{ $t("header.Emulators") }}</span>
         </nuxt-link>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      @click="closeAllNav()"
-      >
-        <nuxt-link :to="getLink('/downloads')" class="d-flex">
-          <p class="mobile-menu-links">{{ $t("header.downloads") }}</p>
+
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4" @click="closeAllNav()">
+        <nuxt-link :to="getLink('/downloads')" class="d-flex w-100 justify-content-between align-items-center">
+          <span class="mobile-menu-links">{{ $t("header.downloads") }}</span>
         </nuxt-link>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      style="background-color:orange;"
-      @click="closeAllNav()"
-      >
-        <nuxt-link :to="getLink('/pin-code')" class="d-flex">
-          <p class="mobile-menu-links" style="color:white">{{ $t("header.PinCode") }}</p>
+
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4" style="background-color:orange;" @click="closeAllNav()">
+        <nuxt-link :to="getLink('/pin-code')" class="d-flex w-100 justify-content-between align-items-center">
+          <span class="mobile-menu-links text-white">{{ $t("header.PinCode") }}</span>
         </nuxt-link>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      @click="closeAllNav()"
-      >
-        <nuxt-link :to="getLink('/shop?free-shipping')" class="d-flex">
-          <p class="mobile-menu-links-red">{{ $t("header.FreeShipping") }}</p>
+
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4" @click="closeAllNav()">
+        <nuxt-link :to="getLink('/shop?free-shipping')" class="d-flex w-100 justify-content-between align-items-center">
+          <span class="mobile-menu-links-red">{{ $t("header.FreeShipping") }}</span>
         </nuxt-link>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      style="background-color:red;"
-      @click="closeAllNav()"
-      >
-        <nuxt-link :to="getLink('/shop?offers')" class="d-flex">
-          <p class="mobile-menu-links" style="color:white">{{ $t("header.Offer") }}</p>
+
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4" style="background-color:red;" @click="closeAllNav()">
+        <nuxt-link :to="getLink('/shop?offers')" class="d-flex w-100 justify-content-between align-items-center">
+          <span class="mobile-menu-links text-white">{{ $t("header.Offer") }}</span>
         </nuxt-link>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      @click="closeAllNav()"
-      >
-        <nuxt-link :to="getLink('/shop?bundled')" class="d-flex">
-          <p class="mobile-menu-links-red">{{ $t("header.Bundles") }}</p>
+
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4" @click="closeAllNav()">
+        <nuxt-link :to="getLink('/shop?bundled')" class="d-flex w-100 justify-content-between align-items-center">
+          <span class="mobile-menu-links-red">{{ $t("header.Bundles") }}</span>
         </nuxt-link>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      @click="closeAllNav()"
-      >
-        <nuxt-link :to="getLink('/unlock-remote-services')" class="d-flex">
-          <p class="mobile-menu-links-red">{{ $t("header.unlockService") }}</p>
+
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4" @click="closeAllNav()">
+        <nuxt-link :to="getLink('/unlock-remote-services')" class="d-flex w-100 justify-content-between align-items-center">
+          <span class="mobile-menu-links-red">{{ $t("header.unlockService") }}</span>
         </nuxt-link>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
-      <li class="menu-list-items mb-0 mt-0 p-3 pl-4"
-      @click="closeAllNav()"
-      >
-        <nuxt-link :to="getLink('/online-services')" class="d-flex">
-          <p class="mobile-menu-links-red">{{ $t("header.OnlineServices") }}</p>
+
+      <li class="menu-list-items mb-0 mt-0 p-3 pl-4" @click="closeAllNav()">
+        <nuxt-link :to="getLink('/online-services')" class="d-flex w-100 justify-content-between align-items-center">
+          <span class="mobile-menu-links-red">{{ $t("header.OnlineServices") }}</span>
         </nuxt-link>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
+
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4" v-if="isAuthenticated">
         <div class="text-center">
           <button class="login-button w-50" @click="LogOut(),closeAllNav()">
@@ -160,125 +136,150 @@
           </button>
         </div>
       </li>
+
       <hr class="mt-0 mb-0 dashed">
     </ul>
     <div id="mySidenav" class="sidenav">
       <span class="mobile-menu-title">{{ $t("header.keysAndRemote") }}</span>
       <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
-      <div v-for="(item,index) in keysAndRemotes" :key="index" class="row ml-auto mr-auto text-center mb-1">
-        <div v-for="(item2, index2) in item" :key="index2" class="col-6">
-          <div v-if="item2.slug && item2.slug !=''">
-            <div @click="closeAllNav()">
-              <nuxt-link :to="'/'+item2.slug">
-                <nuxt-img format="webp" alt="key and remote" :src="item2.image"  width="100" height="100" class="mt-1 mb-1" loading="lazy" />
-                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-              </nuxt-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="mySidenav2" class="sidenav">
-      <span class="mobile-menu-title">{{ $t("header.AccessoriesAndTools") }}</span>
-      <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
-      <div v-for="(item,index) in accessoriesAndTools" :key="index" class="row ml-auto mr-auto text-center mb-1">
-        <div v-for="(item2, index2) in item" :key="index2" class="col-6">
-          <div v-if="item2.slug && item2.slug !=''" >
-            <div @click="closeAllNav()">
-              <nuxt-link :to="'/'+item2.slug">
-                <nuxt-img alt="Accessories and tools" format="webp" :src="item2.image" width="100" height="100" class="mt-1 mb-1" loading="lazy" />
-                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-              </nuxt-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="mySidenav3" class="sidenav">
-      <span class="mobile-menu-title">{{ $t("header.DeviceAndMachine") }}</span>
-      <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
-      <div v-for="(item,index) in devicesAndMachines" :key="index" class="row ml-auto mr-auto text-center mb-1">
-        <div v-for="(item2, index2) in item" :key="index2" class="col-6">
-          <div v-if="item2.slug && item2.slug !=''" >
-            <nuxt-link :to="'/'+item2.slug">
-              <div @click="closeAllNav()">
-                <nuxt-img alt="Device and machines" format="webp" :src="item2.image" width="100" height="100" class="mt-1 mb-1" loading="lazy" />
-                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-              </div>
+      <div v-for="(item, index) in keysAndRemotes" :key="index" class="px-3">
+        <div v-for="(item2, index2) in item" :key="index2" class="mb-2">
+          <div v-if="item2.slug && item2.slug !== ''">
+            <nuxt-link
+              :to="'/' + item2.slug"
+              class="d-block py-2 w-100 border-bottom"
+              @click.native="closeAllNav()"
+            >
+              <span class="font-weight-bold">
+                {{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}
+              </span>
             </nuxt-link>
           </div>
         </div>
       </div>
     </div>
+
+    <div id="mySidenav2" class="sidenav">
+      <span class="mobile-menu-title">{{ $t("header.AccessoriesAndTools") }}</span>
+      <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
+      <div v-for="(item, index) in accessoriesAndTools" :key="index" class="px-3">
+        <div v-for="(item2, index2) in item" :key="index2" class="mb-2">
+          <div v-if="item2.slug && item2.slug !== ''">
+            <nuxt-link
+              :to="'/' + item2.slug"
+              class="d-block py-2 w-100 border-bottom"
+              @click.native="closeAllNav()"
+            >
+              <span class="font-weight-bold">
+                {{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}
+              </span>
+            </nuxt-link>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="mySidenav3" class="sidenav">
+      <span class="mobile-menu-title">{{ $t("header.DeviceAndMachine") }}</span>
+      <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
+      <div v-for="(item, index) in devicesAndMachines" :key="index" class="px-3">
+        <div v-for="(item2, index2) in item" :key="index2" class="mb-2">
+          <div v-if="item2.slug && item2.slug !== ''">
+            <nuxt-link
+              :to="'/' + item2.slug"
+              class="d-block py-2 w-100 border-bottom"
+              @click.native="closeAllNav()"
+            >
+              <span class="font-weight-bold">
+                {{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}
+              </span>
+            </nuxt-link>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div id="mySidenav4" class="sidenav">
       <span class="mobile-menu-title">{{ $t("header.Manufactures") }}</span>
       <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
-      <div v-for="(item,index) in manufacturers" :key="index" class="row ml-auto mr-auto text-center mb-1">
-        <div v-for="(item2, index2) in item" :key="index2" class="col-6">
-          <div v-if="item2.slug && item2.slug !=''">
-            <div @click="closeAllNav()">
-              <nuxt-link :to="'/'+item2.slug">
-                <nuxt-img alt="Manufactures" format="webp" :src="item2.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
-                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-              </nuxt-link>
-            </div>
+      <div v-for="(item, index) in manufacturers" :key="index" class="px-3">
+        <div v-for="(item2, index2) in item" :key="index2" class="mb-2">
+          <div v-if="item2.slug && item2.slug !== ''">
+            <nuxt-link
+              :to="'/' + item2.slug"
+              class="d-block py-2 w-100 border-bottom"
+              @click.native="closeAllNav()"
+            >
+              <span class="font-weight-bold">
+                {{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}
+              </span>
+            </nuxt-link>
           </div>
         </div>
       </div>
     </div>
+
     <div id="mySidenav5" class="sidenav">
-      <span class="mobile-menu-title-car">{{ $t("header.Cars") }}</span>
+      <span class="mobile-menu-title">{{ $t("header.Cars") }}</span>
       <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
-      <div v-for="(item,index) in cars" :key="index" class="row ml-auto mr-auto text-center mb-1">
-        <div v-for="(item2, index2) in item" :key="index2" class="col-6">
-          <div v-if="item2.slug && item2.slug !=''">
-            <div @click="closeAllNav()">
-              <nuxt-link :to="'/'+item2.slug">
-                <nuxt-img alt="Cars" format="webp" :src="item2.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
-                <span class="font-weight-bold">{{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}</span>
-              </nuxt-link>
-            </div>
+      <div v-for="(item, index) in cars" :key="index" class="px-3">
+        <div v-for="(item2, index2) in item" :key="index2" class="mb-2">
+          <div v-if="item2.slug && item2.slug !== ''">
+            <nuxt-link
+              :to="'/' + item2.slug"
+              class="d-block py-2 w-100 border-bottom"
+              @click.native="closeAllNav()"
+            >
+              <span class="font-weight-bold">
+                {{ item2.name && item2.name[$i18n.locale] ? item2.name[$i18n.locale] : 'N/A' }}
+              </span>
+            </nuxt-link>
           </div>
         </div>
       </div>
     </div>
+
     <div id="mySidenav6" class="sidenav">
-      <span class="mobile-menu-title-car">{{ $t("header.TokensAndSoftware") }}</span>
+      <span class="mobile-menu-title">{{ $t("header.TokensAndSoftware") }}</span>
       <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
-      <div class="text-center">
-        <button class="token-and-software-buttons">{{ $t("common.software") }}</button>
-      </div>
-      <div v-for="(itemm,index) in $settings.main_menu" :key="index">
-        <div v-for="(item2, index2) in itemm.items" :key="index2">
-          <div v-if="itemm.slug =='tokens-software'" class="row ml-auto mr-auto text-center d-flex flex-row ">
-            <div v-for="(item3,index3) in item2" :key="index3" class="col-6">
-              <div v-if="item3.slug.includes('software')" >
-                <div @click="closeAllNav()">
+      <div class="px-3">
+        <div class="mb-2 font-weight-bold">{{ $t("common.software") }}</div>
+        <div v-for="(itemm, index) in $settings.main_menu" :key="index">
+          <div v-for="(item2, index2) in itemm.items" :key="index2">
+            <div v-if="itemm.slug === 'tokens-software'">
+              <div v-for="(item3, index3) in item2" :key="index3">
+                <div v-if="item3.slug.includes('software')">
                   <nuxt-link
-                    :to="'/'+item3.slug">
-                    <nuxt-img alt="Software" format="webp" :src="item3.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
-                    <span class="font-weight-bold">{{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}</span>
+                    :to="'/' + item3.slug"
+                    class="d-block py-2 w-100 border-bottom"
+                    @click.native="closeAllNav()"
+                  >
+                    <span class="font-weight-bold">
+                      {{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}
+                    </span>
                   </nuxt-link>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <hr>
-      <div class="text-center">
-        <button class="token-and-software-buttons">{{ $t("common.token") }}</button>
-      </div>
-      <div v-for="(itemm,index) in $settings.main_menu" :key="index">
-        <div v-for="(item2, index2) in itemm.items" :key="index2">
-          <div v-if="itemm.slug =='tokens-software'" class="row ml-auto mr-auto text-center d-flex flex-row mb-1">
-            <div v-for="(item3,index3) in item2" :key="index3" class="col-6">
-              <div v-if="item3.slug.includes('token')" >
-                <div @click="closeAllNav()">
+
+        <hr>
+
+        <div class="mb-2 font-weight-bold">{{ $t("common.token") }}</div>
+        <div v-for="(itemm, index) in $settings.main_menu" :key="index">
+          <div v-for="(item2, index2) in itemm.items" :key="index2">
+            <div v-if="itemm.slug === 'tokens-software'">
+              <div v-for="(item3, index3) in item2" :key="index3">
+                <div v-if="item3.slug.includes('token')">
                   <nuxt-link
-                    :to="'/'+item3.slug">
-                    <nuxt-img alt="Token" format="webp" :src="item3.image.s.url" width="100" height="100" class="mb-1" loading="lazy" />
-                    <span class="font-weight-bold">{{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}</span>
+                    :to="'/' + item3.slug"
+                    class="d-block py-2 w-100 border-bottom"
+                    @click.native="closeAllNav()"
+                  >
+                    <span class="font-weight-bold">
+                      {{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}
+                    </span>
                   </nuxt-link>
                 </div>
               </div>

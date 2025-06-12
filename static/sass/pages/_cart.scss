@@ -80,12 +80,6 @@
 		}
 	}
 
-	.subtotal-price {
-		color: #f52020;
-		font-size: 1.6rem;
-		font-weight: 600;
-	}
-
 	.btn-remove {
 		right: -10px;
 		font-size: 1.1rem;
@@ -117,10 +111,10 @@
 }
 
 .table.table-cart {
-	.product-title a,
 	.subtotal-price {
 		display: block;
 		margin-bottom: 1px;
+		color: #f52020;
 	}
 }
 
@@ -522,4 +516,9 @@ i.cart-empty {
     font-size: 1.3rem;
     font-weight: 300;
     color: $navy-light-color;
+}
+.subtotal-price {
+	font-size: 16px;
+	font-weight: 600;
+	color: #f52020;
 }

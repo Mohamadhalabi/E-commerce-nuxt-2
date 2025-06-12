@@ -6,7 +6,7 @@
         class="dropdown-toggle cart-toggle"
         role="button"
         @click="showCartMenu">
-        <nuxt-img width="32px" height="32px" loading="lazy" src="/images/icons/cart-1.svg" alt="Cart Icon" />
+        <nuxt-img width="32px" height="32px" class="cart-icon" loading="lazy" src="/images/icons/cart-1.svg" alt="Cart Icon" />
         <span class="cart-count badge-circle">{{ cartCount }}</span>
       </a>
       <div class="cart-overlay" @click="hideCartMenu" />
@@ -56,11 +56,11 @@
                 <div
                   class="product-details m-0 p-0"
                   :class="{ 'text-right': getIsAr }">
-                  <h4 class="product-title m-0 p-0" style="max-width: 75%">
+                  <span class="product-title m-0 p-0" style="max-width: 75%">
                     <nuxt-link :to="getLink('/products/'+product.slug)">
                       {{ product.short_title }}
                     </nuxt-link>
-                  </h4>
+                  </span>
                     <div class="col-lg-12 sku-color mt-1"> {{$t('products.sku')}} :{{ product.sku }}</div>
                     <pv-quantity-input
                           :qty="product.quantity"
@@ -69,7 +69,7 @@
                           class="mt-1"
                           @changeQty="changeQuantity"
                       />
-                      <span class="price-color p-4">
+                      <span style="color:red">
                           {{product.price.currency + parseFloat(product.priceitem * product.quantity).toFixed(2) }}
                       </span>
                   <div class="w-100 d-flex align-items-center">

@@ -1,6 +1,7 @@
 <template>
-  <div style="top:0;left:0" class="p-1 position-absolute d-flex flex-column align items-center justify-content-between">
-    <!-- Begin:Top Row -->
+  <div
+    class="p-1 position-absolute d-flex flex-column align-items-center justify-content-between"
+    :style="!singeleProduct ? 'top:0;left:0' : ''"> 
     <div class="d-flex align-items-center justify-content-between  ">
       <!-- Begin: Discount -->
       <template
@@ -61,6 +62,7 @@ import { isEmpty } from "lodash";
 export default {
   props: {
     product: Object,
+    singeleProduct: Boolean,
   },
   data: function () {
     return {

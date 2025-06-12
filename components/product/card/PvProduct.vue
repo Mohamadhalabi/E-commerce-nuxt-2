@@ -36,10 +36,7 @@
          :class="{'product-card-information' : !isIndexPage, 'product-card-information-index' : isIndexPage}"
     >
       <div class="row">
-        <div class="col-lg-12 text-center">
-          <div class="sku-color">SKU:{{ product.sku }}</div>
-        </div>
-        <div class="col-lg-12 text-center category-title mb-lg-0 mb-md-0 mb-1 category-name">
+        <div class="col-lg-12 mb-lg-0 mb-md-0 mb-1">
           <div
             :class="{'text-right': getIsAr }"
             :style="'display: inline-block;'"
@@ -48,7 +45,7 @@
               class="categoryLink"
               :to="getLink('/'+product.categories['slug'])"
             >
-              {{ product.categories['title'] }}
+            {{ truncateTitle(product.categories['title'], 28) }}
             </nuxt-link>
           </div>
           <div v-if="product.categories.length > 1">
@@ -56,28 +53,29 @@
               class="categoryLink"
               :to="getLink('/' + product.categories[1].slug)"
             >
-              {{ product.categories[1].name }}
+            {{ truncateTitle(product.categories[1].name, 10) }}
             </nuxt-link>
           </div>
         </div>
-        <div class="col-lg-12 text-center mt-1 product-short-title"
-             :class="{'product-short-title-index': isIndexPage, 'product-short-title': !isIndexPage }"
-        >
-          <div>
-            <nuxt-link :to="getLink('/products/'+product.slug)">
-             <h2 class="product-h2 mb-0" style="">{{ truncateTitle(product.title, 75) }}</h2>
-            </nuxt-link>
-          </div>
+        <div class="col-lg-12">
+          <div class="sku-color product-sku">{{ product.sku }}</div>
+        </div>
+        <div class="col-lg-12 product-short-title" :class="{'product-short-title-index': isIndexPage, 'product-short-title': !isIndexPage }">
+          <nuxt-link :to="getLink('/products/'+product.slug)">
+            <span class="product-span" style="">{{ truncateTitle(product.title, 70) }}</span>
+          </nuxt-link>
         </div>
 <!--        col-lg-12 text-center mt-lg-1 mt-4 mt-md-1 mt-sm-2 mt-xl-2-->
-        <div class="col-lg-12">
+        <!-- <div class="col-lg-12">
+        </div> -->
+        <!-- <div class="col-lg-12">
           <pv-price-box
             class="m-0"
             v-if="product.hide_price == 0"
             :product="product"
             :gridPrice="true"
           />
-          <div v-else style="justify-content: center; display: flex;position: relative;bottom: 5px">
+          <div v-else style="display: flex;position: relative;bottom: 5px">
             <img src="/images/icons/whatsapp-logo.svg" width="20px" @click="goToWhatsApp(product)" />
             <span
               class="d-inline-block p-1 font-weight-bold"
@@ -87,14 +85,32 @@
             {{ $t("products.ContactUsToSendYouThePrice") }}
             </span>
           </div>
-        </div>
-        <div class="col-lg-12 text-center">
-          <pv-rating :product="product" />
-        </div>
+        </div> -->
       </div>
     </div>
+
+
+      <div class="px-3 mt-3">
+                  <pv-rating :product="product" />
+        <pv-price-box
+          v-if="product.hide_price == 0"
+          :product="product"
+          :gridPrice="true"
+        />
+        <div v-else style="display: flex; position: relative; bottom: 5px">
+          <img src="/images/icons/whatsapp-logo.svg" width="20px" @click="goToWhatsApp(product)" />
+          <span
+            class="d-inline-block p-1 font-weight-bold"
+            @click="goToWhatsApp(product)"
+            style="position: relative; color: #f52020; cursor: pointer; font-size: 14px"
+          >
+            {{ $t("products.ContactUsToSendYouThePrice") }}
+          </span>
+        </div>
+      </div>
+
     <!-- Begin:Buttons -->
-    <div class="d-lg-flex align-items-streach justify-content-center py-2 mt-4 mt-lg-2 mt-md-2">
+    <div class="d-lg-flex align-items-streach justify-content-center py-2">
       <button
       v-if="product.hide_price != 0 || product.categories.slug == 'Online-Services'"
       class="w-100 mx-1 whatsapp-button"
@@ -197,17 +213,6 @@ export default {
 </script>
 
 <style scoped>
-.price-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-  bottom: 0px;
-}
-.product-h2{
-  font-size: 15px;
-}
 
 .rounded-10 {
   border-radius: 10px;
@@ -223,9 +228,16 @@ export default {
 
 .categoryLink {
   text-decoration: underline;
-  font-size: 1.2rem;
+  font-size: 0.8rem;
+  font-weight: bold;
   color: #727272;
   transition: all 0.1s ease-in;
+}
+
+@media screen and (max-width: 767px){
+  .categoryLink{
+    font-size: 16px;
+  }
 }
 
 .categoryLink:hover {
@@ -234,30 +246,41 @@ export default {
 
 }
 .product-card-information, .product-card-information-index{
-  height: 200px;
-}
-.product-short-title{
-  font-weight: 900;
   height: 90px;
-}
-.product-short-title-index{
-  height: 80px;
 }
 
 @media screen and (max-width:1400px){
-  .product-short-title{
-    height: 100px;
-  }
-}
-@media screen and (max-width:1200px){
-  .product-short-title{
-    height: 90px;
+  .product-card-information, .product-card-information-index{
+    height: 120px;
   }
 }
 
-.product-short-title:hover{
-  text-decoration: underline;
+.product-short-title, .product-sku{
+  margin-top: 5px;
+  /* height: 80px; */
 }
+/* .product-short-title{
+  font-weight: 900;
+  height: 90px;
+} */
+/* .product-short-title-index{
+  height: 80px;
+} */
+
+@media screen and (max-width:1400px){
+  /* .product-short-title{
+    height: 100px;
+  } */
+}
+@media screen and (max-width:1200px){
+  /* .product-short-title{
+    height: 90px;
+  } */
+}
+
+/* .product-short-title:hover{
+  text-decoration: underline;
+} */
 
 .whatsapp-button{
   background-color: #2ba968;
@@ -273,39 +296,38 @@ export default {
   align-items: center;
   justify-content: center;
 }
+.product-span{
+  font-size: 0.9rem;
+  font-weight: bold;
+  line-break: anywhere;
+}
 @media screen and (max-width:767px){
-  .product-short-title{
-    height: 120px;
+  .product-span{
+    font-size: 16px;
   }
   .product-card-information, .product-card-information-index{
-    height: 220px;
+    height: 160px;
   }
 }
 @media screen and (max-width:575px){
-  .product-short-title{
+  /* .product-short-title{
     height: 90px;
-  }
+  } */
   .product-card-information, .product-card-information-index{
-    height: 200px;
-  }
-  .product-h2{
-    font-size: 13px;
+    /* height: 200px; */
   }
 }
 @media screen and (max-width:380px){
-  .product-short-title{
-    height: 100px;
-  }
-}
-@media screen and (max-width:320px){
-  .product-short-title{
-    height: 120px;
-  }
-  .product-card-information, .product-card-information-index{
+    .product-card-information, .product-card-information-index{
     height: 230px;
   }
-  .product-h2{
-    font-size: 13px;
-  }
+  /* .product-short-title{
+    height: 100px;
+  } */
+}
+@media screen and (max-width:320px){
+  /* .product-short-title{
+    height: 120px;
+  } */
 }
 </style>

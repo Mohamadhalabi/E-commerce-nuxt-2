@@ -201,4 +201,10 @@ export default {
   }
 };
 </script>
-<style lang="scss"> .flip-card__top, .flip-card__bottom, .flip-card__back-bottom, .flip-card__back::before, .flip-card__back::after { color: white !important; } </style>
+<style lang="scss"> .flip-card__top, .flip-card__bottom, .flip-card__back-bottom, .flip-card__back::before, .flip-card__back::after { color: white !important; } 
+
+
+.flip-card{
+  font-size: 30px!important;
+}
+</style>

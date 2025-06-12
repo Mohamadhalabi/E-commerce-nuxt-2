@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="product-default">
-      <pv-label-group :product="product" style="top:auto!important" />
+      <pv-label-group :singeleProduct="true" :product="product" />
     </div>
     <ImageMagnifier :image="product.gallery" :currentIndex="currentIndex" size="l" :isMouseInside="isMouseInside" />
     <Carousel

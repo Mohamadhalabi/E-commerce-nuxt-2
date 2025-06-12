@@ -429,7 +429,10 @@
 		font-size: 2.3rem;
 	}
 }
-
+.small-price-color{
+	font-size: 16px;
+	color: #f52020;
+}
 .brands-slider .swiper-slide {
 	max-height: 60px;
 }
@@ -532,11 +535,6 @@ button.mfp-close {
     display: flex;
     align-items: center;
 }
-
-.badge-circle {
-	font-size: 1.1rem;
-}
-
 .service-grid .feature-box {
 	height: 20em;
 }

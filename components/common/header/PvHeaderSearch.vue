@@ -1,130 +1,140 @@
 <template>
-  <div
-    class="header-search header-search-inline header-search-category text-right"
-  >
-  <div class="header-search-wrapper d-flex align-items-center">
-      <nuxt-img 
-        width="32px" 
-        height="32px"
-        loading="lazy" 
-        src="/images/icons/search-2.svg"
-        alt="Search icon" 
-        @click="goToShop"
-        class="search-icon me-2"
-      />
-      <div class="row w-100">
-        <div class="col-7">
-          <input
-            id="search_term"
-            v-model="searchKey"
-            class="form-control"
-            type="text"
-            name="search_term"
-            :placeholder="$t('home.searchInput')"
-            autocomplete="off"
-            @input="searchProduct(), isInputClicked = true; $emit('SearchInputClicked', isInputClicked)"
-            @focus="isInputClicked = true; $emit('SearchInputClicked', isInputClicked); searchProduct()"
-            @blur="isInputClicked = false; $emit('SearchInputClicked', isInputClicked)"
-            @keyup.enter="goToShop"
-          />
-        </div>
-        <div class="col-5">
-          <select class="form-select select-category" v-model="selectedCategory">
+  <div class="d-flex flex-column position-relative w-100">
+    <!-- Unified Search Input with Category Select -->
+    <div class="position-relative">
+      <div class="d-flex w-100">
+        <!-- Select dropdown with fixed width -->
+        <div style="" class="">
+          <select
+            class="form-select select-category border-end-0 rounded-start"
+            v-model="selectedCategory"
+          >
             <option value="Select a category">{{ $t('home.selectCategory') }}</option>
-            <option 
-              v-for="category in categories" 
-              :key="category.slug" 
+            <option
+              v-for="category in categories"
+              :key="category.slug"
               :value="category.slug"
             >
               {{ category[`name_${$i18n.locale}`] }}
             </option>
           </select>
         </div>
-      </div>
-    </div>
-      <div class="live-search-list">
-        <div v-if="searchKey.length > 0" class="search-suggests">
-          <b-list-group>
-            <b-list-group-item
-              v-for="(product, index) in availableItems"
-              :key="index"
-              class="pruductSearch align-items-center justify-content-between">
-              <nuxt-link class="p-0 notHover" @click.native="RemoveSearchKey" :to="getLink('/products/'+product.slug)">
-                <div class="row">
-                  <div class="col-xl-2 col-lg-2 m-auto">
-                    <nuxt-img
-                      format="webp"
-                      :src="product['gallery'][0]['s']['url']"
-                      :alt="product['short_title']"
-                      class="mr-auto ml-auto search-image"
-                    />
-                  </div>
-                  <div class="" :class="{'col-xl-8 col-lg-8': product.hide_price === 0, 'col-xl-7 col-lg-7': product.hide_price !== 0}">
-                    <p v-html="highlightSearchKey(product['title'] + ' ' + product['summary_name'], searchKey)" class="w-100"></p>
-                    <div class="sku-color">
-                      <p v-html="highlightSearchKey(product.sku, searchKey)"></p>
-                    </div>
-                  </div>
 
-                  <div :class="{'col-xl-2 col-lg-2': product.hide_price === 0, 'col-xl-3 col-lg-3': product.hide_price !== 0}">
-                    <pv-price-box
-                      class="text-right"
-                      v-if="product.hide_price == 0"
-                      :product="product"
-                    />
-                    <div v-else class="float-right d-flex">
-                      <i
-                        class="fab fa-sm fa-whatsapp m-auto"
-                        style="font-size: 20px; color: rgb(43, 169, 104); cursor: pointer;"
-                        @click="goToWhatsApp(product)"
-                      />
-                      <small
-                        class="px-2"
-                        @click="goToWhatsApp(product)"
-                        style="position: relative; color: rgb(43, 169, 104); cursor: pointer;font-size: 15px"
-                      >
-                        {{ $t("products.ContactUsToSendYouThePrice") }}
-                      </small>
-                    </div>
+        <!-- Search input that grows -->
+        <div class="flex-grow-1">
+          <input
+            v-model="searchKey"
+            class="form-control search-input border-start-0 rounded-end w-100"
+            type="text"
+            name="search_term"
+            :placeholder="typingPlaceholder"
+            autocomplete="off"
+            @input="searchProduct(); isInputClicked = true"
+            @focus="isInputClicked = true; searchProduct()"
+            @blur="handleBlur"
+            @keyup.enter="goToShop"
+          />
+        </div>
+      </div>
+
+      <!-- Search Result List -->
+      <div
+        v-if="availableItems.length"
+        class="live-search-list bg-white shadow rounded-bottom"
+      >
+        <ul class="list-group list-group-flush">
+          <li
+            v-for="(product, index) in availableItems"
+            :key="index"
+            class="list-group-item pruductSearch align-items-center justify-content-between"
+          >
+            <nuxt-link
+              class="p-0 notHover d-block text-decoration-none text-dark"
+              @click.native="RemoveSearchKey"
+              :to="getLink('/products/' + product.slug)"
+            >
+              <div class="row align-items-center">
+                <div class="col-2 m-auto text-center">
+                  <nuxt-img
+                    format="webp"
+                    :src="product.gallery[0]?.s?.url"
+                    :alt="product.short_title"
+                    class="search-image m-auto"
+                  />
+                </div>
+                <div
+                  :class="{
+                    'col-xl-8 col-lg-8': product.hide_price == 0,
+                    'col-xl-7 col-lg-7': product.hide_price !== 0
+                  }"
+                >
+                  <p
+                    v-html="highlightSearchKey(product.title + ' ' + product.summary_name, searchKey)"
+                  ></p>
+                  <small class="sku-color d-block" v-html="highlightSearchKey(product.sku, searchKey)"></small>
+                </div>
+                <div
+                  :class="{
+                    'col-xl-2 col-lg-2': product.hide_price == 0,
+                    'col-xl-3 col-lg-3': product.hide_price !== 0
+                  }"
+                  class="text-end"
+                >
+                  <pv-price-box
+                    v-if="product.hide_price == 0"
+                    :product="product"
+                  />
+                  <div v-else class="d-flex justify-content-end align-items-center">
+                    <i
+                      class="fab fa-whatsapp"
+                      style="font-size: 20px; color: rgb(43, 169, 104); cursor: pointer;"
+                      @click="goToWhatsApp(product)"
+                    ></i>
+                    <small
+                      class="px-2"
+                      @click="goToWhatsApp(product)"
+                      style="color: rgb(43, 169, 104); cursor: pointer; font-size: 15px"
+                    >
+                      {{ $t("products.ContactUsToSendYouThePrice") }}
+                    </small>
                   </div>
                 </div>
-              </nuxt-link>
-            </b-list-group-item>
-            <b-list-group-item
-              v-if="getProductsBySearchArrayLength > 5"
-              class="text-center border"
+              </div>
+            </nuxt-link>
+          </li>
+
+          <!-- Show More -->
+          <li
+            v-if="getProductsBySearchArrayLength > 5"
+            class="list-group-item text-center border-top"
+          >
+            <nuxt-link
+              class="notHover text-decoration-none"
+              :to="getLink('/shop' + (selectedCategory ? `?categories=${selectedCategory}&search=${searchKey}` : `?search=${searchKey}`))"
             >
-              <nuxt-link v-if="selectedCategory !=null" class="notHover" :to="getLink('/shop?&categories='+selectedCategory+'&search='+searchKey)">
-                <base-button-icon-1 class="w-50 py-3" :outline="true">
-                  see ({{ getProductsBySearchArrayLength - 5 }}) product more..
-                </base-button-icon-1>
-              </nuxt-link>
-              <nuxt-link v-else class="notHover" :to="getLink('/shop?search='+searchKey)">
-                <base-button-icon-1 class="w-100 py-3" :outline="true">
-                  see ({{ getProductsBySearchArrayLength - 5 }}) product more..
-                </base-button-icon-1>
-              </nuxt-link>
-            </b-list-group-item>
-          </b-list-group>
-        </div>
+              <base-button-icon-1 class="w-100 py-3" :outline="true">
+                see ({{ getProductsBySearchArrayLength - 5 }}) product more..
+              </base-button-icon-1>
+            </nuxt-link>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 <script>
-import {mapGetters} from "vuex";
-import axios from 'axios';
-import AutoComplate from "~/components/common/AutoComplate.vue";
-
+import { mapGetters } from "vuex";
+import axios from "axios";
+import PvPriceBox from "~/components/product/partials/PvPriceBox.vue";
+import BaseButtonIcon1 from "../BaseButtonIcon1.vue";
 export default {
-  components: {
-    BaseButtonIcon1: () => import("../BaseButtonIcon1.vue"),
-    PvPriceBox: () => import("~/components/product/partials/PvPriceBox"),
-    AutoComplate,
+    components: {
+    PvPriceBox,
+    BaseButtonIcon1
   },
-  data: function () {
+  data() {
     return {
-      isInputClicked:false,
+      isInputClicked: false,
       selectedCategory: "Select a category",
       searchKey: "",
       timer: null,
@@ -132,29 +142,64 @@ export default {
       productsBySearch: [],
       availableItems: [],
       getProductsBySearchArrayLength: 5,
+      typingPlaceholder: "",
+      fullPlaceholder: "I'm searching for ...",
+      typingIndex: 0,
+      typingTimer: null
     };
   },
-
   computed: {
     ...mapGetters("language", ["getLang"]),
   },
   mounted() {
     this.getCategoriesWithTranslate();
+    this.startTypewriterEffect();
+  },
+  beforeDestroy() {
+    if (this.typingTimer) clearInterval(this.typingTimer);
   },
   methods: {
-    RemoveSearchKey(){
+    handleBlur() {
+      setTimeout(() => {
+        this.isInputClicked = false;
+      }, 150);
+    },
+    startTypewriterEffect() {
+      this.typingPlaceholder = "";
+      this.typingIndex = 0;
+
+      const typeWriter = () => {
+        if (this.typingIndex < this.fullPlaceholder.length) {
+          this.typingPlaceholder += this.fullPlaceholder[this.typingIndex];
+          this.typingIndex++;
+        } else {
+          clearInterval(this.typingTimer);
+          setTimeout(() => {
+            this.typingPlaceholder = "";
+            this.typingIndex = 0;
+            this.typingTimer = setInterval(typeWriter, 100);
+          }, 2000);
+        }
+      };
+
+      this.typingTimer = setInterval(typeWriter, 100);
+    },
+
+    RemoveSearchKey() {
       this.searchKey = "";
       this.productsBySearch = [];
       this.availableItems = [];
     },
+
     getLink(route) {
-      if (this.getLang === 'en') {
+      if (this.getLang === "en") {
         this.getLang = "";
         return route;
       } else {
-        return `/${this.getLang}${route}`; // Include the language parameter
+        return `/${this.getLang}${route}`;
       }
     },
+
     highlightSearchKey(shortTitle, searchKey) {
       const lowerShortTitle = shortTitle.toLowerCase();
       const lowerSearchKey = searchKey.toLowerCase();
@@ -162,14 +207,9 @@ export default {
       const startIndex = lowerShortTitle.indexOf(lowerSearchKey);
       const endIndex = startIndex + searchKey.length;
 
-      if (startIndex === -1) {
-        return shortTitle;
-      }
+      if (startIndex === -1) return shortTitle;
 
-      const highlightedPart = `<mark style="background-color: #fdb585">${shortTitle.slice(
-        startIndex,
-        endIndex
-      )}</mark>`;
+      const highlightedPart = `<mark style="background-color: #fdb585">${shortTitle.slice(startIndex, endIndex)}</mark>`;
       const remainingPart = shortTitle.slice(endIndex);
 
       return `${shortTitle.slice(0, startIndex)}${highlightedPart}${remainingPart}`;
@@ -181,58 +221,65 @@ export default {
         "_blank"
       );
     },
+
     searchProduct() {
       if (this.searchKey.length >= 3) {
         this.$Progress.start();
-        let str = this.searchKey;
-        str = str.replace(/ +(?= )/g,'');
-        let search_key = str.replace(/#/g, "# "); // Add a space after #
-        search_key = search_key.replace(/# /g, ""); // Remove # and the following space
 
-        if (this.timer) {
-          clearTimeout(this.timer);
-          this.timer = null;
-        }
+        let str = this.searchKey.trim().replace(/ +(?= )/g, "");
+        let search_key = str.replace(/# +/g, "");
+
+        console.log("Searching for:", search_key); // ✅ LOG THIS
+
+        if (this.timer) clearTimeout(this.timer);
+
         this.timer = setTimeout(() => {
           let query = `?search=${search_key}`;
-          if (this.selectedCategory != null && this.selectedCategory !== "shop") {
-            query = `?search=${search_key}&categories=${this.selectedCategory}`;
+          if (
+            this.selectedCategory &&
+            this.selectedCategory !== "shop" &&
+            this.selectedCategory !== "Select a category"
+          ) {
+            query += `&categories=${this.selectedCategory}`;
           }
-          axios.get(`shop${query}`,{
-            baseURL: process.env.API_BASE_URL,
-            headers:{
-              'Accept-Language': this.$i18n.locale,
-              'Content-Type': 'application/json',
-              'currency': this.$cookies.get('currency') || 'USD',
-              'Accept': 'application/json',
-              'secret-key': process.env.SECRET_KEY,
-              'api-key': process.env.API_KEY,
-            },
-          })
-            .then((response) => {
-              this.$Progress.finish();
-              this.productsBySearch = response.data.products;
-              this.getProductsBySearchArrayLength = response.data.total;
-              this.availableItems = this.productsBySearch.slice(0, 5);
-              // this.$Progress.finish();
-            })
-            .catch((error) => {
-              this.$Progress.fail();
-              return {error: JSON.stringify(error)};
-            });
-        }, 500);
-      }
 
-      if(this.searchKey.length <3){
+
+          console.log("Final query:", query); // ✅ LOG QUERY
+
+          axios.get(`shop${query}`, {
+            baseURL: process.env.API_BASE_URL,
+            headers: {
+              "Accept-Language": this.$i18n.locale,
+              "Content-Type": "application/json",
+              currency: this.$cookies.get("currency") || "USD",
+              Accept: "application/json",
+              "secret-key": process.env.SECRET_KEY,
+              "api-key": process.env.API_KEY,
+            },
+          }).then((response) => {
+            this.$Progress.finish();
+            console.log("Search result:", response.data); // ✅ LOG RESPONSE
+
+            this.productsBySearch = response.data.products;
+            this.getProductsBySearchArrayLength = response.data.total;
+            this.availableItems = this.productsBySearch.slice(0, 5);
+          }).catch((error) => {
+            this.$Progress.fail();
+            console.error("Search error:", error); // ✅ LOG ERROR
+          });
+        }, 500);
+      } else {
         this.productsBySearch = [];
+        this.availableItems = [];
       }
     },
+
+
     getCategoriesWithTranslate() {
       this.categories = this.$settings.categories.map((category) => {
         let categoryNameLang = category.name;
-        for (const categoryNameLangKey in categoryNameLang) {
-          category[`name_${categoryNameLangKey}`] =
-            categoryNameLang[categoryNameLangKey];
+        for (const key in categoryNameLang) {
+          category[`name_${key}`] = categoryNameLang[key];
         }
         return category;
       });
@@ -241,32 +288,16 @@ export default {
     removeInputText() {
       this.searchKey = "";
     },
+
     goToShop() {
-      let query = null;
-      if (this.searchKey == "" && this.selectedCategory == null) {
-        return;
-      } else if (this.searchKey == "" && this.selectedCategory != null) {
-        query = {
-          categories: this.selectedCategory,
-          page: 1,
-        };
-      } else if (this.searchKey != "" && this.selectedCategory == null) {
-        query = {
-          page: 1,
-          search: this.searchKey,
-        };
-      } else if (this.searchKey != "" && this.selectedCategory != null) {
-        query = {
-          page: 1,
-          categories: this.selectedCategory,
-          search: this.searchKey,
-        };
-      } else if (this.searchKey != "" && this.selectedCategory == 'shop') {
-        query = {
-          page: 1,
-          search: this.searchKey,
-        };
-      }
+      if (!this.searchKey && !this.selectedCategory) return;
+
+      const query = {
+        ...(this.searchKey ? { search: this.searchKey } : {}),
+        ...(this.selectedCategory ? { categories: this.selectedCategory } : {}),
+        page: 1,
+      };
+
       this.$router.push({ path: "/shop", query });
       this.removeInputText();
       this.productsBySearch = [];
@@ -274,40 +305,19 @@ export default {
   },
 };
 </script>
-<style>
-/* .autoComplateClass .multiselect__tags {
-  background-color: transparent;
-  border: 0px;
-  margin-top: 3%;
-  width: 100%
-}
 
-.autoComplateClass .multiselect__element,
-.autoComplateClass .multiselect__input,
-.autoComplateClass .multiselect__single {
-  font-size: 12px;
-  text-align: end;
-  margin-top: 3px;
-  color: #b5adb5;
+<style>
+.live-search-list {
+  position: absolute;
+  top: 100%;
+  background: #fff;
+  z-index: 1050;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  padding: 0;
+  margin-top: 0;
+  display: block;
 }
-[dir=rtl] span.multiselect__placeholder {
-  float: left;
-}
-span.multiselect__placeholder{
-}
-.list-group-item.pruductSearch {
-  text-align: start;
-  border-bottom: 3px solid #dee2eb;
-}
-.notHover:hover {
-  background: none !important;
-}
-.search-image{
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-  width: 75px;
-}
-.search-image:hover{
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-} */
 </style>

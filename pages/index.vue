@@ -1,40 +1,74 @@
 <template>
   <main class="main">
       <!-- <pv-stories class="desktop-only" />     -->
-      <pv-intro-section/>
       <home-page-search />
-      <pv-slider-banner class="desktop-only"  />
+      <pv-intro-section/>
+      <home-page-offer/>
+      <!-- <pv-slider-banner class="desktop-only"  /> -->
     <div
         class="container-fluid">
         <div class="container">
-          <pv-latest-products
-            :isIndexPage ="true"
-            :collectionTitle="$t('home.latestProducts')"
-            :link="'new-arrival'"
-          />
+          <pv-section-title
+              :title="$t('home.latestProducts')"
+              :link="'new-arrival'"
+            ></pv-section-title>
+          <div class="row">
+            <div class="col-3 m-auto">
+              <img class="rounded-lg" src="https://dev-srv.tlkeys.com/storage/images/main-banner/ford-software-banner.webp" />
+            </div>
+            <div class="col-9 m-auto">
+              <pv-latest-products
+                :isIndexPage ="true"
+              />
+            </div>
+          </div>
         </div>
       </div>
-      <div
-        <div class="container">
-          <pv-best-selling
-            :isIndexPage ="true"
-            :collectionTitle="$t('home.bestSellingProducts')"
-            :link="'best-seller'"
-          />
+      <div class="container">
+         <pv-section-title
+              :title="$t('home.bestSellingProducts')"
+              :link="'best-seller'"
+            ></pv-section-title>
+          <div class="row">
+            <div class="col-9 m-auto">
+              <pv-best-selling
+                :isIndexPage ="true"
+              />
+            </div>
+            <div class="col-3 m-auto">
+              <img class="rounded-lg" src="https://dev-srv.tlkeys.com/storage/images/main-banner/rolls-royce-banner.jpg" />
+            </div>
+          </div>
         </div>
-      <div
-        class="container-fluid">
-        <div class="container">
-          <pv-top-selling
-            :isIndexPage ="true"
-            :collectionTitle="$t('home.topSellingProduct')"
-            :link="'top-selling'"
-          />
-        </div>
-      </div>
-      <div class="container-fluid pt-4">
+        <div class="container-fluid pt-4">
         <div class="container large-screen-only">
           <pv-line-banner class="mb-4" v-if="!isMobile" />
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="container">
+          <div class="mb-2">
+            <pv-section-title
+              :title="$t('home.topSellingProduct')"
+              :link="'top-selling'"
+            ></pv-section-title>
+          </div>
+          <div class="row">
+            <div class="col-3 m-auto">
+              <img class="rounded-lg" src="https://dev-srv.tlkeys.com/storage/images/sliders/Xhorse-Dolphin-XP-005L.jpg" />
+            </div>
+            <div class="col-9 m-auto">
+              <pv-top-selling
+                :isIndexPage ="true"
+              />          
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div
+          class="p-3 justify-content-center">
+            <pv-manufacturers-section/>
         </div>
       </div>
       <div class="container">
@@ -61,17 +95,11 @@
             />
           </div>
         </div>
-          <pv-manufacturers-section/>
-        <div style="background-color: #f07905">
-      <div class="container">
-        <div
-          class="p-3 justify-content-center">
-        </div>
-      </div>
-    </div>
   </main>
 </template>
 <script>
+import HomePageOffer from '~/components/home/HomePageOffer.vue';
+
 // import {mapGetters} from "vuex";
 // import api from '~/api';
 export default {
@@ -203,9 +231,11 @@ export default {
     }
   },
   components: {
-    PvStories: () => import("~/components/home/PvStories"),
-    PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
+    // PvStories: () => import("~/components/home/PvStories"),
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
+    PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
+    PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
+    HomePageOffer: () => import("~/components/home/HomePageOffer.vue"),
     PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
     PvLatestProducts: () => import("~/components/home/PvLatestProducts.vue"),
     PvBestSelling: () => import("~/components/home/PvBestSelling.vue"),
@@ -215,7 +245,7 @@ export default {
     PvTopSellingThreeProducts: () => import("~/components/home/PvTopSellingThreeProducts.vue"),
     PvNewArrival: () => import("~/components/home/PvNewArrival.vue"),
     PvFreeShipping:() => import("~/components/home/PvFreeShipping.vue"),
-    PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
+    PvSectionTitle: () => import("~/components/common/PvSectionTitle.vue"),
   },
 
   data: function () {

@@ -1,163 +1,75 @@
 <template>
-  <div>
-    <div class="col-lg-12">
-      <h1 class="home-page-h1 font-weight-bold m-0">{{ $t("home.keyandremote") }}</h1>
-    </div>
-    <div class="box-shadow-none third-menu">
-      <div class="row d-flex home-page-search mb-3 mb-lg-0 justify-content-center">
-        <div class="col-xl-5 col-lg-12 col-md-12 d-flex justify-content-center" style="align-items: center;margin:auto!important">
-          <div class="row p-3 p-lg-0">
-            <div class="col-lg-6 col-12 mt-auto mb-auto text-center">
-              <span class="search-by-fcc">
-                {{ $t("home.SearchFCCID") }} {{ $t("home.orSearchPartNumber")}}
-              </span>
-            </div>
-            <div class="col-lg-6 col-12">
-              <div class="searchProductStyle p-3">
-              <form class="nosubmit2"
-                    @submit.prevent="onEnter(searchKey)"
-              >
-                <input
-                  v-model="searchKey"
-                  type="search"
-                  class="w-100 fcc-part-search-input search-by-car"
-                  :placeholder="$t('common.search')"
-                  @input="searchProduct"
-                  :style=" getIsAr
-                            ? 'background-position: 96% ;'
-                            : 'background-position: 5px ;'
-                        "
-                />
-              </form>
-              <b-list-group
-                v-if="productsBySearch.length > 0"
-                class="home-page-search-items"
-              >
-                <b-list-group-item
-                  v-for="(product, index) in availableItems"
-                  :key="index"
-                  class="pruductSearch p-1 pt-2"
-                  @click="$router.push(`products/${product['slug']}`)">
-                  <nuxt-img
-                    format="webp"
-                    loading="lazy"
-                    :src="product['gallery'][0]['s']['url']"
-                    :alt="product['short_title']"
-                    width="50"
-                    class="d-inline-block mx-1"
-                  />
-                  <div>
-                    <span>{{ product["short_title"] }}</span>
-                    <div class="sku-color" style="margin-bottom: 5px;">Sku:{{ product.sku }}</div>
+<div class="search-bar-wrapper py-2 shadow-sm">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 d-flex flex-wrap justify-content-center gap-2 p-2">
 
-                    <pv-price-box
-                      class="m-0"
-                      :homePageSearch="true"
-                      v-if="product.hide_price == 0"
-                      :product="product"
-                    />
+        <!-- Brand Select -->
+        <div class="flex-grow-1" style="min-width: 150px; max-width: 200px;">
+          <select
+            class="form-select"
+            v-model="brand"
+            @change="getModelsByBrand"
+          >
+            <option :value="null" disabled selected>{{ $t('home.selectBrand') }}</option>
+            <option v-for="item in brands" :key="item.slug" :value="item.slug">
+              {{ item.brand }}
+            </option>
+          </select>
+        </div>
 
-                    <div
-                      v-else
-                      style="text-align: start; display: flex">
-                      <i
-                        class="fab fa-sm fa-whatsapp mx-1"
-                        style="
-                                    font-size: 20px;
-                                    color: #4fce5d;
-                                    cursor: pointer;
-                                  "
-                        @click="goToWhatsApp"
-                      />
-                      <small
-                        class="d-inline-block px-2"
-                        @click="goToWhatsApp(product)"
-                        style="
-                                    width: 100%;
-                                    position: relative;
-                                    color: #4fce5d;
-                                    cursor: pointer;
-                                  ">
-                        {{ $t("product.ContactUsToSendYouThePrice") }}
-                      </small>
-                    </div>
-                  </div>
-                </b-list-group-item>
-                <b-list-group-item
-                  v-if="getProductsBySearchArrayLength > 5"
-                  class="text-center border">
-                  <nuxt-link class="notHover" to="/shop">
-                    <base-button-icon-1
-                      class="w-100 py-3"
-                      :outline="true"
-                    >
-                      see ({{ getProductsBySearchArrayLength - 5 }})
-                      product more..
-                    </base-button-icon-1>
-                  </nuxt-link>
-                </b-list-group-item>
-              </b-list-group>
-            </div>
-            </div>
-          </div>
+        <!-- Model Select -->
+        <div class="flex-grow-1" style="min-width: 150px; max-width: 200px;">
+          <select
+            class="form-select"
+            v-model="model"
+            @change="getYears"
+          >
+            <option :value="null" disabled selected>{{ $t('home.selectModel') }}</option>
+            <option v-for="item in models" :key="item.slug" :value="item.slug">
+              {{ item.name }}
+            </option>
+          </select>
         </div>
-        <div class="col-xl-7 col-lg-12 col-md-12 m-auto d-lg-flex d-md-flex justify-content-center pl-5 pr-5 mb-2 mt-md-2 mb-md-2">
-          <div class="mt-auto mb-auto p-3">
-            <span class="search-by-fcc mt-lg-0">
-              {{ $t('home.searchByCar') }}
-            </span>
-          </div>
-              <div class="mb-1 mb-lg-0 search-by-car">
-              <AutoComplate
-              v-model="brand"
-              :placeholder="$t('home.selectBrand')"
-              :options="brands"
-              class="search-by-car-input"
-              :item-text="'brand'"
-              @setValue="$event ? (brand = $event.slug) : (brand = null),getModelsByBrand()"/>
-              </div>
-              <div class="ml-lg-2 mb-1 mb-lg-0 search-by-car">
-                <AutoComplate
-                  v-model="model"
-                  :placeholder="$t('home.selectModel')"
-                  :options="models"
-                  class="search-by-car-input"
-                  :item-text="'name'"
-                  @setValue="$event ? (model = $event.slug) : (model = null),getYears()"/>
-              </div>
-              <div class="ml-lg-2 mb-1 mb-lg-0 search-by-car">
-                <AutoComplate
-                  v-model="year"
-                  :placeholder="$t('home.selectYear')"
-                  :options="years"
-                  class="search-by-car-input"
-                  :item-text="'name'"
-                  @setValue="$event ? (year = $event.slug) : (year = null), goToShop()"
-                />
-              </div>
-              <div class="ml-lg-2 mb-1 mb-lg-0 search-by-car">
-                <base-button-icon-1
-                  @click="goToShop"
-                  :icon="true"
-                  :innerText="$t('home.Search')"
-                  class="py-3 w-100">
-                  <i class="icon sicon-magnifier"></i>
-                </base-button-icon-1>
-            </div>
+
+        <!-- Year Select -->
+        <div class="flex-grow-1" style="min-width: 150px; max-width: 200px;">
+          <select
+            class="form-select"
+            v-model="year"
+            @change="goToShop"
+          >
+            <option :value="null" disabled selected>{{ $t('home.selectYear') }}</option>
+            <option v-for="item in years" :key="item.slug" :value="item.slug">
+              {{ item.name }}
+            </option>
+          </select>
         </div>
+
+        <!-- Search Button -->
+        <div style="min-width: 100px;">
+          <base-button-icon-1
+            @click="goToShop"
+            :icon="true"
+            :innerText="$t('home.Search')"
+            class="w-100 h-100"
+          >
+            <i class="icon sicon-magnifier"></i>
+          </base-button-icon-1>
+        </div>
+
       </div>
     </div>
   </div>
+</div>
 </template>
 <script>
 import Api from "~/api";
 import {mapGetters} from "vuex";
-import AutoComplate from "~/components/common/AutoComplate.vue";
 export default {
   name: "HomePageSearch",
   components: {
     PvPriceBox: () => import("~/components/product/partials/PvPriceBox.vue"),
-    AutoComplate,
     BaseButtonIcon1: () => import("~/components/common/BaseButtonIcon1.vue"),
     PvPriceBox: () => import("~/components/product/partials/PvPriceBox.vue"),
 

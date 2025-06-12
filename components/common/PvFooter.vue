@@ -22,10 +22,6 @@
           <div class="row">
             <div class="col-lg-5 m-b-4">
               <p class="footer-desc text-white font-weight-bold" v-html="$t('footer.description')"/>
-              <div class="row ls-0 footer-question">
-                <div class="col-12">
-                </div>
-              </div>
             </div>
             <div class="col-lg-4 col-sm-8 m-b-4 justify-content-center d-lg-flex">
               <div class="widget">

@@ -19,14 +19,27 @@
 
 // # Variables
 
-#search_term{
-	max-width: 90%;
-	background-color: #fff;
-}
 .select-category{
-	max-width: 90%;
-	border: 0;
-	text-align: center;
+	border-top-left-radius: 20px!important;
+	border-bottom-left-radius: 20px!important;
+	border-top-right-radius: 1px!important;
+	border-bottom-right-radius: 1px!important;
+	height: 45px;
+	max-width: 180px;
+}
+
+.search-image{
+	box-shadow: 0 1px 3px rgba(0, 0, 0, .12), 0 1px 2px rgba(0, 0, 0, .24);
+    transition: all .3s cubic-bezier(.25,.8,.25,1);
+    width: 75px;
+}
+
+.search-input{
+	border-top-right-radius: 20px!important;
+	border-bottom-right-radius: 20px!important;
+	border-top-left-radius: 1px!important;
+	border-bottom-left-radius: 1px!important;
+	height: 45px;
 }
 
 @include set-default(

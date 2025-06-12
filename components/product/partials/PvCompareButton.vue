@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link
+  <!-- <nuxt-link
     v-if="isComparedList"
     to="/compares"
     class="d-flex"
@@ -23,7 +23,7 @@
   <span style="margin-top: 4px;">{{
       $t("products.addCompare")
     }}</span>
-  </a>
+  </a> -->
 </template>
 
 <script>

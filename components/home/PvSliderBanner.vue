@@ -3,7 +3,7 @@
     <section class="intro-section">
       <div class="container">
         <div class="row">
-          <div class="d-flex flex-column align-items-center justify-content-between col-xl-4 col-lg-4 col-md-8 ml-auto mr-auto">
+          <!-- <div class="d-flex flex-column align-items-center justify-content-between col-xl-4 col-lg-4 col-md-8 ml-auto mr-auto">
             <pv-banner-card
               class="d-none d-lg-block mt-1"
               :rondomProduct="rondomProduct[4]"
@@ -29,7 +29,7 @@
               :fourth_item="true"
             >
             </pv-banner-card>
-          </div>
+          </div> -->
           <div class="col-xl-4 col-lg-4 align-content-center mt-auto mb-auto large-screen-only">
             <Carousel
               class="rounded-5"
@@ -59,8 +59,7 @@
               </div>
             </Carousel>
           </div>
-
-          <div class="d-flex flex-column align-items-center justify-content-between col-xl-4 col-lg-4 col-md-8 ml-auto mr-auto">
+          <!-- <div class="d-flex flex-column align-items-center justify-content-between col-xl-4 col-lg-4 col-md-8 ml-auto mr-auto">
             <pv-banner-card
               class="d-none d-lg-block mt-1"
               :height="250"
@@ -85,7 +84,7 @@
               :fourth_item="true"
             >
             </pv-banner-card>
-          </div>
+          </div> -->
         </div>
       </div>
     </section>

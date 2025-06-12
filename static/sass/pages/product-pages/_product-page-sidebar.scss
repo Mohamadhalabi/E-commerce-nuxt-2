@@ -29,7 +29,6 @@
 		.widget-title {
 			color: #7a7d82;
 			font-weight: 600;
-			font-size: 14px;
 			font-family: $font-family;
 			line-height: 24px;
 		}
@@ -44,8 +43,6 @@
 			right: 2px;
 			transform: translateY(-50%);
 			transition: all .35s;
-			font-family: 'porto';
-			font-size: 1.7rem;
 			font-weight: 600;
 			color: $primary-color-dark;
 		}
@@ -134,7 +131,6 @@
 		text-transform: none;
 		border-bottom-width: 1px;
 		font-weight: 600;
-		font-size: 1.5rem;
 		line-height: 24px;
 	}
 

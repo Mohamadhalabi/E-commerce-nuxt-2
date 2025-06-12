@@ -29,9 +29,9 @@
     <div class="row">
       <div class="col">
         <div v-if="product.categories[0].slug == 'pin-code-offline' ||  (product.categories[0].slug == 'Online-Services' && product.price.value != 0 )">
-          <pv-price-box class="mb-2" :product="product" />
+          <pv-price-box class="" :product="product" />
         </div>
-        <pv-price-box class="mb-2" v-if="product.hide_price == 0" :product="product"/>
+        <pv-price-box class="" v-if="product.hide_price == 0" :product="product"/>
         <div v-else class="d-flex">
           <img src="/images/icons/whatsapp-logo.svg" @click="goToWhatsApp(product)" width="20px" />
           <span
@@ -199,7 +199,7 @@
           AddProductToCart(product);
         "
         :outline="true"
-        class="mx-2 py-4"
+        class="mx-2 py-3"
       >
         {{ $t("products.addCart") }}</base-button-icon-1>
       <div v-else class="d-flex align-items-center">
