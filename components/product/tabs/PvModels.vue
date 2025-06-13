@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-striped table-bordered">
+  <table class="table table-bordered table-striped mt-1 p-1">
     <thead>
     <tr>
       <th class="bg-white">{{$t('products.BRAND')}}</th>
@@ -88,11 +88,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .carsModel {
   text-decoration: underline;
 }
 .carsModel:hover {
   text-decoration: underline;
+}
+.table {
+  font-size: 14px;
 }
 </style>

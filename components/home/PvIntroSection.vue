@@ -4,10 +4,10 @@
       <div class="row">
         <div key="intro-1" class="col-12 mt-1">
           <Carousel
-            :show-arrows="false"
+            :show-arrows="true"
             :loop="true"
-            :autoplay-delay="5"
-            :show-dots="true"
+            :autoplay-delay="4"
+            :show-dots="false"
             :pagination-enabled="true"
           >
             <div

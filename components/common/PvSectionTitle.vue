@@ -1,6 +1,6 @@
 <template>
   <div :class="{ 'float-right' : getIsAr }" class="titleWrapper w-100 mb-1">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-lg-12 additional-product-items d-flex">
         <h3 class="m-0 home-page-title">
           <span v-if="!UrlLink.includes('undefined')">

@@ -3,9 +3,9 @@
     <div class="modal-wrapper custom-modal-form p-2" :class="$i18n.locale == 'ar' ? 'ltrClass' : ''">
       <div class="container">
         <div class="d-flex align-items-center w-100 justify-content-between mb-3" :class="{ 'flex-row-reverse': getIsAr }">
-          <h2 class="title m-0 mt-2">
+          <span class="update-title font-weight-bold">
             {{ typeForm == "edit" ? "Update Address" : "Create Address" }}
-          </h2>
+          </span>
         </div>
         <form action="#" class="custom-form mb-0" @submit.prevent="submit">
           <div class="row classFormRtl">
@@ -329,5 +329,8 @@ export default {
 <style>
 .address-buttons{
   min-width: 150px;
+}
+.update-title{
+  font-size: 24px;
 }
 </style>

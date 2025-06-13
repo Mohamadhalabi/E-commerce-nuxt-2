@@ -5,17 +5,10 @@
   </div>
   <div class="card-body">
     <p class="mb-0" style="text-align: center">
-      <base-button-icon-1 style="width: 90px" class="p-3 mx-1" @click="confirmDelete">
-      <span><svg xmlns="http://www.w3.org/2000/svg"
-        height="20"
-        viewBox="0 96 960 960"
-        width="20"
-        fill="#fff">
-        <path d="M261 936q-24.75 0-42.375-17.625T201 876V306h-41v-60h188v-30h264v30h188v60h-41v570q0 24-18 42t-42 18H261Zm438-630H261v570h438V306ZM367 790h60V391h-60v399Zm166 0h60V391h-60v399ZM261 306v570-570Z" /></svg>
-      </span>{{ $t("common.delete") }}</base-button-icon-1>
+      <base-button-icon-1 style="width: 90px" class="py-2 mx-2" @click="confirmDelete">
+      {{ $t("common.delete") }}</base-button-icon-1>
       <base-button-icon-1
-      style="width: 90px"
-      class="p-3 mx-1"
+      class="py-2 mx-2"
       :outline="true"
       @click="hideDialog">
       {{ $t("common.cancel") }}</base-button-icon-1>

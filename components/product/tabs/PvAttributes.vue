@@ -9,7 +9,7 @@
         v-for="(group, index) in groupedAttributeNames"
         :key="index"
       >
-        <table class="table table-striped table-bordered">
+        <table class="table table-bordered table-striped">
           <tbody>
           <tr v-for="attributeName in group" :key="attributeName">
             <th class="attribute-table-header">{{ attributeName }}</th>
@@ -74,9 +74,6 @@ export default {
 };
 </script>
 <style>
-.attributes-table{
-  margin-top: -15px;
-}
 .attribute-table{
   display: flex;
 }
@@ -90,9 +87,9 @@ export default {
 }
 .attribute-table-header{
   width: 50%;
-  background-color: #f9f9f9
+  font-size: 14px;
 }
 .attribute-table-td{
-  background-color: #ffffff
+  font-size: 14px;
 }
 </style>

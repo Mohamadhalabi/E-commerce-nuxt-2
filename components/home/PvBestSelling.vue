@@ -2,7 +2,6 @@
   <div ref="bestSellingProductsWrapper">
     <pv-collection
       v-if="bestSellingProducts2"
-      style="padding: 25px;"
       :isIndexPage="true"
       :products="bestSellingProducts2"
       :collectionTitle="$t('home.bestSellingProducts')"

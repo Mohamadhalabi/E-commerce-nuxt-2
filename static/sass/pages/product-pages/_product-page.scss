@@ -183,7 +183,7 @@ $product-single-thumbnail-gutter: 3px !default;
 	.product-title {
 		margin-bottom: 1.1rem;
 		color: $primary-color-dark;
-		font-size: 1.8rem;
+		font-size: 25px;
 		font-weight: 700;
 		letter-spacing: -.01em;
 		line-height: 35px;
@@ -368,7 +368,6 @@ $product-single-thumbnail-gutter: 3px !default;
 
 	.rating-link {
 		color: $navy-light2-color;
-		font-size: 1.3rem;
 		font-weight: 400;
 		&:hover {
 			text-decoration: underline;
@@ -387,7 +386,9 @@ $product-single-thumbnail-gutter: 3px !default;
 
 	.product-action {
 		padding: 1.5rem 0 1.6rem;
-		border-top: 1px solid $navy-light3-color;
+	}
+	.add-to-cart{
+		border-bottom: 1px solid $navy-light3-color;
 	}
 
 	.container {
@@ -496,7 +497,7 @@ main .sticky-header {
 .sku-color{
 	color: rgb(85, 107, 47);
 	font-weight: bold;
-	font-size: 0.9rem;
+	font-size: 16px;
 }
 @media screen and (max-width: 767px){
 	.sku-color{
@@ -783,21 +784,6 @@ main .sticky-header {
 
 	.feature-box-content {
 		margin-left: 0;
-	}
-}
-
-// 4.3) Tags Content
-.table.table-striped {
-	margin-top: 2rem;
-	margin-bottom: 5.9rem;
-
-	& td,
-	& th {
-		padding: 1.1rem 1.2rem;
-	}
-
-	tr:nth-child(odd){
-		background-color: #f9f9f9
 	}
 }
 

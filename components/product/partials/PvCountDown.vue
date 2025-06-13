@@ -207,4 +207,12 @@ export default {
 .flip-card{
   font-size: 30px!important;
 }
+.flip-clock{
+  padding: 0!important;
+  margin-top: 10px!important;
+}
+
+.flip-clock__slot{
+  font-size: 16px!important;
+}
 </style>

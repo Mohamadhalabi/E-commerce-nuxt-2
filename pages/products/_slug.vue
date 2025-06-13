@@ -34,13 +34,14 @@
       </nav>
       <div class="container">
         <div class="row">
-          <div class="col-xl-5 col-lg-5 col-md-6 col-sm-6 col-12">
-            <pv-media-new :product="product" />
-            <div class="text-center">
-              <span class="sku-color d-lg-none d-md-none">SKU: {{ product.sku }}</span>
+          <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12">
+            <div class="text-center d-lg-none d-md-none">
+              <span class="sku-color">{{ product.sku }}</span><br>
+              <h1 class="font-weight-bold mt-1 mb-1"> {{ product.title }}</h1>
             </div>
+            <pv-media-new :product="product" />
           </div>
-          <div class="col-xl-7 col-lg-7 col-md-5 col-sm-6 col-12 product-single-details">
+          <div class="col-xl-7 col-lg-7 col-md-5 col-sm-12 col-12 product-single-details">
             <pv-detail
             :product="product"
             :tokens="tokens"

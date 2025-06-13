@@ -3,13 +3,13 @@
     <template v-if="product.discount && product.discount.length != 0">
       <span
         v-if="product.discount.type == 'fixed'"
-        :class="[smallProducts ? 'small-price-color' : 'price-color', 'font-weight-bold', { 'highlighted': hasDuplicate(product.discount.value) }]"
+        :class="[smallProducts ? 'small-price-color' : (productPage ? 'product-detail-price' : 'price-color'), 'font-weight-bold', { 'highlighted': hasDuplicate(product.discount.value) }]"
       >
         {{ (product.price.value - (product.discount.value * product.price.exchange_rate)).toFixed(2) }}{{ product.price.currency }}
       </span>
       <span
         v-else
-        :class="[smallProducts ? 'small-price-color' : 'price-color', 'font-weight-bold', { 'highlighted': hasDuplicate(product.discount.value) }]"
+        :class="[smallProducts ? 'small-price-color' : (productPage ? 'product-detail-price' : 'price-color'), 'font-weight-bold', { 'highlighted': hasDuplicate(product.discount.value) }]"
       >
         {{ (product.price.value - (product.price.value * (product.discount.value / 100))).toFixed(2) }}{{ product.price.currency }}
       </span>
@@ -23,7 +23,7 @@
 
     <template v-else-if="product.is_sale == 1 && (product.price.value != product.sale_price.value)">
       <span
-        :class="[smallProducts ? 'small-price-color' : 'price-color', 'font-weight-bold', { 'highlighted': hasDuplicate(product.sale_price.value) }]"
+        :class="[smallProducts ? 'small-price-color' : (productPage ? 'product-detail-price' : 'price-color'), 'font-weight-bold', { 'highlighted': hasDuplicate(product.sale_price.value) }]"
       >
         {{ product.sale_price.currency + product.sale_price.value }}
       </span>
@@ -45,7 +45,7 @@
 
     <template v-else>
       <span
-        :class="[smallProducts ? 'small-price-color' : 'price-color', { 'highlighted': hasDuplicate(product.price.value), 'homePageSearch': homePageSearch === true }]"
+        :class="[smallProducts ? 'small-price-color' : (productPage ? 'product-detail-price' : 'price-color'), { 'highlighted': hasDuplicate(product.price.value), 'homePageSearch': homePageSearch === true }]"
       >
         {{ product.price.currency + product.price.value }}
       </span>
@@ -65,6 +65,7 @@ export default {
     homePageSearch: Boolean,
     additionalProductItems: Boolean,
     smallProducts: Boolean,
+    productPage: Boolean,
   },
   data: function () {
     return {

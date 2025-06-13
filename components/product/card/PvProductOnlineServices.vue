@@ -145,9 +145,6 @@ export default {
   border-radius: 10px;
 }
 
-.product-default {
-}
-
 .position-relative .category-list a {
   transition: all 0.1s ease-in;
 }

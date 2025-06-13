@@ -1,70 +1,132 @@
 <template>
   <main class="main">
-      <!-- <pv-stories class="desktop-only" />     -->
-      <home-page-search />
-      <pv-intro-section/>
-      <home-page-offer/>
-      <!-- <pv-slider-banner class="desktop-only"  /> -->
-    <div
-        class="container-fluid">
-        <div class="container">
-          <pv-section-title
-              :title="$t('home.latestProducts')"
-              :link="'new-arrival'"
-            ></pv-section-title>
-          <div class="row">
-            <div class="col-3 m-auto">
-              <img class="rounded-lg" src="https://dev-srv.tlkeys.com/storage/images/main-banner/ford-software-banner.webp" />
-            </div>
-            <div class="col-9 m-auto">
-              <pv-latest-products
-                :isIndexPage ="true"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+    <home-page-search />
+    <pv-intro-section/>
+    <home-page-offer/>
+
+    <!-- Latest Products Section -->
+    <div class="container-fluid">
       <div class="container">
-         <pv-section-title
-              :title="$t('home.bestSellingProducts')"
-              :link="'best-seller'"
-            ></pv-section-title>
-          <div class="row">
-            <div class="col-9 m-auto">
-              <pv-best-selling
-                :isIndexPage ="true"
-              />
-            </div>
-            <div class="col-3 m-auto">
-              <img class="rounded-lg" src="https://dev-srv.tlkeys.com/storage/images/main-banner/rolls-royce-banner.jpg" />
+        <pv-section-title
+          :title="$t('home.latestProducts')"
+          :link="'new-arrival'"
+        />
+        <div class="row">
+          <div class="col-3 home-page-banners d-none d-lg-block m-auto">
+            <div class="featured-collection-info flex shrink-0 flex-col">
+              <div class="featured-collection-image">
+                <a href="#" class="media block relative w-full">
+                  <img
+                    src="https://dev-srv.tlkeys.com/storage/images/main-banner/ford-software-banner.webp"
+                    class="img-fit home-page-banner-image img-fit--cover rounded-lg"
+                    style="object-position: 50% 50%"
+                    loading="lazy"
+                    alt="Latest Products"
+                  />
+                </a>
+              </div>
+              <div class="featured-collection-text flex flex-col grow">
+                <h2 class="section-heading">Latest Arrival</h2>
+                <div class="grow">
+                  <div class="rte">
+                    <p>Discover what’s new – Just landed!</p>
+                  </div>
+                </div>
+                <a class="mt-8 w-full shop-now" href="/new-arrival">Shop Now</a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="container-fluid pt-4">
-        <div class="container large-screen-only">
-          <pv-line-banner class="mb-4" v-if="!isMobile" />
-        </div>
-      </div>
-      <div class="container-fluid">
-        <div class="container">
-          <div class="mb-2">
-            <pv-section-title
-              :title="$t('home.topSellingProduct')"
-              :link="'top-selling'"
-            ></pv-section-title>
-          </div>
-          <div class="row">
-            <div class="col-3 m-auto">
-              <img class="rounded-lg" src="https://dev-srv.tlkeys.com/storage/images/sliders/Xhorse-Dolphin-XP-005L.jpg" />
-            </div>
-            <div class="col-9 m-auto">
-              <pv-top-selling
-                :isIndexPage ="true"
-              />          
-            </div>
+          <div class="col-lg-9 col-12 m-0">
+            <pv-latest-products :isIndexPage="true" />
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Best Selling Section -->
+    <div class="container">
+      <pv-section-title
+        :title="$t('home.bestSellingProducts')"
+        :link="'best-seller'"
+      />
+      <div class="row">
+        <div class="col-3 home-page-banners d-none d-lg-block m-auto">
+          <div class="featured-collection-info flex shrink-0 flex-col">
+            <div class="featured-collection-image">
+              <a href="https://www.locksmithkeyless.com/pages/deal-of-the-day" class="media block relative w-full">
+                <img
+                  src="https://www.locksmithkeyless.com/cdn/shop/files/11-6-2025-Deal-of-the-day.webp?v=1749651259&amp;width=460"
+                  class="img-fit home-page-banner-image img-fit--cover"
+                  style="object-position: 50% 50%"
+                  loading="lazy"
+                  alt="Deal of the Day"
+                />
+              </a>
+            </div>
+            <div class="featured-collection-text flex flex-col grow">
+              <h2 class="section-heading">Deal Of The Day</h2>
+              <div class="grow">
+                <div class="rte">
+                  <p>Limited Time, Big Savings – Grab It Now!</p>
+                </div>
+              </div>
+              <a class="mt-8 w-full shop-now" href="https://www.locksmithkeyless.com/pages/deal-of-the-day">Shop Now</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-9 col-12 m-0">
+          <pv-best-selling :isIndexPage="true" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Line Banner -->
+    <div class="container-fluid pt-4">
+      <div class="container large-screen-only">
+        <pv-line-banner class="mb-4" v-if="!isMobile" />
+      </div>
+    </div>
+
+    <!-- Top Selling Section -->
+    <div class="container-fluid">
+      <div class="container">
+        <div class="mb-2">
+          <pv-section-title
+            :title="$t('home.topSellingProduct')"
+            :link="'top-selling'"
+          />
+        </div>
+        <div class="row">
+          <div class="col-3 home-page-banners d-none d-lg-block m-auto">
+            <div class="featured-collection-info flex shrink-0 flex-col">
+              <div class="featured-collection-image">
+                <a href="/top-selling" class="media block relative w-full">
+                  <img
+                    src="https://dev-srv.tlkeys.com/storage/images/sliders/Xhorse-Dolphin-XP-005L.jpg"
+                    class="img-fit home-page-banner-image img-fit--cover rounded-lg"
+                    style="object-position: 50% 50%"
+                    loading="lazy"
+                    alt="Top Selling"
+                  />
+                </a>
+              </div>
+              <div class="featured-collection-text flex flex-col grow">
+                <h2 class="section-heading">Top Selling</h2>
+                <div class="grow">
+                  <div class="rte">
+                    <p>Most Popular Picks – Customers’ Favorites!</p>
+                  </div>
+                </div>
+                <a class="mt-8 w-full shop-now" href="/top-selling">Shop Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-9 col-12 m-0">
+            <pv-top-selling :isIndexPage="true" />
+          </div>
+        </div>
+      </div>
+    </div>
       <div class="container">
         <div
           class="p-3 justify-content-center">

@@ -1,8 +1,13 @@
 <template>
   <div v-if="manufacturers.length > 0" ref="manufacturersWrapper">
     <div class="container mb-1 mt-2" style="border-radius: 10px;padding: 10px;">
+      <div class="col-lg-12 additional-product-items d-flex">
+        <h3 class="m-0 home-page-title">
+          {{ $t("home.shopByBrand") }}
+        </h3>
+      </div>
       <Carousel
-        :slides-per-page="8"
+        :slides-per-page="6"
         :autoplay-delay="2"
         :paginate-by-slide="true"
         :responsive="[

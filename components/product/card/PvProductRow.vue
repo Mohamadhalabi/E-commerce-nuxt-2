@@ -1,6 +1,6 @@
 <template >
   <div
-    class="mb-2 mt-2 product-default bg-white inner-quickview  position-relative card-main-wrapper border shadow-sm rounded-10">
+    class="product-default bg-white inner-quickview  position-relative card-main-wrapper border shadow-sm rounded-10">
     <div class="row">
       <div class="col-lg-2 col-md-4 col-sm-4 col-xs-4 d-flex mt-auto mb-auto add-to-cart-accessories " style="border-right: 1px solid lightgrey; padding-top: 20px;padding-left: 20px; justify-content: space-around">
         <div class="mb-auto mt-auto accessories" v-if="product.hide_price == 0">
@@ -34,7 +34,7 @@
       </div>
       <div class="col-lg-2 col-md-4 col-sm-4 col-xs-1 mt-auto pt-lg-3 mb-auto">
         <pv-price-box
-          class="mt-1"
+          class="mt-1 text-center"
           v-if="product.hide_price == 0"
           :product="product"
           :additionalProductItems="true"

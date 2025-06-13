@@ -1,8 +1,8 @@
 <template>
   <div :class="{ 'text-right': getIsAr }">
     <div v-if="product.accessories && !isEmpty(product.accessories)">
-      <h3 class="additional-product-items mb-lg-3">{{ $t("products.Accessories") }}</h3>
-      <table class="table table-bordered table-spacing">
+      <h3 class="additional-product-items">{{ $t("products.Accessories") }}</h3>
+      <table class="table table-spacing">
         <tr>
           <td>
             <div
@@ -18,8 +18,8 @@
       </table>
     </div>
     <div v-if="product.compatible_with && !isEmpty(product.compatible_with)">
-      <h3 class="additional-product-items mb-lg-3">{{ $t("products.CompatibleWith") }}</h3>
-      <table class="table table-bordered table-spacing">
+      <h3 class="additional-product-items">{{ $t("products.CompatibleWith") }}</h3>
+      <table class="table table-spacing">
         <tr>
           <td>
             <div
@@ -34,8 +34,8 @@
       </table>
     </div>
     <div v-if="product.bundled.length > 0">
-      <h3 class="additional-product-items mb-lg-3">{{ $t("products.BundleProducts") }}</h3>
-      <table class="table table-bordered table-spacing">
+      <h3 class="additional-product-items">{{ $t("products.BundleProducts") }}</h3>
+      <table class="table table-spacing">
         <tr>
           <td>
             <div
@@ -338,9 +338,6 @@ export default {
 };
 </script>
 <style>
-.table-spacing tr {
-  margin-bottom: 10px!important;
-}
 .additional-product-items{
   border-image: linear-gradient(to right, #892118, #ff6800) 1;
   border-image-slice: 1;
@@ -369,7 +366,6 @@ div.vjs-poster{
 
 .modal-content {
   position: relative;
-  //max-width: 40%;
 }
 
 .modal-image-container {

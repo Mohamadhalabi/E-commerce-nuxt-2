@@ -486,7 +486,7 @@
 		margin-bottom: .6rem;
 		color: $body-text;
 		font-family: $font-family;
-		font-size: 1.4rem;
+		font-size: 16px;
 		font-weight: 400;
 		letter-spacing: -.01em;
 	}
@@ -721,6 +721,7 @@ p.noproduct-msg::before {
   cursor: pointer;
   font-size: 12px;
   padding: 7px;
+  scale: 0.8;
 }
 
 .selectedAddress {
@@ -943,6 +944,15 @@ p.your-order{
   font-weight: bold;
   padding: 10px;
 }
+
+.checkout-table-body h6{
+	font-size: 18px;
+}
+
+.checkout-table-body h4{
+	font-size: 24px
+}
+
 @media screen and (min-width: 993px) {
   .checkout-table-header, .checkout-table-body {
     border-bottom: 1px solid #e0e0e0
@@ -974,7 +984,7 @@ p.your-order{
     justify-content: center;
   }
   .bs-stepper-header{
-    display: block;
+    display: block!important;
   }
   .step{
     text-align: center;

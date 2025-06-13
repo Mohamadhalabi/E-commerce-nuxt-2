@@ -2,10 +2,10 @@
 <div class="search-bar-wrapper py-2 shadow-sm">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 d-flex flex-wrap justify-content-center gap-2 p-2">
+      <div class="col-12 d-flex flex-wrap justify-content-center gap-2 p-2 search-row">
 
         <!-- Brand Select -->
-        <div class="flex-grow-1" style="min-width: 150px; max-width: 200px;">
+        <div class="flex-grow-1" style="min-width: 150px;">
           <select
             class="form-select"
             v-model="brand"
@@ -19,7 +19,7 @@
         </div>
 
         <!-- Model Select -->
-        <div class="flex-grow-1" style="min-width: 150px; max-width: 200px;">
+        <div class="flex-grow-1" style="min-width: 150px;">
           <select
             class="form-select"
             v-model="model"
@@ -33,7 +33,7 @@
         </div>
 
         <!-- Year Select -->
-        <div class="flex-grow-1" style="min-width: 150px; max-width: 200px;">
+        <div class="flex-grow-1" style="min-width: 150px">
           <select
             class="form-select"
             v-model="year"
@@ -195,12 +195,14 @@ export default {
 }
 </script>
 <style>
-@media screen and (max-width: 767px){
-  .fcc-part-search-input{
-    height: 35px;
+@media screen and (max-width: 500px) {
+  .search-bar-wrapper .search-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
   }
-  .search-by-car{
-    padding:3px;
+
+  .search-bar-wrapper .search-row > div {
+    width: 100% !important;
   }
 }
 </style>

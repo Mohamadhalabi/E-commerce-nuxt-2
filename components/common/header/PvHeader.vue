@@ -226,20 +226,20 @@ export default {
       this.$nuxt.refresh();
     },
 
-    handleScroll() {
-      if (window.scrollY >= 350) {
-        this.$refs.headerBottom.classList.add('d-lg-flex');
-      } else {
-        this.$refs.headerBottom.classList.remove('d-lg-flex');
-      }
-    }
+    // handleScroll() {
+    //   if (window.scrollY >= 350) {
+    //     this.$refs.headerBottom.classList.add('d-lg-flex');
+    //   } else {
+    //     this.$refs.headerBottom.classList.remove('d-lg-flex');
+    //   }
+    // }
   },
   destroyed() {
     window.removeEventListener('scroll', this.checkScroll);
     window.removeEventListener('resize', this.checkMobile);
   },
   beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
+    // window.removeEventListener('scroll', this.handleScroll);
   },
   mounted() {
     if(process.client) {
@@ -253,7 +253,7 @@ export default {
     this.checkMobile();
     window.addEventListener('scroll', this.checkScroll, {passive:true});
     window.addEventListener('resize', this.checkMobile);
-    window.addEventListener('scroll', this.handleScroll, {passive:true});
+    // window.addEventListener('scroll', this.handleScroll, {passive:true});
   },
 };
 </script>

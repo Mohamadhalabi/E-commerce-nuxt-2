@@ -70,17 +70,30 @@
           @click="selectAddress(address)">
           <h5 class="card-header">
             <div class="row">
-              <div class="col-6 text-start">
-                <button type="button" class="btn btn-danger" @click="openDeleteConfirm(address)">
+              <div class="col-lg-6 col-md-6 col-6 text-start">
+                <base-button-icon-1
+                  @click="openDeleteConfirm(address)"
+                  :outline="true"
+                  class="px-2 py-2">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
                     <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
                   </svg>
                   {{$t("common.delete")}}
-                </button>
+                </base-button-icon-1>
               </div>
-              <div class="col-6">
-                
+              <div class="col-lg-6 col-md-6 col-6 text-end">
+                <base-button-icon-1
+                  @click="openAddressFormModal(address),displayAddressInCheckout()"
+                  :outline="true"
+                  class="px-2 py-2">
+                  <svg id='Edit_24' width='24' height='24' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='24' height='24' stroke='none' fill='#000000' opacity='0'/>
+                  <g transform="matrix(0.83 0 0 0.83 12 12)" >
+                  <path style="stroke: none; stroke-width: 1; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: miter; stroke-miterlimit: 4; fill: rgb(255, 255, 255); fill-rule: nonzero; opacity: 1;" transform=" translate(-15, -15)" d="M 22.828125 3 C 22.316375 3 21.804562 3.1954375 21.414062 3.5859375 L 19 6 L 24 11 L 26.414062 8.5859375 C 27.195062 7.8049375 27.195062 6.5388125 26.414062 5.7578125 L 24.242188 3.5859375 C 23.851688 3.1954375 23.339875 3 22.828125 3 z M 17 8 L 5.2597656 19.740234 C 5.2597656 19.740234 6.1775313 19.658 6.5195312 20 C 6.8615312 20.342 6.58 22.58 7 23 C 7.42 23.42 9.6438906 23.124359 9.9628906 23.443359 C 10.281891 23.762359 10.259766 24.740234 10.259766 24.740234 L 22 13 L 17 8 z M 4 23 L 3.0566406 25.671875 C 3.019555391732378 25.777315948579314 3.0004098353434143 25.88822818626975 3 26 C 3 26.552284749830793 3.4477152501692068 27 4 27 C 4.111771836422188 26.999590036115436 4.22268407474976 26.98044434440919 4.328125 26.943359 C 4.331387024617978 26.942074127865663 4.334642269631416 26.940772109861395 4.3378906 26.939453 L 4.3632812 26.931641 C 4.3652389131533935 26.93034554822427 4.367192058595549 26.929043206816875 4.3691406 26.927734 L 7 26 L 5.5 24.5 L 4 23 z" stroke-linecap="round" />
+                  </g>
+                  </svg>
+                  {{ $t("common.edit") }}
+                </base-button-icon-1>
               </div>
             </div>
           </h5>
@@ -341,13 +354,13 @@ export default {
       border-left: 0;
       content: '';
       display: block;
-      height: 1rem;
-      margin-left: 5px;
+      height: 16px;
+      margin-left: 3px;
       margin-top: 8px;
       transform:
         rotate(45deg)
         translate(-50%, -50%);
-      width: 0.5rem;
+      width: 8px;
     }
 
     &:checked {
