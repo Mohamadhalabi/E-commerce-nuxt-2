@@ -20,9 +20,10 @@
           </li>
         </ol>
       </nav>
-      <div class="col-md-12">
-        <ShopBanner v-if="category" :image="category.banner"/>
-        <ShopBanner v-if="manufacturer" :image="manufacturer.banner"/>
+      <div class="d-lg-none">
+      <MobileFilter v-if="category" :category="category.slug"/>
+      <MobileFilter v-if="manufacturer" :manufacturer="manufacturer.slug"/>
+      <MobileFilter v-if="brand" :brand="brand.slug"/>
       </div>
       <div class="row">
         <div class="col-lg-10">
@@ -33,6 +34,10 @@
             @direction-by="changeDirection"
             @filters="displayFilters"
           />
+          <div class="col-md-12">
+            <ShopBanner v-if="category" :image="category.banner"/>
+            <ShopBanner v-if="manufacturer" :image="manufacturer.banner"/>
+          </div>
           <div class="category-desc mt-3">
             <pv-tabs class="product-single-tabs">
               <ul class="nav nav-tabs" role="tablist" style="position: sticky;margin-bottom: 10px;">
@@ -83,27 +88,6 @@
                 >
                 </div>
                 <ImageModal :imageUrl="selectedImageUrl" ref="imageModal" />
-
-                <!-- <div v-if="frequently_asked_questions && !isEmpty(frequently_asked_questions)" id="faq-content" class="tab-pane fade" role="tabpanel" aria-labelledby="product-tab-faq" ref="contentContainer">
-                  <div v-for="(faq, index) in frequently_asked_questions" :key="index">
-                    <b-card no-body class="mb-1">
-                      <b-button class="pdf-button" block v-b-toggle="'accordion-' + index" @click="flipArrow(index)">
-                        <div class="pdf-icon"></div>
-                        <h2 class="m-0 pdf-faq-title">{{faq[0]}}
-                          <span :class="['accordion-arrow', {'flipped': isArrowFlipped(index)}]" style="float: right">&#9660;</span>
-                        </h2>
-                      </b-button>
-                      <b-collapse :id="'accordion-' + index" accordion="my-accordion" role="tabpanel">
-                        <b-card-body>
-                          <b-card-text>
-                            <p class="m-0" v-html="faq[1]"></p>
-                          </b-card-text>
-                        </b-card-body>
-                      </b-collapse>
-                    </b-card>
-                  </div>
-                </div> -->
-
                 <div
                   id="video-tab-content"
                   class="tab-pane fade"
@@ -142,35 +126,17 @@
           </div>
         </div>
       </div>
-      <!-- <div class="filter-modal">
-        <b-modal
-          id="bv-modal-example2"
-          v-model="openModal" centered hide-header hide-footer>
-          <div class="sidebar-shop p-4">
-              <sidebar-filter v-if="category" :category="category.slug"/>
-              <sidebar-filter v-if="manufacturer" :manufacturer="manufacturer.slug"/>
-              <sidebar-filter v-if="brand" :brand="brand.slug"/>
-          </div>
-        </b-modal>
-        <button
-          v-if="openModal"
-          title="Close (Esc)"
-          type="button"
-          class="close-image-modal"
-          @click="closeModal"
-        >
-          X
-        </button>
-      </div> -->
     </div>
   </main>
 </template>
 <script>
 import {isEmpty} from "lodash";
+import MobileFilter from "~/components/shop/MobileFilter.vue";
 import {scrollTopHandler} from "~/utils";
 export default {
   name: 'ShopTemplate',
   components: {
+    MobileFilter,
     PvContactus: () => import("~/components/product/tabs/PvContactus.vue"),
     ImageModal: () => import("~/components/product/ImageModal.vue"),
     PvTabs: () => import("~/components/features/PvTabs.vue"),

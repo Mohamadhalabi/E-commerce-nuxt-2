@@ -395,24 +395,23 @@ export default {
     },
     async getAccessoriesAndTools() {
       if(!this.AccessoriesAndToolsMenuOpened){
-        if (this.accessoriesAndTools.length === 0 && !this.isFetchingAccessoriesAndTools) {
-        this.isFetchingAccessoriesAndTools = true; // Set flag to true before making the request
+        this.isFetchingAccessoriesAndTools = true;
         await Api.get('/accessories-tools-menu')
-          .then(response => {
+        .then(response => {
             this.AccessoriesAndToolsMenuOpened = true;
             this.accessoriesAndTools = response.data.data.menu.main_menu['accessories-tools'];
-          })
-          .catch(error => {
-            console.error("Error fetching accessories and tools:", error);
-          })
-          .finally(() => {
-            this.isFetchingAccessoriesAndTools = false; // Reset flag after the request is done
-          });
-      }
+        })
+      .catch(error => {
+        console.error("Error fetching Accessories and tools:", error);
+      })
+      .finally(() => {
+        this.isFetchingAccessoriesAndTools = false; // Reset flag after the request is done
+      });
       }else{
         this.AccessoriesAndToolsMenuOpened = !this.AccessoriesAndToolsMenuOpened;
       }
     },
+    
     async getDevicesAndMachines() {
       if(!this.DeviceAndMachineMenuOpened){
         this.isFetchingDevicesAndMachines = true;
@@ -430,7 +429,7 @@ export default {
       }else{
         this.DeviceAndMachineMenuOpened = !this.DeviceAndMachineMenuOpened;
       }
-    },
+    },    
     async getSoftwareAndTokens(){
       if(!this.SoftwareAndTokenMenuOpened){
         try{

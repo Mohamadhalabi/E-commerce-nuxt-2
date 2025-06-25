@@ -2,7 +2,7 @@
   <div v-if="slides.length > 0">
     <section class="intro-section container">
       <div class="row">
-        <div key="intro-1" class="col-12 mt-1">
+        <div key="intro-1" class="col-12 mt-3 mb-2">
           <Carousel
             :show-arrows="true"
             :loop="true"
@@ -18,9 +18,8 @@
             >
               <a :href="slide.link" target="_blank" aria-label="Sliders">
                 <nuxt-img
-                  style="border-radius: 10px;"
                   format="webp"
-                  class="w-100 round-10"
+                  class="w-100"
                   sizes="sm:400px md:768px lg:1024px xl:1280px xxl:1536 2xl:1800px"
                   width="1800px"
                   height="454px"

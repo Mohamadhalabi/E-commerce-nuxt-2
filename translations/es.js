@@ -443,6 +443,7 @@ export default
     option4: 'Pago seguro',
     keyandremote:'LLAVES Y CONTROLES REMOTOS PARA CUALQUIER VEHÍCULO',
     searchByCar: 'Buscar por vehículo',
+    popularCategories: 'Categorías Populares',
   },
 
   compare: {

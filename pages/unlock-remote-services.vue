@@ -134,6 +134,6 @@ export default {
   vertical-align: middle!important;
 }
 .unlock-service-title{
-  font-size: 3.5rem;
+  font-size: 32px;
 }
 </style>

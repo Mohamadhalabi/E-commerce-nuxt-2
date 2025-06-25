@@ -444,6 +444,7 @@ export default
     option4: 'Безопасная оплата',
     keyandremote: 'КЛЮЧИ И ПУЛЬТЫ ДЛЯ ЛЮБОГО ТРАНСПОРТНОГО СРЕДСТВА',
     searchByCar: 'Поиск по автомобилю',
+    popularCategories: 'Популярные категории',
   },
 
   compare: {

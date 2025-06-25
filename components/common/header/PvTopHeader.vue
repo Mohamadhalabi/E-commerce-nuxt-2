@@ -80,6 +80,7 @@ export default {
   computed: {
     ...mapGetters("currency", ["currency"]),
     ...mapGetters("language", ["getLang"]),
+    ...mapGetters("rtlStore", ["getIsAr"]),
     availableCurrencies() {
       return this.$settings.currencies.filter((i) => i !== this.currency);
     },

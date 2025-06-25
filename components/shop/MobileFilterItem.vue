@@ -1,24 +1,22 @@
 <template>
   <div v-if="item.group != 'attributes'">
     <span class="widget-title">
-      <a
-        data-toggle="collapse"
-        href="javascript:;"
-        :class="{ collapsed: !isGroupOpened, 'text-right': getIsAr, 'mb-2': !isGroupOpened, 'mb-1': isGroupOpened }"
-        @click="toggleManual"
-      >
-        {{ item.group_name }}
-      </a>
-    </span>
-
-    <vue-slide-toggle :open="isGroupOpened" class="filter-border-bottom">
+        <a
+          data-toggle="collapse"
+          href="javascript:;"
+          :class="{ collapsed: !opened, 'text-right': getIsAr, 'mb-2': !opened ,'mb-1':opened }"
+          @click="opened = !opened"
+        >{{ item.group_name }}
+        </a>
+      </span>
+    <vue-slide-toggle :open="opened || true" class="filter-border-bottom">
       <div class="widget-body">
         <checkbox-item-category
-          class="mt-1"
-          v-if="item.type === 'checkbox_category'"
-          :items="item.items"
-          :group="item.group"
-          @filter-query="filterQuery"
+            class="mt-1"
+            v-if="item.type === 'checkbox_category'"
+            :items="item.items"
+            :group="item.group"
+            @filter-query="filterQuery"
         />
         <checkbox-item
           class="mt-1"
@@ -38,28 +36,23 @@
       </div>
     </vue-slide-toggle>
   </div>
-
   <div v-else>
-    <div class="widget-body" v-if="attributeFilters.items.length !== 0">
+    <div class="widget-body"
+         v-if="attributeFilters.items.length !==0">
       <template v-for="(filter, index) in attributeFilters.items">
-        <div
-          class="filter-toggle"
-          @click="toggleFilter(index)"
-          :class="{ 'text-right': getIsAr, 'mb-2': !isOpen(index), 'mb-1': isOpen(index) }"
-        >
+        <div class="filter-toggle" @click="toggleFilter(index)" :class="{'text-right': getIsAr, 'mb-2': !isOpen(index) ,'mb-1':isOpen(index)}">
           <a
             data-toggle="collapse"
             href="javascript:;"
             class="filter-title"
             :class="{
-              attributesfiltersClosed: !isOpen(index) && !getIsAr,
-              attributesfiltersOpened: isOpen(index) && !getIsAr,
-              attributesfiltersClosedAr: !isOpen(index) && getIsAr,
-              attributesfiltersOpenedAr: isOpen(index) && getIsAr,
-            }"
-          >
-            {{ index }}
-          </a>
+            attributesfiltersClosed: !isOpen(index) && !getIsAr,
+            attributesfiltersOpened:isOpen(index) && !getIsAr,
+            attributesfiltersClosedAr: !isOpen(index) && getIsAr,
+            attributesfiltersOpenedAr:isOpen(index) && getIsAr,
+             }">
+              {{ index }}
+            </a>
         </div>
         <div class="filter-border-bottom2">
           <transition name="filter-slide">
@@ -85,26 +78,15 @@ import { mapGetters } from "vuex";
 export default {
   name: "FilterItem",
   components: {
-    DropDownManufactureItem: () => import("~/components/shop/itemType/DropDownManufactureItem.vue"),
-    RadioButtonItem: () => import("~/components/shop/itemType/RadioButtonItem.vue"),
+    DropDownManufactureItem:() => import("~/components/shop/itemType/DropDownManufactureItem.vue"),
+    RadioButtonItem:() => import("~/components/shop/itemType/RadioButtonItem.vue"),
     CheckboxItem: () => import("~/components/shop/itemType/CheckboxItem.vue"),
     DropDownItem: () => import("~/components/shop/itemType/DropDownItem"),
     VueSlideToggle,
-    CheckboxItemCategory: () => import("~/components/shop/itemType/CheckboxItemCategory.vue"),
-  },
-  watch: {
-    '$route.query': {
-      immediate: true,
-      handler() {
-        this.manuallyToggled = false;
-      }
-    }
+    CheckboxItemCategory: () => import("~/components/shop/itemType/CheckboxItemCategory.vue")
   },
   props: {
-    selectedCategory: {
-      type: [String, Object, Array],
-      default: null
-    },
+    opened: Boolean,
     name: String,
     item: {
       type: [Object, Array],
@@ -115,48 +97,18 @@ export default {
       type: [Object, Array],
       required: false,
     },
-    checkedItems: {
-      type: Array,
-      default: () => [],
-    },
   },
   data() {
     return {
       openFilters: [],
-      manuallyToggled: false,
     };
   },
-  computed: {
-    ...mapGetters("rtlStore", ["getIsAr"]),
-    isGroupOpened() {
-      if (this.manuallyToggled !== false) return this.manuallyToggled;
-
-      const groupSlugs = (this.item.items || []).map(i => i.slug?.toLowerCase());
-
-      const hasChecked = this.checkedItems?.some(checked =>
-        groupSlugs.includes(checked.slug?.toLowerCase())
-      );
-
-      const hasCategory = this.selectedCategory &&
-        groupSlugs.includes(this.selectedCategory?.toLowerCase());
-
-      const hasManufacturer = this.selectedManufacture &&
-        groupSlugs.includes(this.selectedManufacture?.toLowerCase());
-
-      // ✅ Open group based on slugtype logic
-      const shouldOpenBySlugType = (
-        (this.slugtype === 'manufacturer' && this.item.group === 'manufacturers') ||
-        (this.slugtype === 'category' && this.item.group === 'category') ||
-        (this.slugtype === 'brand' && this.item.group === 'brands')
-      );
-
-      return hasChecked || hasCategory || hasManufacturer || shouldOpenBySlugType;
+  mounted() {
+    if (this.name === "checkboxes") {
+      this.opened = true;
     }
   },
   methods: {
-    toggleManual() {
-      this.manuallyToggled = !this.isGroupOpened;
-    },
     toggleFilter(index) {
       if (this.isOpen(index)) {
         this.closeFilter(index);
@@ -177,8 +129,11 @@ export default {
       }
     },
     filterQuery(data) {
-      this.$emit("filter-query", data);
+        this.$emit("filter-query", data);
     },
+  },
+  computed: {
+    ...mapGetters("rtlStore", ["getIsAr"]),
   },
 };
 </script>
@@ -201,8 +156,7 @@ h3.widget-title a.text-right::after {
   max-height: 0;
 }
 
-.fa-plus,
-.fa-minus {
+.fa-plus, .fa-minus{
   color: #313131;
   font-size: 12px;
 }
@@ -212,36 +166,36 @@ h3.widget-title a.text-right::after {
   transform: rotate(180deg);
 }
 
+
 .filter-toggle:not(:first-child) {
   padding-top: 20px;
 }
 
-.filter-toggle {
+.filter-toggle{
   cursor: pointer;
   padding-top: 5px;
   transition: ease-out 0.3s;
 }
-.attributesfiltersOpened::before {
+.attributesfiltersOpened::before{
   display: inline-block;
   width: 10px;
   height: 2px;
   background: #535250;
-  content: "";
+  content: '';
   margin-right: 2px;
   margin-top: 7px;
   float: right;
 }
-a.attributesfiltersClosed,
-a.attributesfiltersOpened {
+a.attributesfiltersClosed,a.attributesfiltersOpened{
   font-weight: 550;
   color: #313131;
 }
 
-.attributesfiltersClosed::before {
+.attributesfiltersClosed::before{
   display: inline-block;
   width: 10px;
   height: 2px;
-  content: "\002B";
+  content: '\002B';
   margin-right: 3px;
   font-size: 22px;
   margin-top: -6px;
@@ -249,39 +203,39 @@ a.attributesfiltersOpened {
   font-weight: normal;
 }
 
-.attributesfiltersClosedAr::before {
+.attributesfiltersClosedAr::before{
   display: inline-block;
   width: 10px;
   height: 2px;
   color: #535250;
-  content: "\002B";
+  content: '\002B';
   margin-right: 3px;
   font-size: 22px;
   margin-top: -6px;
   float: left;
 }
-.attributesfiltersOpenedAr::before {
+.attributesfiltersOpenedAr::before{
   display: inline-block;
   width: 10px;
   height: 2px;
   background: #535250;
-  content: "";
+  content: '';
   margin-right: 2px;
   margin-top: 7px;
   float: left;
 }
-.widget-title {
+.widget-title{
   text-transform: capitalize;
-  color: #333e48;
+  color: #333E48;
 }
 .filter-border-bottom {
   border-top: 1px solid #dee2e6;
 }
-.filter-border-bottom2 {
+.filter-border-bottom2{
   border-top: 1px solid #dee2e6;
 }
-.filter-border-bottom2::before {
-  content: "";
+.filter-border-bottom2::before{
+  content: '';
   display: block;
   position: relative;
   width: 18%;
@@ -290,8 +244,8 @@ a.attributesfiltersOpened {
   border-image-slice: 1;
   margin-top: -2px;
 }
-.widget-title::after {
-  content: "";
+.widget-title::after{
+  content: '';
   display: block;
   position: relative;
   width: 18%;
@@ -299,9 +253,9 @@ a.attributesfiltersOpened {
   border-image: linear-gradient(to right, #892118, #ff6800) 1;
   border-image-slice: 1;
 }
-.filter-title {
+.filter-title{
   text-transform: capitalize;
-  font-size: 1.1em;
-  color: #333e48;
+  font-size:1.1em;
+  color: #333E48;
 }
 </style>

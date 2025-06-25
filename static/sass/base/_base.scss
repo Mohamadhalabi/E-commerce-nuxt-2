@@ -367,9 +367,3 @@ body.modal-open {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(359deg); }
 }
-
-@include mq(md, max) {
-	html {
-		font-size: 9px;
-	}
-}

@@ -126,21 +126,21 @@
       
       <base-button-icon-1
         v-else-if="!product.has_token && !product.has_cover"
-        class="px-2 py-2 mx-1 w-100"
+        class="px-2 py-2 mx-lg-2 w-100"
         @click="addToCart(product)"
         :outline="true"
       >{{ $t("wishlist.addToCart") }}
       </base-button-icon-1>
       <base-button-icon-1
         v-else
-        class="px-2 py-2 mx-1 w-100"
+        class="px-2 py-2 mx-lg-2 w-100"
         @click="$router.push({ path: `/products/${product.slug}` })"
         :outline="true"
       >{{ $t("wishlist.addToCart") }}
       </base-button-icon-1>
 
       <base-button-icon-1
-        class="px-2 py-2 mx-1 w-100 mt-1 mt-lg-0"
+        class="px-2 py-2 mx-lg-2 w-100 mt-1 mt-lg-0"
         @click="openQuickview"
         :outline="true"
       >{{ $t("wishlist.QuickView") }}

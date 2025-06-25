@@ -318,7 +318,7 @@ export default {
     ...mapActions("shop", ["getCartList"]),
     ...mapActions("compare", ["fetchList"]),
     ...mapActions("fav", ["fetchWishlist"]),
-
+    ...mapActions("authentication", ["LogOut"]),
     getKeysAndRemotes: function(){
       if(JSON.parse(JSON.stringify(this.keysAndRemotes)).length == 0){
         Api.get('/keys-and-remotes-menu')
@@ -415,18 +415,6 @@ export default {
       document.getElementById("mySidenav5").style.width = "0";
       document.getElementById("mySidenav6").style.width = "0";
       document.querySelector("body").classList.remove("mmenu-active");
-    },
-    LogOut() {
-      // this.$Progress.start();
-      this.$auth.logout().then((res) => {
-        // localStorage.setItem("tokenEnded", 1);
-        this.fetchList();
-        this.fetchWishlist();
-        this.getCartList();
-        this.closeNav()
-        this.$router.push("/");
-      });
-      // this.$Progress.finish();
     },
   },
 };

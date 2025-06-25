@@ -441,6 +441,7 @@ export default
     option4: 'Paiement sécurisé',
     keyandremote:'CLÉS ET TÉLÉCOMMANDES POUR TOUS LES VÉHICULES',
     searchByCar: 'Rechercher par voiture',
+    popularCategories: 'Catégories Populaires',
   },
   compare: {
     addToCard: 'Ajouter au panier',

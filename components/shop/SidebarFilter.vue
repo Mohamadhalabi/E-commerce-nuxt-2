@@ -48,6 +48,7 @@
           :attributeFilters="attributeFilters"
           :selectedCategory="selected_category"
           :selectedManufacture="selected_manufacture"
+          :checkedItems="checked_items"
           @filter-query="filterQuery"
         />
       </div>
@@ -59,6 +60,7 @@
 import {mapGetters} from "vuex";
 import {scrollTopHandler} from "~/utils";
 import axios from "axios";
+import MobileDetect from 'mobile-detect';
 
 export default {
   name: "SidebarFilter",
@@ -67,11 +69,6 @@ export default {
     FilterItem: () => import("~/components/shop/FilterItem.vue"),
     BaseButtonIcon1: () => import("../common/BaseButtonIcon1.vue"),
   },
-
-  async fetch(){
-  //  await explodeFilter(this.$route.query) 
-  },
-
   props: {
     category: {
       type: String,
@@ -125,6 +122,24 @@ export default {
       }
     },
     explodeFilter(query) {
+      let isMobile = false;
+
+      // SSR (server-side) device detection
+      if (process.server && this.$ssrContext && this.$ssrContext.req) {
+        const userAgent = this.$ssrContext.req.headers['user-agent'];
+        const md = new MobileDetect(userAgent);
+        isMobile = !!md.mobile() || !!md.tablet();
+      }
+
+      // Client-side detection (fallback)
+      if (process.client && window.innerWidth < 993) {
+        isMobile = true;
+      }
+
+      // ❌ Don't make API call if it's a mobile device
+      if (isMobile) return;
+
+      // Proceed with your existing API logic
       let slug_type = "";
       if (this.category) {
         slug_type = "category";
@@ -133,7 +148,8 @@ export default {
       } else if (this.manufacturer) {
         slug_type = "manufacturer";
       }
-      this.slugtype = slug_type
+      this.slugtype = slug_type;
+
       let dataForm = {
         categories: this.category,
         brands: this.brand,
@@ -141,8 +157,9 @@ export default {
         attributes: query,
         slug_type: slug_type,
         language: this.getLang,
-        main_manufacturer: this.manufacturer
+        main_manufacturer: this.manufacturer,
       };
+
       for (const property in query) {
         dataForm[property] = query[property]
           ? query[property].split(",").toString()
@@ -153,18 +170,19 @@ export default {
 
       const axiosConfig = {
         baseURL: process.env.API_BASE_URL,
-        headers:{
+        headers: {
           'Accept-Language': this.$i18n.locale,
           'Content-Type': 'application/json',
           'currency': currency,
           'Accept': 'application/json',
           'secret-key': process.env.SECRET_KEY,
           'api-key': process.env.API_KEY,
-        }
+        },
       };
-
-      axios.post("/search/filter", dataForm, axiosConfig)
+      axios
+        .post("/search/filter", dataForm, axiosConfig)
         .then((response) => {
+          console.log(response)
           this.filter = response.data;
           this.total = this.filter.total;
           this.checked_items = this.filter.checked_items.items;
@@ -172,7 +190,6 @@ export default {
           this.selected_category = response.data.categories.selected;
           this.selected_manufacture = response.data.manufacturers.selected;
         });
-
     },
 
     filterQuery(data) {

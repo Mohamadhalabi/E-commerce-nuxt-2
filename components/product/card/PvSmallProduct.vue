@@ -2,7 +2,7 @@
   <div
     class="scalling product-default
      left-details product-widgetborder d-flex flex-column
-     align-items-start p-2 pb-0 w-100 h-100 border rounded-5 shadow-sm"
+     align-items-start p-2 pb-0 w-100 h-100 border rounded-5 shadow-sm mb-2"
   >
     <div class="w-100">
       <div class="row">

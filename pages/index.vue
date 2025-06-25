@@ -2,10 +2,33 @@
   <main class="main">
     <home-page-search />
     <pv-intro-section/>
-    <home-page-offer/>
+    <home-page-categories/>
+    <pv-manufacturers-section/>
 
+    <div class="container">
+      <pv-section-title
+      :title="$t('home.latestProducts')"
+      :link="'new-arrival'"
+      />
+      <pv-latest-products :isIndexPage="true" />
+
+      <pv-section-title
+        :title="$t('home.bestSellingProducts')"
+        :link="'best-seller'"
+      />
+      <pv-best-selling :isIndexPage="true" />
+      
+      <pv-line-banner class="" v-if="!isMobile" />
+
+      <pv-section-title
+        :title="$t('home.topSellingProduct')"
+        :link="'top-selling'"
+      />
+      
+      <pv-top-selling :isIndexPage="true" />
+    </div>
     <!-- Latest Products Section -->
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
       <div class="container">
         <pv-section-title
           :title="$t('home.latestProducts')"
@@ -41,10 +64,10 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Best Selling Section -->
-    <div class="container">
+    <!-- <div class="container">
       <pv-section-title
         :title="$t('home.bestSellingProducts')"
         :link="'best-seller'"
@@ -78,17 +101,12 @@
           <pv-best-selling :isIndexPage="true" />
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- Line Banner -->
-    <div class="container-fluid pt-4">
-      <div class="container large-screen-only">
-        <pv-line-banner class="mb-4" v-if="!isMobile" />
-      </div>
-    </div>
 
     <!-- Top Selling Section -->
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
       <div class="container">
         <div class="mb-2">
           <pv-section-title
@@ -126,13 +144,7 @@
           </div>
         </div>
       </div>
-    </div>
-      <div class="container">
-        <div
-          class="p-3 justify-content-center">
-            <pv-manufacturers-section/>
-        </div>
-      </div>
+    </div> -->
       <div class="container">
           <div class="product-widgets-container row pb-2">
             <pv-on-sale-products
@@ -160,8 +172,6 @@
   </main>
 </template>
 <script>
-import HomePageOffer from '~/components/home/HomePageOffer.vue';
-
 // import {mapGetters} from "vuex";
 // import api from '~/api';
 export default {
@@ -297,7 +307,7 @@ export default {
     HomePageSearch: () => import("~/components/home/HomePageSearch.vue"),
     PvIntroSection: () => import("~/components/home/PvIntroSection.vue"),
     PvManufacturersSection: () => import("~/components/home/PvManufacturersSection.vue"),
-    HomePageOffer: () => import("~/components/home/HomePageOffer.vue"),
+    HomePageCategories: () => import("~/components/home/HomePageCategories.vue"),
     PvSliderBanner: () => import("~/components/home/PvSliderBanner.vue"),
     PvLatestProducts: () => import("~/components/home/PvLatestProducts.vue"),
     PvBestSelling: () => import("~/components/home/PvBestSelling.vue"),

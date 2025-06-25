@@ -5,19 +5,23 @@
         <PvTopHeader />
       </div>
     </div>
+
     <header class="header">
       <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-        <div class="container">
-          <!-- Mobile Header Layout (screens < 992px) -->
-          <div class="d-flex d-lg-none justify-content-between align-items-center w-100 px-2 py-2">
-            <!-- Hamburger -->
-            <button class="hamburger-btn" @click="showMobileMenu" aria-label="Toggle mobile menu">
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
+        <div class="container d-block">
+          
+          <!-- ✅ Mobile Sticky-on-Scroll Wrapper -->
+          <div :class="['d-lg-none', 'mobile-scroll-wrapper', { 'fixed-on-scroll': isScrolled }]">
+            <!-- Mobile Header -->
+            <div :class="['d-flex justify-content-between align-items-center w-100', { 'px-4 py-4': isScrolled }]">
+              <!-- Hamburger -->
+              <button class="hamburger-btn" @click="showMobileMenu" aria-label="Toggle mobile menu">
+                <span></span>
+                <span></span>
+                <span></span>
+              </button>
 
-            <!-- Logo -->
+              <!-- Logo -->
               <nuxt-link :to="getLink('/')">
                 <nuxt-img
                   format="webp"
@@ -29,35 +33,39 @@
                 />
               </nuxt-link>
 
-            <!-- Login & Cart -->
-            <div class="d-flex align-items-center gap-2">
-              <nuxt-link :to="getLink('/auth/login-register')" class="d-flex align-items-center">
-                <img src="/images/icons/avatar.png" class="person-icon" width="30" height="30" />
-              </nuxt-link>
-              <div style="min-width: 36px;">
-                <pv-cart-menu />
+              <!-- Login & Cart -->
+              <div class="d-flex align-items-center gap-2">
+                <nuxt-link v-if="!this.StateUser" :to="getLink('/auth/login-register')" class="d-flex align-items-center">
+                  <img src="/images/icons/avatar.png" class="person-icon" width="30" height="30" />
+                </nuxt-link>
+                <nuxt-link v-else :to="getLink('/account?tab=dashboard')" class="d-flex align-items-center">
+                  <img src="/images/icons/avatar.png" class="person-icon" width="30" height="30" />
+                </nuxt-link>
+                <div style="min-width: 36px;">
+                  <pv-cart-menu />
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Mobile Search Bar -->
-          <div class="d-lg-none w-100 mt-2 px-2">
-            <pv-header-search @SearchInputClicked="SearchInputClicked" />
+            <!-- Mobile Search -->
+            <div class="w-100 px-2 py-2 border-top">
+              <pv-header-search @SearchInputClicked="SearchInputClicked" />
+            </div>
           </div>
 
           <!-- Desktop Header Layout (screens >= 992px) -->
           <div class="row d-none d-lg-flex align-items-center w-100">
             <div class="col-lg-3">
-                <nuxt-link :to="getLink('/')">
-                  <nuxt-img
-                    format="webp"
-                    class="logo-image p-2"
-                    sizes="sm:100vw md:50vw lg:400px"
-                    title="Techno lock logo"
-                    src="/images/logos/techno-lock-desktop-logo.webp"
-                    alt="tlk Logo"
-                  />
-                </nuxt-link>
+              <nuxt-link :to="getLink('/')">
+                <nuxt-img
+                  format="webp"
+                  class="logo-image p-2"
+                  sizes="sm:100vw md:50vw lg:400px"
+                  title="Techno lock logo"
+                  src="/images/logos/techno-lock-desktop-logo.webp"
+                  alt="tlk Logo"
+                />
+              </nuxt-link>
             </div>
             <div class="col-lg-6">
               <pv-header-search @SearchInputClicked="SearchInputClicked" />
@@ -76,7 +84,6 @@
                 <pv-cart-menu />
               </div>
             </div>
-
             <div class="col-lg-3 d-flex align-items-center" v-else>
               <nuxt-link class="nav-link d-flex align-items-center me-3" :to="getLink('/auth/login-register')">
                 <div class="header-user">
@@ -87,7 +94,6 @@
                 <pv-cart-menu />
               </div>
             </div>
-
           </div>
         </div>
       </nav>
@@ -134,6 +140,7 @@
   </div>
 </template>
 
+
 <script>
 import { mapActions, mapGetters, mapMutations } from "vuex";
 import api from "~/api";
@@ -148,7 +155,7 @@ export default {
   data() {
     return {
       isMobile: false,
-      isScrolling: false,
+      isScrolled: false,
       searchQuery:"",
       numbers: [1, 2, 3],
     };
@@ -226,20 +233,17 @@ export default {
       this.$nuxt.refresh();
     },
 
-    // handleScroll() {
-    //   if (window.scrollY >= 350) {
-    //     this.$refs.headerBottom.classList.add('d-lg-flex');
-    //   } else {
-    //     this.$refs.headerBottom.classList.remove('d-lg-flex');
-    //   }
-    // }
+    handleScroll() {
+      if (window.scrollY > 50) {
+        this.isScrolled = true;
+      } else {
+        this.isScrolled = false;
+      }
+    },
   },
   destroyed() {
     window.removeEventListener('scroll', this.checkScroll);
     window.removeEventListener('resize', this.checkMobile);
-  },
-  beforeDestroy() {
-    // window.removeEventListener('scroll', this.handleScroll);
   },
   mounted() {
     if(process.client) {
@@ -251,9 +255,12 @@ export default {
       }
     }
     this.checkMobile();
-    window.addEventListener('scroll', this.checkScroll, {passive:true});
+    window.addEventListener('scroll', this.handleScroll, { passive: true });
     window.addEventListener('resize', this.checkMobile);
-    // window.addEventListener('scroll', this.handleScroll, {passive:true});
+  },
+  beforeDestroy() {
+    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('resize', this.checkMobile);
   },
 };
 </script>
@@ -324,7 +331,7 @@ export default {
 }
 @media screen and (max-width: 992px){
   .mobile-logo{
-    max-width: 350px;
+    max-width: 280px;
   }
 }
 @media screen and (max-width: 500px){
@@ -338,13 +345,6 @@ export default {
     max-width: 150px;
   }
 }
-.logged-in-menu{
-  margin: 0;
-  border-top: 2px dotted #E6E6E6;
-  padding-top: 2px;
-  padding-bottom: 2px;
-}
-
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -363,5 +363,28 @@ export default {
 .pulse-animation-end-of-year {
   display: inline-block;
   animation: pulse 1.5s infinite ease-in-out;
+}
+@media (max-width: 991px) {
+  .mobile-scroll-wrapper {
+    background-color: white;
+    transition: all 0.3s ease;
+  }
+
+  .fixed-on-scroll {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1050;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .from-demo-26 {
+    padding-top: 0; /* Start with no padding */
+  }
+
+  .fixed-on-scroll ~ * {
+    margin-top: 130px; /* Offset rest of page when header becomes fixed */
+  }
 }
 </style>

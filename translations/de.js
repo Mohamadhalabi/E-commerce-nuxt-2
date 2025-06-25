@@ -442,6 +442,7 @@ export default
     option4: 'Sichere Zahlung',
     keyandremote:'SCHLÜSSEL & FERNBEDIENUNGEN FÜR JEDES FAHRZEUG',
     searchByCar: 'Nach Fahrzeug suchen',
+    popularCategories: 'Beliebte Kategorien',
   },
 
   compare: {

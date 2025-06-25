@@ -8,7 +8,7 @@
     <div class="account-content">
       <form id="detailsForm" action="#" class="custom-form" @submit.prevent="updateUserDetails">
         <div class="row">
-          <div class="col-md-8 order-md-0 order-1">
+          <div class="col-md-12 order-md-0 order-1">
             <!-- Name -->
             <div class="form-group mt-lg-0  mt-3">
               <label for="name">
@@ -27,23 +27,21 @@
 
             <div class="col-lg-12 col-md-12 mb-3 p-0">
               <label>{{ $t("auth.Language")}}</label>
-              <AutoComplate
-                :placeholder="profile.preferred_language"
-                :model="profile.preferred_language"
-                :allow-empty="false"
-                :options="[
-                  { name: 'English', value: 'en'},
-                  { name: 'French', value: 'fr' },
-                  { name: 'Spanish', value: 'es' },
-                  { name: 'German', value: 'de' },
-                  { name: 'Russian', value: 'ru' },
-                  ]"
-                @setValue="profile.preferred_language = $event.value"
-              />
+                <select
+                  class="form-select"
+                  v-model="profile.preferred_language"
+                >
+                  <option disabled value="">{{ profile.preferred_language || 'Select language' }}</option>
+                  <option value="en">English</option>
+                  <option value="fr">French</option>
+                  <option value="es">Spanish</option>
+                  <option value="de">German</option>
+                  <option value="ru">Russian</option>
+                </select>
             </div>
 
             <!-- Company -->
-            <div class="form-group mb-3">
+            <div class="form-group">
               <label for="acc-company-name">
                 {{ $t("account.company_name") }}
               </label>
@@ -56,81 +54,12 @@
               />
             </div>
           </div>
-
-          <!-- Avatar -->
-          <div class="col-md-4 pt-2  d-flex justify-content-center order-md-1 order-0">
-            <div
-              class="profile-avatar position-relative d-md-flex align-items-center  flex-column"
-            >
-              <a class="m-0 rounded-5" href="javascript:;">
-                <i
-                  class="rounded-5"
-                  :class="
-                    profile.avatar && profile.avatar !== ''
-                      ? 'user-avatar'
-                      : 'fa fa-user'
-                  "
-                >
-                </i>
-                <img
-                  loading="lazy"
-                  v-if="profile.avatar && profile.avatar !== ''"
-                  :src="profile.avatar"
-                  alt="Avatar"
-                />
-                <b-form-file
-                  prevent
-                  class="avatarClass"
-                  plain
-                  v-model="avatar"
-                  @change="onFileChange"
-                />
-
-
-                <span style="z-index: 0;" class="edit-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="25"
-                    viewBox="0 96 960 960"
-                    width="25"
-                    fill="#7c7c7a"
-                  >
-                    <path
-                      d="M303 753h60l230-230-60-60-230 230v60Zm310-250 40-40q8-8 8.5-19.5T654 424l-21-21q-8-8-19.5-8.5T594 402l-41 41 60 60ZM480 976q-82 0-155-31.5t-127.5-86Q143 804 111.5 731T80 576q0-83 31.5-156t86-127Q252 239 325 207.5T480 176q83 0 156 31.5T763 293q54 54 85.5 127T880 576q0 82-31.5 155T763 858.5q-54 54.5-127 86T480 976Zm0-60q142 0 241-99.5T820 576q0-142-99-241t-241-99q-141 0-240.5 99T140 576q0 141 99.5 240.5T480 916Zm0-340Z"
-                    />
-                  </svg>
-                </span>
-              </a>
-              <!--  <span class=" text-center"
-                v-if="profile.avatar && profile.avatar !== ''"
-                @click="removeUserAvatar"
-              >
-                {{ $t("account.remove_avatar") }}
-              </span> -->
-
-              <base-button-icon-1
-                class="mt-1 p-2"
-                :outline="true"
-                @click="removeUserAvatar"
-                v-mode="avatar"
-                v-if="profile.avatar && false && profile.avatar !== ''"
-              >{{ $t("account.remove_avatar") }}
-              </base-button-icon-1
-              >
-              <span
-                style="transform: none !important"
-                class="m-0"
-                v-if="!(profile.avatar && profile.avatar !== '')"
-              >{{ $t("account.upload_avatar") }}</span
-              >
-            </div>
-          </div>
         </div>
 
         <div class="row">
           <div class="col-md-12 mt-md-2">
             <!-- Email Address  -->
-            <div class="form-group mb-3">
+            <div class="form-group">
               <label for="acc-u-email">
                 {{ $t("account.email_address") }}
                 <span class="required">*</span>
@@ -149,7 +78,7 @@
 
           <div class="col-md-6">
             <!-- PhoneNumber -->
-            <div class="form-group mb-3 VuePhoneNumberInputClass">
+            <div class="form-group  VuePhoneNumberInputClass">
               <label for="acc-phone">
                 {{ $t("account.phone") }}
                 <span class="required">*</span>
@@ -168,7 +97,7 @@
 
           <div class="col-md-6">
             <!-- Website -->
-            <div class="form-group mb-3">
+            <div class="form-group">
               <label for="acc-website-url">
                 {{ $t("account.website") }}
               </label>
@@ -233,7 +162,6 @@ import Api from "~/api";
 import BaseButtonIcon1 from "../common/BaseButtonIcon1.vue";
 import {mapActions} from "vuex";
 import AutoComplate from "~/components/common/AutoComplate.vue";
-import PvError from "~/components/common/ErrorMessage.vue";
 import api from "~/api";
 export default {
   data: function () {

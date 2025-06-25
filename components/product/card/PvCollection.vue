@@ -1,7 +1,7 @@
 <template>
   <div v-if="products" data-nosnippet>
     <Carousel
-      :slides-per-page="4"
+      :slides-per-page="5"
       :show-dots='true'
       :autoplay-delay="11114"
       :gutter="20"

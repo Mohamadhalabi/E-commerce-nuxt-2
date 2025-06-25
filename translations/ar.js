@@ -394,6 +394,7 @@ export default {
     freeshoppingproducts: 'منتجات التسوق المجانية',
     keyandremote: 'مفاتيح وأجهزة تحكم عن بعد لأي سيارة',
     searchByCar: 'البحث عن طريق اختيار السيارات',
+    popularCategories: 'الفئات الشائعة',
 
   },
   compare: {

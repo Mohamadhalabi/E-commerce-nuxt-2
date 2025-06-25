@@ -1,5 +1,5 @@
 <template>
-<div class="search-bar-wrapper py-2 shadow-sm">
+<div class="search-bar-wrapper py-2 shadow-sm d-none d-lg-block">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 d-flex flex-wrap justify-content-center gap-2 p-2 search-row">

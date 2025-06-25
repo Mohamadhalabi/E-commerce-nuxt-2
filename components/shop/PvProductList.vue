@@ -4,12 +4,10 @@
     <div v-if="viewType == 'product'">
       <nav
         v-if="!products || (products && products.length > 0)"
-        v-sticky class="toolbox sticky-header mobile-sticky"
-        data-start-top="500"
-        data-offset-top="60">
-        <div class="filters d-flex d-lg-none">
+        v-sticky class="toolbox">
+        <!-- <div class="filters d-flex d-lg-none">
           <button @click="clickedFilter()" class="btn btn-secondary ml-2 mb-2">Filters</button>
-        </div>
+        </div> -->
         <div class="toolbox-left">
           <div class="row">
             <div class="col-6">
@@ -83,10 +81,17 @@
       <div v-if="pageCount > 1 && selectedNumber !== 8" class="d-flex justify-content-center mt-4">
         <nav>
           <ul class="pagination flex-wrap justify-content-center">
-            <li class="page-item" :class="{ disabled: selectedPage === 1 }">
-              <a class="page-link" href="#" @click.prevent="changePage(selectedPage - 1)">&laquo;</a>
+            <!-- First -->
+            <li class="page-item first-last" :class="{ disabled: selectedPage === 1 }">
+              <a class="page-link" href="#" @click.prevent="changePage(1)">«</a>
             </li>
 
+            <!-- Prev -->
+            <li class="page-item" :class="{ disabled: selectedPage === 1 }">
+              <a class="page-link" href="#" @click.prevent="changePage(selectedPage - 1)">‹</a>
+            </li>
+
+            <!-- Page numbers -->
             <li
               v-for="page in visiblePages"
               :key="page"
@@ -103,8 +108,14 @@
               </a>
             </li>
 
+            <!-- Next -->
             <li class="page-item" :class="{ disabled: selectedPage === pageCount }">
-              <a class="page-link" href="#" @click.prevent="changePage(selectedPage + 1)">&raquo;</a>
+              <a class="page-link" href="#" @click.prevent="changePage(selectedPage + 1)">›</a>
+            </li>
+
+            <!-- Last -->
+            <li class="page-item first-last" :class="{ disabled: selectedPage === pageCount }">
+              <a class="page-link" href="#" @click.prevent="changePage(pageCount)">»</a>
             </li>
           </ul>
         </nav>
@@ -114,13 +125,11 @@
 </template>
 
 <script>
-import { scrollTopHandler } from "~/utils";
 import axios from "axios";
-import Pagination from 'vue-pagination-2';
+import {scrollTopHandler} from "~/utils";
 
 export default {
   components: {
-    Pagination,
     BaseButtonIcon1: () => import("../common/BaseButtonIcon1.vue"),
     NotFound: () => import("~/components/shop/NotFound.vue"),
     PvCollection: () => import("~/components/product/card/PvCollection.vue"),
@@ -226,12 +235,12 @@ export default {
     };
   },
   watch: {
-    $route: function () {
-      this.type = this.$route.query.list_view ? "list" : "grid";
-      this.selectedPage = this.$route.query.page;
-      this.fetchProducts();
-    },
-
+      $route(to, from) {
+        this.type = to.query.list_view ? "list" : "grid";
+        this.selectedPage = parseInt(to.query.page ?? 1);
+        scrollTopHandler();
+        this.fetchProducts();
+      }
   },
   computed: {
     isSelected() {
@@ -252,14 +261,14 @@ export default {
         pages.push('...');
       }
 
-      for (let i = current - 3; i <= current + 3; i++) {
+      for (let i = current - 1; i <= current + 1; i++) {
         if (i > 0 && i <= total) {
           pages.push(i);
         }
       }
 
       // Always include last page
-      if (current < total - 3) {
+      if (current < total - 1) {
         pages.push('...');
         pages.push(total);
       }
@@ -427,6 +436,9 @@ export default {
     width: 100%;
     margin-bottom: 15px;
     margin-top: 15px;
+  }
+  .first-last{
+    display: none;
   }
 }
 @media screen and (max-width: 767px) {

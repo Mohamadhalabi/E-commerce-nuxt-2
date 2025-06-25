@@ -1,5 +1,7 @@
 <template>
     <main class="main">
+      <client-only>
+      
       <div class="container account-container custom-account-container">
         <div
           class="row">
@@ -8,9 +10,13 @@
             sticky-container
           >
             <div v-sticky="isSticky" sticky-offset="{top: 136}">
-              <div class="from-demo-26 mb-3">
-                <div v-if="isAuthenticated" class="header-user">
-                  <i :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">
+              <div class="from-demo-26 mb-1">
+                <div v-if="this.isAuthenticated" class="header-user">
+                  <nuxt-img src="/images/icons/avatar.png" width="32px" height="32px" class="person-icon">
+                    
+                  </nuxt-img>
+                    {{ StateUser.name }}
+                  <!-- <i :class="StateUser.avatar ? 'user-avatar' : 'sicon-user'">
                     <nuxt-img
                       format="webp"
                       v-if="StateUser.avatar"
@@ -20,7 +26,7 @@
                       height="50"
                       alt="Avatar"
                     />
-                  </i>
+                  </i> -->
 
                   <div
                     class="header-userinfo d-none d-lg-block mx-2"
@@ -190,7 +196,7 @@
                     </a>
                   </li>
 
-                  <li class="nav-item custom-nav-item" style="cursor: pointer">
+                  <!-- <li class="nav-item custom-nav-item" style="cursor: pointer">
                     <a
                       class="nav-link custom-nav-link"
                       :class="$route.query.tab == 'wishlist' ? 'active' : ''"
@@ -206,9 +212,9 @@
                       </span>
                     </span>
                     </a>
-                  </li>
+                  </li> -->
 
-                  <li class="nav-item custom-nav-item" style="cursor: pointer">
+                  <!-- <li class="nav-item custom-nav-item" style="cursor: pointer">
                     <a
                       class="nav-link custom-nav-link"
                       :class="$route.query.tab == 'compares' ? 'active' : ''"
@@ -224,7 +230,7 @@
                       </span>
                     </span>
                     </a>
-                  </li>
+                  </li> -->
 
                   <li class="nav-item custom-nav-item" style="cursor: pointer">
                     <a
@@ -243,7 +249,7 @@
                     </span>
                     </a>
                   </li>
-                  <li v-if="isAuthenticated" class="custom-nav-item">
+                  <li v-if="this.isAuthenticated" class="custom-nav-item">
                     <a
                       href="javascript:;"
                       class="nav-link custom-nav-link"
@@ -380,9 +386,9 @@
             <div v-else-if="$route.query.tab == 'cart'">
               <PvCart />
             </div>
-            <div v-else-if="$route.query.tab == 'wishlist'">
+            <!-- <div v-else-if="$route.query.tab == 'wishlist'">
               <PvWashlist />
-            </div>
+            </div> -->
             <div v-else-if="$route.query.tab == 'compares'">
               <PvCompareList />
             </div>
@@ -395,6 +401,7 @@
           </div>
         </div>
       </div>
+      </client-only>
     </main>
 </template>
 
@@ -520,8 +527,8 @@ export default {
   computed: {
     ...mapGetters("authentication", ["isAuthenticated", "StateUser"]),
     ...mapGetters("shop", ["cartCount"]),
-    ...mapGetters("fav", ["getWishlistCounts"]),
-    ...mapGetters("compare", ["getCounts"]),
+    // ...mapGetters("fav", ["getWishlistCounts"]),
+    // ...mapGetters("compare", ["getCounts"]),
     ...mapGetters("rtlStore", ["getIsAr"]),
   },
   components: {
@@ -536,10 +543,10 @@ export default {
     // PvCards: () => import("~/components/account/PvCards"),
     PvOrderInfo: () => import("~/components/account/PvOrderInfo"),
     PvCart: () => import("~/components/account/PvCart"),
-    PvWashlist: () => import("~/components/account/PvWashlist"),
-    PvCompareList: () => import("~/components/account/PvCompareList"),
+    // PvWashlist: () => import("~/components/account/PvWashlist"),
+    // PvCompareList: () => import("~/components/account/PvCompareList"),
     // PvSupport: () => import("~/components/account/PvSupportList"),
-    PvWhatsNew: () => import("~/components/account/PvWhatsNew"),
+    // PvWhatsNew: () => import("~/components/account/PvWhatsNew"),
   },
 
   data: function () {
@@ -551,7 +558,7 @@ export default {
   },
 
   mounted() {
-    this.getWhatsNews();
+    // this.getWhatsNews();
   },
 
   methods: {
@@ -570,13 +577,13 @@ export default {
       }
     },
 
-    getWhatsNews() {
-      // this.$Progress.start();
-      Api.get("/user/whats-new").then((response) => {
-        this.urReads = response.data.unread_total;
-      });
-      // this.$Progress.finish();
-    },
+    // getWhatsNews() {
+    //   // this.$Progress.start();
+    //   Api.get("/user/whats-new").then((response) => {
+    //     this.urReads = response.data.unread_total;
+    //   });
+    //   // this.$Progress.finish();
+    // },
 
     defalutAvatar(e) {
       e.target.src = img;

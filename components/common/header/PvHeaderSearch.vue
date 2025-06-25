@@ -9,7 +9,7 @@
             class="form-select select-category border-end-0 rounded-start"
             v-model="selectedCategory"
           >
-            <option value="Select a category">{{ $t('home.selectCategory') }}</option>
+            <option :value="defaultCategoryLabel">{{ $t('home.selectCategory') }}</option>
             <option
               v-for="category in categories"
               :key="category.slug"
@@ -38,10 +38,7 @@
       </div>
 
       <!-- Search Result List -->
-      <div
-        v-if="availableItems.length"
-        class="live-search-list bg-white shadow rounded-bottom"
-      >
+        <div v-if="isInputClicked && searchKey.length >= 2 && availableItems.length" class="live-search-list bg-white shadow rounded-bottom custom-scroll-mobile" ref="searchDropdown">
         <ul class="list-group list-group-flush">
           <li
             v-for="(product, index) in availableItems"
@@ -53,33 +50,26 @@
               @click.native="RemoveSearchKey"
               :to="getLink('/products/' + product.slug)"
             >
-              <div class="row align-items-center">
-                <div class="col-2 m-auto text-center">
+              <div class="d-flex align-items-center gap-2 w-100 flex-wrap flex-md-nowrap">
+                <!-- Image -->
+                <div class="flex-shrink-0 text-center" style="width: 60px;">
                   <nuxt-img
                     format="webp"
                     :src="product.gallery[0]?.s?.url"
                     :alt="product.short_title"
-                    class="search-image m-auto"
+                    class="search-image"
+                    style="max-width: 100%; max-height: 60px;"
                   />
                 </div>
-                <div
-                  :class="{
-                    'col-xl-8 col-lg-8': product.hide_price == 0,
-                    'col-xl-7 col-lg-7': product.hide_price !== 0
-                  }"
-                >
-                  <p
-                    v-html="highlightSearchKey(product.title + ' ' + product.summary_name, searchKey)"
-                  ></p>
+
+                <!-- Title + SKU -->
+                <div class="flex-grow-1">
+                  <p class="mb-1" v-html="highlightSearchKey(product.title + ' ' + product.summary_name, searchKey)"></p>
                   <small class="sku-color d-block" v-html="highlightSearchKey(product.sku, searchKey)"></small>
                 </div>
-                <div
-                  :class="{
-                    'col-xl-2 col-lg-2': product.hide_price == 0,
-                    'col-xl-3 col-lg-3': product.hide_price !== 0
-                  }"
-                  class="text-end"
-                >
+
+                <!-- Price or WhatsApp -->
+                <div class="text-lg-end flex-shrink-0" style="min-width: 100px;">
                   <pv-price-box
                     v-if="product.hide_price == 0"
                     :product="product"
@@ -104,16 +94,13 @@
           </li>
 
           <!-- Show More -->
-          <li
-            v-if="getProductsBySearchArrayLength > 5"
-            class="list-group-item text-center border-top"
-          >
+          <li v-if="getProductsBySearchArrayLength > visibleSearchLimit" class="list-group-item text-center border-top">
             <nuxt-link
               class="notHover text-decoration-none"
               :to="getLink('/shop' + (selectedCategory ? `?categories=${selectedCategory}&search=${searchKey}` : `?search=${searchKey}`))"
             >
               <base-button-icon-1 class="w-100 py-3" :outline="true">
-                see ({{ getProductsBySearchArrayLength - 5 }}) product more..
+                see ({{ getProductsBySearchArrayLength - visibleSearchLimit }}) product more..
               </base-button-icon-1>
             </nuxt-link>
           </li>
@@ -127,14 +114,16 @@ import { mapGetters } from "vuex";
 import axios from "axios";
 import PvPriceBox from "~/components/product/partials/PvPriceBox.vue";
 import BaseButtonIcon1 from "../BaseButtonIcon1.vue";
+
 export default {
-    components: {
+  components: {
     PvPriceBox,
-    BaseButtonIcon1
+    BaseButtonIcon1,
   },
   data() {
     return {
       isInputClicked: false,
+      defaultCategoryLabel: "Select a category",
       selectedCategory: "Select a category",
       searchKey: "",
       timer: null,
@@ -142,10 +131,11 @@ export default {
       productsBySearch: [],
       availableItems: [],
       getProductsBySearchArrayLength: 5,
+      visibleSearchLimit: 5, // 👈 used for responsive item count
       typingPlaceholder: "",
       fullPlaceholder: "I'm searching for ...",
       typingIndex: 0,
-      typingTimer: null
+      typingTimer: null,
     };
   },
   computed: {
@@ -154,9 +144,17 @@ export default {
   mounted() {
     this.getCategoriesWithTranslate();
     this.startTypewriterEffect();
+
+    if (process.client) {
+      this.visibleSearchLimit = window.innerWidth <= 576 ? 3 : 5;
+      
+      document.addEventListener("click", this.handleClickOutside);
+    }
   },
   beforeDestroy() {
     if (this.typingTimer) clearInterval(this.typingTimer);
+
+    document.removeEventListener("click", this.handleClickOutside);
   },
   methods: {
     handleBlur() {
@@ -184,52 +182,50 @@ export default {
 
       this.typingTimer = setInterval(typeWriter, 100);
     },
+    handleClickOutside(event) {
+      const inputEl = this.$el.querySelector("input");
+      const dropdownEl = this.$refs.searchDropdown;
 
+      if (
+        inputEl &&
+        !inputEl.contains(event.target) &&
+        dropdownEl &&
+        !dropdownEl.contains(event.target)
+      ) {
+        this.isInputClicked = false;
+      }
+    },
     RemoveSearchKey() {
       this.searchKey = "";
       this.productsBySearch = [];
       this.availableItems = [];
     },
-
     getLink(route) {
-      if (this.getLang === "en") {
-        this.getLang = "";
-        return route;
-      } else {
-        return `/${this.getLang}${route}`;
-      }
+      return this.getLang === "en" ? route : `/${this.getLang}${route}`;
     },
-
-    highlightSearchKey(shortTitle, searchKey) {
-      const lowerShortTitle = shortTitle.toLowerCase();
+    highlightSearchKey(text, searchKey) {
+      const lowerText = text.toLowerCase();
       const lowerSearchKey = searchKey.toLowerCase();
 
-      const startIndex = lowerShortTitle.indexOf(lowerSearchKey);
+      const startIndex = lowerText.indexOf(lowerSearchKey);
+      if (startIndex === -1) return text;
+
       const endIndex = startIndex + searchKey.length;
-
-      if (startIndex === -1) return shortTitle;
-
-      const highlightedPart = `<mark style="background-color: #fdb585">${shortTitle.slice(startIndex, endIndex)}</mark>`;
-      const remainingPart = shortTitle.slice(endIndex);
-
-      return `${shortTitle.slice(0, startIndex)}${highlightedPart}${remainingPart}`;
+      const highlighted = `<mark style="background-color: #fdb585">${text.slice(startIndex, endIndex)}</mark>`;
+      return `${text.slice(0, startIndex)}${highlighted}${text.slice(endIndex)}`;
     },
-
     goToWhatsApp(product) {
       window.open(
         `https://api.whatsapp.com/send?phone=971504429045&text=Could I please have the price of the ${product.title}`,
         "_blank"
       );
     },
-
     searchProduct() {
       if (this.searchKey.length >= 3) {
         this.$Progress.start();
 
-        let str = this.searchKey.trim().replace(/ +(?= )/g, "");
-        let search_key = str.replace(/# +/g, "");
-
-        console.log("Searching for:", search_key); // ✅ LOG THIS
+        const str = this.searchKey.trim().replace(/ +(?= )/g, "");
+        const search_key = str.replace(/# +/g, "");
 
         if (this.timer) clearTimeout(this.timer);
 
@@ -238,70 +234,69 @@ export default {
           if (
             this.selectedCategory &&
             this.selectedCategory !== "shop" &&
-            this.selectedCategory !== "Select a category"
+            this.selectedCategory !== this.defaultCategoryLabel
           ) {
             query += `&categories=${this.selectedCategory}`;
           }
+          axios
+            .get(`shop${query}`, {
+              baseURL: process.env.API_BASE_URL,
+              headers: {
+                "Accept-Language": this.$i18n.locale,
+                "Content-Type": "application/json",
+                currency: this.$cookies.get("currency") || "USD",
+                Accept: "application/json",
+                "secret-key": process.env.SECRET_KEY,
+                "api-key": process.env.API_KEY,
+              },
+            })
+            .then((response) => {
+              this.$Progress.finish();
+              this.productsBySearch = response.data.products;
+              this.getProductsBySearchArrayLength = response.data.total;
 
-
-          console.log("Final query:", query); // ✅ LOG QUERY
-
-          axios.get(`shop${query}`, {
-            baseURL: process.env.API_BASE_URL,
-            headers: {
-              "Accept-Language": this.$i18n.locale,
-              "Content-Type": "application/json",
-              currency: this.$cookies.get("currency") || "USD",
-              Accept: "application/json",
-              "secret-key": process.env.SECRET_KEY,
-              "api-key": process.env.API_KEY,
-            },
-          }).then((response) => {
-            this.$Progress.finish();
-            console.log("Search result:", response.data); // ✅ LOG RESPONSE
-
-            this.productsBySearch = response.data.products;
-            this.getProductsBySearchArrayLength = response.data.total;
-            this.availableItems = this.productsBySearch.slice(0, 5);
-          }).catch((error) => {
-            this.$Progress.fail();
-            console.error("Search error:", error); // ✅ LOG ERROR
-          });
+              this.availableItems = this.productsBySearch.slice(
+                0,
+                this.visibleSearchLimit
+              );
+            })
+            .catch((error) => {
+              this.$Progress.fail();
+              console.error("Search error:", error);
+            });
         }, 500);
       } else {
         this.productsBySearch = [];
         this.availableItems = [];
       }
     },
-
-
     getCategoriesWithTranslate() {
       this.categories = this.$settings.categories.map((category) => {
-        let categoryNameLang = category.name;
+        const categoryNameLang = category.name;
         for (const key in categoryNameLang) {
           category[`name_${key}`] = categoryNameLang[key];
         }
         return category;
       });
     },
-
     removeInputText() {
       this.searchKey = "";
     },
-
     goToShop() {
-      if (!this.searchKey && !this.selectedCategory) return;
+      if (!this.searchKey && (!this.selectedCategory || this.selectedCategory === "Select a category")) return;
 
       const query = {
         ...(this.searchKey ? { search: this.searchKey } : {}),
-        ...(this.selectedCategory ? { categories: this.selectedCategory } : {}),
+        ...(this.selectedCategory && this.selectedCategory !== "Select a category"
+          ? { categories: this.selectedCategory }
+          : {}),
         page: 1,
       };
 
       this.$router.push({ path: "/shop", query });
       this.removeInputText();
       this.productsBySearch = [];
-    },
+    }
   },
 };
 </script>
@@ -320,4 +315,13 @@ export default {
   margin-top: 0;
   display: block;
 }
+@media (max-width: 576px) {
+  .custom-scroll-mobile {
+    max-height: 60vh; /* Adjust as needed */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
+    border-radius: 0 0 10px 10px;
+  }
+}
+
 </style>

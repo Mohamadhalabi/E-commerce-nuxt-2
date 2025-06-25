@@ -447,13 +447,14 @@ export default
       lastVisited: 'Last Visited Products',
       searchInput: 'I\'m searching for...',
       selectCategory: 'Select a category',
-      shopByBrand: 'Shop By Brand',
+      shopByBrand: 'Popular Brands',
       option1: 'Fast Shipping',
       option2: 'Money back guarantee',
       option3: 'Online Support 24/7',
       option4: 'Secure Payment',
       keyandremote:'KEYS & REMOTES FOR ANY VEHICLE',
       searchByCar: 'Search By Car',
+      popularCategories: 'Popular Categories',
     },
 
     compare: {
