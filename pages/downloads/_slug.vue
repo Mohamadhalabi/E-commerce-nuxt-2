@@ -310,7 +310,7 @@
       <div class="post-content mt-lg-4" v-html="download.description" />
       <h3 class="text-orange mt-lg-4 download-border-bottom" v-if="gallery.length > 0">Gallery</h3>
       <pv-media  :product="download"></pv-media>
-      <h3 v-if="videos.length > 0" class="text-orange mt-lg-4 download-border-bottom"
+      <!-- <h3 v-if="videos.length > 0" class="text-orange mt-lg-4 download-border-bottom"
       >video</h3>
       <div v-if="videos.length > 0" class="row mb-3">
         <div
@@ -319,7 +319,7 @@
           class="downloadVedioWrapper col-md-4  position-relative mb-2 ">
           <iframe class="d-flex" style="width: 100%;min-height: 300px" frameBorder="0" :src="getEmbedUrl(video.link)" />
         </div>
-      </div>
+      </div> -->
     </div>
   </main>
 </template>
@@ -328,11 +328,10 @@
 import Api from "~/api";
 import PvMedia from "~/components/downloads/PvMedia.vue";
 import PvBtnShare from "~/components/common/PvBtnShare.vue";
-// import VideoPlayer from 'nuxt-video-player'
 import {mapGetters} from "vuex";
 export default {
   components: {
-    VideoPlayer,
+    // VideoPlayer,
     PvBtnShare,
     PvMedia,
   },
@@ -509,7 +508,7 @@ export default {
   background-color: #f07905;
 }
 .h1-download{
-  font-size: 2.5rem;
+  font-size: 32px;
   font-weight: 700;
   border-bottom: 0;
 }
