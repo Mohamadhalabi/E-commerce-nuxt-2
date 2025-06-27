@@ -123,10 +123,9 @@
 
 <script>
 import Api from '~/api';
-import Carousel from "vue-ssr-carousel"
 export default {
   components: {
-    Carousel
+    Carousel: () => import('vue-ssr-carousel'),
   },
   data: function() {
     return {

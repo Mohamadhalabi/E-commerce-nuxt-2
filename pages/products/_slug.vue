@@ -33,7 +33,7 @@
         </div>
       </nav>
       <div class="container">
-        <div class="row">
+        <div class="row min-height-product">
           <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12">
             <div class="text-center d-lg-none d-md-none">
               <h1 class="font-weight-bold mt-1 mb-1"> {{ product.title }}</h1>
@@ -61,7 +61,7 @@
       <div>
         <!-- <LazyHydrate when-visible> -->
           <pv-description
-          v-if="product"
+          v-show="product"
           :product="product"
           class="container"
         />
@@ -467,3 +467,30 @@ export default {
   },
 };
 </script>
+<style>
+.min-height-product {
+  min-height: 600px;
+}
+
+.related-products-section {
+  min-height: 400px;
+}
+
+.skeleton-box {
+  background-color: #eee;
+  border-radius: 5px;
+  animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #eee;
+  }
+  50% {
+    background-color: #ddd;
+  }
+  100% {
+    background-color: #eee;
+  }
+}
+</style>

@@ -313,18 +313,29 @@ export default {
 </script>
 
 <style>
+.position-relative {
+  padding-bottom: 0px; /* reserve space for dropdown to prevent layout shift */
+}
+
 .live-search-list {
   position: absolute;
+  left: 0;
+  right: 0;
   top: 100%;
-  background: #fff;
   z-index: 1050;
-  overflow-y: auto;
+  background: white;
   border: 1px solid #ccc;
   border-top: none;
   border-radius: 0 0 10px 10px;
-  padding: 0;
-  margin-top: 0;
-  display: block;
+  overflow-y: auto;
+  max-height: 300px;
+  transition: max-height 0.3s ease;
+}
+
+.search-image {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
 }
 @media (max-width: 576px) {
   .custom-scroll-mobile {

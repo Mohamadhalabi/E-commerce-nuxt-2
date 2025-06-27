@@ -1,11 +1,12 @@
 <template>
   <nuxt-link :to="getLink('/account')" class="header-icon" v-if="isAuthenticated">
     <div class="header-user">
-      <img
+      <nuxt-img
         src="/images/icons/avatar.png"
         class="person-icon"
         width="32px"
         height="32px"
+        loading="lazy"
       />
       <template>
         <div class="header-dropdown">

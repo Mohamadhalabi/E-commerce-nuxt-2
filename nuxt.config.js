@@ -9,8 +9,6 @@ export default ({
     "build:modern": "nuxt build --modern=server",
     "start:modern": "nuxt start --modern=server"
   },
-  // modern: true, // Enables modern mode in both server and client side
-
   head: {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png' },
@@ -28,11 +26,26 @@ export default ({
 
       // ✅ Roboto Font Preload
       {
+        rel: 'preconnect',
+        href: 'https://fonts.googleapis.com',
+        crossorigin: true,
+      },
+      {
+        rel: 'preconnect',
+        href: 'https://fonts.gstatic.com',
+        crossorigin: true,
+      },
+      {
         rel: 'preload',
         as: 'style',
         href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
-        onload: "this.onload=null;this.rel='stylesheet'"
-      }
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
+        media: 'print',
+        onload: "this.media='all'",
+      },
     ],
 
     meta: [
@@ -103,10 +116,12 @@ export default ({
     {src: '@plugins/direction-control.js', ssr: true}, // rTL
     // {src: '@plugins/vue-awesome-swiper.js', ssr: false},
     {src: '~/plugins/vue-progressbar.js', ssr: false},
+    { src: '~/plugins/axios-cache.js', ssr: true },
   ],
 
   buildModules: [
     'vue-ssr-carousel/nuxt',
+    '@nuxt/postcss8',
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     ['nuxt-i18n', {
@@ -250,7 +265,20 @@ export default ({
     optimizeCSS: true,
     publicPath: '/publicpath',
     babel: {
-      compact: true
+      compact: true,
+      presets({ isServer }) {
+        return [
+          [
+            require.resolve('@nuxt/babel-preset-app'),
+            {
+              corejs: { version: 3 },
+              targets: isServer
+                ? { node: 'current' }
+                : { esmodules: true },
+            }
+          ]
+        ]
+      }
     },
     splitChunks: {
       layouts: true,
@@ -282,7 +310,54 @@ export default ({
       }
     },
     modern: true,
-    aggressiveCodeRemoval: true
+    aggressiveCodeRemoval: true,
+    postcss: {
+      plugins: {
+        'postcss-import': {},
+        autoprefixer: {},
+        '@fullhuman/postcss-purgecss': process.env.NODE_ENV === 'production'
+          ? {
+              content: [
+                './components/**/*.vue',
+                './layouts/**/*.vue',
+                './pages/**/*.vue',
+                './plugins/**/*.js',
+                './nuxt.config.js',
+              ],
+              safelist: {
+                standard: [
+                  /^bg-/,
+                  /^text-/,
+                  /^btn-/,
+                  /^alert-/,
+                  /^d-/,
+                  /^col-/,
+                  /^row/,
+                  /^container/,
+                  /^mx-/, /^px-/, /^py-/, /^my-/, /^mt-/, /^mb-/,
+                  /^justify-/,
+                  /^align-/,
+                  /^order-/,
+                  /^position-/,
+                  /^shadow/,
+                  /^rounded/,
+                  /^border/,
+                  /^carousel/,
+                  /^collapse/,
+                  /^navbar/, /^nav/, /^dropdown/,
+                  /^modal/,
+                  /^form-/,
+                  /^input-/,
+                  /^is-/,
+                ],
+              },
+              defaultExtractor(content) {
+                return content.match(/[\w-/:.]+(?<!:)/g) || [];
+              },
+            }
+          : false,
+      },
+    },
   },
 
   generate: {
@@ -305,7 +380,7 @@ export default ({
 
   server: {
     port: 4000,
-    host: 'localhost'  // Correctly defined as a string
+    host: process.env.host || 'localhost'
   },
   nuxtPrecompress: {
     enabled: true, // Enable in production

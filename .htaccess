@@ -12,16 +12,29 @@ RewriteRule ^ /shop?search=%1 [R=301,L]
 RewriteCond %{HTTP_HOST} ^tlkeys\.com [NC]
 RewriteRule ^(.*)$ http://www.tlkeys.com/$1 [R=301,L]
 
-# Handle requests on port 4000
+# Handle requests on port 4000 (if needed)
 RewriteCond %{SERVER_PORT} 443
-RewriteRule ^index.php(.*) http://%{HTTP_HOST}:4000/$1 [P,L]
-RewriteRule (.*) http://%{HTTP_HOST}:4000/$1 [P,L]
+RewriteRule ^index\.php(.*)$ http://%{HTTP_HOST}:4000/$1 [P,L]
+RewriteRule ^(.*)$ http://%{HTTP_HOST}:4000/$1 [P,L]
 
-# BEGIN cPanel-generated php ini directives, do not edit
-# php -- END cPanel-generated handler, do not edit
-
-# php -- BEGIN cPanel-generated handler, do not edit
+# BEGIN cPanel-generated php ini directives (do not edit)
 <IfModule mime_module>
   AddHandler application/x-httpd-ea-php82 .php .php8 .phtml
 </IfModule>
-# php -- END cPanel-generated handler, do not edit
+# END cPanel-generated handler
+
+# ✅ Caching headers for static assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType image/gif  "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webp|jpe?g|png|svg|gif)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

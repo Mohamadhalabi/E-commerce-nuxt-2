@@ -55,7 +55,13 @@
               @click="setLocale(locale[0])"
             >
               <a href="javascript:;">
-                <img :src="locale[1].flag" alt="Flag" width="20px" />
+                <nuxt-img
+                  :src="locale[1].flag"
+                  :alt="`${locale[1].language} Flag`"
+                  width="20"
+                  height="14"
+                  format="webp"
+                />
                 {{ locale[1].language }}
               </a>
             </li>

@@ -7,14 +7,14 @@
             <nuxt-link
               :to="getLink('/')"
             >
-              <img
+              <nuxt-img
+                src="/images/logo-footer.png"
                 format="webp"
                 loading="lazy"
-                src="/images/logo-footer.png"
-                alt="footer Logo"
-                title="Techno lock footer logo"
                 width="169"
                 height="56"
+                alt="footer Logo"
+                title="Techno lock footer logo"
                 class="m-b-3 logo"
               />
             </nuxt-link>
@@ -133,32 +133,17 @@
               </p>
             </div>
 
-            <div class="payment-icons ">
-              <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/dhl.png')"
-                class="payment-icon" />
-              <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/aramex.webp')"
-                class="payment-icon" />
-              <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/fedex.webp')"
-                class="payment-icon" />
-              <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/ups.webp')"
-                class="payment-icon" />
+            <div class="payment-icons d-flex align-items-center gap-2 flex-wrap">
+              <nuxt-img src="https://dev-srv.tlkeys.com/storage/images/shipping-methods/dhl.png" width="40" height="28" alt="DHL" class="payment-icon" format="webp" loading="lazy" />
+              <nuxt-img src="https://dev-srv.tlkeys.com/storage/images/shipping-methods/aramex.webp" width="40" height="28" alt="Aramex" class="payment-icon" format="webp" loading="lazy" />
+              <nuxt-img src="https://dev-srv.tlkeys.com/storage/images/shipping-methods/fedex.webp" width="40" height="28" alt="FedEx" class="payment-icon" format="webp" loading="lazy" />
+              <nuxt-img src="https://dev-srv.tlkeys.com/storage/images/shipping-methods/ups.webp" width="40" height="28" alt="UPS" class="payment-icon" format="webp" loading="lazy" />
+
+              <nuxt-img src="https://dev-srv.tlkeys.com/storage/images/shipping-methods/paypal.webp" width="40" height="28" alt="PayPal" class="payment-icon" format="webp" loading="lazy" />
+              <nuxt-img src="https://dev-srv.tlkeys.com/storage/images/shipping-methods/stripe.webp" width="40" height="28" alt="Stripe" class="payment-icon" format="webp" loading="lazy" />
+              <nuxt-img src="https://dev-srv.tlkeys.com/storage/images/shipping-methods/card.webp" width="40" height="28" alt="Card" class="payment-icon" format="webp" loading="lazy" />
             </div>
 
-            <div class="payment-icons ">
-              <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/paypal.webp')"
-                class="payment-icon" />
-              <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/stripe.webp')"
-                class="payment-icon" />
-              <span
-                style="background-image: url('https://dev-srv.tlkeys.com/storage/images/shipping-methods/card.webp')"
-                class="payment-icon" />
-            </div>
           </div>
         </div>
       </div>

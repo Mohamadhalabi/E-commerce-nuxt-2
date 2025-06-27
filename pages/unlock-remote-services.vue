@@ -1,11 +1,5 @@
 <template>
   <div :class="{ 'text-right': getIsAr }">
-    <Carousel class="rounded-5" :options="baseSlider6">
-      <div v-for="(slide, index) in slides" :key="index" class="swiper-slide boxed-slide rounded-5">
-        <img style="width: 100%" class="slide-bg ml-auto mr-auto" :src="slide.image" alt="banner" />
-      </div>
-    </Carousel>
-    
     <div class="container mt-3">
       <div class="d-flex justify-content-sm-between">
         <h1 class="text-center unlock-service-title">{{ $t("services.unlockServices") }}</h1>
@@ -88,13 +82,12 @@
 </template>
 
 <script>
-import Carousel from 'vue-ssr-carousel';
 import { mapGetters } from "vuex";
 import { VueGoodTable } from 'vue-good-table';
 import 'vue-good-table/dist/vue-good-table.css';
 
 export default {
-  components: { Carousel, VueGoodTable },
+  components: { VueGoodTable },
   computed: {
     ...mapGetters("rtlStore", ["getIsAr"]),
   },

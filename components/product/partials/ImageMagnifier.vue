@@ -13,7 +13,7 @@
       sizes="sm:100vw md:50vw lg:600px"
       width="500"
       height="500"
-      loading="lazy"
+      loading="eager"
     />
 
     <!-- Modal -->

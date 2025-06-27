@@ -36,10 +36,10 @@
               <!-- Login & Cart -->
               <div class="d-flex align-items-center gap-2">
                 <nuxt-link v-if="!this.StateUser" :to="getLink('/auth/login-register')" class="d-flex align-items-center">
-                  <img src="/images/icons/avatar.png" class="person-icon" width="30" height="30" />
+                  <nuxt-img loading="lazy" src="/images/icons/avatar.png" class="person-icon" width="30" height="30" ></nuxt-img>
                 </nuxt-link>
                 <nuxt-link v-else :to="getLink('/account?tab=dashboard')" class="d-flex align-items-center">
-                  <img src="/images/icons/avatar.png" class="person-icon" width="30" height="30" />
+                  <nuxt-img loading="lazy" src="/images/icons/avatar.png" class="person-icon" width="30" height="30" ></nuxt-img>
                 </nuxt-link>
                 <div style="min-width: 36px;">
                   <pv-cart-menu />
@@ -73,7 +73,7 @@
             <div class="col-lg-3 d-flex align-items-center" v-if="!this.StateUser">
               <nuxt-link class="nav-link d-flex align-items-center me-3" :to="getLink('/auth/login-register')">
                 <div class="header-user">
-                  <img src="/images/icons/avatar.png" class="person-icon" width="32px" height="32px" />
+                  <nuxt-img loading="lazy" src="/images/icons/avatar.png" class="person-icon" width="32px" height="32px" ></nuxt-img>
                   <div class="welcome-login">
                     <p>{{ $t("header.welcome") }}</p>
                     <p class="font-weight-bold">{{ $t("header.login") }}</p>
@@ -107,31 +107,80 @@
       <div class="header-bottom sticky-header second-menu d-none d-lg-flex justify-content-center shadow-sm">
         <div class="container">
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?offers')">
-            <img src="/images/icons/offer.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
+            <nuxt-img
+              src="/images/icons/offer.svg"
+              alt="Offer Icon"
+              class="second-menu-images"
+              width="25"
+              height="25"
+              format="webp"
+            />
             {{ $t("header.Offer") }}
           </nuxt-link>
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?promotion')">
-            <img src="/images/icons/gift.svg" class="second-menu-images" alt="Offer Icon" width="25px" />
+            <nuxt-img
+              src="/images/icons/gift.svg"
+              alt="Promotion Icon"
+              class="second-menu-images"
+              width="25"
+              height="25"
+              format="webp"
+            />
             {{ $t("header.promotion") }}
           </nuxt-link>
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?free-shipping')">
-            <img src="/images/icons/free-shipping.svg" class="second-menu-images" alt="Free Shipping" width="25px" />
+            <nuxt-img
+              src="/images/icons/free-shipping.svg"
+              alt="Free Shipping"
+              class="second-menu-images"
+              width="25"
+              height="25"
+              format="webp"
+            />
             {{ $t("header.FreeShipping") }}
           </nuxt-link>
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?bundled')">
-            <img src="/images/icons/bundles.svg" class="second-menu-images" alt="Bundles" width="25px" />
+            <nuxt-img
+              src="/images/icons/bundles.svg"
+              alt="Bundles"
+              class="second-menu-images"
+              width="25"
+              height="25"
+              format="webp"
+            />
             {{ $t("header.Bundles") }}
           </nuxt-link>
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/online-services')">
-            <img src="/images/icons/wrench.svg" class="second-menu-images" alt="Online Services" width="25px" />
+            <nuxt-img
+              src="/images/icons/wrench.svg"
+              alt="Online Services"
+              class="second-menu-images"
+              width="25"
+              height="25"
+              format="webp"
+            />
             {{ $t("header.OnlineServices") }}
           </nuxt-link>
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/unlock-remote-services')">
-            <img src="/images/icons/unlock-services.svg" class="second-menu-images" alt="Unlock Remote Services" width="25px" />
+            <nuxt-img
+              src="/images/icons/unlock-services.svg"
+              alt="Unlock Remote Services"
+              class="second-menu-images"
+              width="25"
+              height="25"
+              format="webp"
+            />
             {{ $t("header.unlockService") }}
           </nuxt-link>
           <nuxt-link class="d-flex align-items-center font-weight-bold m-auto" :to="getLink('/shop?new-arrival')">
-            <img src="/images/icons/new-arrival.svg" class="second-menu-images" alt="New Arrival" width="25px" />
+            <nuxt-img
+              src="/images/icons/new-arrival.svg"
+              alt="New Arrival"
+              class="second-menu-images"
+              width="25"
+              height="25"
+              format="webp"
+            />
             {{ $t("home.newarrivalproducts") }}
           </nuxt-link>
         </div>
