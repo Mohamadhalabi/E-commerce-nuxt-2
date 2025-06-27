@@ -204,7 +204,7 @@ export default {
           width: "931",
           height: "auto",
           adaptive: true,
-          class: "quickview-modal",
+          class: "",
         }
       );
     },
@@ -257,30 +257,8 @@ export default {
 
 .product-short-title, .product-sku{
   margin-top: 5px;
-  /* height: 80px; */
-}
-/* .product-short-title{
-  font-weight: 900;
-  height: 90px;
-} */
-/* .product-short-title-index{
-  height: 80px;
-} */
-
-@media screen and (max-width:1400px){
-  /* .product-short-title{
-    height: 100px;
-  } */
-}
-@media screen and (max-width:1200px){
-  /* .product-short-title{
-    height: 90px;
-  } */
 }
 
-/* .product-short-title:hover{
-  text-decoration: underline;
-} */
 
 .whatsapp-button{
   background-color: #2ba968;
@@ -309,25 +287,9 @@ export default {
     height: 160px;
   }
 }
-@media screen and (max-width:575px){
-  /* .product-short-title{
-    height: 90px;
-  } */
-  .product-card-information, .product-card-information-index{
-    /* height: 200px; */
-  }
-}
 @media screen and (max-width:380px){
     .product-card-information, .product-card-information-index{
     height: 230px;
   }
-  /* .product-short-title{
-    height: 100px;
-  } */
-}
-@media screen and (max-width:320px){
-  /* .product-short-title{
-    height: 120px;
-  } */
 }
 </style>

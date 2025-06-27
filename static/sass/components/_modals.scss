@@ -124,12 +124,22 @@
 		max-width: 932px !important;
 		margin-top: 3%;
 		margin-bottom: 3%;
+		max-height: 60vh !important; /* allow it to fill most of the screen */
+		overflow-y: auto !important;
 	}
 }
+
 .vm--container .vm--overlay {
 	background: rgba(119, 119, 119, 0.4);
 }
 
 .vm--container.quickview-modal .vm--overlay {
 	background: rgba(68,70,69,0.65);
+}
+
+@media screen and (min-width: 1400px){
+.modal-dialog{
+	max-width: 900px!important;
+	max-height: 900px!important;
+}
 }

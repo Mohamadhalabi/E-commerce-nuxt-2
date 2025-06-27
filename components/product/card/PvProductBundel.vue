@@ -24,7 +24,7 @@
         </div>
         <div class="sku sku-color mt-1">SKU:{{ product.sku }}</div>
       </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-1 mt-auto pt-lg-3 mb-auto">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-1 mt-auto pt-lg-3 mb-auto text-center">
         <pv-price-box
           class="mt-1"
           v-if="product.hide_price == 0"

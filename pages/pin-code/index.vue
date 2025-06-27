@@ -19,31 +19,28 @@
               <h3 class="cart-total-price text-center">
                 {{ $t("pincode.pincodeoffline") }}
               </h3>
-              <div class="row justify-content-md-center justify-content-lg-start justify-content-sm-center justify-content-center">
+              <div class="row justify-content-md-center  justify-content-sm-center justify-content-center">
                 <div
                   v-for="(brand,index) in offline_pin_code"
                   :key="index"
-                  class="brandClass col-xl-3 col-lg-3 mx-3 col-md-2 mx-xl-4 col-sm-3 mb-2 col-3"
-                >
-                  <nuxt-link
-                  :to="'products/'+ brand.slug"
-                  >
-                  <nuxt-img
-                    :src="brand.image.l.url"
-                    class="img-thumbnail mx-auto mt-1"
-                    :open_graph="brand.image.l['open_graph']"
-                    :scal="brand.image.l['scal']"
-                    :description="brand.image.l['description']"
-                  />
-                  <h6 class="text-center my-1 sku-color">
-                    {{brand.sku}}
-                  </h6>
-                    <h6 class="text-center my-1 pin-code-offline-short-title">
+                  class="brandClass col-xl-3 col-lg-3 mx-3 col-md-2 col-sm-3 mb-2 col-3 mr-0 ml-0 d-flex flex-column justify-content-between">
+                  <nuxt-link :to="'products/'+ brand.slug" class="d-flex flex-column h-100 text-decoration-none">
+                    <nuxt-img
+                      :src="brand.image.l.url"
+                      class="img-thumbnail mx-auto mt-1"
+                      :open_graph="brand.image.l['open_graph']"
+                      :scal="brand.image.l['scal']"
+                      :description="brand.image.l['description']"
+                    />
+                    <p class="text-center my-1 sku-color">
+                      {{brand.sku}}
+                    </p>
+                    <p class="text-center m-auto pin-code-offline-short-title font-weight-bold">
                       {{brand.short_title}}
-                    </h6>
-                  <b class="text-center d-block price-color pin-code-offline-price">
-                    {{brand.price.value}} {{brand.price.currency}}
-                  </b>
+                    </p>
+                    <b class="text-center d-block price-color pin-code-offline-price mt-auto">
+                      {{brand.price.value}} {{brand.price.currency}}
+                    </b>
                   </nuxt-link>
                 </div>
               </div>
@@ -184,13 +181,16 @@ export default {
 };
 </script>
 <style>
-.brandClass{
+.brandClass {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: #fff;
   border-radius: 7px;
   box-shadow: 0px 0px 7px 0px #a8a8a8;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
-  min-height: 200px;
+  min-height: 250px;
 }
 @media screen and (max-width: 993px){
   .brandClass{
@@ -215,14 +215,9 @@ export default {
   }
 }
 .pin-code-offline-price{
-  position: absolute;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  font-size: 20px;
 }
 .pin-code-offline-short-title{
-  position: absolute;
-  right: 0;
-  left: 0;
+  line-height: inherit;
 }
 </style>

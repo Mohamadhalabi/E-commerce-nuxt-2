@@ -2,10 +2,10 @@
   <div>
     <div class="contact-two">
       <div class="row">
-        <div class="col-md-8">
-          <h3 style="color:#777775">
+        <div class="col-md-12">
+          <span class="font-weight-bold mt-2" style="color:#777775;font-size: 22px;">
             {{ $t('contact.sendMessage') }}
-          </h3>
+          </span>
 
           <div class="row">
             <div class="col-lg-6">
@@ -66,47 +66,11 @@
 
               <div class="form-footer">
                 <button
-                  class="btn btn-primary"
+                  class="btn btn-secondary mt-1"
                   @click="sendMessage"
                 >
                   {{ $t('contact.sendMessage') }}
                 </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <h3 style="color:#777775">
-            {{ $t('contact.contactUs') }}
-          </h3>
-
-          <div class="contact-info">
-            <div class="porto-sicon-box d-flex align-items-center">
-              <div class="porto-icon">
-                <i class="fa fa-phone"/>
-              </div>
-              <div class="porto-sicon-description">
-                <a href="tel:+4733378901">
-                  {{ $settings.contact.phone_primary }}
-                </a>
-              </div>
-            </div>
-            <div class="porto-sicon-box d-flex align-items-center">
-              <div class="porto-icon">
-                <i class="fa fa-envelope"/>
-              </div>
-              <div class="porto-sicon-description">
-                <a :href="'mailto:' + $settings.contact.email_primary">{{ $settings.contact.email_primary }}</a><br>
-                <a :href="'mailto:' + $settings.contact.email_secondary">{{ $settings.contact.email_secondary }}</a>
-              </div>
-            </div>
-            <div class="porto-sicon-box d-flex align-items-center">
-              <div class="porto-icon">
-                <i class="fa fa-location-arrow"/>
-              </div>
-              <div class="porto-sicon-description">
-                Address: {{ $settings.contact.address }}
               </div>
             </div>
           </div>

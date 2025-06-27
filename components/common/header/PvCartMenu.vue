@@ -69,7 +69,7 @@
                           class="mt-1"
                           @changeQty="changeQuantity"
                       />
-                      <span style="color:red">
+                      <span style="color:red" class="font-weight-bold">
                           {{product.price.currency + parseFloat(product.priceitem * product.quantity).toFixed(2) }}
                       </span>
                   <div class="w-100 d-flex align-items-center">

@@ -94,16 +94,27 @@
           </li>
 
           <!-- Show More -->
-          <li v-if="getProductsBySearchArrayLength > visibleSearchLimit" class="list-group-item text-center border-top">
-            <nuxt-link
-              class="notHover text-decoration-none"
-              :to="getLink('/shop' + (selectedCategory ? `?categories=${selectedCategory}&search=${searchKey}` : `?search=${searchKey}`))"
+            <li
+              v-if="getProductsBySearchArrayLength > visibleSearchLimit"
+              class="list-group-item text-center border-top"
             >
-              <base-button-icon-1 class="w-100 py-3" :outline="true">
-                see ({{ getProductsBySearchArrayLength - visibleSearchLimit }}) product more..
-              </base-button-icon-1>
-            </nuxt-link>
-          </li>
+              <nuxt-link
+                class="notHover text-decoration-none"
+                :to="getLink(
+                  '/shop' +
+                    (
+                      selectedCategory &&
+                      selectedCategory !== defaultCategoryLabel
+                        ? `?categories=${selectedCategory}&search=${searchKey}`
+                        : `?search=${searchKey}`
+                    )
+                )"
+              >
+                <base-button-icon-1 class="w-100 py-3" :outline="true">
+                  see ({{ getProductsBySearchArrayLength - visibleSearchLimit }}) product more..
+                </base-button-icon-1>
+              </nuxt-link>
+            </li>
         </ul>
       </div>
     </div>

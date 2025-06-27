@@ -38,12 +38,11 @@
       <div class="divider" />
     </div>
     <div class="add-product-review">
-      <h3
+      <p
         v-if="ratings.length == 0"
-        class="review-title"
-      >
+        class="review-title">
         {{$t("review.firstReview")}}: “{{product.title}}”
-      </h3>
+      </p>
 
       <div class="form-group position-relative">
         <div class="d-flex align-items-center justify-content-between">

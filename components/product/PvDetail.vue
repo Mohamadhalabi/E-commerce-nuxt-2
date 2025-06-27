@@ -16,7 +16,7 @@
     </div>
     <!-- Product Summary Name  -->
     <div v-if="product.summary_name != product.title" class="product-desc">
-      <h2 class="summary-name">{{ product.summary_name }}</h2>
+      <h2 class="summary-name" style="font-size: 18px">{{ product.summary_name }}</h2>
     </div>
     <!-- Product Note  -->
     <div v-if="product.note" class="pb-4">

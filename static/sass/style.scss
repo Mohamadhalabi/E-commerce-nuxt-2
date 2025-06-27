@@ -1,5 +1,13 @@
 @charset 'UTF-8';
-
+html, body {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 // Mixins
 @import 'tlkeys/variables';
 @import 'mixins/core';

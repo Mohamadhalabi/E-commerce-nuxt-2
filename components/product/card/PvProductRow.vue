@@ -30,11 +30,11 @@
             {{ product.short_title }}
           </nuxt-link>
         </div>
-        <div class="sku mt-1">SKU:{{ product.sku }}</div>
+        <div class="sku mt-1">{{ product.sku }}</div>
       </div>
-      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-1 mt-auto pt-lg-3 mb-auto">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-1 mt-auto pt-lg-3 mb-auto text-center">
         <pv-price-box
-          class="mt-1 text-center"
+          class="mt-1"
           v-if="product.hide_price == 0"
           :product="product"
           :additionalProductItems="true"

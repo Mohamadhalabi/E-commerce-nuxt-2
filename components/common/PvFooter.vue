@@ -1,6 +1,6 @@
 <template>
   <div class="from-demo-17">
-    <footer ref="footer" class="bgWorld footer bg-dark">
+    <footer ref="footer" class="bgWorld footer bg-dark m-0">
       <div class="container">
         <div class="footer-middle pt-0">
           <div class="row">

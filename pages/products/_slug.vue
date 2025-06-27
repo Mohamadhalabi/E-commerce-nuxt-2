@@ -36,8 +36,8 @@
         <div class="row">
           <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12">
             <div class="text-center d-lg-none d-md-none">
-              <span class="sku-color">{{ product.sku }}</span><br>
               <h1 class="font-weight-bold mt-1 mb-1"> {{ product.title }}</h1>
+              <span class="sku-color">{{ product.sku }}</span><br>
             </div>
             <pv-media-new :product="product" />
           </div>
@@ -84,23 +84,30 @@
       </div> -->
 
       <hr class="mt-0 m-b-5 container" />
-      <div class="product-widgets-container container mx-auto row pb-2">
-        <div class="container" style="display: contents;">
+      <div class="container">
+          <div class="product-widgets-container row pb-2">
             <pv-on-sale-products
-            :collection-title="$t('home.onSaleProduct')"
-            />  
+              :collection-title="$t('home.onSaleProduct')"
+              :animation-delay="'200'"
+              :link="'discount'"
+            />
             <pv-top-selling-three-products
-            :collection-title="$t('home.topSellingProduct')"
+              :collection-title="$t('home.topSellingProduct')"
+              :animation-delay="'500'"
+              :link="'top-selling'"
             />
-              <pv-new-arrival
+            <pv-new-arrival
               :collection-title="$t('home.newarrivalproducts')"
+              :animation-delay="'800'"
+              :link="'new-arrival'"
             />
-              <pv-free-shipping
+            <pv-free-shipping
               :collection-title="$t('home.freeshoppingproducts')"
+              :animation-delay="'1100'"
+              :link="'free-shipping'"
             />
-
+          </div>
         </div>
-      </div>
       </div>
   </main>
 </template>

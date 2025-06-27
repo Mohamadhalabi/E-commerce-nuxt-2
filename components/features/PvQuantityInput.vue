@@ -23,9 +23,9 @@
             </button>
           </span>
           <input
-            class="horizontal-quantity form-control bg-transparent"
+            class=" bg-transparent"
             type="number"
-            style="text-align: center;font-size: 13px;padding:5px;border: 1px solid #892118!important;"
+            style="text-align: center;font-size: 13px;padding:5px;border: 1px solid #892118!important;width:50px"
             :value="currentQty"
             :max="product.stock"
             @change="changeQty($event)"

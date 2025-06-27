@@ -28,7 +28,7 @@
               <span v-else style="color: #556b2f">
                 <i
                   class="fab fa-sm fa-whatsapp"
-                  style="font-size: 13px; color: #556b2f; cursor: pointer"
+                  style="font-size: 16px; color: #556b2f; cursor: pointer"
                   @click="goToWhatsApp(product)"
                 />
                 <small @click="goToWhatsApp(product)">{{
@@ -37,14 +37,14 @@
               </span>
             </div>
             <div class="col-12">
-              <h3 class="product-title" style="font-size: 12px;margin-top: 2px">
-                <nuxt-link :to="getLink('/products/'+product.slug)">
+              <p class="product-title two-line-ellipsis" style="font-size: 14px; font-weight: bold;">
+                <nuxt-link :to="getLink('/products/' + product.slug)">
                   {{ product.short_title }}
                 </nuxt-link>
-              </h3>
+              </p>
             </div>
             <div class="col-12">
-              <span class="d-block sku-color" style="font-size: 12px"
+              <span class="d-block sku-color" style="font-size: 14px"
               >SKU:{{ product.sku }}</span
               >
             </div>
@@ -93,3 +93,13 @@ export default {
   },
 };
 </script>
+<style lang="css" scoped>
+.two-line-ellipsis {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.8em;
+}
+</style>

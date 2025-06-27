@@ -38,7 +38,6 @@
                 :width="image[currentIndex]['l'].width"
                 :height="image[currentIndex]['l'].height"
                 class="rounded-5"
-                style="max-width:40vw!important;"
                 :alt="image[currentIndex]['l'].alt"
               />
             </div> 
