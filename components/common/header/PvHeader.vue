@@ -15,12 +15,24 @@
             <!-- Mobile Header -->
             <div :class="['d-flex justify-content-between align-items-center w-100', { 'px-4 py-4': isScrolled }]">
               <!-- Hamburger -->
-              <button class="hamburger-btn" @click="showMobileMenu" aria-label="Toggle mobile menu">
-                <span></span>
-                <span></span>
-                <span></span>
-              </button>
-
+              <svg @click="showMobileMenu" id='menu-2_32' width='32' height='32' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'><rect width='32' height='32' stroke='none' fill='#000000' opacity='0'/>
+                <g transform="matrix(1.33 0 0 1.33 16 16)" >
+                <g style="" >
+                  <g transform="matrix(1 0 0 1 0 0)" >
+                  <path style="stroke: none; stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" transform=" translate(-12, -12)" d="M 0 0 L 24 0 L 24 24 L 0 24 z" stroke-linecap="round" />
+                  </g>
+                  <g transform="matrix(1 0 0 1 0 -6)" >
+                  <line style="stroke: rgb(33,33,33); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" x1="-8" y1="0" x2="8" y2="0" />
+                  </g>
+                  <g transform="matrix(1 0 0 1 0 0)" >
+                  <line style="stroke: rgb(33,33,33); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" x1="-8" y1="0" x2="8" y2="0" />
+                  </g>
+                  <g transform="matrix(1 0 0 1 0 6)" >
+                  <line style="stroke: rgb(33,33,33); stroke-width: 2; stroke-dasharray: none; stroke-linecap: round; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 4; fill: none; fill-rule: nonzero; opacity: 1;" x1="-8" y1="0" x2="8" y2="0" />
+                  </g>
+                </g>
+                </g>
+              </svg>
               <!-- Logo -->
               <nuxt-link :to="getLink('/')">
                 <nuxt-img
@@ -435,5 +447,33 @@ export default {
   .fixed-on-scroll ~ * {
     margin-top: 130px; /* Offset rest of page when header becomes fixed */
   }
+}
+.hamburger-button {
+  all: unset; /* resets Safari default styles */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 22px;
+  height: 20px;
+  cursor: pointer;
+  padding: 0;
+  background: transparent;
+  border: none;
+}
+
+.hamburger-button span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #333 !important; /* force visibility */
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.hamburger-button span {
+  background-color: #333 !important;
+  background-color: rgba(51, 51, 51, 1) !important;
+}
+.hamburger-button {
+  -webkit-appearance: none;
 }
 </style>

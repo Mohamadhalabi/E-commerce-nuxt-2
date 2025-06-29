@@ -86,27 +86,6 @@
       }
   }
 
-.hamburger-btn {
-  background: transparent;
-  border: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 22px;
-  height: 20px;
-  padding: 0;
-  cursor: pointer;
-}
-
-.hamburger-btn span {
-  display: block;
-  height: 3px;
-  background-color: #333;
-  border-radius: 2px;
-  transition: 0.3s ease;
-}
-
-
   .header {
       .contact-widget {
           margin-left: 5px;

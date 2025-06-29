@@ -4,7 +4,7 @@
     <div class="position-relative">
       <div class="d-flex w-100">
         <!-- Select dropdown with fixed width -->
-        <div style="" class="">
+        <div class="select-wrapper">
           <select
             class="form-select select-category border-end-0 rounded-start"
             v-model="selectedCategory"
@@ -38,7 +38,7 @@
       </div>
 
       <!-- Search Result List -->
-        <div v-if="isInputClicked && searchKey.length >= 2 && availableItems.length" class="live-search-list bg-white shadow rounded-bottom custom-scroll-mobile" ref="searchDropdown">
+        <div v-if="searchKey.length >= 2 && availableItems.length" class="live-search-list bg-white shadow rounded-bottom custom-scroll-mobile" ref="searchDropdown">
         <ul class="list-group list-group-flush">
           <li
             v-for="(product, index) in availableItems"
@@ -205,6 +205,7 @@ export default {
       ) {
         this.isInputClicked = false;
       }
+      this.searchKey = "";
     },
     RemoveSearchKey() {
       this.searchKey = "";
@@ -313,22 +314,20 @@ export default {
 </script>
 
 <style>
-.position-relative {
-  padding-bottom: 0px; /* reserve space for dropdown to prevent layout shift */
-}
-
 .live-search-list {
   position: absolute;
-  left: 0;
-  right: 0;
   top: 100%;
-  z-index: 1050;
-  background: white;
+  z-index: 1030;
+  background: #fff;
   border: 1px solid #ccc;
   border-top: none;
   border-radius: 0 0 10px 10px;
   overflow-y: auto;
-  max-height: 300px;
+  max-height: 8 00px;
+  overflow-y: auto;
+  display: block;
+  padding: 0;
+  margin-top: 0;
   transition: max-height 0.3s ease;
 }
 
@@ -337,12 +336,20 @@ export default {
   height: 60px;
   object-fit: contain;
 }
-@media (max-width: 576px) {
+@media screen and (max-width: 993px) {
   .custom-scroll-mobile {
     max-height: 60vh; /* Adjust as needed */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch; /* smooth scrolling on iOS */
     border-radius: 0 0 10px 10px;
+  }
+  .select-wrapper{
+    display: none!important;
+  }
+  .search-input{
+    border-left: 1px solid rgba(83,82,80,.14)!important;
+    border-bottom-left-radius: 10px!important;
+    border-top-left-radius: 10px!important;
   }
 }
 
