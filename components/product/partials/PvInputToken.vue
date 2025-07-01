@@ -22,13 +22,12 @@
         v-model="newSerial"
         class="form-control border-warning"
         placeholder="Enter a serial number and press Enter"
-        @keyup.enter="addSerial"
         @input="checkInput"
       />
     </div>
 
     <!-- Added serial numbers -->
-    <div class="mb-1 d-flex flex-wrap gap-2">
+    <div class="mb-1 mt-1 d-flex flex-wrap gap-2">
       <span
         v-for="(sn, index) in serial_number"
         :key="index"
@@ -59,7 +58,7 @@
       <div class="col-auto">
         <base-button-icon-1
           :disabled="!canAddToCart"
-          @click="handleAddToCart(),addSerial()"
+          @click="submitCart"
           :outline="true"
           class="p-2"
         >
@@ -90,6 +89,10 @@ export default {
   methods: {
     ...mapActions("shop", ["addToCart"]),
 
+    submitCart() {
+      this.addSerial(); // Add current serial if not empty
+      this.handleAddToCart(); // Proceed with cart logic
+    },
     addSerial() {
       const trimmed = this.newSerial.trim();
       if (trimmed && !this.serial_number.includes(trimmed)) {
