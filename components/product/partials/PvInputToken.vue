@@ -1,128 +1,128 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-12">
-        <ul class="text-danger font-weight-bold">
-          <li>
-            <i class="fa fa-exclamation-triangle"></i>
-            {{ $t("products.serial_number_is_required") }}
-          </li>
-          <li class="my-2">
-            <i class="fa fa-exclamation-triangle"></i>
-            {{ $t("products.after_receiving_payment") }}
-          </li>
-        </ul>
-      </div>
-      <div class="col-12 m-0">
-        <div class=" m-0">
-          <label>{{ $t("products.serial_number") }}</label>
-          <b-form-tags
-            addButtonVariant="warning"
-            id="serial_number"
-            input-id="serial_number"
-            remove-on-delete
-            :class="`   border-warning `"
-            size="lg"
-            tagPills="false"
-            :separator="['+', ',', ' ']"
-            placeholder="Enter new serial number separated by space"
-            v-model="serial_number"
-          ></b-form-tags>
-        </div>
-      </div>
+    <!-- Serial input warning -->
+    <div class="col-12">
+      <ul class="text-danger fw-bold list-unstyled mb-2">
+        <li>
+          <i class="fa fa-exclamation-triangle me-1"></i>
+          {{ $t("products.serial_number_is_required") }}
+        </li>
+        <li>
+          <i class="fa fa-exclamation-triangle me-1"></i>
+          {{ $t("products.after_receiving_payment") }}
+        </li>
+      </ul>
     </div>
 
+    <!-- Serial input -->
+    <div class="col-12">
+      <label>{{ $t("products.serial_number") }}</label>
+      <input
+        type="text"
+        v-model="newSerial"
+        class="form-control border-warning"
+        placeholder="Enter a serial number and press Enter"
+        @keyup.enter="addSerial"
+        @input="checkInput"
+      />
+    </div>
 
-    <div class="product-single-qty">
-      <div
-        v-if="product.hide_price == 0"
-        class="input-group bootstrap-touchspin bootstrap-touchspin-injected"
+    <!-- Added serial numbers -->
+    <div class="mb-1 d-flex flex-wrap gap-2">
+      <span
+        v-for="(sn, index) in serial_number"
+        :key="index"
+        class="badge bg-warning text-dark p-2 d-flex align-items-center"
       >
+        {{ sn }}
+        <i
+          class="fa fa-times ms-2"
+          style="cursor:pointer;"
+          @click="removeSerial(index)"
+          title="Remove"
+        ></i>
+      </span>
+    </div>
+
+    <!-- Quantity and Add to Cart -->
+    <div class="row align-items-center mb-1">
+      <div class="col-auto">
         <input
-          v-model="qty"
-          class="horizontal-quantity form-control bg-transparent"
-          type="text"
-          @change="changeQty($event)"
+          :value="serial_number.length"
+          class="form-control py-1 px-2"
+          type="number"
+          readonly
+          style="width: 70px;"
         />
       </div>
+
+      <div class="col-auto">
+        <base-button-icon-1
+          :disabled="!canAddToCart"
+          @click="handleAddToCart(),addSerial()"
+          :outline="true"
+          class="p-2"
+        >
+          {{ $t("products.addCart") }}
+        </base-button-icon-1>
+      </div>
     </div>
-
-
-    <base-button-icon-1 :disabled="serial_number.length == 0" @click="product.quantity = qty ; addToCart(product)"
-                        :outline="true" class="p-3">
-      {{ $t("products.addCart") }}
-    </base-button-icon-1>
-
   </div>
 </template>
 
+
 <script>
-import {mapActions} from "vuex";
-import Api from "~/api";
+import { mapActions } from "vuex";
 import BaseButtonIcon1 from '~/components/common/BaseButtonIcon1.vue';
 
 export default {
-  components: {BaseButtonIcon1},
-  comments: {
-    BaseButtonIcon1,
+  components: { BaseButtonIcon1 },
+  props: {
+    product: Object,
   },
   data() {
     return {
-      qty: 0,
       serial_number: [],
-      validation_serial_number: false,
+      newSerial: '',
+      canAddToCart: false,
     };
-  },
-  props: {
-    product: Object,
-    /* tokens: Array, */
-  },
-  watch: {
-    serial_number: function () {
-      this.qty = this.serial_number.length;
-      this.product["serial_number"] = this.serial_number;
-    }
   },
   methods: {
     ...mapActions("shop", ["addToCart"]),
-    ...mapActions("compare", ["fetchList", "addToList"]),
-    ...mapActions("fav", ["addToWishlist"]),
 
-    addToCompare(item) {
-      Api.post("/products/compares", {product: item.slug})
-        .then((response) => {
-          this.$notify({
-            group: "custom-notify",
-            type: "success",
-            text: response.data.message,
-          });
-        })
-        .catch(() => {
-        });
+    addSerial() {
+      const trimmed = this.newSerial.trim();
+      if (trimmed && !this.serial_number.includes(trimmed)) {
+        this.serial_number.push(trimmed);
+      }
+      this.newSerial = '';
+      this.updateCartState();
     },
-    goToWhatsApp(product) {
-      window.open(
-        `https://api.whatsapp.com/send?phone=971544179287&text=Could I please have the price of the ${product.title}`,
-        "_blank"
-      );
+
+    removeSerial(index) {
+      this.serial_number.splice(index, 1);
+      this.updateCartState();
     },
-    addTag(e) {
-      this.qty = this.serial_number.length;
+
+    checkInput() {
+      this.updateCartState();
+    },
+
+    updateCartState() {
+      this.canAddToCart = this.newSerial.trim().length > 0 || this.serial_number.length > 0;
+    },
+
+    handleAddToCart() {
+      this.product.quantity = this.serial_number.length;
+      this.product.serial_number = [...this.serial_number];
+      this.addToCart(this.product);
+      this.canAddToCart = false;
     },
   },
 };
 </script>
 <style scoped>
-.b-form-tags-list {
-  height: 100%;
-}
-
-.b-form-tags-button {
-  height: 30px !important;
-  color: #fffaf4;
-}
-
-#serial_number {
-  height: auto !important;
+input[type="number"] {
+  height: 32px !important;
 }
 </style>
