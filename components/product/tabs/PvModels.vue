@@ -28,20 +28,21 @@
         </nuxt-link>
       </td>
       <td v-else>
-        <nuxt-link
+        ----
+        <!-- <nuxt-link
           class="carsModel"
           :to="getLink('/' + (brand.brand ? brand.brand.toLowerCase().trim().replace(/\s+/g, '-') : ''))"
         >
           {{ brand.model || '' }}
-        </nuxt-link>
+        </nuxt-link> -->
       </td>
       <template v-if="brand.years && !isEmpty(brand.years)">
         <td>{{ getMinimumYear(brand) }}</td>
         <td>{{ getMaximumYear(brand) }}</td>
       </template>
       <template v-else>
-        <td>{{ $t('products.all') }}</td>
-        <td>{{ $t('products.all') }}</td>
+        <td>----</td>
+        <td>----</td>
       </template>
     </tr>
     </tbody>
