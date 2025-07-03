@@ -17,7 +17,7 @@
     <div
         v-for="(item, index) in getFilterdItemsArray"
         :key="`${group}_${index}_${item.slug}`"
-        class="d-felx align-items-center"
+        class="align-items-center"
     >
       <input
           type="checkbox"
@@ -31,7 +31,7 @@
       <div
           v-for="(children,index2) in item.children"
           :key="`${group}_${index2}_${children.slug}`"
-          class="mx-3"
+          class="d-flex mx-3"
       >
         <input
             type="checkbox"
@@ -39,7 +39,7 @@
             :name="children.name"
             :value="children.slug"
             @change="filterQuery(children.slug)"
-            class="mx-1"
+            class="mx-2"
         />
         <label class="children-category" :for="children.name">
           {{ children.name.length > 25 ? children.name.slice(0, 25) + '...' : children.name }}
@@ -181,7 +181,7 @@ input.nosubmit {
   background-size: 10px 10px;
 }
 .children-category{
-  font-size: 13px;
+  font-size: 14px;
   padding-bottom: 5px;
   padding-top: 5px;
 }

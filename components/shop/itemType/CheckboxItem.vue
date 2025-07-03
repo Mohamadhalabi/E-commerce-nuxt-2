@@ -18,16 +18,16 @@
       v-for="(item, index) in getFilterdItemsArray"
       :key="`${group}_${index}_${item.slug}`"
       @change="filterQuery(item.slug)"
-      class="d-felx align-items-center checkbox-filters"
+      class="d-flex align-items-center checkbox-filters"
     >
       <input
         type="checkbox"
         :checked="item.checked"
         :name="item.name"
         :value="item.name"
-        class="mx-1"
+        class="mx-2"
       />
-      <label :for="item.name">{{ item.name }}</label>
+      <label style="font-size: 14px;" :for="item.name">{{ item.name }}</label>
     </div>
   </div>
 </template>

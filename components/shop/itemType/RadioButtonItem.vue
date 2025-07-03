@@ -18,7 +18,7 @@
       v-for="(item, index) in getFilterdItemsArray"
       :key="`${group}_${index}_${item.slug}`"
       @change="changeBrand(item.slug)"
-      class="d-felx align-items-center"
+      class="d-flex align-items-center"
     >
       <input
         type="radio"
