@@ -23,6 +23,7 @@
         <!-- Search input that grows -->
         <div class="flex-grow-1">
           <input
+            ref="searchInput"
             v-model="searchKey"
             class="form-control search-input border-start-0 rounded-end w-100"
             type="text"
@@ -194,7 +195,7 @@ export default {
       this.typingTimer = setInterval(typeWriter, 100);
     },
     handleClickOutside(event) {
-      const inputEl = this.$el.querySelector("input");
+      const inputEl = this.$refs.searchInput;
       const dropdownEl = this.$refs.searchDropdown;
 
       if (
@@ -204,8 +205,8 @@ export default {
         !dropdownEl.contains(event.target)
       ) {
         this.isInputClicked = false;
+        this.searchKey = ""; // ✅ Only clear if clicked outside both
       }
-      this.searchKey = "";
     },
     RemoveSearchKey() {
       this.searchKey = "";
