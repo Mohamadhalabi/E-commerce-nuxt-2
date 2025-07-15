@@ -15,7 +15,23 @@
       :is="mobileMenuComponent"
       class="mobile-only"
     />
+    <div>
+      <!-- Discount Button -->
+      <!-- <button
+        class="btn btn-warning"
+        style="position: fixed; bottom: 80px; right: 20px; z-index: 9999;"
+        @click="loadModal"
+      >
+        🎁 Get 5% Off
+      </button> -->
 
+      <!-- Modal (lazy loaded) -->
+      <!-- <component
+        v-if="showModal"
+        :is="DiscountModal"
+        @close="showModal = false"
+      /> -->
+    </div>
 
     <!-- Modal -->
     <!-- <b-modal
@@ -47,6 +63,7 @@
 
 <script>
 import { stickyHeaderHandler } from "~/utils";
+import { defineAsyncComponent } from 'vue';
 
 export default {
   components: {
@@ -80,6 +97,7 @@ export default {
       isMobile: false,
       mobileMenuComponent: null,
       showModal: false,
+      DiscountModal: null,
       iFrameCode: '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PWSSMVC7" height="0" width="0" style="display:none;visibility:hidden"></iframe>',
     };
   },
@@ -99,6 +117,15 @@ export default {
     window.removeEventListener('resize', this.checkIfMobile);
   },
   methods: {
+
+    loadModal() {
+      if (!this.DiscountModal) {
+        this.DiscountModal = defineAsyncComponent(() =>
+          import('~/components/promotion/DiscountModal.vue')
+        );
+      }
+      this.showModal = true;
+    },
     async checkIfMobile() {
       this.isMobile = window.innerWidth <= 993;
       if (this.isMobile && !this.mobileMenuComponent) {

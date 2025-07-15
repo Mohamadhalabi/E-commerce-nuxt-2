@@ -117,6 +117,7 @@ export default ({
     // {src: '@plugins/vue-awesome-swiper.js', ssr: false},
     {src: '~/plugins/vue-progressbar.js', ssr: false},
     { src: '~/plugins/axios-cache.js', ssr: true },
+    { src: "~/plugins/visibility.js", srr: true},
   ],
 
   buildModules: [

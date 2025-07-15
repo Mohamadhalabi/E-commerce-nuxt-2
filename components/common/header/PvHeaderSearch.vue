@@ -4,7 +4,7 @@
     <div class="position-relative">
       <div class="d-flex w-100">
         <!-- Select dropdown with fixed width -->
-        <div class="select-wrapper">
+        <!-- <div class="select-wrapper">
           <select
             class="form-select select-category border-end-0 rounded-start"
             v-model="selectedCategory"
@@ -18,7 +18,7 @@
               {{ category[`name_${$i18n.locale}`] }}
             </option>
           </select>
-        </div>
+        </div> -->
 
         <!-- Search input that grows -->
         <div class="flex-grow-1">
@@ -337,7 +337,7 @@ export default {
   height: 60px;
   object-fit: contain;
 }
-@media screen and (max-width: 993px) {
+
   .custom-scroll-mobile {
     max-height: 60vh; /* Adjust as needed */
     overflow-y: auto;
@@ -352,6 +352,6 @@ export default {
     border-bottom-left-radius: 10px!important;
     border-top-left-radius: 10px!important;
   }
-}
+
 
 </style>
