@@ -25,7 +25,7 @@
               <div class="coupon-code">
                 <span class="code-pill animated-pill" @click="copyCoupon">WELCOME10</span>
               </div>
-              <div class="coupon-note">*Minimum purchase $250 required</div>
+              <div class="coupon-note">*Minimum purchase $250</div>
           </div>
         </div>
         <button class="coupon-close" @click="dismissPromo">×</button>

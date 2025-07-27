@@ -122,7 +122,7 @@ export default ({
 
   buildModules: [
     'vue-ssr-carousel/nuxt',
-    '@nuxt/postcss8',
+    // '@nuxt/postcss8',
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     ['nuxt-i18n', {
@@ -298,31 +298,31 @@ export default ({
     },
     modern: true,
     aggressiveCodeRemoval: true,
-    postcss: {
-      postcssOptions: {
-        plugins: {
-          'postcss-import': {},
-          autoprefixer: {},
-          '@fullhuman/postcss-purgecss': process.env.NODE_ENV === 'production'
-            ? {
-                content: [
-                  './components/**/*.vue',
-                  './layouts/**/*.vue',
-                  './pages/**/*.vue',
-                  './plugins/**/*.js',
-                  './nuxt.config.js',
-                ],
-                safelist: {
-                  standard: [ /* your classes here */ ],
-                },
-                defaultExtractor(content) {
-                  return content.match(/[\w-/:.]+(?<!:)/g) || [];
-                },
-              }
-            : false,
-        },
-      },
-    },
+    // postcss: {
+    //   postcssOptions: {
+    //     plugins: {
+    //       'postcss-import': {},
+    //       autoprefixer: {},
+    //       '@fullhuman/postcss-purgecss': process.env.NODE_ENV === 'production'
+    //         ? {
+    //             content: [
+    //               './components/**/*.vue',
+    //               './layouts/**/*.vue',
+    //               './pages/**/*.vue',
+    //               './plugins/**/*.js',
+    //               './nuxt.config.js',
+    //             ],
+    //             safelist: {
+    //               standard: [ /* your classes here */ ],
+    //             },
+    //             defaultExtractor(content) {
+    //               return content.match(/[\w-/:.]+(?<!:)/g) || [];
+    //             },
+    //           }
+    //         : false,
+    //     },
+    //   },
+    // },
   },
 
   generate: {
