@@ -15,7 +15,7 @@
             off
           </template>
           <template v-else-if="product.discount.type === 'percent'">
-            {{ this.$options.filters.discountFormat((product.discount.value * product.price.exchange_rate).toFixed(2)) }}%
+              {{ discountFormat((product.discount.value * product.price.exchange_rate).toFixed(2)) }}%
             off
           </template>
         </div>
@@ -69,6 +69,12 @@ export default {
       sale_percentage: 0,
       isEmpty,
     };
+  },
+  methods: {
+    discountFormat(value) {
+      if (!value) return '';
+      return parseFloat(value).toFixed(0); // or whatever format you want
+    }
   },
   mounted: function () {
     if (this.product.is_sale && this.product.price) {

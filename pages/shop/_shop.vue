@@ -34,10 +34,10 @@
             @direction-by="changeDirection"
             @filters="displayFilters"
           />
-          <div class="col-md-12">
+          <!-- <div class="col-md-12">
             <ShopBanner v-if="category" :image="category.banner"/>
             <ShopBanner v-if="manufacturer" :image="manufacturer.banner"/>
-          </div>
+          </div> -->
           <div class="category-desc mt-3">
             <pv-tabs class="product-single-tabs">
               <ul class="nav nav-tabs" role="tablist" style="position: sticky;margin-bottom: 10px;">
@@ -141,7 +141,7 @@ export default {
     ImageModal: () => import("~/components/product/ImageModal.vue"),
     PvTabs: () => import("~/components/features/PvTabs.vue"),
     PvProductList: () => import("~/components/shop/PvProductList.vue"),
-    ShopBanner: () => import("~/components/shop/PvShopBanner.vue"),
+    // ShopBanner: () => import("~/components/shop/PvShopBanner.vue"),
     SidebarFilter: () => import("~/components/shop/SidebarFilter.vue"),
   },
   props: {

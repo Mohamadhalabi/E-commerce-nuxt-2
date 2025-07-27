@@ -27,22 +27,11 @@
           sticky-container
         >
           <div sticky-offset="{top: 75}">
-            <sidebar-filter />
+            <!-- <sidebar-filter /> -->
           </div>
         </aside>
       </div>
     </div>
-    <!-- <b-modal
-      v-model="openModal" hide-header hide-footer>
-      <div
-        class="sidebar-shop col-lg-2 order-lg-first p-4"
-        sticky-container
-      >
-        <div sticky-offset="{top: 75}">
-          <sidebar-filter />
-        </div>
-      </div>
-    </b-modal> -->
   </main>
 </template>
 

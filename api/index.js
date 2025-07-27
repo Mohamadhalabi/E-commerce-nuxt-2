@@ -1,17 +1,16 @@
 import axios from 'axios';
-import { state } from '/store/currency'
 
 // Check if localStorage is available (client-side)
 const isLocalStorageAvailable = process.client && typeof localStorage !== 'undefined';
 
-// If localStorage is available, use it to get the state
+// Get stored user state
 const localStorageState = isLocalStorageAvailable ? JSON.parse(localStorage.getItem('tlkeys')) : null;
 const token = localStorageState ? localStorageState.auth.token : null;
 
-// Set default currency if not present in localStorage
-// if (isLocalStorageAvailable && !localStorage.getItem('currency')) {
-//   localStorage.setItem('currency', 'USD');
-// }
+// Get stored currency or fallback to USD
+const currency = isLocalStorageAvailable && localStorage.getItem('currency')
+  ? localStorage.getItem('currency')
+  : 'USD';
 
 const api = axios.create({
   withCredentials: true,
@@ -19,31 +18,22 @@ const api = axios.create({
   headers: {
     'Accept-Language': 'en',
     'Content-Type': 'application/json',
-    'currency': state().currency,
+    'currency': currency,
     'Accept': 'application/json',
     'secret-key': process.env.SECRET_KEY,
     'api-key': process.env.API_KEY,
   },
 });
 
-const responseHandler = (response) => {
-  return response;
-};
-
+const responseHandler = (response) => response;
 const errorHandler = (error) => {
-  if (error.response.status === 401) {
-    // Remove token and handle the redirection on the client side
-    if (isLocalStorageAvailable) {
-      localStorage.removeItem('tlkeys');
-    }
+  if (error.response?.status === 401 && isLocalStorageAvailable) {
+    localStorage.removeItem('tlkeys');
   }
   return Promise.reject(error);
 };
 
-api.interceptors.response.use(
-  (response) => responseHandler(response),
-  (error) => errorHandler(error)
-);
+api.interceptors.response.use(responseHandler, errorHandler);
 
 if (token) {
   api.defaults.headers.common['Authorization'] = `Bearer ${token}`;

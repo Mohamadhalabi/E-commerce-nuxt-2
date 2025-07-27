@@ -228,20 +228,6 @@ export default ({
     base: '/',
     linkActiveClass: '',
     linkExactActiveClass: 'active',
-    scrollBehavior(to, from, savedPosition) {
-      return new Promise((resolve) => {
-        // Set a timeout of 500 milliseconds (adjust as needed)
-        setTimeout(() => {
-          if (savedPosition) {
-            // If the user is navigating back, restore the saved scroll position
-            resolve(savedPosition);
-          } else {
-            // If navigating to a new page, scroll to the top
-            return({ x: 0, y: 0 });
-          }
-        }, 1500); // Adjust the timeout value as needed
-      });
-    }
   },
   serverMiddleware: [
     '~/middleware/redirects.js',
@@ -313,50 +299,28 @@ export default ({
     modern: true,
     aggressiveCodeRemoval: true,
     postcss: {
-      plugins: {
-        'postcss-import': {},
-        autoprefixer: {},
-        '@fullhuman/postcss-purgecss': process.env.NODE_ENV === 'production'
-          ? {
-              content: [
-                './components/**/*.vue',
-                './layouts/**/*.vue',
-                './pages/**/*.vue',
-                './plugins/**/*.js',
-                './nuxt.config.js',
-              ],
-              safelist: {
-                standard: [
-                  /^bg-/,
-                  /^text-/,
-                  /^btn-/,
-                  /^alert-/,
-                  /^d-/,
-                  /^col-/,
-                  /^row/,
-                  /^container/,
-                  /^mx-/, /^px-/, /^py-/, /^my-/, /^mt-/, /^mb-/,
-                  /^justify-/,
-                  /^align-/,
-                  /^order-/,
-                  /^position-/,
-                  /^shadow/,
-                  /^rounded/,
-                  /^border/,
-                  /^carousel/,
-                  /^collapse/,
-                  /^navbar/, /^nav/, /^dropdown/,
-                  /^modal/,
-                  /^form-/,
-                  /^input-/,
-                  /^is-/,
+      postcssOptions: {
+        plugins: {
+          'postcss-import': {},
+          autoprefixer: {},
+          '@fullhuman/postcss-purgecss': process.env.NODE_ENV === 'production'
+            ? {
+                content: [
+                  './components/**/*.vue',
+                  './layouts/**/*.vue',
+                  './pages/**/*.vue',
+                  './plugins/**/*.js',
+                  './nuxt.config.js',
                 ],
-              },
-              defaultExtractor(content) {
-                return content.match(/[\w-/:.]+(?<!:)/g) || [];
-              },
-            }
-          : false,
+                safelist: {
+                  standard: [ /* your classes here */ ],
+                },
+                defaultExtractor(content) {
+                  return content.match(/[\w-/:.]+(?<!:)/g) || [];
+                },
+              }
+            : false,
+        },
       },
     },
   },
@@ -381,7 +345,7 @@ export default ({
 
   server: {
     port: 4000,
-    host: process.env.host || 'localhost'
+    host: 'localhost'
   },
   nuxtPrecompress: {
     enabled: true, // Enable in production
