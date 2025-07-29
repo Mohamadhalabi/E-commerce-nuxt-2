@@ -13,8 +13,8 @@
           <div class="row bg-white m-0">
             <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
               <div v-for="(i, key2) in item" :key="key2" class="bg-white logo-item-car p-0 with-box-shadow sub-menu-cars">
-                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image && i.image.s">
-                  <nuxt-img format="webp" class="sub-menu-images" :src="i.image.s.url" />
+                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image">
+                  <nuxt-img format="webp" class="sub-menu-images" :src="i.image" />
                 </nuxt-link>
               </div>
             </nav>
