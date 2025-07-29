@@ -1,128 +1,65 @@
 import config from './configs';
-const version = process.env.version;
+import LRU from 'lru-cache';
 
-const {locale, availableLocales} = config.locales;
+const version = process.env.version;
+const { locale, availableLocales } = config.locales;
 const currency = 'USD';
 
-export default ({
-  "scripts": {
-    "build:modern": "nuxt build --modern=server",
-    "start:modern": "nuxt start --modern=server"
-  },
+export default {
+  target: 'server',
+  ssr: true,
+
   head: {
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png' },
-      { rel: 'shortcut icon', sizes: '16x16 24x24 32x32 48x48', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png' },
-      { rel: 'apple-touch-icon', sizes: '180x180', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-180x180-precomposed.png' },
-      { rel: 'apple-touch-icon', sizes: '152x152', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-152x152-precomposed.png' },
-      { rel: 'apple-touch-icon', sizes: '144x144', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-144x144-precomposed.png' },
-      { rel: 'apple-touch-icon', sizes: '120x120', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-120x120-precomposed.png' },
-      { rel: 'apple-touch-icon', sizes: '114x114', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-114x114-precomposed.png' },
-      { rel: 'apple-touch-icon', sizes: '76x76', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-76x76-precomposed.png' },
-      { rel: 'apple-touch-icon', sizes: '72x72', href: 'https://www.tlkeys.com/images/icons/apple-touch-icon-72x72-precomposed.png' },
-      { rel: 'icon', sizes: '192x192', href: 'https://www.tlkeys.com/images/icons/touch-icon-192x192.png' },
-      { rel: 'icon', sizes: '128x128', href: 'https://www.tlkeys.com/images/icons/touch-icon-128x128.png' },
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: 'https://www.tlkeys.com/images/icons/technolock-icon-32x32.png' },
-
-      // ✅ Roboto Font Preload
-      {
-        rel: 'preconnect',
-        href: 'https://fonts.googleapis.com',
-        crossorigin: true,
-      },
-      {
-        rel: 'preconnect',
-        href: 'https://fonts.gstatic.com',
-        crossorigin: true,
-      },
-      {
-        rel: 'preload',
-        as: 'style',
-        href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
-      },
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap',
-        media: 'print',
-        onload: "this.media='all'",
-      },
+      { rel: 'icon', type: 'image/x-icon', href: '/icons/apple-touch-icon-180x180-precomposed.png' },
+      { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: true },
+      { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
+      { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap' },
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap', media: 'print', onload: "this.media='all'" },
     ],
-
     meta: [
-      { 'http-equiv': 'Content-Type', content: 'text/html; charset=utf-8' },
-      { name: 'msapplication-TileImage', content: 'https://www.tlkeys.com/images/icons/apple-touch-icon-144x144-precomposed.png' },
+      { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
-      { name: 'msapplication-tap-highlight', content: 'no' },
-      { name: 'mobile-web-app-capable', content: 'yes' },
       { name: 'application-name', content: 'Techno Lock Keys' },
-      { name: 'apple-mobile-web-app-capable', content: 'yes' },
-      { name: 'apple-mobile-web-app-status-bar-style', content: 'default' },
-      { name: 'apple-mobile-web-app-title', content: 'Techno Lock Keys' }
     ],
-
     script: [
       {
-        hid: 'google-tag-manager',
-        innerHTML: String.raw`
-          (function(w,d,s,l,i){
-            w[l]=w[l]||[];
-            w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-            var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-            j.async=true;
-            j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-            f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-PWSSMVC7');
-        `,
-        defer: true,
-        async: true
-      },
-      {
-        hid: 'yandex',
-        src: 'https://mc.yandex.ru/metrika/tag.js',
-        async: true,
+        hid: 'gtm',
+        innerHTML: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PWSSMVC7');`,
+        type: 'text/javascript',
         defer: true
       }
     ],
-
     noscript: [
-      {
-        innerHTML: `<div><img src="https://mc.yandex.ru/watch/96738038" style="position:absolute; left:-9999px;" alt="" /></div>`
-      },
-      {
-        innerHTML: `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">`
-      }
+      { innerHTML: `<div><img src="https://mc.yandex.ru/watch/96738038" style="position:absolute; left:-9999px;" alt="" /></div>` }
     ],
-
     __dangerouslyDisableSanitizers: ['script', 'noscript']
   },
+
   css: [
-    'bootstrap/dist/css/bootstrap.min.css',// Import Bootstrap CSS
-    '@static/sass/style.scss',
-    '@static/css/steper.css',
-    '@static/css/agile.css',
+    'bootstrap/dist/css/bootstrap.min.css',
+    '@/static/sass/style.scss',
+    '@/static/css/steper.css',
+    '@/static/css/agile.css',
+    'vue-ssr-carousel/index.css'
   ],
 
   plugins: [
-    {src: '~/plugins/bootstrap.js', ssr:false },
-    {src: '~/plugins/user.js', ssr: false},
-    // {src : '~/plugins/i18n-watch.js', ssr: true},
-    {src: '@plugins/index.js', ssr: false},
-    {src: '@plugins/settings.js', ssr: true},
-    // {src: '@plugins/localstorage.js', ssr: false},
-    // {src: '@plugins/filters.js', ssr: true},
-    {src: '@plugins/directives/sticky.js', ssr: false},
-    {src: '@plugins/direction-control.js', ssr: true}, // rTL
-    // {src: '@plugins/vue-awesome-swiper.js', ssr: false},
-    {src: '~/plugins/vue-progressbar.js', ssr: false},
+    { src: '~/plugins/bootstrap.js', ssr: false },
+    { src: '~/plugins/user.js', ssr: false },
+    { src: '~/plugins/settings.js', ssr: true },
+    { src: '~/plugins/directives/sticky.js', ssr: false },
+    { src: '~/plugins/direction-control.js', ssr: true },
+    { src: '~/plugins/vue-progressbar.js', ssr: false },
     { src: '~/plugins/axios-cache.js', ssr: true },
-    { src: "~/plugins/visibility.js", srr: true},
+    { src: '~/plugins/visibility.js', ssr: true },
+    { src: '~/plugins/index.js', ssr: false },
   ],
 
+  components: true,
+
   buildModules: [
-    'vue-ssr-carousel/nuxt',
-    // '@nuxt/postcss8',
     '@nuxtjs/dotenv',
     '@nuxtjs/style-resources',
     ['nuxt-i18n', {
@@ -133,32 +70,22 @@ export default ({
       langDir: 'translations/',
       defaultLocale: 'en',
       vueI18n: {
-        fallbackLocale: ['en', 'fr','es','de','ru','ar'],
+        fallbackLocale: ['en', 'fr', 'es', 'de', 'ru', 'ar'],
       },
-      skipSettingLocaleOnNavigate: false
     }]
   ],
 
-
-  modules: ['@nuxtjs/axios' , '@nuxtjs/google-gtag' , '@nuxtjs/auth' ,'nuxt-precompress', '@nuxt/image', 'cookie-universal-nuxt'],
-  // bootstrapVue: {
-  //   componentPlugins: [
-  //     'CardPlugin',
-  //     'FormInputPlugin',
-  //     'ModalPlugin',
-  //     'TablePlugin',
-  //     'CollapsePlugin',
-  //     'PaginationPlugin',
-  //     'ListGroupPlugin',
-  //     'FormTagsPlugin',
-  //     'AlertPlugin',
-  //     'ButtonPlugin',
-  //     'FormFilePlugin',
-  //     'FormTextareaPlugin',
-  //   ],
-  // },
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/google-gtag',
+    '@nuxtjs/auth',
+    '@nuxt/image',
+    'nuxt-precompress',
+    'cookie-universal-nuxt',
+  ],
 
   axios: {
+    baseURL: process.env.API_BASE_URL,
     headers: {
       'Accept-Language': locale,
       'Content-Type': 'application/json',
@@ -166,38 +93,37 @@ export default ({
       'Accept': 'application/json',
       'secret-key': process.env.SECRET_KEY,
       'api-key': process.env.API_KEY
-    },
-    baseURL: process.env.API_BASE_URL
+    }
   },
-  'google-gtag':{
-    id: 'G-5G2DSZVBJ9', // required
+
+  'google-gtag': {
+    id: 'G-5G2DSZVBJ9'
   },
+
   image: {
     domains: ['dev-srv.tlkeys.com'],
-    quality: 1,
+    quality: 60,
     format: ['webp'],
     screens: {
-      'xs': 320,
-      'sm': 640,
-      'md': 768,
-      'lg': 1024,
-      'xl': 1280,
-      'xxl': 1536,
-      '2xl': 1920
+      xs: 320, sm: 640, md: 768, lg: 1024, xl: 1280, xxl: 1536, '2xl': 1920
     },
   },
+
   render: {
-    asyncScript:true,
+    asyncScripts: true,
     http2: {
+      push: true,
       pushAssets: (req, res, publicPath, preloadFiles) =>
         preloadFiles
-          .filter(f => f.asType === 'script' && f.file === 'runtime.js')
-          .map(f => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`),
+          .filter(f => ['script', 'style'].includes(f.asType))
+          .map(f => `<${publicPath}${f.file}>; rel=preload; as=${f.asType}`)
     },
     bundleRenderer: {
-      shouldPrefetch: () => false,
-      shouldPreload: (fileWithoutQuery, asType) => ["script", "style"].includes(asType),
-    },
+      cache: new LRU({
+        max: 1000,
+        maxAge: 1000 * 60 * 15 // ✅ v6 uses maxAge, not ttl
+      })
+    }
   },
 
   auth: {
@@ -205,67 +131,43 @@ export default ({
     strategies: {
       local: {
         endpoints: {
-          login: {
-            url: '/user/auth/login',
-            method: 'post',
-            propertyName: 'authorisation.token'
-          },
-          logout: {url: '/user/auth/logout', method: 'post'},
-          user: {url: '/me', method: 'post', propertyName: 'data'}
+          login: { url: '/user/auth/login', method: 'post', propertyName: 'authorisation.token' },
+          logout: { url: '/user/auth/logout', method: 'post' },
+          user: { url: '/me', method: 'post', propertyName: 'data' }
         },
-        user: {
-          property: false,
-        },
-        tokenType: 'Bearer'
+        tokenType: 'Bearer',
+        user: { property: false }
       }
     },
     redirect: false
   },
 
-
   router: {
-    prefetchLinks: true,
     base: '/',
+    prefetchLinks: false,
     linkActiveClass: '',
     linkExactActiveClass: 'active',
   },
+
   serverMiddleware: [
+    '~/server-middleware/compression.js',
     '~/middleware/redirects.js',
     '~/middleware/force410.js',
   ],
+
+
   build: {
-    loaders: {
-      scss: {
-        implementation: require('sass')
-      }
-    },
     transpile: ['cookie-es'],
-    
-    analyze: true,
+    extractCSS: true,
+    optimizeCSS: true,
     minifyCSS: true,
     minifyJS: true,
     html: {
       minifyCSS: true,
-      minifyJS: true,
+      minifyJS: true
     },
-    extractCSS: true,
-    optimizeCSS: true,
-    publicPath: '/publicpath',
     babel: {
-      compact: true,
-      presets({ isServer }) {
-        return [
-          [
-            require.resolve('@nuxt/babel-preset-app'),
-            {
-              corejs: { version: 3 },
-              targets: isServer
-                ? { node: 'current' }
-                : { esmodules: true },
-            }
-          ]
-        ]
-      }
+      compact: true
     },
     splitChunks: {
       layouts: true,
@@ -273,108 +175,68 @@ export default ({
       commons: true
     },
     filenames: {
-      app: ({ isDev, isModern }) => isDev ? `[name]${isModern ? '.modern' : ''}.js` : `[contenthash:7]${isModern ? '.modern' : ''}.${version}.js`,
-      chunk: ({ isDev, isModern }) => isDev ? `[name]${isModern ? '.modern' : ''}.js` : `[contenthash:7]${isModern ? '.modern' : ''}.${version}.js`,
-      css: ({ isDev }) => isDev ? `[name].css` : `css/[contenthash:7].${version}.css`,
-      img: ({ isDev }) => isDev ? `[path][name].[ext]` : `img/[name].[contenthash:7].${version}.[ext]`,
-      font: ({ isDev }) => isDev ? `[path][name].[ext]` : `fonts/[name].[contenthash:7].${version}.[ext]`,
-      video: ({ isDev }) => isDev ? `[path][name].[ext]` : `videos/[name].[contenthash:7].${version}.[ext]`
+      app: ({ isDev }) => isDev ? '[name].js' : `[contenthash:7].${version}.js`,
+      chunk: ({ isDev }) => isDev ? '[name].js' : `[contenthash:7].${version}.js`,
+      css: ({ isDev }) => isDev ? '[name].css' : `css/[contenthash:7].${version}.css`,
     },
-    optimization:{
+    optimization: {
       minimize: true,
-      splitChunks: {
-        chunks: 'all',
-        automaticNameDelimiter: '.',
-        name: true,
-        cacheGroups: {}
-      },
       runtimeChunk: true,
     },
     terser: {
-      terserOptions:{
+      terserOptions: {
         compress: true,
         mangle: true,
       }
     },
-    modern: true,
-    aggressiveCodeRemoval: true,
-    // postcss: {
-    //   postcssOptions: {
-    //     plugins: {
-    //       'postcss-import': {},
-    //       autoprefixer: {},
-    //       '@fullhuman/postcss-purgecss': process.env.NODE_ENV === 'production'
-    //         ? {
-    //             content: [
-    //               './components/**/*.vue',
-    //               './layouts/**/*.vue',
-    //               './pages/**/*.vue',
-    //               './plugins/**/*.js',
-    //               './nuxt.config.js',
-    //             ],
-    //             safelist: {
-    //               standard: [ /* your classes here */ ],
-    //             },
-    //             defaultExtractor(content) {
-    //               return content.match(/[\w-/:.]+(?<!:)/g) || [];
-    //             },
-    //           }
-    //         : false,
-    //     },
-    //   },
-    // },
+    modern: true
   },
 
-  generate: {
-    subFolders: false,
-    fallback: '404.html'
-  },
-  ssr: true,
-  loading: {
-    color: '#f07905',
-    height: '6px',
-    throttle: 0,
-    failedColor: 'red',
-    duration: 15000,
-  },
-  // loading: false,
-  // loadingIndicator: false,
-
-
-  pageTransition: 'page',
-
-  server: {
-    port: 4000,
-    host: 'localhost'
-  },
+  // ✅ Build-time Gzip/Brotli for static files
   nuxtPrecompress: {
-    enabled: true, // Enable in production
-    report: false, // set true to turn one console messages during module init
-    test: /\.(js|css|html|txt|xml|svg)$/, // files to compress on build
-    // Serving options
+    enabled: true,
+    report: false,
+    test: /\.(js|css|html|txt|xml|svg)$/,
     middleware: {
-      // You can disable middleware if you serve static files using nginx...
       enabled: true,
-      // Enable if you have .gz or .br files in /static/ folder
       enabledStatic: true,
-      // Priority of content-encodings, first matched with request Accept-Encoding will me served
       encodingsPriority: ['br', 'gzip'],
     },
-
-    // build time compression settings
     gzip: {
       enabled: true,
-      filename: '[path].gz[query]', // middleware will look for this filename
+      filename: '[path].gz[query]',
       threshold: 10240,
       minRatio: 0.8,
       compressionOptions: { level: 9 },
     },
     brotli: {
       enabled: true,
-      filename: '[path].br[query]', // middleware will look for this filename
+      filename: '[path].br[query]',
       compressionOptions: { level: 11 },
       threshold: 10240,
       minRatio: 0.8,
     },
   },
-});
+
+  generate: {
+    fallback: '404.html',
+    subFolders: false,
+  },
+
+
+  loading: {
+    color: '#f07905',
+    height: '6px',
+    throttle: 0,
+    failedColor: 'red',
+    duration: 15000,
+    continuous: true
+  },
+
+  pageTransition: 'page',
+
+  server: {
+    port: 4000,
+    host: 'localhost'
+  }
+};

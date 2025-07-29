@@ -48,7 +48,7 @@
       <hr class="mt-0 mb-0 dashed">
 
       <li class="menu-list-items mb-0 mt-0 p-3 pl-4">
-        <div class="d-flex justify-content-between align-items-center w-100" @click="tokenSoftwareMenu()">
+        <div class="d-flex justify-content-between align-items-center w-100" @click="tokenSoftwareMenu(),getSoftwareAndTokens()">
           <span class="mobile-menu-links">{{ $t("header.TokensAndSoftware") }}</span>
           <span class="mobile-menu-toggle-button">&#x25BE;</span>
         </div>
@@ -243,56 +243,52 @@
       <span class="mobile-menu-title">{{ $t("header.TokensAndSoftware") }}</span>
       <a href="javascript:void(0)" @click="closeNav()" class="closebtn">&times;</a>
       <div class="px-3">
-        <div class="mb-2 font-weight-bold">{{ $t("common.software") }}</div>
-        <div v-for="(itemm, index) in $settings.main_menu" :key="index">
-          <div v-for="(item2, index2) in itemm.items" :key="index2">
-            <div v-if="itemm.slug === 'tokens-software'">
-              <div v-for="(item3, index3) in item2" :key="index3">
-                <div v-if="item3.slug.includes('software')">
-                  <nuxt-link
-                    :to="'/' + item3.slug"
-                    class="d-block py-2 w-100 border-bottom"
-                    @click.native="closeAllNav()"
-                  >
-                    <span class="font-weight-bold">
-                      {{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}
-                    </span>
-                  </nuxt-link>
-                </div>
-              </div>
+
+        <!-- SOFTWARE Section -->
+        <div class="font-weight-bold">{{ $t("common.software") }}</div>
+        <div v-if="softwareAndTokens?.items?.software">
+          <div v-for="(item, index) in softwareAndTokens.items.software" :key="'software-' + index">
+            <div v-if="item.slug.includes('software')">
+              <nuxt-link
+                :to="'/' + item.slug"
+                class="d-block py-2 w-100 border-bottom"
+                @click.native="closeAllNav()"
+              >
+                <span class="font-weight-bold">
+                  {{ item.name && item.name[$i18n.locale] ? item.name[$i18n.locale] : 'N/A' }}
+                </span>
+              </nuxt-link>
             </div>
           </div>
         </div>
 
         <hr>
 
-        <div class="mb-2 font-weight-bold">{{ $t("common.token") }}</div>
-        <div v-for="(itemm, index) in $settings.main_menu" :key="index">
-          <div v-for="(item2, index2) in itemm.items" :key="index2">
-            <div v-if="itemm.slug === 'tokens-software'">
-              <div v-for="(item3, index3) in item2" :key="index3">
-                <div v-if="item3.slug.includes('token')">
-                  <nuxt-link
-                    :to="'/' + item3.slug"
-                    class="d-block py-2 w-100 border-bottom"
-                    @click.native="closeAllNav()"
-                  >
-                    <span class="font-weight-bold">
-                      {{ item3.name && item3.name[$i18n.locale] ? item3.name[$i18n.locale] : 'N/A' }}
-                    </span>
-                  </nuxt-link>
-                </div>
-              </div>
+        <!-- TOKEN Section -->
+        <div class="font-weight-bold">{{ $t("common.token") }}</div>
+        <div v-if="softwareAndTokens?.items?.token">
+          <div v-for="(item, index) in softwareAndTokens.items.token" :key="'token-' + index">
+            <div v-if="item.slug.includes('token')">
+              <nuxt-link
+                :to="'/' + item.slug"
+                class="d-block py-2 w-100 border-bottom"
+                @click.native="closeAllNav()"
+              >
+                <span class="font-weight-bold">
+                  {{ item.name && item.name[$i18n.locale] ? item.name[$i18n.locale] : 'N/A' }}
+                </span>
+              </nuxt-link>
             </div>
           </div>
         </div>
+
       </div>
     </div>
+
   </div>
 </template>
 <script>
 import {mapActions, mapGetters} from "vuex";
-import img from "~/static/images/blank.png";
 import Api from "~/api";
 export default {
   data: function () {
@@ -308,11 +304,6 @@ export default {
   computed: {
     ...mapGetters("language", ["getLang"]),
     ...mapGetters("authentication", ["isAuthenticated", "StateUser"]),
-    totalLength: function() {
-      const mainMenuLength = Object.keys(this.$settings.main_menu).length;
-      const menusLength = Object.keys(this.$settings.menus).length;
-      return mainMenuLength + menusLength;
-    },
   },
   methods: {
     ...mapActions("shop", ["getCartList"]),
@@ -364,6 +355,17 @@ export default {
         .catch(error => ({error: JSON.stringify(error)}));        
       }
     },
+    async getSoftwareAndTokens() {
+      if (Object.keys(this.softwareAndTokens || {}).length === 0) {
+        try {
+          const response = await Api.get("/software-and-token");
+          this.softwareAndTokens = response.data.data.menu.main_menu["tokens-software"];
+        } catch (error) {
+          console.error("Error fetching software and tokens:", error);
+        }
+      }
+    },
+
     getLink(route) {
       if (this.getLang === 'en') {
         return route; // Return the route as is without the language parameter
@@ -377,9 +379,6 @@ export default {
       } else {
         return "https://cdn-icons-png.flaticon.com/512/7855/7855599.png";
       }
-    },
-    defaultAvatar(e) {
-      e.target.src = img;
     },
     KeyRemoteMenu(){
       document.getElementById("mySidenav").style.width = "260px";

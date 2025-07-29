@@ -35,7 +35,7 @@
 
 export default {
   components: {
-    VideoPlayer
+    // VideoPlayer
   },
   props: {
     story: Object,

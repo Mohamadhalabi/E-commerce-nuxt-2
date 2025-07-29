@@ -154,7 +154,6 @@ export default {
     ...mapGetters("language", ["getLang"]),
   },
   mounted() {
-    this.getCategoriesWithTranslate();
     this.startTypewriterEffect();
 
     if (process.client) {
@@ -282,15 +281,6 @@ export default {
         this.productsBySearch = [];
         this.availableItems = [];
       }
-    },
-    getCategoriesWithTranslate() {
-      this.categories = this.$settings.categories.map((category) => {
-        const categoryNameLang = category.name;
-        for (const key in categoryNameLang) {
-          category[`name_${key}`] = categoryNameLang[key];
-        }
-        return category;
-      });
     },
     removeInputText() {
       this.searchKey = "";

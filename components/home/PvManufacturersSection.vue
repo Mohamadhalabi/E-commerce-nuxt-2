@@ -1,5 +1,5 @@
 <template>
-  <div v-if="manufacturers.length > 0" ref="manufacturersWrapper">
+  <div v-show="manufacturers.length > 0" ref="manufacturersWrapper">
     <div class="container mt-2" style="border-radius: 10px;padding: 10px;">
       <div class="col-lg-12 additional-product-items d-flex">
         <h3 class="m-0 home-page-title">
@@ -67,8 +67,9 @@ export default {
     };
   },
   mounted() {
-    // Set up the IntersectionObserver after the component is mounted
-    this.setupIntersectionObserver();
+    this.$nextTick(() => {
+      this.setupIntersectionObserver();
+    });
   },
   methods: {
     async fetchManufacturers() {
@@ -80,23 +81,25 @@ export default {
       }
     },
     setupIntersectionObserver() {
+      const element = this.$refs.manufacturersWrapper;
+
+      if (!element) {
+        // Retry in next tick if not yet in DOM
+        this.$nextTick(() => this.setupIntersectionObserver());
+        return;
+      }
+
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            this.fetchManufacturers(); // Trigger the API call when the element is in view
-            observer.disconnect(); // Disconnect after the first load
+            this.fetchManufacturers();
+            observer.disconnect();
           }
         });
       });
 
-      // Use the wrapper ref for the observer
-      const element = this.$refs.manufacturersWrapper;
-      if (element) {
-        observer.observe(element);
-      } else {
-        console.error("Wrapper element not found for intersection observer");
-      }
-    },
+      observer.observe(element);
+    }
   },
 };
 </script>

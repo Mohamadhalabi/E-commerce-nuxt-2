@@ -920,5 +920,11 @@ export default
       viewWishlist:"View Wishlist",
       viewCompare:"View Compare",
       PleaseSelectPaymentMethod: "Please Select a payment method"
+    },
+    coupon:{
+      label: "COUPON",
+      title:"Get 10% off your first order",
+      useCode: "Use Code",
+      note: "*Minimum purchase $250"
     }
   };

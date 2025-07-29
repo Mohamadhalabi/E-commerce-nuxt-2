@@ -1,12 +1,11 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-8 mb-2" v-if="$settings.website.bottom_big_banner_link">
+      <div class="col-md-8 mb-2">
         <a
-          v-if="$settings.website.bottom_big_banner_link"
-          :href="$settings.website.bottom_big_banner_link"
-          target="_blank"
-          class="top-notice-image"
+        href="https://www.tlkeys.com/autel"
+        target="_blank"
+        class="top-notice-image"
         >
           <nuxt-img
             loading="lazy"
@@ -14,17 +13,13 @@
             style="border-radius: 6px;"
             width="924"
             height="238"
-            :src="$settings.website.bottom_big_banner_image.l.url"
-            :open_graph="$settings.website.bottom_big_banner_image.l['open_graph']"
-            :scal="$settings.website.bottom_big_banner_image.l['scal']"
-            :description="$settings.website.bottom_big_banner_image.l['description']"
-            :alt="$settings.website.bottom_big_banner_image.l['alt']"
+            src="https://dev-srv.tlkeys.com/storage/esg/top-banner/banner%20left%20-%201.jpg"
           />
         </a>
       </div>
-      <div class="col-md-4" v-if="$settings.website.bottom_small_banner_link">
+      <div class="col-md-4" >
         <a
-          :href="$settings.website.bottom_small_banner_link"
+          href="https://www.tlkeys.com/obdstar"
           target="_blank"
           class="top-notice-image"
         >
@@ -34,11 +29,7 @@
             width="452"
             height="241"
             style="border-radius: 6px;"
-            :src="$settings.website.bottom_small_banner_image.l.url"
-            :open_graph="$settings.website.bottom_small_banner_image.l['open_graph']"
-            :scal="$settings.website.bottom_small_banner_image.l['scal']"
-            :description="$settings.website.bottom_small_banner_image.l['description']"
-            :alt="$settings.website.bottom_small_banner_image.l['alt']"
+            src="https://dev-srv.tlkeys.com/storage/esg/top-banner/banner%20right%20-%201.jpg"
           />
         </a>
       </div>

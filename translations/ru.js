@@ -906,5 +906,11 @@ export default
     viewWishlist:"Просмотреть список желаний",
     viewCompare:"Просмотреть сравнение",
     PleaseSelectPaymentMethod: "Пожалуйста, выберите способ оплаты"
+  },
+  coupon: {
+    label: "КУПОН",
+    title: "Получите скидку 10% на первый заказ",
+    useCode: "Используйте код",
+    note: "*Минимальная покупка $250"
   }
 };

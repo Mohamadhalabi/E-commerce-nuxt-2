@@ -27,7 +27,7 @@
           sticky-container
         >
           <div sticky-offset="{top: 75}">
-            <!-- <sidebar-filter /> -->
+            <sidebar-filter />
           </div>
         </aside>
       </div>

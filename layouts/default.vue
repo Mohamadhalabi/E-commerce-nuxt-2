@@ -3,7 +3,7 @@
     <vue-progress-bar/>
     <noscript v-html="iFrameCode" />
     <pv-header @isClicked="isClicked" />
-    <nuxt/>
+    <nuxt keep-alive />
     <pv-footer/>
     <pv-app-popup class="minipopup-area minipopup-top-area"/>
     <pv-product-popup class="minipopup-area"/>
@@ -16,16 +16,16 @@
     <transition name="fade">
       <div v-if="showPromo" class="coupon-ticket">
         <div class="coupon-left">
-          <span>COUPON</span>
+          <span>{{ $t('coupon.label') }}</span>
         </div>
         <div class="coupon-right">
-          <div class="coupon-header">Get 10% off your first order</div>
+          <div class="coupon-header">{{ $t('coupon.title') }}</div>
           <div class="coupon-center">
-            <div class="coupon-code-label">Use Code</div>
-              <div class="coupon-code">
-                <span class="code-pill animated-pill" @click="copyCoupon">WELCOME10</span>
-              </div>
-              <div class="coupon-note">*Minimum purchase $250</div>
+            <div class="coupon-code-label">{{ $t('coupon.useCode') }}</div>
+            <div class="coupon-code">
+              <span class="code-pill animated-pill" @click="copyCoupon">WELCOME10</span>
+            </div>
+            <div class="coupon-note">{{ $t('coupon.note') }}</div>
           </div>
         </div>
         <button class="coupon-close" @click="dismissPromo">×</button>

@@ -964,8 +964,11 @@ export default
     viewWishlist: "Voir la liste de souhaits",
     viewCompare: "Voir la comparaison",
     PleaseSelectPaymentMethod: "Veuillez choisir un moyen de paiement"
+  },
+  coupon: {
+    label: "COUPON",
+    title: "Obtenez 10% de réduction sur votre première commande",
+    useCode: "Utilisez le code",
+    note: "*Achat minimum de 250 $"
   }
-
-
-}
-;
+};

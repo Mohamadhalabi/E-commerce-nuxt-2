@@ -1,103 +1,126 @@
 <template>
   <div class="header-menu main-nav" :class="{ 'text-right': getIsAr }">
     <nav class="menu nav-categories header-main-menu">
-      <!-- Cars Menu -->
-      <nav class="left-menu-items" @click="getCars()" :class="{ 'orange-background': carMenuOpened }">
-        <nuxt-link
-          :to="getLink('#')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu" 
-          :class="{ 'orange-background': carMenuOpened }"
-          >
-            {{ $t("header.Cars") }}
-          </span>
-        </nuxt-link>
-        <nav
-          v-if="carMenuOpened"
-          class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          v-for="(item, key) in cars"
-          :key="key">
-          <div class="row bg-white m-0">
-            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
-              <div
-                v-for="(i, key2) in item"
-                :key="key2"
-                class="bg-white logo-item-car p-0 with-box-shadow sub-menu-cars">
-                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image && i.image.s">
-                  <nuxt-img
-                    format="webp"
-                    class="sub-menu-images"
-                    :src="i.image.s.url"
-                  />
-                </nuxt-link>
-              </div>
-            </nav>
-          </div>
-        </nav>
-      </nav>
-
-
-
-      <nav class="left-menu-items" @click="getManufacturers()" :class="{ 'orange-background': ManufacturerMenuOpened }">
-        <nuxt-link
-          :to="getLink('#')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu" :class="{ 'orange-background': ManufacturerMenuOpened }">
-            {{ $t("header.Manufactures") }}
-          </span>
-        </nuxt-link>
-        <nav
-          v-if="ManufacturerMenuOpened"
-          class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          v-for="(item, key) in manufacturers"
-          :key="key">
-          <div class="row bg-white m-0">
-            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
-              <div
-                v-for="(i, key2) in item"
-                :key="key2"
-                class="bg-white logo-item p-0 with-box-shadow sub-menu-cars">
-                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image && i.image.s">
-                  <nuxt-img
-                    format="webp"
-                    class="sub-menu-images"
-                    :src="i.image.s.url"
-                  />
-                </nuxt-link>
-              </div>
-            </nav>
-          </div>
-        </nav>
-      </nav>
-
       
-      <nav class="left-menu-items" @click="getKeysAndRemotes()" :class="{ 'orange-background': keysAndRemoteMenuOpened }">
-        <nuxt-link
-          :to="getLink('#')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu" :class="{ 'orange-background': keysAndRemoteMenuOpened }">
-            {{ $t("header.keysAndRemote") }}
-          </span>
-        </nuxt-link>
-        <nav
-          v-if="keysAndRemoteMenuOpened"
-          class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          v-for="(item, key) in keysAndRemotes"
-          :key="key">
+      <!-- Cars Menu -->
+      <nav class="left-menu-items" :class="{ 'orange-background': carMenuOpened }">
+        <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('cars')">
+          <nuxt-link :to="getLink('#')">
+            <span class="header-main-menu" :class="{ 'orange-background': carMenuOpened }">{{ $t("header.Cars") }}</span>
+          </nuxt-link>
+        </div>
+        <nav v-if="carMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white" v-for="(item, key) in cars" :key="key">
+          <div class="row bg-white m-0">
+            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
+              <div v-for="(i, key2) in item" :key="key2" class="bg-white logo-item-car p-0 with-box-shadow sub-menu-cars">
+                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image && i.image.s">
+                  <nuxt-img format="webp" class="sub-menu-images" :src="i.image.s.url" />
+                </nuxt-link>
+              </div>
+            </nav>
+          </div>
+        </nav>
+      </nav>
+
+      <!-- Manufacturer Menu -->
+      <nav class="left-menu-items" :class="{ 'orange-background': manufacturerMenuOpened }">
+        <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('manufacturers')">
+          <nuxt-link :to="getLink('#')">
+            <span class="header-main-menu" :class="{ 'orange-background': manufacturerMenuOpened }">{{ $t("header.Manufactures") }}</span>
+          </nuxt-link>
+        </div>
+        <nav v-if="manufacturerMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white" v-for="(item, key) in manufacturers" :key="key">
+          <div class="row bg-white m-0">
+            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
+              <div v-for="(i, key2) in item" :key="key2" class="bg-white logo-item p-0 with-box-shadow sub-menu-cars">
+                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image">
+                   <nuxt-img format="webp" class="sub-menu-images" :src="i.image.s.url" />
+                </nuxt-link>
+              </div>
+            </nav>
+          </div>
+        </nav>
+      </nav>
+
+      <!-- Keys and Remotes Menu -->
+      <nav class="left-menu-items" :class="{ 'orange-background': keysAndRemoteMenuOpened }">
+        <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('keysAndRemotes')">
+          <nuxt-link :to="getLink('#')">
+            <span class="header-main-menu" :class="{ 'orange-background': keysAndRemoteMenuOpened }">{{ $t("header.keysAndRemote") }}</span>
+          </nuxt-link>
+        </div>
+
+        <nav v-if="keysAndRemoteMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white">
           <div class="row bg-white m-0">
             <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
               <div
-                v-for="(i, key2) in item"
+                v-for="(i, key2) in keysAndRemotes.items"
                 :key="key2"
-                class="bg-white logo-item p-0 with-box-shadow sub-menu-cars">
+                class="bg-white logo-item p-0 with-box-shadow sub-menu-cars"
+              >
+
+              <span style="color:black!important">
+              </span>
                 <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image">
-                  <nuxt-img
-                    format="webp"
-                    class="sub-menu-images"
-                    :src="i.image"
-                  />
-                  <div class="" style="color:#3E3E3E;font-size: 11px;text-align: center; margin-top: 5px;margin-bottom: 5px;text-transform: capitalize;">
-                    <span>{{ i.name[$i18n.locale] }}</span>
+                  <nuxt-img format="webp" class="sub-menu-images" :src="i.image" />
+                  <div class="text-center mt-1 mb-1 text-capitalize" style="color:#3E3E3E;font-size:11px;">
+                    <span>{{ i.name[$i18n.locale] || i.name.en }}</span>
+                  </div>
+                </nuxt-link>
+              </div>
+            </nav>
+          </div>
+        </nav>
+      </nav>
+
+      <!-- Accessories and Tools Menu -->
+      <nav class="left-menu-items" :class="{ 'orange-background': accessoriesAndToolsMenuOpened }">
+        <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('accessoriesAndTools')">
+          <nuxt-link :to="getLink('#')">
+            <span class="header-main-menu" :class="{ 'orange-background': accessoriesAndToolsMenuOpened }">{{ $t("header.AccessoriesAndTools") }}</span>
+          </nuxt-link>
+        </div>
+
+        <nav v-if="accessoriesAndToolsMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white">
+          <div class="row bg-white m-0">
+            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
+              <div
+                v-for="(i, key2) in accessoriesAndTools.items"
+                :key="key2"
+                class="bg-white logo-item-accessories p-0 with-box-shadow sub-menu-cars"
+              >
+                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image">
+                  <nuxt-img format="webp" class="sub-menu-images" :src="i.image" />
+                  <div class="text-center mt-1 mb-1 text-capitalize" style="color:#3E3E3E;font-size:11px;">
+                    <span>{{ i.name[$i18n.locale] || i.name.en }}</span>
+                  </div>
+                </nuxt-link>
+              </div>
+            </nav>
+          </div>
+        </nav>
+      </nav>
+
+      <!-- Devices and Machines Menu -->
+      <nav class="left-menu-items" :class="{ 'orange-background': deviceAndMachineMenuOpened }">
+        <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('devicesAndMachines')">
+          <nuxt-link :to="getLink('#')">
+            <span class="header-main-menu" :class="{ 'orange-background': deviceAndMachineMenuOpened }">{{ $t("header.DeviceAndMachine") }}</span>
+          </nuxt-link>
+        </div>
+
+        <nav v-if="deviceAndMachineMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white">
+          <div class="row bg-white m-0">
+            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
+              <div
+                v-for="(i, key2) in devicesAndMachines.items"
+                :key="key2"
+                class="bg-white logo-item-device-machine p-0 with-box-shadow sub-menu-cars"
+              >
+                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image">
+                  <nuxt-img format="webp" class="sub-menu-images" :src="i.image" />
+                  <div class="text-center mt-1 mb-1 text-capitalize" style="color:#3E3E3E;font-size:11px;">
+                    <span>{{ i.name[$i18n.locale] || i.name.en }}</span>
                   </div>
                 </nuxt-link>
               </div>
@@ -107,137 +130,35 @@
       </nav>
 
 
-      <nav class="left-menu-items" @click="getAccessoriesAndTools()" :class="{ 'orange-background': AccessoriesAndToolsMenuOpened }">
-        <nuxt-link
-          :to="getLink('#')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu" :class="{ 'orange-background': AccessoriesAndToolsMenuOpened }">
-            {{ $t("header.AccessoriesAndTools") }}
-          </span>
-        </nuxt-link>
-        <nav
-          v-if="AccessoriesAndToolsMenuOpened"
-          class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          v-for="(item, key) in accessoriesAndTools"
-          :key="key">
-          <div class="row bg-white m-0">
-            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
-              <div
-                v-for="(i, key2) in item"
-                :key="key2"
-                class="bg-white logo-item-accessories p-0 with-box-shadow sub-menu-cars">
-                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image">
-                  <nuxt-img
-                    format="webp"
-                    class="sub-menu-images"
-                    :src="i.image"
-                  />
-                  <div class="" style="color:#3E3E3E;font-size: 11px;text-align: center; margin-top: 5px;margin-bottom: 5px;text-transform: capitalize;">
-                    <span>{{ i.name[$i18n.locale] }}</span>
-                  </div>
-                </nuxt-link>
-              </div>
-            </nav>
-          </div>
-        </nav>
-      </nav>
-
-
-
-      <nav class="left-menu-items" @click="getDevicesAndMachines()" :class="{ 'orange-background': DeviceAndMachineMenuOpened }">
-        <nuxt-link
-          :to="getLink('#')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu" :class="{ 'orange-background': DeviceAndMachineMenuOpened }">
-            {{ $t("header.DeviceAndMachine") }}
-          </span>
-        </nuxt-link>
-        <nav
-          v-if="DeviceAndMachineMenuOpened"
-          class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          v-for="(item, key) in devicesAndMachines"
-          :key="key">
-          <div class="row bg-white m-0">
-            <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
-              <div
-                v-for="(i, key2) in item"
-                :key="key2"
-                class="bg-white logo-item-device-machine p-0 with-box-shadow sub-menu-cars">
-                <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image">
-                  <nuxt-img
-                    format="webp"
-                    class="sub-menu-images"
-                    :src="i.image"
-                  />
-                  <div class="" style="color:#3E3E3E;font-size: 11px;text-align: center; margin-top: 5px;margin-bottom: 5px;text-transform: capitalize;">
-                    <span>{{ i.name[$i18n.locale] }}</span>
-                  </div>
-                </nuxt-link>
-              </div>
-            </nav>
-          </div>
-        </nav>
-      </nav>
-
-      <nav class="left-menu-items">
-        <nuxt-link
-          :to="getLink('/emulators')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
-            {{ $t("header.Emulators") }}
-          </span>
-        </nuxt-link>
-      </nav>
-
-
-      <nav class="left-menu-items" @click="getSoftwareAndTokens()" :class="{ 'orange-background': SoftwareAndTokenMenuOpened }">
-        <nuxt-link
-          :to="getLink('#')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu" :class="{ 'orange-background': SoftwareAndTokenMenuOpened }">
-            {{ $t("header.TokensAndSoftware") }}
-          </span>
-        </nuxt-link>
-        <nav
-          v-if="SoftwareAndTokenMenuOpened"
-          class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white"
-          v-for="(item, key) in softwareAndTokens"
-          :key="key">
+      <!-- Software and Tokens Menu -->
+      <nav class="left-menu-items" :class="{ 'orange-background': softwareAndTokenMenuOpened }">
+        <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('softwareAndTokens')">
+          <nuxt-link :to="getLink('#')">
+            <span class="header-main-menu" :class="{ 'orange-background': softwareAndTokenMenuOpened }">{{ $t("header.TokensAndSoftware") }}</span>
+          </nuxt-link>
+        </div>
+        <nav v-if="softwareAndTokenMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white" v-for="(item, key) in softwareAndTokens" :key="key">
           <div class="row bg-white m-0">
             <div class="col-6 software-menu-right-border pl-0 pr-0">
               <div class="p-4">
-                <button class="token-and-software-buttons">{{ $t("common.software")}}</button>
+                <button class="token-and-software-buttons">{{ $t("common.software") }}</button>
               </div>
               <nav class="d-flex flex-wrap bg-white p-0">
-                <div
-                  v-for="(i, key2) in item.software"
-                  :key="key2"
-                  class="bg-white p-0 with-box-shadow software-token-items">
-                  <nuxt-link :to="getLink('/' + i.slug)">
-                    <nuxt-img
-                      format="webp"
-                      class="sub-menu-images p-2"
-                      :src="i.image['s'].url"
-                    />
+                <div v-for="(i, key2) in item.software" :key="key2" class="bg-white p-0 with-box-shadow software-token-items">
+                  <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image && i.image.s">
+                    <nuxt-img format="webp" class="sub-menu-images p-2" :src="i.image.s.url" />
                   </nuxt-link>
                 </div>
               </nav>
             </div>
             <div class="col-6 pr-0 pl-0">
               <div class="p-4">
-                <button class="token-and-software-buttons">{{ $t("common.token")}}</button>                
+                <button class="token-and-software-buttons">{{ $t("common.token") }}</button>
               </div>
               <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
-                <div
-                  v-for="(i, key2) in item.token"
-                  :key="key2"
-                  class="bg-white p-0 with-box-shadow software-token-items">
-                  <nuxt-link :to="getLink('/' + i.slug)">
-                    <nuxt-img
-                      format="webp"
-                      class="sub-menu-images p-2"
-                      :src="i.image['s'].url"
-                    />
+                <div v-for="(i, key2) in item.token" :key="key2" class="bg-white p-0 with-box-shadow software-token-items">
+                  <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image && i.image.s">
+                    <nuxt-img format="webp" class="sub-menu-images p-2" :src="i.image.s.url" />
                   </nuxt-link>
                 </div>
               </nav>
@@ -246,228 +167,277 @@
         </nav>
       </nav>
 
-
-
+      <!-- Static Menus -->
       <nav class="left-menu-items">
-        <nuxt-link
-          :to="getLink('/downloads')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
-          <span class="header-main-menu">
-            {{ $t("header.downloads") }}
-          </span>
+        <nuxt-link :to="getLink('/emulators')" class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
+          <span class="header-main-menu">{{ $t("header.Emulators") }}</span>
         </nuxt-link>
       </nav>
 
-
       <nav class="left-menu-items">
-        <nuxt-link
-          :to="getLink('/pin-code')"
-          class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles bg-red">
-          <span class="header-main-menu bg-red">
-            {{ $t("header.PinCode") }}
-          </span>
+        <nuxt-link :to="getLink('/downloads')" class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles">
+          <span class="header-main-menu">{{ $t("header.downloads") }}</span>
         </nuxt-link>
       </nav>
 
+      <nav class="left-menu-items">
+        <nuxt-link :to="getLink('/pin-code')" class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles bg-red">
+          <span class="header-main-menu bg-red">{{ $t("header.PinCode") }}</span>
+        </nuxt-link>
+      </nav>
 
     </nav>
   </div>
 </template>
 
 
+
 <script>
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 import Api from "~/api";
+
 export default {
-  data: function () {
+  data() {
     return {
-      manufacturers : [],
       cars: [],
-      keysAndRemotes : [],
+      manufacturers: [],
+      keysAndRemotes: [],
       accessoriesAndTools: [],
       devicesAndMachines: [],
       softwareAndTokens: [],
+
       carMenuOpened: false,
-      ManufacturerMenuOpened: false,
+      manufacturerMenuOpened: false,
       keysAndRemoteMenuOpened: false,
-      AccessoriesAndToolsMenuOpened: false,
-      DeviceAndMachineMenuOpened: false,
-      SoftwareAndTokenMenuOpened: false,
-      isFetchingDevicesAndMachines:false,
-      isFetchingAccessoriesAndTools: false,
-      isFetchingKeysAndRemotes: false,
-      isFetchingManufacturers: false,
+      accessoriesAndToolsMenuOpened: false,
+      deviceAndMachineMenuOpened: false,
+      softwareAndTokenMenuOpened: false,
+
+      carMenuLoaded: false,
+      manufacturerMenuLoaded: false,
+      keysAndRemoteMenuLoaded: false,
+      accessoriesAndToolsMenuLoaded: false,
+      deviceAndMachineMenuLoaded: false,
+      softwareAndTokenMenuLoaded: false,
+
       isFetchingCars: false,
-      isFetchingSoftwareAndToken: false, 
+      isFetchingManufacturers: false,
+      isFetchingKeysAndRemotes: false,
+      isFetchingAccessoriesAndTools: false,
+      isFetchingDevicesAndMachines: false,
+      isFetchingSoftwareAndTokens: false,
     };
   },
-  mounted(){
+
+  mounted() {
     document.addEventListener("click", this.handleGlobalClick);
   },
-  beforeDestroy(){
+  beforeDestroy() {
     document.removeEventListener("click", this.handleGlobalClick);
   },
+
   methods: {
-    handleGlobalClick(event) {
-      if(this.carMenuOpened || this.ManufacturerMenuOpened || this.keysAndRemoteMenuOpened || this.AccessoriesAndToolsMenuOpened || this.DeviceAndMachineMenuOpened || this.SoftwareAndTokenMenuOpened){
-        this.closeCarMenu();
-        this.closeManufacturerMenu();
-        this.closeKeyAndRemotesMenu();
-        this.closeAccessoriesAndTools();
-        this.closeDeviceAndMachineMenu();
-        this.closeSoftwareAndTokenMenu();
+    handleMenu(type) {
+      const map = {
+        cars: {
+          fetch: this.getCars,
+          opened: 'carMenuOpened',
+          loaded: 'carMenuLoaded',
+        },
+        manufacturers: {
+          fetch: this.getManufacturers,
+          opened: 'manufacturerMenuOpened',
+          loaded: 'manufacturerMenuLoaded',
+        },
+        keysAndRemotes: {
+          fetch: this.getKeysAndRemotes,
+          opened: 'keysAndRemoteMenuOpened',
+          loaded: 'keysAndRemoteMenuLoaded',
+        },
+        accessoriesAndTools: {
+          fetch: this.getAccessoriesAndTools,
+          opened: 'accessoriesAndToolsMenuOpened',
+          loaded: 'accessoriesAndToolsMenuLoaded',
+        },
+        devicesAndMachines: {
+          fetch: this.getDevicesAndMachines,
+          opened: 'deviceAndMachineMenuOpened',
+          loaded: 'deviceAndMachineMenuLoaded',
+        },
+        softwareAndTokens: {
+          fetch: this.getSoftwareAndTokens,
+          opened: 'softwareAndTokenMenuOpened',
+          loaded: 'softwareAndTokenMenuLoaded',
+        },
+      };
+
+      const menu = map[type];
+      if (!menu) return;
+
+      const isOpen = this[menu.opened];
+
+      this.closeAllMenus();
+
+      if (isOpen) {
+        this[menu.opened] = false;
+      } else if (this[menu.loaded]) {
+        this[menu.opened] = true;
+      } else {
+        menu.fetch();
       }
     },
-    closeCarMenu(){
+
+    closeAllMenus() {
       this.carMenuOpened = false;
-      // this.isFetchingCars = false;
-      // this.cars = []
-    },
-    closeManufacturerMenu(){
-      this.ManufacturerMenuOpened = false;
-    },
-    closeKeyAndRemotesMenu(){
+      this.manufacturerMenuOpened = false;
       this.keysAndRemoteMenuOpened = false;
+      this.accessoriesAndToolsMenuOpened = false;
+      this.deviceAndMachineMenuOpened = false;
+      this.softwareAndTokenMenuOpened = false;
     },
-    closeAccessoriesAndTools(){
-      this.AccessoriesAndToolsMenuOpened = false;
+
+    handleGlobalClick() {
+      this.closeAllMenus();
     },
-    closeDeviceAndMachineMenu(){
-      this.DeviceAndMachineMenuOpened = false;
-    },
-    closeSoftwareAndTokenMenu(){
-      this.SoftwareAndTokenMenuOpened = false;
-    },
+
     async getCars() {
-      if(!this.carMenuOpened){
-        this.isFetchingCars = true; // Set flag to true before making the request
-        await Api.get('/menu')
-          .then(response => {
-            this.carMenuOpened = true;
-            this.cars = response.data.data.menu.main_menu.cars;
-          })
-          .catch(error => {
-            console.error("Error fetching cars:", error);
-          })
-          .finally(() => {
-            this.isFetchingCars = false; // Reset flag after the request is done
-          });
-        }
-        else{
-          this.carMenuOpened = !this.carMenuOpened
-        }
+      if (this.carMenuLoaded) {
+        this.carMenuOpened = true;
+        return;
+      }
+
+      this.isFetchingCars = true;
+      try {
+        this.$nuxt.$loading.start();
+        const res = await Api.get("/menu");
+        this.cars = res.data.data.menu.main_menu.cars;
+        this.carMenuLoaded = true;
+        this.carMenuOpened = true;
+      } catch (e) {
+        console.error("Cars error", e);
+      } finally {
+        this.isFetchingCars = false;
+        this.$nuxt.$loading.finish();
+      }
     },
-   async getManufacturers() {
-    if(!this.ManufacturerMenuOpened){
+
+    async getManufacturers() {
+      if (this.manufacturerMenuLoaded) {
+        this.manufacturerMenuOpened = true;
+        return;
+      }
+
       this.isFetchingManufacturers = true;
-      await Api.get('/manufacturers_menu')
-      .then(response => {
-        this.ManufacturerMenuOpened = true;
-        this.manufacturers = response.data.data.menu.main_menu.manufacturers;
-      })
-      .catch(error => {
-        console.error("Error fetching manufacturers:", error);
-      })
-      .finally(() => {
-        this.isFetchingManufacturers = false; // Reset flag after the request is done
-      });
-    }else{
-      this.ManufacturerMenuOpened = !this.ManufacturerMenuOpened
-    }
-  },
+      try {
+        this.$nuxt.$loading.start();
+        const res = await Api.get("/manufacturers_menu");
+        this.manufacturers = res.data.data.menu.main_menu.manufacturers;
+        this.manufacturerMenuLoaded = true;
+        this.manufacturerMenuOpened = true;
+      } catch (e) {
+        console.error("Manufacturers error", e);
+      } finally {
+        this.isFetchingManufacturers = false;
+        this.$nuxt.$loading.finish();
+      }
+    },
+
     async getKeysAndRemotes() {
-      if(!this.keysAndRemoteMenuOpened){
-        this.isFetchingKeysAndRemotes = true;
-      await Api.get('/keys-and-remotes-menu')
-      .then(response => {
+      if (this.keysAndRemoteMenuLoaded) {
         this.keysAndRemoteMenuOpened = true;
-        this.keysAndRemotes = response.data.data.menu.main_menu['Key-Remote'];
-      })
-      .catch(error => {
-        console.error("Error fetching keys and remotes:", error);
-      })
-      .finally(() => {
-        this.isFetchingKeysAndRemotes = false; // Reset flag after the request is done
-      });
-      }else{
-        this.keysAndRemoteMenuOpened = !this.keysAndRemoteMenuOpened;
+        return;
+      }
+
+      this.isFetchingKeysAndRemotes = true;
+      try {
+        this.$nuxt.$loading.start();
+        const res = await Api.get("/keys-and-remotes-menu");
+        this.keysAndRemotes = res.data.data.menu.main_menu["Key-Remote"]; // 💡 store the entire object
+        this.keysAndRemoteMenuLoaded = true;
+        this.keysAndRemoteMenuOpened = true;
+      } catch (err) {
+        console.error("Keys & Remotes error", err);
+      } finally {
+        this.isFetchingKeysAndRemotes = false;
+        this.$nuxt.$loading.finish();
       }
     },
+
+
     async getAccessoriesAndTools() {
-      if(!this.AccessoriesAndToolsMenuOpened){
-        this.isFetchingAccessoriesAndTools = true;
-        await Api.get('/accessories-tools-menu')
-        .then(response => {
-            this.AccessoriesAndToolsMenuOpened = true;
-            this.accessoriesAndTools = response.data.data.menu.main_menu['accessories-tools'];
-        })
-      .catch(error => {
-        console.error("Error fetching Accessories and tools:", error);
-      })
-      .finally(() => {
-        this.isFetchingAccessoriesAndTools = false; // Reset flag after the request is done
-      });
-      }else{
-        this.AccessoriesAndToolsMenuOpened = !this.AccessoriesAndToolsMenuOpened;
+      if (this.accessoriesAndToolsMenuLoaded) {
+        this.accessoriesAndToolsMenuOpened = true;
+        return;
+      }
+
+      this.isFetchingAccessoriesAndTools = true;
+      try {
+        this.$nuxt.$loading.start();
+        const res = await Api.get("/accessories-tools-menu");
+        this.accessoriesAndTools = res.data.data.menu.main_menu["accessories-tools"]; // save full object
+        this.accessoriesAndToolsMenuLoaded = true;
+        this.accessoriesAndToolsMenuOpened = true;
+      } catch (err) {
+        console.error("Accessories error", err);
+      } finally {
+        this.isFetchingAccessoriesAndTools = false;
+        this.$nuxt.$loading.finish();
       }
     },
-    
+
     async getDevicesAndMachines() {
-      if(!this.DeviceAndMachineMenuOpened){
-        this.isFetchingDevicesAndMachines = true;
-        await Api.get('/device-machine-menu')
-        .then(response => {
-            this.DeviceAndMachineMenuOpened = true;
-            this.devicesAndMachines = response.data.data.menu.main_menu['device_machines'];
-        })
-      .catch(error => {
-        console.error("Error fetching Device and machines:", error);
-      })
-      .finally(() => {
+      if (this.devicesAndMachinesMenuLoaded) {
+        this.deviceAndMachineMenuOpened = true;
+        return;
+      }
+
+      this.isFetchingDevicesAndMachines = true;
+      try {
+        this.$nuxt.$loading.start();
+        const res = await Api.get("/device-machine-menu");
+        this.devicesAndMachines = res.data.data.menu.main_menu["device_machines"]; // Store full object
+        this.devicesAndMachinesMenuLoaded = true;
+        this.deviceAndMachineMenuOpened = true;
+      } catch (err) {
+        console.error("Devices error", err);
+      } finally {
         this.isFetchingDevicesAndMachines = false;
-      });
-      }else{
-        this.DeviceAndMachineMenuOpened = !this.DeviceAndMachineMenuOpened;
-      }
-    },    
-    async getSoftwareAndTokens(){
-      if(!this.SoftwareAndTokenMenuOpened){
-        try{
-        const response = await Api.get('/software-and-token');
-        this.SoftwareAndTokenMenuOpened = true;
-        this.softwareAndTokens = response.data.data.menu.main_menu['tokens-software'];
-      }catch(error){
-        console.log("Error Fetching Token and software Menu:", error);
-      } finally{
-        this.isFetchingSoftwareAndToken = false;
-      }
-      }else{
-        this.SoftwareAndTokenMenuOpened = !this.SoftwareAndTokenMenuOpened
+        this.$nuxt.$loading.finish();
       }
     },
-      getLink(route) {
-        if (this.getLang === 'en') {
-          return route; // Return the route as is without the language parameter
-        } else {
-          return `/${this.getLang}${route}`; // Include the language parameter
-        }
-      },
+
+    async getSoftwareAndTokens() {
+      if (this.softwareAndTokensMenuLoaded) {
+        this.softwareAndTokenMenuOpened = true;
+        return;
+      }
+
+      this.isFetchingSoftwareAndTokens = true;
+      try {
+        this.$nuxt.$loading.start();
+        const res = await Api.get("/software-and-token");
+        console.log(res);
+        this.softwareAndTokens = res.data.data.menu.main_menu["tokens-software"];
+        this.softwareAndTokensMenuLoaded = true;
+        this.softwareAndTokenMenuOpened = true;
+      } catch (e) {
+        console.error("Software & Tokens error", e);
+      } finally {
+        this.isFetchingSoftwareAndTokens = false;
+        this.$nuxt.$loading.finish();
+      }
     },
+
+    getLink(route) {
+      return this.getLang === "en" ? route : `/${this.getLang}${route}`;
+    },
+  },
+
   computed: {
     ...mapGetters("language", ["getLang"]),
-      ...mapGetters("rtlStore", ["getIsAr"]),
-    totalLength: function () {
-      const mainMenuLength = Object.keys(this.$settings.main_menu).length;
-      const menusLength = Object.keys(this.$settings.menus).length;
-      return mainMenuLength + menusLength;
-    },
-    itemWidth: function () {
-      return `${100 / this.totalLength}%`;
-    },
-    currentItem: function () {
-      if (this.$route.query && this.$route.query.category)
-        return this.$route.query.category;
-      return "";
+    ...mapGetters("rtlStore", ["getIsAr"]),
+    currentItem() {
+      return this.$route.query?.category || "";
     },
   },
 };
@@ -498,6 +468,7 @@ export default {
 .header-li-titles {
   height: 50px !important;
   padding: 3px;
+  justify-content: center;
 }
 
 .hoverable {
@@ -542,8 +513,7 @@ export default {
 .custom-megamenu .col-6 {
   flex: 0 0 50%;
   max-width: 50%;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 0;
 }
 
 /* Optional divider between Software and Token */
@@ -562,17 +532,15 @@ export default {
 
 .logo-item,
 .logo-item-accessories,
-.logo-item-device-machine,
-.software-token-items {
+.logo-item-device-machine{
   width: 10%;
-  max-width: 10%;
   flex: 0 0 10%;
   padding: 10px;
   box-sizing: border-box;
 }
 
 /* === Responsive Adjustments === */
-@media screen and (max-width: 1200px) {
+/* @media screen and (max-width: 1200px) {
   .logo-item-car,
   .logo-item,
   .logo-item-accessories,
@@ -582,9 +550,9 @@ export default {
     max-width: 12.5%;
     flex: 0 0 12.5%;
   }
-}
+} */
 
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .logo-item-car,
   .logo-item,
   .logo-item-accessories,
@@ -594,9 +562,9 @@ export default {
     max-width: 25%;
     flex: 0 0 25%;
   }
-}
+} */
 
-@media screen and (max-width: 480px) {
+/* @media screen and (max-width: 480px) {
   .logo-item-car,
   .logo-item,
   .logo-item-accessories,
@@ -606,7 +574,7 @@ export default {
     max-width: 50%;
     flex: 0 0 50%;
   }
-}
+} */
 
 /* === IMAGES === */
 .sub-menu-images {
@@ -743,14 +711,14 @@ export default {
 }
 
 /* === Logo Items: 5 per row (100 / 5 = 20%) === */
-.left-menu-items:nth-child(7) .software-token-items {
+/* .left-menu-items:nth-child(7) .software-token-items {
   width: 20%;
   max-width: 20%;
   flex: 0 0 20%;
   box-sizing: border-box;
   padding: 10px;
   text-align: center;
-}
+} */
 
 /* === Tablet: 4 items per row === */
 @media screen and (max-width: 992px) {
@@ -764,20 +732,20 @@ export default {
     margin-bottom: 20px;
   }
 
-  .left-menu-items:nth-child(7) .software-token-items {
+  /* .left-menu-items:nth-child(7) .software-token-items {
     width: 25%;
     max-width: 25%;
     flex: 0 0 25%;
-  }
+  } */
 }
 
 /* === Mobile: 2 items per row === */
-@media screen and (max-width: 576px) {
+/* @media screen and (max-width: 576px) {
   .left-menu-items:nth-child(7) .software-token-items {
     width: 50%;
     max-width: 50%;
     flex: 0 0 50%;
   }
-}
+} */
 
 </style>

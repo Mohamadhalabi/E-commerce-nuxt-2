@@ -904,5 +904,11 @@ export default
     viewWishlist:"Wunschliste anzeigen",
     viewCompare:"Vergleich anzeigen",
     PleaseSelectPaymentMethod: "Bitte wählen Sie eine Zahlungsmethode"
+  },
+  coupon: {
+    label: "GUTSCHEIN",
+    title: "Erhalten Sie 10% Rabatt auf Ihre erste Bestellung",
+    useCode: "Code verwenden",
+    note: "*Mindestbestellwert 250 $"
   }
 };

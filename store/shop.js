@@ -97,51 +97,44 @@ export const actions = {
   },
 
   addToCart: async function ({ commit }, payload) {
-    const authToken = this.$cookies.get('authToken');    
-    if (authToken == undefined) {
-      if (!payload['quantity']) {
-        payload['quantity'] = 1;
-      }
-      if(payload.stock == 0){
+    const authToken = this.$cookies.get('authToken');
+
+    // 🔹 GUEST CART LOGIC
+    if (!authToken) {
+      payload.quantity = payload.quantity || 1;
+
+      if (payload.stock === 0) {
         commit('UPDATE_PRODUCT_STATUS', `<b>${payload.sku}</b> is out of stock, but we will try to get it for you.`);
         commit('UPDATE_PRODUCT_SKU', payload.sku);
       }
 
-      let cartListCheck = JSON.parse(localStorage.getItem('card')) || [];
-
-      cartListCheck.forEach((item, index) => {
-        if (item.slug == payload.slug) {
-
-          cartListCheck.splice(index, 1);
-          if(process.client)
-          localStorage.setItem('card', JSON.stringify(cartListCheck));
-        }
-      })
-
       let cartList = JSON.parse(localStorage.getItem('card')) || [];
-      let concateCard = cartList.concat([payload]);
 
+      // Remove duplicate entry if same slug exists
+      cartList = cartList.filter(item => item.slug !== payload.slug);
+      cartList.push(payload);
 
-      if(process.client)
-      localStorage.setItem('card', JSON.stringify(concateCard));
+      localStorage.setItem('card', JSON.stringify(cartList));
 
-      let totalPrice = {
-        currency: concateCard[0]['price']['currency'],
-        value: 0
-      };
-
-      for (let index = 0; index < concateCard.length; index++) {
-        totalPrice.value += parseFloat(concateCard[index]['price']['value']) * parseFloat(concateCard[index]['quantity']);
+      let total = 0;
+      for (let item of cartList) {
+        const price = parseFloat(item.sale_price?.value) <= parseFloat(item.price?.value)
+          ? parseFloat(item.sale_price?.value)
+          : parseFloat(item.price?.value);
+        total += price * item.quantity;
       }
-      totalPrice.value = totalPrice.value.toString();
 
-      let response = {
+      const currency = cartList[0]?.price?.currency || 'USD';
+      const totalPrice = { currency, value: total.toString() };
+
+      const response = {
         discount_value: totalPrice,
         dolar_price: totalPrice,
-        products: concateCard,
+        products: cartList,
         total: totalPrice,
         total_before_coupon: totalPrice
       };
+
       commit('UPDATE_CART', response);
 
       this._vm.$notify({
@@ -150,40 +143,52 @@ export const actions = {
         type: 'success',
         data: payload,
       });
+
       return;
     }
 
-    if (authToken == undefined) return;
-    payload.product = payload.sku;
-    payload.quantity = payload.quantity || 1;
-    let product = pick(payload, ['product', 'quantity', 'short_title', 'price', 'serial_number','cover_model']);
+    // 🔹 LOGGED-IN CART LOGIC
+    try {
+      payload.product = payload.sku;
+      payload.quantity = payload.quantity || 1;
 
-    Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
-    Api.post('cart', product)
-      .then(() => {
-        let response = Api.get('cart');
-        this._vm.$notify({
-          group: 'addProduct',
-          text: this.$i18n.t('alerts.addedToCart'),
-          data: payload,
-          type: 'success',
-          position: 'top right',
-        });
-        response.then((res) => {
-          commit('UPDATE_CART', res.data);
-        });
-      })
-      .catch((error) => {
-        let message = error.response.data.message;
-        commit('UPDATE_PRODUCT_STATUS', error.response.data.message); // Add this line to update productStatus
-        commit('UPDATE_PRODUCT_SKU', error.response.data.data.product_sku); // Add this line to update productStatus
-        this._vm.$notify({
-          group: 'errorMessage',
-          text: message
-        });
+      const product = pick(payload, ['product', 'quantity', 'short_title', 'price', 'serial_number', 'cover_model']);
+
+      Api.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+      
+      await Api.post('cart', product);
+
+      const response = await Api.get('cart');
+
+      if (response && response.data) {
+        commit('UPDATE_CART', response.data);
+      } else {
+        console.error('⚠️ Unexpected response structure from cart API:', response);
+      }
+
+      this._vm.$notify({
+        group: 'addProduct',
+        text: this.$i18n.t('alerts.addedToCart'),
+        data: payload,
+        type: 'success',
+        position: 'top right',
+      });
+    } catch (error) {
+      const message = error?.response?.data?.message || 'Cart error';
+      const sku = error?.response?.data?.data?.product_sku || payload?.sku;
+
+      commit('UPDATE_PRODUCT_STATUS', message);
+      commit('UPDATE_PRODUCT_SKU', sku);
+
+      this._vm.$notify({
+        group: 'errorMessage',
+        text: message
       });
 
+      console.error('❌ addToCart failed:', error);
+    }
   },
+
 
   changeQuantity: async function ({ commit, state }, payload) {
     const authToken = this.$cookies.get('authToken');    

@@ -187,8 +187,8 @@ export default {
           this.total = this.filter.total;
           this.checked_items = this.filter.checked_items.items;
           this.attributeFilters = this.filter.attributes;
-          this.selected_category = response.data.categories.selected;
-          this.selected_manufacture = response.data.manufacturers.selected;
+          this.selected_category = response.data.categories?.selected || null;
+          this.selected_manufacture = response.data.manufacturers?.selected || null;
         });
     },
 

@@ -148,7 +148,6 @@ export default {
       return this.getLang === "en" ? route : `/${this.getLang}${route}`;
     },
     openFilterModal(item, key) {
-    console.log("Selected Filter:", item);
     this.activeFilter = item;
     this.activeFilterKey = key;
     },

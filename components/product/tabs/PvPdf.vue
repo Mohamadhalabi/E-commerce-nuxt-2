@@ -78,7 +78,7 @@ export default {
 }
 
 .pdf-icon{
-  background-image: url("./static/images/icons/pdf-icon.png");
+  /* background-image: url("./static/images/icons/pdf-icon.png"); */
   background-size: cover;
 }
 .contact-two .btn{

@@ -633,6 +633,11 @@ export default {
   },
   online:{
     onlineServices: "خدمات اون لاين",
+  },
+  coupon: {
+    label: "قسيمة",
+    title: "احصل على خصم 10٪ على أول طلب لك",
+    useCode: "استخدم الرمز",
+    note: "*الحد الأدنى للشراء 250 دولارًا"
   }
-
 };

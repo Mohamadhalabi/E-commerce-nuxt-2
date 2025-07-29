@@ -10,6 +10,7 @@
             class="form-select"
             v-model="brand"
             @change="getModelsByBrand"
+            @focus="handleBrandSelectFocus"
           >
             <option :value="null" disabled selected>{{ $t('home.selectBrand') }}</option>
             <option v-for="item in brands" :key="item.slug" :value="item.slug">
@@ -94,9 +95,6 @@ export default {
     ...mapGetters('rtlStore', ['getIsAr']),
     ...mapGetters("language", ["getLang"]),
   },
-  mounted: function () {
-    this.getBrands();
-  },
   methods: {
     onEnter(searchKey){
       if(this.getLang =="en"){
@@ -104,6 +102,11 @@ export default {
       }
       else{
         this.$router.push(this.getLang+'/shop?search='+searchKey)
+      }
+    },
+    handleBrandSelectFocus() {
+      if (this.brands.length === 0) {
+        this.getBrands();
       }
     },
     goToShop: function () {
