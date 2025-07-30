@@ -5,9 +5,7 @@
       <!-- Cars Menu -->
       <nav class="left-menu-items" :class="{ 'orange-background': carMenuOpened }">
         <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('cars')">
-          <nuxt-link :to="getLink('#')">
             <span class="header-main-menu" :class="{ 'orange-background': carMenuOpened }">{{ $t("header.Cars") }}</span>
-          </nuxt-link>
         </div>
         <nav v-if="carMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white" v-for="(item, key) in cars" :key="key">
           <div class="row bg-white m-0">
@@ -25,9 +23,7 @@
       <!-- Manufacturer Menu -->
       <nav class="left-menu-items" :class="{ 'orange-background': manufacturerMenuOpened }">
         <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('manufacturers')">
-          <nuxt-link :to="getLink('#')">
-            <span class="header-main-menu" :class="{ 'orange-background': manufacturerMenuOpened }">{{ $t("header.Manufactures") }}</span>
-          </nuxt-link>
+          <span class="header-main-menu" :class="{ 'orange-background': manufacturerMenuOpened }">{{ $t("header.Manufactures") }}</span>
         </div>
         <nav v-if="manufacturerMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white" v-for="(item, key) in manufacturers" :key="key">
           <div class="row bg-white m-0">
@@ -45,11 +41,8 @@
       <!-- Keys and Remotes Menu -->
       <nav class="left-menu-items" :class="{ 'orange-background': keysAndRemoteMenuOpened }">
         <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('keysAndRemotes')">
-          <nuxt-link :to="getLink('#')">
-            <span class="header-main-menu" :class="{ 'orange-background': keysAndRemoteMenuOpened }">{{ $t("header.keysAndRemote") }}</span>
-          </nuxt-link>
+          <span class="header-main-menu" :class="{ 'orange-background': keysAndRemoteMenuOpened }">{{ $t("header.keysAndRemote") }}</span>
         </div>
-
         <nav v-if="keysAndRemoteMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white">
           <div class="row bg-white m-0">
             <nav class="submenu custom-submenu d-flex flex-wrap bg-white p-0">
@@ -58,7 +51,6 @@
                 :key="key2"
                 class="bg-white logo-item p-0 with-box-shadow sub-menu-cars"
               >
-
               <span style="color:black!important">
               </span>
                 <nuxt-link :to="getLink('/' + i.slug)" v-if="i.image">
@@ -76,9 +68,7 @@
       <!-- Accessories and Tools Menu -->
       <nav class="left-menu-items" :class="{ 'orange-background': accessoriesAndToolsMenuOpened }">
         <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('accessoriesAndTools')">
-          <nuxt-link :to="getLink('#')">
-            <span class="header-main-menu" :class="{ 'orange-background': accessoriesAndToolsMenuOpened }">{{ $t("header.AccessoriesAndTools") }}</span>
-          </nuxt-link>
+          <span class="header-main-menu" :class="{ 'orange-background': accessoriesAndToolsMenuOpened }">{{ $t("header.AccessoriesAndTools") }}</span>
         </div>
 
         <nav v-if="accessoriesAndToolsMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white">
@@ -104,9 +94,7 @@
       <!-- Devices and Machines Menu -->
       <nav class="left-menu-items" :class="{ 'orange-background': deviceAndMachineMenuOpened }">
         <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('devicesAndMachines')">
-          <nuxt-link :to="getLink('#')">
-            <span class="header-main-menu" :class="{ 'orange-background': deviceAndMachineMenuOpened }">{{ $t("header.DeviceAndMachine") }}</span>
-          </nuxt-link>
+          <span class="header-main-menu" :class="{ 'orange-background': deviceAndMachineMenuOpened }">{{ $t("header.DeviceAndMachine") }}</span>
         </div>
 
         <nav v-if="deviceAndMachineMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white">
@@ -133,9 +121,7 @@
       <!-- Software and Tokens Menu -->
       <nav class="left-menu-items" :class="{ 'orange-background': softwareAndTokenMenuOpened }">
         <div class="d-flex align-items-center flex-column mt-auto mb-auto header-li-titles" @click.stop.prevent="handleMenu('softwareAndTokens')">
-          <nuxt-link :to="getLink('#')">
-            <span class="header-main-menu" :class="{ 'orange-background': softwareAndTokenMenuOpened }">{{ $t("header.TokensAndSoftware") }}</span>
-          </nuxt-link>
+          <span class="header-main-menu" :class="{ 'orange-background': softwareAndTokenMenuOpened }">{{ $t("header.TokensAndSoftware") }}</span>
         </div>
         <nav v-if="softwareAndTokenMenuOpened" class="custom-megamenu megamenu-car p-0 megamenu-fixed-width megamenu-2cols bg-white" v-for="(item, key) in softwareAndTokens" :key="key">
           <div class="row bg-white m-0">
@@ -460,6 +446,10 @@ export default {
   font-size: 13.5px;
 }
 
+.header-main-menu:hover{
+  cursor: pointer;
+}
+
 .left-menu-items,
 .right-menu-items {
   border-right: 1px solid #585a5e !important;
@@ -684,7 +674,6 @@ export default {
 .bg-red {
   background-color: red;
 }
-/* === Token & Software Menu: Full width without side gaps === */
 .left-menu-items:nth-child(7) > .custom-megamenu.megamenu-car.megamenu-2cols {
   width: 100% !important;
   padding: 20px 0; /* remove left/right gaps */
@@ -694,7 +683,6 @@ export default {
   gap: 0;
 }
 
-/* === Software & Token Columns (50% each, no inner padding) === */
 .left-menu-items:nth-child(7) .custom-megamenu .col-6 {
   flex: 0 0 50%;
   max-width: 50%;
@@ -703,22 +691,11 @@ export default {
   padding: 0;
 }
 
-/* === Grid wrapper for logos inside each column === */
 .left-menu-items:nth-child(7) .custom-megamenu .col-6 nav {
   display: flex;
   flex-wrap: wrap;
   padding: 0 10px; /* slight inner padding for logos */
 }
-
-/* === Logo Items: 5 per row (100 / 5 = 20%) === */
-/* .left-menu-items:nth-child(7) .software-token-items {
-  width: 20%;
-  max-width: 20%;
-  flex: 0 0 20%;
-  box-sizing: border-box;
-  padding: 10px;
-  text-align: center;
-} */
 
 /* === Tablet: 4 items per row === */
 @media screen and (max-width: 992px) {
@@ -731,21 +708,6 @@ export default {
     flex: 100%;
     margin-bottom: 20px;
   }
-
-  /* .left-menu-items:nth-child(7) .software-token-items {
-    width: 25%;
-    max-width: 25%;
-    flex: 0 0 25%;
-  } */
 }
-
-/* === Mobile: 2 items per row === */
-/* @media screen and (max-width: 576px) {
-  .left-menu-items:nth-child(7) .software-token-items {
-    width: 50%;
-    max-width: 50%;
-    flex: 0 0 50%;
-  }
-} */
 
 </style>

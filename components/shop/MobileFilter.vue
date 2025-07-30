@@ -118,13 +118,8 @@ export default {
       activeFilterKey: '',
     };
   },
-  watch: {
-    $route: {
-      immediate: true,
-      handler() {
-        this.explodeFilter(this.$route.query);
-      },
-    },
+  mounted(){
+    this.explodeFilter(this.$route.query);
   },
   computed: {
     ...mapGetters("language", ["getLang"]),

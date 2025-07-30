@@ -99,14 +99,18 @@ export default {
     };
   },
 
-  watch: {
-    '$route': {
-      immediate: true, // Trigger the watcher immediately when the component is created
-      handler() {
-        this.explodeFilter(this.$route.query);
-      },
-    },
+  // watch: {
+  //   '$route': {
+  //     immediate: true, // Trigger the watcher immediately when the component is created
+  //     handler() {
+  //       this.explodeFilter(this.$route.query);
+  //     },
+  //   },
+  // },
+  mounted(){
+    this.explodeFilter(this.$route.query);
   },
+
   computed:{
     ...mapGetters("language", ["getLang"]),
   },

@@ -3,23 +3,6 @@
     <!-- Unified Search Input with Category Select -->
     <div class="position-relative">
       <div class="d-flex w-100">
-        <!-- Select dropdown with fixed width -->
-        <!-- <div class="select-wrapper">
-          <select
-            class="form-select select-category border-end-0 rounded-start"
-            v-model="selectedCategory"
-          >
-            <option :value="defaultCategoryLabel">{{ $t('home.selectCategory') }}</option>
-            <option
-              v-for="category in categories"
-              :key="category.slug"
-              :value="category.slug"
-            >
-              {{ category[`name_${$i18n.locale}`] }}
-            </option>
-          </select>
-        </div> -->
-
         <!-- Search input that grows -->
         <div class="flex-grow-1">
           <input
@@ -101,15 +84,7 @@
             >
               <nuxt-link
                 class="notHover text-decoration-none"
-                :to="getLink(
-                  '/shop' +
-                    (
-                      selectedCategory &&
-                      selectedCategory !== defaultCategoryLabel
-                        ? `?categories=${selectedCategory}&search=${searchKey}`
-                        : `?search=${searchKey}`
-                    )
-                )"
+                :to="getLink(`/shop?search=${searchKey}`)"
               >
                 <base-button-icon-1 class="w-100 py-3" :outline="true">
                   see ({{ getProductsBySearchArrayLength - visibleSearchLimit }}) product more..
@@ -135,8 +110,6 @@ export default {
   data() {
     return {
       isInputClicked: false,
-      defaultCategoryLabel: "Select a category",
-      selectedCategory: "Select a category",
       searchKey: "",
       timer: null,
       categories: [],
@@ -243,13 +216,6 @@ export default {
 
         this.timer = setTimeout(() => {
           let query = `?search=${search_key}`;
-          if (
-            this.selectedCategory &&
-            this.selectedCategory !== "shop" &&
-            this.selectedCategory !== this.defaultCategoryLabel
-          ) {
-            query += `&categories=${this.selectedCategory}`;
-          }
           axios
             .get(`shop${query}`, {
               baseURL: process.env.API_BASE_URL,
@@ -286,13 +252,10 @@ export default {
       this.searchKey = "";
     },
     goToShop() {
-      if (!this.searchKey && (!this.selectedCategory || this.selectedCategory === "Select a category")) return;
+      if (!this.searchKey) return;
 
       const query = {
-        ...(this.searchKey ? { search: this.searchKey } : {}),
-        ...(this.selectedCategory && this.selectedCategory !== "Select a category"
-          ? { categories: this.selectedCategory }
-          : {}),
+        search: this.searchKey,
         page: 1,
       };
 
