@@ -57,10 +57,12 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
-import {scrollTopHandler} from "~/utils";
+import { mapGetters } from "vuex";
+import { scrollTopHandler } from "~/utils";
 import axios from "axios";
-import MobileDetect from 'mobile-detect';
+import MobileDetect from "mobile-detect";
+
+let cancelTokenSource = null; // ✅ global inside this module so we can cancel between calls
 
 export default {
   name: "SidebarFilter",
@@ -70,21 +72,9 @@ export default {
     BaseButtonIcon1: () => import("../common/BaseButtonIcon1.vue"),
   },
   props: {
-    category: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    manufacturer: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    brand: {
-      type: String,
-      required: false,
-      default: null,
-    },
+    category: { type: String, required: false, default: null },
+    manufacturer: { type: String, required: false, default: null },
+    brand: { type: String, required: false, default: null },
   },
 
   data() {
@@ -95,62 +85,70 @@ export default {
       filter: null,
       attributeFilters: null,
       selected_category: null,
-      selected_manufacture:null,
+      selected_manufacture: null,
     };
   },
 
   watch: {
-    '$route': {
-      immediate: true, // Trigger the watcher immediately when the component is created
-      handler() {
-        this.explodeFilter(this.$route.query);
-      },
-    },
-  },
+    '$route.query': {
+      deep: true,
+      immediate: true,
+      handler(newQuery, oldQuery) {
+        // ✅ Skip if only the "page" query changed
+        if (oldQuery && Object.keys(newQuery).length === Object.keys(oldQuery).length) {
+          const onlyPageChanged =
+            Object.keys(newQuery).every(key => 
+              key === 'page' || newQuery[key] === oldQuery[key]
+            );
 
-  computed:{
+          if (onlyPageChanged) return; // 🔹 Don't call filters API
+        }
+
+        // Otherwise update filters
+        this.explodeFilter(newQuery);
+      }
+    }
+  },
+  computed: {
     ...mapGetters("language", ["getLang"]),
   },
-  methods: {
-    goToPreviousPage(){
-      this.$router.go(-1)
-      },
-    getLink(route) {
-      if (this.getLang === 'en') {
-        return route; // Return the route as is without the language parameter
-      } else {
-        return `/${this.getLang}${route}`; // Include the language parameter
-      }
-    },
-    explodeFilter(query) {
-      let isMobile = false;
 
-      // SSR (server-side) device detection
-      if (process.server && this.$ssrContext && this.$ssrContext.req) {
-        const userAgent = this.$ssrContext.req.headers['user-agent'];
+  methods: {
+    goToPreviousPage() {
+      this.$router.go(-1);
+    },
+
+    getLink(route) {
+      return this.getLang === "en" ? route : `/${this.getLang}${route}`;
+    },
+
+    async explodeFilter(query) {
+      // ✅ Cancel any previous request
+      if (cancelTokenSource) {
+        cancelTokenSource.cancel("Route changed - canceling previous filter request");
+      }
+      cancelTokenSource = axios.CancelToken.source();
+
+      // ✅ Skip on mobile
+      let isMobile = false;
+      if (process.server && this.$ssrContext?.req) {
+        const userAgent = this.$ssrContext.req.headers["user-agent"];
         const md = new MobileDetect(userAgent);
         isMobile = !!md.mobile() || !!md.tablet();
       }
-
-      // Client-side detection (fallback)
       if (process.client && window.innerWidth < 993) {
         isMobile = true;
       }
-
-      // ❌ Don't make API call if it's a mobile device
       if (isMobile) return;
 
-      // Proceed with your existing API logic
+      // Determine slug_type
       let slug_type = "";
-      if (this.category) {
-        slug_type = "category";
-      } else if (this.brand) {
-        slug_type = "brand";
-      } else if (this.manufacturer) {
-        slug_type = "manufacturer";
-      }
+      if (this.category) slug_type = "category";
+      else if (this.brand) slug_type = "brand";
+      else if (this.manufacturer) slug_type = "manufacturer";
       this.slugtype = slug_type;
 
+      // Prepare form data
       let dataForm = {
         categories: this.category,
         brands: this.brand,
@@ -167,80 +165,65 @@ export default {
           : true;
       }
 
-      const currency = this.$cookies.get('currency') || 'USD';
-
+      const currency = this.$cookies.get("currency") || "USD";
       const axiosConfig = {
         baseURL: process.env.API_BASE_URL,
         headers: {
-          'Accept-Language': this.$i18n.locale,
-          'Content-Type': 'application/json',
-          'currency': currency,
-          'Accept': 'application/json',
-          'secret-key': process.env.SECRET_KEY,
-          'api-key': process.env.API_KEY,
+          "Accept-Language": this.$i18n.locale,
+          "Content-Type": "application/json",
+          currency: currency,
+          Accept: "application/json",
+          "secret-key": process.env.SECRET_KEY,
+          "api-key": process.env.API_KEY,
         },
+        cancelToken: cancelTokenSource.token, // ✅ attach cancel token
       };
-      axios
-        .post("/search/filter", dataForm, axiosConfig)
-        .then((response) => {
-          console.log(response)
-          this.filter = response.data;
-          this.total = this.filter.total;
-          this.checked_items = this.filter.checked_items.items;
-          this.attributeFilters = this.filter.attributes;
-          this.selected_category = response.data.categories?.selected || null;
-          this.selected_manufacture = response.data.manufacturers?.selected || null;
-        });
+
+      try {
+        const response = await axios.post("/search/filter", dataForm, axiosConfig);
+        this.filter = response.data;
+        this.total = this.filter.total;
+        this.checked_items = this.filter.checked_items.items;
+        this.attributeFilters = this.filter.attributes;
+        this.selected_category = response.data.categories?.selected || null;
+        this.selected_manufacture = response.data.manufacturers?.selected || null;
+      } catch (err) {
+        if (axios.isCancel(err)) {
+          console.log("Previous filter request canceled:", err.message);
+        } else {
+          console.error("Filter request failed:", err);
+        }
+      }
     },
 
     filterQuery(data) {
-      scrollTopHandler()
+      scrollTopHandler();
       let tempQuery = Object.assign({}, this.$route.query);
       let selector = "";
-      const queryParameters = ['manufacturer', 'brands', 'category','manufacturer-type'];
-
-      const hasQuery = queryParameters.some(param => this.$route.query.hasOwnProperty(param));
-
-      let FullPath = this.$route.fullPath;
-      let pathParts = FullPath.split('/');
-      let pathpart = pathParts[1];
-      let questionMarkIndex = pathpart.indexOf("?");
-      let urlWithoutBeforeQuestionMark = pathpart.substring(questionMarkIndex + 1);
-      let finalUrl = "/shop?" + urlWithoutBeforeQuestionMark.replace("?", "/");
+      const queryParameters = ["manufacturer", "brands", "category", "manufacturer-type"];
+      const hasQuery = queryParameters.some((param) => this.$route.query.hasOwnProperty(param));
       const path = this.$route.path;
-
-      // Split the path by '/' to get an array of parts
-      const parts = path.split('/');
-
-      // Get the first part (excluding the empty string at the beginning)
-      const firstPart = parts[1] || '';
-
+      const parts = path.split("/");
+      const firstPart = parts[1] || "";
 
       if (data.type === "others_filter") {
         if (tempQuery.hasOwnProperty(data.slug)) {
           delete tempQuery[data.slug];
-        }
-        else {
+        } else {
           tempQuery[data.slug] = null;
         }
-      }
-
-      else if (data.type === "manufacturers")
-      {
-        if(data.slug === tempQuery.manufacturers)
-        {
-          delete tempQuery.manufacturers
+      } else if (data.type === "manufacturers") {
+        if (data.slug === tempQuery.manufacturers) {
+          delete tempQuery.manufacturers;
         }
-      }
-
-      else {
+      } else {
         selector = tempQuery[data.type] ? tempQuery[data.type].split(",") : [];
         let index = selector.indexOf(data.slug);
         if (index > -1) {
           selector.splice(index, 1);
           if (!selector.length) {
-            if(tempQuery.brands == tempQuery[data.type]){
-              Object.keys(tempQuery).forEach(key => delete tempQuery[key]);
+            if (tempQuery.brands == tempQuery[data.type]) {
+              Object.keys(tempQuery).forEach((key) => delete tempQuery[key]);
             }
             delete tempQuery[data.type];
           } else {
@@ -251,32 +234,29 @@ export default {
           tempQuery[data.type] = selector.toString();
         }
       }
+
       tempQuery["page"] = 1;
 
-
-      if(data.slug === firstPart){
+      if (data.slug === firstPart) {
         if (hasQuery) {
-          this.$router.push({
-            path: finalUrl
-          })
+          this.$router.push({ path: "/shop" });
         } else {
-          this.$router.push({
-            path: '/shop'
-          })
+          this.$router.push({ path: "/shop" });
         }
-      }
-      else {
+      } else {
         this.$router.push({
           path: this.$route.path,
           query: {
             ...tempQuery,
-          },
+            page: 1
+          }
         });
       }
-    }
+    },
   },
 };
 </script>
+
 <style>
 span.previous-page{
   cursor: pointer;

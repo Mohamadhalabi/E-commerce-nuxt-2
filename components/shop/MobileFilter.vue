@@ -94,6 +94,9 @@ import { scrollTopHandler } from "~/utils";
 import axios from "axios";
 import MobileDetect from "mobile-detect";
 
+// ✅ Track cancel tokens so we can abort previous requests
+let cancelTokenSource = null;
+
 export default {
   name: "SidebarFilter",
   components: {
@@ -115,45 +118,65 @@ export default {
       selected_category: null,
       selected_manufacture: null,
       activeFilter: null,
-      activeFilterKey: '',
+      activeFilterKey: "",
     };
   },
   watch: {
-    '$route': {
-      immediate: true, // Trigger the watcher immediately when the component is created
-      handler() {
-        this.explodeFilter(this.$route.query);
-      },
-    },
+    '$route.query': {
+      deep: true,
+      immediate: true,
+      handler(newQuery, oldQuery) {
+        // ✅ Skip if only the "page" query changed
+        if (oldQuery && Object.keys(newQuery).length === Object.keys(oldQuery).length) {
+          const onlyPageChanged =
+            Object.keys(newQuery).every(key => 
+              key === 'page' || newQuery[key] === oldQuery[key]
+            );
+
+          if (onlyPageChanged) return; // 🔹 Don't call filters API
+        }
+
+        // Otherwise update filters
+        this.explodeFilter(newQuery);
+      }
+    }
   },
   computed: {
     ...mapGetters("language", ["getLang"]),
   },
   methods: {
     openAllAttributesModal() {
-    const attrFilter = {
-        group: 'attributes',
-        group_name: 'Attributes',
-        type: 'checkbox',
-        // we pass the whole attributeFilters object here
-    };
-    this.activeFilter = attrFilter;
-    this.activeFilterKey = 'attributes';
+      const attrFilter = {
+        group: "attributes",
+        group_name: "Attributes",
+        type: "checkbox",
+      };
+      this.activeFilter = attrFilter;
+      this.activeFilterKey = "attributes";
     },
 
     goToPreviousPage() {
       this.$router.go(-1);
     },
+
     getLink(route) {
       return this.getLang === "en" ? route : `/${this.getLang}${route}`;
     },
-    openFilterModal(item, key) {
-    this.activeFilter = item;
-    this.activeFilterKey = key;
-    },
-    explodeFilter(query) {
-      let isMobile = false;
 
+    openFilterModal(item, key) {
+      this.activeFilter = item;
+      this.activeFilterKey = key;
+    },
+
+    async explodeFilter(query) {
+      // ✅ Cancel previous pending request
+      if (cancelTokenSource) {
+        cancelTokenSource.cancel("Route changed - cancelling previous filter request");
+      }
+      cancelTokenSource = axios.CancelToken.source();
+
+      // ✅ Mobile-only logic stays
+      let isMobile = false;
       if (process.server && this.$ssrContext?.req) {
         const userAgent = this.$ssrContext.req.headers["user-agent"];
         const md = new MobileDetect(userAgent);
@@ -162,12 +185,19 @@ export default {
       if (process.client && window.innerWidth < 993) {
         isMobile = true;
       }
-      if (!isMobile) return;
+      if (!isMobile) return; // mobile only
 
-      let slug_type = this.category ? "category" : this.brand ? "brand" : this.manufacturer ? "manufacturer" : "";
-
+      // Determine slug_type
+      let slug_type = this.category
+        ? "category"
+        : this.brand
+        ? "brand"
+        : this.manufacturer
+        ? "manufacturer"
+        : "";
       this.slugtype = slug_type;
 
+      // Prepare payload
       let dataForm = {
         categories: this.category,
         brands: this.brand,
@@ -185,7 +215,6 @@ export default {
       }
 
       const currency = this.$cookies.get("currency") || "USD";
-
       const axiosConfig = {
         baseURL: process.env.API_BASE_URL,
         headers: {
@@ -196,23 +225,39 @@ export default {
           "secret-key": process.env.SECRET_KEY,
           "api-key": process.env.API_KEY,
         },
+        cancelToken: cancelTokenSource.token,
       };
 
-      axios.post("/search/filter", dataForm, axiosConfig).then((response) => {
+      try {
+        const response = await axios.post("/search/filter", dataForm, axiosConfig);
         this.filter = response.data;
         this.total = response.data.total;
         this.checked_items = response.data.checked_items.items;
         this.attributeFilters = response.data.attributes;
-        this.selected_category = response.data.categories.selected;
-        this.selected_manufacture = response.data.manufacturers.selected;
-      });
+        this.selected_category = response.data.categories?.selected || null;
+        this.selected_manufacture = response.data.manufacturers?.selected || null;
+      } catch (err) {
+        if (axios.isCancel(err)) {
+          console.log("Previous mobile filter request cancelled");
+        } else {
+          console.error("Mobile filter request failed", err);
+        }
+      }
     },
+
     filterQuery(data) {
       scrollTopHandler();
       let tempQuery = { ...this.$route.query };
       let selector = "";
-      const queryParameters = ["manufacturer", "brands", "category", "manufacturer-type"];
-      const hasQuery = queryParameters.some((param) => this.$route.query.hasOwnProperty(param));
+      const queryParameters = [
+        "manufacturer",
+        "brands",
+        "category",
+        "manufacturer-type",
+      ];
+      const hasQuery = queryParameters.some((param) =>
+        this.$route.query.hasOwnProperty(param)
+      );
 
       const path = this.$route.path;
       const parts = path.split("/");
@@ -256,12 +301,16 @@ export default {
           this.$router.push({ path: "/shop" });
         }
       } else {
-        this.$router.push({ path: this.$route.path, query: { ...tempQuery } });
+        this.$router.push({
+          path: this.$route.path,
+          query: { ...tempQuery },
+        });
       }
     },
   },
 };
 </script>
+
 <style>
 .filter-scroll-wrapper {
   overflow-x: auto;

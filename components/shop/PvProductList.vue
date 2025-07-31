@@ -5,9 +5,7 @@
       <nav
         v-if="!products || (products && products.length > 0)"
         v-sticky class="toolbox">
-        <!-- <div class="filters d-flex d-lg-none">
-          <button @click="clickedFilter()" class="btn btn-secondary ml-2 mb-2">Filters</button>
-        </div> -->
+
         <div class="toolbox-left">
           <div class="row">
             <div class="col-6">
@@ -126,7 +124,10 @@
 
 <script>
 import axios from "axios";
-import {scrollTopHandler} from "~/utils";
+import { scrollTopHandler } from "~/utils";
+
+// ✅ Keep a global cancel token for products
+let cancelTokenSource = null;
 
 export default {
   components: {
@@ -136,85 +137,21 @@ export default {
     PvProduct: () => import("~/components/product/card/PvProduct.vue"),
     PvListProduct: () => import("~/components/product/card/PvListProduct.vue"),
   },
-//   head() {
-//   return {
-//     script: [
-//       {
-//         type: 'application/ld+json',
-//         json: {
-//           "@context": "https://schema.org",
-//           "@type": "WebPage",
-//           "products": this.products.map(product => {
-//             const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
-//             const productData = {
-//               "@type": "Product",
-//               "name": product.title,
-//               "url": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + "/products/" + product.slug,
-//               "description": product['seo_description'],
-//               "brand": {
-//                 "@type": "Brand",
-//                 "name": product.manufacturer,
-//               },
-//               "image": product.gallery[0]['l']['url'],
-//               "additionalImage": product.gallery[1]['l']['url'],
-//               "sameAs": product.canonical,
-//               "sku": product.sku,
-//               "weight": product.weight,
-//               "offers": {
-//                 "@type": "Offer",
-//                 "price": product.price.value,
-//                 "salePrice": product.sale_price.value === product.price.value ? 0 : product.sale_price.value,
-//                 "priceCurrency": product.price.code,
-//                 "availability": product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
-//                 "url": process.env.PUBLIC_PATH_WITHOUT_SLASH + languagePrefix + "/products/" + product.slug,
-//               }
-//             };
-//             return productData;
-//           })
-//         }
-//       },
-//     ]
-//   };
-// },
-
 
   async fetch() {
     await this.fetchProducts();
   },
 
   props: {
-    value: {
-      type: Object,
-      required: false,
-    },
-    category: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    manufacturer: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    brand: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    slugtype: {
-      type: String,
-      required: false,
-      default: null,
-    },
-    slug: {
-      type: String,
-      required: false,
-      default: null,
-    },
+    value: Object,
+    category: String,
+    manufacturer: String,
+    brand: String,
+    slugtype: String,
+    slug: String,
   },
 
-  data: function () {
+  data() {
     return {
       showStyle: "grid",
       viewType: null,
@@ -226,69 +163,61 @@ export default {
       selectedPage: 1,
       total_products: 0,
       page: 1,
-      type: {
-        type: String,
-        default: "grid",
-      },
+      type: "grid",
       orderBy: "created_at",
       ordering: "type",
     };
   },
-  watch: {
-      $route(to, from) {
-        this.fetchProducts();
 
-        this.type = to.query.list_view ? "list" : "grid";
-        this.selectedPage = parseInt(to.query.page ?? 1);
-        // scrollTopHandler();
-      }
+  watch: {
+    "$route.fullPath"() {
+      this.fetchProducts();
+      this.type = this.$route.query?.list_view ? "list" : "grid"; // ✅ safe
+      this.selectedPage = parseInt(this.$route.query.page ?? 1);
+    }
   },
+
+
   computed: {
     isSelected() {
-      if (this.showStyle === "grid") {
-        return true;
-      } else if (this.showStyle === "list") {
-        return false;
-      }
+      return this.showStyle === "grid";
     },
     visiblePages() {
       const total = this.pageCount;
       const current = parseInt(this.selectedPage);
       const pages = [];
 
-      // Always include first page
       if (current > 4) {
-        pages.push(1);
-        pages.push('...');
+        pages.push(1, "...");
       }
-
       for (let i = current - 1; i <= current + 1; i++) {
         if (i > 0 && i <= total) {
           pages.push(i);
         }
       }
-
-      // Always include last page
       if (current < total - 1) {
-        pages.push('...');
-        pages.push(total);
+        pages.push("...", total);
       }
-
       return pages;
     },
   },
+
   mounted() {
     this.selectedPage = parseInt(this.$route.query.page ?? this.selectedPage);
-    // this.fetchProducts(); // Initial fetch
-    this.scroll(); // Setup infinite scroll
+    this.scroll();
   },
+
   methods: {
     async fetchProducts() {
+      // ✅ Cancel any previous pending request
+      if (cancelTokenSource) {
+        cancelTokenSource.cancel("Route changed - cancelling previous product request");
+      }
+      cancelTokenSource = axios.CancelToken.source();
+
       let tempQuery = "";
       let displayType = "normal";
-      if (this.$route.query.hasOwnProperty("categories") || this.category) {
-        displayType = "normal";
-      }
+
       if (this.slugtype === "category") {
         tempQuery += `categories=${this.slug}`;
       } else if (this.slugtype === "manufacturer") {
@@ -296,9 +225,13 @@ export default {
       } else if (this.slugtype === "brand") {
         tempQuery += `brands=${this.slug}`;
       }
+
       for (const property in this.$route.query) {
-        tempQuery += `&${property}${this.$route.query[property] ? `=${this.$route.query[property]}` : ""}`;
+        tempQuery += `&${property}${
+          this.$route.query[property] ? `=${this.$route.query[property]}` : ""
+        }`;
       }
+
       switch (this.ordering) {
         case "type":
           this.orderBy = "type";
@@ -333,40 +266,47 @@ export default {
           this.direction = "desc";
           break;
       }
-      let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
-      if(this.selectedNumber == "8") query += `&page=${this.selectedPage}`;
 
-      const { data } = await axios.get(`search/product${query}`, {
-        baseURL: process.env.API_BASE_URL,
-        headers: {
-          'Accept-Language': this.$i18n.locale,
-          'Content-Type': 'application/json',
-          'currency': this.$cookies.get('currency') || 'USD',
-          'Accept': 'application/json',
-          'secret-key': process.env.SECRET_KEY,
-          'api-key': process.env.API_KEY,
+      let query = `?${tempQuery}&disply_type=${displayType}&direction=${this.direction}&order-by=${this.orderBy}&length=${this.selectedNumber}`;
+      if (this.selectedNumber == "8") query += `&page=${this.selectedPage}`;
+
+      try {
+        const { data } = await axios.get(`search/product${query}`, {
+          baseURL: process.env.API_BASE_URL,
+          headers: {
+            "Accept-Language": this.$i18n.locale,
+            "Content-Type": "application/json",
+            currency: this.$cookies.get("currency") || "USD",
+            Accept: "application/json",
+            "secret-key": process.env.SECRET_KEY,
+            "api-key": process.env.API_KEY,
+          },
+          cancelToken: cancelTokenSource.token,
+        });
+
+        this.total_products = data.total;
+
+        if (this.selectedNumber == "8") {
+          this.products.push(...data.products);
+        } else {
+          this.products = data.products;
         }
-      });
-      this.total_products = data.total 
-      if(this.selectedNumber == "8"){
-        this.products.push(...data.products);
-      }else{
-        this.products = data.products;;
+
+        this.show_not_found = data.products.length === 0;
+        this.viewType = data.products[0]?.category ? "categories" : "product";
+        this.pageCount = data.total_pages;
+      } catch (err) {
+        if (axios.isCancel(err)) {
+          console.log("Previous product request cancelled");
+        } else {
+          console.error("Product request failed", err);
+        }
       }
-      if (data.products.length === 0) {
-        this.show_not_found = true;
-      }
-      if (data.products[0]["category"]) {
-        this.viewType = "categories";
-      } else {
-        this.viewType = "product";
-      }
-      this.pageCount = data.total_pages;
     },
+
     scroll() {
-      if(this.selectedNumber == "8"){
+      if (this.selectedNumber == "8") {
         let observer = new IntersectionObserver((entries) => {
-          // Check if the scrollObserver is intersecting (visible)
           if (entries[0].isIntersecting) {
             this.selectedPage++;
             if (this.selectedPage <= this.pageCount) {
@@ -374,56 +314,48 @@ export default {
             }
           }
         });
-        // Observe the scrollObserver reference
         observer.observe(this.$refs.scrollObserver);
       }
     },
-    clickedFilter(){
-      this.$modal.show(
-        () => import("~/components/shop/SidebarFilter.vue"),
-        {
-          adaptive: true,
-          height:"500",
-          class: "p-3",
-        }
-      );
-    },
+
     selectShowStyle(style) {
       this.showStyle = style;
     },
+
     handleChange() {
       this.products = [];
       this.selectedPage = 1;
       this.scroll();
       this.fetchProducts();
-      this.$router.push({ path: this.$route.path, query: {
-            ...this.$route.query,
-            page: 1,
-          }, });
+      this.$router.push({
+        path: this.$route.path,
+        query: { ...this.$route.query, page: 1 },
+      });
     },
+
     changeOrder() {
       this.selectedPage = 1;
       this.fetchProducts();
     },
+
     changeDirection() {
       this.selectedPage = 1;
       this.fetchProducts();
     },
+
     changePage(page) {
       if (page === this.selectedPage) return;
       if (page >= 1 && page <= this.pageCount) {
         this.$router.push({ query: { ...this.$route.query, page } });
       }
     },
-    showMore(category) {
-      let query = {
-        categories: category,
-        page: 1,
-        search: this.$route.query.search,
-      };
-      this.$router.push({ path: "shop", query: { ...query } });
-    },
 
+    showMore(category) {
+      this.$router.push({
+        path: "shop",
+        query: { categories: category, page: 1, search: this.$route.query.search },
+      });
+    },
   },
 };
 </script>
