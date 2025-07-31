@@ -2,7 +2,7 @@
   <div>
     <!-- Serial input warning -->
     <div class="col-12">
-      <ul class="text-danger fw-bold list-unstyled mb-2">
+      <ul class="text-danger fw-bold list-unstyled mt-1 mb-1">
         <li>
           <i class="fa fa-exclamation-triangle me-1"></i>
           {{ $t("products.serial_number_is_required") }}

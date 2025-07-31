@@ -322,7 +322,7 @@ $product-single-thumbnail-gutter: 3px !default;
 	.horizontal-quantity {
 	  padding: .2rem;
 	  height: 24px;
-	  width: 36px;
+	  width: 80px;
 	  background-color: $orange-light2-color;
 	  font-size: 13px;
 	  text-align: center;
@@ -385,8 +385,9 @@ $product-single-thumbnail-gutter: 3px !default;
 	}
 
 	.product-action {
-		padding: 1.5rem 0 1.6rem;
+		padding: 1.5rem 0 0;
 	}
+
 	.add-to-cart{
 		border-bottom: 1px solid $navy-light3-color;
 	}
@@ -716,6 +717,9 @@ main .sticky-header {
 			border-bottom-color: $primary-color-dark;
 		}
 	}
+}
+.product-custom-buttons{
+	display: flex;
 }
 .product-desc-content {
 	margin-bottom: 2.5rem;

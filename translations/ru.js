@@ -65,6 +65,11 @@ export default
     failedToChangeThePassword: 'Не удалось изменить пароль, попробуйте еще раз',
     WelcomeTo: 'Добро пожаловать в',
     tlkeys: 'Techno Lock Keys',
+    rotatingMessages: [
+      "Отправка в тот же день до 16:00 по GMT+4",
+      "Бесплатная доставка для заказов от 4999 долларов"
+    ],
+
   },
   auth: {
     phoneNumber: 'Номер телефона',

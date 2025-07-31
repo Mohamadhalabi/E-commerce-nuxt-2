@@ -65,6 +65,11 @@ export default
     failedToChangeThePassword: 'Passwortänderung fehlgeschlagen, versuchen Sie es erneut',
     WelcomeTo: 'Willkommen bei',
     tlkeys: 'Techno Lock Keys',
+    rotatingMessages: [
+      "Versand am selben Tag bis 16:00 Uhr GMT+4",
+      "Kostenloser Versand für berechtigte Bestellungen über 4999 $"
+    ],
+
   },
   auth: {
     phoneNumber: 'Telefonnummer',

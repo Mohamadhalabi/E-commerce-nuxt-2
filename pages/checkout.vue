@@ -686,6 +686,9 @@ export default {
   },
 
   watch: {
+      '$route.fullPath'() {
+        this.refetchPrice();
+      },
     "dataForm.payment_method": function (val) {
       if (val == "paypal") {
         this.dataForm.card_id = "-1";

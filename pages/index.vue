@@ -175,6 +175,7 @@
 // import {mapGetters} from "vuex";
 // import api from '~/api';
 export default {
+  name: 'HomePage',
   head() {
     const languagePrefix = this.$i18n.locale !== 'en' ? `/${this.$i18n.locale}` : '';
     return {

@@ -67,7 +67,7 @@ export default
       tlkeys:'Techno Lock Keys',
       rotatingMessages: [
         "Same Day shipping until 4PM GMT+4",
-        "Free Shipping for eligible orders over $10000"
+        "Free Shipping for eligible orders over $4999"
       ],
     },
     auth: {
@@ -587,7 +587,7 @@ export default
       reviewFor: 'Review For',
       reviewsFor: 'reviews For',
       serial_number_is_required: 'Serial Number Is Required .',
-      after_receiving_payment: 'After receiving the payment notification and Serial Number, we will promptly send you the file or an update notification.',
+      after_receiving_payment: 'After we receive the payment and Serial Number, we will promptly send the Update.',
       if_want_multi: 'If You Want Multiple Files Send Serial Number For Each One Seperated With + .',
       bundled: 'Bundle',
       serial_number: 'Serial Number',

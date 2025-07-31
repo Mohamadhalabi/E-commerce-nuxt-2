@@ -65,6 +65,11 @@ export default
     failedToChangeThePassword: 'No se pudo cambiar la contraseña. Inténtalo de nuevo',
     WelcomeTo: 'Bienvenido a',
     tlkeys: 'Claves de Techno Lock',
+    rotatingMessages: [
+      "Envío el mismo día hasta las 4PM GMT+4",
+      "Envío gratuito para pedidos elegibles superiores a 4999 USD"
+    ],
+
   },
   auth: {
     phoneNumber: 'Número de teléfono',

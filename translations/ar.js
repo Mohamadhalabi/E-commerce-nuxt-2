@@ -57,6 +57,10 @@ export default {
     failedToChangeThePassword: 'فشل في تغيير كلمة المرور حاول مرة اخرى',
     WelcomeTo:'مرحبا بك في',
     tlkeys:'تكنو لوك لتجارة المفاتيح',
+    rotatingMessages: [
+      "شحن في نفس اليوم حتى الساعة 4 مساءً بتوقيت GMT+4",
+      "شحن مجاني للطلبات المؤهلة التي تزيد عن 4999 دولارًا"
+    ],
   },
   auth: {
     phoneNumber: 'رقم الهاتف',
