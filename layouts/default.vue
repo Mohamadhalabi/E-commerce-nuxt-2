@@ -3,7 +3,7 @@
     <vue-progress-bar/>
     <noscript v-html="iFrameCode" />
     <pv-header @isClicked="isClicked" />
-    <nuxt />
+    <nuxt keep-alive />
     <pv-footer/>
     <pv-app-popup class="minipopup-area minipopup-top-area"/>
     <pv-product-popup class="minipopup-area"/>

@@ -236,10 +236,11 @@ export default {
   },
   watch: {
       $route(to, from) {
+        this.fetchProducts();
+
         this.type = to.query.list_view ? "list" : "grid";
         this.selectedPage = parseInt(to.query.page ?? 1);
-        scrollTopHandler();
-        this.fetchProducts();
+        // scrollTopHandler();
       }
   },
   computed: {
