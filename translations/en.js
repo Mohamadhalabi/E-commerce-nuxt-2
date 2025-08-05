@@ -178,6 +178,7 @@ export default
       checkout: 'Checkout',
       order_complete: 'Order Complete',
       product: 'Product',
+      products: 'Prodcuts', 
       price: 'Price',
       quantity: 'Quantity',
       Subtotal: 'Subtotal',

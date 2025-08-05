@@ -148,21 +148,21 @@ export default {
   },
   mounted: function () {
     if (this.product !== null) {
-      this.$nextTick(() => {
-        let self = this;
-        this.$refs.mediaRef.swiper.on("transitionStart", function () {
-          let activeIndex = self.$refs.mediaRef.swiper.activeIndex;
-          self.$refs.thumbRef.swiper.slideTo(activeIndex);
-          self.$refs.thumbRef.swiper.$el
-            .find(".swiper-wrapper")
-            .find(".swiper-dot.active")[0]
-            .classList.remove("active");
-          self.$refs.thumbRef.swiper.$el
-            .find(".swiper-wrapper")
-            .find(".swiper-dot")
-            [activeIndex].classList.add("active");
-        });
-      });
+      // this.$nextTick(() => {
+      //   let self = this;
+      //   this.$refs.mediaRef.swiper.on("transitionStart", function () {
+      //     let activeIndex = self.$refs.mediaRef.swiper.activeIndex;
+      //     self.$refs.thumbRef.swiper.slideTo(activeIndex);
+      //     self.$refs.thumbRef.swiper.$el
+      //       .find(".swiper-wrapper")
+      //       .find(".swiper-dot.active")[0]
+      //       .classList.remove("active");
+      //     self.$refs.thumbRef.swiper.$el
+      //       .find(".swiper-wrapper")
+      //       .find(".swiper-dot")
+      //       [activeIndex].classList.add("active");
+      //   });
+      // });
     }
   },
   methods: {

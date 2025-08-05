@@ -12,18 +12,37 @@ export default {
   head: {
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/icons/apple-touch-icon-180x180-precomposed.png' },
+
+      // ✅ Preconnect for faster first requests
       { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: true },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
+      { rel: 'preconnect', href: 'https://www.tlkeys.com', crossorigin: true }, // main domain
+      { rel: 'preconnect', href: 'https://static.cloudflareinsights.com', crossorigin: true }, // Cloudflare analytics
+      { rel: 'preconnect', href: 'https://dev-srv.tlkeys.com', crossorigin: true }, // image domain
+
+      // ✅ Preload fonts to avoid chaining requests
+      { rel: 'preload', href: '/fonts/normal.woff2', as: 'font', type: 'font/woff2', crossorigin: true },
+      { rel: 'preload', href: '/fonts/normal-bold.woff2', as: 'font', type: 'font/woff2', crossorigin: true },
+
+      // ✅ Preload Google Fonts stylesheet
       { rel: 'preload', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap' },
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap', media: 'print', onload: "this.media='all'" },
+
+      // ✅ Load Google Fonts without blocking render
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap', media: 'print', onload: "this.media='all'" }
     ],
+
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'application-name', content: 'Techno Lock Keys' },
     ],
+
     script: [
+      // ✅ Defer Cloudflare email decode so it doesn’t block rendering
+      { src: '/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js', defer: true },
+
+      // ✅ GTM already async/defer
       {
         hid: 'gtm',
         innerHTML: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-PWSSMVC7');`,
@@ -31,9 +50,11 @@ export default {
         defer: true
       }
     ],
+
     noscript: [
       { innerHTML: `<div><img src="https://mc.yandex.ru/watch/96738038" style="position:absolute; left:-9999px;" alt="" /></div>` }
     ],
+
     __dangerouslyDisableSanitizers: ['script', 'noscript']
   },
 
@@ -82,7 +103,32 @@ export default {
     '@nuxt/image',
     'nuxt-precompress',
     'cookie-universal-nuxt',
+    'nuxt-ssr-cache', // ✅ Added SSR HTML caching
   ],
+
+  // ✅ SSR Full Page Cache Settings
+  cache: {
+    pages: [
+      '/',                
+      '/product/**',      
+      '/category/**',     
+      '/:lang/product/**',
+      '/:lang/category/**'
+    ],
+    key: (route, context) => {
+      const url = context.req.url || '';
+      // ❌ Do not cache cart, checkout, account
+      if (url.startsWith('/cart') || url.startsWith('/checkout') || url.startsWith('/account')) {
+        return false; // Returning false disables caching for this route
+      }
+      return url;
+    },
+    store: {
+      type: 'memory',
+      max: 2000,
+      ttl: 60 * 60
+    }
+  },
 
   axios: {
     baseURL: process.env.API_BASE_URL,
@@ -121,9 +167,10 @@ export default {
     bundleRenderer: {
       cache: new LRU({
         max: 1000,
-        maxAge: 1000 * 60 * 15 // ✅ v6 uses maxAge, not ttl
+        maxAge: 1000 * 60 * 15 // 15 minutes
       })
-    }
+    },
+    compressor: false // ✅ turn off HTML compression for faster SSR
   },
 
   auth: {
@@ -154,7 +201,6 @@ export default {
     '~/middleware/redirects.js',
     '~/middleware/force410.js',
   ],
-
 
   build: {
     transpile: ['cookie-es'],
@@ -192,7 +238,6 @@ export default {
     modern: true
   },
 
-  // ✅ Build-time Gzip/Brotli for static files
   nuxtPrecompress: {
     enabled: true,
     report: false,
@@ -222,7 +267,6 @@ export default {
     fallback: '404.html',
     subFolders: false,
   },
-
 
   loading: {
     color: '#f07905',

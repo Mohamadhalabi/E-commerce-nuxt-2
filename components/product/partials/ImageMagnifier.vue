@@ -14,7 +14,11 @@
       width="500"
       height="500"
       loading="eager"
+      fetchpriority="high"
+      preload
+      decoding="async"
     />
+
 
     <!-- Modal -->
     <div class="modal" v-if="isModalVisible" @click.self="closeImageModal">

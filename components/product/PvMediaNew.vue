@@ -27,17 +27,19 @@
         class="thumbnail-image"
         @click="gotoMainCarousel(index)"
       >
-        <nuxt-img
-          :loading="index === 0 ? 'eager' : 'lazy'"
-          sizes="sm:150px md:150px lg:150px"
-          format="webp"
-          width="150"
-          height="150"
-          class="rounded-5"
-          :src="image['s'].url"
-          :alt="getAltText(image['s'].url)"
-          style="border: 1px solid #e7e7e6!important; object-fit: contain;"
-        />
+      <nuxt-img
+        :loading="index === 0 ? 'eager' : 'lazy'"
+        :fetchpriority="index === 0 ? 'high' : undefined"
+        :preload="index === 0"
+        sizes="sm:150px md:150px lg:150px"
+        format="webp"
+        width="150"
+        height="150"
+        class="rounded-5"
+        :src="image['s'].url"
+        :alt="getAltText(image['s'].url)"
+        style="border: 1px solid #e7e7e6!important; object-fit: contain;"
+      />
       </div>
 
       <!-- Replace font-awesome arrows with SVG -->

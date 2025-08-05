@@ -635,7 +635,6 @@
     </div>
     <AddressDialog
       :type-form="typeForm"
-      @close="closedEvent"
     />
   </main>
 </template>

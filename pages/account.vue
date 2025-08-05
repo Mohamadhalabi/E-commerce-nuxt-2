@@ -27,19 +27,6 @@
                       alt="Avatar"
                     />
                   </i> -->
-
-                  <div
-                    class="header-userinfo d-none d-lg-block mx-2"
-                    :class="{ 'text-right': getIsAr }"
-                  >
-                  <span class="d-inline-block font2 line-height-1">
-                    {{ $t("account.logged") }}
-                  </span>
-                    <h4 class="mb-0">
-                      {{ StateUser.name }}
-                      <sub><br />{{ StateUser.uuid }}</sub>
-                    </h4>
-                  </div>
                 </div>
               </div>
 
