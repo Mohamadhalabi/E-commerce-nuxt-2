@@ -607,8 +607,14 @@ export default function(req, res, next) {
       from:"/products/Lonsdor-Toyota-Corolla-LT30-01-Universal-Smart-Key-Board-4-Buttons",
       to:"/products/lonsdor-lt30-01-4a-universal-smart-remote-pcb"
     },
-
-
+    {
+      from:"/products/Lonsdor-Toyota-Corolla-LT30-01-Universal-Smart-Key-Board-4-Buttons",
+      to:"/products/lonsdor-lt30-01-4a-universal-smart-remote-pcb"
+    },
+    {
+      from:"/products/xhorse-key-tool-midi-immo-tpms-device",
+      to:"/products/xhorse-xdkmd0en-key-tool-midi-immo-tpms-basic-version"
+    },
   ]
   const redirect = redirects.find((r) => r.from.toLowerCase() === req.url.toLowerCase());
 
