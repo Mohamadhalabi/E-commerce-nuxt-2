@@ -11,7 +11,7 @@ export default {
 
   head: {
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/icons/apple-touch-icon-180x180-precomposed.png' },
+      { rel: 'icon', type: 'image/x-icon', href: '/images/icons/apple-touch-icon-180x180-precomposed.png' },
 
       // ✅ Preconnect for faster first requests
       { rel: 'preconnect', href: 'https://fonts.googleapis.com', crossorigin: true },
@@ -107,28 +107,28 @@ export default {
   ],
 
   // ✅ SSR Full Page Cache Settings
-  cache: {
-    pages: [
-      '/',                
-      '/product/**',      
-      '/category/**',     
-      '/:lang/product/**',
-      '/:lang/category/**'
-    ],
-    key: (route, context) => {
-      const url = context.req.url || '';
-      // ❌ Do not cache cart, checkout, account
-      if (url.startsWith('/cart') || url.startsWith('/checkout') || url.startsWith('/account')) {
-        return false; // Returning false disables caching for this route
-      }
-      return url;
-    },
-    store: {
-      type: 'memory',
-      max: 2000,
-      ttl: 60 * 60
-    }
-  },
+  // cache: {
+  //   pages: [
+  //     '/',                
+  //     '/product/**',      
+  //     '/category/**',     
+  //     '/:lang/product/**',
+  //     '/:lang/category/**'
+  //   ],
+  //   key: (route, context) => {
+  //     const url = context.req.url || '';
+  //     // ❌ Do not cache cart, checkout, account
+  //     if (url.startsWith('/cart') || url.startsWith('/checkout') || url.startsWith('/account')) {
+  //       return false; // Returning false disables caching for this route
+  //     }
+  //     return url;
+  //   },
+  //   store: {
+  //     type: 'memory',
+  //     max: 2000,
+  //     ttl: 60 * 60
+  //   }
+  // },
 
   axios: {
     baseURL: process.env.API_BASE_URL,
