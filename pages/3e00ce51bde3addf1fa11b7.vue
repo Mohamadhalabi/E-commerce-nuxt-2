@@ -1,26 +1,33 @@
 <template>
   <main class="vin-to-pin d-flex justify-content-center align-items-center">
-    <div class="card custom-card p-4 text-white shadow" style="width: 100%; max-width: 400px;">      
-      <h3 class="text-center text-white mb-3">VIN TO PIN</h3>
+    <div class="card custom-card p-4 text-white shadow position-relative" style="width: 100%; max-width: 400px;">
+      
+      <!-- 🔄 Loading Overlay -->
+      <div v-if="isLoading" class="loading-overlay d-flex justify-content-center align-items-center">
+        <div class="spinner-border text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <h3 class="text-center text-white mb-3">KIA / HYUNDAI Part Number</h3>
 
       <form @submit.prevent="handleSubmit">
         <!-- VIN -->
         <div class="mb-2">
-
-        <div class="alert alert-danger" v-if="showVinError" role="alert">
+          <div class="alert alert-danger" v-if="showVinError" role="alert">
             VIN must be exactly 17 characters.
-        </div>
-        <input
+          </div>
+          <input
             type="text"
             v-model="vin"
             @input="formatVin"
             maxlength="17"
             class="form-control large-input"
             placeholder="VIN Number"
-        />
+          />
         </div>
 
-        <!-- Username (password style) -->
+        <!-- Username -->
         <div class="mb-2">
           <input
             type="password"
@@ -31,19 +38,47 @@
           />
         </div>
 
-        <!-- Pin Code -->
+        <!-- Part Number Result -->
         <div class="mb-2">
-          <input type="text" v-model="pinCode" class="form-control large-input" placeholder="Part Number" readonly />
+          <input
+            type="text"
+            v-model="pinCode"
+            class="form-control large-input"
+            placeholder="Part Number"
+            readonly
+          />
+        </div>
+
+        <!-- Error Message -->
+        <div v-if="errorMessage" class="alert alert-danger" role="alert">
+          {{ errorMessage }}
+        </div>
+
+        <!-- Limit Info -->
+        <div v-if="requestsLeft !== null || subscriptionEnds !== null" class="text-white text-sm mb-3">
+          <div v-if="requestsLeft !== null">
+            <strong>Queries left today:</strong> {{ requestsLeft }} / 5
+          </div>
+          <div v-if="subscriptionEnds">
+            <strong>Subscription ends:</strong> {{ subscriptionEnds }}
+          </div>
         </div>
 
         <!-- Submit Button -->
-        <button type="submit" class="btn get-button w-100 large-button">Get</button>
+        <button type="submit" class="btn get-button w-100 large-button" :disabled="isLoading">
+          <span v-if="isLoading">
+            <i class="fa fa-spinner fa-spin"></i> Loading...
+          </span>
+          <span v-else>Get</span>
+        </button>
       </form>
     </div>
   </main>
 </template>
+
 <script>
 import axios from 'axios'
+
 export default {
   layout: 'pincode_layout',
 
@@ -54,6 +89,10 @@ export default {
       keyCode: '',
       pinCode: '',
       showVinError: false,
+      isLoading: false,
+      requestsLeft: null,
+      subscriptionEnds: null,
+      errorMessage: null
     }
   },
 
@@ -66,7 +105,6 @@ export default {
 
   watch: {
     vin(newVal) {
-      // Remove alert automatically if VIN reaches exactly 17 chars
       if (newVal.length === 17) {
         this.showVinError = false
       }
@@ -79,19 +117,23 @@ export default {
     },
 
     async handleSubmit() {
-      // VIN validation
       if (this.vin.length !== 17) {
         this.showVinError = true
         return
       }
       this.showVinError = false
+      this.errorMessage = null
 
-      // Save username for 12 hours
       this.setCookie('username', this.username, 0.5)
+
+      this.isLoading = true
+      this.pinCode = ''
+      this.requestsLeft = null
+      this.subscriptionEnds = null
 
       try {
         const response = await axios.post(
-          "vin-to-pin", // endpoint relative to baseURL
+          "/vin-to-part-number",
           {
             username: this.username,
             vin: this.vin
@@ -109,19 +151,17 @@ export default {
           }
         )
 
-        console.log("API Response:", response.data)
-
-        // If API returns keyCode & pinCode
-        this.keyCode = response.data.keyCode || ''
-        this.pinCode = response.data.pinCode || ''
-
+        this.pinCode = response.data.partno || ''
+        this.requestsLeft = response.data.requests_left
+        this.subscriptionEnds = response.data.subscription_ends
       } catch (error) {
         console.error("Error fetching VIN to PIN:", error)
-        alert("There was an error sending your request.")
+        this.errorMessage = error.response?.data?.error || "There was an error sending your request."
+      } finally {
+        this.isLoading = false
       }
     },
 
-    // Helper: set cookie (days can be fractional)
     setCookie(name, value, days) {
       let expires = ''
       if (days) {
@@ -132,7 +172,6 @@ export default {
       document.cookie = name + '=' + (value || '') + expires + '; path=/'
     },
 
-    // Helper: get cookie
     getCookie(name) {
       const nameEQ = name + '='
       const ca = document.cookie.split(';')
@@ -143,21 +182,6 @@ export default {
       }
       return null
     },
-
-    // Helper: erase cookie
-    eraseCookie(name) {
-      document.cookie = name + '=; Max-Age=-99999999; path=/'
-    }
-  },
-
-  head() {
-    return {
-      title: 'Vin To Pin',
-      meta: [
-        { hid: 'robots', name: 'robots', content: 'noindex, noarchive, nofollow' },
-        { hid: 'googlebot', name: 'googlebot', content: 'noindex, noarchive, nofollow' }
-      ]
-    }
   }
 }
 </script>
@@ -176,6 +200,8 @@ export default {
 
 .custom-card {
   background-color: #1c1c1c;
+  border-radius: 15px;
+  position: relative;
 }
 
 /* Bigger inputs */
@@ -191,9 +217,21 @@ export default {
   font-size: 1.1rem;
 }
 
-.alert{
-    border-radius: 10px;
-    margin-bottom: 15px;
-    padding: 0.8rem;
+.alert {
+  border-radius: 10px;
+  margin-bottom: 15px;
+  padding: 0.8rem;
+}
+
+/* 🔄 Loading overlay styles */
+.loading-overlay {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  border-radius: 15px;
 }
 </style>
