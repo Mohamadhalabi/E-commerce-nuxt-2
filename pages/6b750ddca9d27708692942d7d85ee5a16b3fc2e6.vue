@@ -62,7 +62,7 @@
       <!-- Display requests_today and requests_this_month -->
       <div v-if="requestsToday !== undefined && requestsThisMonth !== undefined">
         <div class="mt-3 text-white">
-          <p>Requested codes today:: {{ requestsToday }}</p>
+          <p>Requested codes today: {{ requestsToday }}</p>
           <p>Requests codes this month: {{ requestsThisMonth }}</p>
         </div>
       </div>
