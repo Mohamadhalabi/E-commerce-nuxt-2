@@ -1,24 +1,29 @@
 <template>
   <main class="vin-to-pin d-flex justify-content-center align-items-center">
-    <div class="card custom-card p-4 text-white shadow" style="width: 100%; max-width: 400px;">      
-      <h3 class="text-center text-white mb-3">KIA / HYUNDAI VIN TO PIN</h3>
+    <div class="stack">
+      <h3 class="heading text-center">Vin Request</h3>
 
-      <!-- Bootstrap Alert for errors -->
+      <!-- Error -->
       <div v-if="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
         {{ errorMessage }}
       </div>
 
-      <!-- Loading screen -->
+      <!-- Loading -->
       <div v-if="loading" class="loading-overlay">
         <div class="spinner-border text-light" role="status">
           <span class="visually-hidden">Loading...</span>
         </div>
       </div>
 
-      <form @submit.prevent="handleSubmit">
+      <!-- Counters -->
+      <div v-if="requestsToday !== undefined && requestsThisMonth !== undefined" class="counters">
+        <p>Today: {{ requestsToday }} | This Month: {{ requestsThisMonth }}</p>
+      </div>
+
+      <form @submit.prevent="handleSubmit" class="flex-col">
         <!-- VIN -->
-        <div class="mb-2">
-          <div class="alert alert-danger" v-if="showVinError" role="alert">
+        <div class="row-gap">
+          <div class="alert alert-danger py-2 px-3 mb-2" v-if="showVinError" role="alert">
             VIN must be exactly 17 characters.
           </div>
           <input
@@ -26,57 +31,64 @@
             v-model="vin"
             @input="formatVin"
             maxlength="17"
-            class="form-control large-input"
+            :class="['pill-input', 'vin-width', successState ? 'success-border' : '', greenTextState ? 'green-text' : '']"
             placeholder="VIN Number"
-          />
-        </div>
-
-        <!-- Username (password style) -->
-        <div class="mb-2">
-          <input
-            type="password"
-            v-model="username"
-            class="form-control large-input"
-            placeholder="Enter Username"
+            autocomplete="off"
             required
           />
         </div>
 
+        <!-- Username -->
+        <div class="row-gap">
+          <input
+            type="password"
+            v-model="username"
+            :class="['pill-input', 'username-width', successState ? 'success-border' : '', greenTextState ? 'green-text' : '']"
+            placeholder="Enter Username"
+            required
+            autocomplete="new-password"
+          />
+        </div>
+
         <!-- Key Code -->
-        <div class="mb-2">
-          <input type="text" v-model="keyCode" class="form-control large-input" placeholder="Key Code" readonly />
+        <div class="row-gap">
+          <input
+            type="text"
+            v-model="keyCode"
+            :class="['pill-input', 'key-width', successState ? 'success-border' : '', greenTextState ? 'green-text' : '']"
+            placeholder="Key Code"
+            readonly
+          />
         </div>
 
         <!-- Pin Code -->
-        <div class="mb-2">
-          <input type="text" v-model="pinCode" class="form-control large-input" placeholder="Pin Code" readonly />
+        <div class="row-gap">
+          <input
+            type="text"
+            v-model="pinCode"
+            :class="['pill-input', 'pin-width', 'pin-accent', successState ? 'success-border' : '', greenTextState ? 'green-text' : '']"
+            placeholder="Pin Code"
+            readonly
+          />
         </div>
 
-        <!-- Submit Button (Get) -->
-        <button type="submit" class="btn get-button w-100 large-button" :disabled="disabled">
-          <span v-if="loading">Loading...</span>
-          <span v-else>Get</span>
-        </button>
+        <!-- Actions: GET + COPY (same row) -->
+        <div class="actions-row">
+          <button type="submit" class="get-button" :disabled="disabled">
+            <span v-if="loading">Loading...</span>
+            <span v-else>GET</span>
+          </button>
+
+          <button
+            v-if="keyCode && pinCode && !loading"
+            type="button"
+            class="copy-button"
+            @click="copyToClipboard"
+          >
+            Copy
+          </button>
+        </div>
       </form>
-
-      <!-- Display requests_today and requests_this_month -->
-      <div v-if="requestsToday !== undefined && requestsThisMonth !== undefined">
-        <div class="mt-3 text-white">
-          <p>Requested codes today: {{ requestsToday }}</p>
-          <p>Requests codes this month: {{ requestsThisMonth }}</p>
-        </div>
-      </div>
-
-      <!-- Copy button that triggers copyToClipboard method -->
-      <div v-if="keyCode && pinCode && !loading">
-        <button
-          type="button"
-          class="btn btn-success w-100 mt-3"
-          @click="copyToClipboard"
-        >
-          Copy VIN, Key Code, and Pin Code
-        </button>
-      </div>
     </div>
   </main>
 </template>
@@ -86,7 +98,6 @@ import axios from "axios";
 
 export default {
   layout: "pincode_layout",
-
   data() {
     return {
       vin: "",
@@ -94,56 +105,48 @@ export default {
       keyCode: "",
       pinCode: "",
       showVinError: false,
-      loading: false, // Loading state
-      errorMessage: "", // Error message for Bootstrap alert
-      requestsToday: undefined, // Track today's requests count
-      requestsThisMonth: undefined, // Track this month's requests count
+      loading: false,
+      errorMessage: "",
+      requestsToday: undefined,
+      requestsThisMonth: undefined,
       disabled: false,
+      greenTextState: false, // ✅ new state
     };
   },
-
-  mounted() {
-    const savedUsername = this.getCookie("username");
-    if (savedUsername) {
-      this.username = savedUsername;
-    }
-  },
-
-  watch: {
-    vin(newVal) {
-      // Remove alert automatically if VIN reaches exactly 17 chars
-      if (newVal.length === 17) {
-        this.showVinError = false;
-      }
+  computed: {
+    successState() {
+      return !!(this.keyCode && this.pinCode);
     },
   },
-
+  mounted() {
+    const savedUsername = this.getCookie("username");
+    if (savedUsername) this.username = savedUsername;
+  },
+  watch: {
+    vin(v) {
+      if (v.length === 17) this.showVinError = false;
+    },
+  },
   methods: {
     formatVin() {
       this.vin = this.vin.replace(/o/gi, "0").toUpperCase().slice(0, 17);
     },
 
     async handleSubmit() {
-      // VIN validation
       if (this.vin.length !== 17) {
         this.showVinError = true;
         return;
       }
       this.showVinError = false;
-
-      // Save username for 12 hours
       this.setCookie("username", this.username, 0.5);
-
-      this.loading = true; // Start loading
+      this.loading = true;
       this.disabled = true;
+      this.greenTextState = false; // reset before request
 
       try {
         const response = await axios.post(
-          "vin-to-pin-new", // endpoint relative to baseURL
-          {
-            username: this.username,
-            vin: this.vin,
-          },
+          "vin-to-pin-new",
+          { username: this.username, vin: this.vin },
           {
             baseURL: process.env.API_BASE_URL,
             headers: {
@@ -157,77 +160,86 @@ export default {
           }
         );
 
-        console.log("API Response:", response.data);
-
-        // Check if there's an error from the API response
         if (response.data.error) {
-          // If the API response has an error message, display it
-          this.errorMessage = response.data.error; // e.g., "Request limit exceeded for today"
-          this.keyCode = ""; // Clear keyCode in case of error
-          this.pinCode = ""; // Clear pinCode in case of error
-        } else if (response.data.vin === "Not Correct Vin") {
-          // If VIN is invalid, clear the values
+          this.errorMessage = response.data.error;
           this.keyCode = "";
           this.pinCode = "";
-          this.errorMessage = "Invalid VIN entered. Please try again."; // Display error message
+        } else if (response.data.vin === "Not Correct Vin") {
+          this.keyCode = "";
+          this.pinCode = "";
+          this.errorMessage = "Invalid VIN entered. Please try again.";
         } else {
-          // Set the keyCode and pinCode values to the response data
           this.keyCode = response.data.key_code || "";
           this.pinCode = response.data.pin_code || "";
-          this.errorMessage = ""; // Clear any previous error message
+          this.errorMessage = "";
+
+          // ✅ Set green text condition
+          if (response.data.available_in_db && this.username === "4immo8110") {
+            this.greenTextState = true;
+          }
         }
 
-        // Ensure requests_today and requests_this_month are being handled correctly
         this.requestsToday = response.data.requests_today || 0;
         this.requestsThisMonth = response.data.requests_this_month || 0;
-      } catch (error) {
-        console.error("Error fetching VIN to Pin:", error);
-        this.errorMessage = error.response ? error.response.data.error || "An error occurred. Please try again later." : "An error occurred. Please try again later."; // Display API or generic error
-      } finally {
-        this.loading = false; // End loading
+      } catch (e) {
+        if (e.response && e.response.data) {
+          // If Laravel validation error contains vin message
+          if (e.response.data.errors && e.response.data.errors.vin) {
+            this.errorMessage = e.response.data.errors.vin[0];
+          }
+          // If generic message exists
+          else if (e.response.data.message) {
+            this.errorMessage = e.response.data.message;
+          }
+          // Fallback
+          else {
+            this.errorMessage = "An error occurred. Please try again later.";
+          }
+        } else {
+          this.errorMessage = "An error occurred. Please try again later.";
+        }
+        this.keyCode = "";
+        this.pinCode = "";
+      }
+      finally {
+        this.loading = false;
+        this.disabled = false;
       }
     },
 
-
-    // Helper: set cookie (days can be fractional)
     setCookie(name, value, days) {
       let expires = "";
       if (days) {
-        const date = new Date();
-        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        expires = "; expires=" + date.toUTCString();
+        const d = new Date();
+        d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+        expires = "; expires=" + d.toUTCString();
       }
       document.cookie = name + "=" + (value || "") + expires + "; path=/";
     },
 
-    // Helper: get cookie
     getCookie(name) {
       const nameEQ = name + "=";
       const ca = document.cookie.split(";");
       for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0) === " ") c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        while (c.charAt(0) === " ") c = c.substring(1);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length);
       }
       return null;
     },
 
-    // Helper: erase cookie
     eraseCookie(name) {
       document.cookie = name + "=; Max-Age=-99999999; path=/";
     },
 
-    // Helper: copy to clipboard
     copyToClipboard() {
-      const textToCopy = `VIN: ${this.vin}\nKey Code: ${this.keyCode}\nPin Code: ${this.pinCode}`;
-      navigator.clipboard.writeText(textToCopy).then(() => {
-        alert("Copied to clipboard!");
-      }).catch((err) => {
-        console.error("Error copying to clipboard: ", err);
-      });
+      const text = `${this.vin}\n${this.keyCode}\n${this.pinCode}`;
+      navigator.clipboard.writeText(text).then(
+        () => 
+        (err) => console.error("Clipboard error:", err)
+      );
     },
   },
-
   head() {
     return {
       title: "Vin To Pin",
@@ -241,49 +253,119 @@ export default {
 </script>
 
 <style scoped>
+/* Page */
 .vin-to-pin {
   min-height: 100vh;
-  background-color: red;
-  padding: 20px;
+  background: #000;
+  padding: 32px 16px;
 }
-
-.get-button {
-  background-color: green;
-  color: white;
-}
-
-.custom-card {
-  background-color: darkred;
-}
-
-/* Bigger inputs */
-.large-input {
-  height: 50px;
-  font-size: 1.1rem;
-  padding: 0 15px;
-}
-
-/* Bigger button */
-.large-button {
-  height: 50px;
-  font-size: 1.1rem;
-}
-
-.alert {
-  border-radius: 10px;
-  margin-bottom: 15px;
-  padding: 0.8rem;
-}
-
-.loading-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+.stack {
+  position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+}
+.heading {
+  color: #e7e7e7;
+  font-weight: 600;
+  margin-bottom: 22px;
+  letter-spacing: 0.3px;
+}
+
+/* Layout */
+.flex-col { display: flex; flex-direction: column; align-items: center; }
+.row-gap { margin: 22px 0; }
+
+/* Inputs */
+.pill-input {
+  height: 64px;
+  background: red;
+  border: 2px solid #6b6b6b;
+  color: #f2f2f2;
+  border-radius: 14px;
+  outline: none;
+  text-align: center;
+  font-size: 28px;
+  line-height: 1;
+  padding: 0 18px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+.pill-input::placeholder { color: #d9d9d9; opacity: 0.85; }
+.pill-input:focus { border-color: #8a8a8a; }
+
+/* ✅ Success state */
+.success-border {
+  background-color: red;
+  border-color:white !important;
+  box-shadow: 0 0 0 2px rgba(0, 200, 83, 0.2);
+}
+
+/* ✅ Green text state */
+.green-text {
+  color: #00ff00 !important;
+}
+
+/* Widths */
+.vin-width { width: 680px; max-width: 92vw; }
+.username-width { width: 420px; max-width: 86vw; }
+.key-width { width: 300px; max-width: 80vw; }
+.pin-width { width: 360px; max-width: 84vw; }
+
+/* Pin accent */
+.pin-accent {
+  border-color: #61c3a6;
+  box-shadow: 0 0 0 2px rgba(97,195,166,0.15);
+}
+
+/* Actions row */
+.actions-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 34px;
+  flex-wrap: wrap;
+}
+
+/* GET */
+.get-button {
+  width: 220px;
+  height: 72px;
+  background: #5fb99c;
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 28px;
+}
+.get-button:disabled { opacity: 0.7; cursor: not-allowed; }
+
+/* COPY */
+.copy-button {
+  height: 72px;
+  padding: 0 20px;
+  border-radius: 16px;
+  border: 2px solid #5fb99c;
+  background: #222;
+  color: #e7fff6;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* Alerts + overlay */
+.alert { border-radius: 10px; padding: 0.8rem; }
+.loading-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 10;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .pill-input { height: 58px; font-size: 22px; }
+  .get-button, .copy-button { height: 64px; font-size: 18px; }
 }
 </style>
